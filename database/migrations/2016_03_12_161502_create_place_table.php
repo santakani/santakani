@@ -14,7 +14,32 @@ class CreatePlaceTable extends Migration
     {
         Schema::create('place', function (Blueprint $table) {
             $table->increments('id');
+
+            // Non-translated content
+            $table->integer('city')->unsigned(); // ID of city
+            $table->integer('image')->unsigned(); // ID of image
+            $table->string('address');
+            $table->string('email');
+            $table->string('phone');
+
+            // Timestamps
             $table->timestamps();
+            $table->softDeletes();
+        });
+        Schema::create('place_translation', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('place_id')->unsigned();
+            $table->string('locale')->index();
+
+            // Translated content
+            $table->string('name');
+            $table->string('tagline');
+            $table->text('guide');
+
+            // Unique and foreign key
+            // When deleting city model, also delete all translation models
+            $table->unique(['place_id','locale']);
+            $table->foreign('place_id')->references('id')->on('place')->onDelete('cascade');
         });
     }
 
@@ -26,5 +51,6 @@ class CreatePlaceTable extends Migration
     public function down()
     {
         Schema::drop('place');
+        Schema::drop('place_translation');
     }
 }
