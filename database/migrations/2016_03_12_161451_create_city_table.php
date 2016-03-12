@@ -47,7 +47,7 @@ class CreateCityTable extends Migration
      */
     public function down()
     {
-        Schema::drop('city');
         Schema::drop('city_translation');
+        Schema::drop('city');
     }
 }

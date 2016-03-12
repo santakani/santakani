@@ -18,6 +18,7 @@ class CreatePlaceTable extends Migration
             // Non-translated content
             $table->integer('city')->unsigned(); // ID of city
             $table->integer('image')->unsigned(); // ID of image
+            $table->string('type'); // Shop, gallery, studio, etc.
             $table->string('address');
             $table->string('email');
             $table->string('phone');
@@ -50,7 +51,7 @@ class CreatePlaceTable extends Migration
      */
     public function down()
     {
-        Schema::drop('place');
         Schema::drop('place_translation');
+        Schema::drop('place');
     }
 }
