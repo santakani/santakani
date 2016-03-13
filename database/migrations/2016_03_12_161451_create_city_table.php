@@ -16,8 +16,9 @@ class CreateCityTable extends Migration
             $table->increments('id');
 
             // Non-translated content
-            $table->integer('country')->unsigned(); // ID of country
-            $table->integer('image')->unsigned(); // ID of image
+            $table->string('url_name')->unique(); // Name in URL
+            $table->integer('country_id')->unsigned(); // ID of country
+            $table->integer('image_id')->unsigned(); // ID of image
 
             // Timestamps
             $table->timestamps();
