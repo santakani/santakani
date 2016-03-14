@@ -28,7 +28,6 @@ class CreatePlaceTable extends Migration
             $table->softDeletes();
         });
         Schema::create('place_translation', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('place_id')->unsigned();
             $table->string('locale')->index();
 

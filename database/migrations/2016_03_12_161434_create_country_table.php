@@ -24,7 +24,6 @@ class CreateCountryTable extends Migration
             $table->softDeletes();
         });
         Schema::create('country_translation', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('country_id')->unsigned();
             $table->string('locale')->index();
 

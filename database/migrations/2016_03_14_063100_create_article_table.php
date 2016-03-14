@@ -23,7 +23,6 @@ class CreateArticleTable extends Migration
             $table->softDeletes();
         });
         Schema::create('article_translation', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('article_id')->unsigned();
             $table->string('locale')->index();
 

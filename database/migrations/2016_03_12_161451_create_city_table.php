@@ -25,7 +25,6 @@ class CreateCityTable extends Migration
             $table->softDeletes();
         });
         Schema::create('city_translation', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('city_id')->unsigned();
             $table->string('locale')->index();
 
