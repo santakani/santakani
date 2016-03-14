@@ -14,7 +14,27 @@ class CreateArticleTable extends Migration
     {
         Schema::create('article', function (Blueprint $table) {
             $table->increments('id');
+
+            // Non-translated content
+            $table->integer('image')->unsigned(); // ID of image
+
+            // Timestamps
             $table->timestamps();
+            $table->softDeletes();
+        });
+        Schema::create('article_translation', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('article_id')->unsigned();
+            $table->string('locale')->index();
+
+            // Translated content
+            $table->string('name');
+            $table->text('content');
+
+            // Unique and foreign key
+            // When deleting article model, also delete all translation models
+            $table->unique(['article_id','locale']);
+            $table->foreign('article_id')->references('id')->on('article')->onDelete('cascade');
         });
     }
 
@@ -25,6 +45,7 @@ class CreateArticleTable extends Migration
      */
     public function down()
     {
+        Schema::drop('article_translation');
         Schema::drop('article');
     }
 }
