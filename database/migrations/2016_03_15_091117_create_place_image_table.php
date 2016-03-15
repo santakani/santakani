@@ -13,8 +13,15 @@ class CreatePlaceImageTable extends Migration
     public function up()
     {
         Schema::create('place_image', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->integer('place_id')->unsigned();
+            $table->integer('image_id')->unsigned();
+            $table->integer('order')->unsigned();
+
+            // Unique
+            $table->unique(['place_id','image_id']);
+            // Foreign key
+            $table->foreign('place_id')->references('id')->on('place')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
         });
     }
 

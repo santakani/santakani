@@ -13,8 +13,15 @@ class CreateCountryImageTable extends Migration
     public function up()
     {
         Schema::create('country_image', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->integer('country_id')->unsigned();
+            $table->integer('image_id')->unsigned();
+            $table->integer('order')->unsigned();
+
+            // Unique
+            $table->unique(['country_id','image_id']);
+            // Foreign key
+            $table->foreign('country_id')->references('id')->on('country')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
         });
     }
 

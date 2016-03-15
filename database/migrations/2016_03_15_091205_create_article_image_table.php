@@ -13,8 +13,15 @@ class CreateArticleImageTable extends Migration
     public function up()
     {
         Schema::create('article_image', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->integer('article_id')->unsigned();
+            $table->integer('image_id')->unsigned();
+            $table->integer('order')->unsigned();
+
+            // Unique
+            $table->unique(['article_id','image_id']);
+            // Foreign key
+            $table->foreign('article_id')->references('id')->on('article')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
         });
     }
 
