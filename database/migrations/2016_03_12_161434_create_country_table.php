@@ -17,7 +17,7 @@ class CreateCountryTable extends Migration
 
             // Non-translated content
             $table->string('url_name')->unique(); // Name in URL
-            $table->integer('image')->unsigned(); // ID of image
+            $table->integer('image_id')->unsigned(); // ID of image
 
             // Timestamps
             $table->timestamps();

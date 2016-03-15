@@ -16,7 +16,7 @@ class CreateArticleTable extends Migration
             $table->increments('id');
 
             // Non-translated content
-            $table->integer('image')->unsigned(); // ID of image
+            $table->integer('image_id')->unsigned(); // ID of image
 
             // Timestamps
             $table->timestamps();
