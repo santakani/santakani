@@ -21,7 +21,7 @@ class CreateCityImageTable extends Migration
             $table->unique(['city_id','image_id']);
             // Foreign key
             $table->foreign('city_id')->references('id')->on('city')->onDelete('cascade');
-            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('image')->onDelete('cascade');
         });
     }
 

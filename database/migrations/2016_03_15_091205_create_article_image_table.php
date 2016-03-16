@@ -21,7 +21,7 @@ class CreateArticleImageTable extends Migration
             $table->unique(['article_id','image_id']);
             // Foreign key
             $table->foreign('article_id')->references('id')->on('article')->onDelete('cascade');
-            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('image')->onDelete('cascade');
         });
     }
 

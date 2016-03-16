@@ -21,7 +21,7 @@ class CreateCountryImageTable extends Migration
             $table->unique(['country_id','image_id']);
             // Foreign key
             $table->foreign('country_id')->references('id')->on('country')->onDelete('cascade');
-            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('image')->onDelete('cascade');
         });
     }
 

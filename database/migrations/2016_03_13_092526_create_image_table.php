@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMediaTable extends Migration
+class CreateImageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateMediaTable extends Migration
      */
     public function up()
     {
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('image', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('type'); // Image, audio, video
@@ -20,8 +20,9 @@ class CreateMediaTable extends Migration
             $table->integer('width')->unsigned(); // Width of image and video
             $table->integer('height')->unsigned(); // Height of image and video
             $table->string('external_url'); // YouTube, Vimeo, SoundCloud, etc.
-            // Large size image: /upload/[id]/large.[format] max. 1200x1200px
-            // Small size image: /upload/[id]/small.[format] max. 600x600px
+            $table->integer('user_id')->unsigned(); // Who uploaded this image or video
+            // Large size image: /upload/image/[id]/large.[format] max. 1200x1200px
+            // Small size image: /upload/image/[id]/small.[format] max. 600x600px
 
             // Timestamps
             $table->timestamps();
@@ -36,6 +37,6 @@ class CreateMediaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('media');
+        Schema::drop('image');
     }
 }
