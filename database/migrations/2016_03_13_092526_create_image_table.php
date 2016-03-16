@@ -20,7 +20,7 @@ class CreateImageTable extends Migration
             $table->integer('width')->unsigned(); // Width of image and video
             $table->integer('height')->unsigned(); // Height of image and video
             $table->string('external_url'); // YouTube, Vimeo, SoundCloud, etc.
-            $table->integer('user_id')->unsigned(); // Who uploaded this image or video
+            $table->integer('user_id')->unsigned()->nullable(); // Who uploaded this image or video
             // Large size image: /upload/image/[id]/large.[format] max. 1200x1200px
             // Small size image: /upload/image/[id]/small.[format] max. 600x600px
 

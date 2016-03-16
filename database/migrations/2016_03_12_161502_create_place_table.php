@@ -22,6 +22,7 @@ class CreatePlaceTable extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('phone');
+            $table->integer('user_id')->unsigned()->nullable(); // Who own this place page
 
             // Timestamps
             $table->timestamps();
