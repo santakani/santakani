@@ -14,15 +14,15 @@ class AddUserIdForeignKey extends Migration
     {
         Schema::table('place', function (Blueprint $table) {
             // When deleted image, set image_id to null
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
         Schema::table('image', function (Blueprint $table) {
             // When deleted image, set image_id to null
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
         Schema::table('article', function (Blueprint $table) {
             // When deleted image, set image_id to null
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
     }
 
