@@ -26,11 +26,14 @@ class CreateCountryTable extends Migration
         Schema::create('country_translation', function (Blueprint $table) {
             $table->integer('country_id')->unsigned();
             $table->string('locale')->index();
+            $table->boolean('complete');
 
             // Translated content
             $table->string('name');
             $table->string('tagline');
             $table->text('guide');
+
+            $table->timestamps();
 
             // Unique and foreign key
             // When deleting country model, also delete all translation models

@@ -26,10 +26,13 @@ class CreateArticleTable extends Migration
         Schema::create('article_translation', function (Blueprint $table) {
             $table->integer('article_id')->unsigned();
             $table->string('locale')->index();
+            $table->boolean('complete');
 
             // Translated content
             $table->string('name');
             $table->text('content');
+
+            $table->timestamps();
 
             // Unique and foreign key
             // When deleting article model, also delete all translation models

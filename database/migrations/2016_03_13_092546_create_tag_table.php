@@ -26,10 +26,13 @@ class CreateTagTable extends Migration
         Schema::create('tag_translation', function (Blueprint $table) {
             $table->integer('tag_id')->unsigned();
             $table->string('locale')->index();
+            $table->boolean('complete');
 
             // Translated content
             $table->string('name');
             $table->string('description'); // Very short description < 255 char
+
+            $table->timestamps();
 
             // Unique and foreign key
             // When deleting country model, also delete all translation models

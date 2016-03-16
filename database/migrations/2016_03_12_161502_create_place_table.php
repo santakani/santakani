@@ -31,11 +31,14 @@ class CreatePlaceTable extends Migration
         Schema::create('place_translation', function (Blueprint $table) {
             $table->integer('place_id')->unsigned();
             $table->string('locale')->index();
+            $table->boolean('complete');
 
             // Translated content
             $table->string('name');
             $table->string('tagline');
             $table->text('guide');
+
+            $table->timestamps();
 
             // Unique and foreign key
             // When deleting city model, also delete all translation models
