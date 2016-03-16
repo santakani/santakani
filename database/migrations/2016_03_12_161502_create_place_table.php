@@ -17,7 +17,7 @@ class CreatePlaceTable extends Migration
 
             // Non-translated content
             $table->integer('city_id')->unsigned(); // ID of city
-            $table->integer('image_id')->unsigned(); // ID of image
+            $table->integer('image_id')->unsigned()->nullable(); // ID of image
             $table->string('type'); // Shop, gallery, studio, etc.
             $table->string('address');
             $table->string('email');
