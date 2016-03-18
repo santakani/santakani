@@ -105,5 +105,8 @@
     </nav>
 
     @yield('content')
+
+    @include('modal.location')
+    @include('modal.language')
 </body>
 </html>
