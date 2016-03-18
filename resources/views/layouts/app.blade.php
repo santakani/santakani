@@ -38,7 +38,7 @@
             </div>
 
             <div class="collapse" id="navbar-search-collapse">
-                <form role="search" action="search.html">
+                <form role="search" action="{{ url('/search') }}">
                     <div class="input-group">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button"
@@ -54,10 +54,10 @@
 
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html"><i class="fa fa-fw fa-home"></i> Home</a></li>
-                    <li><a href="map.html"><i class="fa fa-fw fa-map-marker"></i> Map</a></li>
-                    <li><a href="tags.html"><i class="fa fa-fw fa-tag"></i> Tags</a></li>
-                    <li><a href="read.html"><i class="fa fa-fw fa-bookmark"></i> Read</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-fw fa-home"></i> Home</a></li>
+                    <li><a href="{{ url('/map') }}"><i class="fa fa-fw fa-map-marker"></i> Map</a></li>
+                    <li><a href="{{ url('/tag') }}"><i class="fa fa-fw fa-tag"></i> Tags</a></li>
+                    <li><a href="{{ url('/read') }}"><i class="fa fa-fw fa-bookmark"></i> Read</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -70,20 +70,14 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="dashboard.html">
+                                <li><a href="{{ url('/dashboard') }}">
                                     <i class="fa fa-fw fa-tachometer"></i> Dashboard</a></li>
-
                                 <li role="separator" class="divider"></li>
-                                <li><a href="designer.html">Mai Niemi (Designer)</a></li>
-                                <li><a href="shop.html">MAINIEMI SHOP Helsinki (Shop)</a></li>
-                                <li><a href="shop.html">MAINIEMI SHOP Oulu (Shop)</a></li>
-
-                                <li role="separator" class="divider"></li>
-                                <li><a href="user-profile.html">
+                                <li><a href="{{ url('/user/'.Auth::user()->id) }}">
                                     <i class="fa fa-fw fa-user"></i> Profile</a></li>
-                                <li><a href="user-notification.html">
+                                <li><a href="{{ url('/notification') }}">
                                     <i class="fa fa-fw fa-bell"></i> Notification</a></li>
-                                <li><a href="user-settings.html">
+                                <li><a href="{{ url('/setting') }}">
                                     <i class="fa fa-fw fa-cog"></i> Settings</a></li>
                                 <li><a href="{{ url('/logout') }}">
                                     <i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
@@ -96,7 +90,7 @@
                 </ul>
 
                 <form class="navbar-form navbar-right hidden-xs" role="search"
-                    action="search.html">
+                    action="{{ url('/search') }}">
                     <div class="input-group">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" data-toggle="modal"
