@@ -1,0 +1,11 @@
+.navbar button.navbar-toggle {
+  padding: 6px 8px; }
+
+.navbar #navbar-search-collapse {
+  padding: 0 15px;
+  border-top: 1px solid #e7e7e7;
+  margin: 0 -15px; }
+  .navbar #navbar-search-collapse form {
+    padding: 8px 0; }
+
+/*# sourceMappingURL=app.css.map */

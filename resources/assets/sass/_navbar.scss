@@ -4,6 +4,12 @@
     }
 
     #navbar-search-collapse {
-        padding-bottom: 8px;
+        padding: 0 15px;
+        border-top: 1px solid #e7e7e7;
+        margin: 0 -15px;
+
+        form {
+            padding: 8px 0;
+        }
     }
 }
