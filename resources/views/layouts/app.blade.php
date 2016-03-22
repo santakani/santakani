@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ isset($title) ? ($title.' - Santakani') : 'Santakani - Discover independent design from Finland' }}</title>
+    <title>{{ isset($title) ? ($title.' - Santakani') : 'Santakani - Stories of design?!' }}</title>
 
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -21,7 +21,7 @@
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
+        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -54,10 +54,8 @@
 
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}"><i class="fa fa-fw fa-home"></i> Home</a></li>
-                    <li><a href="{{ url('/map') }}"><i class="fa fa-fw fa-map-marker"></i> Map</a></li>
-                    <li><a href="{{ url('/tag') }}"><i class="fa fa-fw fa-tag"></i> Tags</a></li>
-                    <li><a href="{{ url('/read') }}"><i class="fa fa-fw fa-bookmark"></i> Read</a></li>
+                    <li><a href="{{ url('/') }}">Stories</a></li>
+                    <li><a href="{{ url('/map') }}">Map</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -98,10 +96,10 @@
                         </span>
                         <input type="search" class="form-control search-input"
                             placeholder="Search">
-                    </div><!-- /input-group -->
+                    </div><!-- /.input-group -->
                 </form>
             </div><!-- /.navbar-collapse -->
-        </div><!-- .container-fluid -->
+        </div><!-- /.container -->
     </nav>
 
     @yield('content')
