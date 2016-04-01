@@ -13,16 +13,16 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserTableSeeder::class);
         $this->call(ImageTableSeeder::class);
-        $this->call(ArticleTableSeeder::class);
+        $this->call(DesignerTableSeeder::class);
         $this->call(CountryTableSeeder::class);
         $this->call(CityTableSeeder::class);
         $this->call(PlaceTableSeeder::class);
         $this->call(TagTableSeeder::class);
         $this->call(PlaceTagTableSeeder::class);
-        $this->call(ArticleTagTableSeeder::class);
+        $this->call(DesignerTagTableSeeder::class);
         $this->call(CountryImageTableSeeder::class);
         $this->call(CityImageTableSeeder::class);
         $this->call(PlaceImageTableSeeder::class);
-        $this->call(ArticleImageTableSeeder::class);
+        $this->call(DesignerImageTableSeeder::class);
     }
 }
