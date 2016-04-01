@@ -20,7 +20,7 @@ class AddUserIdForeignKey extends Migration
             // When deleted image, set image_id to null
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
-        Schema::table('article', function (Blueprint $table) {
+        Schema::table('designer', function (Blueprint $table) {
             // When deleted image, set image_id to null
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
@@ -39,7 +39,7 @@ class AddUserIdForeignKey extends Migration
         Schema::table('image', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
-        Schema::table('article', function (Blueprint $table) {
+        Schema::table('designer', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
     }

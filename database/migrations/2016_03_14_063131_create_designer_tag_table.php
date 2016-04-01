@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleTagTable extends Migration
+class CreateDesignerTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,14 @@ class CreateArticleTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_tag', function (Blueprint $table) {
-            $table->integer('article_id')->unsigned();
+        Schema::create('designer_tag', function (Blueprint $table) {
+            $table->integer('designer_id')->unsigned();
             $table->integer('tag_id')->unsigned();
 
             // Unique
-            $table->unique(['article_id','tag_id']);
+            $table->unique(['designer_id','tag_id']);
             // Foreign key
-            $table->foreign('article_id')->references('id')->on('article')->onDelete('cascade');
+            $table->foreign('designer_id')->references('id')->on('designer')->onDelete('cascade');
             $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
         });
     }
@@ -31,6 +31,6 @@ class CreateArticleTagTable extends Migration
      */
     public function down()
     {
-        Schema::drop('article_tag');
+        Schema::drop('designer_tag');
     }
 }

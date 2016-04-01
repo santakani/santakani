@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleImageTable extends Migration
+class CreateDesignerImageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,15 @@ class CreateArticleImageTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_image', function (Blueprint $table) {
-            $table->integer('article_id')->unsigned();
+        Schema::create('designer_image', function (Blueprint $table) {
+            $table->integer('designer_id')->unsigned();
             $table->integer('image_id')->unsigned();
             $table->integer('order')->unsigned();
 
             // Unique
-            $table->unique(['article_id','image_id']);
+            $table->unique(['designer_id','image_id']);
             // Foreign key
-            $table->foreign('article_id')->references('id')->on('article')->onDelete('cascade');
+            $table->foreign('designer_id')->references('id')->on('designer')->onDelete('cascade');
             $table->foreign('image_id')->references('id')->on('image')->onDelete('cascade');
         });
     }
@@ -32,6 +32,6 @@ class CreateArticleImageTable extends Migration
      */
     public function down()
     {
-        Schema::drop('article_image');
+        Schema::drop('designer_image');
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleTable extends Migration
+class CreateDesignerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,19 +12,19 @@ class CreateArticleTable extends Migration
      */
     public function up()
     {
-        Schema::create('article', function (Blueprint $table) {
+        Schema::create('designer', function (Blueprint $table) {
             $table->increments('id');
 
             // Non-translated content
             $table->integer('image_id')->unsigned()->nullable(); // ID of image
-            $table->integer('user_id')->unsigned()->nullable(); // Who wrote this article
+            $table->integer('user_id')->unsigned()->nullable(); // Who own designer page
 
             // Timestamps
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('article_translation', function (Blueprint $table) {
-            $table->integer('article_id')->unsigned();
+        Schema::create('designer_translation', function (Blueprint $table) {
+            $table->integer('designer_id')->unsigned();
             $table->string('locale')->index();
             $table->boolean('complete');
 
@@ -35,9 +35,9 @@ class CreateArticleTable extends Migration
             $table->timestamps();
 
             // Unique and foreign key
-            // When deleting article model, also delete all translation models
-            $table->unique(['article_id','locale']);
-            $table->foreign('article_id')->references('id')->on('article')->onDelete('cascade');
+            // When deleting designer model, also delete all translation models
+            $table->unique(['designer_id','locale']);
+            $table->foreign('designer_id')->references('id')->on('designer')->onDelete('cascade');
         });
     }
 
@@ -48,7 +48,7 @@ class CreateArticleTable extends Migration
      */
     public function down()
     {
-        Schema::drop('article_translation');
-        Schema::drop('article');
+        Schema::drop('designer_translation');
+        Schema::drop('designer');
     }
 }
