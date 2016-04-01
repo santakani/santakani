@@ -31,8 +31,7 @@ class CreateCityTable extends Migration
 
             // Translated content
             $table->string('name');
-            $table->string('tagline');
-            $table->text('guide');
+            $table->text('content');
 
             $table->timestamps();
 
