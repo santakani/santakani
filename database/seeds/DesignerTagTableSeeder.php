@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ArticleTagTableSeeder extends Seeder
+class DesignerTagTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
