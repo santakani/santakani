@@ -1,6 +1,11 @@
+# Laravel framework
 /vendor
 /node_modules
 /public/storage
 Homestead.yaml
 Homestead.json
 .env
+
+# Linux system
+*.kate-swp
+.directory
