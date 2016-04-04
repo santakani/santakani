@@ -32,7 +32,7 @@ class ImageTableSeeder extends Seeder
 
         DB::table('image')->insert([
             'type' => 'image',
-            'format' => 'jpg',
+            'format' => 'png',
             'width' => 1200,
             'height' => 1200,
             'user_id' => 1,
