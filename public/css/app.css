@@ -8,4 +8,14 @@
   .navbar #navbar-search-collapse form {
     padding: 8px 0; }
 
+.navbar .avatar {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin: -99px 0;
+  vertical-align: middle;
+  border-radius: 3px;
+  background-size: cover;
+  background-position: center; }
+
 /*# sourceMappingURL=app.css.map */

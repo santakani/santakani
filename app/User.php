@@ -30,4 +30,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Generate URL to avatar file
+     *
+     * @return string
+     */
+    public function getAvatarUrl()
+    {
+        return '/storage/avatar/' . (int)($this->id/1000) . '/' . $this->id%1000;
+    }
 }
