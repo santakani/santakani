@@ -24,6 +24,7 @@ class CreateDesignerTable extends Migration
             $table->softDeletes();
         });
         Schema::create('designer_translation', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('designer_id')->unsigned();
             $table->string('locale')->index();
             $table->boolean('complete');
