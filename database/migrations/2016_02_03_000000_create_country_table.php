@@ -22,6 +22,9 @@ class CreateCountryTable extends Migration
             // Timestamps
             $table->timestamps();
             $table->softDeletes();
+
+            // When deleted image, set image_id to null
+            $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
         Schema::create('country_translation', function (Blueprint $table) {
             $table->integer('country_id')->unsigned();

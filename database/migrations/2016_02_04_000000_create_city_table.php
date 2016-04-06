@@ -23,6 +23,9 @@ class CreateCityTable extends Migration
             // Timestamps
             $table->timestamps();
             $table->softDeletes();
+
+            // When deleted image, set image_id to null
+            $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
         Schema::create('city_translation', function (Blueprint $table) {
             $table->integer('city_id')->unsigned();

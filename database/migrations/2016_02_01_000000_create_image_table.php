@@ -27,6 +27,9 @@ class CreateImageTable extends Migration
             // Timestamps
             $table->timestamps();
             $table->softDeletes();
+
+            // When deleted image, set image_id to null
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
     }
 
