@@ -32,7 +32,7 @@ class Designer extends Model
     {
         return DesignerTranslation::where([
             ['designer_id', $this->id],
-            ['locale', $lang],
+            ['language', $lang],
         ])->first();
     }
 }

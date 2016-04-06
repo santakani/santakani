@@ -25,7 +25,7 @@ class CreateCountryTable extends Migration
         });
         Schema::create('country_translation', function (Blueprint $table) {
             $table->integer('country_id')->unsigned();
-            $table->string('locale')->index();
+            $table->string('language')->index();
             $table->boolean('complete');
 
             // Translated content
@@ -36,7 +36,7 @@ class CreateCountryTable extends Migration
 
             // Unique and foreign key
             // When deleting country model, also delete all translation models
-            $table->unique(['country_id','locale']);
+            $table->unique(['country_id','language']);
             $table->foreign('country_id')->references('id')->on('country')->onDelete('cascade');
         });
     }

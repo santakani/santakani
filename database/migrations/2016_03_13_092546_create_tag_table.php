@@ -25,18 +25,18 @@ class CreateTagTable extends Migration
         });
         Schema::create('tag_translation', function (Blueprint $table) {
             $table->integer('tag_id')->unsigned();
-            $table->string('locale')->index();
+            $table->string('language')->index();
             $table->boolean('complete');
 
             // Translated content
             $table->string('name');
-            $table->string('description'); // Very short description < 255 char
+            $table->text('content'); // Very short description < 255 char
 
             $table->timestamps();
 
             // Unique and foreign key
             // When deleting country model, also delete all translation models
-            $table->unique(['tag_id','locale']);
+            $table->unique(['tag_id','language']);
             $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
         });
     }

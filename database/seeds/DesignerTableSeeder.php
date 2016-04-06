@@ -20,7 +20,7 @@ class DesignerTableSeeder extends Seeder
 
         DB::table('designer_translation')->insert([
             'designer_id' => 1,
-            'locale' => 'en',
+            'language' => 'en',
             'name' => 'Guo Yunhe',
             'content' => <<<HTML
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius commodo ante, et gravida massa gravida sed. Quisque aliquet orci vitae justo commodo, eu hendrerit justo euismod. Morbi non eleifend magna, eu cursus nulla. Integer pulvinar quam non velit gravida lacinia. Nullam commodo volutpat lectus, sed cursus enim tincidunt id. Pellentesque aliquet, arcu mollis porta pellentesque, ligula justo rhoncus mi, non aliquam mi ex ut velit. Donec ac sapien nec lorem fermentum viverra non et nisi. Aenean iaculis aliquet pharetra. Vivamus consectetur turpis sit amet sagittis aliquam. Ut placerat tellus eu enim aliquam, at faucibus mauris tempor. Proin at ullamcorper eros. Aliquam eget vulputate metus, vel dictum ligula. Vivamus id quam porttitor, bibendum lorem id, posuere quam.
@@ -39,7 +39,7 @@ HTML
 
         DB::table('designer_translation')->insert([
             'designer_id' => 1,
-            'locale' => 'zh',
+            'language' => 'zh',
             'name' => '郭云鹤',
             'content' => <<<HTML
 别统始太性积老马克，听给南为通片海立，第常Q雨佣例政。 入局她般支龙，目重候社属务，么录W么。 百多改育先教路水并，数众车六处志线内层，众医少事肃行花。
@@ -64,7 +64,7 @@ HTML
 
          DB::table('designer_translation')->insert([
             'designer_id' => 2,
-            'locale' => 'en',
+            'language' => 'en',
             'name' => 'Du Yuexin',
             'content' => <<<HTML
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius commodo ante, et gravida massa gravida sed. Quisque aliquet orci vitae justo commodo, eu hendrerit justo euismod. Morbi non eleifend magna, eu cursus nulla. Integer pulvinar quam non velit gravida lacinia. Nullam commodo volutpat lectus, sed cursus enim tincidunt id. Pellentesque aliquet, arcu mollis porta pellentesque, ligula justo rhoncus mi, non aliquam mi ex ut velit. Donec ac sapien nec lorem fermentum viverra non et nisi. Aenean iaculis aliquet pharetra. Vivamus consectetur turpis sit amet sagittis aliquam. Ut placerat tellus eu enim aliquam, at faucibus mauris tempor. Proin at ullamcorper eros. Aliquam eget vulputate metus, vel dictum ligula. Vivamus id quam porttitor, bibendum lorem id, posuere quam.
@@ -83,7 +83,7 @@ HTML
 
         DB::table('designer_translation')->insert([
             'designer_id' => 2,
-            'locale' => 'zh',
+            'language' => 'zh',
             'name' => '杜玥辛',
             'content' => <<<HTML
 别统始太性积老马克，听给南为通片海立，第常Q雨佣例政。 入局她般支龙，目重候社属务，么录W么。 百多改育先教路水并，数众车六处志线内层，众医少事肃行花。
@@ -108,7 +108,7 @@ HTML
 
          DB::table('designer_translation')->insert([
             'designer_id' => 3,
-            'locale' => 'en',
+            'language' => 'en',
             'name' => 'Yun Xiaotong',
             'content' => <<<HTML
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius commodo ante, et gravida massa gravida sed. Quisque aliquet orci vitae justo commodo, eu hendrerit justo euismod. Morbi non eleifend magna, eu cursus nulla. Integer pulvinar quam non velit gravida lacinia. Nullam commodo volutpat lectus, sed cursus enim tincidunt id. Pellentesque aliquet, arcu mollis porta pellentesque, ligula justo rhoncus mi, non aliquam mi ex ut velit. Donec ac sapien nec lorem fermentum viverra non et nisi. Aenean iaculis aliquet pharetra. Vivamus consectetur turpis sit amet sagittis aliquam. Ut placerat tellus eu enim aliquam, at faucibus mauris tempor. Proin at ullamcorper eros. Aliquam eget vulputate metus, vel dictum ligula. Vivamus id quam porttitor, bibendum lorem id, posuere quam.
@@ -127,7 +127,7 @@ HTML
 
         DB::table('designer_translation')->insert([
             'designer_id' => 3,
-            'locale' => 'zh',
+            'language' => 'zh',
             'name' => '云小童',
             'content' => <<<HTML
 别统始太性积老马克，听给南为通片海立，第常Q雨佣例政。 入局她般支龙，目重候社属务，么录W么。 百多改育先教路水并，数众车六处志线内层，众医少事肃行花。
@@ -152,7 +152,7 @@ HTML
 
          DB::table('designer_translation')->insert([
             'designer_id' => 4,
-            'locale' => 'en',
+            'language' => 'en',
             'name' => 'Yu Huiyang',
             'content' => <<<HTML
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius commodo ante, et gravida massa gravida sed. Quisque aliquet orci vitae justo commodo, eu hendrerit justo euismod. Morbi non eleifend magna, eu cursus nulla. Integer pulvinar quam non velit gravida lacinia. Nullam commodo volutpat lectus, sed cursus enim tincidunt id. Pellentesque aliquet, arcu mollis porta pellentesque, ligula justo rhoncus mi, non aliquam mi ex ut velit. Donec ac sapien nec lorem fermentum viverra non et nisi. Aenean iaculis aliquet pharetra. Vivamus consectetur turpis sit amet sagittis aliquam. Ut placerat tellus eu enim aliquam, at faucibus mauris tempor. Proin at ullamcorper eros. Aliquam eget vulputate metus, vel dictum ligula. Vivamus id quam porttitor, bibendum lorem id, posuere quam.
@@ -171,7 +171,7 @@ HTML
 
         DB::table('designer_translation')->insert([
             'designer_id' => 4,
-            'locale' => 'zh',
+            'language' => 'zh',
             'name' => '余慧阳',
             'content' => <<<HTML
 别统始太性积老马克，听给南为通片海立，第常Q雨佣例政。 入局她般支龙，目重候社属务，么录W么。 百多改育先教路水并，数众车六处志线内层，众医少事肃行花。
