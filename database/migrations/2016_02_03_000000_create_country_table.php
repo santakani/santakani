@@ -27,6 +27,7 @@ class CreateCountryTable extends Migration
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
         Schema::create('country_translation', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('country_id')->unsigned();
             $table->string('language')->index();
             $table->boolean('complete');

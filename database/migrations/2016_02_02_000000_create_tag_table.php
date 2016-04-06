@@ -24,6 +24,7 @@ class CreateTagTable extends Migration
             $table->softDeletes();
         });
         Schema::create('tag_translation', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('tag_id')->unsigned();
             $table->string('language')->index();
             $table->boolean('complete');

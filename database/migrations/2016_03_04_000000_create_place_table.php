@@ -36,6 +36,7 @@ class CreatePlaceTable extends Migration
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
         Schema::create('place_translation', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('place_id')->unsigned();
             $table->string('language')->index();
             $table->boolean('complete');
