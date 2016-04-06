@@ -16,6 +16,7 @@ class CreatePlaceTable extends Migration
             $table->increments('id');
 
             // Non-translated content
+            $table->integer('country_id')->unsigned(); // ID of country
             $table->integer('city_id')->unsigned(); // ID of city
             $table->integer('image_id')->unsigned()->nullable(); // ID of image
             $table->string('type'); // Shop, gallery, studio, etc.
@@ -28,9 +29,10 @@ class CreatePlaceTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            // When deleted image, set image_id to null
+            // Foreign keys, when delete country, city, image, user, set columns to null
+            $table->foreign('country_id')->references('id')->on('country')->onDelete('set null');
+            $table->foreign('city_id')->references('id')->on('city')->onDelete('set null');
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
-            // When deleted image, set image_id to null
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
         Schema::create('place_translation', function (Blueprint $table) {
