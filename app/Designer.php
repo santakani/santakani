@@ -12,4 +12,27 @@ class Designer extends Model
      * @var string
      */
     protected $table = 'designer';
+
+    /**
+     * Generate URL to avatar file
+     *
+     * @return Image
+     */
+    public function getImage()
+    {
+        return Image::find($this->image_id);
+    }
+
+    /**
+     * Generate URL to image file
+     *
+     * @return DesignerTranslation
+     */
+    public function getTranslation($lang = 'en')
+    {
+        return DesignerTranslation::where([
+            ['designer_id', $this->id],
+            ['locale', $lang],
+        ])->first();
+    }
 }
