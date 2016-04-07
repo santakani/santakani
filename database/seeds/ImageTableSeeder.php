@@ -121,5 +121,15 @@ class ImageTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+
+        // 12
+        DB::table('image')->insert([
+            'type' => 'image',
+            'format' => 'jpg',
+            'width' => 1200,
+            'height' => 750,
+            'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 }
