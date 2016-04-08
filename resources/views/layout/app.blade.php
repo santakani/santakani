@@ -7,17 +7,17 @@
 
     <title>{{ isset($title) ? ($title.' - Santakani') : 'Santakani - Stories of design?!' }}</title>
 
-    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/css/app.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('/bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('/bower_components/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('/css/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('/css/app.css') }}" rel="stylesheet" type="text/css"/>
 
-    <script src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/bower_components/masonry/dist/masonry.pkgd.min.js" type="text/javascript"></script>
-    <script src="/bower_components/imagesloaded/imagesloaded.pkgd.min.js" type="text/javascript"></script>
-    <script src="/bower_components/select2/dist/js/select2.min.js" type="text/javascript"></script>
-    <script src="/js/app.js" type="text/javascript"></script>
+    <script src="{{ url('/bower_components/jquery/dist/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/bower_components/masonry/dist/masonry.pkgd.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/bower_components/imagesloaded/imagesloaded.pkgd.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/bower_components/select2/dist/js/select2.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/js/bootstrap.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
 </head>
 <body id="app-layout" class="{{ $body_class or 'default' }}">
     <nav class="navbar navbar-default">

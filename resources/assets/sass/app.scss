@@ -1,3 +1,12 @@
+/**
+ * Core App Style
+ */
+
+// Core variables and mixins from Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+
+// App layout
 @import "navbar";
 
 // Home page related
