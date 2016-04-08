@@ -1,0 +1,42 @@
+.home #story-list .story {
+    margin-bottom: 30px;
+
+    img.featured-image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .content {
+        height: 10em;
+        overflow: hidden;
+    }
+
+    .expand-button {
+        display: block;
+        margin: auto;
+
+        .more {
+            display: inline;
+        }
+        .less {
+            display: none;
+        }
+    }
+
+    &.expanded {
+        .content {
+            height: 30em;
+            overflow: auto;
+        }
+
+        .expand-button {
+            .more {
+                display: none;
+            }
+            .less {
+                display: inline;
+            }
+        }
+    }
+}

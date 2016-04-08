@@ -18,4 +18,28 @@
   background-size: cover;
   background-position: center; }
 
+.home #story-list .story {
+  margin-bottom: 30px; }
+  .home #story-list .story img.featured-image {
+    display: block;
+    width: 100%;
+    height: auto; }
+  .home #story-list .story .content {
+    height: 10em;
+    overflow: hidden; }
+  .home #story-list .story .expand-button {
+    display: block;
+    margin: auto; }
+    .home #story-list .story .expand-button .more {
+      display: inline; }
+    .home #story-list .story .expand-button .less {
+      display: none; }
+  .home #story-list .story.expanded .content {
+    height: 30em;
+    overflow: auto; }
+  .home #story-list .story.expanded .expand-button .more {
+    display: none; }
+  .home #story-list .story.expanded .expand-button .less {
+    display: inline; }
+
 /*# sourceMappingURL=app.css.map */

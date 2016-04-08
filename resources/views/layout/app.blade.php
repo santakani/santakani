@@ -19,7 +19,7 @@
     <script src="/bower_components/select2/dist/js/select2.min.js" type="text/javascript"></script>
     <script src="/js/app.js" type="text/javascript"></script>
 </head>
-<body id="app-layout">
+<body id="app-layout" class="{{ $body_class or 'default' }}">
     <nav class="navbar navbar-default">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
