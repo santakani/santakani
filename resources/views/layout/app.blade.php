@@ -7,6 +7,8 @@
 
     <title>{{ isset($title) ? ($title.' - Santakani') : 'Santakani - Stories of design?!' }}</title>
 
+    <link rel="shortcut icon" href="{{ url('/favicon.png') }}" type="image/png">
+
     <link href="{{ url('/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/lib/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/css/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
