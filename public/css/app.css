@@ -91,6 +91,18 @@
     #kanibar .second-row button {
       background-color: rgba(255, 255, 255, 0.7); }
 
+#kani-brand {
+  margin: 50px auto;
+  text-align: center;
+  font-size: 1.5em; }
+  #kani-brand .logo {
+    height: 100px;
+    width: auto; }
+  #kani-brand .santa {
+    color: #D1141E; }
+  #kani-brand .kani {
+    color: #697646; }
+
 #story-list {
   margin-top: 30px; }
   #story-list .story {
