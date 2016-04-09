@@ -23,6 +23,7 @@ class CreatePlaceTable extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('phone');
+            $table->string('website');
             $table->integer('user_id')->unsigned()->nullable(); // Who own this place page
 
             // Timestamps
@@ -35,6 +36,9 @@ class CreatePlaceTable extends Migration
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
+
+        DB::statement('ALTER TABLE place ADD location POINT AFTER city_id' );
+
         Schema::create('place_translation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('place_id')->unsigned();
