@@ -30,4 +30,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/', 'HomeController@index');
+
+    Route::resource('image', 'ImageController');
+
+    Route::resource('tag', 'TagController');
+
+    Route::resource('country', 'CountryController');
+
+    Route::resource('city', 'PhotoController');
+
+    Route::resource('designer', 'DesignerController');
+
+    Route::resource('place', 'PlaceController');
 });
