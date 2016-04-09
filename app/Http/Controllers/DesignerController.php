@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Designer;
 
 class DesignerController extends Controller
 {
@@ -15,7 +16,8 @@ class DesignerController extends Controller
      */
     public function index()
     {
-        //
+        $designers = Designer::all();
+        return view('home', ['body_class' => 'home', 'designers' => $designers]);
     }
 
     /**
