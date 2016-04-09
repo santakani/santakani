@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Place;
 
 class PlaceController extends Controller
 {
@@ -15,7 +16,8 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
+        $places = Place::all();
+        return view('places', ['body_class' => 'places', 'places' => $places]);
     }
 
     /**

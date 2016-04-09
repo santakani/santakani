@@ -6,8 +6,7 @@
   background-color: #eeeeee;
   background-size: cover;
   background-position: center;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
-  margin-bottom: 30px; }
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5); }
   #kanibar a {
     text-decoration: none; }
     #kanibar a:active, #kanibar a:hover {
@@ -92,28 +91,50 @@
     #kanibar .second-row button {
       background-color: rgba(255, 255, 255, 0.7); }
 
-.home #story-list .story {
-  margin-bottom: 30px; }
-  .home #story-list .story img.featured-image {
-    display: block;
-    width: 100%;
-    height: auto; }
-  .home #story-list .story .content {
-    height: 10em;
-    overflow: hidden; }
-  .home #story-list .story .expand-button {
-    display: block;
-    margin: auto; }
-    .home #story-list .story .expand-button .more {
-      display: inline; }
-    .home #story-list .story .expand-button .less {
+#story-list {
+  margin-top: 30px; }
+  #story-list .story {
+    margin-bottom: 30px; }
+    #story-list .story img.featured-image {
+      display: block;
+      width: 100%;
+      height: auto; }
+    #story-list .story .content {
+      height: 10em;
+      overflow: hidden; }
+    #story-list .story .expand-button {
+      display: block;
+      margin: auto; }
+      #story-list .story .expand-button .more {
+        display: inline; }
+      #story-list .story .expand-button .less {
+        display: none; }
+    #story-list .story.expanded .content {
+      height: 30em;
+      overflow: auto; }
+    #story-list .story.expanded .expand-button .more {
       display: none; }
-  .home #story-list .story.expanded .content {
-    height: 30em;
-    overflow: auto; }
-  .home #story-list .story.expanded .expand-button .more {
-    display: none; }
-  .home #story-list .story.expanded .expand-button .less {
-    display: inline; }
+    #story-list .story.expanded .expand-button .less {
+      display: inline; }
+
+#place-wrapper {
+  width: 100%;
+  overflow: hidden; }
+  #place-wrapper #place-map {
+    float: left;
+    width: 50%;
+    height: 600px; }
+    #place-wrapper #place-map.affix {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      height: auto; }
+    #place-wrapper #place-map #place-map-inner {
+      width: 100%;
+      height: 100%; }
+  #place-wrapper #place-list {
+    margin-left: 50%;
+    padding: 20px;
+    height: 2000px; }
 
 /*# sourceMappingURL=app.css.map */
