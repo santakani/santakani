@@ -17,7 +17,11 @@ class PlaceController extends Controller
     public function index()
     {
         $places = Place::all();
-        return view('places', ['body_class' => 'places', 'places' => $places]);
+        return view('places', [
+            'body_class' => 'places',
+            'active_nav' => 'place',
+            'places' => $places,
+        ]);
     }
 
     /**
