@@ -32,11 +32,11 @@
             </div>
 
             <div id="nav-menu">
-                <a id="story-menu-item" class="nav-menu-item {{ $active_nav==='story'?'active':'' }}" href="{{ url('/') }}">
+                <a id="story-menu-item" class="nav-menu-item {{ isset($active_nav) && $active_nav==='story'?'active':'' }}" href="{{ url('/') }}">
                     <img src="{{ url('/img/logo-red.png') }}" />
                     Stories
                 </a>
-                <a id="place-menu-item" class="nav-menu-item {{ $active_nav==='place'?'active':'' }}" href="{{ url('/place') }}">
+                <a id="place-menu-item" class="nav-menu-item {{ isset($active_nav) && $active_nav==='place'?'active':'' }}" href="{{ url('/place') }}">
                     <img src="{{ url('/img/logo-green.png') }}" />
                     Places
                 </a>
