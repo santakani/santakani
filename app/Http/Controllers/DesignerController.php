@@ -17,7 +17,10 @@ class DesignerController extends Controller
     public function index()
     {
         $designers = Designer::all();
-        return view('home', ['body_class' => 'home', 'designers' => $designers]);
+        return view('stories', [
+            'body_class' => 'stories',
+            'active_nav' => 'story',
+            'designers' => $designers]);
     }
 
     /**
