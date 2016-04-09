@@ -23,6 +23,53 @@
     #place-list {
         margin-left: 50%;
         padding: 20px;
-        height: 2000px;
+
+        article.place {
+            display: flex;
+            height: 200px;
+            margin-bottom: 20px;
+
+            .image {
+                @include image-cover();
+                position: relative;
+                flex: 0 0 200px;
+                width: 200px;
+                height: 200px;
+                float: left;
+
+                .type {
+                    position: absolute;
+                    left: 0;
+                    top: 1em;
+                    display: block;
+                    padding: 0.2em 0.5em;
+                    color: #ffffff;
+                    background-color: #000000;
+                }
+            }
+
+            .text {
+                flex: 1 1 100px;
+                padding: 10px;
+                overflow: hidden;
+
+                .title {
+                    margin-top: 0;
+                }
+
+                .tag {
+                    display: inline-block;
+                    font-size: $font-size-small;
+                    color: $brand-info;
+                    border: 1px solid $brand-info;
+                    padding: 0.2em 0.5em;
+                    border-radius: 99px;
+                }
+
+                .content {
+                    height: -moz-available;
+                }
+            }
+        }
     }
 }

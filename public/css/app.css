@@ -134,7 +134,48 @@
       height: 100%; }
   #place-wrapper #place-list {
     margin-left: 50%;
-    padding: 20px;
-    height: 2000px; }
+    padding: 20px; }
+    #place-wrapper #place-list article.place {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      height: 200px;
+      margin-bottom: 20px; }
+      #place-wrapper #place-list article.place .image {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        -webkit-flex: 0 0 200px;
+        -ms-flex: 0 0 200px;
+        flex: 0 0 200px;
+        width: 200px;
+        height: 200px;
+        float: left; }
+        #place-wrapper #place-list article.place .image .type {
+          position: absolute;
+          left: 0;
+          top: 1em;
+          display: block;
+          padding: 0.2em 0.5em;
+          color: #ffffff;
+          background-color: #000000; }
+      #place-wrapper #place-list article.place .text {
+        -webkit-flex: 1 1 100px;
+        -ms-flex: 1 1 100px;
+        flex: 1 1 100px;
+        padding: 10px;
+        overflow: hidden; }
+        #place-wrapper #place-list article.place .text .title {
+          margin-top: 0; }
+        #place-wrapper #place-list article.place .text .tag {
+          display: inline-block;
+          font-size: 12px;
+          color: #697646;
+          border: 1px solid #697646;
+          padding: 0.2em 0.5em;
+          border-radius: 99px; }
+        #place-wrapper #place-list article.place .text .content {
+          height: -moz-available; }
 
 /*# sourceMappingURL=app.css.map */
