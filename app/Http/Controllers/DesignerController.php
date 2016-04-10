@@ -52,7 +52,11 @@ class DesignerController extends Controller
      */
     public function show($id)
     {
-        //
+        $designer = Designer::find($id);
+        return view('designer.show', [
+            'body_class' => 'designer-page',
+            'active_nav' => 'story',
+            'designer' => $designer]);
     }
 
     /**
