@@ -17,7 +17,8 @@ elixir(function(mix) {
     mix.scripts([
         'story-list.js',
         'place-map.js',
-        'place-list.js'
+        'place-list.js',
+        'picture-carousel.js',
     ], 'public/js/app.js');
     mix.copy('node_modules/bootstrap-sass/assets/javascripts/bootstrap.js', 'public/js/bootstrap.js');
 });

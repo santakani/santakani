@@ -1,7 +1,17 @@
 @extends('layout.app')
 
 @section('content')
-<article id="story-{{ $designer->id }}" class="story grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<div id="picture-carousel" class="carousel">
+  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
+  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
+  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
+  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
+  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
+  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
+</div>
+
+
+<article id="designer-{{ $designer->id }}" class="designer container">
     <img class="featured-image" src="{{ $designer->getImage()->getThumbUrl() }}" />
     <h3 class="title"><a href="{{ url('/designer/' . $designer->id) }}">
         {{ $designer->getTranslation()->name }}</a></h3>

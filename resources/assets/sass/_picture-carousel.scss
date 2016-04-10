@@ -1,0 +1,15 @@
+#picture-carousel {
+    margin: 40px 0;
+    img {
+        height: 400px;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: $screen-xs-max) {
+    #picture-carousel {
+        img {
+            height: 200px;
+        }
+    }
+}

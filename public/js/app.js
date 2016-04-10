@@ -39,4 +39,12 @@ $(function () {
 
  
 
+$(function () {
+    $('#picture-carousel').flickity({
+        freeScroll: true,
+        wrapAround: true,
+        imagesLoaded: true
+    });
+});
+
 //# sourceMappingURL=app.js.map
