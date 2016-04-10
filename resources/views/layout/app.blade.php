@@ -22,7 +22,7 @@
     <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
 </head>
 <body id="app-layout" class="{{ $body_class or 'default' }}">
-    <div id="kanibar" style="background-image:url(img/background/{{ rand(1,3) }}.jpg)">
+    <div id="kanibar" style="background-image:url({{ url('/img/background/' . rand(1,3) . '.jpg')}})">
         <div class="first-row">
 
             <div id="brand">
