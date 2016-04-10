@@ -2,8 +2,10 @@
 
 @section('content')
 <div id="place-wrapper" class="clearfix">
-    <div id="place-map" data-spy="affix" data-offset-top="300">
-        <div id="place-map-inner"></div>
+    <div id="place-map">
+        <div id="place-map-inner">
+            <div id="place-map-draw"></div>
+        </div>
     </div>
     <div id="place-list">
         @foreach ($places as $place)

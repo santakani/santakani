@@ -7,16 +7,31 @@
         width: 50%;
         height: 600px;
 
-        &.affix {
+        @media screen and (max-width: $screen-xs-max) {
+            float: none;
+            width: 100%;
+            height: 200px;
+        }
+
+        #place-map-inner, #place-map-draw {
+            width: 100%;
+            height: 100%;
+        }
+
+        #place-map-inner.affix {
             top: 0;
             left: 0;
             bottom: 0;
+            width: 50%;
             height: auto;
-        }
+            z-index: 1;
 
-        #place-map-inner {
-            width: 100%;
-            height: 100%;
+            @media screen and (max-width: $screen-xs-max) {
+                right: 0;
+                bottom: auto;
+                width: 100%;
+                height: 200px;
+            }
         }
     }
 
@@ -24,18 +39,34 @@
         margin-left: 50%;
         padding: 20px;
 
+        @media screen and (max-width: $screen-xs-max) {
+            margin-left: 0;
+            padding: 0;
+        }
+
         article.place {
             display: flex;
             height: 200px;
             margin-bottom: 20px;
 
+            @media screen and (max-width: $screen-xs-max) {
+                height: 150px;
+                margin-bottom: 10px;
+                font-size: $font-size-small;
+            }
+
             .image {
                 @include image-cover();
                 position: relative;
-                flex: 0 0 200px;
+                flex: 0 0 auto;
                 width: 200px;
                 height: 200px;
                 float: left;
+
+                @media screen and (max-width: $screen-xs-max) {
+                    width: 150px;
+                    height: 150px;
+                }
 
                 .type {
                     position: absolute;
@@ -55,6 +86,18 @@
 
                 .title {
                     margin-top: 0;
+
+                    small {
+                        display: inline-block;
+                        margin: 0.5em 0;
+                    }
+
+                    @media screen and (max-width: $screen-xs-max) {
+                        font-size: $font-size-small;
+                        small {
+                            font-size: $font-size-small;
+                        }
+                    }
                 }
 
                 .tag {
@@ -64,10 +107,12 @@
                     border: 1px solid $brand-info;
                     padding: 0.2em 0.5em;
                     border-radius: 99px;
-                }
 
-                .content {
-                    height: -moz-available;
+                    @media screen and (max-width: $screen-xs-max) {
+                        border: none;
+                        padding: 0;
+                        border-radius: 0;
+                    }
                 }
             }
         }
