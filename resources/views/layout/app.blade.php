@@ -26,13 +26,6 @@
 <body id="app-layout" class="{{ $body_class or 'default' }}">
     <div id="kanibar" style="background-image:url({{ url('/img/background/' . rand(1,3) . '.jpg')}})">
         <div class="first-row">
-
-            <div id="brand">
-                <a href="{{ url('/') }}">
-                    <span class="santa">Santa</span><span class="kani">Kani</span>
-                </a>
-            </div>
-
             <div id="nav-menu">
                 <a id="story-menu-item" class="nav-menu-item {{ isset($active_nav) && $active_nav==='story'?'active':'' }}" href="{{ url('/') }}">
                     <img src="{{ url('/img/logo-red.png') }}" />

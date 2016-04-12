@@ -3,11 +3,12 @@
   background-position: center;
   background-repeat: no-repeat;
   height: 300px;
-  text-shadow: 0 0 5px #ffffff, 0 0 2px #ffffff, 0 0 1px #ffffff; }
+  text-shadow: 0 0 8px #ffffff, 0 0 4px #ffffff, 0 0 2px #ffffff; }
   @media screen and (max-width: 767px) {
     #kanibar {
       height: 200px; } }
   #kanibar a {
+    color: #000000;
     text-decoration: none; }
     #kanibar a:active, #kanibar a:hover {
       text-decoration: none; }
@@ -27,18 +28,6 @@
       #kanibar .first-row {
         height: 100px;
         padding: 0 15px; } }
-    #kanibar .first-row #brand {
-      -webkit-flex: 0 0 150px;
-      -ms-flex: 0 0 150px;
-      flex: 0 0 150px;
-      font-size: 24px; }
-      #kanibar .first-row #brand .santa {
-        color: #D1141E; }
-      #kanibar .first-row #brand .kani {
-        color: #697646; }
-      @media screen and (max-width: 767px) {
-        #kanibar .first-row #brand {
-          display: none; } }
     #kanibar .first-row #nav-menu {
       -webkit-flex: 1 1 300px;
       -ms-flex: 1 1 300px;
@@ -51,7 +40,8 @@
       align-items: center;
       -webkit-justify-content: center;
       -ms-flex-pack: center;
-      justify-content: center; }
+      justify-content: center;
+      margin-left: 150px; }
       @media screen and (max-width: 767px) {
         #kanibar .first-row #nav-menu {
           -webkit-flex: 2 2 200px;
@@ -60,7 +50,8 @@
           padding: 0;
           -webkit-justify-content: left;
           -ms-flex-pack: left;
-          justify-content: left; } }
+          justify-content: left;
+          margin-left: 0; } }
       #kanibar .first-row #nav-menu .nav-menu-item {
         display: block;
         -webkit-flex: 0 0 80px;
@@ -112,7 +103,14 @@
           height: 48px;
           border-radius: 99px; }
         #kanibar .first-row #user-menu.logged-in .dropdown-menu {
-          background-color: rgba(255, 255, 255, 0.3); }
+          background-color: rgba(0, 0, 0, 0.4); }
+          #kanibar .first-row #user-menu.logged-in .dropdown-menu > li.divider {
+            background-color: rgba(255, 255, 255, 0.3); }
+          #kanibar .first-row #user-menu.logged-in .dropdown-menu > li > a {
+            color: #ffffff;
+            text-shadow: 0 0 4px #ffffff; }
+            #kanibar .first-row #user-menu.logged-in .dropdown-menu > li > a:hover {
+              background-color: rgba(100, 255, 100, 0.5); }
       #kanibar .first-row #user-menu.not-logged-in {
         -webkit-flex: 0 0 150px;
         -ms-flex: 0 0 150px;

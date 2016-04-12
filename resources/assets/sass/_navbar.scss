@@ -1,13 +1,14 @@
 #kanibar {
     @include image-cover();
     height: 300px;
-    text-shadow: 0 0 5px #ffffff, 0 0 2px #ffffff, 0 0 1px #ffffff;
+    text-shadow: 0 0 8px #ffffff, 0 0 4px #ffffff, 0 0 2px #ffffff;
 
     @media screen and (max-width: $screen-xs-max) {
         height: 200px;
     }
 
     a {
+        color: #000000;
         text-decoration: none;
 
         &:active, &:hover {
@@ -29,33 +30,18 @@
             padding: 0 15px;
         }
 
-        #brand {
-            flex: 0 0 $side-width;
-            font-size: 24px;
-
-            .santa {
-                color: $brand-primary;
-            }
-
-            .kani {
-                color: $brand-success;
-            }
-
-            @media screen and (max-width: $screen-xs-max) {
-                display: none;
-            }
-        }
-
         #nav-menu {
             flex: 1 1 300px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-left: $side-width;
 
             @media screen and (max-width: $screen-xs-max) {
                 flex: 2 2 200px;
                 padding: 0;
                 justify-content: left;
+                margin-left: 0;
             }
 
             .nav-menu-item {
@@ -120,7 +106,20 @@
                 }
 
                 .dropdown-menu {
-                    background-color: rgba(255, 255, 255, 0.3);
+                    background-color: rgba(0, 0, 0, 0.4);
+
+                    > li.divider {
+                        background-color: rgba(255,255,255,0.3);
+                    }
+
+                    > li > a {
+                        color: #ffffff;
+                        text-shadow: 0 0 4px #ffffff;
+
+                        &:hover {
+                            background-color: rgba(100,255,100,0.5);
+                        }
+                    }
                 }
             }
 
