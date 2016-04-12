@@ -1,48 +1,27 @@
+$kanibar-side-width: 150px;
+
 #kanibar {
-    @include image-cover();
-    height: 300px;
-    text-shadow: 0 0 8px #ffffff, 0 0 4px #ffffff, 0 0 2px #ffffff;
+    height: 200px;
+    margin-bottom: 20px;
 
-    @media screen and (max-width: $screen-xs-max) {
-        height: 200px;
-    }
-
-    a {
+    a, a:active, a:hover {
         color: #000000;
         text-decoration: none;
-
-        &:active, &:hover {
-            text-decoration: none;
-        }
     }
 
     .first-row {
-        $side-width: 150px;
-
         display: flex;
-        height: 200px;
+        height: 160px;
         padding: 0 20px;
         align-items: center;
         justify-content: center;
-
-        @media screen and (max-width: $screen-xs-max) {
-            height: 100px;
-            padding: 0 15px;
-        }
 
         #nav-menu {
             flex: 1 1 300px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: $side-width;
-
-            @media screen and (max-width: $screen-xs-max) {
-                flex: 2 2 200px;
-                padding: 0;
-                justify-content: left;
-                margin-left: 0;
-            }
+            margin-left: $kanibar-side-width;
 
             .nav-menu-item {
                 display: block;
@@ -50,20 +29,10 @@
                 padding-bottom: 10px;
                 text-align: center;
 
-                @media screen and (max-width: $screen-xs-max) {
-                    flex: 0 0 60px;
-                    padding-bottom: 5px;
-                }
-
                 img {
                     height: 80px;
                     width: auto;
                     margin-bottom: 10px;
-
-                    @media screen and (max-width: $screen-xs-max) {
-                        height: 48px;
-                        margin-bottom: 5px;
-                    }
                 }
 
                 &.active {
@@ -91,11 +60,7 @@
             &.logged-in {
                 $avatar-size: 48px;
                 flex: 0 0 $avatar-size;
-                margin-left: $side-width - $avatar-size;
-
-                @media screen and (max-width: $screen-xs-max) {
-                    margin-left: 0;
-                }
+                margin-left: $kanibar-side-width - $avatar-size;
 
                 .avatar.dropdown-toggle {
                     @include image-cover();
@@ -104,31 +69,10 @@
                     height: 48px;
                     border-radius: 99px;
                 }
-
-                .dropdown-menu {
-                    background-color: rgba(0, 0, 0, 0.4);
-
-                    > li.divider {
-                        background-color: rgba(255,255,255,0.3);
-                    }
-
-                    > li > a {
-                        color: #ffffff;
-                        text-shadow: 0 0 4px #ffffff;
-
-                        &:hover {
-                            background-color: rgba(100,255,100,0.5);
-                        }
-                    }
-                }
             }
 
             &.not-logged-in {
-                flex: 0 0 $side-width;
-
-                @media screen and (max-width: $screen-xs-max) {
-                    flex: 0 0 auto;
-                }
+                flex: 0 0 $kanibar-side-width;
 
                 a {
                     margin-left: 1em;
@@ -138,18 +82,48 @@
     }
 
     .second-row {
-        height: 100px;
-        max-width: 500px;
-        padding: 33px 15px;
-        margin: auto;
+        height: 40px;
+        padding: 0 15px;
 
-        input {
-            background-color: rgba(255,255,255,0.5);
-        }
-
-        button {
-            background-color: rgba(255,255,255,0.7);
+        form {
+            max-width: 500px;
+            margin: auto;
         }
     }
 
+    @media screen and (max-width: $screen-xs-max) {
+        height: 140px;
+
+        .first-row {
+            height: 100px;
+            padding: 0 15px;
+
+            #nav-menu {
+                flex: 2 2 200px;
+                padding: 0;
+                justify-content: left;
+                margin-left: 0;
+
+                .nav-menu-item {
+                    flex: 0 0 60px;
+                    padding-bottom: 5px;
+
+                    img {
+                        height: 48px;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+
+            #user-menu {
+                &.logged-in {
+                    margin-left: 0;
+                }
+
+                &.not-logged-in {
+                    flex: 0 0 auto;
+                }
+            }
+        }
+    }
 }

@@ -24,7 +24,7 @@
     <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
 </head>
 <body id="app-layout" class="{{ $body_class or 'default' }}">
-    <div id="kanibar" style="background-image:url({{ url('/img/background/' . rand(1,3) . '.jpg')}})">
+    <div id="kanibar">
         <div class="first-row">
             <div id="nav-menu">
                 <a id="story-menu-item" class="nav-menu-item {{ isset($active_nav) && $active_nav==='story'?'active':'' }}" href="{{ url('/') }}">
