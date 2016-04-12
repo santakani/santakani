@@ -111,6 +111,8 @@
           width: 48px;
           height: 48px;
           border-radius: 99px; }
+        #kanibar .first-row #user-menu.logged-in .dropdown-menu {
+          background-color: rgba(255, 255, 255, 0.3); }
       #kanibar .first-row #user-menu.not-logged-in {
         -webkit-flex: 0 0 150px;
         -ms-flex: 0 0 150px;
