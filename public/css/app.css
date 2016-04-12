@@ -1,12 +1,9 @@
-/**
- * Core App Style
- */
 #kanibar {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 300px;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5); }
+  text-shadow: 0 0 5px #ffffff, 0 0 2px #ffffff, 0 0 1px #ffffff; }
   @media screen and (max-width: 767px) {
     #kanibar {
       height: 200px; } }
@@ -33,7 +30,8 @@
     #kanibar .first-row #brand {
       -webkit-flex: 0 0 150px;
       -ms-flex: 0 0 150px;
-      flex: 0 0 150px; }
+      flex: 0 0 150px;
+      font-size: 24px; }
       #kanibar .first-row #brand .santa {
         color: #D1141E; }
       #kanibar .first-row #brand .kani {
@@ -279,5 +277,12 @@
 @media screen and (max-width: 767px) {
   #picture-carousel img {
     height: 200px; } }
+
+.designer-page article {
+  max-width: 600px;
+  margin-top: 40px;
+  margin-bottom: 100px; }
+  .designer-page article .title {
+    text-align: center; }
 
 /*# sourceMappingURL=app.css.map */

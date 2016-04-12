@@ -1,7 +1,7 @@
 #kanibar {
     @include image-cover();
     height: 300px;
-    text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+    text-shadow: 0 0 5px #ffffff, 0 0 2px #ffffff, 0 0 1px #ffffff;
 
     @media screen and (max-width: $screen-xs-max) {
         height: 200px;
@@ -31,6 +31,7 @@
 
         #brand {
             flex: 0 0 $side-width;
+            font-size: 24px;
 
             .santa {
                 color: $brand-primary;
