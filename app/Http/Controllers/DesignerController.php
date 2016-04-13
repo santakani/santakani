@@ -67,7 +67,8 @@ class DesignerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $designer = Designer::find($id);
+        return view('designer.edit', ['designer' => $designer]);
     }
 
     /**
