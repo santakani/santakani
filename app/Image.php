@@ -14,6 +14,21 @@ class Image extends Model
     protected $table = 'image';
 
     /**
+     * Maximum size of images. Uploaded images larger than this value will be scaled.
+     *
+     * @var int
+     */
+    protected $max_size = 1200;
+
+    /**
+     * Size of image thumbnails. Uploaded images smaller than this value will not
+     * generate thumbnail file, using full image instead.
+     *
+     * @var int
+     */
+    protected $thumb_size = 600;
+
+    /**
      * Generate URL to image file
      *
      * @return string
@@ -31,6 +46,10 @@ class Image extends Model
      */
     public function getThumbUrl($size = 'thumb')
     {
-        return $this->getUrl('thumb');
+        if ($this->width <= $this->thumb_size && $this->height <= $this->thumb_size) {
+            return $this->getUrl('full');
+        } else {
+            return $this->getUrl('thumb');
+        }
     }
 }
