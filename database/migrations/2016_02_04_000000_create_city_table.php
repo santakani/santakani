@@ -18,25 +18,20 @@ class CreateCityTable extends Migration
             // Non-translated content
             $table->string('url_name')->unique(); // Name in URL
             $table->integer('country_id')->unsigned(); // ID of country
-            $table->integer('image_id')->unsigned()->nullable(); // ID of image
 
             // Timestamps
             $table->timestamps();
             $table->softDeletes();
-
-            // When deleted image, set image_id to null
-            $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
         Schema::create('city_translation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('city_id')->unsigned();
             $table->string('language')->index();
-            $table->boolean('complete');
 
             // Translated content
             $table->string('name');
-            $table->text('content');
 
+            // Timestamps
             $table->timestamps();
 
             // Unique and foreign key

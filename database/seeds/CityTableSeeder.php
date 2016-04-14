@@ -16,7 +16,6 @@ class CityTableSeeder extends Seeder
         DB::table('city')->insert([
             'url_name' => 'helsinki',
             'country_id' => 1,
-            'image_id' => 12,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -24,7 +23,6 @@ class CityTableSeeder extends Seeder
             'city_id' => 1,
             'language' => 'en',
             'name' => 'Helsinki',
-            'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -32,7 +30,6 @@ class CityTableSeeder extends Seeder
             'city_id' => 1,
             'language' => 'zh',
             'name' => '赫尔辛基',
-            'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }

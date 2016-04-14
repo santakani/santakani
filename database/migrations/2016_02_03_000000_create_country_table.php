@@ -18,25 +18,20 @@ class CreateCountryTable extends Migration
             // Non-translated content
             $table->string('url_name')->unique(); // Name in URL
             $table->string('code')->unique(); // ISO 3166-1 alpha-2
-            $table->integer('image_id')->unsigned()->nullable(); // ID of image
 
             // Timestamps
             $table->timestamps();
             $table->softDeletes();
-
-            // When deleted image, set image_id to null
-            $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
         Schema::create('country_translation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('country_id')->unsigned();
             $table->string('language')->index();
-            $table->boolean('complete');
 
             // Translated content
             $table->string('name');
-            $table->text('content');
 
+            // Timestamps
             $table->timestamps();
 
             // Unique and foreign key

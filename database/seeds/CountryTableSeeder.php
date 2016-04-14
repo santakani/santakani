@@ -16,7 +16,6 @@ class CountryTableSeeder extends Seeder
         DB::table('country')->insert([
             'url_name' => 'finland',
             'code' => 'fi',
-            'image_id' => 11,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -24,7 +23,6 @@ class CountryTableSeeder extends Seeder
             'country_id' => 1,
             'language' => 'en',
             'name' => 'Finland',
-            'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -32,7 +30,6 @@ class CountryTableSeeder extends Seeder
             'country_id' => 1,
             'language' => 'zh',
             'name' => '芬兰',
-            'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }
