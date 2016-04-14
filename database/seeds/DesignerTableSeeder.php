@@ -13,6 +13,8 @@ class DesignerTableSeeder extends Seeder
     public function run()
     {
         DB::table('designer')->insert([
+            'country_id' => 1,
+            'city_id' => 1,
             'image_id' => 13,
             'user_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
