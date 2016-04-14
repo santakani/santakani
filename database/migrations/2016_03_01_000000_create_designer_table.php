@@ -35,7 +35,6 @@ class CreateDesignerTable extends Migration
             $table->increments('id');
             $table->integer('designer_id')->unsigned();
             $table->string('language')->index();
-            $table->boolean('complete');
 
             // Translated content
             $table->string('name');

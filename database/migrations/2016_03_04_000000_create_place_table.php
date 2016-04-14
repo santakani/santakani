@@ -43,7 +43,6 @@ class CreatePlaceTable extends Migration
             $table->increments('id');
             $table->integer('place_id')->unsigned();
             $table->string('language')->index();
-            $table->boolean('complete');
 
             // Translated content
             $table->string('name');
