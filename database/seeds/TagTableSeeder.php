@@ -15,7 +15,6 @@ class TagTableSeeder extends Seeder
         // 1
         DB::table('tag')->insert([
             'url_name' => 'wood',
-            'image_id' => 7,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -38,7 +37,6 @@ class TagTableSeeder extends Seeder
         // 2
         DB::table('tag')->insert([
             'url_name' => 'knitwear',
-            'image_id' => 8,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -61,7 +59,6 @@ class TagTableSeeder extends Seeder
         // 3
         DB::table('tag')->insert([
             'url_name' => 'bamboo',
-            'image_id' => 9,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -84,7 +81,6 @@ class TagTableSeeder extends Seeder
         // 4
         DB::table('tag')->insert([
             'url_name' => 'earring',
-            'image_id' => 10,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -107,7 +103,6 @@ class TagTableSeeder extends Seeder
         // 5 Fashion
         DB::table('tag')->insert([
             'url_name' => 'fashion',
-            'image_id' => 20,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -130,7 +125,6 @@ class TagTableSeeder extends Seeder
         // 6 Clothing
         DB::table('tag')->insert([
             'url_name' => 'clothing',
-            'image_id' => 20,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -153,7 +147,6 @@ class TagTableSeeder extends Seeder
         // 7 Bag
         DB::table('tag')->insert([
             'url_name' => 'bag',
-            'image_id' => 16,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -176,7 +169,6 @@ class TagTableSeeder extends Seeder
         // 8 Woman
         DB::table('tag')->insert([
             'url_name' => 'woman',
-            'image_id' => 16,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
