@@ -15,6 +15,7 @@ class CreateDesignerTagTable extends Migration
         Schema::create('designer_tag', function (Blueprint $table) {
             $table->integer('designer_id')->unsigned();
             $table->integer('tag_id')->unsigned();
+            $table->integer('order')->unsigned();
 
             // Unique
             $table->unique(['designer_id','tag_id']);
