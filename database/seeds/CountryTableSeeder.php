@@ -15,8 +15,8 @@ class CountryTableSeeder extends Seeder
         // 1
         DB::table('country')->insert([
             'url_name' => 'finland',
+            'code' => 'fi',
             'image_id' => 11,
-            'country_code' => 'FI',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
