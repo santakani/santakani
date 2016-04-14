@@ -21,17 +21,17 @@ class TagTableSeeder extends Seeder
 
         DB::table('tag_translation')->insert([
             'tag_id' => 1,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Wood',
-            'content' => file_get_contents('http://loripsum.net/api'),
+            'alias' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('tag_translation')->insert([
             'tag_id' => 1,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '木',
-            'content' => file_get_contents('http://loripsum.net/api'),
+            'alias' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -44,17 +44,17 @@ class TagTableSeeder extends Seeder
 
         DB::table('tag_translation')->insert([
             'tag_id' => 2,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Knitwear',
-            'content' => file_get_contents('http://loripsum.net/api'),
+            'alias' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('tag_translation')->insert([
             'tag_id' => 2,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '针织品',
-            'content' => file_get_contents('http://loripsum.net/api'),
+            'alias' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -67,17 +67,17 @@ class TagTableSeeder extends Seeder
 
         DB::table('tag_translation')->insert([
             'tag_id' => 3,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Bamboo',
-            'content' => file_get_contents('http://loripsum.net/api'),
+            'alias' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('tag_translation')->insert([
             'tag_id' => 3,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '竹',
-            'content' => file_get_contents('http://loripsum.net/api'),
+            'alias' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -90,17 +90,109 @@ class TagTableSeeder extends Seeder
 
         DB::table('tag_translation')->insert([
             'tag_id' => 4,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Earring',
-            'content' => file_get_contents('http://loripsum.net/api'),
+            'alias' => 'Eardrop',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('tag_translation')->insert([
             'tag_id' => 4,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '耳环',
-            'content' => file_get_contents('http://loripsum.net/api'),
+            'alias' => '耳坠,耳钉',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 5 Fashion
+        DB::table('tag')->insert([
+            'url_name' => 'fashion',
+            'image_id' => 20,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('tag_translation')->insert([
+            'tag_id' => 5,
+            'locale' => 'en',
+            'name' => 'Fashion',
+            'alias' => '',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('tag_translation')->insert([
+            'tag_id' => 5,
+            'locale' => 'zh',
+            'name' => '时尚',
+            'alias' => '',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 6 Clothing
+        DB::table('tag')->insert([
+            'url_name' => 'clothing',
+            'image_id' => 20,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('tag_translation')->insert([
+            'tag_id' => 6,
+            'locale' => 'en',
+            'name' => 'Clothing',
+            'alias' => '',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('tag_translation')->insert([
+            'tag_id' => 6,
+            'locale' => 'zh',
+            'name' => '服装',
+            'alias' => '服饰，衣服，时装',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 7 Bag
+        DB::table('tag')->insert([
+            'url_name' => 'bag',
+            'image_id' => 16,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('tag_translation')->insert([
+            'tag_id' => 7,
+            'locale' => 'en',
+            'name' => 'Bag',
+            'alias' => '',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('tag_translation')->insert([
+            'tag_id' => 7,
+            'locale' => 'zh',
+            'name' => '包',
+            'alias' => '皮包，钱包，手提包',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 8 Woman
+        DB::table('tag')->insert([
+            'url_name' => 'woman',
+            'image_id' => 16,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('tag_translation')->insert([
+            'tag_id' => 8,
+            'locale' => 'en',
+            'name' => 'Woman',
+            'alias' => 'Female',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('tag_translation')->insert([
+            'tag_id' => 8,
+            'locale' => 'zh',
+            'name' => '女性',
+            'alias' => '女人，女式，女装',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }

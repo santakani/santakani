@@ -131,5 +131,85 @@ class ImageTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+
+        // 13, YAT designer photo
+        DB::table('image')->insert([
+            'type' => 'image',
+            'format' => 'jpg',
+            'width' => 460,
+            'height' => 280,
+            'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 14, YAT design photo
+        DB::table('image')->insert([
+            'type' => 'image',
+            'format' => 'jpg',
+            'width' => 287,
+            'height' => 395,
+            'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 15, YAT design photo
+        DB::table('image')->insert([
+            'type' => 'image',
+            'format' => 'jpg',
+            'width' => 263,
+            'height' => 395,
+            'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 16, YAT design photo
+        DB::table('image')->insert([
+            'type' => 'image',
+            'format' => 'jpg',
+            'width' => 800,
+            'height' => 1200,
+            'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 17, YAT design photo
+        DB::table('image')->insert([
+            'type' => 'image',
+            'format' => 'jpg',
+            'width' => 800,
+            'height' => 1200,
+            'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 18, YAT design photo
+        DB::table('image')->insert([
+            'type' => 'image',
+            'format' => 'jpg',
+            'width' => 800,
+            'height' => 1200,
+            'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 19, YAT design photo
+        DB::table('image')->insert([
+            'type' => 'image',
+            'format' => 'jpg',
+            'width' => 800,
+            'height' => 1200,
+            'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        // 20, YAT design photo
+        DB::table('image')->insert([
+            'type' => 'image',
+            'format' => 'jpg',
+            'width' => 1200,
+            'height' => 608,
+            'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 }
