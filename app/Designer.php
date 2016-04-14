@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Designer extends Model
 {
@@ -14,13 +15,31 @@ class Designer extends Model
     protected $table = 'designer';
 
     /**
-     * Generate URL to avatar file
+     * Get the main image, it is designer photo or brand logo.
      *
      * @return Image
      */
-    public function getImage()
+    public function getMainImage()
     {
         return Image::find($this->image_id);
+    }
+
+    /**
+     * Get other images, they are usually photos of design.
+     *
+     * @return Image
+     */
+    public function getImages()
+    {
+        $images = [];
+
+        $image_ids = DB::table('designer_image')->select('image_id as id', 'order')
+            ->where('designer_id', $this->id)->get();
+
+        foreach ($image_ids as $image_id) {
+            $images[$image_id->order] = Image::find($image_id->id);
+        }
+        return $images;
     }
 
     /**

@@ -12,12 +12,13 @@
 @endif
 
 <div id="picture-carousel" class="carousel">
-  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
-  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
-  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
-  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
-  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
-  <img src="{{ $designer->getImage()->getThumbUrl() }}" />
+
+@foreach ($designer->getImages() as $image)
+
+<img src="{{ url($image->getUrl()) }}" />
+
+@endforeach
+
 </div>
 
 
