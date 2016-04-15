@@ -19,7 +19,9 @@
 
 @foreach ($designer->getImages() as $image)
 
-<img src="{{ url($image->getUrl()) }}" />
+    <div class="picture-thumb" data-src="{{ url($image->getUrl()) }}"
+        data-thumb="{{ url($image->getThumbUrl()) }}"
+        style="background-image:url({{ url($image->getThumbUrl()) }})"></div>
 
 @endforeach
 

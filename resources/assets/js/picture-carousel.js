@@ -1,7 +1,10 @@
 $(function () {
     $('#picture-carousel').flickity({
-        freeScroll: true,
-        wrapAround: true,
-        imagesLoaded: true
+        cellAlign: 'left',
+        freeScroll: true
+    });
+
+    $('#picture-carousel').lightGallery({
+        selector: '.picture-thumb'
     });
 });
