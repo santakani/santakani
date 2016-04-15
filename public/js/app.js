@@ -5,7 +5,8 @@ $(function () {
     });
 
     $('#picture-carousel').lightGallery({
-        selector: '.picture-thumb'
+        selector: '.picture-thumb',
+        exThumbImage: 'data-thumb'
     });
 });
 
