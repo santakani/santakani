@@ -266,6 +266,19 @@ body.edit-layout #edit-content {
         width: 200px;
         height: 200px; } }
 
+.lg-outer .lg .lg-thumb-outer .lg-thumb .lg-thumb-item {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-contnet: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: none;
+  border-radius: 0; }
+  .lg-outer .lg .lg-thumb-outer .lg-thumb .lg-thumb-item.active {
+    opacity: 0.5; }
+
 .designer-page article {
   max-width: 600px;
   margin-top: 40px;

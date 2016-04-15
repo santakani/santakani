@@ -14,3 +14,26 @@
         }
     }
 }
+
+.lg-outer .lg {
+
+    .lg-inner {
+
+    }
+
+    .lg-thumb-outer {
+        .lg-thumb {
+            .lg-thumb-item {
+                display: flex;
+                justify-contnet: center;
+                align-items: center;
+                border: none;
+                border-radius: 0;
+
+                &.active {
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+}
