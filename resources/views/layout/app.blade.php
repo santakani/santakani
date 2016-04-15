@@ -23,7 +23,7 @@
     <script src="{{ url('/js/bootstrap.js') }}" type="text/javascript"></script>
     <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
 </head>
-<body id="app-layout" class="{{ $body_class or 'default' }}">
+<body id="{{ $body_id or 'app-layout' }}" class="app-layout {{ $body_class or '' }}">
     <div id="kanibar">
         <div class="first-row">
             <div id="nav-menu">

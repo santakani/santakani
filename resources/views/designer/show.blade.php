@@ -1,4 +1,8 @@
-@extends('layout.app')
+@extends('layout.app', [
+    'title' => $designer->getTranslation()->name . ' - Designer',
+    'body_id' => 'designer-page',
+    'body_class' => 'designer-page',
+])
 
 @section('content')
 
