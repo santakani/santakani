@@ -10,7 +10,10 @@ $(function () {
     $('#place-map-inner').affix({
         offset: {
             top: function () {
-                return $('#kanibar').height();
+                return this.top = $('#kanibar').outerHeight(true) + 20;
+            },
+            bottom: function () {
+                return this.bottom = $('footer').outerHeight(true) + 20;
             }
         }
     });

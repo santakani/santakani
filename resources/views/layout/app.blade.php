@@ -93,7 +93,10 @@ Main app layout, used by most of content web pages
             </form>
         </div><!-- .second-row -->
     </div><!-- #kanibar -->
-    @yield('content')
+
+    <div id="content">
+        @yield('content')
+    </div>
 
     @include('modal.location')
     @include('modal.language')

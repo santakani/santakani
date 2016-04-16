@@ -10,7 +10,7 @@
     <div id="action-bar">
         <div class="container">
             <a href="{{ url('/designer/'.$designer->id.'/edit') }}"
-                id="edit-button" class="btn btn-default pull-right">Edit</a>
+                id="edit-button" class="btn btn-default">Edit</a>
         </div>
     </div>
 @endif

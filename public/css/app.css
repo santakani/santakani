@@ -109,11 +109,17 @@
           -ms-flex: 0 0 auto;
           flex: 0 0 auto; } }
 
-footer .list-inline {
-  text-align: right; }
-  @media screen and (max-width: 767px) {
-    footer .list-inline {
-      text-align: left; } }
+#content {
+  padding: 20px 0;
+  background-color: #f8f8f8; }
+
+footer {
+  padding: 30px 0; }
+  footer .list-inline {
+    text-align: right; }
+    @media screen and (max-width: 767px) {
+      footer .list-inline {
+        text-align: left; } }
 
 #kani-brand {
   margin: 50px auto;
@@ -172,7 +178,10 @@ body.edit-layout #edit-content {
     #place-wrapper #place-map #place-map-inner, #place-wrapper #place-map #place-map-draw {
       width: 100%;
       height: 100%; }
+    #place-wrapper #place-map #place-map-inner.affix-top {
+      position: relative; }
     #place-wrapper #place-map #place-map-inner.affix {
+      position: fixed;
       top: 0;
       left: 0;
       bottom: 0;
@@ -185,6 +194,8 @@ body.edit-layout #edit-content {
           bottom: auto;
           width: 100%;
           height: 200px; } }
+    #place-wrapper #place-map #place-map-inner.affix-bottom {
+      position: relative; }
   #place-wrapper #place-list {
     margin-left: 50%;
     padding: 0 20px; }
@@ -285,11 +296,14 @@ body.edit-layout #edit-content {
   .lg-outer .lg .lg-thumb-outer .lg-thumb .lg-thumb-item.active {
     opacity: 0.5; }
 
-.designer-page article {
+#designer-page #action-bar {
+  text-align: right; }
+
+#designer-page article {
   max-width: 600px;
   margin-top: 40px;
   margin-bottom: 100px; }
-  .designer-page article .title {
+  #designer-page article .title {
     text-align: center; }
 
 /*# sourceMappingURL=app.css.map */

@@ -36,5 +36,8 @@
         @endforeach
     </div><!-- #place-list -->
 </div>
+@endsection
+
+@section('foot_append')
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&callback=initMap"></script>
 @endsection
