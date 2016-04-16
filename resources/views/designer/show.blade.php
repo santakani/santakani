@@ -21,6 +21,13 @@
         <div class="text">
             <h1 class="title">{{ $designer->getTranslation()->name }}</h1>
             <p>Helsinki, Finland</p>
+            <ul class="tags">
+                @foreach ($designer->getTags() as $tag)
+                    <li><a href="{{ $tag->getUrl() }}">
+                        {{ $tag->getTranslation()->name }}
+                    </a></li>
+                @endforeach
+            </ul>
         </div>
     </div>
 </header>

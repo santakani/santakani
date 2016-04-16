@@ -1,7 +1,6 @@
-// Core variables and mixins from Bootstrap
+// Customized Bootstrap
 @import "bootstrap-custom";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // Mixins
 @import "mixin";
@@ -16,6 +15,9 @@
 
 // Edit layout
 @import "edit-layout";
+
+// Tags
+@import "tag";
 
 // Home page related
 @import "story-list";
