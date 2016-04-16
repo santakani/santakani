@@ -109,6 +109,12 @@
           -ms-flex: 0 0 auto;
           flex: 0 0 auto; } }
 
+footer .list-inline {
+  text-align: right; }
+  @media screen and (max-width: 767px) {
+    footer .list-inline {
+      text-align: left; } }
+
 #kani-brand {
   margin: 50px auto;
   text-align: center;

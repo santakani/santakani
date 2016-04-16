@@ -1,0 +1,9 @@
+footer {
+    .list-inline {
+        text-align: right;
+
+        @media screen and (max-width: $screen-xs-max) {
+            text-align: left;
+        }
+    }
+}
