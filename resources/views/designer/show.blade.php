@@ -20,11 +20,16 @@
         <div class="main-image" style="background-image:url({{ url($designer->getMainImage()->getThumbUrl()) }});"></div>
         <div class="text">
             <h1 class="title">{{ $designer->getTranslation()->name }}</h1>
-            <p>Helsinki, Finland</p>
+            <p>
+                <a href="{{ $designer->getCity()->getUrl() }}">
+                    {{ $designer->getCity()->getTranslation()->name }}</a>,
+                <a href="{{ $designer->getCountry()->getUrl() }}">
+                    {{ $designer->getCountry()->getTranslation()->name }}</a>
+            </p>
             <ul class="tags">
                 @foreach ($designer->getTags() as $tag)
                     <li><a href="{{ $tag->getUrl() }}">
-                        {{ $tag->getTranslation()->name }}
+                        #{{ $tag->getTranslation()->name }}
                     </a></li>
                 @endforeach
             </ul>

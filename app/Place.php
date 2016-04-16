@@ -32,7 +32,7 @@ class Place extends Model
     {
         return PlaceTranslation::where([
             ['place_id', $this->id],
-            ['language', $lang],
+            ['locale', $lang],
         ])->first();
     }
 }

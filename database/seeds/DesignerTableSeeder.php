@@ -22,7 +22,7 @@ class DesignerTableSeeder extends Seeder
 
         DB::table('designer_translation')->insert([
             'designer_id' => 1,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => '2OR+BYYAT',
             'content' => <<<TEXT
 2OR+BYYAT is a young, original and dynamic fashion brand based in Helsinki, Finland. The label is known for skillful unconventional cutting, poetic story of colours and inventive textures as well as high quality leather bags. Products are well made and a lot of attention is paid to details. The key factors of the 2OR+BYYAT philosophy are creativity in symbiosis with wearability. The clothes are eclectic but they stand the test of time; the designs are made to last.
@@ -39,7 +39,7 @@ TEXT
 
         DB::table('designer_translation')->insert([
             'designer_id' => 1,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '2OR+BYYAT',
             'content' => <<<TEXT
 2OR+BYYAT 是一个来自芬兰赫尔辛基的时尚品牌，年轻，富有原创性，动态的。标签是著名的熟练非常规切割，颜色和纹理的发明故事诗意，以及高品质的皮包。产品制作精良，很多重视细节。在2OR+ BYYAT哲学的关键因素是与耐磨性共生的创造力。衣服是不拘一格的，但他们经得起时间的考验;这些设计都是为了持续。
@@ -62,7 +62,7 @@ TEXT
 
          DB::table('designer_translation')->insert([
             'designer_id' => 2,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Du Yuexin',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -70,7 +70,7 @@ TEXT
 
         DB::table('designer_translation')->insert([
             'designer_id' => 2,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '杜玥辛',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -84,7 +84,7 @@ TEXT
 
          DB::table('designer_translation')->insert([
             'designer_id' => 3,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Yun Xiaotong',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -92,7 +92,7 @@ TEXT
 
         DB::table('designer_translation')->insert([
             'designer_id' => 3,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '云小童',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -106,7 +106,7 @@ TEXT
 
          DB::table('designer_translation')->insert([
             'designer_id' => 4,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Yu Huiyang',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -114,7 +114,7 @@ TEXT
 
         DB::table('designer_translation')->insert([
             'designer_id' => 4,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '余慧阳',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

@@ -21,14 +21,14 @@ class CountryTableSeeder extends Seeder
 
         DB::table('country_translation')->insert([
             'country_id' => 1,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Finland',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('country_translation')->insert([
             'country_id' => 1,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '芬兰',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);

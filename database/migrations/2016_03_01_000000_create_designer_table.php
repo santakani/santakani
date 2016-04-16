@@ -34,7 +34,7 @@ class CreateDesignerTable extends Migration
         Schema::create('designer_translation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('designer_id')->unsigned();
-            $table->string('language')->index();
+            $table->string('locale')->index();
 
             // Translated content
             $table->string('name');
@@ -44,7 +44,7 @@ class CreateDesignerTable extends Migration
 
             // Unique and foreign key
             // When deleting designer model, also delete all translation models
-            $table->unique(['designer_id','language']);
+            $table->unique(['designer_id','locale']);
             $table->foreign('designer_id')->references('id')->on('designer')->onDelete('cascade');
         });
     }

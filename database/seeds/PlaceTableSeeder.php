@@ -29,7 +29,7 @@ class PlaceTableSeeder extends Seeder
 
         DB::table('place_translation')->insert([
             'place_id' => 1,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'MadeBy Helsinki',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -52,7 +52,7 @@ class PlaceTableSeeder extends Seeder
 
         DB::table('place_translation')->insert([
             'place_id' => 2,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Uniqeco Design',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -75,7 +75,7 @@ class PlaceTableSeeder extends Seeder
 
         DB::table('place_translation')->insert([
             'place_id' => 3,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Tiisin Design',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -98,7 +98,7 @@ class PlaceTableSeeder extends Seeder
 
         DB::table('place_translation')->insert([
             'place_id' => 4,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Sebastian Jansson',
             'content' => file_get_contents('http://loripsum.net/api'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

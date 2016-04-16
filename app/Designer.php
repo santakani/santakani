@@ -15,6 +15,26 @@ class Designer extends Model
     protected $table = 'designer';
 
     /**
+     * Get country that the designer is located.
+     *
+     * @return Country
+     */
+    public function getCountry()
+    {
+        return Country::find($this->country_id);
+    }
+
+    /**
+     * Get city that the designer is located.
+     *
+     * @return City
+     */
+    public function getCity()
+    {
+        return City::find($this->city_id);
+    }
+
+    /**
      * Get the main image, it is designer photo or brand logo.
      *
      * @return Image
@@ -70,7 +90,7 @@ class Designer extends Model
     {
         return DesignerTranslation::where([
             ['designer_id', $this->id],
-            ['language', $lang],
+            ['locale', $lang],
         ])->first();
     }
 }

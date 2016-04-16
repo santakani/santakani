@@ -42,7 +42,7 @@ class CreatePlaceTable extends Migration
         Schema::create('place_translation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('place_id')->unsigned();
-            $table->string('language')->index();
+            $table->string('locale')->index();
 
             // Translated content
             $table->string('name');
@@ -52,7 +52,7 @@ class CreatePlaceTable extends Migration
 
             // Unique and foreign key
             // When deleting city model, also delete all translation models
-            $table->unique(['place_id','language']);
+            $table->unique(['place_id','locale']);
             $table->foreign('place_id')->references('id')->on('place')->onDelete('cascade');
         });
     }

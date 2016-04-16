@@ -21,14 +21,14 @@ class CityTableSeeder extends Seeder
 
         DB::table('city_translation')->insert([
             'city_id' => 1,
-            'language' => 'en',
+            'locale' => 'en',
             'name' => 'Helsinki',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('city_translation')->insert([
             'city_id' => 1,
-            'language' => 'zh',
+            'locale' => 'zh',
             'name' => '赫尔辛基',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
