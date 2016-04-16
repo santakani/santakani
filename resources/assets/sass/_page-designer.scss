@@ -1,6 +1,28 @@
 #designer-page {
+
     #action-bar {
         text-align: right;
+        margin-bottom: 20px;
+    }
+
+    header {
+        $picture-size: 150px;
+
+        .container {
+            max-width: 600px;
+        }
+
+        .main-image {
+            @include image-cover();
+            width: $picture-size;
+            height: $picture-size;
+            border-radius: 999px;
+            float: left;
+        }
+
+        .text {
+            margin-left: $picture-size + 20px;
+        }
     }
 
     article {

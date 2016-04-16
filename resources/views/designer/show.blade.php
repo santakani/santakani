@@ -17,9 +17,11 @@
 
 <header>
     <div class="container">
-        <img src="{{ $designer->getMainImage()->getThumbUrl() }}" />
-        <h1 class="title">{{ $designer->getTranslation()->name }}</h1>
-        <p>Helsinki, Finland</p>
+        <div class="main-image" style="background-image:url({{ url($designer->getMainImage()->getThumbUrl()) }});"></div>
+        <div class="text">
+            <h1 class="title">{{ $designer->getTranslation()->name }}</h1>
+            <p>Helsinki, Finland</p>
+        </div>
     </div>
 </header>
 

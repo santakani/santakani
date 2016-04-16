@@ -297,7 +297,23 @@ body.edit-layout #edit-content {
     opacity: 0.5; }
 
 #designer-page #action-bar {
-  text-align: right; }
+  text-align: right;
+  margin-bottom: 20px; }
+
+#designer-page header .container {
+  max-width: 600px; }
+
+#designer-page header .main-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 150px;
+  border-radius: 999px;
+  float: left; }
+
+#designer-page header .text {
+  margin-left: 170px; }
 
 #designer-page article {
   max-width: 600px;
