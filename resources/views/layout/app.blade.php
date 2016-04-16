@@ -1,3 +1,21 @@
+{{--
+
+Main app layout, used by most of content web pages
+
+* doctype
+* language
+* title
+* favicon
+* charset
+* viewport
+* other meta info
+* css
+* javascript
+* kanibar/navbar
+* footer
+
+--}}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,21 +27,14 @@
 
     <link rel="shortcut icon" href="{{ url('/favicon.png') }}" type="image/png">
 
+    <!-- CSS -->
     <link href="{{ url('/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/lib/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/lib/flickity/dist/flickity.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/lib/lightgallery/dist/css/lightgallery.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/css/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/css/app.css') }}" rel="stylesheet" type="text/css"/>
-
-    <script src="{{ url('/lib/jquery/dist/jquery.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/masonry/dist/masonry.pkgd.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/imagesloaded/imagesloaded.pkgd.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/select2/dist/js/select2.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/flickity/dist/flickity.pkgd.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/lightgallery/dist/js/lightgallery-all.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/js/bootstrap.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
+    @yield('head_append')
 </head>
 <body id="{{ $body_id or 'app-layout' }}" class="app-layout {{ $body_class or '' }}">
     <div id="kanibar">
@@ -86,5 +97,41 @@
 
     @include('modal.location')
     @include('modal.language')
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <p>2015&ndash;{{ date("Y") }} SantaKani.</p>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <ul class="list-inline">
+                        <li><a href="https://www.facebook.com/1116236201740479/"
+                        target="_blank">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/santa.kani/"
+                        target="_blank">Instagram</a></li>
+                        <li><a href="https://www.facebook.com/groups/270204663311876/"
+                        target="_blank">Forum</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-muted">
+                Powered by free software licensed under GNU Affero GPL version 3.
+                Source code on <a href="https://github.com/santakani/santakani.com"
+                target="_blank">Github</a>.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url('/lib/jquery/dist/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/lib/masonry/dist/masonry.pkgd.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/lib/imagesloaded/imagesloaded.pkgd.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/lib/select2/dist/js/select2.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/lib/flickity/dist/flickity.pkgd.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/lib/lightgallery/dist/js/lightgallery-all.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/js/bootstrap.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
+    @yield('foot_append')
 </body>
 </html>
