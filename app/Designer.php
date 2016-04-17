@@ -82,6 +82,25 @@ class Designer extends Model
     }
 
     /**
+     * Get tags that the designer is related to.
+     *
+     * @return int[]
+     */
+    public function getTagIds()
+    {
+        $tags = [];
+
+        $tag_ids = DB::table('designer_tag')->select('tag_id')
+            ->where('designer_id', $this->id)->get();
+
+        foreach ($tag_ids as $key => $tag_id) {
+            $tags[] = $tag_id->tag_id;
+        }
+
+        return $tags;
+    }
+
+    /**
      * Generate URL to image file
      *
      * @return DesignerTranslation
