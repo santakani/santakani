@@ -62,6 +62,10 @@ $(function () {
             // TODO Upload file...
         }
     });
+
+    // Country and city select, use Select2.
+    $("select#country-select").select2();
+    $("select#city-select").select2();
 });
 
 $(function () {

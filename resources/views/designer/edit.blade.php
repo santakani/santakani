@@ -63,6 +63,16 @@
     </div>
 
     <div class="form-group">
+        <label class="col-sm-2 control-label">Location</label>
+        <div class="col-sm-5 col-md-3">
+            @include('component.input.country', ['class' => 'form-control', 'selected' => $designer->country_id])
+        </div>
+        <div class="col-sm-5 col-md-3">
+            @include('component.input.city', ['class' => 'form-control', 'selected' => $designer->city_id])
+        </div>
+    </div>
+
+    <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default">Save</button>
         </div>
