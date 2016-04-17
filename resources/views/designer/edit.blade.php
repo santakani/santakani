@@ -49,7 +49,7 @@
                 <button type="button" id="button-upload-image" class="btn btn-default">Upload</button>
                 <input type="file" id="input-upload-image" class="hidden" accept="image/*">
             </p>
-            <div id="image-gallery">
+            <div id="image-gallery" class="clearfix">
             @foreach ($designer->getImages() as $image)
                 <div class="image-preview" data-image-id="{{$designer->getMainImage()->id}}"
                     style="background-image:url({{$image->getThumbUrl()}})">
@@ -57,6 +57,7 @@
                 </div>
             @endforeach
             </div>
+            <p class="text-muted">Drag and drop to change the order of images.</p>
         </div>
     </div>
 

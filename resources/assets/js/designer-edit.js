@@ -34,6 +34,9 @@ $(function () {
         $(this).parent('.image-preview').remove();
     });
 
+    // Sortable
+    Sortable.create($("#image-gallery")[0], {animation: 300});
+
     // When click button, open file dialog
     $("#button-upload-image").click(function () {
         $("#input-upload-image").click();

@@ -5899,7 +5899,12 @@ body.edit-layout .image-preview {
   width: 150px;
   height: 150px;
   margin-right: 20px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab; }
+  body.edit-layout .image-preview.sortable-ghost {
+    opacity: 0; }
   body.edit-layout .image-preview span {
     position: absolute;
     top: -7.2px;
