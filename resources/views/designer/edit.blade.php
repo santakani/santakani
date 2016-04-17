@@ -6,8 +6,7 @@
 ])
 
 @section('edit_content')
-<form class="form-horizontal" action="{{ url('designer/'.$designer->id) }}"
-    method="put">
+<form class="form-horizontal" action="{{ url('designer/'.$designer->id) }}">
 
     <div class="form-group">
         <label for="input-name" class="col-sm-2 control-label">
