@@ -13,8 +13,9 @@
         <label for="input-name" class="col-sm-2 control-label">
             Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="input-name"
-                placeholder="Name of designer or design brand">
+            <input name="name" type="text" class="form-control" id="input-name"
+                placeholder="Name of designer or design brand"
+                value="{{ $designer->getTranslation()->name }}">
         </div>
     </div>
 
@@ -22,8 +23,8 @@
         <label for="input-content" class="col-sm-2 control-label">
             Story</label>
         <div class="col-sm-10">
-            <textarea class="form-control" id="input-content" rows="3"
-                placeholder="Introduce your unique design story..."></textarea>
+            <textarea name="content" class="form-control" id="input-content" rows="5"
+                placeholder="Introduce your unique design story...">{{ $designer->getTranslation()->content }}</textarea>
         </div>
     </div>
 
