@@ -15,14 +15,11 @@ class CreateImageTable extends Migration
         Schema::create('image', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('type'); // image, youtube, vimeo, soundcloud
-            $table->string('format')->nullable(); // jpg, png, gif
-            $table->integer('width')->unsigned()->nullable(); // Width of image and video
-            $table->integer('height')->unsigned()->nullable(); // Height of image and video
-            $table->string('external_url')->nullable(); // YouTube, Vimeo, SoundCloud, etc.
+            $table->string('mime_type'); // image/jpg, video/youtube
+            $table->integer('width')->unsigned()->nullable();
+            $table->integer('height')->unsigned()->nullable();
+            $table->string('external_url')->nullable(); // YouTube, Vimeo URL
             $table->integer('user_id')->unsigned()->nullable(); // Who uploaded this image or video
-            // Large size image: /public/storage/image/[id/1000]/[id%1000]/full.[format] max. 1200x1200px
-            // Small size image: /public/storage/image/[id/1000]/[id%1000]/thumb.[format] max. 600x600px
 
             // Timestamps
             $table->timestamps();

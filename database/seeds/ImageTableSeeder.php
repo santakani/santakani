@@ -14,8 +14,7 @@ class ImageTableSeeder extends Seeder
     {
         // 1
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 994,
             'height' => 1138,
             'user_id' => 1,
@@ -24,8 +23,7 @@ class ImageTableSeeder extends Seeder
 
         // 2
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 1200,
             'height' => 900,
             'user_id' => 1,
@@ -34,8 +32,7 @@ class ImageTableSeeder extends Seeder
 
         // 3
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'png',
+            'mime_type' => 'image/png',
             'width' => 1200,
             'height' => 1200,
             'user_id' => 1,
@@ -44,8 +41,7 @@ class ImageTableSeeder extends Seeder
 
         // 4
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 1200,
             'height' => 1200,
             'user_id' => 1,
@@ -54,7 +50,7 @@ class ImageTableSeeder extends Seeder
 
         // 5
         DB::table('image')->insert([
-            'type' => 'youtube',
+            'mime_type' => 'video/youtube',
             'width' => 1280,
             'height' => 720,
             'external_url' => 'https://www.youtube.com/watch?v=KLELsFKC6o4',
@@ -64,7 +60,7 @@ class ImageTableSeeder extends Seeder
 
         // 6
         DB::table('image')->insert([
-            'type' => 'vimeo',
+            'mime_type' => 'video/vimeo',
             'width' => 1280,
             'height' => 720,
             'external_url' => 'https://vimeo.com/16922821',
@@ -74,8 +70,7 @@ class ImageTableSeeder extends Seeder
 
         // 7
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 1200,
             'height' => 1039,
             'user_id' => 1,
@@ -84,8 +79,7 @@ class ImageTableSeeder extends Seeder
 
         // 8
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 580,
             'height' => 386,
             'user_id' => 1,
@@ -94,8 +88,7 @@ class ImageTableSeeder extends Seeder
 
         // 9
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 480,
             'height' => 311,
             'user_id' => 1,
@@ -104,8 +97,7 @@ class ImageTableSeeder extends Seeder
 
         // 10
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 570,
             'height' => 570,
             'user_id' => 1,
@@ -114,8 +106,7 @@ class ImageTableSeeder extends Seeder
 
         // 11
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 1200,
             'height' => 900,
             'user_id' => 1,
@@ -124,8 +115,7 @@ class ImageTableSeeder extends Seeder
 
         // 12
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 1200,
             'height' => 750,
             'user_id' => 1,
@@ -134,8 +124,7 @@ class ImageTableSeeder extends Seeder
 
         // 13, YAT designer photo
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 460,
             'height' => 280,
             'user_id' => 1,
@@ -144,8 +133,7 @@ class ImageTableSeeder extends Seeder
 
         // 14, YAT design photo
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 287,
             'height' => 395,
             'user_id' => 1,
@@ -154,8 +142,7 @@ class ImageTableSeeder extends Seeder
 
         // 15, YAT design photo
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 263,
             'height' => 395,
             'user_id' => 1,
@@ -164,8 +151,7 @@ class ImageTableSeeder extends Seeder
 
         // 16, YAT design photo
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 800,
             'height' => 1200,
             'user_id' => 1,
@@ -174,8 +160,7 @@ class ImageTableSeeder extends Seeder
 
         // 17, YAT design photo
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 800,
             'height' => 1200,
             'user_id' => 1,
@@ -184,8 +169,7 @@ class ImageTableSeeder extends Seeder
 
         // 18, YAT design photo
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 800,
             'height' => 1200,
             'user_id' => 1,
@@ -194,8 +178,7 @@ class ImageTableSeeder extends Seeder
 
         // 19, YAT design photo
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 800,
             'height' => 1200,
             'user_id' => 1,
@@ -204,8 +187,7 @@ class ImageTableSeeder extends Seeder
 
         // 20, YAT design photo
         DB::table('image')->insert([
-            'type' => 'image',
-            'format' => 'jpg',
+            'mime_type' => 'image/jpeg',
             'width' => 1200,
             'height' => 608,
             'user_id' => 1,
