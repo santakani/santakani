@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Imagick;
 use Symfony\Component\HttpFoundation\File\File;
 
 class Image extends Model
@@ -220,7 +221,7 @@ class Image extends Model
     public function saveFile(File $file)
     {
         $new_file = $file->move($this->getDirPath(), 'temp');
-        $temp_file_path = $this->getDirPath() . 'temp';
+        $temp_file_path = $this->getDirPath() . '/temp';
 
         $image = new Imagick($temp_file_path);
 

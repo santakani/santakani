@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
-use Input;
+use Imagick;
 
 use App\Http\Requests;
 use App\Image;
@@ -40,7 +41,7 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        return view('image.create');
     }
 
     /**
@@ -59,7 +60,7 @@ class ImageController extends Controller
             $file = $request->file('image');
             $mime_type = $file->getMimeType();
 
-            if ($file->isValid() && Image::isMimeTypeAllowed($mime_type)) {
+            if ($file->isValid() && Image::checkMimeType($mime_type)) {
                 $image->mime_type = $mime_type;
                 $image->save();
                 $image->saveFile($file);
@@ -71,11 +72,11 @@ class ImageController extends Controller
 
             $url = $request->input('url');
 
-            if (Image::isYouTubeUrl($url)) {
+            if (Image::checkYouTubeUrl($url)) {
                 $image->mime_type = 'video/youtube';
                 $image->external_url = $url;
                 $image->save();
-            } elseif (Image::isVimeoUrl($url)) {
+            } elseif (Image::checkVimeoUrl($url)) {
                 $image->mime_type = 'video/vimeo';
                 $image->external_url = $url;
                 $image->save();
