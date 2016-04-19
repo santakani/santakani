@@ -64,8 +64,30 @@ class ImageController extends Controller
                 $image->mime_type = $mime_type;
                 $image->save();
                 $image->saveFile($file);
+
+                if ($request->wantsJSON()) {
+                    return response()->json([
+                        'id' => $image->id,
+                        'mime_type' => $image->mime_type,
+                        'width' => $image->width,
+                        'height' => $image->height,
+                        'url' => [
+                            'large' => $image->getUrl('large'),
+                            'medium' => $image->getUrl('medium'),
+                            'small' => $image->getUrl('small'),
+                            'thumb' => $image->getUrl('thumb'),
+                            'smallThumb' => $image->getUrl('thumb-small'),
+                        ],
+                    ], 200);
+                }
             } else {
-                // TODO Error: file is invalid
+                $error_message = 'Invalid file. Only JPEG, PNG, GIF images are allowed.';
+
+                if ($request->wantsJSON()) {
+                    return response()->json(['message' => $error_message], 400);
+                } else {
+                    return back()->withErrors(['message' => $error_message]);
+                }
             }
 
         } elseif ($request->has('url')) {
@@ -81,11 +103,31 @@ class ImageController extends Controller
                 $image->external_url = $url;
                 $image->save();
             } else {
-                // TODO Error: url is invalid
+                $error_message = 'The URL is not a valid YouTube/Vimeo URL.';
+
+                if ($request->wantsJSON()) {
+                    return response()->json(['message' => $error_message], 400);
+                } else {
+                    return back()->withErrors(['message' => $error_message]);
+                }
+            }
+
+            if ($request->wantsJSON()) {
+                return response()->json([
+                    'id' => $image->id,
+                    'mime_type' => $image->mime_type,
+                    'url' => $image->external_url,
+                ], 200);
             }
 
         } else {
-            // TODO Error: missing information
+            $error_message = 'No image file or YouTube/Vimeo URL found.';
+
+            if ($request->wantsJSON()) {
+                return response()->json(['message' => $error_message], 400);
+            } else {
+                return back()->withErrors(['message' => $error_message]);
+            }
         }
     }
 
