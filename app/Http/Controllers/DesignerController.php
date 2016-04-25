@@ -3,12 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 use App\Http\Requests;
 use App\Designer;
 
 class DesignerController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // Only logged in users can upload images
+        $this->middleware('auth', ['except' => ['index','show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +42,7 @@ class DesignerController extends Controller
      */
     public function create()
     {
-        //
+        return view('designer.create');
     }
 
     /**
@@ -41,7 +53,7 @@ class DesignerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return back()->withInput()->withErrors(['message' => 'hello']);
     }
 
     /**
