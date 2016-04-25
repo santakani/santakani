@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Validator;
 
 use App\Http\Requests;
 use App\Designer;
@@ -53,7 +53,13 @@ class DesignerController extends Controller
      */
     public function store(Request $request)
     {
-        return back()->withInput()->withErrors(['message' => 'hello']);
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'tagline' => 'required|max:255',
+            'email' => 'email|max:255',
+            'country' => 'required|integer|exists:country,id',
+            'city' => 'required|integer|exists:city,id',
+        ]);
     }
 
     /**
