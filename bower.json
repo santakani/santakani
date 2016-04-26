@@ -1,0 +1,29 @@
+{
+  "name": "santakani",
+  "description": "share design stories",
+  "main": "public/index.php",
+  "authors": [
+    "Guo Yunhe <guoyunhebrave@gmail.com>"
+  ],
+  "license": "AGPLv3",
+  "homepage": "https://github.com/santakani/santakani.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Sortable": "^1.4.2",
+    "flickity": "^1.2.1",
+    "font-awesome": "^4.5.0",
+    "lato": "^0.3.0",
+    "imagesloaded": "^4.1.0",
+    "lightgallery": "^1.2.18",
+    "masonry": "^4.0.0",
+    "select2": "^4.0.2"
+  }
+}
