@@ -16,10 +16,16 @@ class CreateDesignerTable extends Migration
             $table->increments('id');
 
             // Non-translated content
-            $table->integer('country_id')->unsigned()->nullable(); // ID of country
-            $table->integer('city_id')->unsigned()->nullable(); // ID of city
-            $table->integer('image_id')->unsigned()->nullable(); // ID of image
-            $table->integer('user_id')->unsigned()->nullable(); // Who own designer page
+            $table->integer('country_id')->unsigned()->nullable();
+            $table->integer('city_id')->unsigned()->nullable();
+            $table->integer('image_id')->unsigned()->nullable(); // Main image
+            $table->integer('user_id')->unsigned()->nullable(); // Owner
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('google_plus')->nullable();
+            $table->string('instagram')->nullable();
 
             // Timestamps
             $table->timestamps();
@@ -31,6 +37,7 @@ class CreateDesignerTable extends Migration
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
+
         Schema::create('designer_translation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('designer_id')->unsigned();
@@ -38,6 +45,7 @@ class CreateDesignerTable extends Migration
 
             // Translated content
             $table->string('name');
+            $table->string('tagline');
             $table->text('content');
 
             $table->timestamps();
