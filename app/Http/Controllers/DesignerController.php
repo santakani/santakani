@@ -67,8 +67,9 @@ class DesignerController extends Controller
         $translation = new DesignerTranslation();
 
         $designer->email = $request->input('email');
-        $designer->country = $request->input('country');
-        $designer->city = $request->input('city');
+        $designer->country_id = $request->input('country');
+        $designer->city_id = $request->input('city');
+        $designer->user_id = $request->user()->id;
 
         $designer->save();
 
