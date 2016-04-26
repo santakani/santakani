@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Be right back.</title>
+        <title>{{ $error_name }}.</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <link href="{{ url('lib/lato/css/lato.min.css') }}" rel="stylesheet" type="text/css">
 
         <style>
             html, body {
@@ -35,12 +35,21 @@
                 font-size: 72px;
                 margin-bottom: 40px;
             }
+
+            a {
+                color: #B0BEC5;
+                font-weight: 300;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="title">{{ $error_code }}&ndash;{{ $error_name }}.</div>
+                <div class="description">@yield('error_desc')</div>
+                <div class="back">
+                    <a href="{{ url('/') }}">Return home &#8640;</a>
+                </div>
             </div>
         </div>
     </body>
