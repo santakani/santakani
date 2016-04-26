@@ -26,8 +26,32 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        $gate->define('edit-designer', function ($user, $designer) {
-            return $user->id === $designer->user_id;
+        $gate->define('edit-page', function ($user, $page_model) {
+            if (!Auth::check()) {
+                return false;
+            }
+
+            $user = Auth::user();
+
+            if ($user->hasRole('admin') || $user->hasRole('editor')) {
+                return true;
+            }
+
+            return $user->id === $page_model->user_id;
+        });
+
+        $gate->define('translate', function ($user, $page_model) {
+            if (!Auth::check()) {
+                return false;
+            }
+
+            $user = Auth::user();
+
+            if ($user->hasRole('admin') || $user->hasRole('editor') || $user->hasRole('translator')) {
+                return true;
+            }
+
+            return $user->id === $page_model->user_id;
         });
     }
 }
