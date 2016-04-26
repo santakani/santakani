@@ -7,6 +7,7 @@ use Illuminate\Validation\Validator;
 
 use App\Http\Requests;
 use App\Designer;
+use App\DesignerTranslation;
 
 class DesignerController extends Controller
 {
@@ -60,6 +61,25 @@ class DesignerController extends Controller
             'country' => 'required|integer|exists:country,id',
             'city' => 'required|integer|exists:city,id',
         ]);
+
+        // Save models
+        $designer = new Designer();
+        $translation = new DesignerTranslation();
+
+        $designer->email = $request->input('email');
+        $designer->country = $request->input('country');
+        $designer->city = $request->input('city');
+
+        $designer->save();
+
+        $translation->designer_id = $designer->id;
+        $translation->locale = 'en';
+        $translation->name = $request->input('name');
+        $translation->tagline = $request->input('tagline');
+
+        $translation->save();
+
+        // TODO Redirect to edit page
     }
 
     /**
