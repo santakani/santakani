@@ -41,17 +41,17 @@
             Main image</label>
         <div class="col-sm-10">
             @if ($image = App\Image::find($image_id = old('image')))
-                @include('component.input.imageupload', [
+                @include('component.upload.image', [
                     'image_id' => $image_id,
                     'thumb_url' => $image->getThumbUrl(),
                 ])
             @elseif ($designer->image)
-                @include('component.input.imageupload', [
+                @include('component.upload.image', [
                     'image_id' => $designer->image_id,
                     'thumb_url' => $designer->image->getThumbUrl(),
                 ])
             @else
-                @include('component.input.imageupload')
+                @include('component.upload.image')
             @endif
         </div>
     </div>
