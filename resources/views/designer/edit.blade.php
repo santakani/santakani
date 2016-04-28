@@ -1,12 +1,12 @@
 @extends('layout.edit', [
-    'title' => 'Edit: ' . $designer->getTranslation()->name,
+    'title' => 'Edit: ' . $designer->name,
     'body_id' => 'designer-edit-page',
     'body_class' => 'designer-edit-page',
     'back_link' => url('/designer/' . $designer->id),
 ])
 
 @section('edit_content')
-<form class="form-horizontal" action="{{ url('designer/'.$designer->id) }}">
+<form class="form-horizontal" action="{{ $designer->url }}">
 
     <div class="form-group">
         <label for="input-name" class="col-sm-2 control-label">
@@ -14,7 +14,16 @@
         <div class="col-sm-10">
             <input name="name" type="text" class="form-control" id="input-name"
                 placeholder="Name of designer or design brand"
-                value="{{ $designer->getTranslation()->name }}">
+                value="{{ old('name')===null?$designer->text('name', 'en'):old('name') }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="input-tagline" class="col-sm-2 control-label">Tagline</label>
+        <div class="col-sm-10">
+            <textarea name="tagline" rows="2" required maxlength="255" class="form-control" id="input-tagline"
+                placeholder="Express design philosophy in short">{{ old('tagline')===null?$designer->text('tagline', 'en'):old('tagline') }}</textarea>
+            <p class="text-muted">Max. 255 characters.</p>
         </div>
     </div>
 
@@ -23,7 +32,7 @@
             Story</label>
         <div class="col-sm-10">
             <textarea name="content" class="form-control" id="input-content" rows="5"
-                placeholder="Introduce your unique design story...">{{ $designer->getTranslation()->content }}</textarea>
+                placeholder="Introduce your unique design story...">{{ old('content')===null?$designer->text('content', 'en'):old('content') }}</textarea>
         </div>
     </div>
 
@@ -31,13 +40,19 @@
         <label class="col-sm-2 control-label">
             Main image</label>
         <div class="col-sm-10">
-            <p>
-                <button type="button" id="button-main-image" class="btn btn-default">Change</button>
-                <input type="file" id="input-main-image" class="hidden" accept="image/*">
-            </p>
-            <div id="main-image-preview" class="image-preview"
-                style="background-image:url({{$designer->getMainImage()->getThumbUrl()}})"
-                data-image-id="{{$designer->getMainImage()->id}}"></div>
+            @if ($image = App\Image::find($image_id = old('image')))
+                @include('component.input.imageupload', [
+                    'image_id' => $image_id,
+                    'thumb_url' => $image->getThumbUrl(),
+                ])
+            @elseif ($designer->image)
+                @include('component.input.imageupload', [
+                    'image_id' => $designer->image_id,
+                    'thumb_url' => $designer->image->getThumbUrl(),
+                ])
+            @else
+                @include('component.input.imageupload')
+            @endif
         </div>
     </div>
 
@@ -45,36 +60,43 @@
         <label class="col-sm-2 control-label">
             Image gallery</label>
         <div class="col-sm-10">
-            <p>
-                <button type="button" id="button-upload-image" class="btn btn-default">Upload</button>
-                <input type="file" id="input-upload-image" class="hidden" accept="image/*">
-            </p>
-            <div id="image-gallery" class="clearfix">
-            @foreach ($designer->getImages() as $image)
-                <div class="image-preview" data-image-id="{{$designer->getMainImage()->id}}"
-                    style="background-image:url({{$image->getThumbUrl()}})">
-                    <span><i class="fa fa-times"></i></span>
-                </div>
-            @endforeach
-            </div>
-            <p class="text-muted">Drag and drop to change the order of images.</p>
+            @if (old('images')!==null)
+                @include('component.upload.gallery', [
+                    'images' => App\Image::find(old('images')),
+                ])
+            @elseif ($designer->images)
+                @include('component.upload.gallery', [
+                    'images' => $designer->images,
+                ])
+            @else
+                @include('component.upload.gallery')
+            @endif
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label">Location</label>
         <div class="col-sm-5 col-md-3">
-            @include('component.input.country', ['class' => 'form-control', 'selected' => $designer->country_id])
+            @include('component.input.country', [
+                'class' => 'form-control',
+                'selected' => old('country')===null?$designer->country_id:old('country')
+            ])
         </div>
         <div class="col-sm-5 col-md-3">
-            @include('component.input.city', ['class' => 'form-control', 'selected' => $designer->city_id])
+            @include('component.input.city', [
+                'class' => 'form-control',
+                'selected' => old('city')===null?$designer->city_id:old('city')
+            ])
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-2 control-label">Location</label>
+        <label class="col-sm-2 control-label">Tags</label>
         <div class="col-sm-10 col-md-8">
-            @include('component.input.tag', ['class' => 'form-control', 'selected' => $designer->getTagIds()])
+            @include('component.input.tag', [
+                'class' => 'form-control',
+                'selected' => old('tags')===null?$designer->tag_ids:old('tags')
+            ])
         </div>
     </div>
 

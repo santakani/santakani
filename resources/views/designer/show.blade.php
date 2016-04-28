@@ -1,33 +1,41 @@
 @extends('layout.app', [
-    'title' => $designer->getTranslation()->name . ' - Designer',
+    'title' => $designer->name . ' - Designer',
     'body_id' => 'designer-page',
     'body_class' => 'designer-page',
 ])
 
 @section('content')
 
-@if (!Auth::guest())
+@if ($can_edit || $can_translate)
     <div id="action-bar">
         <div class="container">
-            <a href="{{ url('/designer/'.$designer->id.'/edit') }}"
-                id="edit-button" class="btn btn-default">Edit</a>
+            @if ($can_edit)
+                <a href="{{ url('designer/'.$designer->id.'/edit') }}"
+                    id="edit-button" class="btn btn-default">Edit</a>
+            @endif
+            @if ($can_translate)
+                <a href="{{ url('designer/'.$designer->id.'/translate') }}"
+                    id="edit-button" class="btn btn-default">Translate</a>
+            @endif
         </div>
     </div>
 @endif
 
 <header>
     <div class="container">
-        <div class="main-image" style="background-image:url({{ url($designer->getMainImage()->getThumbUrl()) }});"></div>
+        @if ($img = $designer->image)
+            <div class="main-image" style="background-image:url({{ $img->getThumbUrl() }});"></div>
+        @endif
         <div class="text">
-            <h1 class="title">{{ $designer->getTranslation()->name }}</h1>
+            <h1 class="title">{{ $designer->name }}</h1>
             <p>
-                <a href="{{ $designer->getCity()->getUrl() }}">
-                    {{ $designer->getCity()->getTranslation()->name }}</a>,
-                <a href="{{ $designer->getCountry()->getUrl() }}">
-                    {{ $designer->getCountry()->getTranslation()->name }}</a>
+                <a href="{{ url('city/'.$designer->city_id) }}">
+                    {{ $designer->city_name or 'Unknown' }}</a>,
+                <a href="{{ url('country/'.$designer->country_id) }}">
+                    {{ $designer->country_name or 'Unknown' }}</a>
             </p>
             <ul class="tags">
-                @foreach ($designer->getTags() as $tag)
+                @foreach ($designer->tags as $tag)
                     <li><a href="{{ $tag->getUrl() }}">
                         #{{ $tag->getTranslation()->name }}
                     </a></li>
@@ -38,7 +46,7 @@
 </header>
 
 <div id="picture-carousel" class="carousel">
-    @foreach ($designer->getImages() as $image)
+    @foreach ($designer->images as $image)
         <div class="picture-thumb" data-src="{{ url($image->getUrl()) }}"
             data-thumb="{{ url($image->getThumbUrl()) }}"
             style="background-image:url({{ url($image->getThumbUrl()) }})"></div>
@@ -46,7 +54,7 @@
 </div>
 
 <article id="designer-{{ $designer->id }}" class="designer container">
-    {{ $designer->getTranslation()->content }}
+    {{ $designer->content }}
 </article>
 
 @endsection
