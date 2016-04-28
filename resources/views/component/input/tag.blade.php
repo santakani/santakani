@@ -1,4 +1,4 @@
-<select name="{{ $name or 'tag' }}" id="{{ $id or 'tag-select' }}"
+<select name="{{ $name or 'tags' }}" id="{{ $id or 'tag-select' }}"
     class="{{ $class or '' }}" multiple>
     @foreach (App\Tag::all() as $tag)
         @if (isset($selected) && in_array($tag->id, $selected))

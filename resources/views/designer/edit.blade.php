@@ -6,7 +6,15 @@
 ])
 
 @section('edit_content')
-<form class="form-horizontal" action="{{ $designer->url }}">
+<form id="designer-edit-form" class="form-horizontal" action="{{ $designer->url }}">
+
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="alert alert-warning" style="display:none;" role="alert"></div>
+        </div>
+    </div>
 
     <div class="form-group">
         <label for="input-name" class="col-sm-2 control-label">

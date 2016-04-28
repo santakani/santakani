@@ -151,9 +151,9 @@ class DesignerController extends Controller
         $designer = Designer::find($id);
 
         $translation = DesignerTranslation::where([
-            ['designer_id', $this->id],
+            ['designer_id', $id],
             ['locale', 'en'],
-        ]);
+        ])->first();
 
         if (empty($designer)) {
             abort(404);
@@ -182,9 +182,15 @@ class DesignerController extends Controller
         ]);
 
         // Save models
-        $designer->image_id = $request->input('image');
-        $designer->country_id = $request->input('country');
-        $designer->city_id = $request->input('city');
+        if ($request->input('image')) {
+            $designer->image_id = $request->input('image');
+        }
+        if ($request->input('country')) {
+            $designer->country_id = $request->input('country');
+        }
+        if ($request->input('city')) {
+            $designer->city_id = $request->input('city');
+        }
         $designer->email = $request->input('email');
         $designer->facebook = $request->input('facebook');
         $designer->twitter = $request->input('twitter');
@@ -203,9 +209,6 @@ class DesignerController extends Controller
         // TODO Save tags
 
         // TODO Save images
-
-        // Redirect to show page
-        return redirect()->action('DesignerController@show', [$designer]);
     }
 
     /**
