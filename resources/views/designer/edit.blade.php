@@ -13,16 +13,20 @@
             Name</label>
         <div class="col-sm-10">
             <input name="name" type="text" class="form-control" id="input-name"
+                value="{{ old('name')===null?$designer->text('name', 'en'):old('name') }}"
                 placeholder="Name of designer or design brand"
-                value="{{ old('name')===null?$designer->text('name', 'en'):old('name') }}">
+                required>
         </div>
     </div>
 
     <div class="form-group">
         <label for="input-tagline" class="col-sm-2 control-label">Tagline</label>
         <div class="col-sm-10">
-            <textarea name="tagline" rows="2" required maxlength="255" class="form-control" id="input-tagline"
-                placeholder="Express design philosophy in short">{{ old('tagline')===null?$designer->text('tagline', 'en'):old('tagline') }}</textarea>
+            <textarea name="tagline" class="form-control" id="input-tagline"
+                placeholder="Express design philosophy in short"
+                rows="2"  maxlength="255">{{
+                old('tagline')===null?$designer->text('tagline', 'en'):old('tagline')
+            }}</textarea>
             <p class="text-muted">Max. 255 characters.</p>
         </div>
     </div>
@@ -31,8 +35,10 @@
         <label for="input-content" class="col-sm-2 control-label">
             Story</label>
         <div class="col-sm-10">
-            <textarea name="content" class="form-control" id="input-content" rows="5"
-                placeholder="Introduce your unique design story...">{{ old('content')===null?$designer->text('content', 'en'):old('content') }}</textarea>
+            <textarea name="content" class="form-control" id="input-content"
+                placeholder="Introduce your unique design story..." rows="5">{{
+                old('content')===null?$designer->text('content', 'en'):old('content')
+            }}</textarea>
         </div>
     </div>
 
@@ -92,11 +98,51 @@
 
     <div class="form-group">
         <label class="col-sm-2 control-label">Tags</label>
-        <div class="col-sm-10 col-md-8">
+        <div class="col-sm-10">
             @include('component.input.tag', [
                 'class' => 'form-control',
                 'selected' => old('tags')===null?$designer->tag_ids:old('tags')
             ])
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="input-email" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input name="email" value="{{ old('email')===null?$designer->email:old('email') }}" type="email"
+                maxlength="255" class="form-control" id="input-email">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="input-facebook" class="col-sm-2 control-label">Facebook</label>
+        <div class="col-sm-10">
+            <input name="facebook" value="{{ old('facebook')===null?$designer->facebook:old('facebook') }}" type="url"
+                maxlength="255" class="form-control" id="input-facebook">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="input-twitter" class="col-sm-2 control-label">Twitter</label>
+        <div class="col-sm-10">
+            <input name="twitter" value="{{ old('twitter')===null?$designer->twitter:old('twitter') }}" type="url"
+                maxlength="255" class="form-control" id="input-twitter">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="input-google-plus" class="col-sm-2 control-label">Google+</label>
+        <div class="col-sm-10">
+            <input name="google_plus" value="{{ old('google_plus')===null?$designer->google_plus:old('google_plus') }}" type="url"
+                maxlength="255" class="form-control" id="input-google-plus">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="input-instagram" class="col-sm-2 control-label">Instagram</label>
+        <div class="col-sm-10">
+            <input name="instagram" value="{{ old('instagram')===null?$designer->instagram:old('instagram') }}" type="url"
+                maxlength="255" class="form-control" id="input-instagram">
         </div>
     </div>
 

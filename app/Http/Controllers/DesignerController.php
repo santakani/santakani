@@ -35,7 +35,8 @@ class DesignerController extends Controller
         return view('stories', [
             'body_class' => 'stories',
             'active_nav' => 'story',
-            'designers' => $designers]);
+            'designers' => $designers
+        ]);
     }
 
     /**
@@ -149,6 +150,11 @@ class DesignerController extends Controller
     {
         $designer = Designer::find($id);
 
+        $translation = DesignerTranslation::where([
+            ['designer_id', $this->id],
+            ['locale', 'en'],
+        ]);
+
         if (empty($designer)) {
             abort(404);
         }
@@ -158,11 +164,48 @@ class DesignerController extends Controller
             abort(403);
         }
 
-        // TODO Validate data
+        // Validate data
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'tagline' => 'string|max:255',
+            'content' => 'string',
+            'image' => 'integer|exists:image,id',
+            'images.*' => 'integer|exists:image,id',
+            'country' => 'integer|exists:country,id',
+            'city' => 'integer|exists:city,id',
+            'tags.*' => 'integer|exists:tag,id',
+            'email' => 'email|max:255',
+            'facebook' => 'url|max:255',
+            'twitter' => 'url|max:255',
+            'google_plus' => 'url|max:255',
+            'instagram' => 'url|max:255',
+        ]);
 
-        // TODO Save model
+        // Save models
+        $designer->image_id = $request->input('image');
+        $designer->country_id = $request->input('country');
+        $designer->city_id = $request->input('city');
+        $designer->email = $request->input('email');
+        $designer->facebook = $request->input('facebook');
+        $designer->twitter = $request->input('twitter');
+        $designer->google_plus = $request->input('google_plus');
+        $designer->instagram = $request->input('instagram');
 
-        // TODO Redirect
+        $designer->save();
+
+        $translation->name = $request->input('name');
+        $translation->tagline = $request->input('tagline');
+        // TODO Secure HTML input http://htmlpurifier.org/
+        $translation->content = $request->input('content');
+
+        $translation->save();
+
+        // TODO Save tags
+
+        // TODO Save images
+
+        // Redirect to show page
+        return redirect()->action('DesignerController@show', [$designer]);
     }
 
     /**
