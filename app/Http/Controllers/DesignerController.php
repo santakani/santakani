@@ -41,6 +41,8 @@ class DesignerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * Any logged-in users can create designer page.
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -51,11 +53,14 @@ class DesignerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * Any logged-in users can create designer page.
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        // Validate data
         $this->validate($request, [
             'name' => 'required|max:255',
             'tagline' => 'required|max:255',
@@ -110,17 +115,31 @@ class DesignerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * Only owner and admin, editor can edit designer page.
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $designer = Designer::find($id);
+
+        if (empty($designer)) {
+            abort(404);
+        }
+
+        // Check permission
+        if (Gate::denies('edit-page', $designer)) {
+            abort(403);
+        }
+
         return view('designer.edit', ['designer' => $designer]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * Only owner and admin, editor can edit designer page.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -128,7 +147,22 @@ class DesignerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $designer = Designer::find($id);
+
+        if (empty($designer)) {
+            abort(404);
+        }
+
+        // Check permission
+        if (Gate::denies('edit-page', $designer)) {
+            abort(403);
+        }
+
+        // TODO Validate data
+
+        // TODO Save model
+
+        // TODO Redirect
     }
 
     /**
@@ -139,6 +173,17 @@ class DesignerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $designer = Designer::find($id);
+
+        if (empty($designer)) {
+            abort(404);
+        }
+
+        // Check permission
+        if (Gate::denies('edit-page', $designer)) {
+            abort(403);
+        }
+
+        // TODO Delete model from database
     }
 }
