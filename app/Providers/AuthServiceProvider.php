@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use Auth;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -27,12 +29,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
         $gate->define('edit-page', function ($user, $page_model) {
-            if (!Auth::check()) {
-                return false;
-            }
-
-            $user = Auth::user();
-
             if ($user->hasRole('admin') || $user->hasRole('editor')) {
                 return true;
             }
@@ -40,13 +36,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $page_model->user_id;
         });
 
-        $gate->define('translate', function ($user, $page_model) {
-            if (!Auth::check()) {
-                return false;
-            }
-
-            $user = Auth::user();
-
+        $gate->define('translate-page', function ($user, $page_model) {
             if ($user->hasRole('admin') || $user->hasRole('editor') || $user->hasRole('translator')) {
                 return true;
             }

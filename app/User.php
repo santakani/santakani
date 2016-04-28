@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use DB;
+
 class User extends Authenticatable
 {
     /**
@@ -62,9 +64,10 @@ class User extends Authenticatable
         $user_roles = DB::table('user_role')->select('role')
             ->where('user_id', $this->id)->get();
 
-        foreach ($user_roles as $key => $value) {
-            if (in_array($value, $this->roles)) {
-                $roles[] = $value;
+        foreach ($user_roles as $user_role) {
+            $role = $user_role->role;
+            if (in_array($role, $this->roles)) {
+                $roles[] = $role;
             }
         }
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 
+use Gate;
+
 use App\Http\Requests;
 use App\Designer;
 use App\DesignerTranslation;
@@ -92,10 +94,16 @@ class DesignerController extends Controller
     public function show($id)
     {
         $designer = Designer::find($id);
+
+        if (empty($designer)) {
+            abort(404);
+        }
+
         return view('designer.show', [
-            'body_class' => 'designer-page',
-            'active_nav' => 'story',
-            'designer' => $designer]);
+            'designer' => $designer,
+            'can_edit' => Gate::allows('edit-page', $designer),
+            'can_translate' => Gate::allows('translate-page', $designer),
+        ]);
     }
 
     /**
