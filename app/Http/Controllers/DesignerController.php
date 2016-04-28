@@ -63,11 +63,11 @@ class DesignerController extends Controller
     {
         // Validate data
         $this->validate($request, [
-            'name' => 'required|max:255',
-            'tagline' => 'required|max:255',
+            'name' => 'required|string|max:255',
+            'tagline' => 'string|max:255',
             'email' => 'email|max:255',
-            'country' => 'required|integer|exists:country,id',
-            'city' => 'required|integer|exists:city,id',
+            'country' => 'integer|exists:country,id',
+            'city' => 'integer|exists:city,id',
         ]);
 
         // Save models

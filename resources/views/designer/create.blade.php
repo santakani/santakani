@@ -20,7 +20,7 @@
         <div class="form-group">
             <label for="input-name" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-10">
-                <input name="name" value="{{Request::old('name')}}" type="text"
+                <input name="name" value="{{ old('name') }}" type="text"
                     required maxlength="255" class="form-control" id="input-name"
                     placeholder="Full name of the designer or brand">
             </div>
@@ -29,8 +29,9 @@
         <div class="form-group">
             <label for="input-tagline" class="col-sm-2 control-label">Tagline</label>
             <div class="col-sm-10">
-                <textarea name="tagline" rows="2" required maxlength="255" class="form-control" id="input-tagline"
-                    placeholder="Express design philosophy in short">{{Request::old('tagline')}}</textarea>
+                <textarea name="tagline" rows="2" maxlength="255" class="form-control"
+                    id="input-tagline" placeholder="Express your design philosophy in short"
+                    >{{ old('tagline') }}</textarea>
                 <p class="text-muted">Max. 255 characters.</p>
             </div>
         </div>
@@ -38,7 +39,7 @@
         <div class="form-group">
             <label for="input-email" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-                <input name="email" value="{{Request::old('email')}}" type="email"
+                <input name="email" value="{{ old('email') }}" type="email"
                     maxlength="255" class="form-control" id="input-email">
             </div>
         </div>
@@ -46,10 +47,10 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Location</label>
             <div class="col-sm-5 col-md-3">
-                @include('component.input.country', ['class' => 'form-control', 'selected' => Request::old('country')])
+                @include('component.input.country', ['class' => 'form-control', 'selected' => old('country')])
             </div>
             <div class="col-sm-5 col-md-3">
-                @include('component.input.city', ['class' => 'form-control', 'selected' => Request::old('city')])
+                @include('component.input.city', ['class' => 'form-control', 'selected' => old('city')])
             </div>
         </div>
 
