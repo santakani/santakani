@@ -82,7 +82,8 @@ class DesignerController extends Controller
 
         $translation->save();
 
-        // TODO Redirect to edit page
+        // Redirect to edit page
+        return redirect()->action('DesignerController@edit', [$designer]);
     }
 
     /**
