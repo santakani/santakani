@@ -1,4 +1,10 @@
-// Control designer edit form.
+/**
+ * Control designer edit form.
+ *
+ * View - views/designer/edit.blade.php
+ * Style - assets/sass/_edit-layout.scss
+ * Script - assets/js/edit/ajax/designer-edit.js
+ */
 
 $(function () {
 

@@ -1,41 +1,3 @@
-// Control designer edit form.
-
-$(function () {
-
-    if ($('#designer-edit-page').length === 0) {
-        return;
-    }
-
-    $('button[type="submit"]').click(function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            method: 'PUT',
-            url: $('#designer-edit-form').attr('action'),
-            data: $('#designer-edit-form').serializeArray()
-        }).done(function () {
-            window.location.href = $('#designer-edit-form').attr('action');
-        }).fail(function (error) {
-            var response = error.responseJSON;
-            var $alert = $('#designer-edit-form .alert');
-            var message = '';
-
-            for (var id in response) {
-                message += '<p>' + response[id] + '</p>';
-            }
-
-            $alert.html(message).show().goTo();
-        });
-    });
-
-    // Country and city select, use Select2.
-    $("select#country-select").select2();
-    $("select#city-select").select2();
-
-    // Tag select, use Select2
-    $("select#tag-select").select2({tags: true});
-});
-
 $(function () {
     $('#picture-carousel').flickity({
         cellAlign: 'left',
@@ -94,37 +56,72 @@ $(function () {
     });
 });
 
-// Control designer edit form.
+// A custom jQuery plugin to scroll window to specific element.
+// Useage: $('#my-div').goTo();
+
+(function($) {
+    $.fn.goTo = function() {
+        $('html, body').animate({
+            scrollTop: $(this).offset().top - 20 + 'px'
+        }, 'fast');
+        return this; // for chaining...
+    }
+})(jQuery);
+
+/**
+ * Control designer edit form.
+ *
+ * View - views/designer/edit.blade.php
+ * Style - assets/sass/_edit-layout.scss
+ * Script - assets/js/edit/ajax/designer-edit.js
+ */
 
 $(function () {
 
-    $('.image-upload').each(function () {
-        var $button = $(this).find('button');
-        var $fileInput = $(this).find('input[type="file"]');
-        var $preview = $(this).find('.image-preview');
+    if ($('#designer-edit-page').length === 0) {
+        return;
+    }
 
-        // When click button, open file dialog
-        $button.click(function () {
-            $fileInput.click();
-        });
+    $('button[type="submit"]').click(function (e) {
+        e.preventDefault();
 
-        // When selected a file from file dialog, show preview and upload image
-        $fileInput.change(function () {
-            if (this.files && this.files[0] && this.files[0].name.match(/\.(jpg|jpeg|png|gif)$/)) {
-                var reader = new FileReader();
+        $.ajax({
+            method: 'PUT',
+            url: $('#designer-edit-form').attr('action'),
+            data: $('#designer-edit-form').serializeArray()
+        }).done(function () {
+            window.location.href = $('#designer-edit-form').attr('action');
+        }).fail(function (error) {
+            var response = error.responseJSON;
+            var $alert = $('#designer-edit-form .alert');
+            var message = '';
 
-                reader.onload = function (e) {
-                    $preview.css('background-image', 'url(' + e.target.result + ')');
-                }
-
-                reader.readAsDataURL(this.files[0]);
-
-                // TODO Upload file...
+            for (var id in response) {
+                message += '<p>' + response[id] + '</p>';
             }
+
+            $alert.html(message).show().goTo();
         });
     });
 
-    // Image gallery management
+    // Country and city select, use Select2.
+    $("select#country-select").select2();
+    $("select#city-select").select2();
+
+    // Tag select, use Select2
+    $("select#tag-select").select2({tags: true});
+});
+
+/**
+ * Image gallery uploader
+ *
+ * View - views/component/upload/gallery.blade.php
+ * Style - assets/sass/_edit-layout.scss
+ * Script - assets/js/edit/upload/gallery.js
+ */
+
+$(function () {
+
     $('.gallery-upload').each(function () {
         var $button = $(this).find('button');
         var $fileInput = $(this).find('input[type="file"]');
@@ -168,16 +165,42 @@ $(function () {
 
 });
 
-// A custom jQuery plugin to scroll window to specific element.
-// Useage: $('#my-div').goTo();
+/**
+ * Single image uploader
+ *
+ * View - views/component/upload/image.blade.php
+ * Style - assets/sass/_edit-layout.scss
+ * Script - assets/js/edit/upload/image.js
+ */
 
-(function($) {
-    $.fn.goTo = function() {
-        $('html, body').animate({
-            scrollTop: $(this).offset().top - 20 + 'px'
-        }, 'fast');
-        return this; // for chaining...
-    }
-})(jQuery);
+$(function () {
+
+    $('.image-upload').each(function () {
+        var $button = $(this).find('button');
+        var $fileInput = $(this).find('input[type="file"]');
+        var $preview = $(this).find('.image-preview');
+
+        // When click button, open file dialog
+        $button.click(function () {
+            $fileInput.click();
+        });
+
+        // When selected a file from file dialog, show preview and upload image
+        $fileInput.change(function () {
+            if (this.files && this.files[0] && this.files[0].name.match(/\.(jpg|jpeg|png|gif)$/)) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $preview.css('background-image', 'url(' + e.target.result + ')');
+                }
+
+                reader.readAsDataURL(this.files[0]);
+
+                // TODO Upload file...
+            }
+        });
+    });
+
+});
 
 //# sourceMappingURL=app.js.map
