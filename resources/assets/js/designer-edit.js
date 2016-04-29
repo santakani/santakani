@@ -17,14 +17,14 @@ $(function () {
             window.location.href = $('#designer-edit-form').attr('action');
         }).fail(function (error) {
             var response = error.responseJSON;
-            var $alert = $('#designer-edit-form .alert').show();
+            var $alert = $('#designer-edit-form .alert');
             var message = '';
 
             for (var id in response) {
                 message += '<p>' + response[id] + '</p>';
             }
 
-            $alert.html(message);
+            $alert.html(message).show().goTo();
         });
     });
 
