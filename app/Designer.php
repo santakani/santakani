@@ -180,8 +180,6 @@ class Designer extends Model
     {
         DB::table('designer_tag')->where('designer_id', $this->id)->delete();
 
-        echo 'set tag ids';
-
         if (is_array($tag_ids)) {
             foreach ($tag_ids as $tag_id) {
                 DB::table('designer_tag')->insert([
