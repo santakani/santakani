@@ -206,7 +206,8 @@ class DesignerController extends Controller
 
         $translation->save();
 
-        // TODO Save tags
+        // Save tags
+        $designer->tag_ids = $request->input('tags');
 
         // TODO Save images
     }

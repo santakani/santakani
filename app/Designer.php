@@ -133,6 +133,25 @@ class Designer extends Model
     }
 
     /**
+     * Set tags. Set action will save into database. Used to attribute tags.
+     *
+     * @param Tag[] $tags Array of Tag objects assigned to Designer object.
+     */
+    public function setTagsAttribute($tags)
+    {
+        DB::table('designer_tag')->where('designer_id', $this->id)->delete();
+
+        if (is_array($tags)) {
+            foreach ($tags as $tag) {
+                DB::table('designer_tag')->insert([
+                    'designer_id' => $this->id,
+                    'tag_id' => $tag->id,
+                ]);
+            }
+        }
+    }
+
+    /**
      * Get tags that the designer is related to. Used to auto-generate attribute tag_ids.
      *
      * @return int[]
@@ -149,6 +168,28 @@ class Designer extends Model
         }
 
         return $tags;
+    }
+
+    /**
+     * Set tags by id. Set action will save into database. Used to attribute tag_ids.
+     * It has same result as setTagsAttribute() but uses different parameters.
+     *
+     * @param int[] $tag_ids Array of tag ids.
+     */
+    public function setTagIdsAttribute($tag_ids)
+    {
+        DB::table('designer_tag')->where('designer_id', $this->id)->delete();
+
+        echo 'set tag ids';
+
+        if (is_array($tag_ids)) {
+            foreach ($tag_ids as $tag_id) {
+                DB::table('designer_tag')->insert([
+                    'designer_id' => $this->id,
+                    'tag_id' => (int) $tag_id,
+                ]);
+            }
+        }
     }
 
     /**
