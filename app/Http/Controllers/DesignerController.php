@@ -22,6 +22,7 @@ class DesignerController extends Controller
     {
         // Only logged in users can upload images
         $this->middleware('auth', ['except' => ['index','show']]);
+        $this->middleware('safetext', ['only' => ['store','update']]);
     }
 
     /**
@@ -182,34 +183,35 @@ class DesignerController extends Controller
         ]);
 
         // Save models
-        if ($request->input('image')) {
-            $designer->image_id = $request->input('image');
+        foreach (['name', 'tagline', 'content'] as $key) {
+            if ($request->has($key)) {
+                $translation->$key = $request->input($key);
+            }
         }
-        if ($request->input('country')) {
-            $designer->country_id = $request->input('country');
-        }
-        if ($request->input('city')) {
-            $designer->city_id = $request->input('city');
-        }
-        $designer->email = $request->input('email');
-        $designer->facebook = $request->input('facebook');
-        $designer->twitter = $request->input('twitter');
-        $designer->google_plus = $request->input('google_plus');
-        $designer->instagram = $request->input('instagram');
-
-        $designer->save();
-
-        $translation->name = $request->input('name');
-        $translation->tagline = $request->input('tagline');
-        // TODO Secure HTML input http://htmlpurifier.org/
-        $translation->content = $request->input('content');
 
         $translation->save();
 
+        foreach (['image', 'country', 'city'] as $key) {
+            if ($request->has($key)) {
+                $designer[$key.'_id'] = (int)$request->input($key);
+            }
+        }
+
+        foreach (['email', 'facebook', 'twitter', 'google_plus', 'instagram'] as $key) {
+            if ($request->has($key)) {
+                $designer->$key = trim($request->input($key));
+            }
+        }
+
         // Save tags
-        $designer->tag_ids = $request->input('tags');
+        if ($request->has('tags')) {
+            $designer->tag_ids = $request->input('tags');
+        }
 
         // TODO Save images
+
+
+        $designer->save();
     }
 
     /**
