@@ -7,7 +7,9 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "laravel/socialite": "^2.0"
+        "laravel/socialite": "^2.0",
+        "ezyang/htmlpurifier": "^4.7",
+        "html2text/html2text": "^4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
