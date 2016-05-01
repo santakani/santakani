@@ -8,7 +8,7 @@
             @foreach ($images as $image)
                 <div class="image-preview" style="background-image:url({{$image->getThumbUrl()}})">
                     <span><i class="fa fa-times"></i></span>
-                    <input type="hidden" name="{{ $name or 'images' }}[]" value="{{ $image_id or '' }}">
+                    <input type="hidden" name="{{ $name or 'images' }}[]" value="{{ $image->id or '' }}">
                 </div>
             @endforeach
         @endif
