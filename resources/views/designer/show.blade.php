@@ -54,7 +54,7 @@
 </div>
 
 <article id="designer-{{ $designer->id }}" class="designer container">
-    {{ $designer->content }}
+    {!! $designer->content !!}
 </article>
 
 @endsection

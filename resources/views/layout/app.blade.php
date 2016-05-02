@@ -130,6 +130,7 @@ Main app layout, used by most of content web pages
     <script src="{{ url('/lib/masonry/dist/masonry.pkgd.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('/lib/imagesloaded/imagesloaded.pkgd.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('/lib/select2/dist/js/select2.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('/lib/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('/lib/flickity/dist/flickity.pkgd.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('/lib/lightgallery/dist/js/lightgallery-all.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('/lib/Sortable/Sortable.min.js') }}" type="text/javascript"></script>

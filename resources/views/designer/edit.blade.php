@@ -43,7 +43,7 @@
         <label for="input-content" class="col-sm-2 control-label">
             Story</label>
         <div class="col-sm-10">
-            <textarea name="content" class="form-control" id="input-content"
+            <textarea name="content" class="form-control tinymce" id="input-content"
                 placeholder="Introduce your unique design story..." rows="5">{{
                 old('content')===null?$designer->text('content', 'en'):old('content')
             }}</textarea>

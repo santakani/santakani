@@ -24,6 +24,7 @@
     "imagesloaded": "^4.1.0",
     "lightgallery": "^1.2.18",
     "masonry": "^4.0.0",
-    "select2": "^4.0.2"
+    "select2": "^4.0.2",
+    "tinymce": "^4.3.11"
   }
 }
