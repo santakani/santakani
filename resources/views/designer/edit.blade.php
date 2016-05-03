@@ -65,21 +65,38 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div id="gallery-form-group" class="form-group">
         <label class="col-sm-2 control-label">
             Image gallery</label>
         <div class="col-sm-10">
-            @if (old('images')!==null)
-                @include('component.upload.gallery', [
-                    'images' => App\Image::find(old('images')),
+            @include('component.upload.imageuploader')
+            <div class="image-gallery">
+                @if (old('images')!==null)
+                    @foreach (App\Image::find(old('images')) as $image)
+                        @include('component.upload.imagepreview', [
+                            'name' => 'images[]',
+                            'id' => $image->id,
+                            'url' => $image->getThumbUrl(),
+                            'remove' => true,
+                        ])
+                    @endforeach
+                @elseif ($designer->images)
+                    @foreach ($designer->images as $image)
+                        @include('component.upload.imagepreview', [
+                            'name' => 'images[]',
+                            'id' => $image->id,
+                            'url' => $image->getThumbUrl(),
+                            'remove' => true,
+                        ])
+                    @endforeach
+                @endif
+            </div>
+            <template>
+                @include('component.upload.imagepreview', [
+                    'name' => 'images[]',
+                    'remove' => true,
                 ])
-            @elseif ($designer->images)
-                @include('component.upload.gallery', [
-                    'images' => $designer->images,
-                ])
-            @else
-                @include('component.upload.gallery')
-            @endif
+            </template>
         </div>
     </div>
 

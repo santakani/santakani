@@ -25,7 +25,7 @@ $(function () {
         }
     });
 
-    // Initialize ImageUploaders
+    // Initialize ImageUploader for main image
     var imagePreview = new ImagePreview({
         selector: '#image-form-group .image-preview'
     });
@@ -44,6 +44,42 @@ $(function () {
         },
         fail: function (error) {
             imagePreview.progress('hide');
+            console.log(error);
+        }
+    });
+
+    // Initialize ImageUploader for image gallery
+    $('#gallery-form-group .image-gallery .image-preview').each(function () {
+        var preview = new ImagePreview({
+            element: this
+        });
+    });
+
+    Sortable.create($('.image-gallery')[0], {animation: 300});
+
+    var newPreviews = [];
+
+    var galleryUploader = new ImageUploader({
+        selector: '#gallery-form-group .image-uploader',
+        multiple: true,
+        start: function (index) {
+            var preview = new ImagePreview({
+                template: $($('#gallery-form-group template').prop('content')).find('.image-preview')
+            });
+            $('.image-gallery').append(preview.element);
+            preview.progress('show');
+            newPreviews.push(preview);
+        },
+        progress: function (percentage, index) {
+            newPreviews[index].progress(percentage);
+        },
+        done: function (image, index) {
+            newPreviews[index].progress('hide');
+            newPreviews[index].image(image.id, image.url.thumb);
+            console.log(index);
+        },
+        fail: function (error, index) {
+            newPreviews[index].progress('hide');
             console.log(error);
         }
     });

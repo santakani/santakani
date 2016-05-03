@@ -94,10 +94,9 @@ ImageUploader.prototype.bindEvents = function () {
         uploader.fileInput.click();
     });
 
+    var count = 0; // Count all uploading jobs
     // When selected a file from file dialog, show preview and upload image
     this.fileInput.change(function () {
-        uploader.start(); // Callback function
-
         for (var i = 0; i < this.files.length; i++) {
             var file = this.files[i];
 
@@ -113,34 +112,41 @@ ImageUploader.prototype.bindEvents = function () {
             data.append('_token', csrfToken);
             data.append('image', file);
 
-            // Upload file...
-            $.ajax({
-                method: 'POST',
-                url: '/image',
-                data: data,
-                processData: false,
-                contentType: false,
-                dataType: 'json',
-                xhr: function() {
-                    var xhr = new window.XMLHttpRequest();
+            // Upload file one by one...
+            // index is the job id of every uploading in queue.
+            (function(index){
+                uploader.start(index); // Callback function
 
-                    xhr.upload.addEventListener("progress", function(evt) {
-                        if (evt.lengthComputable) {
-                            var percentComplete = evt.loaded / evt.total;
-                            percentComplete = parseInt(percentComplete * 100);
-                            uploader.progress(percentComplete); // Callback function
-                        }
-                    }, false);
+                $.ajax({
+                    method: 'POST',
+                    url: '/image',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
 
-                    return xhr;
-                }
-            }).done(function (response) {
-                var image = response;
-                uploader.done(image); // Callback function
-            }).fail(function (response) {
-                var error = response;
-                uploader.fail(error); // Callback function
-            });
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = evt.loaded / evt.total;
+                                percentComplete = parseInt(percentComplete * 100);
+                                uploader.progress(percentComplete, index); // Callback function
+                            }
+                        }, false);
+
+                        return xhr;
+                    }
+                }).done(function (response) {
+                    var image = response;
+                    uploader.done(image, index); // Callback function
+                }).fail(function (response) {
+                    var error = response;
+                    uploader.fail(error, index); // Callback function
+                });
+            })(count);
+
+            count++;
 
             // If it is not multiple image uploader, only upload the first one.
             if (!uploader.multiple) {
