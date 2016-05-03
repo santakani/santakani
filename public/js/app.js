@@ -326,6 +326,10 @@ ImageUploader.prototype.init = function (options) {
     this.fileInput = this.element.find('input[type="file"]');
     this.chooseModal = this.element.find('div.modal').modal('hide');
 
+    if (this.multiple) {
+        this.fileInput.prop('multiple', true);
+    }
+
     return this;
 };
 
