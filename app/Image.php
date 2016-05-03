@@ -93,7 +93,7 @@ class Image extends Model
         }
 
         if ($size === 'thumb' && ($this->width <= self::small_thumb_size || $this->width <= self::small_thumb_size)) {
-            $size = 'small-thumb';
+            $size = 'thumb-small';
         }
 
         return $size;
