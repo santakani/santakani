@@ -31,7 +31,7 @@ class Designer extends Model
      * @var array
      */
     protected $appends = [
-        'country', 'country_name', 'city', 'city_name', 'image', 'images',
+        'country', 'country_name', 'city', 'city_name', 'image', 'images', 'image_ids',
         'tags', 'tag_ids', 'translations', 'name', 'tagline', 'content', 'url'
     ];
 
@@ -104,13 +104,71 @@ class Designer extends Model
     {
         $images = [];
 
-        $image_ids = DB::table('designer_image')->select('image_id as id', 'order')
-            ->where('designer_id', $this->id)->get();
+        $designer_images = DB::table('designer_image')->where('designer_id', $this->id)
+            ->orderBy('order', 'asc')->get();
 
-        foreach ($image_ids as $image_id) {
-            $images[$image_id->order] = Image::find($image_id->id);
+        foreach ($designer_images as $designer_image) {
+            $images[$designer_image->order] = Image::find($designer_image->image_id);
         }
         return $images;
+    }
+
+    /**
+     * Set other images, they are usually photos of design. Used to auto-generate
+     * attribute images.
+     *
+     * @param Image[] $images
+     */
+    public function setImagesAttribute($images)
+    {
+        DB::table('designer_image')->where('designer_id', $this->id)->delete();
+
+        foreach ($images as $key => $image) {
+            DB::table('designer_image')->insert([
+                'designer_id' => $this->id,
+                'image_id' => $image->id,
+                'order' => $key,
+            ]);
+        }
+    }
+
+    /**
+     * Get other images, they are usually photos of design. Used to auto-generate
+     * attribute images.
+     *
+     * @return int[] $image_ids
+     */
+    public function getImageIdsAttribute()
+    {
+        $designer_images = DB::table('designer_image')->where('designer_id', $this->id)
+            ->orderBy('order', 'asc')->get();
+
+        $image_ids = [];
+
+        foreach ($designer_images as $designer_image) {
+            $image_ids[$designer_image->order] = $designer_image->image_id;
+        }
+
+        return image_ids;
+    }
+
+    /**
+     * Set other images, they are usually photos of design. Used to auto-generate
+     * attribute images.
+     *
+     * @param int[] $image_ids
+     */
+    public function setImageIdsAttribute($image_ids)
+    {
+        DB::table('designer_image')->where('designer_id', $this->id)->delete();
+
+        foreach ($image_ids as $key => $image_id) {
+            DB::table('designer_image')->insert([
+                'designer_id' => $this->id,
+                'image_id' => $image_id,
+                'order' => $key,
+            ]);
+        }
     }
 
     /**

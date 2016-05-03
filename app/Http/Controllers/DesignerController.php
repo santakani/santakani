@@ -10,6 +10,7 @@ use Gate;
 use App\Http\Requests;
 use App\Designer;
 use App\DesignerTranslation;
+use App\Image;
 
 class DesignerController extends Controller
 {
@@ -206,10 +207,15 @@ class DesignerController extends Controller
 
         // Save tags
         if ($request->has('tags')) {
-            $designer->tag_ids = $request->input('tags');
+            $designer->tag_ids = array_map('intval',$request->input('tags'));
         }
 
-        // TODO Save images
+        // Save images
+        if ($request->has('images')) {
+            var_dump($request->input('images'));
+            $designer->image_ids = array_map('intval',$request->input('images'));
+        }
+
 
 
         $designer->save();
