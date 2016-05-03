@@ -50,22 +50,17 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div id="image-form-group" class="form-group">
         <label class="col-sm-2 control-label">
             Main image</label>
         <div class="col-sm-10">
+            @include('component.upload.imageuploader')
             @if ($image = App\Image::find($image_id = old('image')))
-                @include('component.upload.image', [
-                    'image_id' => $image_id,
-                    'thumb_url' => $image->getThumbUrl(),
-                ])
+                @include('component.upload.imagepreview', ['id' => $image_id, 'url' => $image->getThumbUrl(), 'remove' => false])
             @elseif ($designer->image)
-                @include('component.upload.image', [
-                    'image_id' => $designer->image_id,
-                    'thumb_url' => $designer->image->getThumbUrl(),
-                ])
+                @include('component.upload.imagepreview', ['id' => $designer->image_id, 'url' => $designer->image->getThumbUrl(), 'remove' => false])
             @else
-                @include('component.upload.image')
+                @include('component.upload.imagepreview', ['remove' => false])
             @endif
         </div>
     </div>

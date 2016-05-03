@@ -8,10 +8,47 @@
 
 $(function () {
 
+    // Page check
     if ($('#designer-edit-page').length === 0) {
         return;
     }
 
+    // Initialize TinyMCE
+    tinymce.init({
+        selector: 'textarea.tinymce',
+        menubar: false,
+        content_css: '/css/app.css',
+        setup: function (editor) {
+            editor.on('change', function () {
+                editor.save();
+            });
+        }
+    });
+
+    // Initialize ImageUploaders
+    var imagePreview = new ImagePreview({
+        selector: '#image-form-group .image-preview'
+    });
+
+    var imageUploader = new ImageUploader({
+        selector: '#image-form-group .image-uploader',
+        start: function () {
+            imagePreview.progress('show');
+        },
+        progress: function (percentage) {
+            imagePreview.progress(percentage);
+        },
+        done: function (image) {
+            imagePreview.progress('hide');
+            imagePreview.image(image.id, image.url.thumb);
+        },
+        fail: function (error) {
+            imagePreview.progress('hide');
+            console.log(error);
+        }
+    });
+
+    // Submit form
     $('button[type="submit"]').click(function (e) {
         e.preventDefault();
 

@@ -136,6 +136,9 @@ Main app layout, used by most of content web pages
     <script src="{{ url('/lib/Sortable/Sortable.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('/js/bootstrap.js') }}" type="text/javascript"></script>
     <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        var csrfToken = "{!! csrf_token() !!}";
+    </script>
     @yield('foot_append')
 </body>
 </html>

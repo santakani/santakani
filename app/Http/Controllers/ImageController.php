@@ -22,6 +22,7 @@ class ImageController extends Controller
     {
         // Only logged in users can upload images
         $this->middleware('auth', ['except' => ['index','show']]);
+        $this->middleware('trim', ['only' => ['store','update']]);
     }
 
     /**
@@ -52,6 +53,12 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate data
+        $this->validate($request, [
+            'image' => 'required_without_all:url|image',
+            'url' => 'required_without_all:image|url',
+        ]);
+
         $image = new Image;
         $image->user_id = Auth::user()->id;
 
@@ -84,9 +91,9 @@ class ImageController extends Controller
                 $error_message = 'Invalid file. Only JPEG, PNG, GIF images are allowed.';
 
                 if ($request->wantsJSON()) {
-                    return response()->json(['message' => $error_message], 400);
+                    return response()->json(['image' => $error_message], 400);
                 } else {
-                    return back()->withErrors(['message' => $error_message]);
+                    return back()->withErrors(['image' => $error_message]);
                 }
             }
 
@@ -106,9 +113,9 @@ class ImageController extends Controller
                 $error_message = 'The URL is not a valid YouTube/Vimeo URL.';
 
                 if ($request->wantsJSON()) {
-                    return response()->json(['message' => $error_message], 400);
+                    return response()->json(['url' => $error_message], 400);
                 } else {
-                    return back()->withErrors(['message' => $error_message]);
+                    return back()->withErrors(['url' => $error_message]);
                 }
             }
 
@@ -124,9 +131,9 @@ class ImageController extends Controller
             $error_message = 'No image file or YouTube/Vimeo URL found.';
 
             if ($request->wantsJSON()) {
-                return response()->json(['message' => $error_message], 400);
+                return response()->json(['url' => $error_message], 400);
             } else {
-                return back()->withErrors(['message' => $error_message]);
+                return back()->withErrors(['url' => $error_message]);
             }
         }
     }

@@ -78,10 +78,47 @@ $(function () {
 
 $(function () {
 
+    // Page check
     if ($('#designer-edit-page').length === 0) {
         return;
     }
 
+    // Initialize TinyMCE
+    tinymce.init({
+        selector: 'textarea.tinymce',
+        menubar: false,
+        content_css: '/css/app.css',
+        setup: function (editor) {
+            editor.on('change', function () {
+                editor.save();
+            });
+        }
+    });
+
+    // Initialize ImageUploaders
+    var imagePreview = new ImagePreview({
+        selector: '#image-form-group .image-preview'
+    });
+
+    var imageUploader = new ImageUploader({
+        selector: '#image-form-group .image-uploader',
+        start: function () {
+            imagePreview.progress('show');
+        },
+        progress: function (percentage) {
+            imagePreview.progress(percentage);
+        },
+        done: function (image) {
+            imagePreview.progress('hide');
+            imagePreview.image(image.id, image.url.thumb);
+        },
+        fail: function (error) {
+            imagePreview.progress('hide');
+            console.log(error);
+        }
+    });
+
+    // Submit form
     $('button[type="submit"]').click(function (e) {
         e.preventDefault();
 
@@ -110,19 +147,6 @@ $(function () {
 
     // Tag select, use Select2
     $("select#tag-select").select2({tags: true});
-});
-
-$(function () {
-    tinymce.init({
-        selector: 'textarea.tinymce',
-        menubar: false,
-        content_css: '/css/app.css',
-        setup: function (editor) {
-            editor.on('change', function () {
-                editor.save();
-            });
-        }
-    });
 });
 
 /**
@@ -178,42 +202,219 @@ $(function () {
 
 });
 
-/**
- * Single image uploader
- *
- * View - views/component/upload/image.blade.php
- * Style - assets/sass/_edit-layout.scss
- * Script - assets/js/edit/upload/image.js
- */
+var ImagePreview = function (options) {
+    this.init(options).bindEvents();
+};
 
-$(function () {
+ImagePreview.prototype.init = function (options) {
+    if (typeof options.selector === 'string') {
+        this.element = $(options.selector);
+    } else if (typeof options.element === 'string') {
+        this.element = $(options.element);
+    } else if (typeof options.element === 'object') {
+        this.element = $(options.element);
+    } else if (typeof options.template === 'string') {
+        this.element = $(options.template).clone();
+    } else if (typeof options.template === 'object') {
+        this.element = $(options.template).clone();
+    }
 
-    $('.image-upload').each(function () {
-        var $button = $(this).find('button');
-        var $fileInput = $(this).find('input[type="file"]');
-        var $preview = $(this).find('.image-preview');
+    this.inputElement = this.element.find('input');
+    this.removeButton = this.element.find('.remove');
+    this.progressWraper = this.element.find('.progress');
+    this.progressBar = this.element.find('.progress-bar');
+    this.uploadProgress = 0;
+    this.imageId = parseInt(this.inputElement.val());
+    this.imageUrl = parseInt(this.inputElement.val());
 
-        // When click button, open file dialog
-        $button.click(function () {
-            $fileInput.click();
-        });
+    return this;
+};
 
-        // When selected a file from file dialog, show preview and upload image
-        $fileInput.change(function () {
-            if (this.files && this.files[0] && this.files[0].name.match(/\.(jpg|jpeg|png|gif)$/)) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $preview.css('background-image', 'url(' + e.target.result + ')');
-                }
-
-                reader.readAsDataURL(this.files[0]);
-
-                // TODO Upload file...
-            }
-        });
+ImagePreview.prototype.bindEvents = function () {
+    var preview = this;
+    this.removeButton.click(function () {
+        preview.element.remove();
     });
 
-});
+    return this;
+};
+
+ImagePreview.prototype.progress = function (progress) {
+    if (progress === 'hide') {
+        this.progressWraper.hide();
+    } else if (progress === 'show') {
+        this.progressWraper.show();
+    } else if (typeof progress === 'number') {
+        this.uploadProgress = progress;
+        this.progressBar.css('width', progress + '%');
+    }
+
+    return this.uploadProgress;
+};
+
+ImagePreview.prototype.image = function (id, url) {
+    this.imageId = id;
+    this.imageUrl = url;
+    this.element.css('background-image', 'url("' + url + '")');
+    this.inputElement.val(id);
+
+    return {id: this.imageId, url: this.imageUrl};
+};
+
+/**
+ * UI for uploading new images and choosing uploaded images
+ *
+ * View - views/component/input/imageuploader.blade.php
+ * Style - assets/sass/_edit-layout.scss
+ * Script - assets/js/edit/input/upload/image.js
+ */
+var ImageUploader = function (options) {
+
+    this.init(options);
+
+    this.bindEvents();
+
+    return this;
+};
+
+/**
+ * Read options and setup object properties.
+ *
+ * [Options]
+ * selector: string
+ * element: string | jQuery | DOM
+ * start: function
+ *      When file uploading started, call this function.
+ * done: function
+ *      When file uploading finished or chosen, call this function.
+ * fail: function
+ *      When error occured, call this function.
+ * multiple: boolean
+ *      If the modal can choose multiple images, default value is false.
+ */
+ImageUploader.prototype.init = function (options) {
+
+    if (typeof options === 'object') {
+        // 'selector' or 'element' option to bind view.
+        if (typeof options.selector === 'string') {
+            this.element = $(options.selector);
+        } else if (typeof options.element === 'string') {
+            this.element = $(options.element);
+        } else if (typeof options.element === 'object') {
+            this.element = $(options.element);
+        }
+
+        // Callback functions
+        if (typeof options.start === 'function') {
+            this.start = options.start;
+        } else {
+            this.start = function () {};
+        }
+
+        if (typeof options.progress === 'function') {
+            this.progress = options.progress;
+        } else {
+            this.start = function () {};
+        }
+
+        if (typeof options.done === 'function') {
+            this.done = options.done;
+        } else {
+            this.done = function () {};
+        }
+
+        if (typeof options.fail === 'function') {
+            this.fail = options.fail;
+        } else {
+            this.fail = function () {};
+        }
+
+        if (typeof options.multiple === 'boolean') {
+            this.multiple = options.multiple;
+        } else {
+            this.multiple = false;
+        }
+    } else {
+        return null;
+    }
+
+    this.uploadButton = this.element.find('button.upload-button');
+    this.chooseButton = this.element.find('button.choose-button');
+    this.fileInput = this.element.find('input[type="file"]');
+    this.chooseModal = this.element.find('div.modal').modal('hide');
+
+    return this;
+};
+
+/**
+ * Initialize user interaction events.
+ */
+ImageUploader.prototype.bindEvents = function () {
+
+    var uploader = this;
+
+    this.uploadButton.click(function () {
+        uploader.fileInput.click();
+    });
+
+    // When selected a file from file dialog, show preview and upload image
+    this.fileInput.change(function () {
+        uploader.start(); // Callback function
+
+        for (var i = 0; i < this.files.length; i++) {
+            var file = this.files[i];
+
+            if (!file.type.match('image.*')) {
+                continue;
+            }
+
+            if (!file.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+                continue;
+            }
+
+            var data = new FormData();
+            data.append('_token', csrfToken);
+            data.append('image', file);
+
+            // Upload file...
+            $.ajax({
+                method: 'POST',
+                url: '/image',
+                data: data,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            percentComplete = parseInt(percentComplete * 100);
+                            uploader.progress(percentComplete); // Callback function
+                        }
+                    }, false);
+
+                    return xhr;
+                }
+            }).done(function (response) {
+                var image = response;
+                uploader.done(image); // Callback function
+            }).fail(function (response) {
+                var error = response;
+                uploader.fail(error); // Callback function
+            });
+
+            // If it is not multiple image uploader, only upload the first one.
+            if (!uploader.multiple) {
+                break;
+            }
+        }
+    });
+
+    this.chooseButton.click(function () {
+        uploader.chooseModal.modal('show');
+    });
+};
 
 //# sourceMappingURL=app.js.map
