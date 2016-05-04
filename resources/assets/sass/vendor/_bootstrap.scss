@@ -2,6 +2,8 @@
  * Customize Bootstrap
  */
 
+$web-font-path: ""; // Disable Google Webfonts
+
 @import "bootstrap/variable";
 
 @import "public/lib/bootswatch/sandstone/variables";
