@@ -26,6 +26,8 @@
     "masonry": "^4.0.0",
     "select2": "^4.0.2",
     "tinymce": "^4.3.11",
-    "roboto-fontface": "^0.4.5"
+    "roboto-fontface": "^0.4.5",
+    "bootswatch": "^3.3.6+1",
+    "bootstrap-sass": "^3.3.6"
   }
 }
