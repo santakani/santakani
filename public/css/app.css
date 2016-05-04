@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/**
+ * Customize Bootstrap
+ */
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -5920,6 +5923,36 @@ body.edit-layout .image-preview {
     font-size: 18px;
     border-radius: 99px; }
 
+#picture-carousel {
+  margin: 40px 0; }
+  #picture-carousel .picture-thumb {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 10px; }
+    @media screen and (max-width: 767px) {
+      #picture-carousel .picture-thumb {
+        width: 200px;
+        height: 200px; } }
+
+.lg-outer .lg .lg-thumb-outer .lg-thumb .lg-thumb-item {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-contnet: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: none;
+  border-radius: 0; }
+  .lg-outer .lg .lg-thumb-outer .lg-thumb .lg-thumb-item.active {
+    opacity: 0.5; }
+
 .tags {
   margin-left: 0;
   margin-right: 0; }
@@ -6062,36 +6095,6 @@ body.edit-layout .image-preview {
               border: none;
               padding: 0;
               border-radius: 0; } }
-
-#picture-carousel {
-  margin: 40px 0; }
-  #picture-carousel .picture-thumb {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    width: 300px;
-    height: 300px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: 0 10px; }
-    @media screen and (max-width: 767px) {
-      #picture-carousel .picture-thumb {
-        width: 200px;
-        height: 200px; } }
-
-.lg-outer .lg .lg-thumb-outer .lg-thumb .lg-thumb-item {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  justify-contnet: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: none;
-  border-radius: 0; }
-  .lg-outer .lg .lg-thumb-outer .lg-thumb .lg-thumb-item.active {
-    opacity: 0.5; }
 
 #designer-page #action-bar {
   text-align: right;

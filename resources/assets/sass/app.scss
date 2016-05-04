@@ -1,32 +1,24 @@
 // Customized Bootstrap
-@import "bootstrap-custom";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "vendor/bootstrap";
 
-// Mixins
-@import "mixin";
+// Vendors
 
-// App layout
-@import "navbar";
-@import "content";
-@import "footer";
+// Base
+@import "base/mixin";
+@import "base/variable";
 
-// Min layout
-@import "kani-brand";
+// Layout
+@import "layout/navbar";
+@import "layout/content";
+@import "layout/footer";
+@import "layout/kani-brand";
+@import "layout/edit-layout";
 
-// Edit layout
-@import "edit-layout";
+// Components
+@import "component/carousel";
+@import "component/tag";
 
-// Tags
-@import "tag";
-
-// Home page related
-@import "story-list";
-
-// Places page related
-@import "place-map-list";
-
-// Single page related
-@import "picture-carousel";
-
-// Designer page
-@import "page-designer";
+// Pages
+@import "page/stories";
+@import "page/places";
+@import "page/designer";
