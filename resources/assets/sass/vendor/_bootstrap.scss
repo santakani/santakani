@@ -2,11 +2,6 @@
  * Customize Bootstrap
  */
 
-// Brand colors
-$brand-primary: #D1141E;
-$brand-success: #697646;
-$brand-info: #697646;
-$brand-warning: #D1141E;
-$brand-danger: #D1141E;
+@import "bootstrap-variable";
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
