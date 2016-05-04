@@ -1,7 +1,6 @@
-// Customized Bootstrap
-@import "vendor/bootstrap";
-
 // Vendors
+@import "vendor/roboto";  // Roboto web fonts
+@import "vendor/bootstrap"; // Customized Bootstrap
 
 // Base
 @import "base/mixin";

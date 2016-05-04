@@ -2,6 +2,10 @@
  * Customize Bootstrap
  */
 
-@import "bootstrap-variable";
+@import "bootstrap/variable";
 
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "public/lib/bootswatch/sandstone/variables";
+
+@import "public/lib/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "public/lib/bootswatch/sandstone/bootswatch";
