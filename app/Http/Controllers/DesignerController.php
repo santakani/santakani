@@ -35,7 +35,7 @@ class DesignerController extends Controller
     public function index()
     {
         $designers = Designer::all();
-        return view('stories', [
+        return view('page.designer.index', [
             'body_class' => 'stories',
             'active_nav' => 'story',
             'designers' => $designers
@@ -51,7 +51,7 @@ class DesignerController extends Controller
      */
     public function create()
     {
-        return view('designer.create');
+        return view('page.designer.create');
     }
 
     /**
@@ -109,7 +109,7 @@ class DesignerController extends Controller
             abort(404);
         }
 
-        return view('designer.show', [
+        return view('page.designer.show', [
             'designer' => $designer,
             'can_edit' => Gate::allows('edit-page', $designer),
             'can_translate' => Gate::allows('translate-page', $designer),
@@ -137,7 +137,7 @@ class DesignerController extends Controller
             abort(403);
         }
 
-        return view('designer.edit', ['designer' => $designer]);
+        return view('page.designer.edit', ['designer' => $designer]);
     }
 
     /**

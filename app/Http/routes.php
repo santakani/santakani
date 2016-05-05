@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +26,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'DesignerController@index');
 
     Route::resource('image', 'ImageController');
 
