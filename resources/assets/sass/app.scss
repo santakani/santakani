@@ -29,6 +29,6 @@ $roboto-font-path: '/lib/roboto-fontface/fonts';
 @import "component/tag";
 
 // Pages
-@import "page/stories";
-@import "page/places";
-@import "page/designer";
+@import "page/designer/index";
+@import "page/designer/show";
+@import "page/place/index";

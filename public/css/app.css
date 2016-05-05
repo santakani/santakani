@@ -6248,6 +6248,32 @@ body.edit-layout .image-preview {
   #story-list .story.expanded .expand-button .less {
     display: inline; }
 
+#designer-page #action-bar {
+  text-align: right;
+  margin-bottom: 20px; }
+
+#designer-page header .container {
+  max-width: 600px; }
+
+#designer-page header .main-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 150px;
+  border-radius: 999px;
+  float: left; }
+
+#designer-page header .text {
+  margin-left: 170px; }
+
+#designer-page article {
+  max-width: 600px;
+  margin-top: 40px;
+  margin-bottom: 100px; }
+  #designer-page article .title {
+    text-align: center; }
+
 #place-wrapper {
   width: 100%;
   overflow: hidden; }
@@ -6350,31 +6376,5 @@ body.edit-layout .image-preview {
               border: none;
               padding: 0;
               border-radius: 0; } }
-
-#designer-page #action-bar {
-  text-align: right;
-  margin-bottom: 20px; }
-
-#designer-page header .container {
-  max-width: 600px; }
-
-#designer-page header .main-image {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 150px;
-  height: 150px;
-  border-radius: 999px;
-  float: left; }
-
-#designer-page header .text {
-  margin-left: 170px; }
-
-#designer-page article {
-  max-width: 600px;
-  margin-top: 40px;
-  margin-bottom: 100px; }
-  #designer-page article .title {
-    text-align: center; }
 
 /*# sourceMappingURL=app.css.map */
