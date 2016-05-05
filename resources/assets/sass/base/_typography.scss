@@ -1,0 +1,21 @@
+h1, h2, h3, h4, h5, h6 {
+    margin-top: $line-height-computed;
+    margin-bottom: $line-height-computed;
+}
+
+p,
+ol, ul,
+dl,
+blockquote,
+address {
+    margin-top: $line-height-computed;
+    margin-bottom: $line-height-computed;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

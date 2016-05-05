@@ -1,10 +1,21 @@
-// Vendors
-@import "vendor/roboto";  // Roboto web fonts
-@import "vendor/bootstrap"; // Customized Bootstrap
+// Core variables, override bootstrap variables and define new
+@import "base/variable";
+
+// Bootstrap and Bootswatch theme
+$web-font-path: ""; // Disable Google Webfonts
+@import "public/lib/bootswatch/sandstone/variables";
+@import "public/lib/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "public/lib/bootswatch/sandstone/bootswatch";
+
+// Roboto fonts
+$roboto-font-path: '/lib/roboto-fontface/fonts';
+@import "public/lib/roboto-fontface/css/roboto-fontface.scss";
 
 // Base
 @import "base/mixin";
-@import "base/variable";
+@import "base/typography";
+
+// Vendor
 
 // Layout
 @import "layout/navbar";
