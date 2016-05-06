@@ -1,11 +1,9 @@
 // Core variables, override bootstrap variables and define new
 @import "base/variable";
 
-// Bootstrap and Bootswatch theme
-$web-font-path: ""; // Disable Google Webfonts
-@import "public/lib/bootswatch/sandstone/variables";
+// Bootstrap
+$icon-font-path: '/lib/bootstrap-sass/assets/fonts';
 @import "public/lib/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "public/lib/bootswatch/sandstone/bootswatch";
 
 // Roboto fonts
 $roboto-font-path: '/lib/roboto-fontface/fonts';

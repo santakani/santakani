@@ -1,129 +1,68 @@
-$kanibar-side-width: 150px;
+nav.custom-navbar {
+    position: fixed;
+    width: 100%;
+    height: $custom-navbar-height;
+    padding: 0 10px;
 
-#kanibar {
-    height: 200px;
-    margin-bottom: 20px;
+    @include material-shadow(lower);
 
-    a, a:active, a:hover {
-        color: #000000;
-        text-decoration: none;
-    }
+    background-color: #fff;
+    z-index: 100;
 
-    .first-row {
+    display: flex;
+
+    .nav-menu {
+        @include list-unstyled;
+
+        height: $custom-navbar-height;
         display: flex;
-        height: 160px;
-        padding: 0 20px;
-        align-items: center;
-        justify-content: center;
+        margin: 0;
+        padding: 0;
 
-        #nav-menu {
-            flex: 1 1 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: $kanibar-side-width;
+        > li {
+            height: $custom-navbar-height;
+            line-height: $custom-navbar-height;
 
-            .nav-menu-item {
+            > a {
                 display: block;
-                flex: 0 0 80px;
-                padding-bottom: 10px;
-                text-align: center;
-
-                img {
-                    height: 80px;
-                    width: auto;
-                    margin-bottom: 10px;
+                height: 100%;
+                padding: 0 5px;
+                text-decoration: none;
+                color: $gray;
+                &:hover {
+                    text-decoration: none;
                 }
-
-                &.active {
-                    padding-bottom: 8px;
-                    border-bottom-width: 2px;
-                    border-bottom-style: solid;
-                }
-            }
-
-            #story-menu-item {
-                color: $brand-primary;
-                border-color: $brand-primary;
-                margin-right: 20px;
-            }
-
-            #place-menu-item {
-                color: $brand-success;
-                border-color: $brand-success;
             }
         }
 
-        #user-menu {
-            text-align: right;
+        &.left {
+            flex: 1 0 auto;
+        }
 
-            &.logged-in {
-                $avatar-size: 48px;
-                flex: 0 0 $avatar-size;
-                margin-left: $kanibar-side-width - $avatar-size;
-
-                .avatar.dropdown-toggle {
-                    @include image-cover();
-                    display: block;
-                    width: 48px;
-                    height: 48px;
-                    border-radius: 99px;
-                }
-            }
-
-            &.not-logged-in {
-                flex: 0 0 $kanibar-side-width;
-
-                a {
-                    margin-left: 1em;
-                }
-            }
+        &.right {
+            flex: 0 0 auto;
         }
     }
 
-    .second-row {
-        height: 40px;
-        padding: 0 15px;
-
-        form {
-            max-width: 500px;
-            margin: auto;
-        }
+    .logo {
+        display: block;
+        position: absolute;
+        width: $custom-navbar-height;
+        height: $custom-navbar-height;
+        left: 50%;
+        top: 0;
+        margin-left: - $custom-navbar-height / 2;
+        background-image: url(/img/logo/color-415x693.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto $custom-navbar-height * 0.6;
     }
 
     @media screen and (max-width: $screen-xs-max) {
-        height: 140px;
-
-        .first-row {
-            height: 100px;
-            padding: 0 15px;
-
-            #nav-menu {
-                flex: 2 2 200px;
-                padding: 0;
-                justify-content: left;
-                margin-left: 0;
-
-                .nav-menu-item {
-                    flex: 0 0 60px;
-                    padding-bottom: 5px;
-
-                    img {
-                        height: 48px;
-                        margin-bottom: 5px;
-                    }
-                }
-            }
-
-            #user-menu {
-                &.logged-in {
-                    margin-left: 0;
-                }
-
-                &.not-logged-in {
-                    flex: 0 0 auto;
-                }
-            }
-        }
+        font-size: $font-size-small;
     }
+}
+
+.custom-navbar-space {
+    height: $custom-navbar-height;
 }
