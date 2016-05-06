@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Log In',
     'body_id' => 'login-page',
-    'body_class' => 'login user',
+    'body_class' => 'login auth user',
 ])
 
 @section('main')

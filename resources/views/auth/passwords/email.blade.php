@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Reset Password',
     'body_id' => 'password-reset-email-page',
-    'body_class' => 'password-reset-email password user',
+    'body_class' => 'password-reset-email password auth user',
 ])
 
 @section('main')

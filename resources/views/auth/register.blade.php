@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Register',
     'body_id' => 'register-page',
-    'body_class' => 'register user',
+    'body_class' => 'register auth user',
 ])
 
 @section('main')

@@ -6081,6 +6081,9 @@ body.edit-layout .image-preview {
       .tags > li:hover a {
         color: #ffffff; }
 
+body.auth main {
+  margin: 50px 0; }
+
 #story-list .story {
   margin-bottom: 30px; }
   #story-list .story img.featured-image {
