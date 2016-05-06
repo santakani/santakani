@@ -1,6 +1,10 @@
-@extends('layout.app')
+@extends('layout.app', [
+    'title' => 'Places',
+    'body_id' => 'place-index-page',
+    'body_class' => 'place-index index',
+])
 
-@section('content')
+@section('main')
 <div id="place-wrapper" class="clearfix">
     <div id="place-map">
         <div id="place-map-inner">

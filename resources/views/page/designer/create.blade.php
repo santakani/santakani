@@ -1,10 +1,10 @@
 @extends('layout.app', [
     'title' => 'New Designer Story',
     'body_id' => 'designer-create-page',
-    'body_class' => 'designer-create-page',
+    'body_class' => 'designer-create designer create',
 ])
 
-@section('content')
+@section('main')
 <form class="form-horizontal" action="{{ url('designer') }}" method="post">
     <div class="container">
         <h1 class="page-header"><center>Create A Story Of A Designer/Brand</center></h1>

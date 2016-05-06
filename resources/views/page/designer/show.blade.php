@@ -1,10 +1,10 @@
 @extends('layout.app', [
     'title' => $designer->name . ' - Designer',
-    'body_id' => 'designer-page',
-    'body_class' => 'designer-page',
+    'body_id' => 'designer-show-page',
+    'body_class' => 'designer-show show',
 ])
 
-@section('content')
+@section('main')
 
 @if ($can_edit || $can_translate)
     <div id="action-bar">

@@ -1,6 +1,10 @@
-@extends('layout.app')
+@extends('layout.app', [
+    'title' => 'Register',
+    'body_id' => 'register-page',
+    'body_class' => 'register user',
+])
 
-@section('content')
+@section('main')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

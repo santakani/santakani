@@ -1,7 +1,10 @@
-@extends('layout.app')
+@extends('layout.app', [
+    'title' => 'Reset Password',
+    'body_id' => 'password-reset-email-page',
+    'body_class' => 'password-reset-email password user',
+])
 
-<!-- Main Content -->
-@section('content')
+@section('main')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

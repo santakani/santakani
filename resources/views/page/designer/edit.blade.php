@@ -1,11 +1,10 @@
-@extends('layout.edit', [
+@extends('layout.app', [
     'title' => 'Edit: ' . $designer->name,
     'body_id' => 'designer-edit-page',
-    'body_class' => 'designer-edit-page',
-    'back_link' => url('/designer/' . $designer->id),
+    'body_class' => 'designer-edit edit',
 ])
 
-@section('edit_content')
+@section('main')
 <form id="designer-edit-form" class="form-horizontal" action="{{ $designer->url }}">
 
     <input type="hidden" name="_token" value="{{ csrf_token() }}">

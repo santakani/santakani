@@ -1,21 +1,3 @@
-{{--
-
-Main app layout, used by most of content web pages
-
-* doctype
-* language
-* title
-* favicon
-* charset
-* viewport
-* other meta info
-* css
-* javascript
-* kanibar/navbar
-* footer
-
---}}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,9 +25,13 @@ Main app layout, used by most of content web pages
         @include('layout.navbar')
     @endif
 
-    <div id="content">
-        @yield('content')
-    </div>
+    <header>
+        @yield('header')
+    </header>
+
+    <main>
+        @yield('main')
+    </main>
 
     @if (!isset($has_footer) || $has_footer)
         @include('layout.footer')

@@ -1,10 +1,10 @@
 @extends('layout.app', [
     'title' => 'Upload Image',
     'body_id' => 'image-create-page',
-    'body_class' => 'image-create-page',
+    'body_class' => 'image-create create',
 ])
 
-@section('content')
+@section('main')
 <form class="form-horizontal" action="{{ url('image') }}" method="post"
     enctype="multipart/form-data">
     <div class="container">

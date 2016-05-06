@@ -1,6 +1,10 @@
-@extends('layout.app')
+@extends('layout.app', [
+    'title' => 'Designers',
+    'body_id' => 'designer-index-page',
+    'body_class' => 'designer-index index',
+])
 
-@section('content')
+@section('main')
 <div id="story-list" class="container">
     <div class="grid row">
         @foreach ($designers as $designer)
