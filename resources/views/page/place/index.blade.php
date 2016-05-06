@@ -38,6 +38,6 @@
 </div>
 @endsection
 
-@section('foot_append')
+@push('scripts')
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&callback=initMap"></script>
-@endsection
+@endpush
