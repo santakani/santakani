@@ -27,6 +27,7 @@
     "tinymce": "^4.3.11",
     "roboto-fontface": "^0.4.5",
     "bootstrap-sass": "^3.3.6",
-    "select2-bootstrap-theme": "^0.1.0-beta.4"
+    "select2-bootstrap-theme": "^0.1.0-beta.4",
+    "background-check": "^1.2.2"
   }
 }
