@@ -104,14 +104,6 @@ ImageUploader.prototype.bindEvents = function () {
         for (var i = 0; i < this.files.length; i++) {
             var file = this.files[i];
 
-            if (!file.type.match('image.*')) {
-                continue;
-            }
-
-            if (!file.name.match(/\.(jpg|jpeg|png|gif)$/)) {
-                continue;
-            }
-
             var data = new FormData();
             data.append('_token', csrfToken);
             data.append('image', file);
