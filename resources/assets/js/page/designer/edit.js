@@ -27,7 +27,9 @@ $(function () {
 
     // Initialize ImageUploader for main image
     var imagePreview = new ImagePreview({
-        selector: '#image-form-group .image-preview'
+        selector: '#image-form-group .image-preview',
+        width: 600,
+        height: 200
     });
 
     var imageUploader = new ImageUploader({
@@ -40,7 +42,7 @@ $(function () {
         },
         done: function (image) {
             imagePreview.progress('hide');
-            imagePreview.image(image.id, image.url.thumb);
+            imagePreview.image(image.id, image.url.medium);
         },
         fail: function (error) {
             imagePreview.progress('hide');
@@ -49,10 +51,12 @@ $(function () {
     });
 
     // Initialize ImageUploader for image gallery
+    var oldPreviews = [];
     $('#gallery-form-group .image-gallery .image-preview').each(function () {
         var preview = new ImagePreview({
             element: this
         });
+        oldPreviews.push(preview);
     });
 
     Sortable.create($('.image-gallery')[0], {animation: 300});
@@ -108,9 +112,9 @@ $(function () {
     });
 
     // Country and city select, use Select2.
-    $("select#country-select").select2();
-    $("select#city-select").select2();
+    $("select#country-select").select2({theme: 'bootstrap'});
+    $("select#city-select").select2({theme: 'bootstrap'});
 
     // Tag select, use Select2
-    $("select#tag-select").select2({tags: true});
+    $("select#tag-select").select2({tags: true, theme: 'bootstrap'});
 });

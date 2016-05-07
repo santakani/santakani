@@ -15,6 +15,13 @@ ImagePreview.prototype.init = function (options) {
         this.element = $(options.template).clone();
     }
 
+    this.width = 150;
+    this.height = 150;
+    if (typeof options.width === 'number' && typeof options.height === 'number') {
+        this.width = options.width;
+        this.height = options.height;
+    }
+
     this.inputElement = this.element.find('input');
     this.removeButton = this.element.find('.remove');
     this.progressWraper = this.element.find('.progress');
@@ -28,8 +35,16 @@ ImagePreview.prototype.init = function (options) {
 
 ImagePreview.prototype.bindEvents = function () {
     var preview = this;
+
+    // Remove button
     this.removeButton.click(function () {
         preview.element.remove();
+    });
+
+    // Responsive size
+    this.updateSize();
+    $(window).resize(function () {
+        preview.updateSize();
     });
 
     return this;
@@ -55,4 +70,22 @@ ImagePreview.prototype.image = function (id, url) {
     this.inputElement.val(id);
 
     return {id: this.imageId, url: this.imageUrl};
+};
+
+ImagePreview.prototype.size = function (width, height) {
+    if (arguments.length === 2) {
+        if(width > 0 && height > 0) {
+            this.width = width;
+            this.height = height;
+            this.updateSize();
+        }
+        return this;
+    } else {
+        return {width: this.width, height: this.height};
+    }
+};
+
+ImagePreview.prototype.updateSize = function () {
+    this.element.css('width', this.width + 'px');
+    this.element.css('height', this.element.width() * this.height / this.width);
 };

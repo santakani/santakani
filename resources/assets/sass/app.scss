@@ -9,6 +9,9 @@ $icon-font-path: '/lib/bootstrap-sass/assets/fonts';
 $roboto-font-path: '/lib/roboto-fontface/fonts';
 @import "public/lib/roboto-fontface/css/roboto-fontface.scss";
 
+// Select2 Bootstrap theme
+@import "public/lib/select2-bootstrap-theme/src/select2-bootstrap.scss";
+
 // Base
 @import "base/mixin";
 @import "base/typography";
@@ -17,17 +20,16 @@ $roboto-font-path: '/lib/roboto-fontface/fonts';
 
 // Layout
 @import "layout/navbar";
-@import "layout/content";
 @import "layout/footer";
-@import "layout/kani-brand";
-@import "layout/edit-layout";
 
 // Components
 @import "component/carousel";
 @import "component/tag";
+@import "component/upload/image-preview";
 
 // Pages
 @import "page/auth";
+@import "page/edit";
 @import "page/designer/index";
 @import "page/designer/show";
 @import "page/place/index";
