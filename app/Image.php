@@ -16,6 +16,16 @@ class Image extends Model
     protected $table = 'image';
 
     /**
+     * The attributes that are managed by accessor and mutator functions.
+     * See https://laravel.com/docs/5.2/eloquent-mutators
+     *
+     * @var array
+     */
+    protected $appends = [
+        'url', 'large_url', 'medium_url', 'small_url', 'thumb_url', 'thumb_small_url',
+    ];
+
+    /**
      * Large size of images (large). Images larger than this value will be scaled.
      *
      * @var int
@@ -194,6 +204,66 @@ class Image extends Model
     }
 
     /**
+     * Getter of url.
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return $this->getUrl();
+    }
+
+    /**
+     * Getter of large_url.
+     *
+     * @return string
+     */
+    public function getLargeUrlAttribute()
+    {
+        return $this->getUrl('large');
+    }
+
+    /**
+     * Getter of medium_url.
+     *
+     * @return string
+     */
+    public function getMediumUrlAttribute()
+    {
+        return $this->getUrl('medium');
+    }
+
+    /**
+     * Getter of small_url.
+     *
+     * @return string
+     */
+    public function getSmallUrlAttribute()
+    {
+        return $this->getUrl('small');
+    }
+
+    /**
+     * Getter of thumb_url.
+     *
+     * @return string
+     */
+    public function getThumbUrlAttribute()
+    {
+        return $this->getUrl('thumb');
+    }
+
+    /**
+     * Getter of thumb_small_url.
+     *
+     * @return string
+     */
+    public function getThumbSmallUrlAttribute()
+    {
+        return $this->getUrl('thumb-small');
+    }
+
+    /**
      * Generate URL to image thumbnail (300x300px)
      *
      * @return string
@@ -228,9 +298,7 @@ class Image extends Model
         // Read original size. Before this, width and height properties are empty.
         $this->width = $image->getImageWidth();
         $this->height = $image->getImageHeight();
-
-        $new_width = 0;
-        $new_height = 0;
+        $this->save();
 
         if ($this->hasSize('large')) {
             $width = min(self::large_size, $this->width);
@@ -238,11 +306,6 @@ class Image extends Model
 
             $image->thumbnailImage($width, $height, true);
             $image->writeImage($this->getFilePath('large'));
-
-            if ($new_width !== 0) {
-                $new_width = $image->getImageWidth();
-                $new_height = $image->getImageHeight();
-            }
         }
 
         if ($this->hasSize('medium')) {
@@ -251,11 +314,6 @@ class Image extends Model
 
             $image->thumbnailImage($width, $height, true);
             $image->writeImage($this->getFilePath('medium'));
-
-            if ($new_width !== 0) {
-                $new_width = $image->getImageWidth();
-                $new_height = $image->getImageHeight();
-            }
         }
 
         if ($this->hasSize('small')) {
@@ -264,11 +322,6 @@ class Image extends Model
 
             $image->thumbnailImage($width, $height, true);
             $image->writeImage($this->getFilePath('small'));
-
-            if ($new_width !== 0) {
-                $new_width = $image->getImageWidth();
-                $new_height = $image->getImageHeight();
-            }
         }
 
         $image->readImage($temp_file_path);
@@ -290,11 +343,6 @@ class Image extends Model
         $image->destroy();
 
         unlink($temp_file_path);
-
-        // Update resized width and height
-        $this->width = $new_width;
-        $this->height = $new_height;
-        $this->save();
     }
 
 
