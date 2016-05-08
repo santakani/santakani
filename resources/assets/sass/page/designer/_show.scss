@@ -7,16 +7,24 @@
         // height controlled by JavaScript
         min-height: $header-min-height;
 
+        color: #fff;
+        text-shadow: 1px 1px 2px $gray-light;
+
+        a {
+            color: #fff;
+        }
+
+        .btn {
+            border: none;
+            background: #fff;
+            color: #000;
+            text-shadow: none;
+        }
+
         .action-bar {
             position: absolute;
             top: 20px;
             right: 20px;
-        }
-
-        .btn {
-            color: #000;
-            background: rgba(255,255,255,0.7);
-            border: none;
         }
 
         .text {
@@ -59,40 +67,14 @@
                 height: 40px;
                 border-radius: 999px;
                 text-align: center;
-            }
-
-            .background--dark & {
-
-            }
-
-            .background--light & {
-
+                background: #fff;
+                color: #000;
+                text-shadow: none;
             }
         }
 
         .tags {
             text-align: center;
-        }
-
-        .background--dark {
-            color: #fff;
-            text-shadow: 1px 1px 2px $gray-light;
-
-            a {
-                color: #fff;
-            }
-
-            .btn {
-                background: #fff;
-                color: #000;
-                text-shadow: none;
-            }
-
-            .links a {
-                background: #fff;
-                color: #000;
-                text-shadow: none;
-            }
         }
 
         .background--light {

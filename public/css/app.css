@@ -6643,15 +6643,20 @@ body.edit main {
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  min-height: 400px; }
+  min-height: 400px;
+  color: #fff;
+  text-shadow: 1px 1px 2px #777777; }
+  #designer-show-page header a {
+    color: #fff; }
+  #designer-show-page header .btn {
+    border: none;
+    background: #fff;
+    color: #000;
+    text-shadow: none; }
   #designer-show-page header .action-bar {
     position: absolute;
     top: 20px;
     right: 20px; }
-  #designer-show-page header .btn {
-    color: #000;
-    background: rgba(255, 255, 255, 0.7);
-    border: none; }
   #designer-show-page header .text {
     position: absolute;
     bottom: 20px;
@@ -6680,22 +6685,12 @@ body.edit main {
       width: 40px;
       height: 40px;
       border-radius: 999px;
-      text-align: center; }
+      text-align: center;
+      background: #fff;
+      color: #000;
+      text-shadow: none; }
   #designer-show-page header .tags {
     text-align: center; }
-  #designer-show-page header .background--dark {
-    color: #fff;
-    text-shadow: 1px 1px 2px #777777; }
-    #designer-show-page header .background--dark a {
-      color: #fff; }
-    #designer-show-page header .background--dark .btn {
-      background: #fff;
-      color: #000;
-      text-shadow: none; }
-    #designer-show-page header .background--dark .links a {
-      background: #fff;
-      color: #000;
-      text-shadow: none; }
   #designer-show-page header .background--light {
     color: #000;
     text-shadow: 1px 1px 2px #fff; }
