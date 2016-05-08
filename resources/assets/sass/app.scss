@@ -17,13 +17,13 @@ $roboto-font-path: '/lib/roboto-fontface/fonts';
 @import "base/typography";
 
 // Vendor
+@import "vendor/light-gallery";
 
 // Layout
 @import "layout/navbar";
 @import "layout/footer";
 
 // Components
-@import "component/carousel";
 @import "component/tag";
 @import "component/upload/image-preview";
 
