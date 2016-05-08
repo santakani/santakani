@@ -1,4 +1,4 @@
-.tags {
+ul.tags, ol.tags {
     @extend .list-inline;
     margin-left: 0;
     margin-right: 0;
@@ -21,6 +21,16 @@
             a {
                 color: #ffffff;
             }
+        }
+    }
+}
+
+p.tags, div.tags {
+    a {
+        margin-right: 1em;
+
+        &:before {
+            content: "#";
         }
     }
 }

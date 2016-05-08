@@ -71,9 +71,7 @@
             {!! $designer->content !!}
             <p class="tags target">
                 @foreach ($designer->tags as $tag)
-                    <a href="{{ $tag->getUrl() }}">
-                        #{{ $tag->getTranslation()->name }}
-                    </a>
+                    <a href="{{ $tag->getUrl() }}">{{ $tag->getTranslation()->name }}</a>
                 @endforeach
             </p>
         </div>
