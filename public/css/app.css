@@ -6532,7 +6532,8 @@ nav.custom-navbar {
   height: 50px; }
 
 footer {
-  padding: 30px 0; }
+  padding: 30px 0;
+  background-color: #fafafa; }
   footer .list-inline, footer .tags {
     text-align: right; }
     @media screen and (max-width: 767px) {
@@ -6722,9 +6723,6 @@ body.edit main {
       text-shadow: none; }
 
 #designer-show-page main {
-  background-color: #fff; }
-
-#designer-show-page footer {
   background-color: #fff; }
 
 #place-wrapper {
