@@ -6723,7 +6723,11 @@ body.edit main {
       text-shadow: none; }
 
 #designer-show-page main {
-  background-color: #fff; }
+  padding: 50px 0; }
+
+.gallery > a {
+  display: block;
+  float: left; }
 
 #place-wrapper {
   width: 100%;

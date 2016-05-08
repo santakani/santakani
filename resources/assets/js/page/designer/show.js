@@ -4,6 +4,7 @@ $(function () {
         return;
     }
 
+    // Header starts
     var $header = $('header');
 
     updateHeaderHeight();
@@ -21,16 +22,12 @@ $(function () {
         threshold: 80,
         minComplexity: 20
     });
+    // Header ends
 
-    $('#picture-carousel').flickity({
-        cellAlign: 'left',
-        freeScroll: true
-    });
-
-    $('#picture-carousel').lightGallery({
-        selector: '.picture-thumb',
-        exThumbImage: 'data-thumb',
+    // Gallery starts
+    $('.gallery').lightGallery({
         thumbWidth: 100,
         thumbContHeight: 120
     });
+    // Gallery ends
 });

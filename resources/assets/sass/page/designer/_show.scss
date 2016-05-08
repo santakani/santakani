@@ -119,6 +119,13 @@
     }
 
     main {
-        background-color: $body-bg;
+        padding: 50px 0;
+    }
+}
+
+.gallery {
+    > a {
+        display: block;
+        float: left;
     }
 }

@@ -65,23 +65,27 @@
 @endsection
 
 @section('main')
-
-<div id="picture-carousel" class="carousel">
-    @foreach ($designer->images as $image)
-        <div class="picture-thumb" data-src="{{ url($image->getUrl()) }}"
-            data-thumb="{{ url($image->getThumbUrl()) }}"
-            style="background-image:url({{ url($image->getThumbUrl()) }})"></div>
-    @endforeach
-</div>
-
 <div class="container">
-    {!! $designer->content !!}
-    <p class="tags target">
-        @foreach ($designer->tags as $tag)
-            <a href="{{ $tag->getUrl() }}">
-                #{{ $tag->getTranslation()->name }}
-            </a>
-        @endforeach
-    </p>
+    <div class="row">
+        <div class="col-md-6">
+            {!! $designer->content !!}
+            <p class="tags target">
+                @foreach ($designer->tags as $tag)
+                    <a href="{{ $tag->getUrl() }}">
+                        #{{ $tag->getTranslation()->name }}
+                    </a>
+                @endforeach
+            </p>
+        </div>
+        <div class="col-md-6">
+            <div class="gallery">
+                @foreach ($designer->images as $image)
+                    <a href="{{ $image->large_url }}">
+                        <img src="{{ $image->thumb_small_url }}" />
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
