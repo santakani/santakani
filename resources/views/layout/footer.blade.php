@@ -27,7 +27,8 @@
                                         <img src="{{ url('img/qrcode/wechat-tiny-finland.jpg') }}">
                                     </div>
                                     <div class="col-sm-6">
-                                        使用微信扫描二维码，关注我们的微信公众号“小芬兰”。
+                                        <p>使用微信扫描二维码，关注我们的微信公众号“小芬兰”。</p>
+                                        <p>微信号: tiny_finland</p>
                                     </div>
                                 </div>
                             </div>
