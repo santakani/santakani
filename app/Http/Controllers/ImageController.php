@@ -89,19 +89,7 @@ class ImageController extends Controller
                 $image->saveFile($file);
 
                 if ($request->wantsJSON()) {
-                    return response()->json([
-                        'id' => $image->id,
-                        'mime_type' => $image->mime_type,
-                        'width' => $image->width,
-                        'height' => $image->height,
-                        'url' => [
-                            'large' => $image->getUrl('large'),
-                            'medium' => $image->getUrl('medium'),
-                            'small' => $image->getUrl('small'),
-                            'thumb' => $image->getUrl('thumb'),
-                            'smallThumb' => $image->getUrl('thumb-small'),
-                        ],
-                    ], 200);
+                    return response()->json($image->toArray(), 200);
                 }
             } else {
                 $error_message = 'Invalid file. Only JPEG, PNG, GIF images are allowed.';
@@ -136,11 +124,7 @@ class ImageController extends Controller
             }
 
             if ($request->wantsJSON()) {
-                return response()->json([
-                    'id' => $image->id,
-                    'mime_type' => $image->mime_type,
-                    'url' => $image->external_url,
-                ], 200);
+                return response()->json($image->toArray(), 200);
             }
 
         } else {

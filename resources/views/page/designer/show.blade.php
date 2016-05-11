@@ -5,7 +5,7 @@
 ])
 
 @section('header')
-<header style="background-image:url({{ $designer->image->large_url }});">
+<header style="background-image:url({{ $designer->image->file_urls['large'] }});">
     <div class="action-bar target">
         @if ($can_edit)
             <a href="{{ url('designer/'.$designer->id.'/edit') }}"
@@ -78,8 +78,8 @@
         <div class="col-md-6">
             <div class="gallery">
                 @foreach ($designer->images as $image)
-                    <a href="{{ $image->large_url }}">
-                        <img src="{{ $image->thumb_small_url }}" />
+                    <a href="{{ $image->file_urls['large'] }}">
+                        <img src="{{ $image->file_urls['thumb'] }}" />
                     </a>
                 @endforeach
             </div>

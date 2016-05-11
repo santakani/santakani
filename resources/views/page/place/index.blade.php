@@ -14,7 +14,7 @@
     <div id="place-list">
         @foreach ($places as $place)
             <article id="place-{{ $place->id }}" class="place">
-                <div class="image" style="background-image:url({{ $place->getImage()->getThumbUrl() }})">
+                <div class="image" style="background-image:url({{ $place->getImage()->file_urls['thumb'] }})">
                     <span class="type">{{ $place->type }}</span>
                 </div>
                 <div class="text">

@@ -34,9 +34,9 @@
             @include('component.upload.imageuploader')
             <br>
             @if ($image = App\Image::find($image_id = old('image')))
-                @include('component.upload.imagepreview', ['id' => $image_id, 'url' => $image->getUrl('medium'), 'remove' => false])
+                @include('component.upload.imagepreview', ['id' => $image_id, 'url' => $image->file_urls['medium'], 'remove' => false])
             @elseif ($designer->image)
-                @include('component.upload.imagepreview', ['id' => $designer->image_id, 'url' => $designer->image->getUrl('medium'), 'remove' => false])
+                @include('component.upload.imagepreview', ['id' => $designer->image_id, 'url' => $designer->image->file_urls['medium'], 'remove' => false])
             @else
                 @include('component.upload.imagepreview', ['remove' => false])
             @endif
@@ -75,7 +75,7 @@
                         @include('component.upload.imagepreview', [
                             'name' => 'images[]',
                             'id' => $image->id,
-                            'url' => $image->getThumbUrl(),
+                            'url' => $image->file_urls['thumb'],
                             'remove' => true,
                         ])
                     @endforeach
@@ -84,7 +84,7 @@
                         @include('component.upload.imagepreview', [
                             'name' => 'images[]',
                             'id' => $image->id,
-                            'url' => $image->getThumbUrl(),
+                            'url' => $image->file_urls['thumb'],
                             'remove' => true,
                         ])
                     @endforeach

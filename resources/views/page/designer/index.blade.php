@@ -11,7 +11,7 @@
             <article id="story-{{ $designer->id }}" class="story grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 @if ($image = $designer->image)
                     <a href="{{ $designer->url }}">
-                        <img class="featured-image" src="{{ $image->getThumbUrl() }}" />
+                        <img class="featured-image" src="{{ $image->file_urls['thumb'] }}" />
                     </a>
                 @endif
                 <h3 class="title"><a href="{{ $designer->url }}">

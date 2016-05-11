@@ -26,31 +26,9 @@ app.controller = {};
  * Model that represents an image from server.
  */
 
-(function () {
-    var mImage;
-    app.model.Image = mImage = function (options) {
-        this.init(options);
-
-        return this;
-    };
-
-    mImage.prototype.init = function (options) {
-        var defaults = {};
-
-        /* merge defaults and options, without modifying defaults */
-        $.extend(this, defaults, options);
-    };
-
-    mImage.prototype.fetch = function () {
-        if (!this.id) {
-            return this;
-        }
-
-        // TODO fetch image data from server.
-
-        return this;
-    };
-})();
+app.model.Image = Backbone.Model.extend({
+    urlRoot: '/image'
+});
 
 var ImagePreview = function (options) {
     this.init(options).bindEvents();
@@ -145,11 +123,7 @@ ImagePreview.prototype.updateSize = function () {
 };
 
 /**
- * UI for uploading new images and choosing uploaded images
- *
- * View - views/component/input/imageuploader.blade.php
- * Style - assets/sass/_edit-layout.scss
- * Script - assets/js/edit/input/upload/image.js
+ * Button for uploading new images
  */
 var ImageUploader = function (options) {
 
@@ -346,7 +320,7 @@ $(function () {
         },
         done: function (image) {
             imagePreview.progress('hide');
-            imagePreview.image(image.id, image.url.medium);
+            imagePreview.image(image.id, image.file_urls.medium);
         },
         fail: function (error) {
             imagePreview.progress('hide');
@@ -383,7 +357,7 @@ $(function () {
         },
         done: function (image, index) {
             newPreviews[index].progress('hide');
-            newPreviews[index].image(image.id, image.url.thumb);
+            newPreviews[index].image(image.id, image.file_urls.thumb);
             console.log(index);
         },
         fail: function (error, index) {

@@ -1,9 +1,5 @@
 /**
- * UI for uploading new images and choosing uploaded images
- *
- * View - views/component/input/imageuploader.blade.php
- * Style - assets/sass/_edit-layout.scss
- * Script - assets/js/edit/input/upload/image.js
+ * Button for uploading new images
  */
 var ImageUploader = function (options) {
 

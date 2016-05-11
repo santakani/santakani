@@ -22,11 +22,11 @@ class Image extends Model
      * @var array
      */
     protected $appends = [
-        'url', 'large_url', 'medium_url', 'small_url', 'thumb_url', 'thumb_small_url',
+        'url', 'file_extension', 'file_urls'
     ];
 
     /**
-     * Large size of images (large). Images larger than this value will be scaled.
+     * Large size of images (large).
      *
      * @var int
      */
@@ -40,13 +40,6 @@ class Image extends Model
     const medium_size = 600;
 
     /**
-     * Small size of images (small).
-     *
-     * @var int
-     */
-    const small_size = 300;
-
-    /**
      * Size of image thumbnails, crop to square (thumb).
      *
      * @var int
@@ -54,35 +47,79 @@ class Image extends Model
     const thumb_size = 300;
 
     /**
-     * Size of image thumbnails, crop to square (thumb).
+     * Root directory of image storage, related to /public directory.
      *
-     * @var int
+     * @var string
      */
-    const small_thumb_size = 150;
+    const image_storage_path = 'storage/image';
 
     /**
-     * Get file extension of image file based on MIME type
+     * Allowed MIME types for files. video/youtube and video/vimeo are not included.
+     *
+     * @var array
+     */
+    protected $allowed_mime_types = [
+        'image/jpeg', 'image/png', 'image/gif',
+    ];
+
+    /**
+     * Image sizes that will be generated.
+     *
+     * @var array
+     */
+    protected $image_sizes = [
+        'full', 'large', 'medium', 'thumb',
+    ];
+
+    /**
+     * Getter of url.
+     * Note this is the URL to image page, not image file.
      *
      * @return string
      */
-    public function getFileExtension()
+    public function getUrlAttribute()
+    {
+        return url('image/' . $this->id);
+    }
+
+    /**
+     * If the image is an image file.
+     *
+     * @return boolean
+     */
+    public function isImage()
+    {
+        return substr($this->mime_type, 0, 5) === 'image';
+    }
+
+    /**
+     * If the image is an external video.
+     *
+     * @return boolean
+     */
+    public function isVideo()
+    {
+        return substr($this->mime_type, 0, 5) === 'video';
+    }
+
+    /**
+     * Getter of attribute "file_extension".
+     * Get file extension of image file based on MIME type.
+     *
+     * @return string
+     */
+    public function getFileExtensionAttribute()
     {
         switch ($this->mime_type) {
             case 'image/jpeg':
-                $ext = '.jpg';
-                break;
+                return '.jpg';
             case 'image/png':
-                $ext = '.png';
-                break;
+                return '.png';
             case 'image/gif':
-                $ext = '.gif';
-                break;
+                return '.gif';
             default:
-                $ext = '';
-                break;
+                return null;
         }
-
-        return $ext;
     }
 
     /**
@@ -92,21 +129,9 @@ class Image extends Model
      *
      * @return string
      */
-    public function getFallbackSize($size)
+    public function sizeFallback($size)
     {
-        if ($size === 'large' && $this->width <= self::medium_size && $this->width <= self::medium_size) {
-            $size = 'medium';
-        }
-
-        if ($size === 'medium' && $this->width <= self::small_size && $this->width <= self::small_size) {
-            $size = 'small';
-        }
-
-        if ($size === 'thumb' && ($this->width <= self::small_thumb_size || $this->width <= self::small_thumb_size)) {
-            $size = 'thumb-small';
-        }
-
-        return $size;
+        return $this->hasSize($size)?$size:'full';
     }
 
     /**
@@ -118,169 +143,91 @@ class Image extends Model
      */
     public function hasSize($size)
     {
-        if ($size === 'large' && $this->width <= self::medium_size && $this->width <= self::medium_size) {
+        if (!in_array($size, $this->image_sizes)) {
             return false;
-        }
-
-        if ($size === 'medium' && $this->width <= self::small_size && $this->width <= self::small_size) {
-            return false;
-        }
-
-        if ($size === 'thumb' && ($this->width <= self::small_thumb_size || $this->width <= self::small_thumb_size)) {
-            return false;
+        } elseif ($size === 'large') {
+            if ($this->width <= self::large_size && $this->width <= self::large_size) {
+                return false;
+            }
+        } elseif ($size === 'medium') {
+            if ($this->width <= self::medium_size && $this->width <= self::medium_size) {
+                return false;
+            }
         }
 
         return true;
     }
 
     /**
-     * Generate full path to image directory
+     * Generate full/relative path to image directory
      *
-     * If image id is 1009768, it will be stored in public/storage/image/1009/768
+     * [Example]
+     * Image id: 1009768
+     * Full path: /srv/www/santakani.com/public/storage/image/1009/768
+     * Relative path: storage/image/1009/768
      *
+     * @param boolean $full Return full path or relative path.
      * @return string
      */
-    public function getDirPath()
+    public function getDirectoryPath($full = true)
     {
-        $path = 'storage/image/' . (int)($this->id/1000) . '/' . $this->id%1000;
+        $id = $this->id;
+        $path = self::image_storage_path . '/' . (int)($id/1000) . '/' . $id%1000;
 
-        return public_path($path);
+        return $full?public_path($path):$path;
     }
 
     /**
-     * Generate full path to image file
+     * Generate full/relative path to image file
      *
-     * If image id is 1009768, it will be stored in public/storage/image/1009/768 and contains:
-     * - large.jpg
-     * - medium.jpg
-     * - small.jpg
-     * - thumb.jpg
-     * - thumb-small.jpg
-     *
-     * Even if the requested size doesn't exist, still return the expected path.
-     *
-     * @param string $size One of large, medium, small, thumb, thumb-small
-     *
+     * @param string $size One of full, large, medium, thumb
+     * @param boolean $full Return full path or relative path.
+     * @param boolean $size_fallback If check fallback sizes.
      * @return string
      */
-    public function getFilePath($size = 'large')
+    public function getFilePath($size = 'full', $full = true, $size_fallback = false)
     {
-        if (!empty($this->external_url)) {
+        if (!$this->isImage()) {
             return null;
         }
 
-        $path = 'storage/image/' . (int)($this->id/1000) . '/' . $this->id%1000
-                . '/' . $size . $this->getFileExtension();
-
-        return public_path($path);
+        return $this->getDirectoryPath($full) . '/' . $size . $this->file_extension;
     }
 
     /**
      * Generate URL to image file
      *
-     * If image id is 1009768, it will be stored in public/storage/image/1009/768 and contains:
-     * - large.jpg
-     * - medium.jpg
-     * - small.jpg
-     * - thumb.jpg
-     * - thumb-small.jpg
-     *
-     * If the requested size doesn't exist, return a fallback size (smaller).
-     *
-     * @param string $size One of large, medium, small, thumb, thumb-small
-     *
+     * @param string $size One of full, large, medium, thumb
+     * @param boolean $size_fallback If check fallback sizes.
      * @return string
      */
-    public function getUrl($size = 'large')
+    public function getFileUrl($size = 'full', $size_fallback = true)
     {
-        if (!empty($this->external_url)) {
-            return $this->external_url;
+        if (!$this->isImage()) {
+            return null;
         }
 
-        $path = 'storage/image/' . (int)($this->id/1000) . '/' . $this->id%1000
-                . '/' . $this->getFallbackSize($size) . $this->getFileExtension();
-
-        return url($path);
+        return url($this->getFilePath($size, false, $size_fallback));
     }
 
     /**
-     * Getter of url. Note this is the URL to image page, not image file.
+     * Getter of file_urls.
+     * URL to image files. Contain for sizes: full, large, medium, thumb.
      *
-     * @return string
+     * @return string[]
      */
-    public function getUrlAttribute()
+    public function getFileUrlsAttribute()
     {
-        return url('image/' . $this->id);
-    }
+        if (!$this->isImage()) {
+            return null;
+        }
 
-    /**
-     * Getter of large_url.
-     *
-     * @return string
-     */
-    public function getLargeUrlAttribute()
-    {
-        return $this->getUrl('large');
-    }
-
-    /**
-     * Getter of medium_url.
-     *
-     * @return string
-     */
-    public function getMediumUrlAttribute()
-    {
-        return $this->getUrl('medium');
-    }
-
-    /**
-     * Getter of small_url.
-     *
-     * @return string
-     */
-    public function getSmallUrlAttribute()
-    {
-        return $this->getUrl('small');
-    }
-
-    /**
-     * Getter of thumb_url.
-     *
-     * @return string
-     */
-    public function getThumbUrlAttribute()
-    {
-        return $this->getUrl('thumb');
-    }
-
-    /**
-     * Getter of thumb_small_url.
-     *
-     * @return string
-     */
-    public function getThumbSmallUrlAttribute()
-    {
-        return $this->getUrl('thumb-small');
-    }
-
-    /**
-     * Generate URL to image thumbnail (300x300px)
-     *
-     * @return string
-     */
-    public function getThumbUrl()
-    {
-        return $this->getUrl('thumb');
-    }
-
-    /**
-     * Generate URL to small image thumbnail (150x150px)
-     *
-     * @return string
-     */
-    public function getSmallThumbUrl()
-    {
-        return $this->getUrl('thumb-small');
+        return [
+            'full' => $this->getFileUrl('full'),
+            'large' => $this->getFileUrl('large'),
+            'medium' => $this->getFileUrl('medium'),
+            'thumb' => $this->getFileUrl('thumb'),
+        ];
     }
 
     /**
@@ -290,8 +237,8 @@ class Image extends Model
      */
     public function saveFile(File $file)
     {
-        $new_file = $file->move($this->getDirPath(), 'temp');
-        $temp_file_path = $this->getDirPath() . '/temp';
+        $new_file = $file->move($this->getDirectoryPath(), 'temp');
+        $temp_file_path = $this->getDirectoryPath() . '/temp';
 
         $image = new Imagick($temp_file_path);
 
@@ -300,45 +247,29 @@ class Image extends Model
         $this->height = $image->getImageHeight();
         $this->save();
 
-        if ($this->hasSize('large')) {
-            $width = min(self::large_size, $this->width);
-            $height = min(self::large_size, $this->height);
+        // Full size image with small file size.
+        $image->thumbnailImage($this->width, $this->height);
+        $image->writeImage($this->getFilePath('full'));
 
-            $image->thumbnailImage($width, $height, true);
+        // Large: 1200x1200px
+        if ($this->hasSize('large')) {
+            $image->readImage($temp_file_path);
+            $image->thumbnailImage(self::large_size, self::large_size, true);
             $image->writeImage($this->getFilePath('large'));
         }
 
+        // Medium 600x600px
         if ($this->hasSize('medium')) {
-            $width = min(self::medium_size, $this->width);
-            $height = min(self::medium_size, $this->height);
-
-            $image->thumbnailImage($width, $height, true);
+            $image->readImage($temp_file_path);
+            $image->thumbnailImage(self::medium_size, self::medium_size, true);
             $image->writeImage($this->getFilePath('medium'));
         }
 
-        if ($this->hasSize('small')) {
-            $width = min(self::small_size, $this->width);
-            $height = min(self::small_size, $this->height);
-
-            $image->thumbnailImage($width, $height, true);
-            $image->writeImage($this->getFilePath('small'));
-        }
-
+        // Thumb: 300x300px croped
         $image->readImage($temp_file_path);
-
-        if ($this->hasSize('thumb')) {
-            $size = min(self::thumb_size, $this->width, $this->height);
-
-            $image->cropThumbnailImage($size, $size);
-            $image->writeImage($this->getFilePath('thumb'));
-        }
-
-        if ($this->hasSize('thumb-small')) {
-            $size = min(self::small_thumb_size, $this->width, $this->height);
-
-            $image->cropThumbnailImage($size, $size);
-            $image->writeImage($this->getFilePath('thumb-small'));
-        }
+        $size = min(self::thumb_size, $this->width, $this->height);
+        $image->cropThumbnailImage($size, $size);
+        $image->writeImage($this->getFilePath('thumb'));
 
         $image->destroy();
 

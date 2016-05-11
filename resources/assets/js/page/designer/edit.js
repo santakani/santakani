@@ -42,7 +42,7 @@ $(function () {
         },
         done: function (image) {
             imagePreview.progress('hide');
-            imagePreview.image(image.id, image.url.medium);
+            imagePreview.image(image.id, image.file_urls.medium);
         },
         fail: function (error) {
             imagePreview.progress('hide');
@@ -79,7 +79,7 @@ $(function () {
         },
         done: function (image, index) {
             newPreviews[index].progress('hide');
-            newPreviews[index].image(image.id, image.url.thumb);
+            newPreviews[index].image(image.id, image.file_urls.thumb);
             console.log(index);
         },
         fail: function (error, index) {
