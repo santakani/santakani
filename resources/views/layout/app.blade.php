@@ -46,6 +46,8 @@
     <script src="{{ url('/lib/Sortable/Sortable.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('/lib/background-check/background-check.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="/lib/underscore/underscore-min.js" type="text/javascript"></script>
+    <script src="/lib/backbone/backbone-min.js" type="text/javascript"></script>
     <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
         // Global variables from server
