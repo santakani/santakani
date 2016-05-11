@@ -28,11 +28,27 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Validate data
+        $this->validate($request, [
+            'user' => 'integer|exists:user,id',
+        ]);
+
+        if ($request->has('user')) {
+            $images = Image::where('user_id', $request->user)->get();
+        } else {
+            $images = Image::all();
+        }
+
+        if ($request->wantsJSON()) {
+            return response()->json($images->toArray(), 200);
+        } else {
+            return view('page.image.index', ['images' => $images]);
+        }
     }
 
     /**

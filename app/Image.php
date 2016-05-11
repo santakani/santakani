@@ -204,13 +204,13 @@ class Image extends Model
     }
 
     /**
-     * Getter of url.
+     * Getter of url. Note this is the URL to image page, not image file.
      *
      * @return string
      */
     public function getUrlAttribute()
     {
-        return $this->getUrl();
+        return url('image/' . $this->id);
     }
 
     /**
@@ -415,4 +415,6 @@ class Image extends Model
             return false;
         }
     }
+
+    // TODO toArray() and toJSON() functions.
 }
