@@ -60,6 +60,10 @@ nav.custom-navbar {
 
     @media screen and (max-width: $screen-xs-max) {
         font-size: $font-size-small;
+
+        .fa {
+            font-size: $font-size-base;
+        }
     }
 }
 

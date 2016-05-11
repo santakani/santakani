@@ -6539,7 +6539,9 @@ nav.custom-navbar {
     background-size: auto 30px; }
   @media screen and (max-width: 767px) {
     nav.custom-navbar {
-      font-size: 12px; } }
+      font-size: 12px; }
+      nav.custom-navbar .fa {
+        font-size: 14px; } }
 
 .custom-navbar-space {
   height: 50px; }
