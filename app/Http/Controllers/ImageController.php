@@ -71,34 +71,41 @@ class ImageController extends Controller
     {
         // Validate data
         $this->validate($request, [
-            'image' => 'required_without_all:url|image',
+            'image' => 'required_without_all:url|image|mimes:jpeg,png,gif',
             'url' => 'required_without_all:image|url',
         ]);
 
         $image = new Image;
         $image->user_id = Auth::user()->id;
 
+        $error_messages = [];
+
         if ($request->hasFile('image')) {
 
             $file = $request->file('image');
-            $mime_type = $file->getMimeType();
 
-            if ($file->isValid() && Image::checkMimeType($mime_type)) {
-                $image->mime_type = $mime_type;
+            if ($file->isValid()) {
+
+                $image->mime_type = $file->getMimeType();
                 $image->save();
                 $image->saveFile($file);
 
                 if ($request->wantsJSON()) {
                     return response()->json($image->toArray(), 200);
+                } else {
+                    return redirect()->route('image.show', ['id' => $image->id]);
                 }
+
             } else {
-                $error_message = 'Invalid file. Only JPEG, PNG, GIF images are allowed.';
+
+                $error_message = 'Fail to upload image.';
 
                 if ($request->wantsJSON()) {
-                    return response()->json(['image' => $error_message], 400);
+                    return response()->json(['image' => [$error_message]], 422);
                 } else {
                     return back()->withErrors(['image' => $error_message]);
                 }
+
             }
 
         } elseif ($request->has('url')) {
@@ -117,24 +124,18 @@ class ImageController extends Controller
                 $error_message = 'The URL is not a valid YouTube/Vimeo URL.';
 
                 if ($request->wantsJSON()) {
-                    return response()->json(['url' => $error_message], 400);
+                    return response()->json(['url' => [$error_message]], 422);
                 } else {
-                    return back()->withErrors(['url' => $error_message]);
+                    return back()->withErrors(['url' => [$error_message]]);
                 }
             }
 
             if ($request->wantsJSON()) {
                 return response()->json($image->toArray(), 200);
-            }
-
-        } else {
-            $error_message = 'No image file or YouTube/Vimeo URL found.';
-
-            if ($request->wantsJSON()) {
-                return response()->json(['url' => $error_message], 400);
             } else {
-                return back()->withErrors(['url' => $error_message]);
+                return redirect()->route('image.show', ['id' => $image->id]);
             }
+
         }
     }
 
