@@ -79,19 +79,57 @@ app.model.Image = Backbone.Model.extend({
     }
 });
 
-// Some template loading and parsing function
+/**
+ * Provide a modal to upload and manage images. Select image to insert to article,
+ * set cover image, avatar and so on. Can filter images belong to specifec user,
+ * or page.
+ */
 
-// Load template from external HTML files
-var loadTemplateFile = app.util.loadTemplateFile = function (url, callback) {
-    $.get(url, function (templateString) {
-        callback(templateString);
-    }, 'html');
-}
+app.view.ImageManager = Backbone.View.extend({
 
-// Load template from DOM, return null if not exists.
-var loadTemplate = app.util.loadTemplate = function (element) {
-    return $(element).html();
-}
+    el: '#image-manager',
+
+    events: {
+        'click .upload-button': 'openFileBrowser',
+        'change .file-input': 'uploadImages'
+    },
+
+    initialize: function () {
+    },
+
+    render: function () {
+        return this;
+    },
+
+    openFileBrowser: function () {
+        this.$('.file-input').click();
+    },
+
+    uploadImages: function () {
+        var files = this.$('.file-input')[0].files;
+        for (var i = 0; i < files.length; i++) {
+            var image = new app.model.Image({id:0});
+            image.upload(files[i]);
+            var preview = new app.view.ImagePreview({
+                model: image,
+                selectable: true,
+                selected: true
+            });
+            this.$('.gallery').prepend(preview.$el);
+        }
+
+        this.closeAlert();
+    },
+
+    closeAlert: function () {
+        this.$('.alert').hide();
+    }
+
+});
+
+$('#image-manager').modal('show');
+
+var manager = new app.view.ImageManager;
 
 /**
  * Image thumbnail used for image upload, select and management.
@@ -107,7 +145,7 @@ app.view.ImagePreview = Backbone.View.extend({
 
     className: 'image-preview',
 
-    template: _.template($('#image-preview-template').html()),
+    template: _.template(app.util.loadTemplate('#image-preview-template')),
 
     width: 150,
 
@@ -122,20 +160,33 @@ app.view.ImagePreview = Backbone.View.extend({
         'click': 'toggleSelect'
     },
 
-    initialize: function () {
+    initialize: function (options) {
+        _.extend(this, _.pick(options, 'width', 'height', 'selectable', 'selected'));
+
+        this.render();
+
         // Responsive size
         this.updateSize();
         $(window).resize(function () {
             preview.updateSize();
         });
 
-        this.listenTo(this.model, 'change:progress', this.refreshProgress);
-        this.listenTo(this.model, 'change:width', this.updateSize);
+        this.listenTo(this.model, 'change', this.update);
     },
 
     render: function () {
         this.$el.html(this.template(this.model.attributes));
+        if (this.selected) {
+            this.$el.addClass('selected');
+        }
+        this.update();
         return this;
+    },
+
+    update: function () {
+        this.updateImage();
+        this.updateSize();
+        this.updateProgress();
     },
 
     updateSize: function () {
@@ -157,7 +208,7 @@ app.view.ImagePreview = Backbone.View.extend({
         }
     },
 
-    refreshProgress: function () {
+    updateProgress: function () {
         var progress = this.model.get('progress');
         var progressBar = this.$('.progress-bar');
         if (progress === false) {
@@ -166,8 +217,34 @@ app.view.ImagePreview = Backbone.View.extend({
             progressBar.css('width',  + '%');
             progressBar.show();
         }
+    },
+
+    updateImage: function () {
+        var url = '';
+        if (this.model.get('file_urls')) {
+            url = this.model.get('file_urls')['thumb'];
+        }
+        this.$el.css('background-image', 'url(' + url + ')');
     }
 });
+
+// Some template loading and parsing function
+
+// Load template from external HTML files
+app.util.loadTemplateFile = function (url, callback) {
+    $.get(url, function (templateString) {
+        callback(templateString);
+    }, 'html');
+}
+
+// Load template from DOM, return null if not exists.
+app.util.loadTemplate = function (element) {
+    if ($(element).length) {
+        return $(element).html();
+    } else {
+        return 'Template not found.';
+    }
+}
 
 var ImagePreview = function (options) {
     this.init(options).bindEvents();

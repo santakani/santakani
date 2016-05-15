@@ -178,3 +178,7 @@
 @push('templates')
     @include('template.image-preview')
 @endpush
+
+@push('modals')
+    @include('component.image-manager')
+@endpush

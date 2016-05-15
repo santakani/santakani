@@ -6555,6 +6555,17 @@ footer {
       footer .list-inline, footer ul.tags, footer ol.tags {
         text-align: left; } }
 
+#image-manager .upload-button {
+  float: right;
+  margin-right: 2em; }
+
+#image-manager .gallery {
+  margin: -5px; }
+
+#image-manager .image-preview {
+  float: left;
+  margin: 5px; }
+
 ul.tags, ol.tags {
   margin-left: 0;
   margin-right: 0; }
@@ -6583,8 +6594,9 @@ p.tags a, div.tags a {
   position: relative;
   /* Width and height are controlled by JavaScript */
   max-width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 3px; }
+  border: 1px solid #ccc; }
+  .image-preview.selected {
+    border: 3px solid #337ab7; }
   .image-preview span.remove {
     position: absolute;
     top: -12px;

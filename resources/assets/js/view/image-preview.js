@@ -12,7 +12,7 @@ app.view.ImagePreview = Backbone.View.extend({
 
     className: 'image-preview',
 
-    template: _.template($('#image-preview-template').html()),
+    template: _.template(app.util.loadTemplate('#image-preview-template')),
 
     width: 150,
 
@@ -27,20 +27,33 @@ app.view.ImagePreview = Backbone.View.extend({
         'click': 'toggleSelect'
     },
 
-    initialize: function () {
+    initialize: function (options) {
+        _.extend(this, _.pick(options, 'width', 'height', 'selectable', 'selected'));
+
+        this.render();
+
         // Responsive size
         this.updateSize();
         $(window).resize(function () {
             preview.updateSize();
         });
 
-        this.listenTo(this.model, 'change:progress', this.refreshProgress);
-        this.listenTo(this.model, 'change:width', this.updateSize);
+        this.listenTo(this.model, 'change', this.update);
     },
 
     render: function () {
         this.$el.html(this.template(this.model.attributes));
+        if (this.selected) {
+            this.$el.addClass('selected');
+        }
+        this.update();
         return this;
+    },
+
+    update: function () {
+        this.updateImage();
+        this.updateSize();
+        this.updateProgress();
     },
 
     updateSize: function () {
@@ -62,7 +75,7 @@ app.view.ImagePreview = Backbone.View.extend({
         }
     },
 
-    refreshProgress: function () {
+    updateProgress: function () {
         var progress = this.model.get('progress');
         var progressBar = this.$('.progress-bar');
         if (progress === false) {
@@ -71,5 +84,13 @@ app.view.ImagePreview = Backbone.View.extend({
             progressBar.css('width',  + '%');
             progressBar.show();
         }
+    },
+
+    updateImage: function () {
+        var url = '';
+        if (this.model.get('file_urls')) {
+            url = this.model.get('file_urls')['thumb'];
+        }
+        this.$el.css('background-image', 'url(' + url + ')');
     }
 });

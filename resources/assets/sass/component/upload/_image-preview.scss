@@ -4,7 +4,10 @@
     /* Width and height are controlled by JavaScript */
     max-width: 100%;
     border: 1px solid $input-border;
-    border-radius: 3px;
+
+    &.selected {
+        border: 3px solid $brand-primary;
+    }
 
     span.remove {
         $size: 24px;
