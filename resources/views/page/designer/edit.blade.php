@@ -174,3 +174,7 @@
 </form>
 </div><!-- .container -->
 @endsection
+
+@push('templates')
+    @include('template.image-preview')
+@endpush

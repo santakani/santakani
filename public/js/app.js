@@ -4,7 +4,9 @@ var app = {};
 
 app.model = {};
 
-app.controller = {};
+app.view = {};
+
+app.util = {};
 
 // A custom jQuery plugin to scroll window to specific element.
 // Useage: $('#my-div').goTo();
@@ -23,11 +25,148 @@ app.controller = {};
  *
  * Namespace: app.model
  *
- * Model that represents an image from server.
+ * See https://github.com/santakani/santakani.com/wiki/Models#image
  */
 
 app.model.Image = Backbone.Model.extend({
-    urlRoot: '/image'
+
+    defaults: {
+        'progress': false, // Upload progress. Uploading: int, 0-100(%); uploaded: false.
+    },
+
+    urlRoot: '/image',
+
+    upload: function (image) {
+        var that = this;
+
+        if (image === undefined) {
+            if (this.image === undefined) {
+                var image = this.image;
+            } else {
+                var image = null;
+            }
+        }
+
+        var data = new FormData();
+        data.append('_token', csrfToken);
+        data.append('image', image);
+
+        $.ajax({
+            method: 'POST',
+            url: '/image',
+            data: data,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total;
+                        percentComplete = parseInt(percentComplete * 100);
+                        that.set({progress: percentComplete});
+                    }
+                }, false);
+
+                return xhr;
+            }
+        }).done(function (data) {
+            that.set(data);
+        }).fail(function (data) {
+            console.log(data);
+        });
+    }
+});
+
+// Some template loading and parsing function
+
+// Load template from external HTML files
+var loadTemplateFile = app.util.loadTemplateFile = function (url, callback) {
+    $.get(url, function (templateString) {
+        callback(templateString);
+    }, 'html');
+}
+
+// Load template from DOM, return null if not exists.
+var loadTemplate = app.util.loadTemplate = function (element) {
+    return $(element).html();
+}
+
+/**
+ * Image thumbnail used for image upload, select and management.
+ * Bind to model Image.
+ *
+ * Class: ImagePreview
+ * Namespace: app.view
+ */
+
+app.view.ImagePreview = Backbone.View.extend({
+
+    tagName: 'div',
+
+    className: 'image-preview',
+
+    template: _.template($('#image-preview-template').html()),
+
+    width: 150,
+
+    height: 150,
+
+    selectable: false,
+
+    selected: false,
+
+    events: {
+        'click .remove': 'remove',
+        'click': 'toggleSelect'
+    },
+
+    initialize: function () {
+        // Responsive size
+        this.updateSize();
+        $(window).resize(function () {
+            preview.updateSize();
+        });
+
+        this.listenTo(this.model, 'change:progress', this.refreshProgress);
+        this.listenTo(this.model, 'change:width', this.updateSize);
+    },
+
+    render: function () {
+        this.$el.html(this.template(this.model.attributes));
+        return this;
+    },
+
+    updateSize: function () {
+        this.$el.css('width', this.width + 'px'); // max-width controlled by CSS.
+        this.$el.css('height', this.$el.width() * this.height / this.width);
+    },
+
+    toggleSelect: function () {
+        if (!this.selectable) {
+            return;
+        }
+
+        this.selected = !this.selected;
+
+        if (this.selected) {
+            this.$el.addClass('selected');
+        } else {
+            this.$el.removeClass('selected');
+        }
+    },
+
+    refreshProgress: function () {
+        var progress = this.model.get('progress');
+        var progressBar = this.$('.progress-bar');
+        if (progress === false) {
+            progressBar.hide();
+        } else {
+            progressBar.css('width',  + '%');
+            progressBar.show();
+        }
+    }
 });
 
 var ImagePreview = function (options) {

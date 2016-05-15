@@ -35,6 +35,10 @@
         @include('layout.footer')
     @endif
 
+    @stack('modals')
+
+    @stack('templates')
+
     <!-- JavaScript -->
     <script src="{{ url('/lib/jquery/dist/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('/lib/masonry/dist/masonry.pkgd.min.js') }}" type="text/javascript"></script>

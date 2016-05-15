@@ -4,4 +4,6 @@ var app = {};
 
 app.model = {};
 
-app.controller = {};
+app.view = {};
+
+app.util = {};
