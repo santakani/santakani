@@ -37,12 +37,15 @@ class ImageController extends Controller
     {
         // Validate data
         $this->validate($request, [
+            'my' => 'boolean',
             'user' => 'integer|exists:user,id',
             'designer' => 'integer|exists:designer,id',
             'place' => 'integer|exists:place,id',
         ]);
 
-        if ($request->has('user')) {
+        if ($request->has('my')) {
+            $images = Image::where('user_id', Auth::user()->id)->get();
+        } elseif ($request->has('user')) {
             $images = Image::where('user_id', $request->user)->get();
         } elseif ($request->has('designer')) {
             $images = Designer::find($request->designer)->images;
