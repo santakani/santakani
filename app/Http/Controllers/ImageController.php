@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use Imagick;
 
 use App\Http\Requests;
+use App\Designer;
 use App\Image;
 
 
@@ -36,10 +38,14 @@ class ImageController extends Controller
         // Validate data
         $this->validate($request, [
             'user' => 'integer|exists:user,id',
+            'designer' => 'integer|exists:designer,id',
+            'place' => 'integer|exists:place,id',
         ]);
 
         if ($request->has('user')) {
             $images = Image::where('user_id', $request->user)->get();
+        } elseif ($request->has('designer')) {
+            $images = Designer::find($request->designer)->images;
         } else {
             $images = Image::all();
         }

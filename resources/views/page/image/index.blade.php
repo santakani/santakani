@@ -9,7 +9,7 @@
     @foreach ($images as $image)
         @if(substr($image->mime_type, 0, 5) === 'image')
             <a href="{{ $image->url }}">
-                <img src="{{ $image->thumb_small_url }}">
+                <img src="{{ $image->file_urls['thumb'] }}">
             </a>
         @else
             <!-- Video -->
