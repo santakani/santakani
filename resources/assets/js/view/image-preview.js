@@ -19,17 +19,13 @@ module.exports = Backbone.View.extend({
 
     height: 150,
 
-    selectable: false,
-
-    selected: false,
-
     events: {
         'click .remove': 'remove',
         'click': 'toggleSelect'
     },
 
     initialize: function (options) {
-        _.extend(this, _.pick(options, 'width', 'height', 'selectable', 'selected'));
+        _.extend(this, _.pick(options, 'width', 'height'));
 
         this.render();
 
@@ -54,6 +50,7 @@ module.exports = Backbone.View.extend({
     update: function () {
         this.updateImage();
         this.updateSize();
+        this.updateSelect();
         this.updateProgress();
     },
 
@@ -63,13 +60,16 @@ module.exports = Backbone.View.extend({
     },
 
     toggleSelect: function () {
-        if (!this.selectable) {
+        this.model.set({selected: !this.model.get('selected')});
+        this.updateSelect();
+    },
+
+    updateSelect: function () {
+        if (!this.model.get('selectable')) {
             return;
         }
 
-        this.selected = !this.selected;
-
-        if (this.selected) {
+        if (this.model.get('selected')) {
             this.$el.addClass('selected');
         } else {
             this.$el.removeClass('selected');

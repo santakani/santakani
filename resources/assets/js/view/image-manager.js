@@ -17,7 +17,9 @@ module.exports = Backbone.View.extend({
         'change .file-input': 'uploadImages'
     },
 
-    initialize: function () {
+    initialize: function (options) {
+        _.extend(this, _.pick(options, 'width', 'height', 'selectable', 'selected'));
+
         this.collection = new ImageList();
         this.listenTo(this.collection, 'add', this.addImage);
     },
@@ -33,7 +35,11 @@ module.exports = Backbone.View.extend({
     uploadImages: function () {
         var files = this.$('.file-input')[0].files;
         for (var i = 0; i < files.length; i++) {
-            var image = new app.model.Image;
+            var image = new Image({
+                id: 0,
+                selectable: true,
+                selected: true
+            });
             image.upload(files[i]);
             this.collection.add(image);
         }
@@ -43,7 +49,10 @@ module.exports = Backbone.View.extend({
      * Fetch uploaded images from server.
      */
     addImage: function (image) {
-        console.log('add');
+        image.set({
+            selectable: true,
+            selected: true
+        });
         var preview = new ImagePreview({model: image});
         this.$('.gallery').prepend(preview.$el);
         this.closeAlert();

@@ -54,9 +54,11 @@ module.exports = Backbone.Collection.extend({
 module.exports = Backbone.Model.extend({
 
     defaults: {
-        'progress': false },
+        'progress': false, // Upload progress. Uploading: int, 0-100(%); uploaded: false.
+        'selectable': false,
+        'selected': false
+    },
 
-    // Upload progress. Uploading: int, 0-100(%); uploaded: false.
     urlRoot: '/image',
 
     upload: function upload(image) {
@@ -221,7 +223,9 @@ module.exports = Backbone.View.extend({
         'change .file-input': 'uploadImages'
     },
 
-    initialize: function initialize() {
+    initialize: function initialize(options) {
+        _.extend(this, _.pick(options, 'width', 'height', 'selectable', 'selected'));
+
         this.collection = new ImageList();
         this.listenTo(this.collection, 'add', this.addImage);
     },
@@ -237,7 +241,11 @@ module.exports = Backbone.View.extend({
     uploadImages: function uploadImages() {
         var files = this.$('.file-input')[0].files;
         for (var i = 0; i < files.length; i++) {
-            var image = new app.model.Image();
+            var image = new Image({
+                id: 0,
+                selectable: true,
+                selected: true
+            });
             image.upload(files[i]);
             this.collection.add(image);
         }
@@ -247,7 +255,10 @@ module.exports = Backbone.View.extend({
      * Fetch uploaded images from server.
      */
     addImage: function addImage(image) {
-        console.log('add');
+        image.set({
+            selectable: true,
+            selected: true
+        });
         var preview = new ImagePreview({ model: image });
         this.$('.gallery').prepend(preview.$el);
         this.closeAlert();
@@ -283,17 +294,13 @@ module.exports = Backbone.View.extend({
 
     height: 150,
 
-    selectable: false,
-
-    selected: false,
-
     events: {
         'click .remove': 'remove',
         'click': 'toggleSelect'
     },
 
     initialize: function initialize(options) {
-        _.extend(this, _.pick(options, 'width', 'height', 'selectable', 'selected'));
+        _.extend(this, _.pick(options, 'width', 'height'));
 
         this.render();
 
@@ -318,6 +325,7 @@ module.exports = Backbone.View.extend({
     update: function update() {
         this.updateImage();
         this.updateSize();
+        this.updateSelect();
         this.updateProgress();
     },
 
@@ -327,13 +335,16 @@ module.exports = Backbone.View.extend({
     },
 
     toggleSelect: function toggleSelect() {
-        if (!this.selectable) {
+        this.model.set({ selected: !this.model.get('selected') });
+        this.updateSelect();
+    },
+
+    updateSelect: function updateSelect() {
+        if (!this.model.get('selectable')) {
             return;
         }
 
-        this.selected = !this.selected;
-
-        if (this.selected) {
+        if (this.model.get('selected')) {
             this.$el.addClass('selected');
         } else {
             this.$el.removeClass('selected');

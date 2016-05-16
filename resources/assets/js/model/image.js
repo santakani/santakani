@@ -8,6 +8,8 @@ module.exports = Backbone.Model.extend({
 
     defaults: {
         'progress': false, // Upload progress. Uploading: int, 0-100(%); uploaded: false.
+        'selectable': false,
+        'selected': false
     },
 
     urlRoot: '/image',
