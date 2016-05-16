@@ -3,16 +3,17 @@
  * Bind to model Image.
  *
  * Class: ImagePreview
- * Namespace: app.view
  */
 
-app.view.ImagePreview = Backbone.View.extend({
+var tpl = require('../utility/template');
+
+module.exports = Backbone.View.extend({
 
     tagName: 'div',
 
     className: 'image-preview',
 
-    template: _.template(app.util.loadTemplate('#image-preview-template')),
+    template: _.template(tpl.load('#image-preview-template')),
 
     width: 150,
 

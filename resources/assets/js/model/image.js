@@ -1,12 +1,10 @@
 /**
- * Class: Image
- *
- * Namespace: app.model
+ * Class: ImageModel
  *
  * See https://github.com/santakani/santakani.com/wiki/Models#image
  */
 
-app.model.Image = Backbone.Model.extend({
+module.exports = Backbone.Model.extend({
 
     defaults: {
         'progress': false, // Upload progress. Uploading: int, 0-100(%); uploaded: false.

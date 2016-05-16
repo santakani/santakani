@@ -48,13 +48,16 @@ class ImageController extends Controller
         } elseif ($request->has('user')) {
             $images = Image::where('user_id', $request->user)->get();
         } elseif ($request->has('designer')) {
-            $images = Designer::find($request->designer)->images;
+            $images = Designer::find(intval($request->input('designer')))->images;
         } else {
             $images = Image::all();
         }
 
         if ($request->wantsJSON()) {
-            return response()->json($images->toArray(), 200);
+            if (is_object($images)) {
+                $images = $images->toArray();
+            }
+            return response()->json($images, 200);
         } else {
             return view('page.image.index', ['images' => $images]);
         }

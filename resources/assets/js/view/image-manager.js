@@ -4,7 +4,11 @@
  * or page.
  */
 
-app.view.ImageManager = Backbone.View.extend({
+var ImageList = require('../collection/image-list');
+var Image = require('../model/image');
+var ImagePreview = require('./image-preview');
+
+module.exports = Backbone.View.extend({
 
     el: '#image-manager',
 
@@ -14,6 +18,8 @@ app.view.ImageManager = Backbone.View.extend({
     },
 
     initialize: function () {
+        this.collection = new ImageList();
+        this.listenTo(this.collection, 'add', this.addImage);
     },
 
     render: function () {
@@ -27,16 +33,19 @@ app.view.ImageManager = Backbone.View.extend({
     uploadImages: function () {
         var files = this.$('.file-input')[0].files;
         for (var i = 0; i < files.length; i++) {
-            var image = new app.model.Image({id:0});
+            var image = new app.model.Image;
             image.upload(files[i]);
-            var preview = new app.view.ImagePreview({
-                model: image,
-                selectable: true,
-                selected: true
-            });
-            this.$('.gallery').prepend(preview.$el);
+            this.collection.add(image);
         }
+    },
 
+    /**
+     * Fetch uploaded images from server.
+     */
+    addImage: function (image) {
+        console.log('add');
+        var preview = new ImagePreview({model: image});
+        this.$('.gallery').prepend(preview.$el);
         this.closeAlert();
     },
 
@@ -45,7 +54,3 @@ app.view.ImageManager = Backbone.View.extend({
     }
 
 });
-
-$('#image-manager').modal('show');
-
-var manager = new app.view.ImageManager;

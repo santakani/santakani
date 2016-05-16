@@ -6,12 +6,26 @@
  * Script - assets/js/edit/ajax/designer-edit.js
  */
 
+var ImagePreview = require('../../view/image-preview');
+var Image = require('../../model/image');
+var ImageManager = require('../../view/image-manager');
+
 $(function () {
 
     // Page check
     if ($('#designer-edit-page').length === 0) {
         return;
     }
+
+    // Image manager
+    $('#image-manager').modal('show');
+
+    window.manager = new ImageManager;
+    manager.collection.fetch({
+        data: {
+            designer: 1
+        }
+    });
 
     // Initialize TinyMCE
     tinymce.init({
@@ -25,68 +39,7 @@ $(function () {
         }
     });
 
-    // Initialize ImageUploader for main image
-    var imagePreview = new ImagePreview({
-        selector: '#image-form-group .image-preview',
-        width: 600,
-        height: 200
-    });
 
-    var imageUploader = new ImageUploader({
-        selector: '#image-form-group .image-uploader',
-        start: function () {
-            imagePreview.progress('show');
-        },
-        progress: function (percentage) {
-            imagePreview.progress(percentage);
-        },
-        done: function (image) {
-            imagePreview.progress('hide');
-            imagePreview.image(image.id, image.file_urls.medium);
-        },
-        fail: function (error) {
-            imagePreview.progress('hide');
-            console.log(error);
-        }
-    });
-
-    // Initialize ImageUploader for image gallery
-    var oldPreviews = [];
-    $('#gallery-form-group .image-gallery .image-preview').each(function () {
-        var preview = new ImagePreview({
-            element: this
-        });
-        oldPreviews.push(preview);
-    });
-
-    Sortable.create($('.image-gallery')[0], {animation: 300});
-
-    var newPreviews = [];
-
-    var galleryUploader = new ImageUploader({
-        selector: '#gallery-form-group .image-uploader',
-        multiple: true,
-        start: function (index) {
-            var preview = new ImagePreview({
-                template: $($('#gallery-form-group template').prop('content')).find('.image-preview')
-            });
-            $('.image-gallery').append(preview.element);
-            preview.progress('show');
-            newPreviews.push(preview);
-        },
-        progress: function (percentage, index) {
-            newPreviews[index].progress(percentage);
-        },
-        done: function (image, index) {
-            newPreviews[index].progress('hide');
-            newPreviews[index].image(image.id, image.file_urls.thumb);
-            console.log(index);
-        },
-        fail: function (error, index) {
-            newPreviews[index].progress('hide');
-            console.log(error);
-        }
-    });
 
     // Submit form
     $('button[type="submit"]').click(function (e) {

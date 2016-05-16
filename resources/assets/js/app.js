@@ -1,9 +1,12 @@
-// Define packages/namespaces
+/**
+ * Currently only load own JavaScript, not third-party libraries.
+ */
 
-var app = {};
+// jQuery plugins
+require('./jquery/go-to');
 
-app.model = {};
+// Utilities
+require('./utility/template');
 
-app.view = {};
-
-app.util = {};
+// Pages
+require('./page/designer/edit');
