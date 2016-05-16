@@ -77,12 +77,11 @@ app.view.ImagePreview = Backbone.View.extend({
 
     updateProgress: function () {
         var progress = this.model.get('progress');
-        var progressBar = this.$('.progress-bar');
         if (progress === false) {
-            progressBar.hide();
+            this.$('.progress').hide();
         } else {
-            progressBar.css('width',  + '%');
-            progressBar.show();
+            this.$('.progress-bar').css('width', progress + '%');
+            this.$('.progress').show();
         }
     },
 

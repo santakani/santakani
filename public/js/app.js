@@ -73,11 +73,30 @@ app.model.Image = Backbone.Model.extend({
             }
         }).done(function (data) {
             that.set(data);
+            that.set({progress: false});
         }).fail(function (data) {
             console.log(data);
         });
     }
 });
+
+// Some template loading and parsing function
+
+// Load template from external HTML files
+app.util.loadTemplateFile = function (url, callback) {
+    $.get(url, function (templateString) {
+        callback(templateString);
+    }, 'html');
+}
+
+// Load template from DOM, return null if not exists.
+app.util.loadTemplate = function (element) {
+    if ($(element).length) {
+        return $(element).html();
+    } else {
+        return 'Template not found.';
+    }
+}
 
 /**
  * Provide a modal to upload and manage images. Select image to insert to article,
@@ -210,12 +229,11 @@ app.view.ImagePreview = Backbone.View.extend({
 
     updateProgress: function () {
         var progress = this.model.get('progress');
-        var progressBar = this.$('.progress-bar');
         if (progress === false) {
-            progressBar.hide();
+            this.$('.progress').hide();
         } else {
-            progressBar.css('width',  + '%');
-            progressBar.show();
+            this.$('.progress-bar').css('width', progress + '%');
+            this.$('.progress').show();
         }
     },
 
@@ -227,24 +245,6 @@ app.view.ImagePreview = Backbone.View.extend({
         this.$el.css('background-image', 'url(' + url + ')');
     }
 });
-
-// Some template loading and parsing function
-
-// Load template from external HTML files
-app.util.loadTemplateFile = function (url, callback) {
-    $.get(url, function (templateString) {
-        callback(templateString);
-    }, 'html');
-}
-
-// Load template from DOM, return null if not exists.
-app.util.loadTemplate = function (element) {
-    if ($(element).length) {
-        return $(element).html();
-    } else {
-        return 'Template not found.';
-    }
-}
 
 var ImagePreview = function (options) {
     this.init(options).bindEvents();

@@ -25,6 +25,15 @@
         font-size: $size;
         border-radius: 99px;
     }
+
+    .progress {
+        position: absolute;
+        top: 45%;
+        bottom: 45%;
+        left: 5%;
+        right: 5%;
+        height: 10%;
+    }
 }
 
 .image-gallery .image-preview {

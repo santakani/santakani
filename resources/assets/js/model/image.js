@@ -51,6 +51,7 @@ app.model.Image = Backbone.Model.extend({
             }
         }).done(function (data) {
             that.set(data);
+            that.set({progress: false});
         }).fail(function (data) {
             console.log(data);
         });
