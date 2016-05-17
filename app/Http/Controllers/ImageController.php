@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Http\Controllers;
 
 use Auth;
@@ -11,7 +20,14 @@ use App\Http\Requests;
 use App\Designer;
 use App\Image;
 
-
+/**
+ * ImageController
+ *
+ * Provide RESTful APIs for image resources.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Image
+ */
 class ImageController extends Controller
 {
 
