@@ -5,5 +5,4 @@
     @if (isset($remove) && $remove)
         <span class="remove">×</span>
     @endif
-    <input type="hidden" name="{{ $name or 'image' }}" value="{{ $id or '' }}">
 </div>

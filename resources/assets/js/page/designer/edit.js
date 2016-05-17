@@ -23,8 +23,29 @@ $(function () {
         parentId: 1
     });
 
-    $('.upload-button').click(function () {
-        manager.call();
+    // Cover
+    var coverImage = new Image({
+        id: $('#image-form-group .image-preview').data('id'),
+        file_urls: {
+            medium: $('#image-form-group .image-preview').data('url'),
+        }
+    });
+    var coverPreview = new ImagePreview({
+        el: '#image-form-group .image-preview',
+        model: coverImage,
+        width: 600,
+        height: 200,
+        imageSize: 'medium',
+    });
+    $('#image-form-group button').click(function () {
+        manager.call({
+            multiple: false,
+            done: function (image) {
+                coverImage.set(_.omit(image.attributes, 'selectable', 'selected', 'progress'));
+                $('#image-form-group input[type="hidden"]').val(image.get('id'));
+            }
+
+        });
     });
 
     // Initialize TinyMCE

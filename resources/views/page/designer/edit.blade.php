@@ -31,15 +31,17 @@
         <label class="col-sm-2 control-label">
             Cover image</label>
         <div class="col-sm-10 col-md-8">
-            @include('component.upload.imageuploader')
-            <br>
+            <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
             @if ($image = App\Image::find($image_id = old('image')))
-                @include('component.upload.imagepreview', ['id' => $image_id, 'url' => $image->file_urls['medium'], 'remove' => false])
-            @elseif ($designer->image)
-                @include('component.upload.imagepreview', ['id' => $designer->image_id, 'url' => $designer->image->file_urls['medium'], 'remove' => false])
+                <div class="image-preview" data-id="{{ $image_id }}"
+                    data-url="{{ $image->file_urls['medium'] }}"></div>
+            @elseif ($designer->image_id)
+                <div class="image-preview" data-id="{{ $designer->image_id }}"
+                    data-url="{{ $designer->image->file_urls['medium'] }}"></div>
             @else
-                @include('component.upload.imagepreview', ['remove' => false])
+                <div class="image-preview"></div>
             @endif
+            <input type="hidden" name="image">
         </div>
     </div>
 
@@ -60,42 +62,6 @@
                 placeholder="Introduce your unique design story..." rows="5">{{
                 old('content')===null?$designer->text('content', 'en'):old('content')
             }}</textarea>
-        </div>
-    </div>
-
-    <div id="gallery-form-group" class="form-group">
-        <label class="col-sm-2 control-label">
-            Image gallery</label>
-        <div class="col-sm-10 col-md-8">
-            @include('component.upload.imageuploader')
-            <br>
-            <div class="image-gallery">
-                @if (old('images')!==null)
-                    @foreach (App\Image::find(old('images')) as $image)
-                        @include('component.upload.imagepreview', [
-                            'name' => 'images[]',
-                            'id' => $image->id,
-                            'url' => $image->file_urls['thumb'],
-                            'remove' => true,
-                        ])
-                    @endforeach
-                @elseif ($designer->images)
-                    @foreach ($designer->images as $image)
-                        @include('component.upload.imagepreview', [
-                            'name' => 'images[]',
-                            'id' => $image->id,
-                            'url' => $image->file_urls['thumb'],
-                            'remove' => true,
-                        ])
-                    @endforeach
-                @endif
-            </div>
-            <template>
-                @include('component.upload.imagepreview', [
-                    'name' => 'images[]',
-                    'remove' => true,
-                ])
-            </template>
         </div>
     </div>
 

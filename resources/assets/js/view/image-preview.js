@@ -19,6 +19,10 @@ module.exports = Backbone.View.extend({
 
     height: 150,
 
+    imageSize: 'thumb',
+
+    removeable: false,
+
     multiple: false, // true: select like checkbox; false: select like radio button
 
     events: {
@@ -27,7 +31,7 @@ module.exports = Backbone.View.extend({
     },
 
     initialize: function (options) {
-        _.extend(this, _.pick(options, 'width', 'height'));
+        _.extend(this, _.pick(options, 'width', 'height', 'imageSize', 'removeable', 'multiple'));
 
         this.render();
 
@@ -42,14 +46,17 @@ module.exports = Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template(this.model.attributes));
-        if (this.selected) {
-            this.$el.addClass('selected');
-        }
         this.update();
         return this;
     },
 
     update: function () {
+        if (this.removeable) {
+            this.$('.remove').show();
+        } else {
+            this.$('.remove').hide();
+        }
+
         this.updateImage();
         this.updateSize();
         this.updateSelect();
@@ -99,7 +106,7 @@ module.exports = Backbone.View.extend({
     updateImage: function () {
         var url = '';
         if (this.model.get('file_urls')) {
-            url = this.model.get('file_urls')['thumb'];
+            url = this.model.get('file_urls')[this.imageSize];
         }
         this.$el.css('background-image', 'url(' + url + ')');
     }
