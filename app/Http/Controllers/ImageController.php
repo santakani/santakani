@@ -40,7 +40,7 @@ class ImageController extends Controller
     {
         // Only logged in users can upload images
         $this->middleware('auth', ['except' => ['index','show']]);
-        $this->middleware('trim', ['only' => ['store','update']]);
+        $this->middleware('trim');
     }
 
     /**
@@ -55,25 +55,25 @@ class ImageController extends Controller
         $this->validate($request, [
             'my' => 'boolean',
             'user' => 'integer|exists:user,id',
-            'designer' => 'integer|exists:designer,id',
-            'place' => 'integer|exists:place,id',
+            'parent_type' => 'string',
+            'parent_id' => 'integer',
         ]);
 
         if ($request->has('my')) {
             $images = Image::where('user_id', Auth::user()->id)->get();
         } elseif ($request->has('user')) {
-            $images = Image::where('user_id', $request->user)->get();
-        } elseif ($request->has('designer')) {
-            $images = Designer::find(intval($request->input('designer')))->images;
+            $images = Image::where('user_id', $request->input('user'))->get();
+        } elseif ($request->has('parent_type') && $request->has('parent_id')) {
+            $images = Image::where([
+                ['parent_type', $request->input('parent_type')],
+                ['parent_id', $request->input('parent_id')],
+            ])->get();
         } else {
             $images = Image::all();
         }
 
         if ($request->wantsJSON()) {
-            if (is_object($images)) {
-                $images = $images->toArray();
-            }
-            return response()->json($images, 200);
+            return response()->json($images->toArray(), 200);
         } else {
             return view('page.image.index', ['images' => $images]);
         }
@@ -99,71 +99,54 @@ class ImageController extends Controller
     {
         // Validate data
         $this->validate($request, [
-            'image' => 'required_without_all:url|image|mimes:jpeg,png,gif',
-            'url' => 'required_without_all:image|url',
+            'image' => 'required|image|mimes:jpeg,png,gif',
+            'parent_type' => 'string',
+            'parent_id' => 'integer',
         ]);
 
         $image = new Image;
         $image->user_id = Auth::user()->id;
 
-        $error_messages = [];
+        if ($request->has('parent_type') && $request->has('parent_id')) {
+            $type = $request->input('parent_type');
+            $id = intval($request->input('parent_id'));
 
-        if ($request->hasFile('image')) {
-
-            $file = $request->file('image');
-
-            if ($file->isValid()) {
-
-                $image->mime_type = $file->getMimeType();
-                $image->save();
-                $image->saveFile($file);
-
-                if ($request->wantsJSON()) {
-                    return response()->json($image->toArray(), 200);
-                } else {
-                    return redirect()->route('image.show', ['id' => $image->id]);
-                }
-
-            } else {
-
-                $error_message = 'Fail to upload image.';
-
-                if ($request->wantsJSON()) {
-                    return response()->json(['image' => [$error_message]], 422);
-                } else {
-                    return back()->withErrors(['image' => $error_message]);
-                }
-
+            if ($type === 'designer') {
+                $parent = Designer::find($id);
+            } elseif ($type === 'place') {
+                $parent = Place::find($id);
+            } elseif ($type === 'country') {
+                $parent = Country::find($id);
+            } elseif ($type === 'city') {
+                $parent = City::find($id);
             }
 
-        } elseif ($request->has('url')) {
-
-            $url = $request->input('url');
-
-            if (Image::checkYouTubeUrl($url)) {
-                $image->mime_type = 'video/youtube';
-                $image->external_url = $url;
-                $image->save();
-            } elseif (Image::checkVimeoUrl($url)) {
-                $image->mime_type = 'video/vimeo';
-                $image->external_url = $url;
-                $image->save();
-            } else {
-                $error_message = 'The URL is not a valid YouTube/Vimeo URL.';
-
-                if ($request->wantsJSON()) {
-                    return response()->json(['url' => [$error_message]], 422);
-                } else {
-                    return back()->withErrors(['url' => [$error_message]]);
-                }
+            if (Gate::allows('edit-page', $parent)) {
+                $image->parent_type = $type;
+                $image->parent_id = $id;
             }
+        }
+
+        $file = $request->file('image');
+
+        if ($file->isValid()) {
+            $image->mime_type = $file->getMimeType();
+            $image->save();
+            $image->saveFile($file);
 
             if ($request->wantsJSON()) {
                 return response()->json($image->toArray(), 200);
             } else {
                 return redirect()->route('image.show', ['id' => $image->id]);
             }
+        } else {
+            $error_message = 'Fail to upload image.';
 
+            if ($request->wantsJSON()) {
+                return response()->json(['image' => [$error_message]], 422);
+            } else {
+                return back()->withErrors(['image' => $error_message]);
+            }
         }
     }
 
