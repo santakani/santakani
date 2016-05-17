@@ -1,10 +1,29 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Imagick;
 use Symfony\Component\HttpFoundation\File\File;
+
+/**
+ * Image
+ *
+ * Model for image meta data. Be responsible for provide image data and manage
+ * uploaded files.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Image
+ */
 
 class Image extends Model
 {
@@ -22,7 +41,7 @@ class Image extends Model
      * @var array
      */
     protected $appends = [
-        'url', 'file_extension', 'file_urls'
+        'url', 'file_urls'
     ];
 
     /**
@@ -72,7 +91,8 @@ class Image extends Model
     ];
 
     /**
-     * Getter of url.
+     * "url" getter.
+     *
      * Note this is the URL to image page, not image file.
      *
      * @return string
@@ -83,32 +103,43 @@ class Image extends Model
     }
 
     /**
-     * If the image is an image file.
+     * "file_urls" getter.
      *
-     * @return boolean
+     * URL to image files. Contain for sizes: full, large, medium, thumb.
+     * Mainly used to send to browser.
+     * TODO implement client side logic to generate file urls
+     *
+     * [Example]
+     *
+     * [
+     *     'full' => 'http://santakani.com/storage/image/0/1/full.jpg',
+     *     'large' => 'http://santakani.com/storage/image/0/1/large.jpg',
+     *     'medium' => 'http://santakani.com/storage/image/0/1/medium.jpg',
+     *     'thumb' => 'http://santakani.com/storage/image/0/1/thumb.jpg',
+     * ]
+     *
+     * @return string[]
      */
-    public function isImage()
+    public function getFileUrlsAttribute()
     {
-        return substr($this->mime_type, 0, 5) === 'image';
+        if (!$this->isImage()) {
+            return null;
+        }
+
+        return [
+            'full' => $this->getFileUrl('full'),
+            'large' => $this->getFileUrl('large'),
+            'medium' => $this->getFileUrl('medium'),
+            'thumb' => $this->getFileUrl('thumb'),
+        ];
     }
 
     /**
-     * If the image is an external video.
-     *
-     * @return boolean
-     */
-    public function isVideo()
-    {
-        return substr($this->mime_type, 0, 5) === 'video';
-    }
-
-    /**
-     * Getter of attribute "file_extension".
      * Get file extension of image file based on MIME type.
      *
      * @return string
      */
-    public function getFileExtensionAttribute()
+    public function getFileExtension()
     {
         switch ($this->mime_type) {
             case 'image/jpeg':
@@ -191,7 +222,7 @@ class Image extends Model
             return null;
         }
 
-        return $this->getDirectoryPath($full) . '/' . $size . $this->file_extension;
+        return $this->getDirectoryPath($full) . '/' . $size . $this->getFileExtension();
     }
 
     /**
@@ -208,26 +239,6 @@ class Image extends Model
         }
 
         return url($this->getFilePath($size, false, $size_fallback));
-    }
-
-    /**
-     * Getter of file_urls.
-     * URL to image files. Contain for sizes: full, large, medium, thumb.
-     *
-     * @return string[]
-     */
-    public function getFileUrlsAttribute()
-    {
-        if (!$this->isImage()) {
-            return null;
-        }
-
-        return [
-            'full' => $this->getFileUrl('full'),
-            'large' => $this->getFileUrl('large'),
-            'medium' => $this->getFileUrl('medium'),
-            'thumb' => $this->getFileUrl('thumb'),
-        ];
     }
 
     /**
@@ -276,76 +287,19 @@ class Image extends Model
         unlink($temp_file_path);
     }
 
-
-
-    // Static Helper Functions
-
     /**
-     * Check if the image file MIME type is allowed.
-     *
-     * @param string $mime_type
-     *
-     * @return boolean
+     * Delete all generated image files and folder of this images.
      */
-    public static function checkMimeType($mime_type)
-    {
-        $allowed_mime_types = ['image/jpeg', 'image/png', 'image/gif'];
-        return in_array($mime_type, $allowed_mime_types);
-    }
+    public function deleteFile() {
+        $path = $this->getDirectoryPath();
+        $files = array_diff(scandir($path), ['.', '..']);
 
-    /**
-     * Check if the URL is valid Vimeo url.
-     *
-     * @param string $url
-     *
-     * @return boolean
-     */
-    public static function checkVideoUrl($url)
-    {
-        return self::checkYouTubeUrl($url) || self::checkVimoeUrl($url);
-    }
-
-    /**
-     * Check if the URL is valid YouTube url.
-     *
-     * @param string $url
-     *
-     * @return boolean
-     */
-    public static function checkYouTubeUrl($url)
-    {
-        $result = parse_url($url);
-
-        if ($result['host'] === 'www.youtube.com' && $result['path'] === '/watch'
-            && strpos($result['query'], 'v=') !== false) {
-            // https://www.youtube.com/watch?v=2CGbyz8UzCY
-            return true;
-        } elseif ($result['host'] === 'youtu.be') {
-            // https://youtu.be/2CGbyz8UzCY
-            return true;
-        } else {
-            return false;
+        foreach ($files as $file) {
+            $file_path = $path . '/' . $file;
+            if (is_file($file_path)) {
+                unlink($file_path);
+            }
         }
     }
 
-    /**
-     * Check if the URL is valid Vimeo url.
-     *
-     * @param string $url
-     *
-     * @return boolean
-     */
-    public static function checkVimeoUrl($url)
-    {
-        $result = parse_url($url);
-
-        // https://vimeo.com/162349501
-        if ($result['host'] === 'vimeo.com') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // TODO toArray() and toJSON() functions.
 }
