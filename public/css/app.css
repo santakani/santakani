@@ -6593,10 +6593,9 @@ p.tags a, div.tags a {
   background-repeat: no-repeat;
   position: relative;
   /* Width and height are controlled by JavaScript */
-  max-width: 100%;
-  border: 1px solid #ccc; }
+  max-width: 100%; }
   .image-preview.selected {
-    border: 3px solid #337ab7; }
+    box-shadow: 0 0 0 5px #5bc0de; }
   .image-preview span.remove {
     position: absolute;
     top: -12px;

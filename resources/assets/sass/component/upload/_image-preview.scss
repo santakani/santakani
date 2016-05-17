@@ -3,10 +3,9 @@
     position: relative;
     /* Width and height are controlled by JavaScript */
     max-width: 100%;
-    border: 1px solid $input-border;
 
     &.selected {
-        border: 3px solid $brand-primary;
+        box-shadow: 0 0 0 5px $brand-info; // A boder-like shadow
     }
 
     span.remove {
