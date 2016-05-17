@@ -6,14 +6,16 @@
 
 @section('main')
 <div class="container">
+
+    @if($errors->any())
+        <div class="alert alert-warning" role="alert">{{$errors->first()}}</div>
+    @endif
+
     @foreach ($images as $image)
-        @if(substr($image->mime_type, 0, 5) === 'image')
-            <a href="{{ $image->url }}">
-                <img src="{{ $image->file_urls['thumb'] }}">
-            </a>
-        @else
-            <!-- Video -->
-        @endif
+        <a href="{{ $image->url }}">
+            <img src="{{ $image->file_urls['thumb'] }}">
+        </a>
     @endforeach
+
 </div>
 @endsection
