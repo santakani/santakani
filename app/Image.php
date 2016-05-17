@@ -122,10 +122,6 @@ class Image extends Model
      */
     public function getFileUrlsAttribute()
     {
-        if (!$this->isImage()) {
-            return null;
-        }
-
         return [
             'full' => $this->getFileUrl('full'),
             'large' => $this->getFileUrl('large'),
@@ -218,10 +214,6 @@ class Image extends Model
      */
     public function getFilePath($size = 'full', $full = true, $size_fallback = false)
     {
-        if (!$this->isImage()) {
-            return null;
-        }
-
         return $this->getDirectoryPath($full) . '/' . $size . $this->getFileExtension();
     }
 
@@ -234,10 +226,6 @@ class Image extends Model
      */
     public function getFileUrl($size = 'full', $size_fallback = true)
     {
-        if (!$this->isImage()) {
-            return null;
-        }
-
         return url($this->getFilePath($size, false, $size_fallback));
     }
 
