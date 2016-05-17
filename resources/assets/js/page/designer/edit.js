@@ -18,13 +18,13 @@ $(function () {
     }
 
     // Image manager
-    $('#image-manager').modal('show');
+    var manager = new ImageManager({
+        parentType: 'designer',
+        parentId: 1
+    });
 
-    window.manager = new ImageManager;
-    manager.collection.fetch({
-        data: {
-            designer: 1
-        }
+    $('.upload-button').click(function () {
+        manager.call();
     });
 
     // Initialize TinyMCE

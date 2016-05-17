@@ -12,8 +12,8 @@
                 <div class="alert alert-info">No images yet, please upload.</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">OK</button>
+                <button type="button" class="cancel-button btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="ok-button btn btn-primary">OK</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

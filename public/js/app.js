@@ -128,13 +128,13 @@ $(function () {
     }
 
     // Image manager
-    $('#image-manager').modal('show');
+    var manager = new ImageManager({
+        parentType: 'designer',
+        parentId: 1
+    });
 
-    window.manager = new ImageManager();
-    manager.collection.fetch({
-        data: {
-            designer: 1
-        }
+    $('.upload-button').click(function () {
+        manager.call();
     });
 
     // Initialize TinyMCE
@@ -218,20 +218,69 @@ module.exports = Backbone.View.extend({
 
     el: '#image-manager',
 
+    multiple: false, // If can select more than one image
+
+    max: 10, // How many images can be selected at once
+
+    done: function done() {}, // Callback after selection succeed, to be override
+
+    fail: function fail() {}, // Callback after selection fail, to be override
+
+    parentType: null, // Type of images' parent model, such as designer, place
+
+    parentId: null, // Id of images' parent model
+
+    previews: [], // List of sub-view ImagePreview
+
+    my: false, // Whether fetch only my uploads
+
     events: {
         'click .upload-button': 'openFileBrowser',
-        'change .file-input': 'uploadImages'
+        'change .file-input': 'uploadImages',
+        'click .cancel-button': 'cancelSelect',
+        'click .ok-button': 'finishSelect'
     },
 
     initialize: function initialize(options) {
-        _.extend(this, _.pick(options, 'width', 'height', 'selectable', 'selected'));
+        _.extend(this, _.pick(options, 'parentType', 'parentId', 'my', 'fail'));
 
         this.collection = new ImageList();
+
         this.listenTo(this.collection, 'add', this.addImage);
+        this.listenTo(this.collection, 'all', this.updateOkButton);
+
+        var data = {};
+        if (this.my) {
+            data['my'] = true;
+        } else if (this.parentType !== null && this.parentId !== null) {
+            data[this.parentType] = this.parentId;
+        }
+
+        this.collection.fetch({
+            data: data
+        });
     },
 
     render: function render() {
         return this;
+    },
+
+    call: function call(options) {
+        _.extend(this, _.pick(options, 'multiple', 'max', 'done', 'fail'));
+        this.resetSelect();
+        this.$el.modal('show');
+    },
+
+    resetSelect: function resetSelect() {
+        _.each(this.collection.models, function (model) {
+            model.set({
+                selected: false
+            });
+        });
+        var that = this;
+        _.each(this.previews, function (preview) {
+            preview.multiple = that.multiple;
+        });
     },
 
     openFileBrowser: function openFileBrowser() {
@@ -261,11 +310,48 @@ module.exports = Backbone.View.extend({
         });
         var preview = new ImagePreview({ model: image });
         this.$('.gallery').prepend(preview.$el);
+        this.previews.push(preview);
+        this.listenTo(preview, 'select', this.unselectSiblings);
         this.closeAlert();
+    },
+
+    unselectSiblings: function unselectSiblings(preview) {
+        _.each(_.without(this.previews, preview), function (preview) {
+            preview.unselect();
+        });
+    },
+
+    showAlert: function showAlert(message, type) {
+        if (!type || _.contains(['success', 'info', 'warning', 'danger'], type)) {
+            type = 'info';
+        }
+        this.$('.alert').removeClass('alert-info alert-success alert-warning alert-danger').addClass('alert-').text(message).show();
     },
 
     closeAlert: function closeAlert() {
         this.$('.alert').hide();
+    },
+
+    updateOkButton: function updateOkButton() {
+        if (this.collection.where({ selected: true }).length > 0) {
+            this.$('.ok-button').prop('disabled', false);
+        } else {
+            this.$('.ok-button').prop('disabled', true);
+        }
+    },
+
+    cancelSelect: function cancelSelect() {
+        this.fail();
+    },
+
+    finishSelect: function finishSelect() {
+        var selectedImages = this.collection.where({ selected: true });
+        if (this.multiple) {
+            this.done(selectedImages);
+        } else {
+            this.done(selectedImages[0]);
+        }
+        this.$el.modal('hide');
     }
 
 });
@@ -294,9 +380,11 @@ module.exports = Backbone.View.extend({
 
     height: 150,
 
+    multiple: false, // true: select like checkbox; false: select like radio button
+
     events: {
         'click .remove': 'remove',
-        'click': 'toggleSelect'
+        'click': 'select'
     },
 
     initialize: function initialize(options) {
@@ -334,9 +422,17 @@ module.exports = Backbone.View.extend({
         this.$el.css('height', this.$el.width() * this.height / this.width);
     },
 
-    toggleSelect: function toggleSelect() {
-        this.model.set({ selected: !this.model.get('selected') });
-        this.updateSelect();
+    select: function select() {
+        if (this.multiple) {
+            this.model.set({ selected: !this.model.get('selected') });
+        } else {
+            this.model.set({ selected: true });
+            this.trigger('select', this);
+        }
+    },
+
+    unselect: function unselect() {
+        this.model.set({ selected: false });
     },
 
     updateSelect: function updateSelect() {

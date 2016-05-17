@@ -19,9 +19,11 @@ module.exports = Backbone.View.extend({
 
     height: 150,
 
+    multiple: false, // true: select like checkbox; false: select like radio button
+
     events: {
         'click .remove': 'remove',
-        'click': 'toggleSelect'
+        'click': 'select'
     },
 
     initialize: function (options) {
@@ -59,9 +61,17 @@ module.exports = Backbone.View.extend({
         this.$el.css('height', this.$el.width() * this.height / this.width);
     },
 
-    toggleSelect: function () {
-        this.model.set({selected: !this.model.get('selected')});
-        this.updateSelect();
+    select: function () {
+        if (this.multiple) {
+            this.model.set({selected: !this.model.get('selected')});
+        } else {
+            this.model.set({selected: true});
+            this.trigger('select', this);
+        }
+    },
+
+    unselect: function () {
+        this.model.set({selected: false});
     },
 
     updateSelect: function () {
