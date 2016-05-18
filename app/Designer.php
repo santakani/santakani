@@ -1,10 +1,27 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
+/**
+ * Designer
+ *
+ * Model for designer page.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Designer
+ */
 class Designer extends Model
 {
     /**
@@ -15,297 +32,101 @@ class Designer extends Model
     protected $table = 'designer';
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'country_id', 'city_id', 'image_id', 'user_id', 'email', 'website', 'facebook',
-        'twitter', 'google_plus', 'instagram'
-    ];
-
-    /**
      * The attributes that are managed by accessor and mutator functions.
-     * See https://laravel.com/docs/5.2/eloquent-mutators
+     * @see https://laravel.com/docs/5.2/eloquent-mutators
      *
      * @var array
      */
     protected $appends = [
-        'country', 'country_name', 'city', 'city_name', 'image', 'images', 'image_ids',
-        'tags', 'tag_ids', 'translations', 'name', 'tagline', 'content', 'url'
+        'url'
     ];
 
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                          Relationship Methods                          //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
+
     /**
-     * Get country that the designer is located. Used to auto-generate attribute country.
+     * Get country that the designer is located.
      *
-     * @return Country
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getCountryAttribute()
+    public function country()
     {
-        return Country::find($this->country_id);
+        return $this->belongsTo('App\Country');
     }
 
     /**
-     * Get country name of default translation. Used to auto-generate attribute country_name.
+     * Get city that the designer is located.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getCountryNameAttribute()
+    public function city()
     {
-        if ($country = $this->getCountryAttribute()) {
-            if ($translation = $country->getTranslation()) {
-                return $translation->name;
-            }
-        }
+        return $this->belongsTo('App\Country');
     }
 
     /**
-     * Get city that the designer is located. Used to auto-generate attribute city.
+     * Get the cover image, used for page banner and thumbnail.
      *
-     * @return City
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getCityAttribute()
+    public function image()
     {
-        return City::find($this->city_id);
+        return $this->belongsTo('App\Image');
     }
 
     /**
-     * Get city name of default translation. Used to auto-generate attribute city_name.
+     * Get Images uploaded to this designer page.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getCityNameAttribute()
+    public function images()
     {
-        if ($city = $this->getCityAttribute()) {
-            if ($translation = $city->getTranslation()) {
-                return $translation->name;
-            }
-        }
+        return $this->morphMany('App\Image', 'parent');
     }
 
     /**
-     * Get the main image, used for page banner and thumbnail. Used to auto-generate
-     * attribute main_image.
+     * Get tags that the designer is related to.
      *
-     * @return Image
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getImageAttribute()
+    public function tags()
     {
-        return Image::find($this->image_id);
-    }
-
-    /**
-     * Get other images, they are usually photos of design. Used to auto-generate
-     * attribute images.
-     *
-     * @return Image[]
-     */
-    public function getImagesAttribute()
-    {
-        $images = [];
-
-        $designer_images = DB::table('designer_image')->where('designer_id', $this->id)
-            ->orderBy('order', 'asc')->get();
-
-        foreach ($designer_images as $designer_image) {
-            $images[$designer_image->order] = Image::find($designer_image->image_id);
-        }
-        return $images;
-    }
-
-    /**
-     * Set other images, they are usually photos of design. Used to auto-generate
-     * attribute images.
-     *
-     * @param Image[] $images
-     */
-    public function setImagesAttribute($images)
-    {
-        DB::table('designer_image')->where('designer_id', $this->id)->delete();
-
-        foreach ($images as $key => $image) {
-            DB::table('designer_image')->insert([
-                'designer_id' => $this->id,
-                'image_id' => $image->id,
-                'order' => $key,
-            ]);
-        }
-    }
-
-    /**
-     * Get other images, they are usually photos of design. Used to auto-generate
-     * attribute images.
-     *
-     * @return int[] $image_ids
-     */
-    public function getImageIdsAttribute()
-    {
-        $designer_images = DB::table('designer_image')->where('designer_id', $this->id)
-            ->orderBy('order', 'asc')->get();
-
-        $image_ids = [];
-
-        foreach ($designer_images as $designer_image) {
-            $image_ids[$designer_image->order] = $designer_image->image_id;
-        }
-
-        return image_ids;
-    }
-
-    /**
-     * Set other images, they are usually photos of design. Used to auto-generate
-     * attribute images.
-     *
-     * @param int[] $image_ids
-     */
-    public function setImageIdsAttribute($image_ids)
-    {
-        DB::table('designer_image')->where('designer_id', $this->id)->delete();
-
-        foreach ($image_ids as $key => $image_id) {
-            DB::table('designer_image')->insert([
-                'designer_id' => $this->id,
-                'image_id' => $image_id,
-                'order' => $key,
-            ]);
-        }
-    }
-
-    /**
-     * Get tags that the designer is related to. Used to auto-generate attribute tags.
-     *
-     * @return Tag
-     */
-    public function getTagsAttribute()
-    {
-        $tags = [];
-
-        $tag_ids = DB::table('designer_tag')->select('tag_id')
-            ->where('designer_id', $this->id)->get();
-
-        foreach ($tag_ids as $key => $tag_id) {
-            $tags[] = Tag::find($tag_id->tag_id);
-        }
-
-        return $tags;
-    }
-
-    /**
-     * Set tags. Set action will save into database. Used to attribute tags.
-     *
-     * @param Tag[] $tags Array of Tag objects assigned to Designer object.
-     */
-    public function setTagsAttribute($tags)
-    {
-        DB::table('designer_tag')->where('designer_id', $this->id)->delete();
-
-        if (is_array($tags)) {
-            foreach ($tags as $tag) {
-                DB::table('designer_tag')->insert([
-                    'designer_id' => $this->id,
-                    'tag_id' => $tag->id,
-                ]);
-            }
-        }
-    }
-
-    /**
-     * Get tags that the designer is related to. Used to auto-generate attribute tag_ids.
-     *
-     * @return int[]
-     */
-    public function getTagIdsAttribute()
-    {
-        $tags = [];
-
-        $tag_ids = DB::table('designer_tag')->select('tag_id')
-            ->where('designer_id', $this->id)->get();
-
-        foreach ($tag_ids as $key => $tag_id) {
-            $tags[] = $tag_id->tag_id;
-        }
-
-        return $tags;
-    }
-
-    /**
-     * Set tags by id. Set action will save into database. Used to attribute tag_ids.
-     * It has same result as setTagsAttribute() but uses different parameters.
-     *
-     * @param int[] $tag_ids Array of tag ids.
-     */
-    public function setTagIdsAttribute($tag_ids)
-    {
-        DB::table('designer_tag')->where('designer_id', $this->id)->delete();
-
-        if (is_array($tag_ids)) {
-            foreach ($tag_ids as $tag_id) {
-                DB::table('designer_tag')->insert([
-                    'designer_id' => $this->id,
-                    'tag_id' => (int) $tag_id,
-                ]);
-            }
-        }
+        /**
+         * First "taggable" is name for column *_type, *_id, and tabble. But
+         * Laravel guess that your table is "taggables". So we pass second "taggable"
+         * as table name.
+         * @see https://laravel.com/api/5.2/Illuminate/Database/Eloquent/Model.html#method_morphToMany
+         */
+        return $this->morphToMany('App\Tag', 'taggable', 'taggable');
     }
 
     /**
      * Get translations. Used to auto-generate attribute translation.
      *
-     * @return DesignerTranslation[]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getTranslationsAttribute($lang = 'en')
+    public function translations()
     {
-        return DesignerTranslation::where([
-            ['designer_id', $this->id],
-            ['locale', $lang],
-        ])->get();
+        return $this->hasMany('App\DesignerTranslation');
     }
 
-    /**
-     * Get translated texts. Used to auto-generate attribute translation.
-     *
-     * @return DesignerTranslation
-     */
-    public function text($name, $locale = 'en')
-    {
-        return DesignerTranslation::where([
-            ['designer_id', $this->id],
-            ['locale', $locale],
-        ])->first()[$name];
-    }
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                           Dynamic Properties                           //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
 
     /**
-     * Name of default translation. Used to auto-generate attribute name.
-     *
-     * @return string
-     */
-    public function getNameAttribute()
-    {
-        return $this->text('name');
-    }
-
-    /**
-     * Tagline of default translation. Used to auto-generate attribute tagline.
-     *
-     * @return string
-     */
-    public function getTaglineAttribute()
-    {
-        return $this->text('tagline');
-    }
-
-    /**
-     * Content of default translation. Used to auto-generate attribute content.
-     *
-     * @return string
-     */
-    public function getContentAttribute()
-    {
-        return $this->text('content');
-    }
-
-    /**
-     * URL of designer page. Used to auto-generate attribute url.
+     * "url" getter. URL of designer page.
      *
      * @return string
      */
@@ -313,4 +134,25 @@ class Designer extends Model
     {
         return url('designer/' . $this->id);
     }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                              Other Methods                             //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Get translated text from translations. Support fallback if language not
+     * available.
+     *
+     * @param string $field  Field name, like "name", "tagline", "content".
+     * @param string $locale Language code, optional. If not set, use English(en).
+     * @return string
+     */
+    public function text($field, $locale = 'en') {
+        $this->translations()->where('locale', $locale)->first()->$field;
+    }
+
 }
