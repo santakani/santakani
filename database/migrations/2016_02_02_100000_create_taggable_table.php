@@ -16,6 +16,9 @@ class CreateTaggableTable extends Migration
             $table->integer('tag_id')->unsigned();
             $table->string('taggable_type');
             $table->integer('taggable_id')->unsigned();
+
+            // Unique
+            $table->unique(['tag_id', 'taggable_type', 'taggable_id']);
         });
     }
 
