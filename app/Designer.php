@@ -51,6 +51,16 @@ class Designer extends Model
 
 
     /**
+     * Owner.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
      * Get country that the designer is located.
      *
      * @return \Illuminate\Database\Eloquent\Relations\Relation
@@ -152,7 +162,7 @@ class Designer extends Model
      * @return string
      */
     public function text($field, $locale = 'en') {
-        $this->translations()->where('locale', $locale)->first()->$field;
+        return $this->translations()->where('locale', $locale)->first()->$field;
     }
 
 }
