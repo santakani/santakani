@@ -1,11 +1,27 @@
-# Laravel framework
+# Vendor packages
+## Composer
 /vendor
+## NPM
 /node_modules
-/public/storage
-Homestead.yaml
-Homestead.json
+## Bower
+/public/lib
+
+# Passwords
 .env
 
-# Linux system
+# Compiled JavaScript and CSS
+/public/css
+/public/js
+
+# Storage
+/public/storage
+
+# Homestead configuration
+Homestead.yaml
+Homestead.json
+
+# Kate
 *.kate-swp
+
+# KDE
 .directory

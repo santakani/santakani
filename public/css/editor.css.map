@@ -1,1 +1,0 @@
-{"version":3,"sources":["editor.scss"],"names":[],"mappings":"AAAA;;GAEG;AAEH;EACI,aAAa,EAChB","file":"editor.css","sourcesContent":["/**\n * Additional style for WISIWYG editor content\n */\n\nbody {\n    padding: 1em;\n}\n"],"sourceRoot":"/source/"}
