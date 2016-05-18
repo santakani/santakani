@@ -18,7 +18,11 @@
         </a>
     </p>
     <p>
-        <a href="{{ $image->parentPage->url }}">Parent page</a>
+        Parent page: <a href="{{ $image->parentPage->url }}">{{ $image->parentPage->text('name') }}</a>
+        &nbsp;&nbsp;
+        Author: <a href="{{ $image->user->url }}">{{ $image->user->name }}</a>
+        &nbsp;&nbsp;
+        Upload at: {{ $image->created_at }}
     </p>
     <br>
 </div>
