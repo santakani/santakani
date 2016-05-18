@@ -38,19 +38,59 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $roles = [
+    protected $defined_roles = [
         'admin', 'editor', 'translator'
     ];
 
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                          Relationship Methods                          //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
+
     /**
-     * Generate URL to avatar file
-     *
-     * @return string
+     * User uploaded images.
      */
-    public function getAvatarUrl()
+    public function images()
     {
-        return '/storage/avatar/' . (int)($this->id/1000) . '/' . $this->id%1000;
+        return $this->hasMany('App\Image');
     }
+
+    /**
+     * User created designer pages.
+     */
+    public function designers()
+    {
+        return $this->hasMany('App\Designer');
+    }
+
+    /**
+     * User created place pages.
+     */
+    public function places()
+    {
+        return $this->hasMany('App\Place');
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                           Dynamic Properties                           //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                              Role Methods                              //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
 
     /**
      * Get all roles of the user.
@@ -66,7 +106,7 @@ class User extends Authenticatable
 
         foreach ($user_roles as $user_role) {
             $role = $user_role->role;
-            if (in_array($role, $this->roles)) {
+            if (in_array($role, $this->defined_roles)) {
                 $roles[] = $role;
             }
         }
@@ -81,7 +121,7 @@ class User extends Authenticatable
      */
     public function hasRole($role)
     {
-        if (!in_array($role, $this->roles)) {
+        if (!in_array($role, $this->defined_roles)) {
             return false;
         }
 
@@ -100,7 +140,7 @@ class User extends Authenticatable
      */
     public function addRole($role)
     {
-        if (!in_array($role, $this->roles)) {
+        if (!in_array($role, $this->defined_roles)) {
             return;
         }
 
@@ -121,7 +161,7 @@ class User extends Authenticatable
      */
     public function removeRole($role)
     {
-        if (!in_array($role, $this->roles)) {
+        if (!in_array($role, $this->defined_roles)) {
             return;
         }
 
