@@ -61,20 +61,17 @@ module.exports = Backbone.Model.extend({
 
     urlRoot: '/image',
 
-    upload: function upload(image) {
+    upload: function upload(options) {
         var that = this;
-
-        if (image === undefined) {
-            if (this.image === undefined) {
-                var image = this.image;
-            } else {
-                var image = null;
-            }
-        }
 
         var data = new FormData();
         data.append('_token', csrfToken);
-        data.append('image', image);
+        data.append('image', options.image);
+
+        if (typeof options.parentType === 'string' && typeof options.parentId === 'number') {
+            data.append('parent_type', options.parentType);
+            data.append('parent_id', options.parentId);
+        }
 
         $.ajax({
             method: 'POST',
@@ -99,8 +96,8 @@ module.exports = Backbone.Model.extend({
         }).done(function (data) {
             that.set(data);
             that.set({ progress: false });
-        }).fail(function (data) {
-            console.log(data);
+        }).fail(function (error) {
+            console.log(error);
         });
     }
 });
@@ -273,8 +270,9 @@ module.exports = Backbone.View.extend({
         var data = {};
         if (this.my) {
             data['my'] = true;
-        } else if (this.parentType !== null && this.parentId !== null) {
-            data[this.parentType] = this.parentId;
+        } else if (typeof this.parentType === 'string' && typeof this.parentId === 'number') {
+            data['parent_type'] = this.parentType;
+            data['parent_id'] = this.parentId;
         }
 
         this.collection.fetch({
@@ -316,7 +314,11 @@ module.exports = Backbone.View.extend({
                 selectable: true,
                 selected: true
             });
-            image.upload(files[i]);
+            image.upload({
+                image: files[i],
+                parentType: this.parentType,
+                parentId: this.parentId
+            });
             this.collection.add(image);
         }
     },

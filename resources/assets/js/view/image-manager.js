@@ -46,8 +46,9 @@ module.exports = Backbone.View.extend({
         var data = {};
         if (this.my) {
             data['my'] = true;
-        } else if (this.parentType !== null && this.parentId !== null) {
-            data[this.parentType] = this.parentId;
+        } else if (typeof this.parentType === 'string' && typeof this.parentId === 'number') {
+            data['parent_type'] = this.parentType;
+            data['parent_id'] = this.parentId;
         }
 
         this.collection.fetch({
@@ -89,7 +90,11 @@ module.exports = Backbone.View.extend({
                 selectable: true,
                 selected: true
             });
-            image.upload(files[i]);
+            image.upload({
+                image: files[i],
+                parentType: this.parentType,
+                parentId: this.parentId
+            });
             this.collection.add(image);
         }
     },
