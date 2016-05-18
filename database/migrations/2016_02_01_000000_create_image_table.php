@@ -54,7 +54,6 @@ class CreateImageTable extends Migration
 
             // Timestamps
             $table->timestamps();
-            $table->softDeletes();
 
             // Foreign key
             // When deleted user, set user_id to null, but still keep the image.
