@@ -295,4 +295,11 @@ class Image extends Model
         }
     }
 
+    /**
+     * Parent model
+     */
+    public function parent() {
+        return $this->morphTo();
+    }
+
 }
