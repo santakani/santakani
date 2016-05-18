@@ -13,6 +13,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use DB;
+use Gate;
 use Illuminate\Http\Request;
 use Imagick;
 
