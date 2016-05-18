@@ -236,6 +236,8 @@ class Image extends Model
      */
     public function saveFile(File $file)
     {
+        $this->deleteFile(); // Clean directory
+
         $new_file = $file->move($this->getDirectoryPath(), 'temp');
         $temp_file_path = $this->getDirectoryPath() . '/temp';
 
@@ -280,6 +282,9 @@ class Image extends Model
      */
     public function deleteFile() {
         $path = $this->getDirectoryPath();
+        if (!is_dir($path)) {
+            return;
+        }
         $files = array_diff(scandir($path), ['.', '..']);
 
         foreach ($files as $file) {
