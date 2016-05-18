@@ -159,7 +159,11 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        //
+        $image = Image::find($id);
+        if (empty($image)) {
+            abort(404);
+        }
+        return view('page.image.show', ['image' => $image]);
     }
 
     /**
