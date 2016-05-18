@@ -15,13 +15,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UserRoleTableSeeder::class);
         $this->call(ImageTableSeeder::class);
         $this->call(TagTableSeeder::class);
+        $this->call(TaggableTableSeeder::class);
         $this->call(CountryTableSeeder::class);
         $this->call(CityTableSeeder::class);
         $this->call(PlaceTableSeeder::class);
-        $this->call(PlaceTagTableSeeder::class);
-        $this->call(PlaceImageTableSeeder::class);
         $this->call(DesignerTableSeeder::class);
-        $this->call(DesignerTagTableSeeder::class);
-        $this->call(DesignerImageTableSeeder::class);
     }
 }
