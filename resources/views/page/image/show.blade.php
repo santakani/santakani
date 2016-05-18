@@ -18,7 +18,7 @@
         </a>
     </p>
     <p>
-        <a href="{{ $image->parent->url }}">Parent page</a>
+        <a href="{{ $image->parentPage->url }}">Parent page</a>
     </p>
     <br>
 </div>

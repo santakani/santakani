@@ -296,13 +296,18 @@ class Image extends Model
     }
 
     /**
-     * Parent model. Function name must be same with *_type and *_id columns.
-     * But "parent" is a reserved keyword, fuck...
+     * Parent model. By default, function name must be same with *_type and *_id
+     * columns. But we can pass a string parameter to morphTo() function to define
+     * custom column name. Then we can rename this function to whatever we like.
+     * @see \App\Designer::images()
+     * @see \App\Place::images()
+     * @see \App\Country::images()
+     * @see \App\City::images()
      *
      * @return mixed
      */
-    public function parent() {
-        return $this->morphTo();
+    public function parentPage() {
+        return $this->morphTo('parent');
     }
 
 }
