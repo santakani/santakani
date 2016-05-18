@@ -1,8 +1,27 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
+/**
+ * ImageTableSeeder
+ *
+ * Fill test data into "image" table. You also need to manully store files in
+ * "public/storage/image".
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Image
+ * @see https://github.com/santakani/santakani.com/wiki/Test-Data
+ */
 class ImageTableSeeder extends Seeder
 {
     /**
@@ -12,186 +31,45 @@ class ImageTableSeeder extends Seeder
      */
     public function run()
     {
-        // 1
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 994,
-            'height' => 1138,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        $images = [
+            1  => [4608, 3072, 1, 'designer', 1],
+            2  => [4608, 3072, 1, 'designer', 1],
+            3  => [4608, 3072, 1, 'designer', 1],
+            4  => [4608, 3072, 1, 'designer', 1],
+            5  => [4608, 3072, 1, 'designer', 1],
+            6  => [4608, 3072, 1, 'designer', 1],
+            7  => [4608, 3072, 1, 'designer', 1],
+            8  => [4608, 3072, 1, 'designer', 1],
+            9  => [3072, 4608, 1, 'designer', 1],
+            10 => [4608, 3072, 1, 'designer', 1],
+            11 => [4608, 3072, 1, 'designer', 1],
+            12 => [2871, 3758, 2, 'designer', 2],
+            13 => [4308, 3072, 2, 'designer', 2],
+            14 => [3744, 2562, 2, 'designer', 2],
+            15 => [4134, 2958, 2, 'designer', 2],
+            16 => [4608, 3072, 2, 'designer', 2],
+            17 => [4608, 2454, 2, 'designer', 2],
+            18 => [4200, 3072, 2, 'designer', 2],
+            19 => [2003, 3850, 2, 'designer', 2],
+            20 => [4608, 3072, 2, 'designer', 2],
+            21 => [4608, 3072, 2, 'designer', 2],
+            22 => [2824, 4608, 2, 'designer', 2],
+            23 => [3072, 4608, 2, 'designer', 2],
+        ];
 
-        // 2
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 1200,
-            'height' => 900,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        $time_stamp = Carbon::now()->format('Y-m-d H:i:s');
 
-        // 3
-        DB::table('image')->insert([
-            'mime_type' => 'image/png',
-            'width' => 1200,
-            'height' => 1200,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 4
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 1200,
-            'height' => 1200,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 5
-        DB::table('image')->insert([
-            'mime_type' => 'video/youtube',
-            'width' => 1280,
-            'height' => 720,
-            'external_url' => 'https://www.youtube.com/watch?v=KLELsFKC6o4',
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 6
-        DB::table('image')->insert([
-            'mime_type' => 'video/vimeo',
-            'width' => 1280,
-            'height' => 720,
-            'external_url' => 'https://vimeo.com/16922821',
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 7
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 1200,
-            'height' => 1039,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 8
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 580,
-            'height' => 386,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 9
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 480,
-            'height' => 311,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 10
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 570,
-            'height' => 570,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 11
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 1200,
-            'height' => 900,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 12
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 1200,
-            'height' => 750,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 13, YAT designer photo
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 460,
-            'height' => 280,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 14, YAT design photo
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 287,
-            'height' => 395,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 15, YAT design photo
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 263,
-            'height' => 395,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 16, YAT design photo
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 800,
-            'height' => 1200,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 17, YAT design photo
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 800,
-            'height' => 1200,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 18, YAT design photo
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 800,
-            'height' => 1200,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 19, YAT design photo
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 800,
-            'height' => 1200,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 20, YAT design photo
-        DB::table('image')->insert([
-            'mime_type' => 'image/jpeg',
-            'width' => 1200,
-            'height' => 608,
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        foreach ($images as $image) {
+            DB::table('image')->insert([
+                'mime_type' => 'image/jpeg',
+                'width' => $image[0],
+                'height' => $image[1],
+                'user_id' => $image[2],
+                'parent_type' => $image[3],
+                'parent_id' => $image[4],
+                'created_at' => $time_stamp,
+                'updated_at' => $time_stamp
+            ]);
+        }
     }
 }
