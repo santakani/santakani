@@ -1,17 +1,33 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Http\Controllers;
 
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
-
-use Gate;
 
 use App\Http\Requests;
 use App\Designer;
 use App\DesignerTranslation;
 use App\Image;
 
+/**
+ * DesignerController
+ *
+ * Provide RESTful APIs for designer resources.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Designer
+ */
 class DesignerController extends Controller
 {
     /**
@@ -24,7 +40,7 @@ class DesignerController extends Controller
         // Only logged in users can upload images
         $this->middleware('auth', ['except' => ['index','show']]);
         $this->middleware('safetext', ['only' => ['store','update']]);
-        $this->middleware('trim', ['only' => ['store','update']]);
+        $this->middleware('trim');
     }
 
     /**
