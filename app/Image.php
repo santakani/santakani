@@ -296,7 +296,10 @@ class Image extends Model
     }
 
     /**
-     * Parent model
+     * Parent model. Function name must be same with *_type and *_id columns.
+     * But "parent" is a reserved keyword, fuck...
+     *
+     * @return mixed
      */
     public function parent() {
         return $this->morphTo();

@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Map string in *_type to model classes
         Relation::morphMap([
             'designer' => \App\Designer::class,
             'place' => \App\Place::class,
