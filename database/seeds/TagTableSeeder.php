@@ -12,180 +12,41 @@ class TagTableSeeder extends Seeder
      */
     public function run()
     {
-        // 1
-        DB::table('tag')->insert([
-            'url_name' => 'wood',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        $tags = [
+            1 => ['wood', 1, 'Wood', 'Wooden,Tree', '木', '木头,木材'],
+            2 => ['hat', 2, 'Hat', 'Cap', '帽子', '帽'],
+            3 => ['eco', 3, 'Ecology', 'Ecological,Envirnment-friendly', '环保', ''],
+            4 => ['handmade', 1, 'Handmade', 'Handcrafted', '手工', '人工'],
+            5 => ['timeless', 1, 'Timeless', 'Forever', '历久弥新', '永恒'],
+            6 => ['jewelry', 1, 'Jewelry', 'Jewellery,Ornament', '首饰', ''],
+            7 => ['accessory', 1, 'Accessory', '', '饰品', ''],
+            8 => ['earring', 1, 'Earring', '', '耳环', ''],
+            9 => ['eardrop', 1, 'Eardrop', '', '耳坠', ''],
+        ];
+        $timestamp = Carbon::now()->format('Y-m-d H:i:s');
 
-        DB::table('tag_translation')->insert([
-            'tag_id' => 1,
-            'locale' => 'en',
-            'name' => 'Wood',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        foreach ($tags as $id => $tag) {
+            DB::table('tag')->insert([
+                'slug' => $tag[0],
+                'image_id' => $tag[1],
+                'created_at' => $timestamp,
+            ]);
 
-        DB::table('tag_translation')->insert([
-            'tag_id' => 1,
-            'locale' => 'zh',
-            'name' => '木',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+            DB::table('tag_translation')->insert([
+                'tag_id' => $id,
+                'locale' => 'en',
+                'name' => $tag[2],
+                'alias' => $tag[3],
+                'created_at' => $timestamp,
+            ]);
 
-        // 2
-        DB::table('tag')->insert([
-            'url_name' => 'knitwear',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 2,
-            'locale' => 'en',
-            'name' => 'Knitwear',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 2,
-            'locale' => 'zh',
-            'name' => '针织品',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 3
-        DB::table('tag')->insert([
-            'url_name' => 'bamboo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 3,
-            'locale' => 'en',
-            'name' => 'Bamboo',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 3,
-            'locale' => 'zh',
-            'name' => '竹',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 4
-        DB::table('tag')->insert([
-            'url_name' => 'earring',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 4,
-            'locale' => 'en',
-            'name' => 'Earring',
-            'alias' => 'Eardrop',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 4,
-            'locale' => 'zh',
-            'name' => '耳环',
-            'alias' => '耳坠,耳钉',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 5 Fashion
-        DB::table('tag')->insert([
-            'url_name' => 'fashion',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 5,
-            'locale' => 'en',
-            'name' => 'Fashion',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 5,
-            'locale' => 'zh',
-            'name' => '时尚',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 6 Clothing
-        DB::table('tag')->insert([
-            'url_name' => 'clothing',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 6,
-            'locale' => 'en',
-            'name' => 'Clothing',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 6,
-            'locale' => 'zh',
-            'name' => '服装',
-            'alias' => '服饰，衣服，时装',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 7 Bag
-        DB::table('tag')->insert([
-            'url_name' => 'bag',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 7,
-            'locale' => 'en',
-            'name' => 'Bag',
-            'alias' => '',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 7,
-            'locale' => 'zh',
-            'name' => '包',
-            'alias' => '皮包，钱包，手提包',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 8 Woman
-        DB::table('tag')->insert([
-            'url_name' => 'woman',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 8,
-            'locale' => 'en',
-            'name' => 'Woman',
-            'alias' => 'Female',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('tag_translation')->insert([
-            'tag_id' => 8,
-            'locale' => 'zh',
-            'name' => '女性',
-            'alias' => '女人，女式，女装',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+            DB::table('tag_translation')->insert([
+                'tag_id' => $id,
+                'locale' => 'zh',
+                'name' => $tag[4],
+                'alias' => $tag[5],
+                'created_at' => $timestamp,
+            ]);
+        }
     }
 }
