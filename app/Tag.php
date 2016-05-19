@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Tag extends Model
+class Tag extends Translatable
 {
     /**
      * The table associated with the model.

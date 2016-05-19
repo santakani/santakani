@@ -22,7 +22,7 @@ use DB;
  * @author Guo Yunhe <guoyunhebrave@gmail.com>
  * @see https://github.com/santakani/santakani.com/wiki/Designer
  */
-class Designer extends Model
+class Designer extends Translatable
 {
     /**
      * The table associated with the model.
@@ -77,7 +77,7 @@ class Designer extends Model
      */
     public function city()
     {
-        return $this->belongsTo('App\Country');
+        return $this->belongsTo('App\City');
     }
 
     /**
@@ -116,16 +116,6 @@ class Designer extends Model
         return $this->morphToMany('App\Tag', 'taggable', 'taggable');
     }
 
-    /**
-     * Get translations. Used to auto-generate attribute translation.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function translations()
-    {
-        return $this->hasMany('App\DesignerTranslation');
-    }
-
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -153,16 +143,5 @@ class Designer extends Model
     //                                                                        //
     ////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * Get translated text from translations. Support fallback if language not
-     * available.
-     *
-     * @param string $field  Field name, like "name", "tagline", "content".
-     * @param string $locale Language code, optional. If not set, use English(en).
-     * @return string
-     */
-    public function text($field, $locale = 'en') {
-        return $this->translations()->where('locale', $locale)->first()->$field;
-    }
 
 }

@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class City extends Model
+class City extends Translatable
 {
     /**
      * The table associated with the model.
