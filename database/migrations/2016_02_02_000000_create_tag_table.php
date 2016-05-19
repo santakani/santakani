@@ -19,7 +19,7 @@ class CreateTagTable extends Migration
             $table->string('slug')->unique();
 
             // Icon/cover image
-            $table->integer('image_id')->unsigned();
+            $table->integer('image_id')->unsigned()->nullable();
 
             // Timestamps
             $table->timestamps();
