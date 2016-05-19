@@ -15,28 +15,40 @@ class CreateCityTable extends Migration
         Schema::create('city', function (Blueprint $table) {
             $table->increments('id');
 
-            // Non-translated content
-            $table->string('url_name')->unique(); // Name in URL
-            $table->integer('country_id')->unsigned(); // ID of country
+            // Name in URL, lower-case. e.g. "finland", "germany"
+            $table->string('slug')->unique();
+
+            // Country id
+            $table->integer('country_id')->unsigned()->nullable();
+
+            // Icon/cover image
+            $table->integer('image_id')->unsigned()->nullable();
 
             // Timestamps
             $table->timestamps();
             $table->softDeletes();
+
+            // Foreign keys
+            $table->foreign('country_id')->references('id')->on('country')->onDelete('set null');
+            $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
+
         Schema::create('city_translation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('city_id')->unsigned();
-            $table->string('locale')->index();
+            $table->string('locale');
 
             // Translated content
             $table->string('name');
+            $table->text('content');
 
             // Timestamps
             $table->timestamps();
 
-            // Unique and foreign key
-            // When deleting city model, also delete all translation models
+            // Unique
             $table->unique(['city_id','locale']);
+
+            // Foreign key
             $table->foreign('city_id')->references('id')->on('city')->onDelete('cascade');
         });
     }
@@ -49,6 +61,7 @@ class CreateCityTable extends Migration
     public function down()
     {
         Schema::drop('city_translation');
+
         Schema::drop('city');
     }
 }
