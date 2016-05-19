@@ -18,9 +18,19 @@
         </a>
     </p>
     <p>
-        Parent page: <a href="{{ $image->parentPage->url }}">{{ $image->parentPage->text('name') }}</a>
+        Parent page:
+        @if ( count( $image->parentPage ) )
+            <a href="{{ $image->parentPage->url }}">{{ $image->parentPage->text('name') }}</a>
+        @else
+            None
+        @endif
         &nbsp;&nbsp;
-        Author: <a href="{{ $image->user->url }}">{{ $image->user->name }}</a>
+        Author:
+        @if ( count( $image->user ) )
+            <a href="{{ $image->user->url }}">{{ $image->user->name }}</a>
+        @else
+            Unknown
+        @endif
         &nbsp;&nbsp;
         Upload at: {{ $image->created_at }}
     </p>

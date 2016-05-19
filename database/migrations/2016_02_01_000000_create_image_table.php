@@ -49,14 +49,17 @@ class CreateImageTable extends Migration
 
             // Parent model type and id. Use Laravel Polymorphic relationships
             // "parent_type" can be "designer", "place", "country", "city"
-            $table->morphs('parent');
+            $table->string('parent_type')->nullable();
+            $table->integer('parent_id')->unsigned()->nullable();
 
             // Timestamps
             $table->timestamps();
             $table->softDeletes();
 
+            // Index
+            $table->index(['parent_type', 'parent_id']);
+
             // Foreign key
-            // When deleted user, set user_id to null, but still keep the image.
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
     }
