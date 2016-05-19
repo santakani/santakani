@@ -15,17 +15,17 @@ class CreateTagTable extends Migration
         Schema::create('tag', function (Blueprint $table) {
             $table->increments('id');
 
-            // Non-translated content
-            $table->string('url_name')->unique(); // Name in URL
+            // Name in URL, lowercase, e.g. "chair", "solid-wood"
+            $table->string('slug')->unique();
 
             // Timestamps
             $table->timestamps();
-            $table->softDeletes();
         });
+
         Schema::create('tag_translation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tag_id')->unsigned();
-            $table->string('locale')->index();
+            $table->string('locale');
 
             // Translated content
             $table->string('name');
@@ -33,9 +33,9 @@ class CreateTagTable extends Migration
 
             $table->timestamps();
 
-            // Unique and foreign key
-            // When deleting country model, also delete all translation models
+            // Unique
             $table->unique(['tag_id','locale']);
+            // Foreign key
             $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
         });
     }
@@ -48,6 +48,7 @@ class CreateTagTable extends Migration
     public function down()
     {
         Schema::drop('tag_translation');
+
         Schema::drop('tag');
     }
 }
