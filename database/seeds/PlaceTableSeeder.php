@@ -12,96 +12,52 @@ class PlaceTableSeeder extends Seeder
      */
     public function run()
     {
-        // 1
-        DB::table('place')->insert([
-            'country_id' => 1,
-            'city_id' => 1,
-            'location' => DB::raw("PointFromText('POINT(60.1686973 24.9512867)')"),
-            'image_id' => 1,
-            'type' => 'shop',
-            'address' => 'Katrinegatan 4',
-            'email' => 'info@example.com',
-            'phone' => '+358123456789',
-            'website' => 'http://example.com/',
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        $places = [
+            1 => [1, 1, 1, 1, 'Costo'],
+            2 => [1, 1, 23, 1, 'folklore'],
+            3 => [1, 1, 1, 1, 'Costo'],
+            4 => [1, 1, 23, 1, 'folklore'],
+            5 => [1, 1, 1, 1, 'Costo'],
+            6 => [1, 1, 23, 1, 'folklore'],
+            7 => [1, 1, 1, 1, 'Costo'],
+            8 => [1, 1, 23, 1, 'folklore'],
+            9 => [1, 1, 1, 1, 'Costo'],
+            10 => [1, 1, 23, 1, 'folklore'],
+        ];
 
-        DB::table('place_translation')->insert([
-            'place_id' => 1,
-            'locale' => 'en',
-            'name' => 'MadeBy Helsinki',
-            'content' => file_get_contents('http://loripsum.net/api'),
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        $timestamp = Carbon::now()->format('Y-m-d H:i:s');
 
-        // 2
-        DB::table('place')->insert([
-            'country_id' => 1,
-            'city_id' => 1,
-            'location' => DB::raw("PointFromText('POINT(60.2029699 24.9482206)')"),
-            'image_id' => 2,
-            'type' => 'shop',
-            'address' => 'Aleksis Kivis gata 74',
-            'email' => 'info@example.com',
-            'phone' => '+358123456789',
-            'website' => 'http://example.com/',
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        foreach ($places as $id => $place) {
+            $x = 60.1686973 + rand(0, 1000) / 1000 - 0.5;
+            $y = 24.9512867 + rand(0, 1000) / 1000 - 0.5;
+            $point = "PointFromText('POINT($x $y)')";
 
-        DB::table('place_translation')->insert([
-            'place_id' => 2,
-            'locale' => 'en',
-            'name' => 'Uniqeco Design',
-            'content' => file_get_contents('http://loripsum.net/api'),
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+            DB::table('place')->insert([
+                'country_id' => $place[0],
+                'city_id' => $place[1],
+                'location' => DB::raw($point),
+                'image_id' => $place[2],
+                'user_id' => $place[3],
+                'type' => 'store',
+                'phone' => '+3581234567',
+                'email' => 'contact@example.com',
+                'website' => 'http://www.example.com/',
+                'facebook' => 'https://www.facebook.com/',
+                'google_plus' => 'https://plus.google.com/',
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp,
+            ]);
 
-        // 3
-        DB::table('place')->insert([
-            'country_id' => 1,
-            'city_id' => 1,
-            'location' => DB::raw("PointFromText('POINT(60.1880678 24.9211522)')"),
-            'image_id' => 3,
-            'type' => 'studio',
-            'address' => 'Aleksis Kivis gata 74',
-            'email' => 'info@example.com',
-            'phone' => '+358123456789',
-            'website' => 'http://example.com/',
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+            DB::table('place_translation')->insert([
+                'place_id' => $id,
+                'locale' => 'en',
+                'name' => $place[4],
+                'content' => file_get_contents('http://loripsum.net/api'),
+                'address' => 'Servinkuja 1 B 19',
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp,
+            ]);
+        }
 
-        DB::table('place_translation')->insert([
-            'place_id' => 3,
-            'locale' => 'en',
-            'name' => 'Tiisin Design',
-            'content' => file_get_contents('http://loripsum.net/api'),
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        // 4
-        DB::table('place')->insert([
-            'country_id' => 1,
-            'city_id' => 1,
-            'location' => DB::raw("PointFromText('POINT(60.2032442 24.9510651)')"),
-            'image_id' => 4,
-            'type' => 'studio',
-            'address' => 'Aleksis Kivis gata 74',
-            'email' => 'info@example.com',
-            'phone' => '+358123456789',
-            'website' => 'http://example.com/',
-            'user_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('place_translation')->insert([
-            'place_id' => 4,
-            'locale' => 'en',
-            'name' => 'Sebastian Jansson',
-            'content' => file_get_contents('http://loripsum.net/api'),
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
     }
 }
