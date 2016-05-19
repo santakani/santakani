@@ -1,5 +1,5 @@
 @extends('layout.app', [
-    'title' => $designer->name . ' - Designer',
+    'title' => $designer->text('name') . ' - Designer',
     'body_id' => 'designer-show-page',
     'body_class' => 'designer-show show',
 ])
@@ -21,14 +21,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-lg-4 target">
-                    <p class="tagline">{{ $designer->tagline }}</p>
-                    <h1>{{ $designer->name }}</h1>
-                    <p class="location">
-                        <a href="{{ url('city/'.$designer->city_id) }}">
-                            {{ $designer->city_name or 'Unknown' }}</a>,
-                        <a href="{{ url('country/'.$designer->country_id) }}">
-                            {{ $designer->country_name or 'Unknown' }}</a>
-                    </p>
+                    <p class="tagline">{{ $designer->text('tagline') }}</p>
+                    <h1>{{ $designer->text('name') }}</h1>
+                    @if ($designer->city_id && $designer->country_id)
+                        <p class="location">
+                            <a href="{{ url('city/'.$designer->city_id) }}">
+                                {{ $designer->city->text('name') }}</a>,
+                            <a href="{{ url('country/'.$designer->country_id) }}">
+                                {{ $designer->country->text('name') }}</a>
+                        </p>
+                    @endif
                     <p class="links">
                         @if (!empty($designer->facebook))
                             <a href="{{ $designer->facebook }}">
@@ -68,10 +70,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            {!! $designer->content !!}
+            {!! $designer->text('content') !!}
             <p class="tags target">
                 @foreach ($designer->tags as $tag)
-                    <a href="{{ $tag->getUrl() }}">{{ $tag->getTranslation()->name }}</a>
+                    <a href="{{ url('tag/' . $tag->id) }}">{{ $tag->text('name') }}</a>
                 @endforeach
             </p>
         </div>

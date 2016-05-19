@@ -124,6 +124,8 @@ class DesignerController extends Controller
             abort(404);
         }
 
+        $designer->load('translations');
+
         return view('page.designer.show', [
             'designer' => $designer,
             'can_edit' => Gate::allows('edit-page', $designer),
