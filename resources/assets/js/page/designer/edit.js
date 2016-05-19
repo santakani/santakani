@@ -20,7 +20,7 @@ $(function () {
     // Image manager
     var manager = new ImageManager({
         parentType: 'designer',
-        parentId: 1
+        parentId: parseInt($('form').data('id'))
     });
 
     // Cover
