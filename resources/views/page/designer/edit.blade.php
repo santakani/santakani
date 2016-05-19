@@ -6,138 +6,138 @@
 
 @section('main')
 <div class="container">
-<form id="designer-edit-form" class="form-horizontal" action="{{ $designer->url }}">
+    <form id="designer-edit-form" class="form-horizontal" action="{{ $designer->url }}">
 
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10 col-md-8">
-            <div class="alert alert-warning" style="display:none;" role="alert"></div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10 col-md-8">
+                <div class="alert alert-warning" style="display:none;" role="alert"></div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="input-name" class="col-sm-2 control-label">
-            Name</label>
-        <div class="col-sm-10 col-md-8">
-            <input name="name" type="text" class="form-control" id="input-name"
-                value="{{ old('name')===null?$designer->text('name', 'en'):old('name') }}"
-                placeholder="Name of designer or design brand"
-                required>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">
+                Name</label>
+            <div class="col-sm-10 col-md-8">
+                <input name="name" type="text" class="form-control" id="input-name"
+                    value="{{ old('name')===null?$designer->text('name', 'en'):old('name') }}"
+                    placeholder="Name of designer or design brand"
+                    required>
+            </div>
         </div>
-    </div>
 
-    <div id="image-form-group" class="form-group">
-        <label class="col-sm-2 control-label">
-            Cover image</label>
-        <div class="col-sm-10 col-md-8">
-            <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
-            @if ($image = App\Image::find($image_id = old('image')))
-                <div class="image-preview" data-id="{{ $image_id }}"
-                    data-url="{{ $image->file_urls['medium'] }}"></div>
-            @elseif ($designer->image_id)
-                <div class="image-preview" data-id="{{ $designer->image_id }}"
-                    data-url="{{ $designer->image->file_urls['medium'] }}"></div>
-            @else
-                <div class="image-preview"></div>
-            @endif
-            <input type="hidden" name="image">
+        <div id="image-form-group" class="form-group">
+            <label class="col-sm-2 control-label">
+                Cover image</label>
+            <div class="col-sm-10 col-md-8">
+                <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
+                @if ($image = App\Image::find($image_id = old('image')))
+                    <div class="image-preview" data-id="{{ $image_id }}"
+                        data-url="{{ $image->file_urls['medium'] }}"></div>
+                @elseif ($designer->image_id)
+                    <div class="image-preview" data-id="{{ $designer->image_id }}"
+                        data-url="{{ $designer->image->file_urls['medium'] }}"></div>
+                @else
+                    <div class="image-preview"></div>
+                @endif
+                <input type="hidden" name="image">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="input-tagline" class="col-sm-2 control-label">Tagline</label>
-        <div class="col-sm-10 col-md-8">
-            <input type="text" name="tagline" class="form-control" id="input-tagline"
-                placeholder="Express design philosophy in short" maxlength="255"
-                value="{{old('tagline')===null?$designer->text('tagline', 'en'):old('tagline')}}">
+        <div class="form-group">
+            <label for="input-tagline" class="col-sm-2 control-label">Tagline</label>
+            <div class="col-sm-10 col-md-8">
+                <input type="text" name="tagline" class="form-control" id="input-tagline"
+                    placeholder="Express design philosophy in short" maxlength="255"
+                    value="{{old('tagline')===null?$designer->text('tagline', 'en'):old('tagline')}}">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="input-content" class="col-sm-2 control-label">
-            Story</label>
-        <div class="col-sm-10 col-md-8">
-            <textarea name="content" class="form-control tinymce" id="input-content"
-                placeholder="Introduce your unique design story..." rows="5">{{
-                old('content')===null?$designer->text('content', 'en'):old('content')
-            }}</textarea>
+        <div class="form-group">
+            <label for="input-content" class="col-sm-2 control-label">
+                Story</label>
+            <div class="col-sm-10 col-md-8">
+                <textarea name="content" class="form-control tinymce" id="input-content"
+                    placeholder="Introduce your unique design story..." rows="5">{{
+                    old('content')===null?$designer->text('content', 'en'):old('content')
+                }}</textarea>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Location</label>
-        <div class="col-sm-5 col-md-4">
-            @include('component.input.country', [
-                'class' => 'form-control',
-                'selected' => old('country')===null?$designer->country_id:old('country')
-            ])
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Location</label>
+            <div class="col-sm-5 col-md-4">
+                @include('component.input.country', [
+                    'class' => 'form-control',
+                    'selected' => old('country')===null?$designer->country_id:old('country')
+                ])
+            </div>
+            <div class="col-sm-5 col-md-4">
+                @include('component.input.city', [
+                    'class' => 'form-control',
+                    'selected' => old('city')===null?$designer->city_id:old('city')
+                ])
+            </div>
         </div>
-        <div class="col-sm-5 col-md-4">
-            @include('component.input.city', [
-                'class' => 'form-control',
-                'selected' => old('city')===null?$designer->city_id:old('city')
-            ])
-        </div>
-    </div>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Tags</label>
-        <div class="col-sm-10 col-md-8">
-            @include('component.input.tag', [
-                'class' => 'form-control',
-                'selected' => old('tags')===null?$designer->tag_ids:old('tags')
-            ])
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Tags</label>
+            <div class="col-sm-10 col-md-8">
+                @include('component.input.tag', [
+                    'class' => 'form-control',
+                    'selected' => old('tags')===null?$designer->tag_ids:old('tags')
+                ])
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="input-email" class="col-sm-2 control-label">Email</label>
-        <div class="col-sm-10 col-md-8">
-            <input name="email" value="{{ old('email')===null?$designer->email:old('email') }}" type="email"
-                maxlength="255" class="form-control" id="input-email">
+        <div class="form-group">
+            <label for="input-email" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10 col-md-8">
+                <input name="email" value="{{ old('email')===null?$designer->email:old('email') }}" type="email"
+                    maxlength="255" class="form-control" id="input-email">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="input-facebook" class="col-sm-2 control-label">Facebook</label>
-        <div class="col-sm-10 col-md-8">
-            <input name="facebook" value="{{ old('facebook')===null?$designer->facebook:old('facebook') }}" type="url"
-                maxlength="255" class="form-control" id="input-facebook">
+        <div class="form-group">
+            <label for="input-facebook" class="col-sm-2 control-label">Facebook</label>
+            <div class="col-sm-10 col-md-8">
+                <input name="facebook" value="{{ old('facebook')===null?$designer->facebook:old('facebook') }}" type="url"
+                    maxlength="255" class="form-control" id="input-facebook">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="input-twitter" class="col-sm-2 control-label">Twitter</label>
-        <div class="col-sm-10 col-md-8">
-            <input name="twitter" value="{{ old('twitter')===null?$designer->twitter:old('twitter') }}" type="url"
-                maxlength="255" class="form-control" id="input-twitter">
+        <div class="form-group">
+            <label for="input-twitter" class="col-sm-2 control-label">Twitter</label>
+            <div class="col-sm-10 col-md-8">
+                <input name="twitter" value="{{ old('twitter')===null?$designer->twitter:old('twitter') }}" type="url"
+                    maxlength="255" class="form-control" id="input-twitter">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="input-google-plus" class="col-sm-2 control-label">Google+</label>
-        <div class="col-sm-10 col-md-8">
-            <input name="google_plus" value="{{ old('google_plus')===null?$designer->google_plus:old('google_plus') }}" type="url"
-                maxlength="255" class="form-control" id="input-google-plus">
+        <div class="form-group">
+            <label for="input-google-plus" class="col-sm-2 control-label">Google+</label>
+            <div class="col-sm-10 col-md-8">
+                <input name="google_plus" value="{{ old('google_plus')===null?$designer->google_plus:old('google_plus') }}" type="url"
+                    maxlength="255" class="form-control" id="input-google-plus">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="input-instagram" class="col-sm-2 control-label">Instagram</label>
-        <div class="col-sm-10 col-md-8">
-            <input name="instagram" value="{{ old('instagram')===null?$designer->instagram:old('instagram') }}" type="url"
-                maxlength="255" class="form-control" id="input-instagram">
+        <div class="form-group">
+            <label for="input-instagram" class="col-sm-2 control-label">Instagram</label>
+            <div class="col-sm-10 col-md-8">
+                <input name="instagram" value="{{ old('instagram')===null?$designer->instagram:old('instagram') }}" type="url"
+                    maxlength="255" class="form-control" id="input-instagram">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Save</button>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Save</button>
+            </div>
         </div>
-    </div>
 
-</form>
+    </form>
 </div><!-- .container -->
 @endsection
 

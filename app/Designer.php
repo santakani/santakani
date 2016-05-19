@@ -32,8 +32,7 @@ class Designer extends Translatable
     protected $table = 'designer';
 
     /**
-     * The attributes that are managed by accessor and mutator functions.
-     * @see https://laravel.com/docs/5.2/eloquent-mutators
+     * Dynamic properties that should be included in toArray() or toJSON().
      *
      * @var array
      */
@@ -124,6 +123,29 @@ class Designer extends Translatable
     //                                                                        //
     ////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * "tag_ids" getter. Return an array of tag ids.
+     *
+     * @return int[]
+     */
+    public function getTagIdsAttribute()
+    {
+        $ids = [];
+        foreach ($this->tags as $tag) {
+            $ids[] = $tag->id;
+        }
+        return $ids;
+    }
+
+    /**
+     * "tag_ids" setter. A convenient way to reset tag relationships.
+     *
+     * @param int[] $tag_ids An array of tag ids.
+     */
+    public function setTagIdsAttribute($tag_ids)
+    {
+        $this->tags()->sync($tag_ids);
+    }
 
     /**
      * "url" getter. URL of designer page.
