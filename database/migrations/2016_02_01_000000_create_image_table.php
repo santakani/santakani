@@ -45,12 +45,11 @@ class CreateImageTable extends Migration
             $table->integer('height')->unsigned()->nullable();
 
             // Who uploaded this image. Users might want to reuse their images.
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->nullable()->index();
 
             // Parent model type and id. Use Laravel Polymorphic relationships
             // "parent_type" can be "designer", "place", "country", "city"
-            $table->string('parent_type')->nullable();
-            $table->integer('parent_id')->unsigned()->nullable();
+            $table->morphs('parent');
 
             // Timestamps
             $table->timestamps();
