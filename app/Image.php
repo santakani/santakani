@@ -225,11 +225,11 @@ class Image extends Model
         if (!in_array($size, $this->image_sizes)) {
             return false;
         } elseif ($size === 'large') {
-            if ($this->width <= self::large_size && $this->width <= self::large_size) {
+            if ($this->width <= self::large_size && $this->height <= self::large_size) {
                 return false;
             }
         } elseif ($size === 'medium') {
-            if ($this->width <= self::medium_size && $this->width <= self::medium_size) {
+            if ($this->width <= self::medium_size && $this->height <= self::medium_size) {
                 return false;
             }
         }
@@ -266,6 +266,9 @@ class Image extends Model
      */
     public function getFilePath($size = 'full', $full = true, $size_fallback = false)
     {
+        if ($size_fallback) {
+            $size = $this->sizeFallback($size);
+        }
         return $this->getDirectoryPath($full) . '/' . $size . $this->getFileExtension();
     }
 
