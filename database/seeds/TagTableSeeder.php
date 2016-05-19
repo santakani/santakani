@@ -16,12 +16,12 @@ class TagTableSeeder extends Seeder
             1 => ['wood', 1, 'Wood', 'Wooden,Tree', '木', '木头,木材'],
             2 => ['hat', 2, 'Hat', 'Cap', '帽子', '帽'],
             3 => ['eco', 3, 'Ecology', 'Ecological,Envirnment-friendly', '环保', ''],
-            4 => ['handmade', 1, 'Handmade', 'Handcrafted', '手工', '人工'],
-            5 => ['timeless', 1, 'Timeless', 'Forever', '历久弥新', '永恒'],
-            6 => ['jewelry', 1, 'Jewelry', 'Jewellery,Ornament', '首饰', ''],
-            7 => ['accessory', 1, 'Accessory', '', '饰品', ''],
-            8 => ['earring', 1, 'Earring', '', '耳环', ''],
-            9 => ['eardrop', 1, 'Eardrop', '', '耳坠', ''],
+            4 => ['handmade', 4, 'Handmade', 'Handcrafted', '手工', '人工'],
+            5 => ['timeless', 5, 'Timeless', 'Forever', '历久弥新', '永恒'],
+            6 => ['jewelry', 6, 'Jewelry', 'Jewellery,Ornament', '首饰', ''],
+            7 => ['accessory', 7, 'Accessory', '', '饰品', ''],
+            8 => ['earring', 8, 'Earring', '', '耳环', ''],
+            9 => ['eardrop', 9, 'Eardrop', '', '耳坠', ''],
         ];
         $timestamp = Carbon::now()->format('Y-m-d H:i:s');
 
