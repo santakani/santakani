@@ -1,5 +1,5 @@
 @extends('layout.app', [
-    'title' => 'Designers',
+    'title' => 'Design Stories',
     'body_id' => 'designer-index-page',
     'body_class' => 'designer-index index',
 ])
