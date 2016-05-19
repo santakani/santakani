@@ -28,13 +28,23 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'DesignerController@index');
 
+    Route::get('setting', 'UserController@setting');
+
+    Route::get('notification', 'UserController@notification');
+
+    Route::resource('user', 'UserController', ['except' => [
+        'create', 'store'
+    ]]);
+
+    Route::get('image/upload', 'ImageController@create');
+
     Route::resource('image', 'ImageController');
 
     Route::resource('tag', 'TagController');
 
     Route::resource('country', 'CountryController');
 
-    Route::resource('city', 'PhotoController');
+    Route::resource('city', 'CityController');
 
     Route::resource('designer', 'DesignerController');
 
