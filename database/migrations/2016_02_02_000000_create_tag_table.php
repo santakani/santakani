@@ -18,8 +18,14 @@ class CreateTagTable extends Migration
             // Name in URL, lowercase, e.g. "chair", "solid-wood"
             $table->string('slug')->unique();
 
+            // Icon/cover image
+            $table->integer('image_id')->unsigned();
+
             // Timestamps
             $table->timestamps();
+
+            // Foreign key
+            $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
 
         Schema::create('tag_translation', function (Blueprint $table) {
