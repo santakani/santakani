@@ -50,10 +50,9 @@ class DesignerController extends Controller
      */
     public function index()
     {
-        $designers = Designer::all();
+        $designers = Designer::with('translations')->get();
+
         return view('page.designer.index', [
-            'body_class' => 'stories',
-            'active_nav' => 'story',
             'designers' => $designers
         ]);
     }

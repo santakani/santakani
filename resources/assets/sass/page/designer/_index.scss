@@ -1,6 +1,16 @@
-#story-list {
-    .story {
+#designer-index-page {
+
+    main {
+        padding: 30px 0;
+    }
+
+    article {
         margin-bottom: 30px;
+
+        a {
+            display: block;
+            position: relative;
+        }
 
         img.featured-image {
             display: block;
@@ -8,37 +18,22 @@
             height: auto;
         }
 
-        .content {
-            height: 10em;
-            overflow: hidden;
+        .text {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            bottom: 5px;
+            color: #fff;
         }
 
-        .expand-button {
-            display: block;
-            margin: auto;
-
-            .more {
-                display: inline;
-            }
-            .less {
-                display: none;
-            }
+        .shadow {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 80px;
+            background-image: linear-gradient( to top, rgba(0,0,0,0.5), rgba(0,0,0,0));
         }
 
-        &.expanded {
-            .content {
-                height: 30em;
-                overflow: auto;
-            }
-
-            .expand-button {
-                .more {
-                    display: none;
-                }
-                .less {
-                    display: inline;
-                }
-            }
-        }
     }
 }

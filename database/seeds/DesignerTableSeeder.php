@@ -43,6 +43,7 @@ class DesignerTableSeeder extends Seeder
                 'designer_id' => $id,
                 'locale' => 'en',
                 'name' => $designer[4],
+                'tagline' => 'Good typeface make any text easier to read',
                 'content' => file_get_contents('http://loripsum.net/api'),
                 'created_at' => $timestamp,
                 'updated_at' => $timestamp,
