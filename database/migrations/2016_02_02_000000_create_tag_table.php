@@ -23,6 +23,7 @@ class CreateTagTable extends Migration
 
             // Timestamps
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
