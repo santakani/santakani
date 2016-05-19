@@ -21,7 +21,7 @@ class CreateTaggableTable extends Migration
             $table->unique(['tag_id', 'taggable_type', 'taggable_id']);
 
             // Foreign key
-            $table->foreign('tag_id')->references('id')->on('tag')->onDelete('delete');
+            $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
         });
     }
 
