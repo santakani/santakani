@@ -5,7 +5,7 @@
 ])
 
 @section('header')
-<header style="background-image:url({{ $designer->image->file_urls['large'] }});">
+<header style="background-image:url({{ $designer->image_id?$designer->image->file_urls['large']:'http://placehold.it/1200x400?text=NO+IMAGE' }});">
     <div class="action-bar target">
         @if ($can_edit)
             <a href="{{ url('designer/'.$designer->id.'/edit') }}"

@@ -16,6 +16,10 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 
 use App\Http\Requests;
+use App\City;
+use App\CityTranslation;
+use App\Country;
+use App\CountryTranslation;
 use App\Designer;
 use App\DesignerTranslation;
 use App\Image;
@@ -92,17 +96,27 @@ class DesignerController extends Controller
         $designer = new Designer();
         $translation = new DesignerTranslation();
 
-        $designer->email = $request->input('email');
-        $designer->country_id = $request->input('country');
-        $designer->city_id = $request->input('city');
+        if ($request->has('email')) {
+            $designer->email = $request->input('email');
+        }
+        if ($request->has('country')) {
+            $designer->country_id = intval($request->input('country'));
+        }
+        if ($request->has('city')) {
+            $designer->city_id = intval($request->input('city'));
+        }
         $designer->user_id = $request->user()->id;
 
         $designer->save();
 
         $translation->designer_id = $designer->id;
         $translation->locale = 'en';
-        $translation->name = $request->input('name');
-        $translation->tagline = $request->input('tagline');
+        if ($request->has('name')) {
+            $translation->name = $request->input('name');
+        }
+        if ($request->has('tagline')) {
+            $translation->tagline = $request->input('tagline');
+        }
 
         $translation->save();
 
@@ -170,10 +184,7 @@ class DesignerController extends Controller
     {
         $designer = Designer::find($id);
 
-        $translation = DesignerTranslation::where([
-            ['designer_id', $id],
-            ['locale', 'en'],
-        ])->first();
+        $translation = $designer->translations()->where('locale', 'en')->first();
 
         if (empty($designer)) {
             abort(404);
@@ -201,10 +212,15 @@ class DesignerController extends Controller
             'instagram' => 'url|max:255',
         ]);
 
-        // Save models
         foreach (['name', 'tagline', 'content'] as $key) {
             if ($request->has($key)) {
+                // Not empty, fill the value
                 $translation->$key = $request->input($key);
+            } elseif ($request->exists($key)) {
+                // Empty, set null.
+                $translation->$key = null;
+            } else {
+                // Not provided, untouch properties.
             }
         }
 
@@ -212,28 +228,31 @@ class DesignerController extends Controller
 
         foreach (['image', 'country', 'city'] as $key) {
             if ($request->has($key)) {
-                $designer[$key.'_id'] = (int)$request->input($key);
+                // Not empty, fill the value
+                $designer[$key.'_id'] = intval($request->input($key));
+            } elseif ($request->exists($key)) {
+                // Empty, set null.
+                $designer[$key.'_id'] = null;
+            } else {
+                // Not provided, untouch properties.
             }
         }
 
         foreach (['email', 'facebook', 'twitter', 'google_plus', 'instagram'] as $key) {
             if ($request->has($key)) {
-                $designer->$key = trim($request->input($key));
+                // Not empty, fill the value
+                $designer->$key = $request->input($key);
+            } elseif ($request->exists($key)) {
+                // Empty, set null.
+                $designer->$key = null;
+            } else {
+                // Not provided, untouch properties.
             }
         }
 
-        // Save tags
         if ($request->has('tags')) {
             $designer->tag_ids = array_map('intval',$request->input('tags'));
         }
-
-        // Save images
-        if ($request->has('images')) {
-            var_dump($request->input('images'));
-            $designer->image_ids = array_map('intval',$request->input('images'));
-        }
-
-
 
         $designer->save();
     }

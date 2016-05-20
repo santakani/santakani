@@ -33,16 +33,18 @@
                 Cover image</label>
             <div class="col-sm-10 col-md-8">
                 <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
-                @if ($image = App\Image::find($image_id = old('image')))
-                    <div class="image-preview" data-id="{{ $image_id }}"
+                @if ($image = App\Image::find(old('image')))
+                    <div class="image-preview" data-id="{{ old('image') }}"
                         data-url="{{ $image->file_urls['medium'] }}"></div>
+                    <input type="hidden" name="image" value="{{ old('image') }}">
                 @elseif ($designer->image_id)
                     <div class="image-preview" data-id="{{ $designer->image_id }}"
                         data-url="{{ $designer->image->file_urls['medium'] }}"></div>
+                    <input type="hidden" name="image" value="{{ $designer->image_id }}">
                 @else
                     <div class="image-preview"></div>
+                    <input type="hidden" name="image">
                 @endif
-                <input type="hidden" name="image">
             </div>
         </div>
 
