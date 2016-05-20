@@ -22,6 +22,7 @@ $roboto-font-path: '/lib/roboto-fontface/fonts';
 // Layout
 @import "layout/navbar";
 @import "layout/footer";
+@import "layout/container";
 
 // Components
 @import "component/image-manager";

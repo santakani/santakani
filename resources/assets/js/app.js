@@ -9,4 +9,5 @@ require('./jquery/go-to');
 require('./utility/template');
 
 // Pages
+require('./page/designer/show');
 require('./page/designer/edit');

@@ -67,25 +67,25 @@
 @endsection
 
 @section('main')
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            {!! $designer->text('content') !!}
-            <p class="tags target">
-                @foreach ($designer->tags as $tag)
-                    <a href="{{ url('tag/' . $tag->id) }}">{{ $tag->text('name') }}</a>
-                @endforeach
-            </p>
-        </div>
-        <div class="col-md-6">
-            <div class="gallery">
-                @foreach ($designer->images as $image)
-                    <a href="{{ $image->file_urls['large'] }}">
-                        <img src="{{ $image->file_urls['thumb'] }}" />
-                    </a>
-                @endforeach
-            </div>
-        </div>
+
+<div class="content container-600">
+
+    {!! $designer->text('content') !!}
+
+    <p class="tags">
+        @foreach ($designer->tags as $tag)
+            <a href="{{ url('tag/' . $tag->id) }}">{{ $tag->text('name') }}</a>
+        @endforeach
+    </p>
+</div>
+
+<div class="container-fluid">
+    <div class="gallery">
+        @foreach ($designer->images as $image)
+            <a href="{{ $image->file_urls['large'] }}">
+                <img src="{{ $image->file_urls['thumb'] }}" />
+            </a>
+        @endforeach
     </div>
 </div>
 @endsection

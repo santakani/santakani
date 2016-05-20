@@ -103,11 +103,23 @@
     main {
         padding: 50px 0;
     }
-}
 
-.gallery {
-    > a {
-        display: block;
-        float: left;
+    .gallery {
+
+        margin: -5px;
+
+        padding: 30px 0;
+
+        a {
+            display: block;
+            float: left;
+            padding: 5px;
+            max-width: 50%;
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
     }
 }
