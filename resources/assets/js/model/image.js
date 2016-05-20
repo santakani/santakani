@@ -52,5 +52,45 @@ module.exports = Backbone.Model.extend({
         }).fail(function (error) {
             console.log(error);
         });
+    },
+
+    size: function (size) {
+        var width, height;
+
+        if (size === 'large') {
+            if (this.get('width') <= 1200 && this.get('height') <= 1200) {
+                width = this.get('width');
+                height = this.get('height');
+            } else if (this.get('width') >= this.get('height')) {
+                width = 1200;
+                height = Math.round(1200 * this.get('height') / this.get('width'));
+            } else {
+                width = Math.round(1200 * this.get('width') / this.get('height'));
+                height = 1200;
+            }
+        } else if (size === 'medium') {
+            if (this.get('width') <= 600 && this.get('height') <= 600) {
+                width = this.get('width');
+                height = this.get('height');
+            } else if (this.get('width') >= this.get('height')) {
+                width = 600;
+                height = Math.round(600 * this.get('height') / this.get('width'));
+            } else {
+                width = Math.round(600 * this.get('width') / this.get('height'));
+                height = 600;
+            }
+        } else if (size === 'thumb') {
+            if (this.get('width') >= 300 && this.get('height') >= 300) {
+                width = 300;
+                height = 300;
+            } else {
+
+            }
+        } else {
+            width = this.get('width');
+            height = this.get('height');
+        }
+
+        return {width: width, height: height};
     }
 });

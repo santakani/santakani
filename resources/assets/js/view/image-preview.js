@@ -37,8 +37,9 @@ module.exports = Backbone.View.extend({
 
         // Responsive size
         this.updateSize();
+        var that = this;
         $(window).resize(function () {
-            preview.updateSize();
+            that.updateSize();
         });
 
         this.listenTo(this.model, 'change', this.update);

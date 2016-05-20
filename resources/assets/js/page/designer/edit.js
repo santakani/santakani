@@ -51,11 +51,28 @@ $(function () {
     // Initialize TinyMCE
     tinymce.init({
         selector: 'textarea.tinymce',
+        plugins: ['link', 'image'],
         menubar: false,
+        toolbar: 'undo redo | styleselect | bold italic | link customimage',
         content_css: ['/css/app.css', '/css/editor.css'],
         setup: function (editor) {
             editor.on('change', function () {
                 editor.save();
+            });
+            editor.addButton('customimage', {
+                icon: 'image',
+                onclick: function () {
+                    manager.call({
+                        multiple: false,
+                        done: function (image) {
+                            var src = image.get('file_urls').medium;
+                            var size = image.size('medium');
+                            var html = '<img src="' + src + '" width="' + size.width
+                                + '" height="' + size.height + '">';
+                            editor.insertContent(html);
+                        }
+                    });
+                }
             });
         }
     });
