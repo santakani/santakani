@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "29b3f7d023a92ba2c63682c0f70e4a59",
-    "content-hash": "5643c153a647f70cdce3048556ea5620",
+    "hash": "ca58164da9b0d7c53d756b5c129043f4",
+    "content-hash": "4e09843a4ffc13307d66b3a177fa15bd",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -204,6 +204,42 @@
                 "html"
             ],
             "time": "2015-08-05 01:03:42"
+        },
+        {
+            "name": "gmo/iso-639",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gmo/iso-639.git",
+                "reference": "c6f7f1233459dbe1833245ae47cdd075b0849ab0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gmo/iso-639/zipball/c6f7f1233459dbe1833245ae47cdd075b0849ab0",
+                "reference": "c6f7f1233459dbe1833245ae47cdd075b0849ab0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gmo\\Iso639\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Convert between ISO-639 codes",
+            "keywords": [
+                "639",
+                "iso",
+                "iso-639",
+                "language"
+            ],
+            "time": "2015-07-17 00:18:37"
         },
         {
             "name": "guzzle/guzzle",
