@@ -11,7 +11,8 @@
         "ezyang/htmlpurifier": "^4.7",
         "html2text/html2text": "^4.0",
         "mledoze/countries": "^1.7",
-        "gmo/iso-639": "^1.0"
+        "gmo/iso-639": "^1.0",
+        "cocur/slugify": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

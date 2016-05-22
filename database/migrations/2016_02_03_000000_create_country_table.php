@@ -40,20 +40,21 @@ class CreateCountryTable extends Migration
 
         // MySQL/MariaDB GEOMETRY, which is not supported by Laravel Blueprint
         DB::statement('ALTER TABLE country ADD coordinate POINT AFTER subregion');
-        DB::statement('ALTER TABLE country ADD border MULTIPOLYGON AFTER coordinate');
 
         Schema::create('country_translation', function (Blueprint $table) {
             $table->increments('id');
+
+            // Parent
             $table->integer('country_id')->unsigned();
+
             // ISO 639-1 codes (2 letters)
             $table->string('locale', 2);
 
-            // Flags
-            $table->boolean('native');
+            // Name
+            $table->string('name')->nullable();
 
-            // Translated content
-            $table->string('name');
-            $table->text('content');
+            // Page content
+            $table->text('content')->nullable();
 
             // Timestamps
             $table->timestamps();
