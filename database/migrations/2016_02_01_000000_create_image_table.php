@@ -35,31 +35,19 @@ class CreateImageTable extends Migration
         Schema::create('image', function (Blueprint $table) {
             $table->increments('id');
 
-            // MIME type used to validate file content and decide file extension
-            // Support image/jpeg, image/png, image/gif
-            $table->string('mime_type');
+            $table->string('mime_type'); // image/jpeg, image/png, image/gif
+            $table->integer('width')->unsigned()->nullable(); // Original width
+            $table->integer('height')->unsigned()->nullable(); // Original height
 
-            // Original width and height. Detect if it has large and medium sizes
-            // generated.
-            $table->integer('width')->unsigned()->nullable();
-            $table->integer('height')->unsigned()->nullable();
-
-            // Who uploaded this image. Users might want to reuse their images.
             $table->integer('user_id')->unsigned()->nullable()->index();
-
-            // Parent model type and id. Use Laravel Polymorphic relationships
-            // "parent_type" can be "designer", "place", "country", "city"
-            $table->string('parent_type')->nullable();
+            $table->string('parent_type')->nullable(); // Polymorphic relationship
             $table->integer('parent_id')->unsigned()->nullable();
 
-            // Timestamps
             $table->timestamps();
             $table->softDeletes();
 
-            // Index
             $table->index(['parent_type', 'parent_id']);
 
-            // Foreign key
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
     }
