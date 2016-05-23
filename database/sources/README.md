@@ -2,6 +2,48 @@
 
 Here are some data source files could be imported into database in some way.
 
+## `countries.json`
+
+Contains 240+ countries and areas. We need to filter some islands and other low
+population areas.
+
+Fetched from <https://github.com/mledoze/countries> with own Chinese translation.
+
+Format:
+
+- `name`
+    - `common` - common name in english
+    - `official` - official name in english
+    - `native` - list of all native names
+        - key: three-letter ISO 639-3 language code
+        - value: name object
+            + key: official - official name translation
+            + key: common - common name translation
+- country code top-level domain (`tld`)
+- code ISO 3166-1 alpha-2 (`cca2`)
+- code ISO 3166-1 numeric (`ccn3`)
+- code ISO 3166-1 alpha-3 (`cca3`)
+- code International Olympic Committee (`cioc`)
+- ISO 4217 currency code(s) (`currency`)
+- calling code(s) (`callingCode`)
+- capital city (`capital`)
+- alternative spellings (`altSpellings`)
+- region
+- subregion
+- list of official languages (`languages`)
+- key: three-letter ISO 639-3 language code
+- value: name of the language in english
+- list of name translations (`translations`)
+- key: three-letter ISO 639-3 language code
+- value: name object
+    + key: official - official name translation
+    + key: common - common name translation
+- latitude and longitude (`latlng`)
+- name of residents (`demonym`)
+- landlocked status (`landlocked`)
+- land borders (`borders`)
+- land area in km² (`area`)
+
 ## `cities15000.txt`
 
 Contain 23499 cities with more than 15000 population. This is almost the big city

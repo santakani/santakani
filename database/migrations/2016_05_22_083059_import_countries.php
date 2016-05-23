@@ -18,17 +18,17 @@ class ImportCountries extends Migration
         $slugify = new Slugify();
         $languages = new Languages();
 
-        $json_string = file_get_contents(base_path('vendor/mledoze/countries/dist/countries.json'));
+        $json_string = file_get_contents(base_path('database/sources/countries.json'));
 
         $country_list = json_decode($json_string, true);
 
         $json_string = null;
 
-        echo "import countries start\n";
+        echo "Import countries start\n";
 
         foreach ($country_list as $country) {
 
-            if (empty($country['latlng']) || empty($country['region'])) {
+            if (!$this->filter($country)) {
                 continue;
             }
 
@@ -48,7 +48,7 @@ class ImportCountries extends Migration
 
             $id = DB::table('country')->where('code', $country['cca2'])->first()->id;
 
-            self::insertTranslation($id, 'en', $country['name']['common']);
+            $this->insertTranslation($id, 'en', $country['name']['common']);
 
             foreach ($country['name']['native'] as $lang_code3 => $name) {
                 if ($lang_code3 === 'cmn' || $lang_code3 === 'zho') {
@@ -56,7 +56,7 @@ class ImportCountries extends Migration
                 } else {
                     $lang_code1 = $languages->findByCode3($lang_code3)->code1();
                 }
-                self::insertTranslation($id, $lang_code1, $name['common']);
+                $this->insertTranslation($id, $lang_code1, $name['common']);
             }
 
             foreach ($country['translations'] as $lang_code3 => $name) {
@@ -65,11 +65,11 @@ class ImportCountries extends Migration
                 } else {
                     $lang_code1 = $languages->findByCode3($lang_code3)->code1();
                 }
-                self::insertTranslation($id, $lang_code1, $name['common']);
+                $this->insertTranslation($id, $lang_code1, $name['common']);
             }
         }
 
-        echo "import countries done\n";
+        echo "Import countries done\n";
     }
 
     /**
@@ -82,19 +82,51 @@ class ImportCountries extends Migration
         // Cannot undo
     }
 
-    static function insertTranslation($id, $locale, $name) {
+
+    /**
+     * These areas will be ignored.
+     *
+     * @param array $country
+     * @return boolean
+     */
+    public function filter($country)
+    {
+        $white_list = [
+
+        ];
+
+        if (in_array($country['cca2'], $white_list)) {
+            return true;
+        }
+
+        if (empty($country['latlng'])) {
+            echo "\tSkip: " . $country['name']['common'] . "\n";
+            return false;
+        }
+
+        $black_list = [
+            'AQ'
+        ];
+
+        if (in_array($country['cca2'], $black_list)) {
+            echo "\tSkip: " . $country['name']['common'] . "\n";
+            return false;
+        }
+
+        return true;
+    }
+
+    public function insertTranslation($id, $locale, $name)
+    {
+        if (empty($id) || empty($locale) || empty($name)) {
+            return;
+        }
+
         if ( count( DB::table('country_translation')->where([
             ['country_id', $id],
             ['locale', $locale],
         ])->first() ) ) {
             return;
-        }
-
-        if (empty($locale)) {
-            echo "skip\n";
-            return;
-        } else {
-            echo $id . "\t" . $locale . "\t" . $name . "\n";
         }
 
         DB::table('country_translation')->insert([
