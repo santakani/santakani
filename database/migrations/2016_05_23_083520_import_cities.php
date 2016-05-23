@@ -1,10 +1,27 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Carbon\Carbon;
 use Cocur\Slugify\Slugify;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * ImportCities
+ *
+ * Database migration to import city data from cities15000.txt.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/City
+ */
 class ImportCities extends Migration
 {
     /**
@@ -83,6 +100,14 @@ class ImportCities extends Migration
         // Cannot undo
     }
 
+    /**
+     * Check unique slug
+     *
+     * @param string $slug
+     * @param int $country_id
+     * @param int $n
+     * @return string
+     */
     public function slug2($slug, $country_id, $n = 0)
     {
         if ($n === 0) {
