@@ -1,11 +1,28 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Carbon\Carbon;
 use Cocur\Slugify\Slugify;
 use Gmo\Iso639\Languages;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * ImportCountries
+ *
+ * Database migration to import country data from countries.json.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Country
+ */
 class ImportCountries extends Migration
 {
     /**
@@ -116,6 +133,13 @@ class ImportCountries extends Migration
         return true;
     }
 
+    /**
+     * Insert translation to country_translation table.
+     *
+     * @param int $id Country ID
+     * @param string $locale Language code
+     * @param string $name Translation of name
+     */
     public function insertTranslation($id, $locale, $name)
     {
         if (empty($id) || empty($locale) || empty($name)) {
