@@ -1,8 +1,25 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * CreateTagTable
+ *
+ * Database migration to create "tag" and "tag_translation" table.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Tag
+ */
 class CreateTagTable extends Migration
 {
     /**
@@ -15,34 +32,29 @@ class CreateTagTable extends Migration
         Schema::create('tag', function (Blueprint $table) {
             $table->increments('id');
 
-            // Name in URL, lowercase, e.g. "chair", "solid-wood"
             $table->string('slug')->unique();
-
-            // Icon/cover image
             $table->integer('image_id')->unsigned()->nullable();
 
-            // Timestamps
             $table->timestamps();
             $table->softDeletes();
 
-            // Foreign key
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
 
         Schema::create('tag_translation', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tag_id')->unsigned();
-            $table->string('locale');
 
-            // Translated content
-            $table->string('name');
-            $table->string('alias')->nullable(); // For better search matches
+            $table->integer('tag_id')->unsigned();
+            $table->string('locale'); // Language code. ISO 639-1 (2 letters)
+
+            $table->string('name')->nullable(); // e.g. "wood", "silver", "furniture"
+            $table->string('alias')->nullable(); // e.g. "cup,mug,glass"
+            $table->text('description')->nullable(); // Short plain text
 
             $table->timestamps();
 
-            // Unique
             $table->unique(['tag_id','locale']);
-            // Foreign key
+
             $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
         });
     }
