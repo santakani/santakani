@@ -1,8 +1,25 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * CreateCountryTable
+ *
+ * Database migration to create "country" and "country_translation" table.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Country
+ */
 class CreateCountryTable extends Migration
 {
     /**
@@ -15,26 +32,15 @@ class CreateCountryTable extends Migration
         Schema::create('country', function (Blueprint $table) {
             $table->increments('id');
 
-            // Name in URL, lower-case. e.g. "finland", "germany"
-            $table->string('slug', 50)->unique();
-
-            // Country code, ISO 3166-1 alpha-2, upper-case. e.g. "FI", "DE"
-            $table->string('code', 2)->unique();
-
-            // Icon/cover image
+            $table->string('slug')->unique(); // e.g. "finland", "germany"
+            $table->string('code')->unique(); // ISO 3166-1 alpha-2. e.g. "FI", "DE"
             $table->integer('image_id')->unsigned()->nullable();
+            $table->string('region')->nullable(); // Continent, e.g. "Europe"
+            $table->string('subregion')->nullable(); // e.g. "East Asia"
 
-            // Region/continent
-            $table->string('region', 10)->nullable();
-
-            // Subregion
-            $table->string('subregion', 20)->nullable();
-
-            // Timestamps
             $table->timestamps();
             $table->softDeletes();
 
-            // Foreign key
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
 
@@ -44,25 +50,16 @@ class CreateCountryTable extends Migration
         Schema::create('country_translation', function (Blueprint $table) {
             $table->increments('id');
 
-            // Parent
             $table->integer('country_id')->unsigned();
+            $table->string('locale'); // Language code. ISO 639-1 (2 letters)
 
-            // ISO 639-1 codes (2 letters)
-            $table->string('locale', 2);
-
-            // Name
             $table->string('name')->nullable();
+            $table->text('content')->nullable(); // HTML
 
-            // Page content
-            $table->text('content')->nullable();
-
-            // Timestamps
             $table->timestamps();
 
-            // Unique
             $table->unique(['country_id','locale']);
 
-            // Foreign key
             $table->foreign('country_id')->references('id')->on('country')->onDelete('cascade');
         });
     }
