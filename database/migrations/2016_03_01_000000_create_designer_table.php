@@ -1,8 +1,25 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * CreateDesignerTable
+ *
+ * Database migration to create "designer" and "designer_translation" table.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Designer
+ */
 class CreateDesignerTable extends Migration
 {
     /**
@@ -15,17 +32,11 @@ class CreateDesignerTable extends Migration
         Schema::create('designer', function (Blueprint $table) {
             $table->increments('id');
 
-            // Location
             $table->integer('country_id')->unsigned()->nullable();
             $table->integer('city_id')->unsigned()->nullable();
-
-            // Cover image
             $table->integer('image_id')->unsigned()->nullable();
-
-            // Owner
             $table->integer('user_id')->unsigned()->nullable();
 
-            // Links
             $table->string('email')->nullable();
             $table->string('website')->nullable();
             $table->string('facebook')->nullable();
@@ -33,11 +44,9 @@ class CreateDesignerTable extends Migration
             $table->string('google_plus')->nullable();
             $table->string('instagram')->nullable();
 
-            // Timestamps
             $table->timestamps();
             $table->softDeletes();
 
-            // Foreign keys
             $table->foreign('country_id')->references('id')->on('country')->onDelete('set null');
             $table->foreign('city_id')->references('id')->on('city')->onDelete('set null');
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
@@ -46,20 +55,18 @@ class CreateDesignerTable extends Migration
 
         Schema::create('designer_translation', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('designer_id')->unsigned();
-            $table->string('locale');
 
-            // Translated content
+            $table->integer('designer_id')->unsigned();
+            $table->string('locale'); // ISO 639-1 (2 letters)
+
             $table->string('name');
             $table->string('tagline');
-            $table->text('content');
+            $table->text('content'); // HTML
 
             $table->timestamps();
 
-            // Unique
             $table->unique(['designer_id','locale']);
 
-            // Foreign key
             $table->foreign('designer_id')->references('id')->on('designer')->onDelete('cascade');
         });
     }
