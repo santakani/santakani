@@ -1,8 +1,26 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
+/**
+ * CityTableSeeder
+ *
+ * Fill test data into "city" and "city_translation" table.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/City
+ * @see https://github.com/santakani/santakani.com/wiki/Test-Data
+ */
 class CityTableSeeder extends Seeder
 {
     /**
@@ -13,33 +31,48 @@ class CityTableSeeder extends Seeder
     public function run()
     {
         $cities = [
-            1 => ['helsinki', 1, 28, 'Helsinki', '赫尔辛基'],
-            2 => ['espoo', 1, 29, 'Espoo', '埃斯波'],
-            3 => ['vantaa', 1, 30, 'Vantaa', '万塔'],
-            4 => ['turku', 1, 31, 'Turku', '图尔库'],
-            5 => ['tampere', 1, 32, 'Tampere', '坦佩雷'],
-            6 => ['oulu', 1, 33, 'Oulu', '奥卢'],
-            7 => ['rovaniemi', 1, 34, 'Rovaniemi', '罗瓦涅米'],
-            8 => ['lahti', 1, 35, 'Lahti', '拉赫蒂'],
+            // slug => [image_id, name_zh, name_fi, name_sv]
+            'helsinki' => [28, '赫尔辛基', 'Helsinki', 'Helsingfors'],
+            'espoo' => [29, '埃斯波', 'Espoo', 'Esbo'],
+            'vantaa' => [30, '万塔', 'Vantaa', 'Vanda'],
+            'turku' => [31, '图尔库', 'Turku', 'Åbo'],
+            'tampere' => [32, '坦佩雷', 'Tampere', 'Tammerfors'],
+            'oulu' => [33, '奥卢', 'Oulu', 'Uleåborg'],
+            'rovaniemi' => [34, '罗瓦涅米', 'Rovaniemen', 'Rovaniemi'],
+            'lahti' => [35, '拉赫蒂', 'Lahti', 'Lahtis'],
         ];
 
-        foreach ($cities as $id => $city) {
-            DB::table('city')->insert([
-                'slug' => $city[0],
-                'country_id' => $city[1],
-                'image_id' => $city[2],
+        $timestamp = Carbon::now()->format('Y-m-d H:i:s');
+
+        foreach ($cities as $slug => $city) {
+            DB::table('city')->where('slug', $slug)->update([
+                'image_id' => $city[0],
             ]);
 
-            DB::table('city_translation')->insert([
-                'city_id' => $id,
-                'locale' => 'en',
-                'name' => $city[3],
-            ]);
+            $id = DB::table('city')->where('slug', $slug)->first()->id;
 
             DB::table('city_translation')->insert([
                 'city_id' => $id,
                 'locale' => 'zh',
-                'name' => $city[4],
+                'name' => $city[1],
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp,
+            ]);
+
+            DB::table('city_translation')->insert([
+                'city_id' => $id,
+                'locale' => 'fi',
+                'name' => $city[2],
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp,
+            ]);
+
+            DB::table('city_translation')->insert([
+                'city_id' => $id,
+                'locale' => 'sv',
+                'name' => $city[3],
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp,
             ]);
         }
     }

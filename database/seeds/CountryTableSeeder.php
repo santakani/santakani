@@ -1,8 +1,26 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
+/**
+ * CountryTableSeeder
+ *
+ * Fill test data into "country" and "country_translation" table.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/Country
+ * @see https://github.com/santakani/santakani.com/wiki/Test-Data
+ */
 class CountryTableSeeder extends Seeder
 {
     /**
@@ -13,31 +31,16 @@ class CountryTableSeeder extends Seeder
     public function run()
     {
         $countries = [
-            1 => ['finland', 'FI', 24, 'Finland', '芬兰'],
-            2 => ['china', 'CN', 25, 'China', '中国'],
-            3 => ['germany', 'DE', 26, 'Germany', '德国'],
-            4 => ['japan', 'JP', 27, 'Japan', '日本'],
+            // code => image_id
+            'FI' => 24,
+            'CN' => 25,
+            'DE' => 26,
+            'JP' => 27,
         ];
 
-        foreach ($countries as $id => $country) {
-            DB::table('country')->insert([
-                'slug' => $country[0],
-                'code' => $country[1],
-                'image_id' => $country[2],
-            ]);
-
-            DB::table('country_translation')->insert([
-                'country_id' => $id,
-                'locale' => 'en',
-                'name' => $country[3],
-                'content' => file_get_contents('http://loripsum.net/api'),
-            ]);
-
-            DB::table('country_translation')->insert([
-                'country_id' => $id,
-                'locale' => 'zh',
-                'name' => $country[4],
-                'content' => file_get_contents('http://loripsum.net/api'),
+        foreach ($countries as $code => $image_id) {
+            DB::table('country')->where('code', $code)->update([
+                'image_id' => $image_id,
             ]);
         }
     }

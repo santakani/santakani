@@ -1,7 +1,25 @@
 <?php
 
+/*
+ * This file is part of santakani.com
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Seeder;
 
+/**
+ * UserTableSeeder
+ *
+ * Fill test data into "user" table.
+ *
+ * @author Guo Yunhe <guoyunhebrave@gmail.com>
+ * @see https://github.com/santakani/santakani.com/wiki/User
+ * @see https://github.com/santakani/santakani.com/wiki/Test-Data
+ */
 class UserTableSeeder extends Seeder
 {
     /**
