@@ -37,7 +37,6 @@ class ImportCities extends Migration
 
         $handle = fopen(base_path("database/sources/cities15000.txt"), "r");
         if ($handle) {
-            $id = 1;
             while (($city = fgetcsv($handle, 0, "\t")) !== false) {
 
                 if (count($city) !== 19) {
@@ -59,7 +58,7 @@ class ImportCities extends Migration
 
                 $slug = $this->slug2($slugify->slugify($city[2]), $country_id);
 
-                DB::table('city')->insert([
+                $id = DB::table('city')->insertGetId([
                     'slug' => $slug,
                     'country_id' => $country_id,
                     'coordinate' => $coordinate,
@@ -77,8 +76,6 @@ class ImportCities extends Migration
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-
-                $id++;
             }
 
             fclose($handle);

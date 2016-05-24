@@ -53,7 +53,7 @@ class ImportCountries extends Migration
             $y = $country['latlng'][1];
             $coordinate = "PointFromText('POINT($x $y)')";
 
-            DB::table('country')->insert([
+            $id = DB::table('country')->insertGetId([
                 'slug' => $slugify->slugify($country['name']['common']),
                 'code' => $country['cca2'],
                 'region' => $country['region'],
@@ -62,8 +62,6 @@ class ImportCountries extends Migration
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-
-            $id = DB::table('country')->where('code', $country['cca2'])->first()->id;
 
             $this->insertTranslation($id, 'en', $country['name']['common']);
 
