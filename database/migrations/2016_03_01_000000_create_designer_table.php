@@ -70,7 +70,9 @@ class CreateDesignerTable extends Migration
             $table->foreign('designer_id')->references('id')->on('designer')->onDelete('cascade');
         });
 
-        DB::statement('ALTER TABLE designer_translation ADD FULLTEXT INDEX designer_translation_name_tagline_content_index(name, tagline, content)');
+        DB::statement('ALTER TABLE designer_translation ADD FULLTEXT INDEX designer_translation_name_index(name)');
+        DB::statement('ALTER TABLE designer_translation ADD FULLTEXT INDEX designer_translation_tagline_index(tagline)');
+        DB::statement('ALTER TABLE designer_translation ADD FULLTEXT INDEX designer_translation_content_index(content)');
     }
 
     /**

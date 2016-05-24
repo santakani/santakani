@@ -74,7 +74,8 @@ class CreatePlaceTable extends Migration
             $table->foreign('place_id')->references('id')->on('place')->onDelete('cascade');
         });
 
-        DB::statement('ALTER TABLE place_translation ADD FULLTEXT INDEX place_translation_name_content_index(name, content)');
+        DB::statement('ALTER TABLE place_translation ADD FULLTEXT INDEX place_translation_name_index(name)');
+        DB::statement('ALTER TABLE place_translation ADD FULLTEXT INDEX place_translation_content_index(content)');
     }
 
     /**
