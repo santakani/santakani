@@ -53,7 +53,7 @@ class CreateCityTable extends Migration
             $table->increments('id');
 
             $table->integer('city_id')->unsigned();
-            $table->string('locale', 2); // ISO 639-1 (2 letters)
+            $table->string('locale'); // ISO 639-1 (2 letters)
 
             $table->string('name')->nullable();
             $table->text('content')->nullable(); // HTML
