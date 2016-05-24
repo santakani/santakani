@@ -39,7 +39,7 @@ class CreateImageTable extends Migration
             $table->integer('width')->unsigned()->nullable(); // Original width
             $table->integer('height')->unsigned()->nullable(); // Original height
 
-            $table->integer('user_id')->unsigned()->nullable()->index();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('parent_type')->nullable(); // Polymorphic relationship
             $table->integer('parent_id')->unsigned()->nullable();
 
