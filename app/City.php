@@ -11,27 +11,33 @@ class City extends Translatable
      */
     protected $table = 'city';
 
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                          Relationship Methods                          //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
+
     /**
-     * Get translations.
+     * Country
      *
-     * @return CityTranslation
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getTranslation($lang = 'en')
+    public function country()
     {
-        return CityTranslation::where([
-            ['city_id', $this->id],
-            ['locale', $lang],
-        ])->first();
+        return $this->belongsTo('App\Country');
     }
 
     /**
-     * Generate full URL to city page
+     * Cover image.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getUrl()
+    public function image()
     {
-        $path = 'city/' . $this->id;
-        return url($path);
+        return $this->belongsTo('App\Image');
     }
+
 }
