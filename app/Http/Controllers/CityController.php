@@ -18,7 +18,7 @@ class CityController extends Controller
     public function index(Request $request)
     {
         $this->validate($request, [
-            'search' => 'string',
+            'search' => 'string|max:20',
             'country_id' => 'integer|exists:country,id',
         ]);
 
