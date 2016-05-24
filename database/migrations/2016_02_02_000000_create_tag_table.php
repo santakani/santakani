@@ -57,6 +57,8 @@ class CreateTagTable extends Migration
 
             $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
         });
+
+        DB::statement('ALTER TABLE tag_translation ADD FULLTEXT INDEX tag_translation_name_alias_description_index(name, alias, description)');
     }
 
     /**

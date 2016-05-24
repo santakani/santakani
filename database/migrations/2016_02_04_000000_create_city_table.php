@@ -46,7 +46,6 @@ class CreateCityTable extends Migration
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
 
-        // MySQL/MariaDB GEOMETRY, which is not supported by Laravel Blueprint
         DB::statement('ALTER TABLE city ADD coordinate POINT AFTER image_id');
 
         Schema::create('city_translation', function (Blueprint $table) {
@@ -64,6 +63,8 @@ class CreateCityTable extends Migration
 
             $table->foreign('city_id')->references('id')->on('city')->onDelete('cascade');
         });
+
+        DB::statement('ALTER TABLE city_translation ADD FULLTEXT INDEX city_translation_name_content_index(name, content)');
     }
 
     /**

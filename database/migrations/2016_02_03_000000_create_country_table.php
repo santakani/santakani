@@ -44,7 +44,6 @@ class CreateCountryTable extends Migration
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
 
-        // MySQL/MariaDB GEOMETRY, which is not supported by Laravel Blueprint
         DB::statement('ALTER TABLE country ADD coordinate POINT AFTER subregion');
 
         Schema::create('country_translation', function (Blueprint $table) {
@@ -62,6 +61,8 @@ class CreateCountryTable extends Migration
 
             $table->foreign('country_id')->references('id')->on('country')->onDelete('cascade');
         });
+
+        DB::statement('ALTER TABLE country_translation ADD FULLTEXT INDEX country_translation_name_content_index(name, content)');
     }
 
     /**
