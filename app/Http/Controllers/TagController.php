@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+
+use App\Tag;
+use App\TagTranslation;
 
 class TagController extends Controller
 {
@@ -13,9 +17,29 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $this->validate($request, [
+            'search' => 'string|max:20',
+        ]);
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+
+            $tags = Tag::whereHas('translations', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })->paginate(15);
+
+        } else {
+            $tags = Tag::paginate(15);
+
+        }
+
+        if ($request->wantsJSON()) {
+            return response()->json($tags->toArray(), 200);
+        } else {
+            return view('page.tag.index', ['tags' => $tags]);
+        }
     }
 
     /**
