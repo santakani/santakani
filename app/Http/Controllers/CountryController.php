@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Country;
+
 class CountryController extends Controller
 {
     /**
@@ -13,9 +15,30 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $this->validate($request, [
+            'search' => 'string|max:20',
+        ]);
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+
+            $countries = Country::whereHas('translations', function ($query) use ($search) {
+                $query->where('name', 'like', $search . '%');
+            })
+                ->paginate(15);
+
+        } else {
+            $countries = Country::paginate(15);
+
+        }
+
+        if ($request->wantsJSON()) {
+            return response()->json($countries->toArray(), 200);
+        } else {
+            return view('page.country.index', ['countries' => $countries]);
+        }
     }
 
     /**

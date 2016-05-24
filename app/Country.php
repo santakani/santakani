@@ -11,27 +11,22 @@ class Country extends Translatable
      */
     protected $table = 'country';
 
-    /**
-     * Get translations.
-     *
-     * @return CountryTranslation
-     */
-    public function getTranslation($lang = 'en')
-    {
-        return CountryTranslation::where([
-            ['country_id', $this->id],
-            ['locale', $lang],
-        ])->first();
-    }
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                          Relationship Methods                          //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
 
     /**
-     * Generate full URL to country page
+     * Cover image.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getUrl()
+    public function image()
     {
-        $path = 'country/' . $this->id;
-        return url($path);
+        return $this->belongsTo('App\Image');
     }
 }
