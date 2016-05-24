@@ -26,7 +26,7 @@ class CityController extends Controller
             $search = $request->input('search');
 
             $cities = City::whereHas('translations', function ($query) use ($search) {
-                $query->where('name', 'like', $search);
+                $query->where('name', 'like', $search . '%');
             })
                 ->where('country_id', $request->input('country_id'))
                 ->paginate(15);
@@ -35,7 +35,7 @@ class CityController extends Controller
             $search = $request->input('search');
 
             $cities = City::whereHas('translations', function ($query) use ($search) {
-                $query->where('name', 'like', $search);
+                $query->where('name', 'like', $search . '%');
             })
                 ->paginate(15);
 
