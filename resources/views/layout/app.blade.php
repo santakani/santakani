@@ -40,20 +40,18 @@
     @stack('templates')
 
     <!-- JavaScript -->
-    <script src="{{ url('/lib/jquery/dist/jquery.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/masonry/dist/masonry.pkgd.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/imagesloaded/imagesloaded.pkgd.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/select2/dist/js/select2.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/flickity/dist/flickity.pkgd.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/lightgallery/dist/js/lightgallery-all.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/Sortable/Sortable.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/background-check/background-check.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="/lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="/lib/masonry/dist/masonry.pkgd.min.js" type="text/javascript"></script>
+    <script src="/lib/imagesloaded/imagesloaded.pkgd.min.js" type="text/javascript"></script>
+    <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+    <script src="/lib/lightgallery/dist/js/lightgallery-all.min.js" type="text/javascript"></script>
+    <script src="/lib/Sortable/Sortable.min.js" type="text/javascript"></script>
+    <script src="/lib/background-check/background-check.min.js" type="text/javascript"></script>
+    <script src="/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js" type="text/javascript"></script>
     <script src="/lib/underscore/underscore-min.js" type="text/javascript"></script>
     <script src="/lib/backbone/backbone-min.js" type="text/javascript"></script>
     <script src="/lib/selectize/dist/js/standalone/selectize.js" type="text/javascript"></script>
-    <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
+    <script src="/js/app.js" type="text/javascript"></script>
     <script type="text/javascript">
         // Global variables from server
         var csrfToken = "{!! csrf_token() !!}";
