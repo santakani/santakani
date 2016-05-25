@@ -12,26 +12,54 @@ class Tag extends Translatable
     protected $table = 'tag';
 
     /**
-     * Get translations.
+     * Attributes that will be appeded to Array or JSON output.
      *
-     * @return TagTranslation
+     * @var array
      */
-    public function getTranslation($lang = 'en')
-    {
-        return TagTranslation::where([
-            ['tag_id', $this->id],
-            ['locale', $lang],
-        ])->first();
-    }
+    protected $appends = [
+        'url', 'name'
+    ];
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                          Relationship Methods                          //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                           Dynamic Properties                           //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
 
     /**
-     * Generate full URL to tag page
+     * "url" getter.
      *
      * @return string
      */
-    public function getUrl()
+    public function getUrlAttribute()
     {
-        $path = 'tag/' . $this->id;
-        return url($path);
+        return url('tag/' . $this->id);
     }
+
+    /**
+     * "name" getter.
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->text('name');
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                              Other Methods                             //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
+
 }

@@ -9,6 +9,9 @@
 var ImagePreview = require('../../view/image-preview');
 var Image = require('../../model/image');
 var ImageManager = require('../../view/image-manager');
+var CountrySelect = require('../../view/country-select');
+var CitySelect = require('../../view/city-select');
+var TagSelect = require('../../view/tag-select');
 
 $(function () {
 
@@ -77,6 +80,9 @@ $(function () {
         }
     });
 
+    var countrySelect = new CountrySelect({el: '.country-select'});
+    var citySelect = new CitySelect({el: '.city-select'});
+    var tagSelect = new TagSelect({el: '.tag-select'});
 
 
     // Submit form

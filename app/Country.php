@@ -11,6 +11,24 @@ class Country extends Translatable
      */
     protected $table = 'country';
 
+    /**
+     * Attributes that will be appeded to Array or JSON output.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'url', 'name'
+    ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'coordinate'
+    ];
+
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -28,5 +46,34 @@ class Country extends Translatable
     public function image()
     {
         return $this->belongsTo('App\Image');
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                           Dynamic Properties                           //
+    //                                                                        //
+    ////////////////////////////////////////////////////////////////////////////
+
+
+    /**
+     * "url" getter.
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return url('country/' . $this->id);
+    }
+
+    /**
+     * "name" getter.
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->text('name');
     }
 }

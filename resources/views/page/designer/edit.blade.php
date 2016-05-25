@@ -82,8 +82,8 @@
                 Location
             </label>
 
-            <div class="col-sm-10 col-md-8">
-                <select class="country-select">
+            <div class="col-sm-5 col-md-4">
+                <select class="country-select form-control">
                     @if (old('country_id') && count(\App\Country::find(old('country_id'))))
                         <option value="{{ old('country_id') }}" selected="selected">
                             {{ \App\Country::find(old('country_id'))->text('name') }}
@@ -94,8 +94,10 @@
                         </option>
                     @endif
                 </select>
+            </div>
 
-                <select class="city-select">
+            <div class="col-sm-5 col-md-4">
+                <select class="city-select form-control">
                     @if (old('city_id') && count(\App\City::find(old('city_id'))))
                         <option value="{{ old('city_id') }}" selected="selected">
                             {{ \App\City::find(old('city_id'))->text('name') }}
@@ -112,7 +114,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Tags</label>
             <div class="col-sm-10 col-md-8">
-                <select class="tag-select">
+                <select class="tag-select" style="width: 100%" multiple="multiple">
                     @if ( count( old('tags') ) )
                         @foreach (\App\Tag::find( old('tags') ) as $tag)
                             <option value="{{ $tag->id }}" selected="selected">

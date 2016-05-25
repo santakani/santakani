@@ -15,6 +15,8 @@
     <link href="{{ url('/lib/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/lib/flickity/dist/flickity.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/lib/lightgallery/dist/css/lightgallery.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="/lib/selectize/dist/css/selectize.css" rel="stylesheet" type="text/css"/>
+    <link href="/lib/selectize/dist/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css"/>
     <link href="{{ url('/css/app.css') }}" rel="stylesheet" type="text/css"/>
     @stack('styles')
 </head>
@@ -52,6 +54,7 @@
     <script src="{{ url('/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="/lib/underscore/underscore-min.js" type="text/javascript"></script>
     <script src="/lib/backbone/backbone-min.js" type="text/javascript"></script>
+    <script src="/lib/selectize/dist/js/standalone/selectize.js" type="text/javascript"></script>
     <script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
         // Global variables from server
