@@ -19,7 +19,9 @@
 
         <div class="form-group">
             <label for="input-name" class="col-sm-2 control-label">
-                Name</label>
+                Name
+            </label>
+
             <div class="col-sm-10 col-md-8">
                 <input name="name" type="text" class="form-control" id="input-name"
                     value="{{ old('name')===null?$designer->text('name', 'en'):old('name') }}"
@@ -30,7 +32,9 @@
 
         <div id="image-form-group" class="form-group">
             <label class="col-sm-2 control-label">
-                Cover image</label>
+                Cover image
+            </label>
+
             <div class="col-sm-10 col-md-8">
                 <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
                 @if ($image = App\Image::find(old('image')))
@@ -49,7 +53,10 @@
         </div>
 
         <div class="form-group">
-            <label for="input-tagline" class="col-sm-2 control-label">Tagline</label>
+            <label for="input-tagline" class="col-sm-2 control-label">
+                Tagline
+            </label>
+
             <div class="col-sm-10 col-md-8">
                 <input type="text" name="tagline" class="form-control" id="input-tagline"
                     placeholder="Express design philosophy in short" maxlength="255"
@@ -59,7 +66,9 @@
 
         <div class="form-group">
             <label for="input-content" class="col-sm-2 control-label">
-                Story</label>
+                Content
+            </label>
+
             <div class="col-sm-10 col-md-8">
                 <textarea name="content" class="form-control tinymce" id="input-content"
                     placeholder="Introduce your unique design story..." rows="5">{{
@@ -69,28 +78,55 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Location</label>
-            <div class="col-sm-5 col-md-4">
-                @include('component.input.country', [
-                    'class' => 'form-control',
-                    'selected' => old('country')===null?$designer->country_id:old('country')
-                ])
-            </div>
-            <div class="col-sm-5 col-md-4">
-                @include('component.input.city', [
-                    'class' => 'form-control',
-                    'selected' => old('city')===null?$designer->city_id:old('city')
-                ])
+            <label class="col-sm-2 control-label">
+                Location
+            </label>
+
+            <div class="col-sm-10 col-md-8">
+                <select class="country-select">
+                    @if (old('country_id') && count(\App\Country::find(old('country_id'))))
+                        <option value="{{ old('country_id') }}" selected="selected">
+                            {{ \App\Country::find(old('country_id'))->text('name') }}
+                        </option>
+                    @elseif ($designer->country_id)
+                        <option value="{{ $designer->country_id }}" selected="selected">
+                            {{ $designer->country->text('name') }}
+                        </option>
+                    @endif
+                </select>
+
+                <select class="city-select">
+                    @if (old('city_id') && count(\App\City::find(old('city_id'))))
+                        <option value="{{ old('city_id') }}" selected="selected">
+                            {{ \App\City::find(old('city_id'))->text('name') }}
+                        </option>
+                    @elseif ($designer->city_id)
+                        <option value="{{ $designer->city_id }}" selected="selected">
+                            {{ $designer->city->text('name') }}
+                        </option>
+                    @endif
+                </select>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label">Tags</label>
             <div class="col-sm-10 col-md-8">
-                @include('component.input.tag', [
-                    'class' => 'form-control',
-                    'selected' => old('tags')===null?$designer->tag_ids:old('tags')
-                ])
+                <select class="tag-select">
+                    @if ( count( old('tags') ) )
+                        @foreach (\App\Tag::find( old('tags') ) as $tag)
+                            <option value="{{ $tag->id }}" selected="selected">
+                                {{ $tag->text('name') }}
+                            </option>
+                        @endforeach
+                    @elseif ( count( $designer->tags ) )
+                        @foreach ($designer->tags as $tag)
+                            <option value="{{ $tag->id }}" selected="selected">
+                                {{ $tag->text('name') }}
+                            </option>
+                        @endforeach
+                    @endif
+                </select>
             </div>
         </div>
 
