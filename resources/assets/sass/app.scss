@@ -1,6 +1,7 @@
 // Core variables, override bootstrap variables and define new
 @import "base/variable";
 
+
 // Bootstrap
 $icon-font-path: '/lib/bootstrap-sass/assets/fonts';
 @import "public/lib/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -9,14 +10,14 @@ $icon-font-path: '/lib/bootstrap-sass/assets/fonts';
 $roboto-font-path: '/lib/roboto-fontface/fonts';
 @import "public/lib/roboto-fontface/css/roboto-fontface.scss";
 
-// Select2 Bootstrap theme
-@import "public/lib/select2-bootstrap-theme/src/select2-bootstrap.scss";
-
 // Base
 @import "base/mixin";
 @import "base/typography";
 
-// Vendor
+// Libraries
+@import "node_modules/openlayers/dist/ol";
+
+// Vendor override
 @import "vendor/light-gallery";
 
 // Layout

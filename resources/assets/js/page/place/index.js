@@ -1,20 +1,21 @@
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('place-map-draw'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
-}
-
 $(function () {
-    $('#place-map-inner').affix({
-        offset: {
-            top: function () {
-                return this.top = $('#kanibar').outerHeight(true) + 20;
-            },
-            bottom: function () {
-                return this.bottom = $('footer').outerHeight(true) + 20;
-            }
-        }
+
+    if ($('#place-index-page').length === 0) {
+        return;
+    }
+
+    var ol = require('openlayers');
+
+    var map = new ol.Map({
+        target: 'place-map-draw',
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM({layer: 'sat'})
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([24.94095, 60.17149]),
+            zoom: 12
+        })
     });
 });

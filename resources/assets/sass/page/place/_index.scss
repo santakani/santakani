@@ -1,129 +1,112 @@
-#place-wrapper {
-    width: 100%;
-    overflow: hidden;
-
-    #place-map {
-        float: left;
-        width: 50%;
-        height: 600px;
-
-        @media screen and (max-width: $screen-xs-max) {
-            float: none;
-            width: 100%;
-            height: 200px;
-        }
-
-        #place-map-inner, #place-map-draw {
-            width: 100%;
-            height: 100%;
-        }
-
-        #place-map-inner {
-            &.affix-top {
-                position: relative;
-            }
-
-            &.affix {
-                position: fixed;
-                top: $custom-navbar-height;
-                left: 0;
-                bottom: 0;
-                width: 50%;
-                height: auto;
-                z-index: 1;
-
-                @media screen and (max-width: $screen-xs-max) {
-                    right: 0;
-                    bottom: auto;
-                    width: 100%;
-                    height: 200px;
-                }
-            }
-
-            &.affix-bottom {
-                position: relative;
-            }
-        }
+#place-index-page {
+    main {
+        width: 100%;
+        overflow: hidden;
     }
 
-    #place-list {
-        margin-left: 50%;
-        padding: 0 20px;
+    footer {
+        display: none;
+    }
+}
+
+#place-map {
+    position: fixed;
+    top: $custom-navbar-height;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    height: auto;
+    z-index: 1;
+
+    @media screen and (max-width: $screen-xs-max) {
+        float: none;
+        width: 100%;
+        height: 200px;
+    }
+
+    #place-map-inner, #place-map-draw {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+#place-list {
+    margin-left: 50%;
+    padding: 0 20px;
+
+    @media screen and (max-width: $screen-xs-max) {
+        margin-left: 0;
+        padding: 0;
+    }
+
+    article.place {
+        display: flex;
+        height: 200px;
+        margin-bottom: 20px;
 
         @media screen and (max-width: $screen-xs-max) {
-            margin-left: 0;
-            padding: 0;
+            height: 150px;
+            margin-bottom: 10px;
+            font-size: $font-size-small;
         }
 
-        article.place {
-            display: flex;
+        .image {
+            @include image-cover();
+            position: relative;
+            flex: 0 0 auto;
+            width: 200px;
             height: 200px;
-            margin-bottom: 20px;
+            float: left;
 
             @media screen and (max-width: $screen-xs-max) {
+                width: 150px;
                 height: 150px;
-                margin-bottom: 10px;
-                font-size: $font-size-small;
             }
 
-            .image {
-                @include image-cover();
-                position: relative;
-                flex: 0 0 auto;
-                width: 200px;
-                height: 200px;
-                float: left;
+            .type {
+                position: absolute;
+                left: 0;
+                top: 1em;
+                display: block;
+                padding: 0.2em 0.5em;
+                color: #ffffff;
+                background-color: #000000;
+            }
+        }
+
+        .text {
+            flex: 1 1 100px;
+            padding: 10px;
+            overflow: hidden;
+
+            .title {
+                margin-top: 0;
+
+                small {
+                    display: inline-block;
+                    margin: 0.5em 0;
+                }
 
                 @media screen and (max-width: $screen-xs-max) {
-                    width: 150px;
-                    height: 150px;
-                }
-
-                .type {
-                    position: absolute;
-                    left: 0;
-                    top: 1em;
-                    display: block;
-                    padding: 0.2em 0.5em;
-                    color: #ffffff;
-                    background-color: #000000;
+                    font-size: $font-size-small;
+                    small {
+                        font-size: $font-size-small;
+                    }
                 }
             }
 
-            .text {
-                flex: 1 1 100px;
-                padding: 10px;
-                overflow: hidden;
+            .tag {
+                display: inline-block;
+                font-size: $font-size-small;
+                color: $brand-info;
+                border: 1px solid $brand-info;
+                padding: 0.2em 0.5em;
+                border-radius: 99px;
 
-                .title {
-                    margin-top: 0;
-
-                    small {
-                        display: inline-block;
-                        margin: 0.5em 0;
-                    }
-
-                    @media screen and (max-width: $screen-xs-max) {
-                        font-size: $font-size-small;
-                        small {
-                            font-size: $font-size-small;
-                        }
-                    }
-                }
-
-                .tag {
-                    display: inline-block;
-                    font-size: $font-size-small;
-                    color: $brand-info;
-                    border: 1px solid $brand-info;
-                    padding: 0.2em 0.5em;
-                    border-radius: 99px;
-
-                    @media screen and (max-width: $screen-xs-max) {
-                        border: none;
-                        padding: 0;
-                        border-radius: 0;
-                    }
+                @media screen and (max-width: $screen-xs-max) {
+                    border: none;
+                    padding: 0;
+                    border-radius: 0;
                 }
             }
         }

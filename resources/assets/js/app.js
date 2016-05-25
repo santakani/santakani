@@ -1,13 +1,23 @@
 /**
- * Currently only load own JavaScript, not third-party libraries.
+ * Load all JavaScript
  */
 
-// jQuery plugins
-require('./jquery/go-to');
+(function () {
 
-// Utilities
-require('./utility/template');
+    var npmPath = '../../../node_modules';
 
-// Pages
-require('./page/designer/show');
-require('./page/designer/edit');
+    // Libraries
+    require('openlayers');
+
+    // jQuery plugins
+    require('./jquery/go-to');
+
+    // Utilities
+    require('./utility/template');
+
+    // Pages
+    require('./page/designer/show');
+    require('./page/designer/edit');
+
+    require('./page/place/index');
+})();
