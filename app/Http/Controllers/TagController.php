@@ -27,7 +27,7 @@ class TagController extends Controller
             $search = $request->input('search');
 
             $tags = Tag::whereHas('translations', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', $search . '%');
             })->paginate(15);
 
         } else {
