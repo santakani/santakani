@@ -7,6 +7,8 @@ module.exports = Backbone.View.extend({
     initialize: function (options) {
         this.$el.selectize({
 
+            plugins: ['remove_button'],
+
             valueField: 'id',
 
             labelField: 'name',
