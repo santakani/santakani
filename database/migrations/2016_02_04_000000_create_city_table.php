@@ -35,18 +35,19 @@ class CreateCityTable extends Migration
             $table->string('slug');
             $table->integer('country_id')->unsigned()->nullable();
             $table->integer('image_id')->unsigned()->nullable();
+            $table->float('latitude', 10, 6)->nullable();
+            $table->float('longitude', 10, 6)->nullable();
             $table->string('timezone'); // "Europe/Helsinki", "Asia/Shanghai"
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->unique(['country_id', 'slug']);
+            $table->index(['latitude', 'longitude']);
 
             $table->foreign('country_id')->references('id')->on('country')->onDelete('set null');
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
-
-        DB::statement('ALTER TABLE city ADD coordinate POINT AFTER image_id');
 
         Schema::create('city_translation', function (Blueprint $table) {
             $table->increments('id');

@@ -40,6 +40,8 @@ class CreatePlaceTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
 
             $table->string('address');
+            $table->float('latitude', 10, 6)->nullable();
+            $table->float('longitude', 10, 6)->nullable();
 
             $table->string('email');
             $table->string('phone');
@@ -50,13 +52,13 @@ class CreatePlaceTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->index(['latitude', 'longitude']);
+
             $table->foreign('country_id')->references('id')->on('country')->onDelete('set null');
             $table->foreign('city_id')->references('id')->on('city')->onDelete('set null');
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
-
-        DB::statement('ALTER TABLE place ADD coordinate POINT AFTER address' );
 
         Schema::create('place_translation', function (Blueprint $table) {
             $table->increments('id');

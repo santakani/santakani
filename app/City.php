@@ -17,7 +17,7 @@ class City extends Translatable
      * @var array
      */
     protected $appends = [
-        'url', 'name'
+        'url', 'name', 'country_name'
     ];
 
     /**
@@ -26,7 +26,7 @@ class City extends Translatable
      * @var array
      */
     protected $hidden = [
-        'coordinate'
+        //
     ];
 
 
@@ -85,6 +85,16 @@ class City extends Translatable
     public function getNameAttribute()
     {
         return $this->text('name');
+    }
+
+    /**
+     * "name" getter.
+     *
+     * @return string
+     */
+    public function getCountryNameAttribute()
+    {
+        return $this->country->text('name');
     }
 
 }

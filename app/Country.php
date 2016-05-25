@@ -26,7 +26,7 @@ class Country extends Translatable
      * @var array
      */
     protected $hidden = [
-        'coordinate'
+        //
     ];
 
 

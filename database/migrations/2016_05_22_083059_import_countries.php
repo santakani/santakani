@@ -49,16 +49,13 @@ class ImportCountries extends Migration
                 continue;
             }
 
-            $x = $country['latlng'][0];
-            $y = $country['latlng'][1];
-            $coordinate = "PointFromText('POINT($x $y)')";
-
             $id = DB::table('country')->insertGetId([
                 'slug' => $slugify->slugify($country['name']['common']),
                 'code' => $country['cca2'],
                 'region' => $country['region'],
                 'subregion' => $country['subregion'],
-                'coordinate' => DB::raw($coordinate),
+                'latitude' => $country['latlng'][0],
+                'longitude' => $country['latlng'][1],
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
@@ -66,20 +63,12 @@ class ImportCountries extends Migration
             $this->insertTranslation($id, 'en', $country['name']['common']);
 
             foreach ($country['name']['native'] as $lang_code3 => $name) {
-                if ($lang_code3 === 'cmn' || $lang_code3 === 'zho') {
-                    $lang_code1 = 'zh';
-                } else {
-                    $lang_code1 = $languages->findByCode3($lang_code3)->code1();
-                }
+                $lang_code1 = $languages->findByCode3($lang_code3)->code1();
                 $this->insertTranslation($id, $lang_code1, $name['common']);
             }
 
             foreach ($country['translations'] as $lang_code3 => $name) {
-                if ($lang_code3 === 'cmn' || $lang_code3 === 'zho') {
-                    $lang_code1 = 'zh';
-                } else {
-                    $lang_code1 = $languages->findByCode3($lang_code3)->code1();
-                }
+                $lang_code1 = $languages->findByCode3($lang_code3)->code1();
                 $this->insertTranslation($id, $lang_code1, $name['common']);
             }
         }

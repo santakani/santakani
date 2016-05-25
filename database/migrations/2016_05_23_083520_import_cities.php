@@ -44,10 +44,6 @@ class ImportCities extends Migration
                     continue;
                 }
 
-                $x = $city[4];
-                $y = $city[5];
-                $coordinate = "PointFromText('POINT($x $y)')";
-
                 $country = DB::table('country')->where('code', $city[8])->first();
                 if (isset($country->id)) {
                     $country_id = $country->id;
@@ -61,9 +57,9 @@ class ImportCities extends Migration
                 $id = DB::table('city')->insertGetId([
                     'slug' => $slug,
                     'country_id' => $country_id,
-                    'coordinate' => $coordinate,
+                    'latitude' => $city[4],
+                    'longitude' => $city[5],
                     'timezone' => $city[17],
-                    'coordinate' => DB::raw($coordinate),
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);

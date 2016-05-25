@@ -46,18 +46,15 @@ class PlaceTableSeeder extends Seeder
         $timestamp = Carbon::now()->format('Y-m-d H:i:s');
 
         foreach ($places as $id => $place) {
-            $x = 60.1686973 + rand(0, 1000) / 1000 - 0.5;
-            $y = 24.9512867 + rand(0, 1000) / 1000 - 0.5;
-            $point = "PointFromText('POINT($x $y)')";
-
             DB::table('place')->insert([
                 'country_id' => $place[0],
                 'city_id' => $place[1],
-                'coordinate' => DB::raw($point),
                 'image_id' => $place[2],
                 'user_id' => $place[3],
                 'type' => 'store',
                 'address' => 'Servinkuja 1 B 19',
+                'latitude' => 60.1686973 + rand(0, 1000) / 1000 - 0.5,
+                'longitude' => 24.9512867 + rand(0, 1000) / 1000 - 0.5,
                 'phone' => '+3581234567',
                 'email' => 'contact@example.com',
                 'website' => 'http://www.example.com/',

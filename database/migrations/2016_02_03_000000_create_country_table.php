@@ -37,14 +37,16 @@ class CreateCountryTable extends Migration
             $table->integer('image_id')->unsigned()->nullable();
             $table->string('region')->nullable(); // Continent, e.g. "Europe"
             $table->string('subregion')->nullable(); // e.g. "East Asia"
+            $table->float('latitude', 10, 6)->nullable();
+            $table->float('longitude', 10, 6)->nullable();
 
             $table->timestamps();
             $table->softDeletes();
 
+            $table->index(['latitude', 'longitude']);
+
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
-
-        DB::statement('ALTER TABLE country ADD coordinate POINT AFTER subregion');
 
         Schema::create('country_translation', function (Blueprint $table) {
             $table->increments('id');
