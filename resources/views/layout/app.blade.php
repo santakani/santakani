@@ -8,16 +8,14 @@
 
     <title>{{ isset($title) ? ($title.' - SantaKani') : 'SantaKani - Stories of design?!' }}</title>
 
-    <link rel="shortcut icon" href="{{ url('/favicon.png') }}" type="image/png">
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
 
     <!-- CSS -->
-    <link href="{{ url('/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('/lib/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('/lib/flickity/dist/flickity.min.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('/lib/lightgallery/dist/css/lightgallery.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/lib/lightgallery/dist/css/lightgallery.min.css" rel="stylesheet" type="text/css"/>
     <link href="/lib/selectize/dist/css/selectize.css" rel="stylesheet" type="text/css"/>
     <link href="/lib/selectize/dist/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('/css/app.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="/css/app.css" rel="stylesheet" type="text/css"/>
     @stack('styles')
 </head>
 

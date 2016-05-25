@@ -18,19 +18,15 @@
   ],
   "dependencies": {
     "Sortable": "^1.4.2",
-    "flickity": "^1.2.1",
     "font-awesome": "^4.5.0",
     "imagesloaded": "^4.1.0",
     "lightgallery": "^1.2.18",
     "masonry": "^4.0.0",
-    "select2": "^4.0.2",
     "tinymce": "^4.3.11",
     "roboto-fontface": "^0.4.5",
     "bootstrap-sass": "^3.3.6",
-    "select2-bootstrap-theme": "^0.1.0-beta.4",
     "background-check": "^1.2.2",
     "backbone": "^1.3.3",
-    "requirejs": "^2.2.0",
     "selectize": "^0.12.1"
   }
 }
