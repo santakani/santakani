@@ -1,11 +1,11 @@
 // A custom jQuery plugin to scroll window to specific element.
 // Useage: $('#my-div').goTo();
 
-(function($) {
-    $.fn.goTo = function() {
-        $('html, body').animate({
-            scrollTop: $(this).offset().top - 20 + 'px'
-        }, 'fast');
-        return this; // for chaining...
+
+$.fn.goTo = function(offset) {
+    if (!offset) {
+        offset = 0;
     }
-})(jQuery);
+    $('html, body').scrollTop($(this).offset().top - offset);
+    return this; // for chaining...
+};

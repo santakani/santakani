@@ -1,40 +1,117 @@
+var ol = require('openlayers');
+var d3 = require('d3');
+
+var Place = Backbone.Model.extend({
+    defaults: {
+        active: false,
+        selected: false,
+    },
+});
+
+var PlaceList = Backbone.Collection.extend({
+    model: Place,
+});
+
+var PlaceRow = Backbone.View.extend({
+
+    tagName: 'article',
+
+    className: 'place',
+
+    template: 'hover',
+
+    events: {
+        'mouseenter': 'activate',
+        'mouseleave': 'deactivate',
+    },
+
+    initialize: function () {
+        var lon = this.model.get('longitude');
+        var lat = this.model.get('latitude');
+
+        this.point = new ol.Feature({
+            geometry: new ol.geom.Point( ol.proj.fromLonLat([lon, lat]) )
+        });
+
+        this.$('.content').text(this.$('.content').text());
+
+        this.update();
+
+        // Model events
+        this.listenTo(this.model, 'change:color', this.updateColor);
+        this.listenTo(this.model, 'change:active', this.updateActive);
+    },
+
+    update: function () {
+        this.updateColor();
+        this.updateActive();
+    },
+
+    updateColor: function () {
+        this.$('.dot').css('background', this.model.get('color'));
+        this.updatePoint();
+    },
+
+    updateActive: function () {
+        if (this.model.get('active')) {
+            this.$el.addClass('active');
+        } else {
+            this.$el.removeClass('active');
+        }
+        this.updatePoint();
+    },
+
+    updatePoint: function () {
+        if (this.model.get('active')) {
+            var src = '/img/icon/map-dot-active.svg';
+        } else {
+            var src = '/img/icon/map-dot.svg';
+        }
+        this.point.setStyle(new ol.style.Style({
+            image: new ol.style.Icon( ({
+                color: this.model.get('color'),
+                src: src
+            }))
+        }));
+    },
+
+    activate: function () {
+        this.model.set('active', true);
+    },
+
+    deactivate: function () {
+        this.model.set('active', false);
+    },
+
+});
+
 $(function () {
 
     if ($('#place-index-page').length === 0) {
         return;
     }
 
-    var ol = require('openlayers');
-    var d3 = require('d3');
-
     var c20 = d3.scale.category20().range(); // 20 different colors
 
+    var places = new PlaceList();
+    var placeRows = [];
     var points = [];
 
     $('article.place').each(function (index) {
-
-        var icon = new ol.style.Icon( ({
-            color: c20[index],
-            src: '/img/icon/map-dot.png'
-        }));
-
-        $(this).find('.dot').css('background', c20[index]);
-
-        var $content = $(this).find('.content');
-        $content.text($content.text());
-
-        var lon = $(this).data('longitude');
-        var lat = $(this).data('latitude');
-
-        var point = new ol.Feature({
-            geometry: new ol.geom.Point( ol.proj.fromLonLat([lon, lat]) )
+        var place = new Place({
+            latitude: $(this).data('latitude'),
+            longitude: $(this).data('longitude'),
+            color: c20[index]
         });
 
-        point.setStyle(new ol.style.Style({
-            image: icon
-        }));
+        var placeRow = new PlaceRow({
+            el: this,
+            model: place,
+        });
 
-        points.push(point);
+        places.push(place);
+        placeRows.push(placeRow);
+        points.push(placeRow.point);
     });
 
     var map = new ol.Map({
@@ -54,5 +131,28 @@ $(function () {
             center: ol.proj.fromLonLat([24.94095, 60.17149]),
             zoom: 12
         })
+    });
+
+    map.on('pointermove', function(e) {
+        var pixelFeature;
+
+        map.forEachFeatureAtPixel(e.pixel, function(feature, layer) {
+            for (var i = 0; i < points.length; i++) {
+                if (feature === points[i]) {
+                    pixelFeature = feature;
+                }
+            }
+        });
+
+
+        for (var i = 0; i < placeRows.length; i++) {
+            if (pixelFeature === placeRows[i].point) {
+                placeRows[i].model.set('active', true);
+                placeRows[i].$el.goTo(100);
+            } else {
+                placeRows[i].model.set('active', false);
+            }
+        }
+
     });
 });

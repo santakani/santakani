@@ -44,6 +44,10 @@
         height: 200px;
         margin-bottom: 20px;
 
+        &.active {
+            background-color: #f0f0f0;
+        }
+
         @media screen and (max-width: $screen-xs-max) {
             height: 150px;
             margin-bottom: 10px;
