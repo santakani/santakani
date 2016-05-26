@@ -19,22 +19,6 @@ nav.custom-navbar {
         margin: 0;
         padding: 0;
 
-        > li {
-            height: $custom-navbar-height;
-            line-height: $custom-navbar-height;
-
-            > a {
-                display: block;
-                height: 100%;
-                padding: 0 5px;
-                text-decoration: none;
-                color: $gray;
-                &:hover {
-                    text-decoration: none;
-                }
-            }
-        }
-
         &.left {
             flex: 1 0 auto;
         }
@@ -42,6 +26,39 @@ nav.custom-navbar {
         &.right {
             flex: 0 0 auto;
         }
+
+        > li {
+            height: $custom-navbar-height;
+            line-height: $custom-navbar-height;
+
+            > a {
+                display: block;
+                height: 100%;
+                padding: 0 10px;
+                text-decoration: none;
+                color: $gray;
+                border-bottom: 4px solid transparent;
+                transition: 0.3s;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            &.active, &:hover {
+                > a {
+                    color: $brand-info;
+                    border-bottom: 4px solid $brand-info;
+                }
+            }
+
+            &:hover {
+                > a {
+                    background-color: lighten($brand-info, 35%);
+                }
+            }
+        }
+
     }
 
     .logo {
@@ -61,8 +78,13 @@ nav.custom-navbar {
     @media screen and (max-width: $screen-xs-max) {
         font-size: $font-size-small;
 
+        .logo {
+            display: none;
+        }
+
         .fa {
-            font-size: $font-size-base;
+            font-size: 18px;
+            line-height: $custom-navbar-height;
         }
     }
 }

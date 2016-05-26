@@ -2,6 +2,7 @@
     'title' => 'Register',
     'body_id' => 'register-page',
     'body_class' => 'register auth user',
+    'active_nav' => 'register',
 ])
 
 @section('main')

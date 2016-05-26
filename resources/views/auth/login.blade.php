@@ -2,6 +2,7 @@
     'title' => 'Log In',
     'body_id' => 'login-page',
     'body_class' => 'login auth user',
+    'active_nav' => 'login',
 ])
 
 @section('main')

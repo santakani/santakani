@@ -2,6 +2,7 @@
     'title' => 'Places',
     'body_id' => 'place-index-page',
     'body_class' => 'place-index-page place-page index-page',
+    'active_nav' => 'place',
 ])
 
 @section('main')

@@ -2,6 +2,7 @@
     'title' => 'Design Stories',
     'body_id' => 'designer-index-page',
     'body_class' => 'designer-index index',
+    'active_nav' => 'designer',
 ])
 
 @section('main')
