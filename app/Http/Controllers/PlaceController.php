@@ -16,7 +16,8 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = Place::all();
+        $places = Place::scope()->get();
+
         return view('page.place.index', [
             'body_class' => 'places',
             'active_nav' => 'place',

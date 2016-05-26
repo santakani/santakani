@@ -14,13 +14,13 @@
 <div id="place-list">
     @foreach ($places as $place)
         <article id="place-{{ $place->id }}" class="place">
-            <div class="image" style="background-image:url({{ $place->getImage()->file_urls['thumb'] }})">
+            <div class="image" style="background-image:url({{ $place->image->file_urls['thumb'] }})">
                 <span class="type">{{ $place->type }}</span>
             </div>
             <div class="text">
                 <h3 class="title">
-                    <a href="{{ url('/place/' . $place->id) }}">
-                        {{ $place->getTranslation()->name }}
+                    <a href="{{ $place->url }}">
+                        {{ $place->text('name') }}
                     </a>
                     <small>
                         <i class="fa fa-heart-o"></i> 59
@@ -33,7 +33,7 @@
                     <span class="tag">knitwear</span>
                 </p>
                 <div class="contnet">
-                    {!! $place->getTranslation()->content !!}
+                    {!! $place->text('content') !!}
                 </div>
             </div>
         </article>
