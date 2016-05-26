@@ -81,6 +81,7 @@
 
             .title {
                 margin-top: 0;
+                a {color: $gray-light;}
 
                 small {
                     display: inline-block;
@@ -93,6 +94,14 @@
                         font-size: $font-size-small;
                     }
                 }
+            }
+
+            .dot {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                background: #fff;
+                border-radius: 99px;
             }
 
             .tag {

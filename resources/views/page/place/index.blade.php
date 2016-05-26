@@ -13,12 +13,15 @@
 
 <div id="place-list">
     @foreach ($places as $place)
-        <article id="place-{{ $place->id }}" class="place">
-            <div class="image" style="background-image:url({{ $place->image->file_urls['thumb'] }})">
+        <article id="place-{{ $place->id }}" class="place"
+            data-id="{{ $place->id }}" data-latitude="{{ $place->latitude }}"
+            data-longitude="{{ $place->longitude }}">
+            <div class="image" style="background-image:url({{ $place->image?$place->image->file_urls['thumb']:'http://placehold.it/200x200?text=NO+IMAGE' }})">
                 <span class="type">{{ $place->type }}</span>
             </div>
             <div class="text">
                 <h3 class="title">
+                    <span class="dot"></span>
                     <a href="{{ $place->url }}">
                         {{ $place->text('name') }}
                     </a>
@@ -32,7 +35,7 @@
                     <span class="tag">tableware</span>
                     <span class="tag">knitwear</span>
                 </p>
-                <div class="contnet">
+                <div class="content">
                     {!! $place->text('content') !!}
                 </div>
             </div>
