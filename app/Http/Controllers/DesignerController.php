@@ -205,6 +205,7 @@ class DesignerController extends Controller
             'city_id' => 'integer|exists:city,id',
             'tag_ids.*' => 'integer|exists:tag,id',
             'email' => 'email|max:255',
+            'website' => 'url|max:255',
             'facebook' => 'url|max:255',
             'twitter' => 'url|max:255',
             'google_plus' => 'url|max:255',
@@ -226,7 +227,7 @@ class DesignerController extends Controller
         $translation->save();
 
         // Keys directly filled into designer model
-        $keys = ['image_id', 'country_id', 'city_id', 'tag_ids', 'email', 'facebook', 'twitter', 'google_plus', 'instagram'];
+        $keys = ['image_id', 'country_id', 'city_id', 'tag_ids', 'email', 'website', 'facebook', 'twitter', 'google_plus', 'instagram'];
 
         foreach ($keys as $key) {
             if ($request->has($key)) {

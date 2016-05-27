@@ -58,6 +58,11 @@
                                 <i class="fa fa-envelope"></i>
                             </a>
                         @endif
+                        @if (!empty($designer->email))
+                            <a href="{{ $designer->website }}">
+                                <i class="fa fa-globe"></i>
+                            </a>
+                        @endif
                     </p>
                 </div><!-- .col-* -->
                 <div class="col-md-6"></div><!-- .col-* -->

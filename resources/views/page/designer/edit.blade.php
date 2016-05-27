@@ -142,6 +142,14 @@
         </div>
 
         <div class="form-group">
+            <label for="input-website" class="col-sm-2 control-label">Website</label>
+            <div class="col-sm-10 col-md-8">
+                <input name="website" value="{{ old('website')===null?$designer->website:old('website') }}" type="url"
+                    maxlength="255" class="form-control" id="input-website">
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="input-facebook" class="col-sm-2 control-label">Facebook</label>
             <div class="col-sm-10 col-md-8">
                 <input name="facebook" value="{{ old('facebook')===null?$designer->facebook:old('facebook') }}" type="url"
