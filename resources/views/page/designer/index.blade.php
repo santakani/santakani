@@ -25,5 +25,6 @@
             </article>
         @endforeach
     </div><!-- .row -->
+    {!! $designers->links() !!}
 </div><!-- .container -->
 @endsection

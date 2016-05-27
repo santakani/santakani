@@ -54,7 +54,7 @@ class DesignerController extends Controller
      */
     public function index()
     {
-        $designers = Designer::with('translations')->get();
+        $designers = Designer::with('translations')->paginate(24);
 
         return view('page.designer.index', [
             'designers' => $designers
