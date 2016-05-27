@@ -40,6 +40,7 @@ $(function () {
         height: 200,
         imageSize: 'medium',
     });
+
     $('#image-form-group button').click(function () {
         manager.call({
             multiple: false,
@@ -84,7 +85,6 @@ $(function () {
     var citySelect = new CitySelect({el: '.city-select'});
     var tagSelect = new TagSelect({el: '.tag-select'});
 
-
     // Submit form
     $('button[type="submit"]').click(function (e) {
         e.preventDefault();
@@ -108,10 +108,4 @@ $(function () {
         });
     });
 
-    // Country and city select, use Select2.
-    $("select#country-select").select2({theme: 'bootstrap'});
-    $("select#city-select").select2({theme: 'bootstrap'});
-
-    // Tag select, use Select2
-    $("select#tag-select").select2({tags: true, theme: 'bootstrap'});
 });

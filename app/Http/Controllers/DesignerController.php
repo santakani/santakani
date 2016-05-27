@@ -54,7 +54,7 @@ class DesignerController extends Controller
      */
     public function index()
     {
-        $designers = Designer::with('translations')->paginate(24);
+        $designers = Designer::with('translations')->paginate(16);
 
         return view('page.designer.index', [
             'designers' => $designers
@@ -88,8 +88,8 @@ class DesignerController extends Controller
             'name' => 'required|string|max:255',
             'tagline' => 'string|max:255',
             'email' => 'email|max:255',
-            'country' => 'integer|exists:country,id',
-            'city' => 'integer|exists:city,id',
+            'country_id' => 'integer|exists:country,id',
+            'city_id' => 'integer|exists:city,id',
         ]);
 
         // Save models
@@ -99,11 +99,11 @@ class DesignerController extends Controller
         if ($request->has('email')) {
             $designer->email = $request->input('email');
         }
-        if ($request->has('country')) {
-            $designer->country_id = intval($request->input('country'));
+        if ($request->has('country_id')) {
+            $designer->country_id = $request->input('country_id');
         }
-        if ($request->has('city')) {
-            $designer->city_id = intval($request->input('city'));
+        if ($request->has('city_id')) {
+            $designer->city_id = $request->input('city_id');
         }
         $designer->user_id = $request->user()->id;
 
@@ -200,11 +200,10 @@ class DesignerController extends Controller
             'name' => 'required|string|max:255',
             'tagline' => 'string|max:255',
             'content' => 'string',
-            'image' => 'integer|exists:image,id',
-            'images.*' => 'integer|exists:image,id',
-            'country' => 'integer|exists:country,id',
-            'city' => 'integer|exists:city,id',
-            'tags.*' => 'integer|exists:tag,id',
+            'image_id' => 'integer|exists:image,id',
+            'country_id' => 'integer|exists:country,id',
+            'city_id' => 'integer|exists:city,id',
+            'tag_ids.*' => 'integer|exists:tag,id',
             'email' => 'email|max:255',
             'facebook' => 'url|max:255',
             'twitter' => 'url|max:255',
@@ -226,19 +225,10 @@ class DesignerController extends Controller
 
         $translation->save();
 
-        foreach (['image', 'country', 'city'] as $key) {
-            if ($request->has($key)) {
-                // Not empty, fill the value
-                $designer[$key.'_id'] = intval($request->input($key));
-            } elseif ($request->exists($key)) {
-                // Empty, set null.
-                $designer[$key.'_id'] = null;
-            } else {
-                // Not provided, untouch properties.
-            }
-        }
+        // Keys directly filled into designer model
+        $keys = ['image_id', 'country_id', 'city_id', 'tag_ids', 'email', 'facebook', 'twitter', 'google_plus', 'instagram'];
 
-        foreach (['email', 'facebook', 'twitter', 'google_plus', 'instagram'] as $key) {
+        foreach ($keys as $key) {
             if ($request->has($key)) {
                 // Not empty, fill the value
                 $designer->$key = $request->input($key);
@@ -248,10 +238,6 @@ class DesignerController extends Controller
             } else {
                 // Not provided, untouch properties.
             }
-        }
-
-        if ($request->has('tags')) {
-            $designer->tag_ids = array_map('intval',$request->input('tags'));
         }
 
         $designer->save();

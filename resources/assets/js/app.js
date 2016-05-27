@@ -16,6 +16,7 @@
     require('./utility/template');
 
     // Pages
+    require('./page/designer/create');
     require('./page/designer/show');
     require('./page/designer/edit');
 

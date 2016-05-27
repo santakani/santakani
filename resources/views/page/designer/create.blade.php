@@ -1,7 +1,8 @@
 @extends('layout.app', [
     'title' => 'New Designer Story',
     'body_id' => 'designer-create-page',
-    'body_class' => 'designer-create designer create',
+    'body_class' => 'designer-create-page designer-page create-page',
+    'active_nav' => 'designer',
 ])
 
 @section('main')
@@ -29,10 +30,9 @@
         <div class="form-group">
             <label for="input-tagline" class="col-sm-2 control-label">Tagline</label>
             <div class="col-sm-10">
-                <textarea name="tagline" rows="2" maxlength="255" class="form-control"
-                    id="input-tagline" placeholder="Express your design philosophy in short"
-                    >{{ old('tagline') }}</textarea>
-                <p class="text-muted">Max. 255 characters.</p>
+                <input type="text" name="tagline" value="{{ old('tagline') }}"
+                    maxlength="255" class="form-control" id="input-tagline"
+                    placeholder="Express your design philosophy in short">
             </div>
         </div>
 
@@ -46,11 +46,25 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label">Location</label>
-            <div class="col-sm-5 col-md-3">
-                @include('component.input.country', ['class' => 'form-control', 'selected' => old('country')])
+
+            <div class="col-sm-5 col-md-4">
+                <select name="country_id" class="country-select form-control">
+                    @if (old('country_id') && count(\App\Country::find(old('country_id'))))
+                        <option value="{{ old('country_id') }}" selected="selected">
+                            {{ \App\Country::find(old('country_id'))->text('name') }}
+                        </option>
+                    @endif
+                </select>
             </div>
-            <div class="col-sm-5 col-md-3">
-                @include('component.input.city', ['class' => 'form-control', 'selected' => old('city')])
+
+            <div class="col-sm-5 col-md-4">
+                <select name="city_id" class="city-select form-control">
+                    @if (old('city_id') && count(\App\City::find(old('city_id'))))
+                        <option value="{{ old('city_id') }}" selected="selected">
+                            {{ \App\City::find(old('city_id'))->text('name') }}
+                        </option>
+                    @endif
+                </select>
             </div>
         </div>
 
