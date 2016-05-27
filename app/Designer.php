@@ -11,8 +11,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use DB;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Designer
@@ -24,6 +26,8 @@ use DB;
  */
 class Designer extends Translatable
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -32,13 +36,18 @@ class Designer extends Translatable
     protected $table = 'designer';
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    /**
      * Dynamic properties that should be included in toArray() or toJSON().
      *
      * @var array
      */
-    protected $appends = [
-        'url'
-    ];
+    protected $appends = ['name', 'tagline', 'tag_ids', 'url'];
 
 
 
@@ -122,6 +131,26 @@ class Designer extends Translatable
     //                           Dynamic Properties                           //
     //                                                                        //
     ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * "name" getter.
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->text('name');
+    }
+
+    /**
+     * "tagline" getter.
+     *
+     * @return string
+     */
+    public function getTaglineAttribute()
+    {
+        return $this->text('tagline');
+    }
 
     /**
      * "tag_ids" getter. Return an array of tag ids.

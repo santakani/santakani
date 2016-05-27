@@ -16,9 +16,11 @@ $roboto-font-path: '/lib/roboto-fontface/fonts';
 
 // Libraries
 @import "node_modules/openlayers/dist/ol";
+@import "node_modules/sweetalert/dist/sweetalert";
 
 // Vendor override
 @import "vendor/light-gallery";
+@import "vendor/sweetalert";
 
 // Layout
 @import "layout/navbar";

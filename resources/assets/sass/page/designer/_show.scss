@@ -10,14 +10,11 @@
         color: #fff;
         text-shadow: 1px 1px 2px $gray-light;
 
-        a {
+        a:not(.btn) {
             color: #fff;
         }
 
         .btn {
-            border: none;
-            background: #fff;
-            color: #000;
             text-shadow: none;
         }
 

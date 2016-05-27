@@ -12,6 +12,7 @@
 namespace App\Http\Controllers;
 
 use Gate;
+
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 
@@ -247,10 +248,11 @@ class DesignerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $designer = Designer::find($id);
 
@@ -258,11 +260,19 @@ class DesignerController extends Controller
             abort(404);
         }
 
-        // Check permission
         if (Gate::denies('edit-page', $designer)) {
             abort(403);
         }
 
-        // TODO Delete model from database
+        if ($request->has('force_delete')) {
+            if ($request->has('with_images')) {
+                $designer->images()->forceDelete();
+            }
+            $designer->forceDelete();
+        } elseif ($request->has('restore')) {
+            $designer->restore();
+        } else {
+            $designer->delete();
+        }
     }
 }
