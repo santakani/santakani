@@ -21,4 +21,5 @@
     require('./page/designer/edit');
 
     require('./page/place/index');
+    require('./page/place/create');
 })();

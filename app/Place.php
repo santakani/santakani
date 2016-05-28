@@ -203,4 +203,20 @@ class Place extends Translatable
             DB::raw("*, (ACOS(COS(RADIANS(?)) * COS(RADIANS(latitude)) * COS(RADIANS(?) - RADIANS(longitude)) + SIN(RADIANS(?)) * SIN(RADIANS(latitude)))) AS distance")
         )->orderBy('distance','asc')->setBindings([$latitude, $longitude, $latitude]);
     }
+
+    /**
+     * All possible types of places.
+     *
+     * @return array
+     */
+    public static function types()
+    {
+        return [
+            'shop' => 'Shop',
+            'studio' => 'Studio',
+            'showroom' => 'Showroom',
+            'museum' => 'Museum',
+            'school' => 'School',
+        ];
+    }
 }
