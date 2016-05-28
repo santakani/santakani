@@ -99,7 +99,7 @@
                 Country/region
             </label>
 
-            <div class="col-sm-5 col-md-3">
+            <div class="col-sm-4 col-md-3">
                 <select class="country-select form-control">
                     @if (!empty($country))
                         <option value="{{ $country->id }}" selected="selected">
@@ -113,7 +113,7 @@
                 City
             </label>
 
-            <div class="col-sm-5 col-md-3">
+            <div class="col-sm-4 col-md-3">
                 <select name="city_id" class="city-select form-control">
                     @if (!empty($city))
                         <?php $city?>
