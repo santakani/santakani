@@ -79,33 +79,46 @@
         </div>
 
         <div class="form-group">
+
+            <?php
+                $country = null;
+                $city = null;
+
+                if (old('city_id')) {
+                    $city = \App\City::find(old('city_id'));
+                } elseif ($designer->city_id) {
+                    $city = \App\City::find($designer->city_id);
+                }
+
+                if (!empty($city)) {
+                    $country = $city->country;
+                }
+            ?>
+
             <label class="col-sm-2 control-label">
-                Location
+                Country/region
             </label>
 
-            <div class="col-sm-5 col-md-4">
-                <select name="country_id" class="country-select form-control">
-                    @if (old('country_id') && count(\App\Country::find(old('country_id'))))
-                        <option value="{{ old('country_id') }}" selected="selected">
-                            {{ \App\Country::find(old('country_id'))->text('name') }}
-                        </option>
-                    @elseif ($designer->country_id)
-                        <option value="{{ $designer->country_id }}" selected="selected">
-                            {{ $designer->country->text('name') }}
+            <div class="col-sm-5 col-md-3">
+                <select class="country-select form-control">
+                    @if (!empty($country))
+                        <option value="{{ $country->id }}" selected="selected">
+                            {{ $country->text('name') }}
                         </option>
                     @endif
                 </select>
             </div>
 
-            <div class="col-sm-5 col-md-4">
+            <label class="col-sm-2 control-label">
+                City
+            </label>
+
+            <div class="col-sm-5 col-md-3">
                 <select name="city_id" class="city-select form-control">
-                    @if (old('city_id') && count(\App\City::find(old('city_id'))))
-                        <option value="{{ old('city_id') }}" selected="selected">
-                            {{ \App\City::find(old('city_id'))->text('name') }}
-                        </option>
-                    @elseif ($designer->city_id)
-                        <option value="{{ $designer->city_id }}" selected="selected">
-                            {{ $designer->city->text('name') }}
+                    @if (!empty($city))
+                        <?php $city?>
+                        <option value="{{ $city->id }}" selected="selected">
+                            {{ $city->text('name') }}
                         </option>
                     @endif
                 </select>

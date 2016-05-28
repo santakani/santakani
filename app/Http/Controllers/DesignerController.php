@@ -89,7 +89,6 @@ class DesignerController extends Controller
             'name' => 'required|string|max:255',
             'tagline' => 'string|max:255',
             'email' => 'email|max:255',
-            'country_id' => 'integer|exists:country,id',
             'city_id' => 'integer|exists:city,id',
         ]);
 
@@ -99,9 +98,6 @@ class DesignerController extends Controller
 
         if ($request->has('email')) {
             $designer->email = $request->input('email');
-        }
-        if ($request->has('country_id')) {
-            $designer->country_id = $request->input('country_id');
         }
         if ($request->has('city_id')) {
             $designer->city_id = $request->input('city_id');
@@ -202,7 +198,6 @@ class DesignerController extends Controller
             'tagline' => 'string|max:255',
             'content' => 'string',
             'image_id' => 'integer|exists:image,id',
-            'country_id' => 'integer|exists:country,id',
             'city_id' => 'integer|exists:city,id',
             'tag_ids.*' => 'integer|exists:tag,id',
             'email' => 'email|max:255',
@@ -228,7 +223,7 @@ class DesignerController extends Controller
         $translation->save();
 
         // Keys directly filled into designer model
-        $keys = ['image_id', 'country_id', 'city_id', 'tag_ids', 'email', 'website', 'facebook', 'twitter', 'google_plus', 'instagram'];
+        $keys = ['image_id', 'city_id', 'tag_ids', 'email', 'website', 'facebook', 'twitter', 'google_plus', 'instagram'];
 
         foreach ($keys as $key) {
             if ($request->has($key)) {

@@ -33,15 +33,20 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4 target">
                     <p class="tagline">{{ $designer->text('tagline') }}</p>
+
                     <h1>{{ $designer->text('name') }}</h1>
-                    @if ($designer->city_id && $designer->country_id)
+
+                    @if ($designer->city && $designer->country)
                         <p class="location">
-                            <a href="{{ url('city/'.$designer->city_id) }}">
-                                {{ $designer->city->text('name') }}</a>,
-                            <a href="{{ url('country/'.$designer->country_id) }}">
-                                {{ $designer->country->text('name') }}</a>
+                            <a href="{{ $designer->city->url }}">
+                                {{ $designer->city->text('name') }}
+                            </a>,
+                            <a href="{{ $designer->country->url }}">
+                                {{ $designer->country->text('name') }}
+                            </a>
                         </p>
                     @endif
+
                     <p class="links">
                         @if (!empty($designer->facebook))
                             <a href="{{ $designer->facebook }}">

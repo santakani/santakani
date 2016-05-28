@@ -75,7 +75,7 @@ class Designer extends Translatable
      */
     public function country()
     {
-        return $this->belongsTo('App\Country');
+        return $this->city->country();
     }
 
     /**

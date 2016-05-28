@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * CreateDesignerTable
@@ -32,7 +32,6 @@ class CreateDesignerTable extends Migration
         Schema::create('designer', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('country_id')->unsigned()->nullable();
             $table->integer('city_id')->unsigned()->nullable();
             $table->integer('image_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();
@@ -47,7 +46,6 @@ class CreateDesignerTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('country_id')->references('id')->on('country')->onDelete('set null');
             $table->foreign('city_id')->references('id')->on('city')->onDelete('set null');
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');

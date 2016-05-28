@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * CreatePlaceTable
@@ -34,7 +34,6 @@ class CreatePlaceTable extends Migration
 
             $table->string('type'); // shop, showroom, studio, school, etc.
 
-            $table->integer('country_id')->unsigned()->nullable();
             $table->integer('city_id')->unsigned()->nullable();
             $table->integer('image_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();
@@ -54,7 +53,6 @@ class CreatePlaceTable extends Migration
 
             $table->index(['latitude', 'longitude']);
 
-            $table->foreign('country_id')->references('id')->on('country')->onDelete('set null');
             $table->foreign('city_id')->references('id')->on('city')->onDelete('set null');
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
