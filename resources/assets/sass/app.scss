@@ -35,6 +35,9 @@ $roboto-font-path: '/lib/roboto-fontface/fonts';
 // Pages
 @import "page/auth";
 @import "page/edit";
+
 @import "page/designer/index";
 @import "page/designer/show";
+
 @import "page/place/index";
+@import "page/place/show";
