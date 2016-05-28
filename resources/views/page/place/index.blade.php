@@ -42,5 +42,6 @@
             </div>
         </article>
     @endforeach
+    {!! $places->links() !!}
 </div><!-- #place-list -->
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\City;
 use App\Place;
 
 class PlaceController extends Controller
@@ -14,14 +15,27 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $places = Place::scope()->get();
+        $this->validate($request, [
+            'city_id' => 'integer|exists:city,id',
+        ]);
+
+        if ($request->has('city_id')) {
+            $city = City::find($request->has('city_id'));
+            $places = Place::where('city_id', $city->id)->paginate(16);
+        } elseif ( count( City::where('slug', 'helsinki')->get() ) ) {
+            $city = City::where('slug', 'helsinki')->first();
+            $places = Place::where('city_id', $city->id)->paginate(16);
+        } else {
+            $places = Place::paginate(16);
+        }
 
         return view('page.place.index', [
             'body_class' => 'places',
             'active_nav' => 'place',
             'places' => $places,
+            'city' => $city,
         ]);
     }
 
