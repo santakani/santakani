@@ -39,18 +39,11 @@ class ImportCities extends Migration
         if ($handle) {
             while (($city = fgetcsv($handle, 0, "\t")) !== false) {
 
-                if (count($city) !== 19) {
-                    echo "\tSkip: $city[1]\n";
+                if (!$this->filter($city)) {
                     continue;
                 }
 
-                $country = DB::table('country')->where('code', $city[8])->first();
-                if (isset($country->id)) {
-                    $country_id = $country->id;
-                } else {
-                    echo "\tSkip: $city[1]\n";
-                    continue;
-                }
+                $country_id = DB::table('country')->where('code', $city[8])->first()->id;
 
                 $slug = $this->slug2($slugify->slugify($city[2]), $country_id);
 
@@ -91,6 +84,28 @@ class ImportCities extends Migration
     public function down()
     {
         // Cannot undo
+    }
+
+    public function filter($city)
+    {
+        if (App::environment('local')) {
+            // The environment is local, only import cities in Finland
+            if ($city[8] !== 'FI') {
+                return false;
+            }
+        }
+
+        if (count($city) !== 19) {
+            return false;
+        }
+
+        $country = DB::table('country')->where('code', $city[8])->first();
+
+        if (!count($country)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

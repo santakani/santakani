@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
 use Carbon\Carbon;
 use Cocur\Slugify\Slugify;
 use Gmo\Iso639\Languages;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
 /**
  * ImportCountries
@@ -95,6 +96,13 @@ class ImportCountries extends Migration
      */
     public function filter($country)
     {
+        if (App::environment('local')) {
+            // The environment is local, only import nordic countries
+            if ($country['subregion'] !== 'Northern Europe') {
+                return false;
+            }
+        }
+
         $white_list = [
 
         ];
