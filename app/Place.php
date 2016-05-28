@@ -49,6 +49,16 @@ class Place extends Translatable
      */
     protected $appends = ['name', 'tag_ids', 'url'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'type', 'city_id', 'image_id', 'address', 'latitude', 'longitude',
+        'email', 'phone', 'website', 'facebook', 'google_plus',
+    ];
+
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -207,9 +217,25 @@ class Place extends Translatable
     /**
      * All possible types of places.
      *
-     * @return array
+     * @return string[]
      */
     public static function types()
+    {
+        $types = [];
+
+        foreach (self::typesWithNames() as $key => $value) {
+            $types[] = $key;
+        }
+
+        return $types;
+    }
+
+    /**
+     * All possible types of places.
+     *
+     * @return array
+     */
+    public static function typesWithNames()
     {
         return [
             'shop' => 'Shop',

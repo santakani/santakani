@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\City;
 use App\Place;
+use App\PlaceTranslation;
 
 class PlaceController extends Controller
 {
@@ -57,7 +58,24 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'type' => 'required|string|in:' . implode(',', Place::types()),
+            'city_id' => 'required|integer|exists:city,id',
+            'address' => 'required|string|max:255',
+            'email' => 'email|max:255',
+            'name' => 'required|string|max:255',
+        ]);
+
+        $place = new Place($request->only(['type', 'address', 'city_id', 'email']));
+        $place->user_id = $request->user()->id;
+        $place->save();
+
+        $translation = new PlaceTranslation($request->only(['name']));
+        $translation->place_id = $place->id;
+        $translation->locale = 'en';
+        $translation->save();
+
+        return redirect()->action('PlaceController@edit', [$place]);
     }
 
     /**

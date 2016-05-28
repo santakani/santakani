@@ -12,4 +12,13 @@ class PlaceTranslation extends Model
      * @var string
      */
     protected $table = 'place_translation';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'content',
+    ];
 }

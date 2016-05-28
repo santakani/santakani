@@ -32,8 +32,8 @@
         <div class="form-group">
             <label for="select-type" class="col-sm-2 control-label">Type</label>
             <div class="col-sm-4 col-md-3">
-                <select id="select-type" name="type" class="form-control">
-                    @foreach (\App\Place::types() as $key => $text)
+                <select id="select-type" name="type" class="form-control" required>
+                    @foreach (\App\Place::typesWithNames() as $key => $text)
                         @if ($key === old('type'))
                             <option value="{{ $key }}" selected="selected">
                                 {{ $text }}
@@ -52,7 +52,7 @@
             <label for="input-address" class="col-sm-2 control-label">Address</label>
             <div class="col-sm-10 col-md-8">
                 <input type="text" name="address" value="{{ old('address') }}"
-                    maxlength="255" class="form-control" id="input-address">
+                    maxlength="255" class="form-control" id="input-address" required>
             </div>
         </div>
 
