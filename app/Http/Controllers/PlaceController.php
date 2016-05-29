@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -86,7 +88,18 @@ class PlaceController extends Controller
      */
     public function show($id)
     {
-        //
+        $place = Place::find($id);
+
+        if (empty($place)) {
+            abort(404);
+        }
+
+        $place->load('translations');
+
+        return view('page.place.show', [
+            'place' => $place,
+            'can_edit' => Gate::allows('edit-page', $place),
+        ]);
     }
 
     /**

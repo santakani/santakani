@@ -14,4 +14,6 @@
 
     require('./page/place/index');
     require('./page/place/create');
+    require('./page/place/show');
+    require('./page/place/edit');
 })();
