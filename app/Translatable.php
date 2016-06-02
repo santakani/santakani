@@ -24,7 +24,7 @@ use DB;
  * @see https://github.com/santakani/santakani.com/wiki/Translation
  */
 
-abstract class Translatable extends Model {
+trait Translatable {
 
     /**
      * Get translations.

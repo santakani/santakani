@@ -24,9 +24,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @author Guo Yunhe <guoyunhebrave@gmail.com>
  * @see https://github.com/santakani/santakani.com/wiki/Place
  */
-class Place extends Translatable
+class Place extends Model
 {
     use SoftDeletes;
+    use Translatable;
 
     /**
      * The table associated with the model.

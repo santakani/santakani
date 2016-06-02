@@ -12,6 +12,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Imagick;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -27,6 +28,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class Image extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *

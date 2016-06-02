@@ -2,8 +2,14 @@
 
 namespace App;
 
-class City extends Translatable
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class City extends Model
 {
+    use SoftDeletes;
+    use Translatable;
+
     /**
      * The table associated with the model.
      *

@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use DB;
 
 class User extends Authenticatable
 {
+    use SoftDeletes;
+
     /**
      * Change table name from users to user.
      *
