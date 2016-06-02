@@ -8,6 +8,8 @@
     // require '$' or 'jQuery'.
     window.$ = window.jQuery = require('jquery');
     require('bootstrap-sass');
+    require('selectize');
+    require('lightgallery');
     window._ = require('underscore');
 
     // Load jQuery plugins

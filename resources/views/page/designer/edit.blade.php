@@ -123,7 +123,7 @@
             </label>
 
             <div class="col-sm-4 col-md-3">
-                <select class="country-select form-control">
+                <select class="country-select">
                     @if (!empty($country))
                         <option value="{{ $country->id }}" selected="selected">
                             {{ $country->text('name') }}
@@ -137,7 +137,7 @@
             </label>
 
             <div class="col-sm-4 col-md-3">
-                <select name="city_id" class="city-select form-control">
+                <select name="city_id" class="city-select">
                     @if (!empty($city))
                         <?php $city?>
                         <option value="{{ $city->id }}" selected="selected">
@@ -150,6 +150,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label">Tags</label>
+
             <div class="col-sm-10 col-md-8">
                 <select name="tag_ids[]" class="tag-select" style="width: 100%" multiple="multiple">
                     @if ( count( old('tags') ) )

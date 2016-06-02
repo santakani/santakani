@@ -16,7 +16,7 @@ var TagSelect = require('../../view/tag-select');
 $(function () {
 
     // Page check
-    if ($('#designer-edit-page').length === 0) {
+    if ($('#place-edit-page').length === 0) {
         return;
     }
 

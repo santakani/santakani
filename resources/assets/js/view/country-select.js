@@ -1,11 +1,10 @@
 var Backbone = require('backbone');
-require('selectize');
 
 module.exports = Backbone.View.extend({
 
     tagName: 'select',
 
-    className: 'country-select form-control',
+    className: 'country-select',
 
     initialize: function (options) {
         this.$el.selectize({
