@@ -79,6 +79,29 @@
         </div>
 
         <div class="form-group">
+            <label class="col-sm-2 control-label">
+                Gallery
+            </label>
+
+            <div class="col-sm-10 col-md-8">
+                <div class="gallery-editor">
+                    <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
+                    <div class="images clearfix">
+                        @if ( count( old('gallery_image_ids') ) )
+                            @foreach (\App\Image::find( old('gallery_image_ids') ) as $image)
+                                @include('component.image-preview', ['image' => $image])
+                            @endforeach
+                        @elseif ( count( $designer->gallery_images ) )
+                            @foreach ($designer->gallery_images as $image)
+                                @include('component.image-preview', ['image' => $image])
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
 
             <?php
                 $country = null;

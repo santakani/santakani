@@ -1,8 +1,13 @@
 .image-preview {
     @include image-cover();
     position: relative;
-    /* Width and height are controlled by JavaScript */
+    /* Actual width and height are controlled by JavaScript */
+    width: 150px;
+    height: 150px;
     max-width: 100%;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
 
     &.selected {
         box-shadow: 0 0 0 5px $brand-info; // A boder-like shadow
