@@ -4,6 +4,8 @@
  * or page.
  */
 
+var Backbone = require('backbone');
+
 var ImageList = require('../collection/image-list');
 var Image = require('../model/image');
 var ImagePreview = require('./image-preview');

@@ -3,8 +3,6 @@
 /vendor
 ## NPM
 /node_modules
-## Bower
-/public/lib
 
 # Passwords
 .env
@@ -12,6 +10,11 @@
 # Compiled JavaScript and CSS
 /public/css
 /public/js
+
+# Copyed files
+/public/lib
+/public/img
+/public/fonts
 
 # Storage
 /public/storage

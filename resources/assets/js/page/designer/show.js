@@ -1,4 +1,5 @@
 var swal = require('sweetalert');
+require('lightgallery');
 
 $(function () {
 
@@ -17,13 +18,6 @@ $(function () {
         var height = $header.width() / 3;
         $header.css('height', height);
     }
-
-    BackgroundCheck.init({
-        targets: 'header .target',
-        images: 'header',
-        threshold: 80,
-        minComplexity: 20
-    });
     // Header ends
 
     // Action bar starts

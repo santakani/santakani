@@ -6,6 +6,8 @@
  * Script - assets/js/edit/ajax/designer-edit.js
  */
 
+// TinyMCE is loaded by HTML <script> tag. Browserify support is not finished.
+
 var ImagePreview = require('../../view/image-preview');
 var Image = require('../../model/image');
 var ImageManager = require('../../view/image-manager');

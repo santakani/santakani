@@ -1,3 +1,6 @@
+var Backbone = require('backbone');
+require('selectize');
+
 module.exports = Backbone.View.extend({
 
     tagName: 'select',

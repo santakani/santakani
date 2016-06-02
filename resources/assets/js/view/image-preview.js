@@ -5,6 +5,8 @@
  * Class: ImagePreview
  */
 
+var Backbone = require('backbone');
+
 var tpl = require('../utility/template');
 
 module.exports = Backbone.View.extend({

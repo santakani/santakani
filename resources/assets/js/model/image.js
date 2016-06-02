@@ -3,6 +3,7 @@
  *
  * See https://github.com/santakani/santakani.com/wiki/Models#image
  */
+var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
 

@@ -1,14 +1,13 @@
 // Core variables, override bootstrap variables and define new
 @import "base/variable";
 
-
 // Bootstrap
-$icon-font-path: '/lib/bootstrap-sass/assets/fonts';
-@import "public/lib/bootstrap-sass/assets/stylesheets/bootstrap";
+$icon-font-path: '../fonts/bootstrap';
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // Roboto fonts
-$roboto-font-path: '/lib/roboto-fontface/fonts';
-@import "public/lib/roboto-fontface/css/roboto-fontface.scss";
+$roboto-font-path: '../fonts/roboto';
+@import "node_modules/roboto-fontface/css/roboto-fontface.scss";
 
 // Base
 @import "base/mixin";
@@ -19,6 +18,16 @@ $roboto-font-path: '/lib/roboto-fontface/fonts';
 @import "node_modules/sweetalert/dist/sweetalert";
 
 // Vendor override
+$fa-font-path: "../fonts/font-awesome";
+@import "node_modules/font-awesome/scss/font-awesome";
+
+$lg-path-fonts: '../fonts/lightgallery';
+$lg-path-images: '../img/lightgallery';
+@import "node_modules/lightgallery/src/sass/lightgallery";
+
+@import "node_modules/selectize/dist/css/selectize";
+@import "node_modules/selectize/dist/css/selectize.bootstrap3";
+
 @import "vendor/light-gallery";
 @import "vendor/sweetalert";
 

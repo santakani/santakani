@@ -11,10 +11,6 @@
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
 
     <!-- CSS -->
-    <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/lib/lightgallery/dist/css/lightgallery.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/lib/selectize/dist/css/selectize.css" rel="stylesheet" type="text/css"/>
-    <link href="/lib/selectize/dist/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css"/>
     <link href="/css/app.css" rel="stylesheet" type="text/css"/>
     @stack('styles')
 </head>
@@ -40,17 +36,7 @@
     @stack('templates')
 
     <!-- JavaScript -->
-    <script src="/lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
-    <script src="/lib/masonry/dist/masonry.pkgd.min.js" type="text/javascript"></script>
-    <script src="/lib/imagesloaded/imagesloaded.pkgd.min.js" type="text/javascript"></script>
-    <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
-    <script src="/lib/lightgallery/dist/js/lightgallery-all.min.js" type="text/javascript"></script>
-    <script src="/lib/Sortable/Sortable.min.js" type="text/javascript"></script>
-    <script src="/lib/background-check/background-check.min.js" type="text/javascript"></script>
-    <script src="/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/lib/underscore/underscore-min.js" type="text/javascript"></script>
-    <script src="/lib/backbone/backbone-min.js" type="text/javascript"></script>
-    <script src="/lib/selectize/dist/js/standalone/selectize.js" type="text/javascript"></script>
+    <script src="/lib/tinymce/tinymce.js" type="text/javascript"></script>
     <script src="/js/app.js" type="text/javascript"></script>
     <script type="text/javascript">
         // Global variables from server

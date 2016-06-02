@@ -4,6 +4,12 @@
 
 (function () {
 
+    // Bootstrap needs 'jQuery' global variable. Other jQuery plugins may also
+    // require '$' or 'jQuery'.
+    window.$ = window.jQuery = require('jquery');
+    require('bootstrap-sass');
+    window._ = require('underscore');
+
     // Load jQuery plugins
     require('./jquery/go-to');
 

@@ -1,16 +1,10 @@
+var Backbone = require('backbone');
 var ol = require('openlayers');
 var d3 = require('d3');
 
-var Place = Backbone.Model.extend({
-    defaults: {
-        active: false,
-        selected: false,
-    },
-});
+var Place = require('../../model/place');
 
-var PlaceList = Backbone.Collection.extend({
-    model: Place,
-});
+var PlaceList = require('../../collection/place-list');
 
 var PlaceRow = Backbone.View.extend({
 
