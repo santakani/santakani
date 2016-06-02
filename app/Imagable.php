@@ -65,7 +65,7 @@ trait Imagable {
      */
     public function getGalleryImagesAttribute()
     {
-        return $this->images()->where('weight', '>', 0)->get();
+        return $this->images()->where('weight', '>', 0)->orderBy('weight', 'desc')->get();
     }
 
     /**
