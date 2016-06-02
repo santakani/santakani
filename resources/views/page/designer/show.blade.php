@@ -102,7 +102,7 @@
 
 <div class="container-fluid">
     <div class="gallery">
-        @foreach ($designer->images as $image)
+        @foreach ($designer->gallery_images as $image)
             <a href="{{ $image->file_urls['large'] }}">
                 <img src="{{ $image->file_urls['thumb'] }}" />
             </a>

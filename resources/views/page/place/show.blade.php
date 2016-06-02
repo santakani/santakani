@@ -18,7 +18,7 @@
                     <img src="http://placehold.it/300x300?text=NO+IMAGE">
                 </a>
             @endif
-            @forelse ($place->images as $image)
+            @forelse ($place->gallery_images as $image)
                 @if ($image->id !== $place->image_id)
                     <a href="{{ $image->file_urls['large'] }}">
                         <img src="{{ $image->file_urls['thumb'] }}">

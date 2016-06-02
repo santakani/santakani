@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Place extends Model
 {
+    use Imagable;
     use SoftDeletes;
     use Translatable;
 
@@ -90,16 +91,6 @@ class Place extends Model
     }
 
     /**
-     * Cover Image.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function image()
-    {
-        return $this->belongsTo('App\Image');
-    }
-
-    /**
      * Owner.
      *
      * @return \Illuminate\Database\Eloquent\Relations\Relation
@@ -107,16 +98,6 @@ class Place extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
-    }
-
-    /**
-     * Get Images uploaded to this designer page.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function images()
-    {
-        return $this->morphMany('App\Image', 'parent');
     }
 
     /**

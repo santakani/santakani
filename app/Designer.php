@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Designer extends Model
 {
+    use Imagable;
     use SoftDeletes;
     use Translatable;
 
@@ -87,26 +88,6 @@ class Designer extends Model
     public function city()
     {
         return $this->belongsTo('App\City');
-    }
-
-    /**
-     * Get the cover image, used for page banner and thumbnail.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function image()
-    {
-        return $this->belongsTo('App\Image');
-    }
-
-    /**
-     * Get Images uploaded to this designer page.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function images()
-    {
-        return $this->morphMany('App\Image', 'parent');
     }
 
     /**
