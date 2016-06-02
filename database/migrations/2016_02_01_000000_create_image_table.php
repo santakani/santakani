@@ -42,11 +42,12 @@ class CreateImageTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('parent_type')->nullable(); // Polymorphic relationship
             $table->integer('parent_id')->unsigned()->nullable();
+            $table->integer('weight')->unsigned()->nullable();
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['parent_type', 'parent_id']);
+            $table->index(['parent_type', 'parent_id', 'weight']);
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
