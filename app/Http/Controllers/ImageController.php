@@ -192,11 +192,35 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $image = Image::find($id);
+
+        $parent = $image->parentPage;
+
+        if (empty($image)) {
+            abort(404);
+        }
+
+        if (Gate::allows('edit-page', $image)) {
+            if ($request->has('force_delete')) {
+                $image->forceDelete();
+            } elseif ($request->has('restore')) {
+                $image->restore();
+            } else {
+                $image->delete();
+            }
+        } elseif (Gate::allows('edit-page', $parent)) {
+            $image->parent_type = null;
+            $image->parent_id = null;
+            $image->save();
+        } else {
+            abort(403);
+        }
+
     }
 }

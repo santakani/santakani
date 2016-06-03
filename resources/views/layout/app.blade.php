@@ -36,12 +36,12 @@
     @stack('templates')
 
     <!-- JavaScript -->
-    <script src="/lib/tinymce/tinymce.js" type="text/javascript"></script>
-    <script src="/js/app.js" type="text/javascript"></script>
     <script type="text/javascript">
         // Global variables from server
         var csrfToken = "{!! csrf_token() !!}";
     </script>
+    <script src="/lib/tinymce/tinymce.js" type="text/javascript"></script>
+    <script src="/js/app.js" type="text/javascript"></script>
     @stack('scripts')
 </body>
 
