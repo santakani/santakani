@@ -75,15 +75,19 @@ trait Imagable {
      */
     public function setGalleryImageIdsAttribute($image_ids)
     {
-        $image_ids = array_intersect($image_ids, $this->image_ids);
-        $hide_image_ids = array_diff($this->image_ids, $image_ids);
+        // PHP array_intersect() function will change array order, so avoid it
+        $filter = $this->image_ids;
+        $hide_image_ids = array_diff($filter, $image_ids);
 
-        $weight = 1;
+        $weight = count($image_ids);
         foreach ($image_ids as $image_id) {
+            if (!in_array($image_id, $filter)) {
+                continue;
+            }
             $image = Image::find($image_id);
             $image->weight = $weight;
             $image->save();
-            $weight++;
+            $weight--;
         }
 
         foreach ($hide_image_ids as $image_id) {
