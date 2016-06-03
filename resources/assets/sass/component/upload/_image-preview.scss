@@ -5,9 +5,6 @@
     width: 150px;
     height: 150px;
     max-width: 100%;
-    float: left;
-    margin-right: 20px;
-    margin-bottom: 20px;
 
     &.selected {
         box-shadow: 0 0 0 5px $brand-info; // A boder-like shadow
@@ -16,8 +13,8 @@
     span.remove {
         $size: 24px;
         position: absolute;
-        top: - $size / 2;
-        right: - $size / 2;
+        top: 3px;
+        right: 3px;
         display: block;
         width: $size;
         height: $size;
@@ -28,6 +25,7 @@
         cursor: pointer;
         font-size: $size;
         border-radius: 99px;
+        z-index: 1;
     }
 
     .progress {
@@ -37,17 +35,5 @@
         left: 5%;
         right: 5%;
         height: 10%;
-    }
-}
-
-.image-gallery .image-preview {
-    float: left;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    cursor: move;
-    cursor: grab;
-
-    &.sortable-ghost {
-        opacity: 0;
     }
 }

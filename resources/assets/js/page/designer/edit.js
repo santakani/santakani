@@ -12,6 +12,7 @@ var ImagePreview = require('../../view/image-preview');
 var Image = require('../../model/image');
 var ImageManager = require('../../view/image-manager');
 var ContentEditor = require('../../view/content-editor');
+var GalleryEditor = require('../../view/gallery-editor');
 var CountrySelect = require('../../view/country-select');
 var CitySelect = require('../../view/city-select');
 var TagSelect = require('../../view/tag-select');
@@ -30,32 +31,27 @@ $(function () {
     });
 
     // Cover
-    var coverImage = new Image({
-        id: $('#image-form-group .image-preview').data('id'),
-        file_urls: {
-            medium: $('#image-form-group .image-preview').data('url'),
-        }
-    });
     var coverPreview = new ImagePreview({
         el: '#image-form-group .image-preview',
-        model: coverImage,
         width: 600,
         height: 200,
-        imageSize: 'medium',
+        size: 'medium',
+        inputName: 'image_id',
     });
 
     $('#image-form-group button').click(function () {
         manager.call({
             multiple: false,
             done: function (image) {
-                coverImage.set(_.omit(image.attributes, 'selectable', 'selected', 'progress'));
-                $('#image-form-group input[type="hidden"]').val(image.get('id'));
+                coverPreview.model.set(image);
             }
 
         });
     });
 
     var contentEditor = new ContentEditor({el: '#input-content', imageManager: manager});
+
+    var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: manager});
 
     var countrySelect = new CountrySelect({el: '.country-select'});
     var citySelect = new CitySelect({el: '.city-select'});

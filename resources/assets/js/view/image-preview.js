@@ -7,6 +7,7 @@
 
 var Backbone = require('backbone');
 
+var Image = require('../model/image');
 var tpl = require('../utility/template');
 
 module.exports = Backbone.View.extend({
@@ -21,11 +22,15 @@ module.exports = Backbone.View.extend({
 
     height: 150,
 
-    imageSize: 'thumb',
+    size: 'thumb',
 
     removeable: false,
 
+    selectable: false,
+
     multiple: false, // true: select like checkbox; false: select like radio button
+
+    inputName: null,
 
     events: {
         'click .remove': 'remove',
@@ -33,7 +38,13 @@ module.exports = Backbone.View.extend({
     },
 
     initialize: function (options) {
-        _.extend(this, _.pick(options, 'width', 'height', 'imageSize', 'removeable', 'multiple'));
+        _.extend(this, _.pick(options, 'width', 'height', 'size', 'removeable',
+            'selectable', 'multiple', 'inputName'));
+
+        if (!this.model) {
+            this.model = new Image();
+            this.model.readElement(this.el);
+        }
 
         this.render();
 
@@ -64,6 +75,14 @@ module.exports = Backbone.View.extend({
         this.updateSize();
         this.updateSelect();
         this.updateProgress();
+
+        if (this.inputName) {
+            this.$('input').attr('name', this.inputName);
+            this.$('input').val(this.model.get('id'));
+        } else {
+            this.$('input').removeAttr('name');
+            this.$('input').val('');
+        }
     },
 
     updateSize: function () {
@@ -84,12 +103,11 @@ module.exports = Backbone.View.extend({
         this.model.set({selected: false});
     },
 
+    /**
+     * Update view based on select states.
+     */
     updateSelect: function () {
-        if (!this.model.get('selectable')) {
-            return;
-        }
-
-        if (this.model.get('selected')) {
+        if (this.selectable && this.model.get('selected')) {
             this.$el.addClass('selected');
         } else {
             this.$el.removeClass('selected');
@@ -107,10 +125,6 @@ module.exports = Backbone.View.extend({
     },
 
     updateImage: function () {
-        var url = '';
-        if (this.model.get('file_urls')) {
-            url = this.model.get('file_urls')[this.imageSize];
-        }
-        this.$el.css('background-image', 'url(' + url + ')');
+        this.$el.css('background-image', 'url(' + this.model.fileUrl(this.size) +')');
     }
 });

@@ -109,7 +109,7 @@ module.exports = Backbone.View.extend({
             selectable: true,
             selected: true
         });
-        var preview = new ImagePreview({model: image});
+        var preview = new ImagePreview({model: image, selectable: true});
         this.$('.gallery').prepend(preview.$el);
         this.previews.push(preview);
         this.listenTo(preview, 'select', this.unselectSiblings);

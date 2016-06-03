@@ -153,4 +153,17 @@ module.exports = Backbone.Model.extend({
 
         return url;
     },
+
+    /**
+     * Read attributes from data properties of an element.
+     */
+    readElement: function (element) {
+        var $element = $(element);
+        this.set({
+            id: $element.data('id'),
+            mime_type: $element.data('mime'),
+            width: $element.data('width'),
+            height: $element.data('height'),
+        });
+    },
 });

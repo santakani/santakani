@@ -37,19 +37,16 @@
             </label>
 
             <div class="col-sm-10 col-md-8">
-                <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
-                @if ($image = App\Image::find(old('image')))
-                    <div class="image-preview" data-id="{{ old('image') }}"
-                        data-url="{{ $image->file_urls['medium'] }}"></div>
-                    <input type="hidden" name="image_id" value="{{ old('image') }}">
-                @elseif ($designer->image_id)
-                    <div class="image-preview" data-id="{{ $designer->image_id }}"
-                        data-url="{{ $designer->image->file_urls['medium'] }}"></div>
-                    <input type="hidden" name="image_id" value="{{ $designer->image_id }}">
-                @else
-                    <div class="image-preview"></div>
-                    <input type="hidden" name="image_id">
-                @endif
+                <div id="cover-editor" class="cover-editor">
+                    <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
+                    @if ($image = App\Image::find(old('image')))
+                        @include('component.image-preview', ['image' => $image])
+                    @elseif ($designer->image_id)
+                        @include('component.image-preview', ['image' => $designer->image])
+                    @else
+                        @include('component.image-preview')
+                    @endif
+                </div>
             </div>
         </div>
 
@@ -84,7 +81,7 @@
             </label>
 
             <div class="col-sm-10 col-md-8">
-                <div class="gallery-editor">
+                <div id="gallery-editor" class="gallery-editor">
                     <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
                     <div class="images clearfix">
                         @if ( count( old('gallery_image_ids') ) )

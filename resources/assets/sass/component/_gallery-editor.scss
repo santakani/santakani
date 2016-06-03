@@ -1,0 +1,20 @@
+.gallery-editor {
+    $image-space: 5px;
+
+    .images {
+        margin-right: - $image-space;
+        margin-bottom: - $image-space;
+    }
+    .image-preview {
+        float: left;
+        margin-right: $image-space;
+        margin-bottom: $image-space;
+
+        &.sortable-ghost {
+            opacity: 0.2;
+        }
+
+        cursor: move;
+        cursor: grab;
+    }
+}
