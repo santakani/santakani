@@ -15,6 +15,23 @@ module.exports = Backbone.Model.extend({
 
     urlRoot: '/image',
 
+    largeSize: 1200,
+
+    mediumSize: 600,
+
+    thumbSize: 300,
+
+    imageStoragePath: 'storage/image', // Related to document root
+
+    /**
+     * Upload image file. If succeed, new image model created on server and return
+     * to client.
+     *
+     * @param {Object} options
+     * @param {File}   options.image Image file from a file input.
+     * @param {string} options.parent_type Parent page type, like 'designer', 'place'.
+     * @param {number} options.parent_id Parent page id.
+     */
     upload: function (options) {
         var that = this;
 
@@ -55,6 +72,13 @@ module.exports = Backbone.Model.extend({
         });
     },
 
+    /**
+     * Calculate actual width and height of different image sizes. Return an object
+     * like {width: 1200, height: 900}
+     *
+     * @param {string} size The size name is one of "full", "large", "medium" and "thumb".
+     * @return {Object} Object with width and height properties.
+     */
     size: function (size) {
         var width, height;
 
@@ -93,5 +117,40 @@ module.exports = Backbone.Model.extend({
         }
 
         return {width: width, height: height};
-    }
+    },
+
+    /**
+     * Generate image file urls, based on id, mime type, width and height.
+     * @param {string} size The size name is one of "full", "large", "medium" and "thumb".
+     * @return {string} Image file URL.
+     */
+    fileUrl: function (size) {
+        var url = '/' + this.imageStoragePath + '/';
+        url += Math.floor(this.get('id')/1000) + '/';
+        url += Math.floor(this.get('id')%1000) + '/';
+
+        if (size === 'large' && this.get('width') >= this.largeSize && this.get('height') >= this.largeSize) {
+            url += 'large';
+        } else if (size === 'medium' && this.get('width') >= this.mediumSize && this.get('height') >= this.mediumSize) {
+            url += 'medium';
+        } else if (size === 'thumb') {
+            url += 'thumb';
+        } else {
+            url += 'full';
+        }
+
+        switch (this.get('mime_type')) {
+            case 'image/jpeg':
+                url += '.jpg';
+                break;
+            case 'image/png':
+                url += '.png';
+                break;
+            case 'image/gif':
+                url += '.gif';
+                break;
+        };
+
+        return url;
+    },
 });

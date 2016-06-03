@@ -11,6 +11,7 @@
 var ImagePreview = require('../../view/image-preview');
 var Image = require('../../model/image');
 var ImageManager = require('../../view/image-manager');
+var ContentEditor = require('../../view/content-editor');
 var CountrySelect = require('../../view/country-select');
 var CitySelect = require('../../view/city-select');
 var TagSelect = require('../../view/tag-select');
@@ -54,34 +55,7 @@ $(function () {
         });
     });
 
-    // Initialize TinyMCE
-    tinymce.init({
-        selector: 'textarea.tinymce',
-        plugins: ['link', 'image'],
-        menubar: false,
-        toolbar: 'undo redo | styleselect | bold italic | link customimage',
-        content_css: ['/css/app.css', '/css/editor.css'],
-        setup: function (editor) {
-            editor.on('change', function () {
-                editor.save();
-            });
-            editor.addButton('customimage', {
-                icon: 'image',
-                onclick: function () {
-                    manager.call({
-                        multiple: false,
-                        done: function (image) {
-                            var src = image.get('file_urls').medium;
-                            var size = image.size('medium');
-                            var html = '<img src="' + src + '" width="' + size.width
-                                + '" height="' + size.height + '">';
-                            editor.insertContent(html);
-                        }
-                    });
-                }
-            });
-        }
-    });
+    var contentEditor = new ContentEditor({el: '#input-content', imageManager: manager});
 
     var countrySelect = new CountrySelect({el: '.country-select'});
     var citySelect = new CitySelect({el: '.city-select'});
