@@ -1,3 +1,9 @@
+/**
+ * Visual editor for HTML editing. Use TinyMCE.
+ *
+ * @see https://github.com/santakani/santakani.com/wiki/Visual-Editor:-TinyMCE
+ */
+
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
@@ -16,11 +22,20 @@ module.exports = Backbone.View.extend({
         // Initialize TinyMCE
         tinymce.init({
             selector: this.selector,
-            plugins: ['link', 'image'],
+            plugins: ['link', 'image', 'paste'],
             menubar: false,
             toolbar: 'undo redo | styleselect | bold italic | link customimage',
+
+            height: 400,
+            min_height: 300,
+            max_height: 600,
+
             content_css: ['/css/app.css', '/css/editor.css'],
-            convert_urls: false, // Do not convert absolute URLs
+
+            convert_urls: false, // Keep relative URLs for images and links
+
+            paste_as_text: true, // Paste as plain text, remove styles and tags.
+
             setup: function (editor) {
                 editor.on('change', function () {
                     editor.save();
