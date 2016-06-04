@@ -29,6 +29,7 @@ $lg-path-images: '../img/lightgallery';
 @import "node_modules/selectize/dist/css/selectize.bootstrap3";
 
 @import "vendor/light-gallery";
+@import "vendor/openlayers";
 @import "vendor/sweetalert";
 
 // Layout
@@ -39,6 +40,7 @@ $lg-path-images: '../img/lightgallery';
 // Components
 @import "component/image-manager";
 @import "component/gallery-editor";
+@import "component/coordinate-select";
 @import "component/tag";
 @import "component/upload/image-preview";
 

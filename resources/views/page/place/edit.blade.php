@@ -162,10 +162,10 @@
                 Coordinates
             </label>
             <div class="col-sm-10 col-md-8">
-                <div id="coordinate-select" class="coordinate-select"
-                     data-latitude="{{ old('latitude') ? old('latitude') : $place->latitude }}"
-                     data-longitude="{{ old('longitude') ? old('longitude') : $place->longitude }}"
-                     ></div>
+                @include('component.coordinate-select', [
+                    'latitude' => old('latitude') ? old('latitude') : $place->latitude,
+                    'longitude' => old('longitude') ? old('longitude') : $place->longitude,
+                ])
             </div>
         </div>
 

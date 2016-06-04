@@ -1,0 +1,33 @@
+.coordinate-select {
+    .grid-lines {
+
+        $size: 1000px;
+
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        overflow: visible;
+
+        * {
+            position: absolute;
+            background-color: #000000;
+            box-shadow: 1px 1px 0 #ffffff;
+        }
+
+        :first-child {
+            width: $size;
+            height: 1px;
+            left: - $size / 2;
+            top: -1px;
+        }
+
+        :last-child {
+            width: 1px;
+            height: $size;
+            left: -1px;
+            top: - $size / 2;
+        }
+    }
+}

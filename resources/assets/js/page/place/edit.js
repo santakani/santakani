@@ -14,6 +14,7 @@ var GalleryEditor = require('../../view/gallery-editor');
 var CountrySelect = require('../../view/country-select');
 var CitySelect = require('../../view/city-select');
 var TagSelect = require('../../view/tag-select');
+var CoordinateSelect = require('../../view/coordinate-select');
 
 $(function () {
 
@@ -52,6 +53,9 @@ $(function () {
 
     var countrySelect = new CountrySelect({el: '.country-select'});
     var citySelect = new CitySelect({el: '.city-select'});
+
+    var coordinateSelect = new CoordinateSelect();
+
     var tagSelect = new TagSelect({el: '.tag-select'});
 
     // Submit form
