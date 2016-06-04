@@ -14,7 +14,7 @@
                     <img src="{{ $place->image->file_urls['thumb'] }}">
                 </a>
             @else
-                <a class="placeholder" href="http://placehold.it/1200x900?text=NO+IMAGE">
+                <a class="placeholder" href="#">
                     <img src="http://placehold.it/300x300?text=NO+IMAGE">
                 </a>
             @endif
@@ -26,7 +26,7 @@
                 @endif
             @empty
                 @for ($i = 0; $i < 8; $i++)
-                    <a class="placeholder" href="http://placehold.it/1200x900?text=NO+IMAGE">
+                    <a class="placeholder" href="#">
                         <img src="http://placehold.it/300x300?text=NO+IMAGE">
                     </a>
                 @endfor
@@ -35,6 +35,13 @@
         <h1 class="page-header">
             {{ $place->text('name') }}
             <small>{{ $place->city->text('name') }}, {{ $place->country->text('name') }}</small>
+
+            @if ($can_edit)
+                <div class="pull-right hidden-xs">
+                    <a id="edit-button" class="btn btn-sm btn-default" href="{{ $place->url . '/edit' }}">Edit</a>
+                    <a id="delete-button" class="btn btn-sm btn-danger" href="#">Delete</a>
+                </div>
+            @endif
         </h1>
     </div>
 </header>
