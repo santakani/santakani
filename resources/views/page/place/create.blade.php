@@ -30,21 +30,15 @@
         </div>
 
         <div class="form-group">
-            <label for="select-type" class="col-sm-2 control-label">Type</label>
+            <label for="place-type-select" class="col-sm-2 control-label">
+                Type
+            </label>
+
             <div class="col-sm-4 col-md-3">
-                <select id="select-type" name="type" class="form-control" required>
-                    @foreach (\App\Place::typesWithNames() as $key => $text)
-                        @if ($key === old('type'))
-                            <option value="{{ $key }}" selected="selected">
-                                {{ $text }}
-                            </option>
-                        @else
-                            <option value="{{ $key }}">
-                                {{ $text }}
-                            </option>
-                        @endif
-                    @endforeach
-                </select>
+                @include('component.place-type-select', [
+                    'selected' => old('type'),
+                    'required' => true,
+                ])
             </div>
         </div>
 

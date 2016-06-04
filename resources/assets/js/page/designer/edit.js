@@ -45,7 +45,6 @@ $(function () {
             done: function (image) {
                 coverPreview.model.set(image);
             }
-
         });
     });
 

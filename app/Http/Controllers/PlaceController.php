@@ -110,7 +110,18 @@ class PlaceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $place = Place::find($id);
+
+        if (empty($place)) {
+            abort(404);
+        }
+
+        // Check permission
+        if (Gate::denies('edit-page', $place)) {
+            abort(403);
+        }
+
+        return view('page.place.edit', ['place' => $place]);
     }
 
     /**
