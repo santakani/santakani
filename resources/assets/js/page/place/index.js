@@ -142,7 +142,7 @@ $(function () {
         for (var i = 0; i < placeRows.length; i++) {
             if (pixelFeature === placeRows[i].point) {
                 placeRows[i].model.set('active', true);
-                placeRows[i].$el.goTo(100);
+                placeRows[i].$el.goTo($('#place-list').offset().top);
             } else {
                 placeRows[i].model.set('active', false);
             }
