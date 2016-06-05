@@ -39,9 +39,9 @@ $lg-path-images: '../img/lightgallery';
 
 // Components
 @import "component/image-manager";
-@import "component/gallery-editor";
 @import "component/coordinate-select";
-@import "component/tag";
+@import "component/gallery-editor";
+@import "component/tag-list";
 @import "component/upload/image-preview";
 
 // Pages

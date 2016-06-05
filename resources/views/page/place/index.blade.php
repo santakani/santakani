@@ -31,11 +31,10 @@
                         <i class="fa fa-comment-o"></i> 14
                     </small>
                 </h3>
-                <p class="tags">
-                    <span class="tag">grocery</span>
-                    <span class="tag">tableware</span>
-                    <span class="tag">knitwear</span>
-                </p>
+                @include('component.tag-list', [
+                    'tags' => $place->tags,
+                    'style' => 'round',
+                ])
                 <div class="content">
                     {!! $place->text('content') !!}
                 </div>

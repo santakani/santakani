@@ -1,0 +1,30 @@
+.tag-list {
+    a {
+        text-transform: lowercase;
+        color: $brand-info;
+    }
+}
+
+.tag-list-plain {
+    a {
+        &:before {
+            content: "#";
+            opacity: 0.5;
+        }
+    }
+}
+
+.tag-list-round {
+    a {
+        display: inline-block;
+        border: 1px solid $brand-info;
+        border-radius: 99px;
+        line-height: 1.8em;
+        padding: 0 0.5em;
+
+        &:hover {
+            background-color: $brand-info;
+            color: #ffffff;
+        }
+    }
+}

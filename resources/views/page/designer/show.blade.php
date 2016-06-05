@@ -93,11 +93,10 @@
 
     {!! $designer->text('content') !!}
 
-    <p class="tags">
-        @foreach ($designer->tags as $tag)
-            <a href="{{ url('tag/' . $tag->id) }}">{{ $tag->text('name') }}</a>
-        @endforeach
-    </p>
+    @include('component.tag-list', [
+        'tags' => $designer->tags,
+        'style' => 'plain',
+    ])
 </div>
 
 <div class="container-fluid">
