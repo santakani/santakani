@@ -101,7 +101,7 @@ class ImageController extends Controller
         // Validate data
         $this->validate($request, [
             'image' => 'required|image|mimes:jpeg,png,gif',
-            'parent_type' => 'string',
+            'parent_type' => 'string|in:city,country,designer,place,story,tag',
             'parent_id' => 'integer',
         ]);
 
@@ -109,22 +109,12 @@ class ImageController extends Controller
         $image->user_id = Auth::user()->id;
 
         if ($request->has('parent_type') && $request->has('parent_id')) {
-            $type = $request->input('parent_type');
-            $id = intval($request->input('parent_id'));
+            $image->parent_type = $request->input('parent_type');
+            $image->parent_id = intval($request->input('parent_id'));
 
-            if ($type === 'designer') {
-                $parent = Designer::find($id);
-            } elseif ($type === 'place') {
-                $parent = Place::find($id);
-            } elseif ($type === 'country') {
-                $parent = Country::find($id);
-            } elseif ($type === 'city') {
-                $parent = City::find($id);
-            }
-
-            if (Gate::allows('edit-page', $parent)) {
-                $image->parent_type = $type;
-                $image->parent_id = $id;
+            if (!Gate::allows('edit-page', $image->parentPage)) {
+                $image->parent_type = null;
+                $image->parent_id = null;
             }
         }
 

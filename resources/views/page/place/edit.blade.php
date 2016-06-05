@@ -26,7 +26,7 @@
             <div class="col-sm-10 col-md-8">
                 <input id="input-name" class="form-control" type="text"
                     name="name" value="{{ old('name')?old('name'):$place->text('name', 'en') }}"
-                    placeholder="Name of place" required maxlength="255">
+                    placeholder="Name of place" maxlength="255">
             </div>
         </div>
 
@@ -152,8 +152,8 @@
 
             <div class="col-sm-10 col-md-8">
                 <input id="address-input" class="form-control" type="text"
-                    name="name" value="{{ old('address')?old('address'):$place->address }}"
-                    required maxlength="255">
+                    name="address" value="{{ old('address')?old('address'):$place->address }}"
+                    maxlength="255">
             </div>
         </div>
 

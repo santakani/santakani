@@ -14,6 +14,18 @@ use App\PlaceTranslation;
 class PlaceController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index','show']]);
+        $this->middleware('safetext', ['only' => ['store','update']]);
+        $this->middleware('trim');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -133,7 +145,72 @@ class PlaceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $place = Place::find($id);
+
+        $translation = $place->translations()->where('locale', 'en')->first();
+
+        if (empty($place)) {
+            abort(404);
+        }
+
+        // Check permission
+        if (Gate::denies('edit-page', $place)) {
+            abort(403);
+        }
+
+        // Validate data
+        $this->validate($request, [
+            'name' => 'string|max:255',
+            'content' => 'string',
+            'type' => 'string|in:' . implode(',', Place::types()),
+            'image_id' => 'integer|exists:image,id',
+            'gallery_image_ids.*' => 'integer|exists:image,id',
+            'city_id' => 'integer|exists:city,id',
+            'address' => 'string|max:255',
+            'latitude' => 'numeric',
+            'longitude' => 'numeric',
+            'tag_ids.*' => 'integer|exists:tag,id',
+            'email' => 'email|max:255',
+            'phone' => 'string|max:255',
+            'website' => 'url|max:255',
+            'facebook' => 'url|max:255',
+            'google_plus' => 'url|max:255',
+        ]);
+
+        foreach (['name', 'content'] as $key) {
+            if ($request->has($key)) {
+                // Not empty, fill the value
+                $translation->$key = $request->input($key);
+            } elseif ($request->exists($key)) {
+                // Empty, set null.
+                $translation->$key = null;
+            } else {
+                // Not provided, untouch properties.
+            }
+        }
+
+        $translation->save();
+
+        // Keys directly filled into designer model
+        $keys = [
+            'type', 'city_id', 'image_id', 'address', 'latitude', 'longitude',
+            'email', 'phone', 'website', 'facebook', 'google_plus',
+            'gallery_image_ids', 'tag_ids'
+        ];
+
+        foreach ($keys as $key) {
+            if ($request->has($key)) {
+                // Not empty, fill the value
+                $place->$key = $request->input($key);
+            } elseif ($request->exists($key)) {
+                // Empty, set null.
+                $place->$key = null;
+            } else {
+                // Not provided, untouch properties.
+            }
+        }
+
+        $place->save();
     }
 
     /**
@@ -142,8 +219,27 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $place = Place::find($id);
+
+        if (empty($place)) {
+            abort(404);
+        }
+
+        if (Gate::denies('edit-page', $place)) {
+            abort(403);
+        }
+
+        if ($request->has('force_delete')) {
+            if ($request->has('with_images')) {
+                $place->images()->forceDelete();
+            }
+            $place->forceDelete();
+        } elseif ($request->has('restore')) {
+            $place->restore();
+        } else {
+            $place->delete();
+        }
     }
 }

@@ -42,7 +42,6 @@ class DesignerController extends Controller
      */
     public function __construct()
     {
-        // Only logged in users can upload images
         $this->middleware('auth', ['except' => ['index','show']]);
         $this->middleware('safetext', ['only' => ['store','update']]);
         $this->middleware('trim');
