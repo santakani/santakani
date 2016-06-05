@@ -28,6 +28,7 @@ class Designer extends Model
 {
     use Imagable;
     use SoftDeletes;
+    use TagFeature;
     use Translatable;
 
     /**
@@ -90,22 +91,6 @@ class Designer extends Model
         return $this->belongsTo('App\City');
     }
 
-    /**
-     * Get tags that the designer is related to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function tags()
-    {
-        /**
-         * First "taggable" is name for column *_type, *_id, and tabble. But
-         * Laravel guess that your table is "taggables". So we pass second "taggable"
-         * as table name.
-         * @see https://laravel.com/api/5.2/Illuminate/Database/Eloquent/Model.html#method_morphToMany
-         */
-        return $this->morphToMany('App\Tag', 'taggable', 'taggable');
-    }
-
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -132,30 +117,6 @@ class Designer extends Model
     public function getTaglineAttribute()
     {
         return $this->text('tagline');
-    }
-
-    /**
-     * "tag_ids" getter. Return an array of tag ids.
-     *
-     * @return int[]
-     */
-    public function getTagIdsAttribute()
-    {
-        $ids = [];
-        foreach ($this->tags as $tag) {
-            $ids[] = $tag->id;
-        }
-        return $ids;
-    }
-
-    /**
-     * "tag_ids" setter. A convenient way to reset tag relationships.
-     *
-     * @param int[] $tag_ids An array of tag ids.
-     */
-    public function setTagIdsAttribute($tag_ids)
-    {
-        $this->tags()->sync($tag_ids);
     }
 
     /**

@@ -28,6 +28,7 @@ class Place extends Model
 {
     use Imagable;
     use SoftDeletes;
+    use TagFeature;
     use Translatable;
 
     /**
