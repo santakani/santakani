@@ -52,3 +52,21 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::resource('story', 'StoryController');
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| API Routes (version 1)
+|--------------------------------------------------------------------------
+|
+| This route group applies the "api" middleware group to every route
+| it contains. The "api" middleware group is defined in your HTTP
+| kernel and includes throttle (limit API rates by 60 times per second) and
+| auth through API rather than session.
+|
+*/
+
+Route::group(['middleware' => 'api', 'prefix' => 'api/v1'], function () {
+
+
+});

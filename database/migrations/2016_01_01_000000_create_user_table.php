@@ -40,6 +40,7 @@ class CreateUserTable extends Migration
             $table->string('email')->unique(); // As username used for login
             $table->string('password', 60);
             $table->rememberToken();
+            $table->string('api_token', 60)->unique();
 
             $table->timestamps();
             $table->softDeletes();
