@@ -26,7 +26,7 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/', 'DesignerController@index');
+    Route::get('/', 'StoryController@index');
 
     Route::get('setting', 'UserController@setting');
 
