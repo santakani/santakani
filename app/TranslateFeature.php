@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 
 /**
- * Translatable
+ * TranslateFeature
  *
  * Parent class for all models with translations. Contain methods to fetch and
  * update translations.
@@ -24,7 +24,7 @@ use DB;
  * @see https://github.com/santakani/santakani.com/wiki/Translation
  */
 
-trait Translatable {
+trait TranslateFeature {
 
     /**
      * Get translations.

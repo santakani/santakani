@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class City extends Model
 {
     use SoftDeletes;
-    use Translatable;
+
+    use ImageFeature;
+    use TranslateFeature;
 
     /**
      * The table associated with the model.

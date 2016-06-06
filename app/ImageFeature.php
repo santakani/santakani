@@ -12,7 +12,7 @@
 namespace App;
 
 /**
- * Imagable
+ * ImageFeature
  *
  * Functions to get and set relationships with image model.
  *
@@ -20,7 +20,7 @@ namespace App;
  * @see https://github.com/santakani/santakani.com/wiki/Image
  */
 
-trait Imagable {
+trait ImageFeature {
 
     /**
      * Main image, avatar, cover.

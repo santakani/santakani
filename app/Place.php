@@ -26,10 +26,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Place extends Model
 {
-    use Imagable;
     use SoftDeletes;
+
+    use ImageFeature;
     use TagFeature;
-    use Translatable;
+    use TranslateFeature;
 
     /**
      * The table associated with the model.
