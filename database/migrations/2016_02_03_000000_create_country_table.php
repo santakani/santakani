@@ -64,8 +64,8 @@ class CreateCountryTable extends Migration
             $table->foreign('country_id')->references('id')->on('country')->onDelete('cascade');
         });
 
-        DB::statement('ALTER TABLE country_translation ADD FULLTEXT INDEX country_translation_name_index(name)');
-        DB::statement('ALTER TABLE country_translation ADD FULLTEXT INDEX country_translation_content_index(content)');
+        DB::statement('ALTER TABLE country_translation ADD FULLTEXT INDEX country_translation_name_ft_index(name)');
+        DB::statement('ALTER TABLE country_translation ADD FULLTEXT INDEX country_translation_content_ft_index(content)');
     }
 
     /**

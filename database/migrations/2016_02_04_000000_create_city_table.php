@@ -65,8 +65,8 @@ class CreateCityTable extends Migration
             $table->foreign('city_id')->references('id')->on('city')->onDelete('cascade');
         });
 
-        DB::statement('ALTER TABLE city_translation ADD FULLTEXT INDEX city_translation_name_index(name)');
-        DB::statement('ALTER TABLE city_translation ADD FULLTEXT INDEX city_translation_content_index(content)');
+        DB::statement('ALTER TABLE city_translation ADD FULLTEXT INDEX city_translation_name_ft_index(name)');
+        DB::statement('ALTER TABLE city_translation ADD FULLTEXT INDEX city_translation_content_ft_index(content)');
     }
 
     /**
