@@ -4,6 +4,10 @@ if (!isset($active_nav)) {
 }
 
 $nav_menu_left = [
+    'story' => [
+        'text' => 'Stories',
+        'url' => url('story'),
+    ],
     'designer' => [
         'text' => 'Designers',
         'url' => url('designer'),
@@ -11,10 +15,6 @@ $nav_menu_left = [
     'place' => [
         'text' => 'Places',
         'url' => url('place'),
-    ],
-    'story' => [
-        'text' => 'Stories',
-        'url' => url('story'),
     ],
 ];
 
