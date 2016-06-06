@@ -36,9 +36,9 @@ Route::group(['middleware' => 'web'], function () {
         'create', 'store'
     ]]);
 
-    Route::get('image/upload', 'ImageController@create');
-
-    Route::resource('image', 'ImageController');
+    Route::resource('image', 'ImageController', ['except' => [
+        'create', 'edit', 'update'
+    ]]);
 
     Route::resource('tag', 'TagController');
 
@@ -49,4 +49,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('designer', 'DesignerController');
 
     Route::resource('place', 'PlaceController');
+
+    Route::resource('story', 'StoryController');
 });
