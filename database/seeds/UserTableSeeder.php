@@ -33,18 +33,21 @@ class UserTableSeeder extends Seeder
             'name' => 'Guo Yunhe',
             'email' => 'yunhe.guo@example.com',
             'password' => bcrypt('abcd123456'),
+            'api_token' => str_random(60),
         ]);
 
         DB::table('user')->insert([
             'name' => 'Du Yuexin',
             'email' => 'yuexin.du@example.com',
             'password' => bcrypt('abcd123456'),
+            'api_token' => str_random(60),
         ]);
 
         DB::table('user')->insert([
             'name' => 'Yun Xiaotong',
             'email' => 'xiaotong.yun@example.com',
             'password' => bcrypt('abcd123456'),
+            'api_token' => str_random(60),
         ]);
     }
 }
