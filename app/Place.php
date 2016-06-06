@@ -63,14 +63,9 @@ class Place extends Model
         'email', 'phone', 'website', 'facebook', 'google_plus',
     ];
 
-
-
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                          Relationship Methods                          //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
-
+    //====================================================================
+    // Relationship Methods
+    //====================================================================
 
     /**
      * Country.
@@ -102,29 +97,9 @@ class Place extends Model
         return $this->belongsTo('App\User');
     }
 
-    /**
-     * Get tags that the designer is related to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function tags()
-    {
-        /**
-         * First "taggable" is name for column *_type, *_id, and tabble. But
-         * Laravel guess that your table is "taggables". So we pass second "taggable"
-         * as table name.
-         * @see https://laravel.com/api/5.2/Illuminate/Database/Eloquent/Model.html#method_morphToMany
-         */
-        return $this->morphToMany('App\Tag', 'taggable', 'taggable');
-    }
-
-
-
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                           Dynamic Properties                           //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
+    //====================================================================
+    // Dynamic Properties
+    //====================================================================
 
     /**
      * "name" getter.
@@ -137,30 +112,6 @@ class Place extends Model
     }
 
     /**
-     * "tag_ids" getter. Return an array of tag ids.
-     *
-     * @return int[]
-     */
-    public function getTagIdsAttribute()
-    {
-        $ids = [];
-        foreach ($this->tags as $tag) {
-            $ids[] = $tag->id;
-        }
-        return $ids;
-    }
-
-    /**
-     * "tag_ids" setter. A convenient way to reset tag relationships.
-     *
-     * @param int[] $tag_ids An array of tag ids.
-     */
-    public function setTagIdsAttribute($tag_ids)
-    {
-        $this->tags()->sync($tag_ids);
-    }
-
-    /**
      * "url" getter. URL of place page.
      *
      * @return string
@@ -170,13 +121,15 @@ class Place extends Model
         return url('place/' . $this->id);
     }
 
+    //====================================================================
+    // Other Methods
+    //====================================================================
 
+    // Todo...
 
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                            Static Functions                            //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
+    //====================================================================
+    // Static Functions
+    //====================================================================
 
     /**
      * Query places within a radius.
@@ -205,13 +158,7 @@ class Place extends Model
      */
     public static function types()
     {
-        $types = [];
-
-        foreach (self::typesWithNames() as $key => $value) {
-            $types[] = $key;
-        }
-
-        return $types;
+        return array_keys(self::typesWithNames());
     }
 
     /**
