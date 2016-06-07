@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -159,6 +159,7 @@ return [
         /**
         * Third Party Service Providers...
         */
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
