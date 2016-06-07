@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Designers',
     'body_id' => 'designer-index-page',
-    'body_class' => 'designer-index index',
+    'body_class' => 'designer-index-page index-page designer-page',
     'active_nav' => 'designer',
 ])
 
@@ -9,22 +9,25 @@
 <div class="container">
     <div class="row">
         @foreach ($designers as $designer)
-            <article id="story-{{ $designer->id }}" class="story grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3"
-                data-id="{{ $designer->id }}">
-                <a href="{{ $designer->url }}">
-                    @if ($image = $designer->image)
-                        <img class="featured-image" src="{{ $image->file_urls['thumb'] }}" />
-                    @else
-                        <img class="featured-image" src="http://placehold.it/300x300?text=NO+IMAGE" />
-                    @endif
-                    <div class="shadow"></div>
-                    <div class="text">
-                        {{ $designer->text('name') }}: {{ $designer->text('tagline') }}
-                    </div>
-                </a>
-            </article>
+            <div class="col-sm-12 col-md-6">
+                <article id="designer-{{ $designer->id }}" class="designer"
+                    data-id="{{ $designer->id }}">
+                    <a href="{{ $designer->url }}">
+                        <div class="cover-image" style="background-image:url({{ $designer->image_id ? $designer->image->file_urls['medium'] : '' }})">
+                            <img class="avatar-image" src="{{ $designer->image_id ? $designer->image->file_urls['thumb'] : '' }}" />
+                        </div>
+                        <div class="text">
+                            <h1>{{ $designer->text('name') }}<br>
+                                <small>{{ $designer->text('tagline') }}</small></h1>
+                            <div class="excerpt">{{ $designer->excerpt('content') }}</div>
+                        </div>
+                    </a>
+                </article>
+            </div>
         @endforeach
     </div><!-- .row -->
-    {!! $designers->links() !!}
+    <div class="text-center">
+        {!! $designers->links() !!}
+    </div>
 </div><!-- .container -->
 @endsection
