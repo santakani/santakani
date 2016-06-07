@@ -1,0 +1,10 @@
+.material-card {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    @include material-shadow(lower);
+    transition: 0.3s;
+
+    &:hover, &:active, &.active {
+        @include material-shadow(medium);
+    }
+}

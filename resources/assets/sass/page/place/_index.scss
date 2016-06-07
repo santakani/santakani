@@ -40,33 +40,28 @@
     }
 
     article.place {
-        display: flex;
-        height: 200px;
+
         margin-bottom: 20px;
-        transition: 0.3s;
 
         &.active {
-            background-color: #f0f0f0;
+            transform: scale(1.03);
         }
 
-        @media screen and (max-width: $screen-xs-max) {
+        > a {
+            display: flex;
+            position: relative;
             height: 150px;
-            margin-bottom: 10px;
-            font-size: $font-size-small;
+            color: $gray;
+            overflow: hidden;
         }
 
-        .image {
+        .cover-image {
             @include image-cover();
             position: relative;
             flex: 0 0 auto;
             width: 200px;
-            height: 200px;
+            height: 150px;
             float: left;
-
-            @media screen and (max-width: $screen-xs-max) {
-                width: 150px;
-                height: 150px;
-            }
 
             .type {
                 position: absolute;
@@ -82,23 +77,13 @@
         .text {
             flex: 1 1 100px;
             padding: 10px;
+            height: 150px;
             overflow: hidden;
 
-            .title {
+            .name {
                 margin-top: 0;
-                a {color: $gray-light;}
-
-                small {
-                    display: inline-block;
-                    margin: 0.5em 0;
-                }
-
-                @media screen and (max-width: $screen-xs-max) {
-                    font-size: $font-size-small;
-                    small {
-                        font-size: $font-size-small;
-                    }
-                }
+                margin-bottom: 10px;
+                font-size: 1.5em;
             }
 
             .dot {
@@ -108,19 +93,27 @@
                 background: #fff;
                 border-radius: 99px;
             }
+        }
 
-            .tag {
-                display: inline-block;
-                font-size: $font-size-small;
-                color: $brand-info;
-                border: 1px solid $brand-info;
-                padding: 0.2em 0.5em;
-                border-radius: 99px;
+        @media screen and (max-width: $screen-xs-max) {
+            > a {
+                flex-direction: column;
+                height: 300px;
+            }
 
-                @media screen and (max-width: $screen-xs-max) {
-                    border: none;
-                    padding: 0;
-                    border-radius: 0;
+            .cover-image {
+                width: auto;
+            }
+
+            .text {
+                height: 150px;
+
+                .name {
+                    font-size: 1.2em;
+
+                    small {
+                        font-size: 0.85em;
+                    }
                 }
             }
         }
