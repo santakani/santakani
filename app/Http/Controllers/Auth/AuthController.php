@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
+use Socialite;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -69,5 +71,45 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
             'api_token' => str_random(60),
         ]);
+    }
+
+    /**
+     * Redirect the user to the Facebook authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Facebook.
+     *
+     * @return Response
+     */
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        if (count($local_user = User::where('facebook_id', $user->getId())->first())) {
+
+        } elseif (count($local_user = User::where('email', $user->getEmail())->first())) {
+            // Save facebook ID
+            $local_user->facebook_id = $user->getId();
+            $local_user->save();
+        } else {
+            // Create new user
+            $local_user = User::create([
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'api_token' => str_random(60),
+                'facebook_id' => $user->getId(),
+            ]);
+
+        }
+
+        // Auth $local_user manually
+        Auth::login($local_user);
     }
 }

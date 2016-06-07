@@ -26,6 +26,9 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+    Route::get('auth/facebook', 'Auth\AuthController@redirectToFacebook');
+    Route::get('auth/facebook/callback', 'Auth\AuthController@handleFacebookCallback');
+
     Route::get('/', 'StoryController@index');
 
     Route::get('setting', 'UserController@setting');
