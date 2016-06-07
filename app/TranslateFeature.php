@@ -60,4 +60,15 @@ trait TranslateFeature {
         }
     }
 
+    /**
+     * Plain text of content with 200 character length.
+     *
+     * @return string
+     */
+    public function excerpt($field, $locale = 'en', $length = 200)
+    {
+        $plain_text = strip_tags($this->text($field, $locale));
+        return grapheme_strlen($plain_text) > $length ? grapheme_substr($plain_text,0,$length) . '...' : $plain_text;
+    }
+
 }
