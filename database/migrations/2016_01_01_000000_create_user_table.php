@@ -42,9 +42,9 @@ class CreateUserTable extends Migration
             $table->rememberToken();
             $table->string('api_token', 60)->unique();
 
-            $table->bigInteger('facebook_id')->nullable()->unique();
-            $table->bigInteger('google_id')->nullable()->unique();
-            $table->bigInteger('twitter_id')->nullable()->unique();
+            $table->string('facebook_id')->nullable()->unique();
+            $table->string('google_id')->nullable()->unique();
+            $table->string('twitter_id')->nullable()->unique();
 
             $table->timestamps();
             $table->softDeletes();
