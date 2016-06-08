@@ -63,7 +63,7 @@ class OAuthController extends Controller
                 }
             }
 
-            Auth::login($local_user);
+            Auth::login($local_user, true);
 
             return redirect('/');
         }
@@ -123,7 +123,7 @@ class OAuthController extends Controller
                 }
             }
 
-            Auth::login($local_user);
+            Auth::login($local_user, true);
 
             return redirect('/');
         }
@@ -183,7 +183,7 @@ class OAuthController extends Controller
                 }
             }
 
-            Auth::login($local_user);
+            Auth::login($local_user, true);
 
             return redirect('/');
         }
