@@ -111,5 +111,7 @@ class AuthController extends Controller
 
         // Auth $local_user manually
         Auth::login($local_user);
+
+        return redirect('/');
     }
 }
