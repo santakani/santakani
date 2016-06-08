@@ -122,7 +122,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function setting()
+    public function settings()
     {
         $user = Auth::user();
         return view('page.user.setting', ['user' => $user]);

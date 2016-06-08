@@ -85,20 +85,28 @@ class OAuthController extends Controller
              * website accounts. This action is usually done in user settings
              * page.
              */
-            $local_user = Auth::user();
-            $local_user[$provider.'_id'] = $user->getId();
 
-            if (empty($local_user->email) && !empty($user->getEmail())) {
-                /*
-                 * If email not set and OAuth email available, set it with OAuth
-                 * email.
-                 */
-                $local_user->email = $user->getEmail();
+            // Check if the OAuth account already exists.
+            $local_user = User::where($provider.'_id', $user->getId())->first();
+            if (count($local_user)) {
+                return redirect('settings')->withErrors([$provider,
+                    'This account is connected with another user. Disconnect them and try again.']);
+            } else {
+                $local_user = Auth::user();
+                $local_user[$provider.'_id'] = $user->getId();
+
+                if (empty($local_user->email) && !empty($user->getEmail())) {
+                    /*
+                    * If email not set and OAuth email available, set it with OAuth
+                    * email.
+                    */
+                    $local_user->email = $user->getEmail();
+                }
+
+                $local_user->save();
+
+                return redirect('settings');
             }
-
-            $local_user->save();
-
-            return redirect('setting');
 
         } else {
             /*

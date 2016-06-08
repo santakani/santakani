@@ -35,7 +35,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'StoryController@index');
 
-    Route::get('setting', 'UserController@setting');
+    Route::get('settings', 'UserController@settings');
 
     Route::get('notification', 'UserController@notification');
 
