@@ -28,6 +28,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('auth/facebook', 'Auth\AuthController@redirectToFacebook');
     Route::get('auth/facebook/callback', 'Auth\AuthController@handleFacebookCallback');
+    Route::get('auth/google', 'Auth\AuthController@redirectToGoogle');
+    Route::get('auth/google/callback', 'Auth\AuthController@handleGoogleCallback');
+    Route::get('auth/twitter', 'Auth\AuthController@redirectToTwitter');
+    Route::get('auth/twitter/callback', 'Auth\AuthController@handleTwitterCallback');
 
     Route::get('/', 'StoryController@index');
 
