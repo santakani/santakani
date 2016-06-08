@@ -125,7 +125,7 @@ class UserController extends Controller
     public function settings()
     {
         $user = Auth::user();
-        return view('page.user.setting', ['user' => $user]);
+        return view('page.user.settings', ['user' => $user]);
     }
 
     /**
