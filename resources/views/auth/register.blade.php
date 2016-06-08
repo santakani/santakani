@@ -12,6 +12,22 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
+
+                    <p class="text-center">
+                        <a class="btn btn-primary btn-lg" href="/auth/facebook">
+                            <i class="fa fa-facebook-official fa-lg"></i>
+                            Register with Facebook
+                        </a>
+                        <a class="btn btn-danger btn-lg" href="/auth/google">
+                            <i class="fa fa-google fa-lg"></i>
+                            Register with Google
+                        </a>
+                        <a class="btn btn-info btn-lg" href="/auth/twitter">
+                            <i class="fa fa-twitter fa-lg"></i>
+                            Register with Twitter
+                        </a>
+                    </p>
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
