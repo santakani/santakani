@@ -92,29 +92,38 @@ class AuthController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
 
-        $local_user = User::where('facebook_id', $user->getId())->first();
+        if (Auth::check()) {
+            $local_user = Auth::user();
+            $local_user->facebook_id = $user->getId();
+            $local_user->save();
 
-        if (!count($local_user)) {
-            $local_user = User::where('email', $user->getEmail())->first();
+            return redirect('setting');
 
-            if (count($local_user)) {
-                // Save Facebook ID
-                $local_user->facebook_id = $user->getId();
-                $local_user->save();
-            } else {
-                // Create new user
-                $local_user = User::create([
-                    'name' => $user->getName(),
-                    'email' => $user->getEmail(),
-                    'api_token' => str_random(60),
-                    'facebook_id' => $user->getId(),
-                ]);
+        } else {
+            $local_user = User::where('facebook_id', $user->getId())->first();
+
+            if (!count($local_user)) {
+                $local_user = User::where('email', $user->getEmail())->first();
+
+                if (count($local_user)) {
+                    // Save Facebook ID
+                    $local_user->facebook_id = $user->getId();
+                    $local_user->save();
+                } else {
+                    // Create new user
+                    $local_user = User::create([
+                        'name' => $user->getName(),
+                        'email' => $user->getEmail(),
+                        'api_token' => str_random(60),
+                        'facebook_id' => $user->getId(),
+                    ]);
+                }
             }
+
+            Auth::login($local_user);
+
+            return redirect('/');
         }
-
-        Auth::login($local_user);
-
-        return redirect('/');
     }
 
     /**
@@ -136,29 +145,38 @@ class AuthController extends Controller
     {
         $user = Socialite::driver('google')->user();
 
-        $local_user = User::where('google_id', $user->getId())->first();
+        if (Auth::check()) {
+            $local_user = Auth::user();
+            $local_user->google_id = $user->getId();
+            $local_user->save();
 
-        if (!count($local_user)) {
-            $local_user = User::where('email', $user->getEmail())->first();
+            return redirect('setting');
 
-            if (count($local_user)) {
-                // Save Google ID
-                $local_user->google_id = $user->getId();
-                $local_user->save();
-            } else {
-                // Create new user
-                $local_user = User::create([
-                    'name' => $user->getName(),
-                    'email' => $user->getEmail(),
-                    'api_token' => str_random(60),
-                    'google_id' => $user->getId(),
-                ]);
+        } else {
+            $local_user = User::where('google_id', $user->getId())->first();
+
+            if (!count($local_user)) {
+                $local_user = User::where('email', $user->getEmail())->first();
+
+                if (count($local_user)) {
+                    // Save Google ID
+                    $local_user->google_id = $user->getId();
+                    $local_user->save();
+                } else {
+                    // Create new user
+                    $local_user = User::create([
+                        'name' => $user->getName(),
+                        'email' => $user->getEmail(),
+                        'api_token' => str_random(60),
+                        'google_id' => $user->getId(),
+                    ]);
+                }
             }
+
+            Auth::login($local_user);
+
+            return redirect('/');
         }
-
-        Auth::login($local_user);
-
-        return redirect('/');
     }
 
     /**
@@ -180,28 +198,37 @@ class AuthController extends Controller
     {
         $user = Socialite::driver('twitter')->user();
 
-        $local_user = User::where('twitter_id', $user->getId())->first();
+        if (Auth::check()) {
+            $local_user = Auth::user();
+            $local_user->twitter_id = $user->getId();
+            $local_user->save();
 
-        if (!count($local_user)) {
-            $local_user = User::where('email', $user->getEmail())->first();
+            return redirect('setting');
 
-            if (count($local_user)) {
-                // Save Twitter ID
-                $local_user->twitter_id = $user->getId();
-                $local_user->save();
-            } else {
-                // Create new user
-                $local_user = User::create([
-                    'name' => $user->getName(),
-                    'email' => $user->getEmail(),
-                    'api_token' => str_random(60),
-                    'twitter_id' => $user->getId(),
-                ]);
+        } else {
+            $local_user = User::where('twitter_id', $user->getId())->first();
+
+            if (!count($local_user)) {
+                $local_user = User::where('email', $user->getEmail())->first();
+
+                if (count($local_user)) {
+                    // Save Twitter ID
+                    $local_user->twitter_id = $user->getId();
+                    $local_user->save();
+                } else {
+                    // Create new user
+                    $local_user = User::create([
+                        'name' => $user->getName(),
+                        'email' => $user->getEmail(),
+                        'api_token' => str_random(60),
+                        'twitter_id' => $user->getId(),
+                    ]);
+                }
             }
+
+            Auth::login($local_user);
+
+            return redirect('/');
         }
-
-        Auth::login($local_user);
-
-        return redirect('/');
     }
 }
