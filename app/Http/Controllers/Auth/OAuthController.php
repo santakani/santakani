@@ -31,6 +31,11 @@ class OAuthController extends Controller
         if (Auth::check()) {
             $local_user = Auth::user();
             $local_user->facebook_id = $user->getId();
+
+            if (empty($local_user->email) && !empty($user->getEmail())) {
+                $local_user->email = $user->getEmail();
+            }
+
             $local_user->save();
 
             return redirect('setting');
@@ -39,7 +44,9 @@ class OAuthController extends Controller
             $local_user = User::where('facebook_id', $user->getId())->first();
 
             if (!count($local_user)) {
-                $local_user = User::where('email', $user->getEmail())->first();
+                if (!empty($user->getEmail())) {
+                    $local_user = User::where('email', $user->getEmail())->first();
+                }
 
                 if (count($local_user)) {
                     // Save Facebook ID
@@ -84,6 +91,11 @@ class OAuthController extends Controller
         if (Auth::check()) {
             $local_user = Auth::user();
             $local_user->google_id = $user->getId();
+
+            if (empty($local_user->email) && !empty($user->getEmail())) {
+                $local_user->email = $user->getEmail();
+            }
+
             $local_user->save();
 
             return redirect('setting');
@@ -92,7 +104,9 @@ class OAuthController extends Controller
             $local_user = User::where('google_id', $user->getId())->first();
 
             if (!count($local_user)) {
-                $local_user = User::where('email', $user->getEmail())->first();
+                if (!empty($user->getEmail())) {
+                    $local_user = User::where('email', $user->getEmail())->first();
+                }
 
                 if (count($local_user)) {
                     // Save Google ID
@@ -137,6 +151,11 @@ class OAuthController extends Controller
         if (Auth::check()) {
             $local_user = Auth::user();
             $local_user->twitter_id = $user->getId();
+
+            if (empty($local_user->email) && !empty($user->getEmail())) {
+                $local_user->email = $user->getEmail();
+            }
+
             $local_user->save();
 
             return redirect('setting');
@@ -145,7 +164,9 @@ class OAuthController extends Controller
             $local_user = User::where('twitter_id', $user->getId())->first();
 
             if (!count($local_user)) {
-                $local_user = User::where('email', $user->getEmail())->first();
+                if (!empty($user->getEmail())) {
+                    $local_user = User::where('email', $user->getEmail())->first();
+                }
 
                 if (count($local_user)) {
                     // Save Twitter ID
