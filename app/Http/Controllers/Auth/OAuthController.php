@@ -26,47 +26,7 @@ class OAuthController extends Controller
      */
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver('facebook')->user();
-
-        if (Auth::check()) {
-            $local_user = Auth::user();
-            $local_user->facebook_id = $user->getId();
-
-            if (empty($local_user->email) && !empty($user->getEmail())) {
-                $local_user->email = $user->getEmail();
-            }
-
-            $local_user->save();
-
-            return redirect('setting');
-
-        } else {
-            $local_user = User::where('facebook_id', $user->getId())->first();
-
-            if (!count($local_user)) {
-                if (!empty($user->getEmail())) {
-                    $local_user = User::where('email', $user->getEmail())->first();
-                }
-
-                if (count($local_user)) {
-                    // Save Facebook ID
-                    $local_user->facebook_id = $user->getId();
-                    $local_user->save();
-                } else {
-                    // Create new user
-                    $local_user = User::create([
-                        'name' => $user->getName(),
-                        'email' => $user->getEmail(),
-                        'api_token' => str_random(60),
-                        'facebook_id' => $user->getId(),
-                    ]);
-                }
-            }
-
-            Auth::login($local_user, true);
-
-            return redirect('/');
-        }
+        return $this->handleProviderCallback('facebook');
     }
 
     /**
@@ -86,47 +46,7 @@ class OAuthController extends Controller
      */
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
-
-        if (Auth::check()) {
-            $local_user = Auth::user();
-            $local_user->google_id = $user->getId();
-
-            if (empty($local_user->email) && !empty($user->getEmail())) {
-                $local_user->email = $user->getEmail();
-            }
-
-            $local_user->save();
-
-            return redirect('setting');
-
-        } else {
-            $local_user = User::where('google_id', $user->getId())->first();
-
-            if (!count($local_user)) {
-                if (!empty($user->getEmail())) {
-                    $local_user = User::where('email', $user->getEmail())->first();
-                }
-
-                if (count($local_user)) {
-                    // Save Google ID
-                    $local_user->google_id = $user->getId();
-                    $local_user->save();
-                } else {
-                    // Create new user
-                    $local_user = User::create([
-                        'name' => $user->getName(),
-                        'email' => $user->getEmail(),
-                        'api_token' => str_random(60),
-                        'google_id' => $user->getId(),
-                    ]);
-                }
-            }
-
-            Auth::login($local_user, true);
-
-            return redirect('/');
-        }
+        return $this->handleProviderCallback('google');
     }
 
     /**
@@ -146,13 +66,33 @@ class OAuthController extends Controller
      */
     public function handleTwitterCallback()
     {
-        $user = Socialite::driver('twitter')->user();
+        return $this->handleProviderCallback('twitter');
+    }
+
+    /**
+     * General function to handle various of OAuth callback.
+     *
+     * @param string $provider One of 'facebook', 'google', 'twitter'
+     * @return Response
+     */
+    protected function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
 
         if (Auth::check()) {
+            /*
+             * Users have already logged in, assign OAuth accounts to their
+             * website accounts. This action is usually done in user settings
+             * page.
+             */
             $local_user = Auth::user();
-            $local_user->twitter_id = $user->getId();
+            $local_user[$provider.'_id'] = $user->getId();
 
             if (empty($local_user->email) && !empty($user->getEmail())) {
+                /*
+                 * If email not set and OAuth email available, set it with OAuth
+                 * email.
+                 */
                 $local_user->email = $user->getEmail();
             }
 
@@ -161,28 +101,43 @@ class OAuthController extends Controller
             return redirect('setting');
 
         } else {
-            $local_user = User::where('twitter_id', $user->getId())->first();
+            /*
+             * User is not logged in. Use OAuth to login or register. This is usually
+             * done in login and register page.
+             *
+             * Check social id of existing users. --> If found, just login the user.
+             */
+            $local_user = User::where($provider.'_id', $user->getId())->first();
 
             if (!count($local_user)) {
+                /*
+                 * If social id not found, then check the email.
+                 */
                 if (!empty($user->getEmail())) {
                     $local_user = User::where('email', $user->getEmail())->first();
                 }
 
                 if (count($local_user)) {
-                    // Save Twitter ID
-                    $local_user->twitter_id = $user->getId();
+                    /*
+                     * If we found same email, then connect existing user with
+                     * OAuth account.
+                     */
+                    $local_user[$provider.'_id'] = $user->getId();
                     $local_user->save();
                 } else {
-                    // Create new user
+                    /*
+                     * If email doesn't match any users, create new user.
+                     */
                     $local_user = User::create([
                         'name' => $user->getName(),
                         'email' => $user->getEmail(),
                         'api_token' => str_random(60),
-                        'twitter_id' => $user->getId(),
+                        $provider.'_id' => $user->getId(),
                     ]);
                 }
             }
 
+            // Login user and remember them.
             Auth::login($local_user, true);
 
             return redirect('/');
