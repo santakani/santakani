@@ -34,11 +34,11 @@ class CreateUserTable extends Migration
         Schema::create('user', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('name'); // Display name, not unique, not used for login
-            $table->text('description'); // Plain text
+            $table->string('name');
+            $table->text('description');
 
-            $table->string('email')->unique(); // As username used for login
-            $table->string('password', 60);
+            $table->string('email')->nullable()->unique();
+            $table->string('password', 60)->nullable();
             $table->rememberToken();
             $table->string('api_token', 60)->unique();
 
