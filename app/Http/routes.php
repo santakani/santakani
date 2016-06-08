@@ -26,12 +26,12 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('auth/facebook', 'Auth\AuthController@redirectToFacebook');
-    Route::get('auth/facebook/callback', 'Auth\AuthController@handleFacebookCallback');
-    Route::get('auth/google', 'Auth\AuthController@redirectToGoogle');
-    Route::get('auth/google/callback', 'Auth\AuthController@handleGoogleCallback');
-    Route::get('auth/twitter', 'Auth\AuthController@redirectToTwitter');
-    Route::get('auth/twitter/callback', 'Auth\AuthController@handleTwitterCallback');
+    Route::get('auth/facebook', 'Auth\OAuthController@redirectToFacebook');
+    Route::get('auth/facebook/callback', 'Auth\OAuthController@handleFacebookCallback');
+    Route::get('auth/google', 'Auth\OAuthController@redirectToGoogle');
+    Route::get('auth/google/callback', 'Auth\OAuthController@handleGoogleCallback');
+    Route::get('auth/twitter', 'Auth\OAuthController@redirectToTwitter');
+    Route::get('auth/twitter/callback', 'Auth\OAuthController@handleTwitterCallback');
 
     Route::get('/', 'StoryController@index');
 
