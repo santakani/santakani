@@ -11,11 +11,14 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 use App\Story;
+use App\StoryTranslation;
 
 /**
  * StoryController
@@ -60,7 +63,7 @@ class StoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.story.create');
     }
 
     /**
@@ -71,7 +74,21 @@ class StoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+        ]);
+
+        $story = new Story();
+        $story->user_id = $request->user()->id;
+        $story->save();
+
+        $translation = new StoryTranslation();
+        $translation->story_id = $story->id;
+        $translation->locale = 'en';
+        $translation->title = $request->input('title');
+        $translation->save();
+
+        return redirect()->action('StoryController@edit', [$story]);
     }
 
     /**
@@ -82,7 +99,18 @@ class StoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $story = Story::find($id);
+
+        if (empty($story)) {
+            abort(404);
+        }
+
+        $story->load('translations');
+
+        return view('page.story.show', [
+            'story' => $story,
+            'can_edit' => Gate::allows('edit-page', $story),
+        ]);
     }
 
     /**
@@ -93,7 +121,21 @@ class StoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $story = Story::find($id);
+
+        if (empty($story)) {
+            abort(404);
+        }
+
+        if (Gate::denies('edit-page', $story)) {
+            abort(403);
+        }
+
+        $story->load('translations');
+
+        return view('page.story.edit', [
+            'story' => $story,
+        ]);
     }
 
     /**
