@@ -36,6 +36,7 @@ class CreateUserTable extends Migration
 
             $table->string('name');
             $table->text('description');
+            $table->string('avatar_type'); // facebook, twitter, gravatar...
 
             $table->string('email')->nullable()->unique();
             $table->string('password', 60)->nullable();

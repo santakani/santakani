@@ -79,21 +79,53 @@ class User extends Authenticatable
         return $this->hasMany('App\Place');
     }
 
+    //====================================================================
+    // Dynamic Properties
+    //====================================================================
 
+    //====================================================================
+    // Avatar Methods
+    //====================================================================
 
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                           Dynamic Properties                           //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
+    /*
+     * Currently, we do not support upload avatar to server. Instead, use various
+     * avatar providers. The order is: Facebook, Google, Twitter, Gravatar. Google
+     * and Twitter avatar need to call API, so implemented in JavaScript.
+     */
 
+    /**
+     * Get Facebook avatar URL. Note that returned image size is not exact value.
+     *
+     * @see https://developers.facebook.com/docs/graph-api/reference/v2.2/user/picture
+     *
+     * @param int $size
+     * @return string
+     */
+    public function facebookAvatar($size)
+    {
+        return 'http://graph.facebook.com/' . $this->facebook_id . '/picture?type=square'
+            . '&width=' . $size . '&height=' . $size;
+    }
 
+    /**
+     * Get Gravatar URL.
+     *
+     * @see https://cn.gravatar.com/site/implement/
+     *
+     * @param int $size
+     * @return string
+     */
+    public function gravatar($size)
+    {
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5( strtolower( trim( $this->email ) ) );
+        $url .= "?s=$size&d=mm&r=g";
+        return $url;
+    }
 
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                              Role Methods                              //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
+    //====================================================================
+    // Role Methods
+    //====================================================================
 
 
     /**
