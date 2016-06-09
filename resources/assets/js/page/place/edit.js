@@ -42,7 +42,7 @@ $(function () {
         manager.call({
             multiple: false,
             done: function (image) {
-                coverPreview.model.set(image);
+                coverPreview.model.set(image.attributes);
             }
         });
     });
@@ -55,6 +55,19 @@ $(function () {
     var citySelect = new CitySelect({el: '.city-select'});
 
     var coordinateSelect = new CoordinateSelect();
+
+    // Update coordinate when changing address
+    if (!coordinateSelect.latitude || !coordinateSelect.longitude) {
+        coordinateSelect.search($('#address-input').val());
+    }
+    var searchTimeout;
+    $('#address-input')[0].oninput = function () {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function () {
+            coordinateSelect.search($('#address-input').val());
+        }, 500);
+    };
+
 
     var tagSelect = new TagSelect({el: '.tag-select'});
 

@@ -32,27 +32,51 @@ module.exports = Backbone.View.extend({
                 })
             ],
             view: new ol.View({
-                center: ol.proj.fromLonLat([this.longitude, this.latitude]),
-                zoom: 12
+                center: [0, 0],
+                zoom: 13
             })
         });
+
+        if (this.latitude && this.longitude) {
+            this.updateCenter();
+        }
 
         var that = this;
 
         this.map.on('moveend', function (event) {
-            var xy = that.map.getView().getCenter();
-            var lonlat = ol.proj.transform(xy, 'EPSG:3857', 'EPSG:4326');
-            that.updateCoordinate(lonlat[1], lonlat[0]);
+            if (!that.updatingCenter) {
+                var xy = that.map.getView().getCenter();
+                var lonlat = ol.proj.transform(xy, 'EPSG:3857', 'EPSG:4326');
+                that.setCoordinate(lonlat[1], lonlat[0]);
+            }
         });
     },
 
-    updateCoordinate: function (latitude, longitude) {
+    setCoordinate: function (latitude, longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.$latitudeInput.val(latitude);
         this.$longitudeInput.val(longitude);
         this.$latitudeText.text(latitude);
         this.$longitudeText.text(longitude);
+    },
+
+    updateCenter: function () {
+        this.updatingCenter = true;
+        this.map.getView().setCenter(ol.proj.transform([this.longitude, this.latitude], 'EPSG:4326', 'EPSG:3857'));
+        this.map.getView().setZoom(13);
+        this.updatingCenter = false;
+    },
+
+    search: function (query) {
+        var url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(query) + '&json_callback=?';
+        var that = this;
+        $.getJSON(url, function(data) {
+            if (data.length > 0) {
+                that.setCoordinate(parseFloat(data[0].lat), parseFloat(data[0].lon));
+                that.updateCenter();
+            }
+        });
     }
 
 });

@@ -120,7 +120,7 @@
             </label>
 
             <div class="col-sm-4 col-md-3">
-                <select class="country-select">
+                <select id="country-select" class="country-select">
                     @if (!empty($country))
                         <option value="{{ $country->id }}" selected="selected">
                             {{ $country->text('name') }}
@@ -134,7 +134,7 @@
             </label>
 
             <div class="col-sm-4 col-md-3">
-                <select name="city_id" class="city-select">
+                <select name="city_id" id="city-select" class="city-select">
                     @if (!empty($city))
                         <?php $city?>
                         <option value="{{ $city->id }}" selected="selected">
