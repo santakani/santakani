@@ -38,12 +38,12 @@ class PlaceController extends Controller
 
         if ($request->has('city_id')) {
             $city = City::find($request->has('city_id'));
-            $places = Place::where('city_id', $city->id)->paginate(16);
+            $places = Place::where('city_id', $city->id)->paginate(24);
         } elseif ( count( City::where('slug', 'helsinki')->get() ) ) {
             $city = City::where('slug', 'helsinki')->first();
-            $places = Place::where('city_id', $city->id)->paginate(16);
+            $places = Place::where('city_id', $city->id)->paginate(24);
         } else {
-            $places = Place::paginate(16);
+            $places = Place::paginate(24);
         }
 
         return view('page.place.index', [

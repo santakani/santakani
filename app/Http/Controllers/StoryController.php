@@ -46,7 +46,7 @@ class StoryController extends Controller
      */
     public function index(Request $request)
     {
-        $stories = Story::paginate(16);
+        $stories = Story::paginate(12);
 
         return view('page.story.index', [
             'stories' => $stories,
