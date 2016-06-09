@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'designer' => \App\Designer::class,
             'place' => \App\Place::class,
+            'story' => \App\Story::class,
             'country' => \App\Country::class,
             'city' => \App\City::class,
         ]);
