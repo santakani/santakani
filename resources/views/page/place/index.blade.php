@@ -14,6 +14,27 @@
 
 <div id="place-list">
     <div class="container-fluid">
+        <form class="form-inline" action="/place" method="get">
+            <div class="form-group">
+                <label for="city-select">City</label>
+                <select name="city_id" id="city-select" class="city-select form-control"
+                    style="width: 200px">
+                    @if (!empty($city))
+                        <option value="{{ $city->id }}" selected="selected">
+                            {{ $city->text('name') }}
+                        </option>
+                    @endif
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="type-input">Type</label>
+                @include('component.place-type-select', [
+                    'selected' => $type,
+                    'all' => true,
+                ])
+            </div>
+            <button type="submit" class="btn btn-default">Find</button>
+        </form>
         @foreach ($places as $place)
             <article id="place-{{ $place->id }}" class="place material-card"
                 data-id="{{ $place->id }}" data-latitude="{{ $place->latitude }}"

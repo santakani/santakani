@@ -39,6 +39,18 @@
         margin-top: 200px;
     }
 
+    form {
+        margin-bottom: 20px;
+
+        label {
+            margin-right: 10px;
+        }
+
+        select, .selectize-control {
+            margin-right: 20px;
+        }
+    }
+
     article.place {
 
         margin-bottom: 20px;

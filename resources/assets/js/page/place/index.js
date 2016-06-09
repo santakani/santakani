@@ -2,6 +2,8 @@ var Backbone = require('backbone');
 var ol = require('openlayers');
 var d3 = require('d3');
 
+var CitySelect = require('../../view/city-select');
+
 var Place = require('../../model/place');
 
 var PlaceList = require('../../collection/place-list');
@@ -149,4 +151,6 @@ $(function () {
         }
 
     });
+
+    var citySelect = new CitySelect({el: '#city-select'});
 });

@@ -34,23 +34,33 @@ class PlaceController extends Controller
     {
         $this->validate($request, [
             'city_id' => 'integer|exists:city,id',
+            'type' => 'string|in:' . implode(',', Place::types()),
         ]);
 
         if ($request->has('city_id')) {
-            $city = City::find($request->has('city_id'));
-            $places = Place::where('city_id', $city->id)->paginate(24);
-        } elseif ( count( City::where('slug', 'helsinki')->get() ) ) {
-            $city = City::where('slug', 'helsinki')->first();
-            $places = Place::where('city_id', $city->id)->paginate(24);
+            $city = City::find($request->input('city_id'));
         } else {
-            $places = Place::paginate(24);
+            $city = City::where('slug', 'helsinki')->first();
+            if (!count($city)) {
+                $city = City::first();
+            }
         }
 
+        if ($request->has('type')) {
+            $places = Place::where([
+                ['city_id', $city->id],
+                ['type', $request->input('type')],
+            ])->paginate(24);
+        } else {
+            $places = Place::where('city_id', $city->id)->paginate(24);
+        }
+
+
+
         return view('page.place.index', [
-            'body_class' => 'places',
-            'active_nav' => 'place',
             'places' => $places,
             'city' => $city,
+            'type' => $request->input('type'),
         ]);
     }
 

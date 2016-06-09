@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use App\City;
 use App\Image;
 use App\User;
+use App\Place;
 
 /**
  * PlaceTableSeeder
@@ -46,7 +47,7 @@ class PlaceTableSeeder extends Seeder
 
         $users = User::all();
 
-        $types = ['shop', 'studio', 'showroom', 'museum', 'school'];
+        $types = Place::types();
 
         for ($i = 0; $i < 100; $i++) {
             $city = $cities[rand(0, count($cities)-1)];
@@ -58,7 +59,7 @@ class PlaceTableSeeder extends Seeder
                 'city_id' => $city->id,
                 'image_id' => $image->id,
                 'user_id' => $user->id,
-                'type' => 'store',
+                'type' => $type,
                 'address' => 'Servinkuja 1 B 19',
                 'latitude' => $city->latitude + rand(0, 1000) / 20000 - 0.025,
                 'longitude' => $city->longitude + rand(0, 1000) / 20000 - 0.025,
