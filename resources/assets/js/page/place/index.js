@@ -128,7 +128,7 @@ $(function () {
         ],
         view: new ol.View({
             center: ol.proj.fromLonLat([longitude, latitude]),
-            zoom: 12
+            zoom: 13
         })
     });
 
