@@ -110,8 +110,11 @@ $(function () {
         points.push(placeRow.point);
     });
 
+    var latitude = $('#place-map').data('latitude');
+    var longitude = $('#place-map').data('longitude');
+
     var map = new ol.Map({
-        target: 'place-map-draw',
+        target: 'place-map',
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.OSM({layer: 'sat'})
@@ -124,7 +127,7 @@ $(function () {
             })
         ],
         view: new ol.View({
-            center: ol.proj.fromLonLat([24.94095, 60.17149]),
+            center: ol.proj.fromLonLat([longitude, latitude]),
             zoom: 12
         })
     });

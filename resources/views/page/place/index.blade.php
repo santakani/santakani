@@ -6,10 +6,7 @@
 ])
 
 @section('main')
-<div id="place-map">
-    <div id="place-map-inner">
-        <div id="place-map-draw"></div>
-    </div>
+<div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}">
 </div>
 
 <div id="place-list">
