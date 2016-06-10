@@ -51,44 +51,15 @@
         </div>
 
         <div class="form-group">
-
-            <?php
-                $country = null;
-                $city = null;
-
-                if (old('city_id')) {
-                    $city = \App\City::find(old('city_id'));
-                }
-
-                if (!empty($city)) {
-                    $country = $city->country;
-                }
-            ?>
-
-            <label class="col-sm-2 control-label">
-                Country/region
-            </label>
-
-            <div class="col-sm-4 col-md-3">
-                <select class="country-select form-control">
-                    @if (!empty($country))
-                        <option value="{{ $country->id }}" selected="selected">
-                            {{ $country->text('name') }}
-                        </option>
-                    @endif
-                </select>
-            </div>
-
             <label class="col-sm-2 control-label">
                 City
             </label>
 
             <div class="col-sm-4 col-md-3">
                 <select name="city_id" class="city-select form-control">
-                    @if (!empty($city))
-                        <option value="{{ $city->id }}" selected="selected">
-                            {{ $city->text('name') }}
-                        </option>
+                    @if (!empty(old('city_id')))
+                        <?php $city = \App\City::find(old('city_id')); ?>
+                        <option value="{{ $city->id }}" selected="selected">{{ $city->full_name }}</option>
                     @endif
                 </select>
             </div>

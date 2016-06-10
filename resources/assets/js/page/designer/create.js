@@ -1,4 +1,3 @@
-var CountrySelect = require('../../view/country-select');
 var CitySelect = require('../../view/city-select');
 
 $(function () {
@@ -7,7 +6,6 @@ $(function () {
         return;
     }
 
-    var countrySelect = new CountrySelect({el: '.country-select'});
     var citySelect = new CitySelect({el: '.city-select'});
 
 });

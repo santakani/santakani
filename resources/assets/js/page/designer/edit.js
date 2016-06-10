@@ -13,7 +13,6 @@ var Image = require('../../model/image');
 var ImageManager = require('../../view/image-manager');
 var ContentEditor = require('../../view/content-editor');
 var GalleryEditor = require('../../view/gallery-editor');
-var CountrySelect = require('../../view/country-select');
 var CitySelect = require('../../view/city-select');
 var TagSelect = require('../../view/tag-select');
 
@@ -52,7 +51,6 @@ $(function () {
 
     var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: manager});
 
-    var countrySelect = new CountrySelect({el: '.country-select'});
     var citySelect = new CitySelect({el: '.city-select'});
     var tagSelect = new TagSelect({el: '.tag-select'});
 
