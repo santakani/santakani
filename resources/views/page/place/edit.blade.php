@@ -25,7 +25,7 @@
 
             <div class="col-sm-10 col-md-8">
                 <input id="input-name" class="form-control" type="text"
-                    name="name" value="{{ old('name')?old('name'):$place->text('name', 'en') }}"
+                    name="name" value="{{ $place->text('name', 'en') }}"
                     placeholder="Name of place" maxlength="255">
             </div>
         </div>
@@ -36,9 +36,8 @@
             </label>
 
             <div class="col-sm-4 col-md-3">
-                <?php $selected = old('type') ? old('type') : $place->type; ?>
                 @include('component.place-type-select', [
-                    'selected' => $selected,
+                    'selected' => $place->type,
                     'required' => true,
                 ])
             </div>
@@ -52,9 +51,7 @@
             <div class="col-sm-10 col-md-8">
                 <div id="cover-editor" class="cover-editor">
                     <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
-                    @if ($image = App\Image::find(old('image')))
-                        @include('component.image-preview', ['image' => $image])
-                    @elseif ($place->image_id)
+                    @if ($place->image_id)
                         @include('component.image-preview', ['image' => $place->image])
                     @else
                         @include('component.image-preview')
@@ -84,15 +81,9 @@
                 <div id="gallery-editor" class="gallery-editor">
                     <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
                     <div class="images clearfix">
-                        @if ( count( old('gallery_image_ids') ) )
-                            @foreach (\App\Image::find( old('gallery_image_ids') ) as $image)
-                                @include('component.image-preview', ['image' => $image])
-                            @endforeach
-                        @elseif ( count( $place->gallery_images ) )
-                            @foreach ($place->gallery_images as $image)
-                                @include('component.image-preview', ['image' => $image])
-                            @endforeach
-                        @endif
+                        @foreach ($place->gallery_images as $image)
+                            @include('component.image-preview', ['image' => $image])
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -100,45 +91,15 @@
 
         <div class="form-group">
 
-            <?php
-                $country = null;
-                $city = null;
-
-                if (old('city_id')) {
-                    $city = \App\City::find(old('city_id'));
-                } elseif ($place->city_id) {
-                    $city = $place->city;
-                }
-
-                if (!empty($city)) {
-                    $country = $city->country;
-                }
-            ?>
-
-            <label class="col-sm-2 control-label">
-                Country
-            </label>
-
-            <div class="col-sm-4 col-md-3">
-                <select id="country-select" class="country-select">
-                    @if (!empty($country))
-                        <option value="{{ $country->id }}" selected="selected">
-                            {{ $country->text('name') }}
-                        </option>
-                    @endif
-                </select>
-            </div>
-
             <label class="col-sm-2 control-label">
                 City
             </label>
 
             <div class="col-sm-4 col-md-3">
-                <select name="city_id" id="city-select" class="city-select">
-                    @if (!empty($city))
-                        <?php $city?>
-                        <option value="{{ $city->id }}" selected="selected">
-                            {{ $city->text('name') }}
+                <select name="city_id" id="city-select" class="city-select form-control">
+                    @if (!empty($place->city_id))
+                        <option value="{{ $place->city_id }}" selected="selected">
+                            {{ $place->city->text('name') }}, {{ $place->country->text('name') }}
                         </option>
                     @endif
                 </select>
@@ -152,8 +113,7 @@
 
             <div class="col-sm-10 col-md-8">
                 <input id="address-input" class="form-control" type="text"
-                    name="address" value="{{ old('address')?old('address'):$place->address }}"
-                    maxlength="255">
+                    name="address" value="{{ $place->address }}" maxlength="255">
             </div>
         </div>
 
@@ -163,8 +123,8 @@
             </label>
             <div class="col-sm-10 col-md-8">
                 @include('component.coordinate-select', [
-                    'latitude' => old('latitude') ? old('latitude') : $place->latitude,
-                    'longitude' => old('longitude') ? old('longitude') : $place->longitude,
+                    'latitude' => $place->latitude,
+                    'longitude' => $place->longitude,
                 ])
             </div>
         </div>
@@ -174,19 +134,11 @@
 
             <div class="col-sm-10 col-md-8">
                 <select name="tag_ids[]" class="tag-select" style="width: 100%" multiple="multiple">
-                    @if ( count( old('tags') ) )
-                        @foreach (\App\Tag::find( old('tags') ) as $tag)
-                            <option value="{{ $tag->id }}" selected="selected">
-                                {{ $tag->text('name') }}
-                            </option>
-                        @endforeach
-                    @elseif ( count( $place->tags ) )
-                        @foreach ($place->tags as $tag)
-                            <option value="{{ $tag->id }}" selected="selected">
-                                {{ $tag->text('name') }}
-                            </option>
-                        @endforeach
-                    @endif
+                    @foreach ($place->tags as $tag)
+                        <option value="{{ $tag->id }}" selected="selected">
+                            {{ $tag->text('name') }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -196,16 +148,15 @@
                 Phone
             </label>
             <div class="col-sm-10 col-md-8">
-                <input id="phone-input" class="form-control" type="tel"
-                       name="phone" value="{{ old('phone') ? old('phone') : $place->phone }}"
-                       maxlength="255">
+                <input name="phone" value="{{ $place->phone }}" type="tel"
+                       id="phone-input" class="form-control" maxlength="255">
             </div>
         </div>
 
         <div class="form-group">
             <label for="input-email" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10 col-md-8">
-                <input name="email" value="{{ old('email')===null?$place->email:old('email') }}" type="email"
+                <input name="email" value="{{ $place->email }}" type="email"
                     maxlength="255" class="form-control" id="input-email">
             </div>
         </div>
@@ -213,7 +164,7 @@
         <div class="form-group">
             <label for="input-website" class="col-sm-2 control-label">Website</label>
             <div class="col-sm-10 col-md-8">
-                <input name="website" value="{{ old('website')===null?$place->website:old('website') }}" type="url"
+                <input name="website" value="{{ $place->website }}" type="url"
                     maxlength="255" class="form-control" id="input-website">
             </div>
         </div>
@@ -221,7 +172,7 @@
         <div class="form-group">
             <label for="input-facebook" class="col-sm-2 control-label">Facebook</label>
             <div class="col-sm-10 col-md-8">
-                <input name="facebook" value="{{ old('facebook')===null?$place->facebook:old('facebook') }}" type="url"
+                <input name="facebook" value="{{ $place->facebook }}" type="url"
                     maxlength="255" class="form-control" id="input-facebook">
             </div>
         </div>
@@ -229,7 +180,7 @@
         <div class="form-group">
             <label for="input-google-plus" class="col-sm-2 control-label">Google+</label>
             <div class="col-sm-10 col-md-8">
-                <input name="google_plus" value="{{ old('google_plus')===null?$place->google_plus:old('google_plus') }}" type="url"
+                <input name="google_plus" value="{{ $place->google_plus }}" type="url"
                     maxlength="255" class="form-control" id="input-google-plus">
             </div>
         </div>
