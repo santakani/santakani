@@ -11,7 +11,6 @@ var Image = require('../../model/image');
 var ImageManager = require('../../view/image-manager');
 var ContentEditor = require('../../view/content-editor');
 var GalleryEditor = require('../../view/gallery-editor');
-var CountrySelect = require('../../view/country-select');
 var CitySelect = require('../../view/city-select');
 var TagSelect = require('../../view/tag-select');
 var CoordinateSelect = require('../../view/coordinate-select');
@@ -51,23 +50,23 @@ $(function () {
 
     var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: manager});
 
-    var countrySelect = new CountrySelect({el: '.country-select'});
     var citySelect = new CitySelect({el: '.city-select'});
 
     var coordinateSelect = new CoordinateSelect();
 
     // Update coordinate when changing address
+    function searchCoordinate () {
+        var query = $('#address-input').val().trim() + ', ' + $('#city-select option').text().trim();
+        coordinateSelect.search(query);
+    }
     if (!coordinateSelect.latitude || !coordinateSelect.longitude) {
-        coordinateSelect.search($('#address-input').val());
+        searchCoordinate();
     }
     var searchTimeout;
     $('#address-input')[0].oninput = function () {
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(function () {
-            coordinateSelect.search($('#address-input').val());
-        }, 500);
+        searchTimeout = setTimeout(searchCoordinate, 500);
     };
-
 
     var tagSelect = new TagSelect({el: '.tag-select'});
 
