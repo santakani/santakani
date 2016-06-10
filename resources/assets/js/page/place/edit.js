@@ -54,19 +54,36 @@ $(function () {
 
     var coordinateSelect = new CoordinateSelect();
 
+
+
+    //====================================================================
     // Update coordinate when changing address
-    function searchCoordinate () {
-        var query = $('#address-input').val().trim() + ', ' + $('#city-select option').text().trim();
-        coordinateSelect.search(query);
+    //====================================================================
+
+    var searchTimeout;
+
+    function searchCoordinateTimer () {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(searchCoordinate, 500);
     }
+
+    function searchCoordinate() {
+        var address = $('#address-input').val().trim();
+        var city = $('#city-select option').text().trim();
+        if (address.length > 0 && city.length > 0) {
+            var query = address + ', ' + city;
+            coordinateSelect.search(query);
+        }
+    }
+
     if (!coordinateSelect.latitude || !coordinateSelect.longitude) {
         searchCoordinate();
     }
-    var searchTimeout;
-    $('#address-input')[0].oninput = function () {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(searchCoordinate, 500);
-    };
+
+    $('#address-input')[0].oninput = searchCoordinateTimer;
+    $('#city-select')[0].onchange = searchCoordinate;
+    $('#search-coordinate-button')[0].onclick = searchCoordinate;
+
 
     var tagSelect = new TagSelect({el: '.tag-select'});
 

@@ -6,8 +6,9 @@ module.exports = Backbone.View.extend({
 
     el: '#coordinate-select',
 
-    initialize: function () {
+    zoom: 14,
 
+    initialize: function () {
         this.$latitudeInput = this.$('input[name="latitude"]');
         this.$longitudeInput = this.$('input[name="longitude"]');
 
@@ -18,6 +19,8 @@ module.exports = Backbone.View.extend({
         this.longitude = parseFloat(this.$longitudeInput.val());
 
         var $gridLines = $('<div class="grid-lines"><div></div><div></div></div>');
+
+        var that = this;
 
         this.map = new ol.Map({
             target: this.$('.map')[0],
@@ -33,7 +36,7 @@ module.exports = Backbone.View.extend({
             ],
             view: new ol.View({
                 center: [0, 0],
-                zoom: 13
+                zoom: that.zoom
             })
         });
 
@@ -64,7 +67,7 @@ module.exports = Backbone.View.extend({
     updateCenter: function () {
         this.updatingCenter = true;
         this.map.getView().setCenter(ol.proj.transform([this.longitude, this.latitude], 'EPSG:4326', 'EPSG:3857'));
-        this.map.getView().setZoom(13);
+        this.map.getView().setZoom(this.zoom);
         this.updatingCenter = false;
     },
 

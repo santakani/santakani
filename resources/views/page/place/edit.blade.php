@@ -111,9 +111,14 @@
                 Address
             </label>
 
-            <div class="col-sm-10 col-md-8">
+            <div class="col-sm-8 col-md-6">
                 <input id="address-input" class="form-control" type="text"
                     name="address" value="{{ $place->address }}" maxlength="255">
+            </div>
+            <div class="col-sm-2">
+                <button id="search-coordinate-button" class="btn btn-info btn-block" type="button">
+                    <i class="fa fa-map-marker fa-lg"></i> Mark On Map
+                </button>
             </div>
         </div>
 

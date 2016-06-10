@@ -8,11 +8,12 @@ module.exports = Backbone.View.extend({
     className: 'city-select form-control',
 
     initialize: function (options) {
+        var that = this;
         this.$el.selectize({
 
-            valueField: 'id',
+            valueField: 'id', // Attribute in 'data' object for value in <option value="..."></option>
 
-            labelField: 'name',
+            labelField: 'full_name', // Attribute in 'data' object for text in <option></option> tags.
 
             searchField: ['slug', 'name'],
 
@@ -34,13 +35,7 @@ module.exports = Backbone.View.extend({
                         callback(res.data);
                     }
                 });
-            },
-
-            render: {
-                option: function(item, escape) {
-                    return '<div>' + escape(item.name) + '</div>';
-                },
-            },
+            }
         });
     }
 });

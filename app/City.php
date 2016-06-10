@@ -25,7 +25,7 @@ class City extends Model
      * @var array
      */
     protected $appends = [
-        'url', 'name', 'country_name'
+        'url', 'name', 'country_name', 'full_name'
     ];
 
     /**
@@ -96,13 +96,23 @@ class City extends Model
     }
 
     /**
-     * "name" getter.
+     * "country_name" getter.
      *
      * @return string
      */
     public function getCountryNameAttribute()
     {
         return $this->country->text('name');
+    }
+
+    /**
+     * "full_name" getter. Like "Helsinki, Finland"
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->text('name') . ', ' . $this->country->text('name');
     }
 
 }

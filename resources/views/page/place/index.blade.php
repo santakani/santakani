@@ -18,7 +18,7 @@
                     style="width: 200px">
                     @if (!empty($city))
                         <option value="{{ $city->id }}" selected="selected">
-                            {{ $city->text('name') }}
+                            {{ $city->full_name }}
                         </option>
                     @endif
                 </select>
