@@ -5,6 +5,7 @@
     width: 150px;
     height: 150px;
     max-width: 100%;
+    box-shadow: 0 0 0 1px $gray-lighter; // A boder-like shadow
 
     &.selected {
         box-shadow: 0 0 0 5px $brand-info; // A boder-like shadow

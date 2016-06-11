@@ -127,7 +127,11 @@ module.exports = Backbone.View.extend({
     },
 
     updateImage: function () {
-        this.$el.css('background-image', 'url(' + this.model.fileUrl(this.size) +')');
+        if (this.model.get('id') && this.model.get('mime_type')) {
+            this.$el.css('background-image', 'url(' + this.model.fileUrl(this.size) +')');
+        } else {
+            this.$el.css('background-image', 'none');
+        }
     },
 
     close: function () {
