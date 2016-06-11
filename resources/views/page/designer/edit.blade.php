@@ -93,8 +93,8 @@
 
             <div class="col-sm-4 col-md-3">
                 <select name="city_id" id="city-select" class="city-select form-control">
-                    @if (!empty($place->city_id))
-                        <option value="{{ $place->city_id }}" selected="selected">{{ $place->city->full_name }}</option>
+                    @if (!empty($designer->city_id))
+                        <option value="{{ $designer->city_id }}" selected="selected">{{ $designer->city->full_name }}</option>
                     @endif
                 </select>
             </div>
