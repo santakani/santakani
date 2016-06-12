@@ -40,7 +40,7 @@ class PlaceController extends Controller
         if ($request->has('city_id')) {
             $city = City::find($request->input('city_id'));
         } else {
-            $city = City::where('slug', 'helsinki')->first();
+            $city = City::where('geoname_id', 658225)->first();
             if (!count($city)) {
                 $city = City::first();
             }

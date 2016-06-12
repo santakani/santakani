@@ -10,7 +10,6 @@
  */
 
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
 
 /**
  * CountryTableSeeder
@@ -30,18 +29,6 @@ class CountryTableSeeder extends Seeder
      */
     public function run()
     {
-        $countries = [
-            // code => image_id
-            'FI' => 24,
-            'CN' => 25,
-            'DE' => 26,
-            'JP' => 27,
-        ];
-
-        foreach ($countries as $code => $image_id) {
-            DB::table('country')->where('code', $code)->update([
-                'image_id' => $image_id,
-            ]);
-        }
+        // No seed needed.
     }
 }

@@ -32,18 +32,17 @@ class CreateCountryTable extends Migration
         Schema::create('country', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('slug')->unique(); // e.g. "finland", "germany"
             $table->string('code')->unique(); // ISO 3166-1 alpha-2. e.g. "FI", "DE"
+            $table->string('continent')->index(); // "EU", "AS"
+            $table->string('currency'); // "EUR", "USD", "RMB"
+
+            $table->string('geoname_id')->nullable()->unique();
+            $table->date('imported_at')->nullable()->index();
+
             $table->integer('image_id')->unsigned()->nullable();
-            $table->string('region')->nullable(); // Continent, e.g. "Europe"
-            $table->string('subregion')->nullable(); // e.g. "East Asia"
-            $table->float('latitude', 10, 6)->nullable();
-            $table->float('longitude', 10, 6)->nullable();
 
             $table->timestamps();
             $table->softDeletes();
-
-            $table->index(['latitude', 'longitude']);
 
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });

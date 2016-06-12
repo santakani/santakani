@@ -13,8 +13,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 use Carbon\Carbon;
-use Cocur\Slugify\Slugify;
-use Gmo\Iso639\Languages;
 
 /**
  * ImportCountries
@@ -33,48 +31,37 @@ class ImportCountries extends Migration
      */
     public function up()
     {
-        $slugify = new Slugify();
-        $languages = new Languages();
+        $handle = fopen(base_path("database/sources/countryInfo.txt"), "r");
 
-        $json_string = file_get_contents(base_path('database/sources/countries.json'));
+        if ($handle) {
+            while (($country = fgetcsv($handle, 0, "\t")) !== false) {
 
-        $country_list = json_decode($json_string, true);
+                if (!$this->filter($country)) {
+                    continue;
+                }
 
-        $json_string = null;
+                $id = DB::table('country')->insertGetId([
+                    'code' => $country[0],
+                    'continent' => $country[8],
+                    'currency' => $country[10],
+                    'geoname_id' => $country[16],
+                    'imported_at' => Carbon::now()->subDays(30)->format('Y-m-d'),
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ]);
 
-        echo "Import countries start\n";
+                DB::table('country_translation')->insert([
+                    'country_id' => $id,
+                    'locale' => 'en',
+                    'name' => $country[4],
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ]);
 
-        foreach ($country_list as $country) {
-
-            if (!$this->filter($country)) {
-                continue;
             }
 
-            $id = DB::table('country')->insertGetId([
-                'slug' => $slugify->slugify($country['name']['common']),
-                'code' => $country['cca2'],
-                'region' => $country['region'],
-                'subregion' => $country['subregion'],
-                'latitude' => $country['latlng'][0],
-                'longitude' => $country['latlng'][1],
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            ]);
-
-            $this->insertTranslation($id, 'en', $country['name']['common']);
-
-            foreach ($country['name']['native'] as $lang_code3 => $name) {
-                $lang_code1 = $languages->findByCode3($lang_code3)->code1();
-                $this->insertTranslation($id, $lang_code1, $name['common']);
-            }
-
-            foreach ($country['translations'] as $lang_code3 => $name) {
-                $lang_code1 = $languages->findByCode3($lang_code3)->code1();
-                $this->insertTranslation($id, $lang_code1, $name['common']);
-            }
+            fclose($handle);
         }
-
-        echo "Import countries done\n";
     }
 
     /**
@@ -89,7 +76,7 @@ class ImportCountries extends Migration
 
 
     /**
-     * These areas will be ignored.
+     * Filter countries. true: imported. false: ignored.
      *
      * @param array $country
      * @return boolean
@@ -97,63 +84,11 @@ class ImportCountries extends Migration
     public function filter($country)
     {
         if (App::environment('local')) {
-            // The environment is local, only import nordic countries
-            if ($country['subregion'] !== 'Northern Europe') {
-                return false;
-            }
+            // local: only import Europe countries.
+            return $country[8] === 'EU';
+        } else {
+            // test, production: import all countries.
+            return !empty($country[0]) && !empty($country[4]) && !empty($country[8]);
         }
-
-        $white_list = [
-
-        ];
-
-        if (in_array($country['cca2'], $white_list)) {
-            return true;
-        }
-
-        if (empty($country['latlng'])) {
-            echo "\tSkip: " . $country['name']['common'] . "\n";
-            return false;
-        }
-
-        $black_list = [
-            'AQ'
-        ];
-
-        if (in_array($country['cca2'], $black_list)) {
-            echo "\tSkip: " . $country['name']['common'] . "\n";
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Insert translation to country_translation table.
-     *
-     * @param int $id Country ID
-     * @param string $locale Language code
-     * @param string $name Translation of name
-     */
-    public function insertTranslation($id, $locale, $name)
-    {
-        if (empty($id) || empty($locale) || empty($name)) {
-            return;
-        }
-
-        if ( count( DB::table('country_translation')->where([
-            ['country_id', $id],
-            ['locale', $locale],
-        ])->first() ) ) {
-            return;
-        }
-
-        DB::table('country_translation')->insert([
-            'country_id' => $id,
-            'locale' => $locale,
-            'name' => $name,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
     }
 }

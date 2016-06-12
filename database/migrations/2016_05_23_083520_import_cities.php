@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-use Carbon\Carbon;
-use Cocur\Slugify\Slugify;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+use Carbon\Carbon;
 
 /**
  * ImportCities
@@ -31,10 +31,6 @@ class ImportCities extends Migration
      */
     public function up()
     {
-        echo "Import cities start\n";
-
-        $slugify = new Slugify();
-
         $handle = fopen(base_path("database/sources/cities15000.txt"), "r");
         if ($handle) {
             while (($city = fgetcsv($handle, 0, "\t")) !== false) {
@@ -43,16 +39,19 @@ class ImportCities extends Migration
                     continue;
                 }
 
-                $country_id = DB::table('country')->where('code', $city[8])->first()->id;
+                $country = DB::table('country')->where('code', $city[8])->first();
 
-                $slug = $this->slug2($slugify->slugify($city[2]), $country_id);
+                if (empty($country)) {
+                    continue;
+                }
 
                 $id = DB::table('city')->insertGetId([
-                    'slug' => $slug,
-                    'country_id' => $country_id,
+                    'country_id' => $country->id,
                     'latitude' => $city[4],
                     'longitude' => $city[5],
                     'timezone' => $city[17],
+                    'geoname_id' => $city[0],
+                    'imported_at' => Carbon::now()->subDays(30)->format('Y-m-d'),
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
@@ -61,19 +60,13 @@ class ImportCities extends Migration
                     'city_id' => $id,
                     'locale' => 'en',
                     'name' => $city[1],
-                    'content' => $city[3],
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
             }
 
             fclose($handle);
-        } else {
-            // error opening the file.
-            echo "\tError: Cannot open file 'database/sources/cities15000.txt'\n";
         }
-
-        echo "Import cities end\n";
     }
 
     /**
@@ -86,57 +79,20 @@ class ImportCities extends Migration
         // Cannot undo
     }
 
+    /**
+     * Filter cities. true: imported. false: ignored.
+     *
+     * @param array $city
+     * @return boolean
+     */
     public function filter($city)
     {
         if (App::environment('local')) {
-            // The environment is local, only import cities in Finland
-            if ($city[8] !== 'FI') {
-                return false;
-            }
-        }
-
-        if (count($city) !== 19) {
-            return false;
-        }
-
-        $country = DB::table('country')->where('code', $city[8])->first();
-
-        if (!count($country)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Check unique slug
-     *
-     * @param string $slug
-     * @param int $country_id
-     * @param int $n
-     * @return string
-     */
-    public function slug2($slug, $country_id, $n = 0)
-    {
-        if ($n === 0) {
-            $cities = DB::table('city')->where([
-                ['slug', $slug],
-                ['country_id', $country_id],
-            ])->get();
+            // local: only import Finland cities.
+            return $city[8] === 'FI';
         } else {
-            $cities = DB::table('city')->where([
-                ['slug', $slug . '-' . $n],
-                ['country_id', $country_id],
-            ])->get();
-        }
-
-        if (count($cities)) {
-            $n++;
-            return $this->slug2($slug, $country_id, $n);
-        } elseif ($n === 0) {
-            return $slug;
-        } else {
-            return $slug . '-' . $n;
+            // test, production: import all cities.
+            return count($city) === 19;
         }
     }
 }

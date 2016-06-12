@@ -32,17 +32,19 @@ class CreateCityTable extends Migration
         Schema::create('city', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('slug');
             $table->integer('country_id')->unsigned()->nullable();
-            $table->integer('image_id')->unsigned()->nullable();
+
             $table->float('latitude', 10, 6)->nullable();
             $table->float('longitude', 10, 6)->nullable();
             $table->string('timezone'); // "Europe/Helsinki", "Asia/Shanghai"
+            $table->string('geoname_id')->nullable()->unique();
+            $table->date('imported_at')->nullable()->index();
+
+            $table->integer('image_id')->unsigned()->nullable();
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['country_id', 'slug']);
             $table->index(['latitude', 'longitude']);
 
             $table->foreign('country_id')->references('id')->on('country')->onDelete('set null');

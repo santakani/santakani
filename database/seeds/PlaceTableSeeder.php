@@ -37,11 +37,11 @@ class PlaceTableSeeder extends Seeder
     {
         $cities = [];
 
-        $cities[] = City::where('slug', 'helsinki')->first();
-        $cities[] = City::where('slug', 'lahti')->first();
-        $cities[] = City::where('slug', 'espoo')->first();
-        $cities[] = City::where('slug', 'vantaa')->first();
-        $cities[] = City::where('slug', 'tampere')->first();
+        $cities[] = City::where('geoname_id', 658225)->first();
+        $cities[] = City::where('geoname_id', 649360)->first();
+        $cities[] = City::where('geoname_id', 660158)->first();
+        $cities[] = City::where('geoname_id', 632453)->first();
+        $cities[] = City::where('geoname_id', 634963)->first();
 
         $images = Image::all();
 
