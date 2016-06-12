@@ -61,6 +61,15 @@ class Designer extends Model
     //                                                                        //
     ////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Logo.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function logo()
+    {
+        return $this->belongsTo('App\Image');
+    }
 
     /**
      * Owner.

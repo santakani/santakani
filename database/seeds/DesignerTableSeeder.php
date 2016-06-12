@@ -48,12 +48,14 @@ class DesignerTableSeeder extends Seeder
 
         for ($i = 0; $i < 100; $i++) {
             $city = $cities[rand(0, count($cities)-1)];
-            $image = $images[$i%count($images)];
+            $image = $images[rand(0, count($images)-1)];
+            $logo_image = $images[rand(0, count($images)-1)];
             $user = $users[rand(0, count($users)-1)];
 
             $id = DB::table('designer')->insertGetId([
                 'city_id' => $city->id,
                 'image_id' => $image->id,
+                'logo_id' => $logo_image->id,
                 'user_id' => $user->id,
                 'email' => 'contact@example.com',
                 'website' => 'http://www.example.com/',

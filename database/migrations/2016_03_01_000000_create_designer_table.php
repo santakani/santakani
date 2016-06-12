@@ -34,6 +34,7 @@ class CreateDesignerTable extends Migration
 
             $table->integer('city_id')->unsigned()->nullable();
             $table->integer('image_id')->unsigned()->nullable();
+            $table->integer('logo_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();
 
             $table->string('email')->nullable();
@@ -48,6 +49,7 @@ class CreateDesignerTable extends Migration
 
             $table->foreign('city_id')->references('id')->on('city')->onDelete('set null');
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
+            $table->foreign('logo_id')->references('id')->on('image')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
 
