@@ -1,0 +1,8 @@
+#action-buttons, .action-buttons {
+    text-align: right;
+    margin: 20px 0;
+
+    @media screen and (max-width: $screen-xs-max) {
+        text-align: left;
+    }
+}

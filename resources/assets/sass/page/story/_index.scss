@@ -38,18 +38,16 @@
 
         a {
             display: block;
-            padding: 20px;
             color: $gray-light;
         }
 
         .cover-image {
             display: block;
-            margin: -20px -20px 0 -20px;
         }
 
         .text {
-            height: 160px;
-            margin-top: 20px;
+            height: 200px;
+            padding: 20px;
             overflow: hidden;
         }
 

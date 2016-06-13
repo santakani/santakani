@@ -11,6 +11,7 @@ $roboto-font-path: '../fonts/roboto';
 
 // Base
 @import "base/mixin";
+@import "base/global";
 @import "base/typography";
 
 // Libraries
@@ -50,6 +51,7 @@ $lg-path-images: '../img/lightgallery';
 @import "page/auth";
 @import "page/edit";
 @import "page/index";
+@import "page/show";
 
 @import "page/designer/index";
 @import "page/designer/show";

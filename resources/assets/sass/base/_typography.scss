@@ -10,14 +10,6 @@ blockquote,
 address {
     margin-top: $line-height-computed;
     margin-bottom: $line-height-computed;
-
-    &:first-child {
-        margin-top: 0;
-    }
-
-    &:last-child {
-        margin-bottom: 0;
-    }
 }
 
 a {
