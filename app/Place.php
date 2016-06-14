@@ -29,6 +29,7 @@ class Place extends Model
     use SoftDeletes;
 
     use ImageFeature;
+    use LikeFeature;
     use TagFeature;
     use TranslateFeature;
 

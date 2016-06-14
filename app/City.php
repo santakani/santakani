@@ -10,6 +10,7 @@ class City extends Model
     use SoftDeletes;
 
     use ImageFeature;
+    use LikeFeature;
     use TranslateFeature;
 
     /**

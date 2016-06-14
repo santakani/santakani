@@ -10,6 +10,7 @@ class Country extends Model
     use SoftDeletes;
 
     use ImageFeature;
+    use LikeFeature;
     use TranslateFeature;
 
     /**

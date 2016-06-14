@@ -27,6 +27,7 @@ class Story extends Model
     use SoftDeletes;
 
     use ImageFeature;
+    use LikeFeature;
     use TagFeature;
     use TranslateFeature;
 

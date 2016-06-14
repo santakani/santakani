@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
             'story' => \App\Story::class,
             'country' => \App\Country::class,
             'city' => \App\City::class,
+            'tag' => \App\Tag::class,
+            'image' => \App\Image::class,
         ]);
     }
 
