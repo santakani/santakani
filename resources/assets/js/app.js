@@ -26,4 +26,5 @@
     require('./page/place/edit');
 
     require('./page/story/edit');
+    require('./page/story/show');
 })();

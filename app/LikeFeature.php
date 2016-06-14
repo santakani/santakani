@@ -11,6 +11,8 @@
 
 namespace App;
 
+use Auth;
+
 /**
  * LikeFeature
  *
@@ -38,5 +40,19 @@ trait LikeFeature {
     {
         $this->like_count = $this->likes()->count();
         $this->save();
+    }
+
+    /**
+     * "liked" getter. If current user liked this page/model.
+     *
+     * @return boolean
+     */
+    public function getLikedAttribute() {
+        if (Auth::check()) {
+            $like = $this->likes()->where( 'user_id', Auth::user()->id )->first();
+            return !empty($like);
+        } else {
+            return false;
+        }
     }
 }

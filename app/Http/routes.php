@@ -47,6 +47,8 @@ Route::group(['middleware' => 'web'], function () {
         'create', 'edit', 'update'
     ]]);
 
+    Route::resource('like', 'LikeController', ['only' => ['store', 'destroy']]);
+
     Route::resource('tag', 'TagController');
 
     Route::resource('country', 'CountryController');

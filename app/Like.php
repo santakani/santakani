@@ -30,6 +30,13 @@ class Like extends Model
      */
     protected $table = 'like';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['likeable_type', 'likeable_id', 'user_id'];
+
 
     //==========================================================================
     // Relationship Methods
