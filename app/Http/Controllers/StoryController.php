@@ -168,17 +168,25 @@ class StoryController extends Controller
 
         if ($request->has('translations') && is_array($request->input('translations'))) {
             foreach ($request->input('translations') as $locale => $texts) {
-                if (!isset($texts['title']) || empty($texts['title']) ||
-                    !isset($texts['content']) || empty($texts['content']) ) {
+                if ( ( !isset($texts['title']) || empty($texts['title']) ) &&
+                    ( !isset($texts['content']) || empty($texts['content']) ) ) {
                     continue;
                 }
 
-                $translation = StoryTranslation::firstOrCreate([
+                $translation = StoryTranslation::where([
                     'story_id' => $id,
                     'locale' => $locale,
-                ]);
+                ])->first();
 
-                $translation->update($texts);
+                if (!count($translation)) {
+                    $translation = new StoryTranslation();
+                    $translation->story_id = $id;
+                    $translation->locale = $locale;
+                }
+
+                $translation->fill($texts);
+
+                $translation->save();
             }
         }
     }

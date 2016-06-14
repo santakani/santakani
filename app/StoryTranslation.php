@@ -32,11 +32,12 @@ class StoryTranslation extends Model
     protected $table = 'story_translation';
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are mass assignable. id, story_id, locale and timestamps
+     * are protected from vulnerability.
      *
      * @var array
      */
     protected $fillable = [
-        'story_id', 'locale', 'title', 'content'
+        'title', 'content'
     ];
 }
