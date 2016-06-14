@@ -59,6 +59,8 @@ class LikeController extends Controller
         if ($request->has('dislike')) {
             $like->delete();
         }
+
+        $like->likeable->updateLikeCount();
     }
 
     /**
@@ -81,5 +83,7 @@ class LikeController extends Controller
         }
 
         $like->delete();
+
+        $like->likeable->updateLikeCount();
     }
 }
