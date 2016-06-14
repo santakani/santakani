@@ -43,16 +43,32 @@ class CreateLikeTable extends Migration
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });
 
-        Schema::create('like_count', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::table('city', function (Blueprint $table) {
+            $table->integer('like_count')->unsigned()->default(0)->after('image_id');
+        });
 
-            $table->string('likeable_type');
-            $table->integer('likeable_id')->unsigned();
-            $table->integer('count')->unsigned()->default(0);
+        Schema::table('country', function (Blueprint $table) {
+            $table->integer('like_count')->unsigned()->default(0)->after('image_id');
+        });
 
-            $table->timestamps();
+        Schema::table('designer', function (Blueprint $table) {
+            $table->integer('like_count')->unsigned()->default(0)->after('instagram');
+        });
 
-            $table->unique(['likeable_type', 'likeable_id']);
+        Schema::table('image', function (Blueprint $table) {
+            $table->integer('like_count')->unsigned()->default(0)->after('weight');
+        });
+
+        Schema::table('place', function (Blueprint $table) {
+            $table->integer('like_count')->unsigned()->default(0)->after('google_plus');
+        });
+
+        Schema::table('story', function (Blueprint $table) {
+            $table->integer('like_count')->unsigned()->default(0)->after('user_id');
+        });
+
+        Schema::table('tag', function (Blueprint $table) {
+            $table->integer('like_count')->unsigned()->default(0)->after('image_id');
         });
     }
 
@@ -63,7 +79,11 @@ class CreateLikeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('like_count');
+        foreach (['city', 'country', 'designer', 'image', 'place', 'story', 'tag'] as $table_name) {
+            Schema::table($table_name, function ($table) {
+                $table->dropColumn('like_count');
+            });
+        }
 
         Schema::drop('like');
     }
