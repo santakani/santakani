@@ -12,6 +12,7 @@
 namespace App\Http\Controllers;
 
 use Gate;
+use Log;
 
 use Illuminate\Http\Request;
 
@@ -147,17 +148,64 @@ class StoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $story = Story::find($id);
+
+        if (empty($story)) {
+            abort(404);
+        }
+
+        if (Gate::denies('edit-page', $story)) {
+            abort(403);
+        }
+
+        $this->validate($request, [
+            'image_id' => 'integer|exists:image,id',
+            'user_id' => 'integer|exists:user,id',
+            'tag_ids.*' => 'integer|exists:tag,id',
+        ]);
+
+        $story->update($request->all());
+
+        $story->save();
+
+        if ($request->has('translations') && is_array($request->input('translations'))) {
+            foreach ($request->input('translations') as $locale => $texts) {
+                $translation = StoryTranslation::firstOrNew([
+                    'story_id' => $id,
+                    'locale' => $locale,
+                ]);
+                $translation->update($texts);
+                $translation->save();
+            }
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $story = Story::find($id);
+
+        if (empty($story)) {
+            abort(404);
+        }
+
+        if (Gate::denies('edit-page', $story)) {
+            abort(403);
+        }
+
+        if ($request->has('force_delete')) {
+            $story->images()->forceDelete();
+            $story->forceDelete();
+        } elseif ($request->has('restore')) {
+            $story->restore();
+        } else {
+            $story->delete();
+        }
     }
 }

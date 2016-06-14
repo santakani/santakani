@@ -1,16 +1,12 @@
 /**
  * Story edit form.
- *
- * View - views/designer/edit.blade.php
- * Style - assets/sass/_edit-layout.scss
- * Script - assets/js/edit/ajax/designer-edit.js
  */
 
-var ImagePreview = require('../../view/image-preview');
 var Image = require('../../model/image');
+
+var ImagePreview = require('../../view/image-preview');
 var ImageManager = require('../../view/image-manager');
 var ContentEditor = require('../../view/content-editor');
-var GalleryEditor = require('../../view/gallery-editor');
 var TagSelect = require('../../view/tag-select');
 
 $(function () {
@@ -45,8 +41,6 @@ $(function () {
     });
 
     var contentEditor = new ContentEditor({el: '#input-content', imageManager: manager});
-
-    var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: manager});
 
     var tagSelect = new TagSelect({el: '.tag-select'});
 

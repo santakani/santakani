@@ -49,16 +49,15 @@ class Story extends Model
      *
      * @var array
      */
-    protected $appends = ['title', 'tag_ids', 'image_ids'];
+    protected $appends = ['title'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'image_id', 'user_id',
-    ];
+    protected $fillable = ['image_id', 'user_id', 'tag_ids'];
+
 
     //====================================================================
     // Relationship Methods
@@ -73,6 +72,7 @@ class Story extends Model
     {
         return $this->belongsTo('App\User');
     }
+
 
     //====================================================================
     // Dynamic Properties
@@ -118,6 +118,7 @@ class Story extends Model
     {
         return url('story/' . $this->id . '/edit');
     }
+
 
     //====================================================================
     // Other Methods
