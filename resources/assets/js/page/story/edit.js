@@ -22,6 +22,16 @@ $(function () {
         parentId: parseInt($('form').data('id'))
     });
 
+    // Translation Tabs
+    $('#translation-tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('.content-editor').each(function () {
+        new ContentEditor({el: this, imageManager: manager});
+    });
+
     // Cover
     var coverPreview = new ImagePreview({
         el: '#image-form-group .image-preview',
@@ -39,8 +49,6 @@ $(function () {
             }
         });
     });
-
-    var contentEditor = new ContentEditor({el: '#input-content', imageManager: manager});
 
     var tagSelect = new TagSelect({el: '.tag-select'});
 

@@ -166,16 +166,19 @@ class StoryController extends Controller
 
         $story->update($request->all());
 
-        $story->save();
-
         if ($request->has('translations') && is_array($request->input('translations'))) {
             foreach ($request->input('translations') as $locale => $texts) {
-                $translation = StoryTranslation::firstOrNew([
+                if (!isset($texts['title']) || empty($texts['title']) ||
+                    !isset($texts['content']) || empty($texts['content']) ) {
+                    continue;
+                }
+
+                $translation = StoryTranslation::firstOrCreate([
                     'story_id' => $id,
                     'locale' => $locale,
                 ]);
+
                 $translation->update($texts);
-                $translation->save();
             }
         }
     }

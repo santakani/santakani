@@ -30,15 +30,49 @@
             </div>
         </div>
 
+        <!-- Nav tabs -->
         <div class="form-group">
-            <label for="title-input" class="col-sm-2 control-label">
-                Title
-            </label>
-
-            <div class="col-sm-10 col-md-8">
-                <input name="translations[en][title]" value="{{ $story->text('title', 'en') }}"
-                    id="title-input" class="form-control" type="text" maxlength="255">
+            <div class="col-sm-offset-2 sol-sm-10 col-md-8">
+                <ul id="translation-tabs" class="nav nav-tabs">
+                    @foreach (App\Localization\Languages::getLanguageList() as $locale => $names)
+                        <li class="{{ $locale==='en'?'active':'' }}">
+                            <a href="#translation-{{ $locale }}" data-toggle="tab" title="{{ $names['native'] }}">
+                                {{ $names['localized'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            @foreach (App\Localization\Languages::getLanguageCodeList() as $locale)
+                <?php $translation = $story->translations()->where('locale', $locale)->first(); ?>
+                <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
+                    <div class="form-group">
+                        <label for="title-input-{{ $locale }}" class="col-sm-2 control-label">
+                            Title
+                        </label>
+
+                        <div class="col-sm-10 col-md-8">
+                            <input name="translations[{{ $locale }}][title]" value="{{ $translation->title or '' }}"
+                                id="title-input-{{ $locale }}" class="form-control" type="text" maxlength="255">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content-editor-{{ $locale }}" class="col-sm-2 control-label">
+                            Content
+                        </label>
+
+                        <div class="col-sm-10 col-md-8">
+                            <textarea id="content-editor-{{ $locale }}" name="translations[{{ $locale }}][content]"
+                                class="content-editor">{{ $translation->content or '' }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
         <div id="image-form-group" class="form-group">
@@ -48,25 +82,13 @@
 
             <div class="col-sm-10 col-md-8">
                 <div id="cover-editor" class="cover-editor">
-                    <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
+                    <button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button><br><br>
                     @if ($story->image_id)
                         @include('component.image-preview', ['image' => $story->image])
                     @else
                         @include('component.image-preview')
                     @endif
                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="input-content" class="col-sm-2 control-label">
-                Content
-            </label>
-
-            <div class="col-sm-10 col-md-8">
-                <textarea id="input-content" name="translations[en][content]">{{
-                    $story->text('content', 'en')
-                }}</textarea>
             </div>
         </div>
 
