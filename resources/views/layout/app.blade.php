@@ -43,6 +43,15 @@
     <script src="/lib/tinymce/tinymce.js" type="text/javascript"></script>
     <script src="/js/app.js" type="text/javascript"></script>
     @stack('scripts')
+
+    @if(App::environment('test'))
+        <div id="test-site-warning" class="alert alert-danger"
+            style="position:fixed;left:10px;right:10px;bottom:10px;margin:0;max-width:600px;z-index:100;">
+            This is a test website and may contain unknown problems. All input data
+            will be flushed everyday. If you have any questions and suggestions,
+            please <a href="mailto:info@santakani.com">contact us</a>.
+        </div>
+    @endif
 </body>
 
 </html>
