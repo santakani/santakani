@@ -36,8 +36,8 @@ class CreateImageTable extends Migration
             $table->increments('id');
 
             $table->string('mime_type');
-            $table->integer('width')->unsigned()->nullable();
-            $table->integer('height')->unsigned()->nullable();
+            $table->integer('width')->unsigned();
+            $table->integer('height')->unsigned();
 
             $table->string('parent_type')->nullable();
             $table->integer('parent_id')->unsigned()->nullable();

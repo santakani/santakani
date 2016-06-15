@@ -50,6 +50,13 @@ class Image extends Model
     ];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['mime_type', 'width', 'height'];
+
+    /**
      * Large size of images (large).
      *
      * @var int
@@ -125,8 +132,8 @@ class Image extends Model
      *
      * @return mixed
      */
-    public function parentPage() {
-        return $this->morphTo('parent');
+    public function parent() {
+        return $this->morphTo();
     }
 
 
@@ -292,47 +299,38 @@ class Image extends Model
     /**
      * Save image file and generate sizes.
      *
-     * @param Symfony\Component\HttpFoundation\File\File $file
+     * @param string $temp_file_path
      */
-    public function saveFile(File $file)
+    public function saveFile($temp_file_path)
     {
         $this->deleteFile(); // Clean directory
 
-        $new_file = $file->move($this->getDirectoryPath(), 'temp');
-        $temp_file_path = $this->getDirectoryPath() . '/temp';
-
-        $image = new Imagick($temp_file_path);
-
-        // Read original size. Before this, width and height properties are empty.
-        $this->width = $image->getImageWidth();
-        $this->height = $image->getImageHeight();
-        $this->save();
+        $imagick = new Imagick($temp_file_path);
 
         // Full size image with small file size.
-        $image->thumbnailImage($this->width, $this->height);
-        $image->writeImage($this->getFilePath('full'));
+        $imagick->thumbnailImage($this->width, $this->height);
+        $imagick->writeImage($this->getFilePath('full'));
 
         // Large: 1200x1200px
         if ($this->hasSize('large')) {
-            $image->readImage($temp_file_path);
-            $image->thumbnailImage(self::large_size, self::large_size, true);
-            $image->writeImage($this->getFilePath('large'));
+            $imagick->readImage($temp_file_path);
+            $imagick->thumbnailImage(self::large_size, self::large_size, true);
+            $imagick->writeImage($this->getFilePath('large'));
         }
 
         // Medium 600x600px
         if ($this->hasSize('medium')) {
-            $image->readImage($temp_file_path);
-            $image->thumbnailImage(self::medium_size, self::medium_size, true);
-            $image->writeImage($this->getFilePath('medium'));
+            $imagick->readImage($temp_file_path);
+            $imagick->thumbnailImage(self::medium_size, self::medium_size, true);
+            $imagick->writeImage($this->getFilePath('medium'));
         }
 
         // Thumb: 300x300px croped
-        $image->readImage($temp_file_path);
-        $size = min(self::thumb_size, $this->width, $this->height);
-        $image->cropThumbnailImage($size, $size);
-        $image->writeImage($this->getFilePath('thumb'));
+        $imagick->readImage($temp_file_path);
+        $imagick->cropThumbnailImage(self::thumb_size, self::thumb_size);
+        $imagick->writeImage($this->getFilePath('thumb'));
 
-        $image->destroy();
+        $imagick->destroy();
 
         unlink($temp_file_path);
     }

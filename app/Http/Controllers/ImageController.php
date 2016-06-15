@@ -88,47 +88,44 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate data
         $this->validate($request, [
             'image' => 'required|image|mimes:jpeg,png,gif',
             'parent_type' => 'string|in:city,country,designer,place,story,tag',
             'parent_id' => 'integer',
         ]);
 
-        $image = new Image;
-        $image->user_id = Auth::user()->id;
+        if (!$request->file('image')->isValid()) {
+            $error_message = 'Fail to upload image.';
+            return response()->json(['image' => [$error_message]], 422);
+        }
+
+        $file_path = $request->file('image')->getPathName();
+
+        $image_meta = getimagesize($file_path);
+
+        $image = Image::create([
+            'mime_type' => $image_meta['mime'],
+            'width' => $image_meta[0],
+            'height' => $image_meta[1],
+        ]);
+
+        $image->user_id = $request->user()->id;
 
         if ($request->has('parent_type') && $request->has('parent_id')) {
             $image->parent_type = $request->input('parent_type');
-            $image->parent_id = intval($request->input('parent_id'));
+            $image->parent_id = $request->input('parent_id');
 
-            if (!Gate::allows('edit-page', $image->parentPage)) {
+            if (!Gate::allows('edit-page', $image->parent)) {
                 $image->parent_type = null;
                 $image->parent_id = null;
             }
         }
 
-        $file = $request->file('image');
+        $image->save();
 
-        if ($file->isValid()) {
-            $image->mime_type = $file->getMimeType();
-            $image->save();
-            $image->saveFile($file);
+        $image->saveFile($file_path);
 
-            if ($request->wantsJSON()) {
-                return response()->json($image->toArray(), 200);
-            } else {
-                return redirect()->route('image.show', ['id' => $image->id]);
-            }
-        } else {
-            $error_message = 'Fail to upload image.';
-
-            if ($request->wantsJSON()) {
-                return response()->json(['image' => [$error_message]], 422);
-            } else {
-                return back()->withErrors(['image' => $error_message]);
-            }
-        }
+        return response()->json($image->toArray(), 200);
     }
 
     /**
@@ -157,7 +154,7 @@ class ImageController extends Controller
     {
         $image = Image::find($id);
 
-        $parent = $image->parentPage;
+        $parent = $image->parent;
 
         if (empty($image)) {
             abort(404);
