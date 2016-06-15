@@ -32,7 +32,6 @@ class CreateTagTable extends Migration
         Schema::create('tag', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('slug')->unique();
             $table->integer('image_id')->unsigned()->nullable();
 
             $table->timestamps();
