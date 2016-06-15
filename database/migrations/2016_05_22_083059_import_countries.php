@@ -45,7 +45,6 @@ class ImportCountries extends Migration
                     'continent' => $country[8],
                     'currency' => $country[10],
                     'geoname_id' => $country[16],
-                    'imported_at' => Carbon::now()->subDays(30)->format('Y-m-d'),
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);

@@ -35,14 +35,15 @@ class CreateImageTable extends Migration
         Schema::create('image', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('mime_type'); // image/jpeg, image/png, image/gif
-            $table->integer('width')->unsigned()->nullable(); // Original width
-            $table->integer('height')->unsigned()->nullable(); // Original height
+            $table->string('mime_type');
+            $table->integer('width')->unsigned()->nullable();
+            $table->integer('height')->unsigned()->nullable();
 
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->string('parent_type')->nullable(); // Polymorphic relationship
+            $table->string('parent_type')->nullable();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('weight')->unsigned()->nullable();
+
+            $table->integer('user_id')->unsigned()->nullable();
 
             $table->timestamps();
             $table->softDeletes();

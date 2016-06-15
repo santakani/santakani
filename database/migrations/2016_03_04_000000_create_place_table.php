@@ -34,10 +34,9 @@ class CreatePlaceTable extends Migration
 
             $table->string('type'); // shop, showroom, studio, school, etc.
 
-            $table->integer('city_id')->unsigned()->nullable();
             $table->integer('image_id')->unsigned()->nullable();
-            $table->integer('user_id')->unsigned()->nullable();
 
+            $table->integer('city_id')->unsigned()->nullable();
             $table->string('address');
             $table->float('latitude', 10, 6)->nullable();
             $table->float('longitude', 10, 6)->nullable();
@@ -47,6 +46,8 @@ class CreatePlaceTable extends Migration
             $table->string('website');
             $table->string('facebook'); // Facebook page
             $table->string('google_plus'); // Google+ business page
+
+            $table->integer('user_id')->unsigned()->nullable();
 
             $table->timestamps();
             $table->softDeletes();

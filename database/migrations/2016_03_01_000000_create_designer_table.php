@@ -32,17 +32,20 @@ class CreateDesignerTable extends Migration
         Schema::create('designer', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('city_id')->unsigned()->nullable();
             $table->integer('image_id')->unsigned()->nullable();
             $table->integer('logo_id')->unsigned()->nullable();
-            $table->integer('user_id')->unsigned()->nullable();
+
+            $table->integer('city_id')->unsigned()->nullable();
 
             $table->string('email')->nullable();
             $table->string('website')->nullable();
+
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('google_plus')->nullable();
             $table->string('instagram')->nullable();
+
+            $table->integer('user_id')->unsigned()->nullable();
 
             $table->timestamps();
             $table->softDeletes();

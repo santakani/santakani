@@ -34,6 +34,7 @@ class CreateLikeTable extends Migration
 
             $table->string('likeable_type');
             $table->integer('likeable_id')->unsigned();
+
             $table->integer('user_id')->unsigned();
 
             $table->timestamps();
@@ -44,23 +45,23 @@ class CreateLikeTable extends Migration
         });
 
         Schema::table('city', function (Blueprint $table) {
-            $table->integer('like_count')->unsigned()->default(0)->after('image_id');
+            $table->integer('like_count')->unsigned()->default(0)->after('geoname_id');
         });
 
         Schema::table('country', function (Blueprint $table) {
-            $table->integer('like_count')->unsigned()->default(0)->after('image_id');
+            $table->integer('like_count')->unsigned()->default(0)->after('geoname_id');
         });
 
         Schema::table('designer', function (Blueprint $table) {
-            $table->integer('like_count')->unsigned()->default(0)->after('instagram');
+            $table->integer('like_count')->unsigned()->default(0)->after('user_id');
         });
 
         Schema::table('image', function (Blueprint $table) {
-            $table->integer('like_count')->unsigned()->default(0)->after('weight');
+            $table->integer('like_count')->unsigned()->default(0)->after('user_id');
         });
 
         Schema::table('place', function (Blueprint $table) {
-            $table->integer('like_count')->unsigned()->default(0)->after('google_plus');
+            $table->integer('like_count')->unsigned()->default(0)->after('user_id');
         });
 
         Schema::table('story', function (Blueprint $table) {

@@ -36,12 +36,12 @@ class CreateCountryTable extends Migration
             $table->string('continent')->index(); // "EU", "AS"
             $table->string('currency'); // "EUR", "USD", "RMB"
 
-            $table->string('geoname_id')->nullable()->unique();
-            $table->date('imported_at')->nullable()->index();
-
             $table->integer('image_id')->unsigned()->nullable();
 
+            $table->string('geoname_id')->nullable()->unique();
+
             $table->timestamps();
+            $table->timestamp('imported_at')->nullable();
             $table->softDeletes();
 
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');

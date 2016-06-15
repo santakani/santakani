@@ -51,7 +51,6 @@ class ImportCities extends Migration
                     'longitude' => $city[5],
                     'timezone' => $city[17],
                     'geoname_id' => $city[0],
-                    'imported_at' => Carbon::now()->subDays(30)->format('Y-m-d'),
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);

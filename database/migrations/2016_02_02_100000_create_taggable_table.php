@@ -33,7 +33,7 @@ class CreateTaggableTable extends Migration
         Schema::create('taggable', function (Blueprint $table) {
             $table->integer('tag_id')->unsigned();
 
-            $table->string('taggable_type'); // Polymorphic relatioship, many to many.
+            $table->string('taggable_type');
             $table->integer('taggable_id')->unsigned();
 
             $table->unique(['tag_id', 'taggable_type', 'taggable_id']);

@@ -33,6 +33,7 @@ class CreateStoryTable extends Migration
             $table->increments('id');
 
             $table->integer('image_id')->unsigned()->nullable();
+
             $table->integer('user_id')->unsigned()->nullable();
 
             $table->timestamps();

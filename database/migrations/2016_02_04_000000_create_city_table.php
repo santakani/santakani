@@ -37,12 +37,13 @@ class CreateCityTable extends Migration
             $table->float('latitude', 10, 6)->nullable();
             $table->float('longitude', 10, 6)->nullable();
             $table->string('timezone'); // "Europe/Helsinki", "Asia/Shanghai"
-            $table->string('geoname_id')->nullable()->unique();
-            $table->date('imported_at')->nullable()->index();
 
             $table->integer('image_id')->unsigned()->nullable();
 
+            $table->string('geoname_id')->nullable()->unique();
+
             $table->timestamps();
+            $table->timestamp('imported_at')->nullable();
             $table->softDeletes();
 
             $table->index(['latitude', 'longitude']);
