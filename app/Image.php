@@ -303,44 +303,53 @@ class Image extends Model
      *
      * @param string $temp_file_path
      */
-    public function saveFile($temp_file_path)
+    public function saveFile($temp_file_path, $delete_origin = true)
     {
+        // Create an empty new folder
         $this->deleteDirectory();
+        $this->createDirectory();
 
-        mkdir($this->getDirectoryPath(), 0755);
-
+        // Imagick instances
         $imagick = new Imagick($temp_file_path);
+        $thumb_imagick = clone $imagick;
 
-        // Full size image with small file size.
+        // Full (reduce file size)
         $imagick->thumbnailImage($this->width, $this->height);
         $imagick->writeImage($this->getFilePath('full'));
         chmod($this->getFilePath('full'), 0644);
 
-        // Large: 1200x1200px
+        // Large
         if ($this->hasSize('large')) {
-            $imagick->readImage($temp_file_path);
             $imagick->thumbnailImage(self::large_size, self::large_size, true);
             $imagick->writeImage($this->getFilePath('large'));
             chmod($this->getFilePath('large'), 0644);
         }
 
-        // Medium 600x600px
+        // Medium
         if ($this->hasSize('medium')) {
-            $imagick->readImage($temp_file_path);
             $imagick->thumbnailImage(self::medium_size, self::medium_size, true);
             $imagick->writeImage($this->getFilePath('medium'));
             chmod($this->getFilePath('medium'), 0644);
         }
 
-        // Thumb: 300x300px croped
-        $imagick->readImage($temp_file_path);
-        $imagick->cropThumbnailImage(self::thumb_size, self::thumb_size);
-        $imagick->writeImage($this->getFilePath('thumb'));
+        // Thumb
+        $thumb_imagick->cropThumbnailImage(self::thumb_size, self::thumb_size);
+        $thumb_imagick->writeImage($this->getFilePath('thumb'));
         chmod($this->getFilePath('thumb'), 0644);
 
         $imagick->destroy();
 
-        unlink($temp_file_path);
+        if ($delete_origin) {
+            unlink($temp_file_path);
+        }
+    }
+
+    /**
+     * Create directory for saving images.
+     */
+    public function createDirectory()
+    {
+        mkdir($this->getDirectoryPath(), 0755, true);
     }
 
     /**
@@ -349,12 +358,5 @@ class Image extends Model
     public function deleteDirectory()
     {
         FileHelper::rrmdir($this->getDirectoryPath());
-    }
-    /**
-     * Alias of deleteDirectory() function.
-     */
-    public function deleteFile()
-    {
-        $this->deleteDirectory();
     }
 }
