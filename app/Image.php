@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Imagick;
 use Symfony\Component\HttpFoundation\File\File;
 
+use App\Helpers\FileHelper;
+
 /**
  * Image
  *
@@ -303,6 +305,8 @@ class Image extends Model
      */
     public function saveFile($temp_file_path)
     {
+        $this->deleteDirectory();
+
         mkdir($this->getDirectoryPath(), 0755);
 
         $imagick = new Imagick($temp_file_path);
@@ -342,18 +346,15 @@ class Image extends Model
     /**
      * Delete all generated image files and folder of this images.
      */
-    public function deleteFile() {
-        $path = $this->getDirectoryPath();
-        if (!is_dir($path)) {
-            return;
-        }
-        $files = array_diff(scandir($path), ['.', '..']);
-
-        foreach ($files as $file) {
-            $file_path = $path . '/' . $file;
-            if (is_file($file_path)) {
-                unlink($file_path);
-            }
-        }
+    public function deleteDirectory()
+    {
+        FileHelper::rrmdir($this->getDirectoryPath());
+    }
+    /**
+     * Alias of deleteDirectory() function.
+     */
+    public function deleteFile()
+    {
+        $this->deleteDirectory();
     }
 }
