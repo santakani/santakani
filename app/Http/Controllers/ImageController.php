@@ -162,6 +162,7 @@ class ImageController extends Controller
 
         if (Gate::allows('edit-page', $image)) {
             if ($request->has('force_delete')) {
+                $image->deleteDirectory();
                 $image->forceDelete();
             } elseif ($request->has('restore')) {
                 $image->restore();
