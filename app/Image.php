@@ -303,19 +303,21 @@ class Image extends Model
      */
     public function saveFile($temp_file_path)
     {
-        $this->deleteFile(); // Clean directory
+        mkdir($this->getDirectoryPath(), 0755);
 
         $imagick = new Imagick($temp_file_path);
 
         // Full size image with small file size.
         $imagick->thumbnailImage($this->width, $this->height);
         $imagick->writeImage($this->getFilePath('full'));
+        chmod($this->getFilePath('full'), 0644);
 
         // Large: 1200x1200px
         if ($this->hasSize('large')) {
             $imagick->readImage($temp_file_path);
             $imagick->thumbnailImage(self::large_size, self::large_size, true);
             $imagick->writeImage($this->getFilePath('large'));
+            chmod($this->getFilePath('large'), 0644);
         }
 
         // Medium 600x600px
@@ -323,12 +325,14 @@ class Image extends Model
             $imagick->readImage($temp_file_path);
             $imagick->thumbnailImage(self::medium_size, self::medium_size, true);
             $imagick->writeImage($this->getFilePath('medium'));
+            chmod($this->getFilePath('medium'), 0644);
         }
 
         // Thumb: 300x300px croped
         $imagick->readImage($temp_file_path);
         $imagick->cropThumbnailImage(self::thumb_size, self::thumb_size);
         $imagick->writeImage($this->getFilePath('thumb'));
+        chmod($this->getFilePath('thumb'), 0644);
 
         $imagick->destroy();
 
