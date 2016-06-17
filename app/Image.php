@@ -74,7 +74,7 @@ class Image extends Model
      *
      * @var string
      */
-    const image_storage_path = 'storage/image';
+    const storage_path = 'storage/images';
 
     /**
      * Allowed MIME types for files. video/youtube and video/vimeo are not included.
@@ -254,7 +254,7 @@ class Image extends Model
     public function getDirectoryPath($full = true)
     {
         $id = $this->id;
-        $path = self::image_storage_path . '/' . (int)($id/1000) . '/' . $id%1000;
+        $path = self::storage_path . '/' . (int)($id/1000) . '/' . $id%1000;
 
         return $full?public_path($path):$path;
     }

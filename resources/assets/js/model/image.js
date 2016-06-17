@@ -21,7 +21,7 @@ module.exports = Backbone.Model.extend({
 
     thumbSize: 300,
 
-    imageStoragePath: 'storage/image', // Related to document root
+    storagePath: 'storage/images', // Related to document root
 
     /**
      * Upload image file. If succeed, new image model created on server and return
@@ -125,7 +125,7 @@ module.exports = Backbone.Model.extend({
      * @return {string} Image file URL.
      */
     fileUrl: function (size) {
-        var url = '/' + this.imageStoragePath + '/';
+        var url = '/' + this.storagePath + '/';
         url += Math.floor(this.get('id')/1000) + '/';
         url += Math.floor(this.get('id')%1000) + '/';
 
