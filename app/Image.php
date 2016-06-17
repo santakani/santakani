@@ -42,16 +42,6 @@ class Image extends Model
     protected $table = 'image';
 
     /**
-     * The attributes that are managed by accessor and mutator functions.
-     * See https://laravel.com/docs/5.2/eloquent-mutators
-     *
-     * @var array
-     */
-    protected $appends = [
-        'url', 'file_urls'
-    ];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -164,7 +154,6 @@ class Image extends Model
      *
      * URL to image files. Contain for sizes: full, large, medium, thumb.
      * Mainly used to send to browser.
-     * TODO implement client side logic to generate file urls
      *
      * [Example]
      *
