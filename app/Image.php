@@ -332,12 +332,14 @@ class Image extends Model
             chmod($this->getFilePath('medium'), 0644);
         }
 
+        $imagick->destroy();
+
         // Thumb
         $thumb_imagick->cropThumbnailImage(self::thumb_size, self::thumb_size);
         $thumb_imagick->writeImage($this->getFilePath('thumb'));
         chmod($this->getFilePath('thumb'), 0644);
 
-        $imagick->destroy();
+        $thumb_imagick->destroy();
 
         if ($delete_origin) {
             unlink($temp_file_path);
