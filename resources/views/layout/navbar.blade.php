@@ -4,6 +4,10 @@ if (!isset($active_nav)) {
 }
 
 $nav_menu_left = [
+    'home' => [
+        'text' => 'Home',
+        'url' => url('/'),
+    ],
     'story' => [
         'text' => 'Stories',
         'url' => url('story'),

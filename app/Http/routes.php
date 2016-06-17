@@ -33,7 +33,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('auth/twitter', 'Auth\OAuthController@redirectToTwitter');
     Route::get('auth/twitter/callback', 'Auth\OAuthController@handleTwitterCallback');
 
-    Route::get('/', 'StoryController@index');
+    Route::get('/', 'HomeController@index');
 
     Route::get('settings', 'UserController@settings');
 

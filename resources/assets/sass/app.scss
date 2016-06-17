@@ -40,6 +40,9 @@ $lg-path-images: '../img/lightgallery';
 @import "node_modules/selectize/dist/css/selectize";
 @import "node_modules/selectize/dist/css/selectize.bootstrap3";
 
+// Flickity
+@import "node_modules/flickity/css/flickity";
+
 // Override Vendor Styles
 @import "vendor/light-gallery";
 @import "vendor/openlayers";
@@ -71,6 +74,8 @@ $lg-path-images: '../img/lightgallery';
 //==============================================================================
 // Pages
 //==============================================================================
+
+@import "page/home";
 
 @import "page/auth";
 @import "page/edit";

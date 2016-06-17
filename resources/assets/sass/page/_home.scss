@@ -1,0 +1,57 @@
+#home-page {
+    header {
+        color: #ffffff;
+    }
+}
+
+#home-carousel {
+    height: 500px;
+    overflow: hidden;
+
+    .carousel-cell {
+        width: 100%;
+        height: 500px;
+        @include image-cover();
+
+        .jumbotron {
+            height: 100%;
+            background-color: transparent;
+            background-image: url(/img/raster/dark-dot.svg);
+
+            p {
+                font-weight: 400;
+            }
+        }
+    }
+
+    .flickity-prev-next-button {
+        border: 3px solid #ffffff;
+        background-color: transparent;
+        transition: 0.3s;
+        transform-origin: 50% 50%;
+
+        &:hover {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        .arrow {
+            fill: #ffffff;
+        }
+    }
+
+    .flickity-page-dots {
+        bottom: 30px;
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            opacity: 1;
+            background: transparent;
+            border: 2px solid white;
+
+            &.is-selected {
+                background: white;
+            }
+        }
+    }
+}

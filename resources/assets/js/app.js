@@ -16,6 +16,7 @@
     require('./jquery/go-to');
 
     // Pages
+    require('./page/home');
     require('./page/designer/create');
     require('./page/designer/show');
     require('./page/designer/edit');

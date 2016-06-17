@@ -1,3 +1,11 @@
+<?php
+// Default values
+$has_navbar = isset($has_navbar)?$has_navbar:true;
+$has_header = isset($has_header)?$has_header:true;
+$has_footer = isset($has_footer)?$has_footer:true;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,17 +25,21 @@
 
 <body id="{{ $body_id or 'app-layout' }}" class="app-layout {{ $body_class or '' }}">
 
-    @if (!isset($has_navbar) || $has_navbar)
+    @if ($has_navbar)
         @include('layout.navbar')
     @endif
 
-    @yield('header')
+    @if ($has_header)
+        <header>
+            @yield('header')
+        </header>
+    @endif
 
     <main>
         @yield('main')
     </main>
 
-    @if (!isset($has_footer) || $has_footer)
+    @if ($has_footer)
         @include('layout.footer')
     @endif
 
