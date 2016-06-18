@@ -1,20 +1,12 @@
-$(function () {
+(function () {
 
-    var $grid = $('#story-list .grid')
+    if ($('#designer-index-page').length === 0) return;
 
-    if ($grid.length === 0) {
-        return;
-    }
-
-    $grid.masonry({
-        itemSelector: '.grid-item', // use a separate class for itemSelector, other than .col-
-        columnWidth: '.grid-item',
-        percentPosition: true
+    $('#designer-filter label').click(function () {
+        // Wait other JS to check the radio input inside
+        setTimeout( function () {
+            $('#designer-filter').submit();
+        }, 100);
     });
 
-    $grid.find('.story .expand-button').click(function () {
-        $(this).parent('.story').toggleClass('expanded');
-        $(this).siblings('.content').scrollTop(0);
-        $grid.masonry();
-    });
-});
+})();

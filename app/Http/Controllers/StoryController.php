@@ -50,7 +50,17 @@ class StoryController extends Controller
      */
     public function index(Request $request)
     {
-        $stories = Story::paginate(12);
+        $this->validate($request, [
+            'tag_id' => 'integer|exists:tag,id',
+        ]);
+
+        if ($request->has('tag_id')) {
+            $stories = Story::whereHas('tags', function ($query) use ($request){
+                $query->where('id', $request->input('tag_id'));
+            })->paginate(12);
+        } else {
+            $stories = Story::paginate(12);
+        }
 
         return view('page.story.index', [
             'stories' => $stories,

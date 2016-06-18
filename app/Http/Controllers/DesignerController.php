@@ -52,9 +52,19 @@ class DesignerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $designers = Designer::with('translations')->paginate(12);
+        $this->validate($request, [
+            'tag_id' => 'integer|exists:tag,id',
+        ]);
+
+        if ($request->has('tag_id')) {
+            $designers = Designer::whereHas('tags', function ($query) use ($request){
+                $query->where('id', $request->input('tag_id'));
+            })->paginate(12);
+        } else {
+            $designers = Designer::paginate(12);
+        }
 
         return view('page.designer.index', [
             'designers' => $designers

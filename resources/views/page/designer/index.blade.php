@@ -7,7 +7,10 @@
 
 @section('main')
 <div class="container">
-    <div class="row">
+    <form id="designer-filter" class="list-filter" action="/designer" method="get">
+        @include('component.tag-filter', ['selected' => app('request')->input('tag_id')])
+    </form>
+    <div id="designer-list" class="row">
         @foreach ($designers as $designer)
             <div class="col-sm-12 col-md-6">
                 <article id="designer-{{ $designer->id }}" class="designer material-card"
@@ -25,7 +28,7 @@
                 </article>
             </div>
         @endforeach
-    </div><!-- .row -->
+    </div><!-- #designer-list -->
     <div class="text-center">
         {!! $designers->links() !!}
     </div>

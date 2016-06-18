@@ -20,6 +20,8 @@
 
     // Pages
     require('./page/home');
+
+    require('./page/designer/index');
     require('./page/designer/create');
     require('./page/designer/show');
     require('./page/designer/edit');
@@ -29,6 +31,7 @@
     require('./page/place/show');
     require('./page/place/edit');
 
+    require('./page/story/index');
     require('./page/story/edit');
     require('./page/story/show');
 })();
