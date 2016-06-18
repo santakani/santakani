@@ -34,25 +34,17 @@ class TaggableTableSeeder extends Seeder
      */
     public function run()
     {
-        $designer_ids = Designer::all()->pluck('id');
+        foreach (['designer', 'place', 'story'] as $type) {
+            for ($id = 1; $id <= 100; $id++) {
+                $tag_ids = Tag::orderByRaw('RAND()')->take(rand(3, 6))->get()->pluck('id');
 
-        $this->batchRandomTags($designer_ids, 'designer');
-
-        $place_ids = Place::all()->pluck('id');
-
-        $this->batchRandomTags($place_ids, 'place');
-    }
-
-    public function batchRandomTags($ids, $type) {
-        foreach ($ids as $id) {
-            $tag_ids = Tag::orderByRaw('RAND()')->take(rand(3, 6))->get()->pluck('id');
-
-            foreach ($tag_ids as $tag_id) {
-                DB::table('taggable')->insert([
-                    'tag_id' => $tag_id,
-                    'taggable_type' => $type,
-                    'taggable_id' => $id,
-                ]);
+                foreach ($tag_ids as $tag_id) {
+                    DB::table('taggable')->insert([
+                        'tag_id' => $tag_id,
+                        'taggable_type' => $type,
+                        'taggable_id' => $id,
+                    ]);
+                }
             }
         }
     }
