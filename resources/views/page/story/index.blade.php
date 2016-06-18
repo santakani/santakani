@@ -6,25 +6,27 @@
 ])
 
 @section('main')
-<div class="custom-container">
-    <div class="clearfix">
-    @foreach ($stories as $story)
-        <article id="story-{{ $story->id }}" class="story" data-id="{{ $story->id }}">
-            <a href="{{ $story->url }}">
-                @if ($image = $story->image)
-                    <img class="cover-image" src="{{ $image->file_urls['thumb'] }}" />
-                @else
-                    <img class="cover-image" src="http://placehold.it/300x300?text=NO+IMAGE" />
-                @endif
-                <div class="shadow"></div>
-                <div class="text">
-                    <h1>{{ $story->title }}</h1>
-                    {{ $story->excerpt }}
-                </div>
-            </a>
-        </article>
-    @endforeach
-    </div>
+<div class="container">
+    <div id="story-list" class="story-list row">
+        @foreach ($stories as $story)
+            <div class="col-sm-4 col-lg-3">
+                <article id="story-{{ $story->id }}" class="story material-card" data-id="{{ $story->id }}">
+                    <a href="{{ $story->url }}">
+                        @if ($image = $story->image)
+                            <img class="cover-image" src="{{ $image->file_urls['thumb'] }}" />
+                        @else
+                            <img class="cover-image" src="http://placehold.it/300x300?text=NO+IMAGE" />
+                        @endif
+                        <div class="shadow"></div>
+                        <div class="text">
+                            <h1>{{ $story->title }}</h1>
+                            {{ $story->excerpt }}
+                        </div>
+                    </a>
+                </article>
+            </div>
+        @endforeach
+    </div><!-- #story-list -->
     <div class="text-center">
         {!! $stories->links() !!}
     </div>

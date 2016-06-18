@@ -10,7 +10,7 @@
     <div class="row">
         @foreach ($designers as $designer)
             <div class="col-sm-12 col-md-6">
-                <article id="designer-{{ $designer->id }}" class="designer"
+                <article id="designer-{{ $designer->id }}" class="designer material-card"
                     data-id="{{ $designer->id }}">
                     <a href="{{ $designer->url }}">
                         <div class="cover-image" style="background-image:url({{ $designer->image_id ? $designer->image->file_urls['medium'] : '' }})">
