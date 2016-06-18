@@ -15,6 +15,9 @@
     // Load jQuery plugins
     require('./jquery/go-to');
 
+    // Layout
+    require('./layout/footer');
+
     // Pages
     require('./page/home');
     require('./page/designer/create');

@@ -2,6 +2,13 @@ footer {
     padding: 30px 0;
     background-color: lighten($gray-base, 98%);
 
+    &.float {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
     .list-inline {
         text-align: right;
 
