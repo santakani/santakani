@@ -31,7 +31,7 @@
         @endforeach
     </div><!-- #story-list -->
     <div class="text-center">
-        {!! $stories->links() !!}
+        {!! $stories->appends(app('request')->all())->links() !!}
     </div>
 </div><!-- .container -->
 @endsection

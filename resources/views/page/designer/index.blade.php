@@ -30,7 +30,7 @@
         @endforeach
     </div><!-- #designer-list -->
     <div class="text-center">
-        {!! $designers->links() !!}
+        {!! $designers->appends(app('request')->all())->links() !!}
     </div>
 </div><!-- .container -->
 @endsection
