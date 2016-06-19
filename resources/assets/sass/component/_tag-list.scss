@@ -1,12 +1,17 @@
-.tag-list {
-    a {
+/**
+ * To be different from tag list in /tag/ page, this tag-list class must only
+ * be used with ul elements, not div.
+ */
+
+ul.tag-list {
+    > li > a {
         text-transform: lowercase;
         color: $brand-info;
     }
 }
 
-.tag-list-plain {
-    a {
+ul.tag-list-plain {
+    > li > a {
         &:before {
             content: "#";
             opacity: 0.5;
@@ -14,8 +19,8 @@
     }
 }
 
-.tag-list-round {
-    a {
+ul.tag-list-round {
+    > li > a {
         display: inline-block;
         border: 1px solid $brand-info;
         border-radius: 99px;

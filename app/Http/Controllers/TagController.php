@@ -40,11 +40,10 @@ class TagController extends Controller
 
             $tags = Tag::whereHas('translations', function ($query) use ($search) {
                 $query->where('name', 'like', $search . '%');
-            })->paginate(15);
+            })->paginate(24);
 
         } else {
-            $tags = Tag::paginate(15);
-
+            $tags = Tag::paginate(24);
         }
 
         if ($request->wantsJSON()) {

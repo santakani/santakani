@@ -8,17 +8,38 @@
 <div class="container">
 
     @if($errors->any())
-        <div class="alert alert-warning" role="alert">{{$errors->first()}}</div>
+        <div class="alert alert-warning" role="alert">{{ $errors->first() }}</div>
     @endif
 
-    <h1 class="page-header">Tags</h1>
-    <ol>
-    @foreach ($tags as $tag)
-        <li>{{ $tag->text('name') }}</li>
-    @endforeach
-    </ol>
+    <h1 class="page-header">
+        Tags
+        <a class="btn btn-default" href="/tag/create">
+            <i class="fa fa-plus"></i> New Tag
+        </a>
+    </h1>
 
-    <br>
+    <div id="tag-list" class="tag-list row">
+        @foreach ($tags as $tag)
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <article id="tag-{{ $tag->id }}" class="tag material-card" data-id="{{ $tag->id }}">
+                    <a href="/tag/{{ $tag->id }}">
+                        @if ($tag->image_id)
+                            <img class="cover-image" src="{{ $tag->image->getFileUrl('thumb') }}" width="300" height="300" />
+                        @else
+                            <img class="cover-image" src="http://placehold.it/300x300?text=" width="300" height="300" />
+                        @endif
+                        <div class="text">
+                            <h3>{{ $tag->text('name') }}</h3>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        @endforeach
+    </div><!-- #tag-list -->
+
+    <div class="text-center">
+        {!! $tags->appends(app('request')->all())->links() !!}
+    </div>
 
 </div>
 @endsection
