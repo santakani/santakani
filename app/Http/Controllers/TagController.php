@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Gate;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,6 +14,16 @@ use App\TagTranslation;
 
 class TagController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index','show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +61,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.tag.create');
     }
 
     /**
@@ -82,7 +94,21 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+
+        if (empty($tag)) {
+            abort(404);
+        }
+
+        if (Gate::denies('edit-page', $tag)) {
+            abort(403);
+        }
+
+        $tag->load('translations');
+
+        return view('page.tag.edit', [
+            'tag' => $tag,
+        ]);
     }
 
     /**
@@ -94,7 +120,41 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tag = Tag::find($id);
+
+        if (empty($tag)) {
+            abort(404);
+        }
+
+        if (Gate::denies('edit-page', $tag)) {
+            abort(403);
+        }
+
+        $this->validate($request, [
+            'level' => 'integer|between:0,255',
+            'image_id' => 'integer|exists:image,id',
+            'translations' => 'array',
+            'translations.*.name' => 'string',
+            'translations.*.alias' => 'string',
+            'translations.*.description' => 'string',
+        ]);
+
+        $tag->update($request->only(['level', 'image_id']));
+
+        if ($request->has('translations') && is_array($request->input('translations'))) {
+            foreach ($request->input('translations') as $locale => $texts) {
+                if ( empty($texts['name']) && empty($texts['alias']) && empty($texts['description']) ) {
+                    continue;
+                }
+
+                $translation = TagTranslation::firstOrCreate([
+                    'tag_id' => $id,
+                    'locale' => $locale,
+                ]);
+
+                $translation->update(array_only($texts, ['name', 'alias', 'description']));
+            }
+        }
     }
 
     /**

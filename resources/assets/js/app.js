@@ -34,4 +34,6 @@
     require('./page/story/index');
     require('./page/story/edit');
     require('./page/story/show');
+
+    require('./page/tag/edit');
 })();

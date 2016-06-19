@@ -29,6 +29,13 @@ class Tag extends Model
         'url', 'name'
     ];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['image_id', 'level'];
+
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
     //                          Relationship Methods                          //
