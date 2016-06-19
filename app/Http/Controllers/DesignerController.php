@@ -44,7 +44,6 @@ class DesignerController extends Controller
     {
         $this->middleware('auth', ['except' => ['index','show']]);
         $this->middleware('safetext', ['only' => ['store','update']]);
-        $this->middleware('trim');
     }
 
     /**

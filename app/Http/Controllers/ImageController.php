@@ -41,7 +41,6 @@ class ImageController extends Controller
     {
         // Only logged in users can upload images
         $this->middleware('auth', ['except' => ['index','show']]);
-        $this->middleware('trim');
     }
 
     /**
