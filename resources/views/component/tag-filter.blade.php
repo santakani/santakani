@@ -10,7 +10,7 @@ if (!isset($selected)) {
 <div class="tag-filter" data-toggle="buttons">
     <label class="btn btn-default {{ $selected == 0 ? 'active' : '' }}">
         <input type="radio" name="{{ $name or 'tag_id' }}" value="" checked="{{ $selected == 0 ? 'checked' : '' }}" />
-        All
+        {{ mb_strtolower(trans('common.all')) }}
     </label>
 
     @foreach ($tags as $tag)
