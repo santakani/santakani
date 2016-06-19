@@ -32,8 +32,8 @@ class CreateTagTable extends Migration
         Schema::create('tag', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('image_id')->unsigned()->nullable();
             $table->tinyInteger('level')->unsigned()->default(0);
+            $table->integer('image_id')->unsigned()->nullable();
 
             $table->timestamps();
             $table->softDeletes();
