@@ -33,6 +33,7 @@ class CreateTagTable extends Migration
             $table->increments('id');
 
             $table->integer('image_id')->unsigned()->nullable();
+            $table->tinyInteger('level')->unsigned()->default(0);
 
             $table->timestamps();
             $table->softDeletes();
