@@ -16,8 +16,8 @@ use Closure;
 /**
  * EmptyToNull
  *
- * Convert empty string inputs in request to null. Only apply to top level value
- * in input array, child array will not be checked.
+ * Convert empty string inputs in request to null. It can affect child arrays
+ * recursively.
  *
  * @author Guo Yunhe <guoyunhebrave@gmail.com>
  * @see https://github.com/santakani/santakani.com/wiki/Middleware
@@ -34,11 +34,43 @@ class EmptyToNull {
     public function handle($request, Closure $next)
     {
         foreach ($request->all() as $key => $value) {
-            if (empty($value)) {
+            if ($value === '') {
                 $request->merge([$key => null]);
+            } elseif (is_array($value)) {
+                if ($this->hasEmpty($value)) {
+                    $request->merge([$key => $this->arrayNull($value)]);
+                }
             }
         }
 
         return $next($request);
+    }
+
+    protected function hasEmpty($array)
+    {
+        foreach ($array as $item) {
+            if (is_array($item)) {
+                if ($this->hasEmpty($item)) {
+                    return true;
+                }
+            } elseif ($item === '') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected function arrayNull($array)
+    {
+        foreach ($array as $key => $item) {
+            if (is_array($item)) {
+                $array[$key] = $this->arrayNull($item);
+            } elseif ($item === '') {
+                $array[$key] = null;
+            }
+        }
+
+        return $array;
     }
 }
