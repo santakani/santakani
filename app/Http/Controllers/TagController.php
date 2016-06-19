@@ -163,8 +163,24 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $tag = Tag::find($id);
+
+        if (empty($tag)) {
+            abort(404);
+        }
+
+        if (Gate::denies('edit-page', $tag)) {
+            abort(403);
+        }
+
+        if ($request->has('force_delete')) {
+            $tag->forceDelete();
+        } elseif ($request->has('restore')) {
+            $tag->restore();
+        } else {
+            $tag->delete();
+        }
     }
 }
