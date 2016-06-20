@@ -17,14 +17,29 @@
         max-width: 1200px;
         height: 500px;
         @include image-cover();
+        transition: opacity 0.5s, transform 0.5s;
 
         .jumbotron {
             height: 100%;
             background-color: transparent;
             background-image: url(/img/raster/dark-dot.svg);
+            transition: opacity 1s;
 
             p {
                 font-weight: 400;
+            }
+        }
+
+        &:not(.is-selected) {
+            transform: scale(0.8);
+            opacity: 0.5;
+
+            .jumbotron {
+                opacity: 0;
+
+                * {
+                    display: none;
+                }
             }
         }
     }
