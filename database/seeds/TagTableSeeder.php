@@ -53,6 +53,7 @@ class TagTableSeeder extends Seeder
         foreach ($tags as $tag) {
             $id = DB::table('tag')->insertGetId([
                 'level' => rand(0,255),
+                'image_id' => rand(1,30),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
