@@ -21,7 +21,7 @@
     <div id="tag-list" class="tag-list row">
         @foreach ($tags as $tag)
             <div class="col-xs-6 col-sm-4 col-md-3">
-                <article id="tag-{{ $tag->id }}" class="tag material-card" data-id="{{ $tag->id }}">
+                <article id="tag-{{ $tag->id }}" class="tag" data-id="{{ $tag->id }}">
                     <a href="/tag/{{ $tag->id }}">
                         @if ($tag->image_id)
                             <img class="cover-image" src="{{ $tag->image->getFileUrl('thumb') }}" width="300" height="300" />

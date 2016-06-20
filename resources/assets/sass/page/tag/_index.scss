@@ -7,6 +7,7 @@
 article.tag {
     position: relative;
     max-width: 100%;
+    margin-bottom: 30px;
 
     a {
         display: block;
@@ -28,11 +29,17 @@ article.tag {
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        background-image: url(/img/raster/dark-dot.svg);
+        background-color: rgba(0,0,0,0.1);
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: rgba(0,0,0,0.3);
+        }
     }
 
     h3 {
         text-align: center;
         transition: 0.3s;
+        font-weight: 400;
     }
 }

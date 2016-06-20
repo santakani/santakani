@@ -107,7 +107,7 @@
     </div><!-- .container -->
 </section><!-- #designer-section -->
 
-<section id="designer-section">
+<section id="place-section">
     <div class="container">
         <h2>
             Places
@@ -125,7 +125,6 @@
                             </div>
                             <div class="text">
                                 <h1 class="name">
-                                    <span class="dot"></span>
                                     {{ $place->text('name') }}
                                     <small>
                                         {{ $place->city->full_name }}
@@ -142,4 +141,33 @@
         </div><!-- #home-place-list -->
     </div><!-- .container -->
 </section><!-- #place-section -->
+
+<section id="tag-section">
+    <div class="container">
+        <h2>
+            Tags
+            <a class="btn btn-default pull-right" href="/tag" role="button">
+                More <i class="fa fa-angle-double-right"></i>
+            </a>
+        </h2>
+        <div id="home-tag-list" class="tag-list row">
+            @foreach ($tags as $tag)
+                <div class="col-xs-6 col-sm-4 col-md-3">
+                    <article id="tag-{{ $tag->id }}" class="tag" data-id="{{ $tag->id }}">
+                        <a href="/tag/{{ $tag->id }}">
+                            @if ($tag->image_id)
+                                <img class="cover-image" src="{{ $tag->image->getFileUrl('thumb') }}" width="300" height="300" />
+                            @else
+                                <img class="cover-image" src="/img/placeholder/blank/300x300.svg" width="300" height="300" />
+                            @endif
+                            <div class="text">
+                                <h3>{{ $tag->text('name') }}</h3>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+            @endforeach
+        </div><!-- #home-tag-list -->
+    </div><!-- .container -->
+</section><!-- #tag-section -->
 @endsection
