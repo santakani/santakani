@@ -18,7 +18,7 @@
 
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                             <label for="name-input" class="col-sm-4 control-label">
                                 Name ({{ trans('languages.english') }})
                             </label>
@@ -34,7 +34,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('level') ? 'has-error' : '' }}">
                             <label for="level-input" class="col-sm-4 control-label">
                                 Level
                             </label>
