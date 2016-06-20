@@ -71,7 +71,24 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->user()->cannot('create-tag')) {
+            abort(403);
+        }
+
+        $this->validate($request, [
+            'level' => 'required|integer|between:0,255',
+            'name' => 'required|string|max:255',
+        ]);
+
+        $tag = Tag::create($request->only(['level']));
+
+        $translation = TagTranslation::create([
+            'tag_id' => $tag->id,
+            'locale' => 'en',
+            'name' => $request->input('name'),
+        ]);
+
+        return redirect()->action('TagController@edit', [$tag]);
     }
 
     /**
@@ -133,9 +150,9 @@ class TagController extends Controller
             'level' => 'integer|between:0,255',
             'image_id' => 'integer|exists:image,id',
             'translations' => 'array',
-            'translations.*.name' => 'string',
-            'translations.*.alias' => 'string',
-            'translations.*.description' => 'string',
+            'translations.*.name' => 'string|max:255',
+            'translations.*.alias' => 'string|max:255',
+            'translations.*.description' => 'string|max:255',
         ]);
 
         $tag->update($request->only(['level', 'image_id']));

@@ -43,5 +43,11 @@ class AuthServiceProvider extends ServiceProvider
 
             return $user->id === $page_model->user_id;
         });
+
+        // Action: create tag
+        // Roles: admin, editor
+        $gate->define('create-tag', function ($user) {
+            return $user->hasRole('admin') || $user->hasRole('editor');
+        });
     }
 }
