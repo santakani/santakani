@@ -105,7 +105,7 @@ class OAuthController extends Controller
 
                 $local_user->save();
 
-                return redirect('settings');
+                return redirect('setting/account');
             }
 
         } else {
@@ -148,7 +148,7 @@ class OAuthController extends Controller
             // Login user and remember them.
             Auth::login($local_user, true);
 
-            return redirect('/');
+            return redirect()->intended('/');
         }
     }
 }
