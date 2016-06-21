@@ -89,18 +89,29 @@ class SettingController extends Controller
      */
     public function update(Request $request)
     {
-        $user = User::find($id);
+        $user = $request->user();
 
-        if (empty($user)) {
-            abort(404);
+        $this->validate($request, [
+            'name' => 'max:255',
+            'description' => 'max:255',
+            'email' => 'email|max:255|unique:user,email,'.$user->id,
+            'password' => 'confirmed|min:6',
+        ]);
+
+        $user->update($request->only(['name', 'description', 'email']));
+
+        if ($request->has('password')) {
+            if ( empty($user->password) ||
+                $user->password === bcrypt($request->input('old_password')) ) {
+
+                $user->update([
+                    'password' => bcrypt($request->input('password')),
+                ]);
+            } else {
+                return response()->json(['old_password' => ['Old password is incorrect.']], 422);
+            }
         }
 
-        // Check permission
-        if (Gate::denies('edit-user', $user)) {
-            abort(403);
-        }
-
-        // TODO update user profiles
     }
 
     /**
