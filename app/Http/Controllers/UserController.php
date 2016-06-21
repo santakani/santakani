@@ -115,26 +115,4 @@ class UserController extends Controller
         // Delete model from database
         $user->delete();
     }
-
-    /**
-     * Show user setting page.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function settings()
-    {
-        $user = Auth::user();
-        return view('page.user.settings', ['user' => $user]);
-    }
-
-    /**
-     * Show notification page.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function notification()
-    {
-        $user = Auth::user();
-        return view('page.user.notification', ['user' => $user]);
-    }
 }

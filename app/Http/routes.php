@@ -35,9 +35,12 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'HomeController@index');
 
-    Route::get('settings', 'UserController@settings');
-
-    Route::get('notification', 'UserController@notification');
+    Route::get('setting', 'SettingController@profile');
+    Route::get('setting/profile', 'SettingController@profile');
+    Route::get('setting/account', 'SettingController@account');
+    Route::get('setting/page', 'SettingController@page');
+    Route::get('setting/trash', 'SettingController@trash');
+    Route::match(['put', 'patch'], 'setting', 'SettingController@update');
 
     Route::resource('user', 'UserController', ['except' => [
         'create', 'store'
