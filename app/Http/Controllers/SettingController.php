@@ -12,6 +12,8 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Hash;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -92,25 +94,38 @@ class SettingController extends Controller
         $user = $request->user();
 
         $this->validate($request, [
-            'name' => 'max:255',
+            'name' => 'filled|max:255',
             'description' => 'max:255',
-            'email' => 'email|max:255|unique:user,email,'.$user->id,
-            'password' => 'confirmed|min:6',
+            'email' => 'filled|email|max:255|unique:user,email,'.$user->id,
+            'old_password' => 'filled',
+            'password' => 'filled|confirmed|min:6',
         ]);
 
-        $user->update($request->only(['name', 'description', 'email']));
+        if ($request->has('name')) {
+            $user->name = $request->input('name');
+        }
+
+        if ($request->exists('description')) { // Can be empty
+            $user->description = $request->input('description');
+        }
+
+        if ($request->has('email')) {
+            $user->email = $request->input('email');
+        }
 
         if ($request->has('password')) {
-            if ( empty($user->password) ||
-                $user->password === bcrypt($request->input('old_password')) ) {
-
-                $user->update([
-                    'password' => bcrypt($request->input('password')),
-                ]);
+            echo 'exists';
+            if ( empty($user->password) || Hash::check($request->input('old_password'), $user->password) ) {
+                $user->password = bcrypt($request->input('password'));
+                echo $user->password;
             } else {
-                return response()->json(['old_password' => ['Old password is incorrect.']], 422);
+                return redirect()->back()->withErrors(['old_password' => ['Old password is incorrect.']]);
             }
         }
+
+        $user->save();
+
+        return redirect()->back();
 
     }
 

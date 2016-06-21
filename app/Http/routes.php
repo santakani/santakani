@@ -40,7 +40,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('setting/account', 'SettingController@account');
     Route::get('setting/page', 'SettingController@page');
     Route::get('setting/trash', 'SettingController@trash');
-    Route::match(['put', 'patch'], 'setting', 'SettingController@update');
+    Route::match(['post', 'put', 'patch'], 'setting', 'SettingController@update');
 
     Route::resource('user', 'UserController', ['except' => [
         'create', 'store'
