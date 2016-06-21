@@ -3,3 +3,10 @@
         padding: 30px 0;
     }
 }
+
+.avatar-preview {
+    @include image-cover();
+    width: 152px;
+    height: 152px;
+    border: 1px solid $gray-lighter;
+}

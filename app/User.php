@@ -2,10 +2,14 @@
 
 namespace App;
 
+use DB;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use DB;
+use Imagick;
+
+use App\Helpers\FileHelper;
 
 class User extends Authenticatable
 {
@@ -47,6 +51,17 @@ class User extends Authenticatable
     ];
 
 
+    //====================================================================
+    // Constants
+    //====================================================================
+
+    const avatar_storage_path = 'storage/avatars';
+
+    const avatar_large_size = 300;
+
+    const avatar_medium_size = 150;
+
+    const avatar_small_size = 50;
 
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
@@ -87,11 +102,82 @@ class User extends Authenticatable
     // Avatar Methods
     //====================================================================
 
-    /*
-     * Currently, we do not support upload avatar to server. Instead, use various
-     * avatar providers. The order is: Facebook, Google, Twitter, Gravatar. Google
-     * and Twitter avatar need to call API, so implemented in JavaScript.
-     */
+    public function getAvatarFileUrl($size = 'medium')
+    {
+        if ($this->avatar_type === 'upload') {
+            return url($this->getAvatarFilePath($size, false));
+        } elseif ($this->facebook_id) {
+            return $this->facebookAvatar();
+        } else {
+            return $this->gravatar();
+        }
+    }
+
+    public function getAvatarDirectoryPath($full = true)
+    {
+        $id = $this->id;
+        $path = self::avatar_storage_path . '/' . (int)($this->id / 1000) . '/' . $this->id % 1000;
+
+        return $full?public_path($path):$path;
+    }
+
+    public function getAvatarFilePath($size = 'medium', $full = true)
+    {
+        if (!in_array($size, ['large', 'medium', 'small'])) {
+            $size = 'medium';
+        }
+
+        $path = $this->getAvatarDirectoryPath(false) . '/' . $size;
+
+        return $full?public_path($path):$path;
+    }
+
+    public function saveAvatarFile($temp_file_path, $delete_origin = true)
+    {
+        $this->removeAvatarDirectory();
+        $this->createAvatarDirectory();
+
+        $imagick = new Imagick($temp_file_path);
+
+        $path = $this->getAvatarFilePath('large');
+        $size = self::avatar_large_size;
+        $imagick->cropThumbnailImage($size, $size);
+        $imagick->writeImage($path);
+        chmod($path, 0644);
+
+        $path = $this->getAvatarFilePath('medium');
+        $size = self::avatar_medium_size;
+        $imagick->cropThumbnailImage($size, $size);
+        $imagick->writeImage($path);
+        chmod($path, 0644);
+
+        $path = $this->getAvatarFilePath('small');
+        $size = self::avatar_small_size;
+        $imagick->cropThumbnailImage($size, $size);
+        $imagick->writeImage($path);
+        chmod($path, 0644);
+
+        $imagick->destroy();
+
+        if ($delete_origin) {
+            unlink($temp_file_path);
+        }
+    }
+
+    public function createAvatarDirectory()
+    {
+        mkdir($this->getAvatarDirectoryPath(), 0755, true);
+    }
+
+    public function removeAvatarDirectory()
+    {
+        $path = $this->getAvatarDirectoryPath();
+        if (is_dir($path)) {
+            FileHelper::rrmdir($path);
+        } elseif (is_file($path)) {
+            unlink($path);
+        }
+    }
 
     /**
      * Get Facebook avatar URL. Note that returned image size is not exact value.
@@ -115,7 +201,7 @@ class User extends Authenticatable
      * @param int $size
      * @return string
      */
-    public function gravatar($size)
+    public function gravatar($size = 150)
     {
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5( strtolower( trim( $this->email ) ) );

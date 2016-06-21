@@ -96,6 +96,7 @@ class SettingController extends Controller
         $this->validate($request, [
             'name' => 'filled|max:255',
             'description' => 'max:255',
+            'avatar' => 'image|mimes:jpeg,png,gif',
             'email' => 'filled|email|max:255|unique:user,email,'.$user->id,
             'old_password' => 'filled',
             'password' => 'filled|confirmed|min:6',
@@ -107,6 +108,12 @@ class SettingController extends Controller
 
         if ($request->exists('description')) { // Can be empty
             $user->description = $request->input('description');
+        }
+
+        if ($request->hasFile('avatar')) {
+            $user->avatar_type = 'upload';
+            $file_path = $request->file('avatar')->getPathName();
+            $user->saveAvatarFile($file_path);
         }
 
         if ($request->has('email')) {

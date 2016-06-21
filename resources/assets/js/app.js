@@ -37,5 +37,6 @@
 
     require('./page/tag/edit');
 
+    require('./page/setting/profile');
     require('./page/setting/account');
 })();
