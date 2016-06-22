@@ -99,7 +99,22 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        $tag = Tag::find($id);
+
+        if (empty($tag)) {
+            abort(404);
+        }
+
+        $designers = $tag->designers()->orderBy('id', 'desc')->take(6)->get();
+        $places = $tag->places()->orderBy('id', 'desc')->take(6)->get();
+        $stories = $tag->stories()->orderBy('id', 'desc')->take(6)->get();
+
+        return view('page.tag.show', [
+            'tag' => $tag,
+            'designers' => $designers,
+            'places' => $places,
+            'stories' => $stories,
+        ]);
     }
 
     /**

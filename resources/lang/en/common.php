@@ -10,4 +10,6 @@ return [
     'ok' => 'OK',
     'register' => 'Register',
     'save' => 'Save',
+    'tag' => 'Tag',
+    'user' => 'User',
 ];

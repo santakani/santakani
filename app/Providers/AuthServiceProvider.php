@@ -49,5 +49,17 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('create-tag', function ($user) {
             return $user->hasRole('admin') || $user->hasRole('editor');
         });
+
+        // Action: edit tag
+        // Roles: admin, editor
+        $gate->define('edit-tag', function ($user) {
+            return $user->hasRole('admin') || $user->hasRole('editor');
+        });
+
+        // Action: delete tag
+        // Roles: admin, editor
+        $gate->define('delete-tag', function ($user) {
+            return $user->hasRole('admin') || $user->hasRole('editor');
+        });
     }
 }

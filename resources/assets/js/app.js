@@ -36,6 +36,7 @@
     require('./page/story/show');
 
     require('./page/tag/edit');
+    require('./page/tag/show');
 
     require('./page/setting/profile');
     require('./page/setting/account');

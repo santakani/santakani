@@ -36,11 +36,24 @@ class Tag extends Model
      */
     protected $fillable = ['image_id', 'level'];
 
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                          Relationship Methods                          //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
+    //==========================================================================
+    // Relationship Methods
+    //==========================================================================
+
+    public function designers()
+    {
+        return $this->morphedByMany('App\Designer', 'taggable', 'taggable');
+    }
+
+    public function places()
+    {
+        return $this->morphedByMany('App\Place', 'taggable', 'taggable');
+    }
+
+    public function stories()
+    {
+        return $this->morphedByMany('App\Story', 'taggable', 'taggable');
+    }
 
 
 
