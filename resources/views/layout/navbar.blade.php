@@ -7,18 +7,22 @@ $nav_menu_left = [
     'home' => [
         'text' => 'Home',
         'url' => url('/'),
+        'icon' => 'home',
     ],
     'story' => [
         'text' => 'Stories',
         'url' => url('story'),
+        'icon' => 'book',
     ],
     'designer' => [
         'text' => 'Designers',
         'url' => url('designer'),
+        'icon' => 'users',
     ],
     'place' => [
         'text' => 'Places',
         'url' => url('place'),
+        'icon' =>'map',
     ],
 ];
 
@@ -39,11 +43,12 @@ $nav_menu_right = [
     <a href="{{ url('/') }}" class="logo"></a>
     <ul class="nav-menu left">
         @foreach ($nav_menu_left as $key => $value)
-            @if ($active_nav === $key)
-                <li class="active"><a href="{{ $value['url'] }}">{{ $value['text'] }}</a></li>
-            @else
-                <li><a href="{{ $value['url'] }}">{{ $value['text'] }}</a></li>
-            @endif
+            <li class="{{ $active_nav === $key?'active':'' }}">
+                <a href="{{ $value['url'] }}">
+                    <i class="fa fa-{{ $value['icon'] }}"></i>
+                    <span>{{ $value['text'] }}</span>
+                </a>
+            </li>
         @endforeach
     </ul>
     <ul class="nav-menu right">
@@ -57,8 +62,9 @@ $nav_menu_right = [
             @endforeach
         @else
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-plus fa-fw"></i>
+                <a href="#" class="dropdown-toggle bg-primary" data-toggle="dropdown">
+                    <i class="fa fa-plus"></i>
+                    <span>Create</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="{{ url('/designer/create') }}">New designer</a></li>

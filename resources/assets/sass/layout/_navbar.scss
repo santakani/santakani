@@ -43,9 +43,13 @@ nav.custom-navbar {
                 &:hover {
                     text-decoration: none;
                 }
+
+                &.bg-primary {
+                    color: #ffffff;
+                }
             }
 
-            &.active, &:hover {
+            &.active {
                 > a {
                     color: $brand-info;
                     border-bottom: 4px solid $brand-info;
@@ -55,6 +59,10 @@ nav.custom-navbar {
             &:hover {
                 > a {
                     background-color: lighten($brand-info, 35%);
+
+                    &.bg-primary {
+                        background-color: lighten($brand-primary, 10%);
+                    }
                 }
             }
         }
@@ -88,15 +96,28 @@ nav.custom-navbar {
     }
 
     @media screen and (max-width: $screen-xs-max) {
-        font-size: $font-size-small;
+
+        padding: 0;
+
+        .nav-menu > li > a {
+            text-align: center;
+            line-height: 30px;
+
+            i.fa {
+                font-size: 21px;
+                vertical-align: bottom;
+            }
+
+            span {
+                display: block;
+                font-size: 10px;
+                line-height: 15px;
+            }
+
+        }
 
         .logo {
             display: none;
-        }
-
-        .fa {
-            font-size: 18px;
-            line-height: $custom-navbar-height;
         }
     }
 }
