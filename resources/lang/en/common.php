@@ -18,6 +18,7 @@ return [
     'register' => 'Register',
     'save' => 'Save',
     'tag' => 'Tag',
+    'title' => 'Title',
     'update' => 'Update',
     'upload' => 'Upload',
     'user' => 'User',
