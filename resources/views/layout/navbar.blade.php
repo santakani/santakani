@@ -49,21 +49,24 @@ $nav_menu_right = [
     <ul class="nav-menu right">
         @if (Auth::guest())
             @foreach ($nav_menu_right as $key => $value)
-            @if ($active_nav === $key)
-                <li class="active"><a href="{{ $value['url'] }}">{{ $value['text'] }}</a></li>
-            @else
-                <li><a href="{{ $value['url'] }}">{{ $value['text'] }}</a></li>
-            @endif
-        @endforeach
+                @if ($active_nav === $key)
+                    <li class="active"><a href="{{ $value['url'] }}">{{ $value['text'] }}</a></li>
+                @else
+                    <li><a href="{{ $value['url'] }}">{{ $value['text'] }}</a></li>
+                @endif
+            @endforeach
         @else
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-plus fa-fw"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="{{ url('/designer/create') }}">New Designer</a></li>
-                    <li><a href="{{ url('/place/create') }}">New Place</a></li>
-                    <li><a href="{{ url('/story/create') }}">New Story</a></li>
+                    <li><a href="{{ url('/designer/create') }}">New designer</a></li>
+                    <li><a href="{{ url('/place/create') }}">New place</a></li>
+                    <li><a href="{{ url('/story/create') }}">New story</a></li>
+                    @if (Auth::user()->can('create-tag'))
+                        <li><a href="{{ url('/tag/create') }}">New tag</a></li>
+                    @endif
                 </ul>
             </li>
 
