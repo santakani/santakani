@@ -30,10 +30,12 @@ $nav_menu_right = [
     'login' => [
         'text' => 'Login',
         'url' => url('login'),
+        'icon' =>'sign-in',
     ],
     'register' => [
         'text' => 'Register',
         'url' => url('register'),
+        'icon' =>'user-plus',
     ],
 ];
 
@@ -54,11 +56,12 @@ $nav_menu_right = [
     <ul class="nav-menu right">
         @if (Auth::guest())
             @foreach ($nav_menu_right as $key => $value)
-                @if ($active_nav === $key)
-                    <li class="active"><a href="{{ $value['url'] }}">{{ $value['text'] }}</a></li>
-                @else
-                    <li><a href="{{ $value['url'] }}">{{ $value['text'] }}</a></li>
-                @endif
+                <li class="{{ $active_nav === $key?'active':'' }}">
+                    <a href="{{ $value['url'] }}">
+                        <i class="fa fa-{{ $value['icon'] }}"></i>
+                        <span class="text">{{ $value['text'] }}</span>
+                    </a>
+                </li>
             @endforeach
         @else
             <li class="dropdown">
