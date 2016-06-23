@@ -5,8 +5,8 @@
 @section('main')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">@yield('panel_title')</h3>
                 </div>

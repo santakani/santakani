@@ -3,7 +3,7 @@
 $has_navbar = isset($has_navbar)?$has_navbar:true;
 $has_header = isset($has_header)?$has_header:true;
 $has_footer = isset($has_footer)?$has_footer:true;
-
+$body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):[];
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ $has_footer = isset($has_footer)?$has_footer:true;
     @stack('styles')
 </head>
 
-<body id="{{ $body_id or 'app-layout' }}" class="app-layout {{ $body_class or '' }}">
+<body id="{{ $body_id or 'app-layout' }}" class="{{ implode($body_classes, ' ') }}">
 
     @if ($has_navbar)
         @include('layout.navbar')

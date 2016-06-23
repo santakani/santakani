@@ -1,87 +1,91 @@
-@extends('layout.app', [
-    'title' => 'Log In',
+@extends('layout.auth', [
+    'title' => trans('common.login'),
     'body_id' => 'login-page',
-    'body_class' => 'login auth user',
+    'body_classes' => ['login-page'],
     'active_nav' => 'login',
 ])
 
-@section('main')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
+@section('panel_title', trans('common.login'))
 
-                    <p class="text-center">
-                        <a class="btn btn-primary btn-lg" href="/auth/facebook">
-                            <i class="fa fa-facebook-official fa-lg"></i>
-                            Login with Facebook
-                        </a>
-                        <a class="btn btn-danger btn-lg" href="/auth/google">
-                            <i class="fa fa-google fa-lg"></i>
-                            Login with Google
-                        </a>
-                        <a class="btn btn-info btn-lg" href="/auth/twitter">
-                            <i class="fa fa-twitter fa-lg"></i>
-                            Login with Twitter
-                        </a>
-                    </p>
+@section('panel_body')
+<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+    <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3">
+            <a class="btn btn-primary btn-lg btn-block" href="/auth/facebook">
+                <i class="fa fa-facebook-official fa-lg"></i>
+                Facebook {{ trans('common.login') }}
+            </a>
+        </div>
+    </div>
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {!! csrf_field() !!}
+    <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3">
+            <a class="btn btn-danger btn-lg btn-block" href="/auth/google">
+                <i class="fa fa-google fa-lg"></i>
+                Google {{ trans('common.login') }}
+            </a>
+        </div>
+    </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+    <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3">
+            <a class="btn btn-info btn-lg btn-block" href="/auth/twitter">
+                <i class="fa fa-twitter fa-lg"></i>
+                Twitter {{ trans('common.login') }}
+            </a>
+        </div>
+    </div>
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+    <p class="text-center text-muted">{{ strtolower(trans('common.or')) }}</p>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+    {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
+    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+        <label class="col-sm-3 control-label">{{ trans('common.email') }}</label>
 
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
+        <div class="col-sm-8 col-lg-6">
+            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+            @if ($errors->has('email'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+        <label class="col-sm-3 control-label">{{ trans('common.password') }}</label>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
+        <div class="col-sm-8 col-lg-6">
+            <input type="password" class="form-control" name="password">
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            @if ($errors->has('password'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember"> Remember me
+                </label>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+            <button type="submit" class="btn btn-info">
+                {{ trans('common.login') }}
+            </button>
+
+            <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot your password?</a>
+        </div>
+    </div>
+</form>
 @endsection

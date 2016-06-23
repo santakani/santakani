@@ -1,11 +1,13 @@
-@extends('layout.app', [
-    'title' => 'Create Designer Profile',
+@extends('layout.create', [
+    'title' => 'Create designer profile',
     'body_id' => 'designer-create-page',
-    'body_class' => 'designer-create-page designer-page create-page',
+    'body_classes' => ['designer-create-page', 'designer-page'],
     'active_nav' => 'designer',
 ])
 
-@section('main')
+@section('panel_title', 'Create designer profile')
+
+@section('panel_body')
 <form class="form-horizontal" action="{{ url('designer') }}" method="post">
     <div class="container">
 
