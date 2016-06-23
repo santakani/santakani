@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Edit: ' . $tag->text('name'),
     'body_id' => 'tag-edit-page',
-    'body_class' => 'tag-edit-page tag-page edit-page',
+    'body_classes' => ['tag-edit-page', 'tag-page', 'edit-page'],
     'active_nav' => 'tag',
 ])
 

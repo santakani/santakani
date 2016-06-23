@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Places',
     'body_id' => 'place-index-page',
-    'body_class' => 'place-index-page place-page index-page',
+    'body_classes' => ['place-index-page', 'place-page', 'index-page'],
     'active_nav' => 'place',
 ])
 

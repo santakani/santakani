@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => $place->text('name') . ' - Place',
     'body_id' => 'place-show-page',
-    'body_class' => 'place-show-page place-page show-page',
+    'body_classes' => ['place-show-page', 'place-page', 'show-page'],
     'active_nav' => 'place',
 ])
 

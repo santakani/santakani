@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Images',
     'body_id' => 'image-show-page',
-    'body_class' => 'image-show image show',
+    'body_classes' => ['image-show-page', 'show-page', 'image-page'],
 ])
 
 @section('main')

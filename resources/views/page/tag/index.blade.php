@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Tags',
     'body_id' => 'tag-index-page',
-    'body_class' => 'tag-index-page tag-page index-page',
+    'body_classes' => ['tag-index-page', 'tag-page', 'index-page'],
 ])
 
 @section('main')

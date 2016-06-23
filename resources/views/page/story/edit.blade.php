@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Edit: ' . $story->text('title'),
     'body_id' => 'story-edit-page',
-    'body_class' => 'story-edit-page story-page edit-page',
+    'body_classes' => ['story-edit-page', 'story-page', 'edit-page'],
     'active_nav' => 'story',
 ])
 

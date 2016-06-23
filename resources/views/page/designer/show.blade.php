@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => $designer->text('name') . ' - Designer',
     'body_id' => 'designer-show-page',
-    'body_class' => 'designer-show-page designer-page show-page',
+    'body_classes' => ['designer-show-page', 'show-page', 'designer-page'],
     'active_nav' => 'designer',
 ])
 

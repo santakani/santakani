@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Cities',
     'body_id' => 'city-index-page',
-    'body_class' => 'city-index-page city-page index-page',
+    'body_classes' => ['city-index-page', 'city-page', 'index-page'],
 ])
 
 @section('main')

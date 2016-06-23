@@ -1,7 +1,7 @@
 @extends('layout.app', [
     'title' => 'Create tag',
     'body_id' => 'tag-create-page',
-    'body_class' => 'tag-create-page tag-page create-page',
+    'body_classes' => ['tag-create-page'],
     'active_nav' => 'tag',
 ])
 

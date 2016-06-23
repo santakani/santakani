@@ -1,6 +1,7 @@
 @extends('layout.app', [
+    'title' => $tag->text('name'),
     'body_id' => 'tag-show-page',
-    'body_class' => 'tag-show-page show-page',
+    'body_classes' => ['tag-show-page', 'tag-page', 'show-page'],
     'active_nav' => 'none',
 ])
 

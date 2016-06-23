@@ -1,6 +1,6 @@
 @extends('layout.app', [
     'body_id' => 'home-page',
-    'body_class' => 'home-page index-page',
+    'body_classes' => ['home-page', 'index-page'],
     'active_nav' => 'home',
 ])
 
