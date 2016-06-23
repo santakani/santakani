@@ -13,11 +13,11 @@
     {!! csrf_field() !!}
 
     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-        <label for="input-name" class="col-sm-3 control-label">{{ trans('common.name') }}</label>
+        <label for="name-input" class="col-sm-3 control-label">{{ trans('common.name') }}</label>
 
         <div class="col-sm-9">
             <input name="name" value="{{ old('name') }}" type="text"
-                required maxlength="255" class="form-control" id="input-name"
+                required maxlength="255" class="form-control" id="name-input"
                 placeholder="Full name of the designer or brand">
             @if ($errors->has('name'))
                 <span class="help-block">
@@ -28,11 +28,11 @@
     </div>
 
     <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-        <label for="input-email" class="col-sm-3 control-label">{{ trans('common.email') }}</label>
+        <label for="email-input" class="col-sm-3 control-label">{{ trans('common.email') }}</label>
 
         <div class="col-sm-9">
             <input name="email" value="{{ old('email') }}" type="email"
-                maxlength="255" class="form-control" id="input-email">
+                maxlength="255" class="form-control" id="email-input">
             @if ($errors->has('email'))
                 <span class="help-block">
                     <strong>{{ $errors->first('email') }}</strong>
