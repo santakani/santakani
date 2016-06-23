@@ -5,6 +5,7 @@ return [
     'cancel' => 'Cancel',
     'close' => 'Close',
     'confirm' => 'Confirm',
+    'create' => 'Create',
     'done' => 'Done',
     'error' => 'Error',
     'email' => 'Email',
@@ -17,5 +18,7 @@ return [
     'register' => 'Register',
     'save' => 'Save',
     'tag' => 'Tag',
+    'update' => 'Update',
+    'upload' => 'Upload',
     'user' => 'User',
 ];
