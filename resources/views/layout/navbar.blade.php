@@ -72,7 +72,8 @@ $nav_menu_right = [
 
             <li class="dropdown {{ $active_nav === 'user'?'active':'' }}">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-user fa-fw"></i> <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                    <img class="avatar" src="{{ Auth::user()->getAvatarFileUrl('medium') }}" />
+                    <span class="name hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="{{ url('/user/'.Auth::user()->id) }}">Profile</a></li>

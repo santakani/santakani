@@ -75,6 +75,18 @@ nav.custom-navbar {
         background-size: auto $custom-navbar-height * 0.6;
     }
 
+    .avatar {
+        display: block;
+        float: left;
+        width: $custom-navbar-height - 10px;
+        height: $custom-navbar-height - 10px;
+        margin: 5px 0;
+    }
+
+    .name {
+        margin-left: 10px;
+    }
+
     @media screen and (max-width: $screen-xs-max) {
         font-size: $font-size-small;
 
