@@ -16,6 +16,8 @@ use Hash;
 
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+
 use App\Http\Requests;
 use App\User;
 
@@ -111,7 +113,7 @@ class SettingController extends Controller
         }
 
         if ($request->hasFile('avatar')) {
-            $user->avatar_type = 'upload';
+            $user->avatar_uploaded_at = Carbon::now()->format('Y-m-d H:i:s');
             $file_path = $request->file('avatar')->getPathName();
             $user->saveAvatarFile($file_path);
         }

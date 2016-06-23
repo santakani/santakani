@@ -36,7 +36,6 @@ class CreateUserTable extends Migration
 
             $table->string('name');
             $table->string('description');
-            $table->string('avatar_type');
 
             $table->string('email')->nullable()->unique();
             $table->string('password', 60)->nullable();
@@ -47,6 +46,7 @@ class CreateUserTable extends Migration
             $table->string('google_id')->nullable()->unique();
             $table->string('twitter_id')->nullable()->unique();
 
+            $table->timestamp('avatar_uploaded_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

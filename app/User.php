@@ -104,12 +104,33 @@ class User extends Authenticatable
 
     public function getAvatarFileUrl($size = 'medium')
     {
-        if ($this->avatar_type === 'upload') {
-            return url($this->getAvatarFilePath($size, false));
-        } elseif ($this->facebook_id) {
-            return $this->facebookAvatar($size);
-        } else {
-            return $this->gravatar($size);
+        if ($this->avatar_uploaded_at) {
+            if (is_integer($size)) {
+                if ($size > 150) {
+                    $size = 'large';
+                } elseif ($size > 50) {
+                    $size = 'medium';
+                } else {
+                    $size = 'small';
+                }
+            }
+            return url($this->getAvatarFilePath($size, false)) . '?v=' .
+                urlencode($this->avatar_uploaded_at);
+        } else{
+            if (is_string($size)) {
+                if ($size === 'large') {
+                    $size = self::avatar_large_size;
+                } elseif ($size === 'small') {
+                    $size = self::avatar_small_size;
+                } else {
+                    $size = self::avatar_medium_size;
+                }
+            }
+            if ($this->facebook_id) {
+                return $this->facebookAvatar($size);
+            } else {
+                return $this->gravatar($size);
+            }
         }
     }
 
@@ -184,18 +205,11 @@ class User extends Authenticatable
      *
      * @see https://developers.facebook.com/docs/graph-api/reference/v2.2/user/picture
      *
-     * @param string $size
+     * @param int $size
      * @return string
      */
-    public function facebookAvatar($size = 'medium')
+    public function facebookAvatar($size)
     {
-        if ($size === 'large') {
-            $size = self::avatar_large_size;
-        } elseif ($size === 'small') {
-            $size = self::avatar_small_size;
-        } else {
-            $size = self::avatar_medium_size;
-        }
         return 'http://graph.facebook.com/' . $this->facebook_id . '/picture?type=square'
             . '&width=' . $size . '&height=' . $size;
     }
@@ -208,16 +222,8 @@ class User extends Authenticatable
      * @param int $size
      * @return string
      */
-    public function gravatar($size = 'medium')
+    public function gravatar($size)
     {
-        if ($size === 'large') {
-            $size = self::avatar_large_size;
-        } elseif ($size === 'small') {
-            $size = self::avatar_small_size;
-        } else {
-            $size = self::avatar_medium_size;
-        }
-
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5( strtolower( trim( $this->email ) ) );
         $url .= "?s=$size&d=mm&r=g";
