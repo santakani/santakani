@@ -1,5 +1,5 @@
 @extends('layout.app', [
-    'body_class' => $body_class . ' setting-page',
+    'body_classes' => isset($body_classes)?array_merge($body_classes, ['setting-page', 'setting-layout']):['setting-page', 'setting-layout'],
     'active_nav' => 'user',
 ])
 <?php

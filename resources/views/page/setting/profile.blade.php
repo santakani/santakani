@@ -1,7 +1,7 @@
 @extends('layout.setting', [
     'title' => 'Profile settings',
     'body_id' => 'profile-setting-page',
-    'body_class' => 'profile-setting-page setting-page',
+    'body_classes' => ['profile-setting-page'],
     'active_section' => 'profile',
 ])
 
