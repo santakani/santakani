@@ -43,15 +43,19 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
         @include('layout.footer')
     @endif
 
+
+    <!-- Modals -->
+    @if (Auth::guest())
+        @include('auth.modal')
+    @endif
+
     @stack('modals')
 
+    <!-- Templates -->
     @stack('templates')
 
-    <!-- JavaScript -->
-    <script type="text/javascript">
-        // Global variables from server
-        var csrfToken = "{!! csrf_token() !!}";
-    </script>
+    <!-- Scripts -->
+    @include('scripts.global')
     <script src="/lib/tinymce/tinymce.js" type="text/javascript"></script>
     <script src="/js/app.js" type="text/javascript"></script>
     @stack('scripts')

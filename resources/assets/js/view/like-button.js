@@ -25,6 +25,11 @@ module.exports = Backbone.View.extend({
     },
 
     like: function () {
+        if (app.user === false) {
+            $('#auth-modal').modal('show');
+            return;
+        }
+
         if (this.model.get('disabled')) {
             return;
         }
@@ -46,8 +51,6 @@ module.exports = Backbone.View.extend({
         }
 
         var that = this;
-
-        console.log(data);
 
         $.ajax({
             url: '/like',
