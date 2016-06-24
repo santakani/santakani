@@ -29,12 +29,12 @@ $nav_menu_left = [
 $nav_menu_right = [
     'login' => [
         'text' => 'Login',
-        'url' => url('login'),
+        'url' => url('login?redirect=' . request()->url()),
         'icon' =>'sign-in',
     ],
     'register' => [
         'text' => 'Register',
-        'url' => url('register'),
+        'url' => url('register?redirect=' . request()->url()),
         'icon' =>'user-plus',
     ],
 ];
@@ -85,10 +85,8 @@ $nav_menu_right = [
                     <span class="name hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="{{ url('/user/'.Auth::user()->id) }}">Profile</a></li>
-                    <li><a href="{{ url('/help') }}">Help</a></li>
-                    <li><a href="{{ url('/setting') }}">Settings</a></li>
-                    <li><a href="{{ url('/logout') }}">Logout</a></li>
+                    <li><a href="{{ url('setting') }}">Settings</a></li>
+                    <li><a href="{{ url('logout?redirect='. request()->url()) }}">Logout</a></li>
                 </ul>
             </li>
         @endif
