@@ -30,7 +30,7 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     @endif
 
     @if ($has_header)
-        <header>
+        <header id="site-header" class="site-header">
             @yield('header')
         </header>
     @endif

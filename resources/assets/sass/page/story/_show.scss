@@ -1,0 +1,74 @@
+#story-show-page {
+    header {
+        color: #ffffff;
+
+        .container {
+            height: 300px;
+            position: relative;
+        }
+    }
+
+    .cover-image {
+        @include image-cover();
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .action-buttons {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .title {
+        position: absolute;
+        bottom: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 36px;
+        font-weight: 300;
+    }
+
+    .meta {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .author {
+        font-size: 22px;
+    }
+
+    main {
+        padding: 30px 0;
+    }
+
+    @media screen and (min-width: $screen-md-min) {
+        header .container {
+            height: 400px;
+        }
+
+        .title {
+            font-size: 48px;
+        }
+    }
+
+    @media screen and (min-width: $screen-lg-min) {
+        header .container {
+            height: 500px;
+        }
+
+        .title {
+            font-size: 64px;
+        }
+    }
+}
+
+
+
