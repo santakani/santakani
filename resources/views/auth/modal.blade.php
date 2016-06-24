@@ -50,7 +50,7 @@
 
                             {!! csrf_field() !!}
 
-                            <div class="form-group">
+                            <div class="form-group email-form-group">
                                 <label class="col-sm-3 control-label">{{ trans('common.email') }}</label>
 
                                 <div class="col-sm-8 col-lg-6">
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group password-form-group">
                                 <label class="col-sm-3 control-label">{{ trans('common.password') }}</label>
 
                                 <div class="col-sm-8 col-lg-6">
@@ -93,7 +93,7 @@
 
                             {!! csrf_field() !!}
 
-                            <div class="form-group">
+                            <div class="form-group name-form-group">
                                 <label class="col-sm-3 control-label">{{ trans('common.name') }}</label>
 
                                 <div class="col-sm-8 col-lg-6">
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group email-form-group">
                                 <label class="col-sm-3 control-label">{{ trans('common.email') }}</label>
 
                                 <div class="col-sm-8 col-lg-6">
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group password-form-group">
                                 <label class="col-sm-3 control-label">{{ trans('common.password') }}</label>
 
                                 <div class="col-sm-8 col-lg-6">
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group password_confirmation-form-group">
                                 <label class="col-sm-3 control-label">{{ trans('common.confirm') }}</label>
 
                                 <div class="col-sm-8 col-lg-6">
