@@ -29,12 +29,12 @@ $nav_menu_left = [
 $nav_menu_right = [
     'login' => [
         'text' => 'Login',
-        'url' => url('login?redirect=' . request()->url()),
+        'url' => url('login?redirect=' . urlencode(request()->fullUrl())),
         'icon' =>'sign-in',
     ],
     'register' => [
         'text' => 'Register',
-        'url' => url('register?redirect=' . request()->url()),
+        'url' => url('register?redirect=' . urlencode(request()->fullUrl())),
         'icon' =>'user-plus',
     ],
 ];
@@ -86,7 +86,7 @@ $nav_menu_right = [
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="{{ url('setting') }}">Settings</a></li>
-                    <li><a href="{{ url('logout?redirect='. request()->url()) }}">Logout</a></li>
+                    <li><a href="{{ url('logout') }}">Logout</a></li>
                 </ul>
             </li>
         @endif

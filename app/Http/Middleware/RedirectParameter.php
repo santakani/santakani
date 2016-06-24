@@ -34,7 +34,7 @@ class RedirectParameter
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::guest() && $request->has('redirect')) {
+        if ($request->has('redirect')) {
             $request->session()->put('url.intended', $request->input('redirect'));
         }
 
