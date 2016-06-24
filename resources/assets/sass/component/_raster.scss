@@ -8,6 +8,14 @@
     background-position: center;
 }
 
+.raster-dark {
+    background-color: rgba(0,0,0,0.2);
+}
+
+.raster-light {
+    background-color: rgba(255,255,255,0.2);
+}
+
 .raster-dark-dot {
     background-image: url(/img/raster/dark-dot.svg);
 }
