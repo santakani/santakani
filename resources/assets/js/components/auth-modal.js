@@ -40,9 +40,7 @@
             dataType: 'json',
         }).done(function () {
             location.reload();
-            console.log('register done');
         }).fail(function (error) {
-            console.log('register fail');
             var response = error.responseJSON;
 
             $registerPane.find('.help-block').remove();
