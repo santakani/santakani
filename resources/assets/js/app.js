@@ -1,43 +1,60 @@
-/**
- * Load all JavaScript
+/*
+ * Main JavaScript file. Load all JavaScripts.
  */
 
-(function () {
+//==============================================================================
+// Libraries
+//==============================================================================
 
-    // Bootstrap needs 'jQuery' global variable. Other jQuery plugins may also
-    // require '$' or 'jQuery'.
-    window.$ = window.jQuery = require('jquery');
-    require('bootstrap-sass');
-    require('selectize');
-    require('lightgallery');
-    window._ = require('underscore');
+// Bootstrap needs 'jQuery' global variable.
+window.$ = window.jQuery = require('jquery');
 
-    // Load jQuery plugins
-    require('./jquery/go-to');
+// Underscore is often used.
+window._ = require('underscore');
 
-    // Layout
-    require('./layout/footer');
+// Bootstrap is not packaged.
+require('bootstrap-sass');
 
-    // Pages
-    require('./page/home');
+// jQuery plugins
+require('selectize');
+require('lightgallery');
+require('./jquery/go-to');
 
-    require('./page/designer/index');
-    require('./page/designer/create');
-    require('./page/designer/show');
-    require('./page/designer/edit');
+//==============================================================================
+// Layouts
+//==============================================================================
 
-    require('./page/place/index');
-    require('./page/place/create');
-    require('./page/place/show');
-    require('./page/place/edit');
+// App layout
+require('./layout/footer');
 
-    require('./page/story/index');
-    require('./page/story/edit');
-    require('./page/story/show');
+//==============================================================================
+// Pages
+//==============================================================================
 
-    require('./page/tag/edit');
-    require('./page/tag/show');
+// Home page
+require('./page/home');
 
-    require('./page/setting/profile');
-    require('./page/setting/account');
-})();
+// Designer
+require('./page/designer/index');
+require('./page/designer/create');
+require('./page/designer/show');
+require('./page/designer/edit');
+
+// Place
+require('./page/place/index');
+require('./page/place/create');
+require('./page/place/show');
+require('./page/place/edit');
+
+// Story
+require('./page/story/index');
+require('./page/story/edit');
+require('./page/story/show');
+
+// Tag
+require('./page/tag/edit');
+require('./page/tag/show');
+
+// User settings
+require('./page/setting/profile');
+require('./page/setting/account');
