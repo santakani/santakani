@@ -77,10 +77,10 @@ nav.custom-navbar {
         left: 50%;
         top: 0;
         margin-left: - $custom-navbar-height / 2;
-        background-image: url(/img/logo/color-415x693.png);
+        background-image: url(/img/logo/without-shadow.svg);
         background-repeat: no-repeat;
         background-position: center;
-        background-size: auto $custom-navbar-height * 0.6;
+        background-size: 80%;
     }
 
     .avatar {
