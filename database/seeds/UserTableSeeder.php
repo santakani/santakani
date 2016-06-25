@@ -34,6 +34,7 @@ class UserTableSeeder extends Seeder
             'email' => 'yunhe.guo@example.com',
             'password' => bcrypt('abcd123456'),
             'api_token' => str_random(60),
+            'role' => 'admin',
         ]);
 
         DB::table('user')->insert([
@@ -41,6 +42,7 @@ class UserTableSeeder extends Seeder
             'email' => 'yuexin.du@example.com',
             'password' => bcrypt('abcd123456'),
             'api_token' => str_random(60),
+            'role' => 'editor',
         ]);
 
         DB::table('user')->insert([
