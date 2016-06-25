@@ -16,7 +16,9 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 
     <title>{{ isset($title) ? ($title.' - SantaKani') : 'SantaKani - Stories of design?!' }}</title>
 
-    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="{{ url('img/logo/origin-32x32.png') }}" type="image/png" sizes="32x32">
+    <link rel="shortcut icon" href="{{ url('img/logo/origin-64x64.png') }}" type="image/png" sizes="64x64">
+    <link rel="shortcut icon" href="{{ url('img/logo/origin-128x128.png') }}" type="image/png" sizes="128x128">
 
     <!-- CSS -->
     <link href="/css/app.css" rel="stylesheet" type="text/css"/>
