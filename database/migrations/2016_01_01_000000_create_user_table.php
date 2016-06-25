@@ -47,6 +47,7 @@ class CreateUserTable extends Migration
             $table->string('twitter_id')->nullable()->unique();
 
             $table->string('locale')->nullable();
+            $table->string('role')->nullable();
 
             $table->timestamp('avatar_uploaded_at')->nullable();
             $table->timestamps();
