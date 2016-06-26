@@ -29,6 +29,8 @@ require('./jquery/go-to');
 
 require('./components/auth-modal');
 
+require('./components/tabs/auto-collapse');
+
 
 
 //==============================================================================

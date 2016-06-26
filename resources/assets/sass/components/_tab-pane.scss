@@ -1,11 +1,11 @@
 .tab-pane-group {
 
     .nav-tabs {
-        > li.active a {
+        > li.active > a {
             background-color: #ffffff;
         }
 
-        > li:not(.active) a {
+        > li:not(.active) > a {
             color: $gray-light;
         }
     }

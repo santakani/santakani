@@ -23,9 +23,11 @@ $(function () {
     });
 
     // Translation Tabs
-    $('#translation-tabs a').click(function (e) {
+    $('#translation-tabs > li:not(.dropdown) > a, #translation-tabs ul a').click(function (e) {
         e.preventDefault();
-        $(this).tab('show');
+        if (!$(this).hasClass('more')) {
+            $(this).tab('show');
+        }
     });
 
     $('.content-editor').each(function () {

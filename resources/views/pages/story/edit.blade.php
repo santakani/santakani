@@ -27,6 +27,12 @@
                             </a>
                         </li>
                     @endforeach
+                    <li class="more dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            More <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right"></ul>
+                    </li>
                 </ul>
 
                 <!-- Tab panes -->
