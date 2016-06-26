@@ -28,7 +28,7 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 <body id="{{ $body_id or 'app-layout' }}" class="{{ implode($body_classes, ' ') }}">
 
     @if ($has_navbar)
-        @include('layouts.navbar')
+        @include('layouts.app.navbar')
     @endif
 
     @if ($has_header)
@@ -42,7 +42,7 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     </main>
 
     @if ($has_footer)
-        @include('layouts.footer')
+        @include('layouts.app.footer')
     @endif
 
 
