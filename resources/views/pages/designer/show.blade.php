@@ -1,3 +1,19 @@
+<?php
+
+if ($designer->image_id) {
+    $cover_image = $designer->image->getFileUrl('large');
+} else {
+    $cover_image = url('img/placeholder/blank/1200x800.svg');
+}
+
+if ($designer->logo_id) {
+    $logo_image = $designer->logo->getFileUrl('thumb');
+} else {
+    $logo_image = url('img/placeholder/blank/300x300.svg');
+}
+
+?>
+
 @extends('layouts.app', [
     'title' => $designer->text('name') . ' - Designer',
     'body_id' => 'designer-show-page',
@@ -6,7 +22,8 @@
 ])
 
 @section('header')
-<div class="page-cover container" style="background-image:url({{ $designer->image_id?$designer->image->file_urls['large']:'http://placehold.it/1200x400?text=NO+IMAGE' }});">
+
+<div class="page-cover container" style="background-image:url({{ $cover_image }});">
 
     <div class="raster raster-dark-dot"></div>
 
@@ -21,66 +38,62 @@
     </div><!-- /.action-buttons -->
 
     <div class="text">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-4 target">
-                    <p class="tagline">{{ $designer->text('tagline') }}</p>
 
-                    <h1>{{ $designer->text('name') }}</h1>
+        <img class="logo-image" src="{{ $logo_image }}"/>
 
-                    @if ($designer->city && $designer->country)
-                        <p class="location">
-                            <a href="{{ $designer->city->url }}">
-                                {{ $designer->city->text('name') }}
-                            </a>,
-                            <a href="{{ $designer->country->url }}">
-                                {{ $designer->country->text('name') }}
-                            </a>
-                        </p>
-                    @endif
+        <h1 class="name">{{ $designer->text('name') }}</h1>
 
-                    <p class="links">
-                        @if (!empty($designer->facebook))
-                            <a href="{{ $designer->facebook }}">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        @endif
-                        @if (!empty($designer->twitter))
-                            <a href="{{ $designer->twitter }}">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        @endif
-                        @if (!empty($designer->google_plus))
-                            <a href="{{ $designer->google_plus }}">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                        @endif
-                        @if (!empty($designer->instagram))
-                            <a href="{{ $designer->instagram }}">
-                                <i class="fa fa-instagram"></i>
-                            </a>
-                        @endif
-                        @if (!empty($designer->email))
-                            <a href="mailto:{{ $designer->email }}">
-                                <i class="fa fa-envelope"></i>
-                            </a>
-                        @endif
-                        @if (!empty($designer->email))
-                            <a href="{{ $designer->website }}">
-                                <i class="fa fa-globe"></i>
-                            </a>
-                        @endif
-                    </p>
-                </div><!-- .col-* -->
-                <div class="col-md-6"></div><!-- .col-* -->
-            </div><!-- .row -->
-        </div><!--.container-->
+        <p class="tagline">{{ $designer->text('tagline') }}</p>
+
     </div><!-- /.text-->
 
 </div><!-- /.container -->
 @endsection
 
 @section('main')
+    @if ($designer->city && $designer->country)
+        <p class="location">
+            <a href="{{ $designer->city->url }}">
+                {{ $designer->city->text('name') }}
+            </a>,
+            <a href="{{ $designer->country->url }}">
+                {{ $designer->country->text('name') }}
+            </a>
+        </p>
+    @endif
+
+    <p class="links">
+        @if (!empty($designer->facebook))
+            <a href="{{ $designer->facebook }}">
+                <i class="fa fa-facebook"></i>
+            </a>
+        @endif
+        @if (!empty($designer->twitter))
+            <a href="{{ $designer->twitter }}">
+                <i class="fa fa-twitter"></i>
+            </a>
+        @endif
+        @if (!empty($designer->google_plus))
+            <a href="{{ $designer->google_plus }}">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        @endif
+        @if (!empty($designer->instagram))
+            <a href="{{ $designer->instagram }}">
+                <i class="fa fa-instagram"></i>
+            </a>
+        @endif
+        @if (!empty($designer->email))
+            <a href="mailto:{{ $designer->email }}">
+                <i class="fa fa-envelope"></i>
+            </a>
+        @endif
+        @if (!empty($designer->email))
+            <a href="{{ $designer->website }}">
+                <i class="fa fa-globe"></i>
+            </a>
+        @endif
+    </p>
 
 <div class="content container-600">
 

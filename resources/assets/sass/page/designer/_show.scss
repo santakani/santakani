@@ -1,5 +1,63 @@
 #designer-show-page {
 
+    header {
+        .text {
+            position: absolute;
+            top: 80px;
+            bottom: 15%;
+            left: 15px;
+            right: 15px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .logo-image {
+            max-height: 79px;
+            width: auto;
+            padding: 2px;
+            background-color: #ffffff;
+            @include material-shadow(low);
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 300;
+        }
+
+        .tagline {
+            font-size: 16px;
+        }
+
+        @media screen and (min-width: $screen-sm-min) {
+            .text {
+                top: 50px;
+                left: 20%;
+                right: 20%;
+            }
+        }
+
+        @media screen and (min-width: $screen-md-min) {
+            .text {
+                top: 15%;
+                bottom: 15%;
+            }
+
+            .logo-image {
+                max-height: 108px;
+                width: auto;
+                padding: 4px;
+            }
+
+            .name {
+                font-size: 40px;
+            }
+
+            .tagline {
+                font-size: 22px;
+            }
+        }
+    }
+
     .links {
         text-align: right;
         font-size: 24px;

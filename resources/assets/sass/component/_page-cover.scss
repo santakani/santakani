@@ -2,7 +2,7 @@
 .page-cover {
     @include image-cover;
     position: relative;
-    height: $container-sm / 3;
+    height: 300px;
 
     @media screen and (min-width: $screen-sm-min) {
         height: $container-sm / 3;
