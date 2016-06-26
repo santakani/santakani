@@ -12,12 +12,11 @@
 namespace App\Http\Controllers;
 
 use Gate;
-use Log;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Localization\Languages;
+
 use App\Story;
 use App\StoryTranslation;
 
@@ -176,7 +175,7 @@ class StoryController extends Controller
             'translations.*.content' => 'string',
         ]);
 
-        $story->update($request->only(['image_id', 'tag_ids']));
+        $story->update(app_array_filter($request->all(), ['image_id', 'tag_ids']));
 
         // TODO transfer story page to another user...
 
@@ -195,7 +194,7 @@ class StoryController extends Controller
                     'locale' => $locale,
                 ]);
 
-                $translation->update(array_only($texts, ['title', 'content']));
+                $translation->update(app_array_filter($texts, ['title', 'content']));
             }
         }
     }
