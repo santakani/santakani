@@ -16,14 +16,10 @@ use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 
-use App\Http\Requests;
-use App\City;
-use App\CityTranslation;
-use App\Country;
-use App\CountryTranslation;
 use App\Designer;
 use App\DesignerTranslation;
-use App\Image;
+use App\Http\Requests;
+use App\Localization\Languages;
 
 /**
  * DesignerController
@@ -189,22 +185,15 @@ class DesignerController extends Controller
     {
         $designer = Designer::find($id);
 
-        $translation = $designer->translations()->where('locale', 'en')->first();
-
         if (empty($designer)) {
             abort(404);
         }
 
-        // Check permission
-        if (Gate::denies('edit-page', $designer)) {
+        if ($request->user()->cannot('edit-designer', $designer)) {
             abort(403);
         }
 
-        // Validate data
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'tagline' => 'string|max:255',
-            'content' => 'string',
             'image_id' => 'integer|exists:image,id',
             'gallery_image_ids.*' => 'integer|exists:image,id',
             'city_id' => 'integer|exists:city,id',
@@ -215,38 +204,33 @@ class DesignerController extends Controller
             'twitter' => 'url|max:255',
             'google_plus' => 'url|max:255',
             'instagram' => 'url|max:255',
+            'translations.*.name' => 'string|max:255',
+            'translations.*.tagline' => 'string|max:255',
+            'translations.*.content' => 'string',
         ]);
 
-        foreach (['name', 'tagline', 'content'] as $key) {
-            if ($request->has($key)) {
-                // Not empty, fill the value
-                $translation->$key = $request->input($key);
-            } elseif ($request->exists($key)) {
-                // Empty, set null.
-                $translation->$key = null;
-            } else {
-                // Not provided, untouch properties.
+        $designer->update(app_array_filter($request->all(), ['image_id', 'gallery_image_ids', 'city_id', 'tag_ids', 'email', 'website', 'facebook', 'twitter', 'google_plus', 'instagram']));
+
+        // TODO transfer designer page to another user...
+
+        if ($request->has('translations')) {
+            foreach ($request->input('translations') as $locale => $texts) {
+                if ( empty($texts['name']) && empty($texts['tagline']) && empty($texts['content']) ) {
+                    continue;
+                }
+
+                if (!in_array($locale, Languages::getLanguageCodeList())) {
+                    continue;
+                }
+
+                $translation = DesignerTranslation::firstOrCreate([
+                    'designer_id' => $id,
+                    'locale' => $locale,
+                ]);
+
+                $translation->update(app_array_filter($texts, ['title', 'tagline', 'content']));
             }
         }
-
-        $translation->save();
-
-        // Keys directly filled into designer model
-        $keys = ['image_id', 'gallery_image_ids', 'city_id', 'tag_ids', 'email', 'website', 'facebook', 'twitter', 'google_plus', 'instagram'];
-
-        foreach ($keys as $key) {
-            if ($request->has($key)) {
-                // Not empty, fill the value
-                $designer->$key = $request->input($key);
-            } elseif ($request->exists($key)) {
-                // Empty, set null.
-                $designer->$key = null;
-            } else {
-                // Not provided, untouch properties.
-            }
-        }
-
-        $designer->save();
     }
 
     /**
