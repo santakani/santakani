@@ -1,0 +1,13 @@
+.like-button {
+    .icon {
+        display: none;
+    }
+
+    &.liked .liked-icon {
+        display: inline-block;
+    }
+
+    &:not(.liked) .not-liked-icon {
+        display: inline-block;
+    }
+}

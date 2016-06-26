@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var Like = require('../model/like');
 
 module.exports = Backbone.View.extend({
+    el: '#like-button',
 
     tagName: 'a',
 
@@ -63,11 +64,9 @@ module.exports = Backbone.View.extend({
 
     updateStatus: function () {
         if (this.model.get('liked')) {
-            this.$('i').addClass('fa-heart');
-            this.$('i').removeClass('fa-heart-o');
+            this.$el.addClass('liked');
         } else {
-            this.$('i').addClass('fa-heart-o');
-            this.$('i').removeClass('fa-heart');
+            this.$el.removeClass('liked');
         }
         if (this.model.get('disabled')) {
             this.$el.addClass('disabled');

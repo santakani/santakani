@@ -17,18 +17,12 @@
         <div class="raster raster-dark-dot"></div>
 
         <div class="action-buttons">
-            <button type="button" id="like-button" class="btn btn-default"
-                data-likeable-id="{{ $story->id}}" data-likeable-type="story"
-                data-liked="{{ $story->liked }}">
-                <i class="fa fa-lg {{ $story->liked?'fa-heart':'fa-heart-o' }}"></i>
-                Like
-                <span class="badge">{{ $story->like_count }}</span>
-            </button>
-            @if ($can_edit)
-                <a id="edit-button" class="btn btn-default" href="{{ $story->url . '/edit' }}">
-                    <i class="fa fa-pencil-square-o fa-lg"></i> Edit</a>
-                <button type="button" id="delete-button" class="btn btn-danger">
-                    <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+            @include('component.buttons.like', ['likeable' => $story])
+            @if (Auth::user()->can('edit-story', $story))
+                @include('component.buttons.edit')
+            @endif
+            @if (Auth::user()->can('delete-story', $story))
+                @include('component.buttons.delete')
             @endif
         </div>
 

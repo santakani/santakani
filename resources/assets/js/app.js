@@ -50,7 +50,11 @@ require('./page/home');
 // Designer
 require('./page/designer/index');
 require('./page/designer/create');
-require('./page/designer/show');
+
+if($('#designer-show-page').length) {
+    require('./page/designer/show');
+}
+
 require('./page/designer/edit');
 
 // Place

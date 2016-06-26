@@ -6,27 +6,16 @@
 ])
 
 @section('header')
-<header style="background-image:url({{ $designer->image_id?$designer->image->file_urls['large']:'http://placehold.it/1200x400?text=NO+IMAGE' }});">
-    <div class="container">
-        <div class="alert alert-warning" style="display:none;">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </div>
-
-    <div class="action-bar target">
-        @if ($can_edit)
-            <a href="{{ url('designer/'.$designer->id.'/edit') }}"
-                id="edit-button" class="btn btn-default btn-sm">Edit</a>
-            @if ($designer->trashed())
-                <a href="#" id="restore-button" class="btn btn-success btn-sm">Restore</a>
-                <a href="#" id="force-delete-button" class="btn btn-danger btn-sm">Permanently Delete</a>
-            @else
-                <a href="#" id="delete-button" class="btn btn-danger btn-sm">Delete</a>
-            @endif
+<div class="container" style="background-image:url({{ $designer->image_id?$designer->image->file_urls['large']:'http://placehold.it/1200x400?text=NO+IMAGE' }});">
+    <div class="action-buttons">
+        @include('component.buttons.like', ['likeable' => $designer])
+        @if (Auth::user()->can('edit-designer', $designer))
+            @include('component.buttons.edit')
         @endif
-    </div><!-- .action-bar -->
+        @if (Auth::user()->can('delete-designer', $designer))
+            @include('component.buttons.delete')
+        @endif
+    </div>
 
     <div class="text">
         <div class="container">
@@ -83,8 +72,8 @@
                 <div class="col-md-6"></div><!-- .col-* -->
             </div><!-- .row -->
         </div><!--.container-->
-    </div><!--.text-->
-</header>
+    </div><!-- /.text-->
+</div><!-- /.container -->
 @endsection
 
 @section('main')
