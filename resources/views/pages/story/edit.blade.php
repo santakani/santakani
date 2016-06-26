@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'title' => 'Edit: ' . $story->text('title'),
+    'title' => trans('common.edit') . ': ' . $story->text('title') . ' - ' . trans('story.story'),
     'body_id' => 'story-edit-page',
     'body_classes' => ['story-edit-page', 'story-page', 'edit-page'],
     'active_nav' => 'story',
@@ -7,7 +7,7 @@
 
 @section('header')
     <div class="container">
-        <h1 class="page-header">Edit Story: {{ $story->text('title') }}</h1>
+        <h1 class="page-header">{{ trans('common.edit') }}: {{ $story->text('title') }}</h1>
     </div>
 @endsection
 
