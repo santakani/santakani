@@ -115,7 +115,7 @@
 @endsection
 
 @push('templates')
-    @include('template.image-preview')
+    @include('templates.image-preview')
 @endpush
 
 @push('modals')
