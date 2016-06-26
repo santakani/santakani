@@ -9,13 +9,13 @@
 }
 
 #home-carousel {
-    height: 500px;
+    height: 300px;
     overflow: hidden;
 
     .carousel-cell {
         width: 100%;
         max-width: 1200px;
-        height: 500px;
+        height: 300px;
         @include image-cover();
         transition: opacity 0.5s, transform 0.5s;
 
@@ -25,8 +25,20 @@
             background-image: url(/img/raster/dark-dot.svg);
             transition: opacity 1s;
 
+            h1 {
+                font-weight: 300;
+
+                @media screen and (max-width: $screen-xs-max) {
+                    font-size: 32px;
+                }
+            }
+
             p {
                 font-weight: 400;
+
+                @media screen and (max-width: $screen-xs-max) {
+                    font-size: 14px;
+                }
             }
         }
 
@@ -57,6 +69,14 @@
         .arrow {
             fill: #ffffff;
         }
+
+        @media screen and (max-width: $screen-xs-max) {
+            display: none;
+        }
+
+        @media screen and (min-width: 1200px) {
+            background-color: rgba(0,0,0,0.3);
+        }
     }
 
     .flickity-page-dots {
@@ -72,6 +92,30 @@
             &.is-selected {
                 background: white;
             }
+        }
+    }
+
+    @media screen and (min-width: $screen-sm-min) {
+        height: 400px;
+
+        .carousel-cell {
+            height: 400px;
+        }
+    }
+
+    @media screen and (min-width: $screen-md-min) {
+        height: 450px;
+
+        .carousel-cell {
+            height: 450px;
+        }
+    }
+
+    @media screen and (min-width: $screen-lg-min) {
+        height: 500px;
+
+        .carousel-cell {
+            height: 500px;
         }
     }
 }

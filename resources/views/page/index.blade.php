@@ -11,9 +11,13 @@
             <div class="container">
                 <h1>Designers + Design Lovers</h1>
                 <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <p>
-                    <a class="btn btn-info btn-lg" href="/designer" role="button">Explore designer list</a>
+                <p class="hidden-xs">
+                    <a class="btn btn-info btn-lg" href="/designer" role="button">Designer list</a>
                     <a class="btn btn-success btn-lg" href="/designer/create" role="button">Create designer profile</a>
+                </p>
+                <p class="visible-xs-block">
+                    <a class="btn btn-info" href="/designer" role="button">Designer list</a>
+                    <a class="btn btn-success" href="/designer/create" role="button">Create designer profile</a>
                 </p>
             </div><!-- .container -->
         </div><!-- .jumbotron -->
@@ -21,11 +25,15 @@
     <div class="carousel-cell" style="background-image:url(/storage/images/0/2/large.jpg)">
         <div class="jumbotron">
             <div class="container">
-                <h1>Design Shops, Design Museums, and More</h1>
+                <h1>Design Shops, Museums, and More</h1>
                 <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <p>
-                    <a class="btn btn-info btn-lg" href="/place" role="button">Open design map</a>
-                    <a class="btn btn-success btn-lg" href="/place/create" role="button">Mark a design shop</a>
+                <p class="hidden-xs">
+                    <a class="btn btn-info btn-lg" href="/place" role="button">Design map</a>
+                    <a class="btn btn-success btn-lg" href="/place/create" role="button">Mark a design place</a>
+                </p>
+                <p class="visible-xs-block">
+                    <a class="btn btn-info" href="/place" role="button">Design map</a>
+                    <a class="btn btn-success" href="/place/create" role="button">Mark a design place</a>
                 </p>
             </div><!-- .container -->
         </div><!-- .jumbotron -->
@@ -35,9 +43,13 @@
             <div class="container">
                 <h1>The Story of Endless Creativity</h1>
                 <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <p>
+                <p class="hidden-xs">
                     <a class="btn btn-info btn-lg" href="/story" role="button">Start reading</a>
                     <a class="btn btn-success btn-lg" href="/story/create" role="button">Write &amp; publish</a>
+                </p>
+                <p class="visible-xs-block">
+                    <a class="btn btn-info" href="/story" role="button">Start reading</a>
+                    <a class="btn btn-success" href="/story/create" role="button">Write an article</a>
                 </p>
             </div><!-- .container -->
         </div><!-- .jumbotron -->
