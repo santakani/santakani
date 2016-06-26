@@ -12,4 +12,14 @@ class DesignerTranslation extends Model
      * @var string
      */
     protected $table = 'designer_translation';
+
+    /**
+     * The attributes that are mass assignable. id, story_id, locale and timestamps
+     * are protected from vulnerability.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'story_id', 'locale', 'name', 'tagline', 'content'
+    ];
 }
