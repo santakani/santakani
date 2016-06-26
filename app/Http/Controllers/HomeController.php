@@ -25,7 +25,7 @@ class HomeController extends Controller
         $stories = Story::whereNotNull('image_id')->orderBy('id', 'desc')->take(6)->get();
         $tags = Tag::whereNotNull('image_id')->orderBy('level', 'desc')->take(12)->get();
 
-        return view('page.index', [
+        return view('pages.index', [
             'designers' => $designers,
             'places' => $places,
             'stories' => $stories,

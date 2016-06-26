@@ -28,7 +28,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('page.user.index', ['users' => $users]);
+        return view('pages.user.index', ['users' => $users]);
     }
 
     /**
@@ -45,7 +45,7 @@ class UserController extends Controller
             abort(404);
         }
 
-        return view('page.user.show', ['user' => $user]);
+        return view('pages.user.show', ['user' => $user]);
     }
 
     /**
@@ -67,7 +67,7 @@ class UserController extends Controller
             abort(403);
         }
 
-        return view('page.user.edit', ['user' => $user]);
+        return view('pages.user.edit', ['user' => $user]);
     }
 
     /**

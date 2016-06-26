@@ -37,7 +37,7 @@ class CountryController extends Controller
         if ($request->wantsJSON()) {
             return response()->json($countries->toArray(), 200);
         } else {
-            return view('page.country.index', ['countries' => $countries]);
+            return view('pages.country.index', ['countries' => $countries]);
         }
     }
 

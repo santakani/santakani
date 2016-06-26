@@ -51,7 +51,7 @@ class CityController extends Controller
         if ($request->wantsJSON()) {
             return response()->json($cities->toArray(), 200);
         } else {
-            return view('page.city.index', ['cities' => $cities]);
+            return view('pages.city.index', ['cities' => $cities]);
         }
     }
 

@@ -75,7 +75,7 @@ class ImageController extends Controller
         if ($request->wantsJSON()) {
             return response()->json($images->toArray(), 200);
         } else {
-            return view('page.image.index', ['images' => $images]);
+            return view('pages.image.index', ['images' => $images]);
         }
     }
 
@@ -139,7 +139,7 @@ class ImageController extends Controller
         if (empty($image)) {
             abort(404);
         }
-        return view('page.image.show', ['image' => $image]);
+        return view('pages.image.show', ['image' => $image]);
     }
 
     /**

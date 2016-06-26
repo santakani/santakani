@@ -49,7 +49,7 @@ class TagController extends Controller
         if ($request->wantsJSON()) {
             return response()->json($tags->toArray(), 200);
         } else {
-            return view('page.tag.index', ['tags' => $tags]);
+            return view('pages.tag.index', ['tags' => $tags]);
         }
     }
 
@@ -60,7 +60,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('page.tag.create');
+        return view('pages.tag.create');
     }
 
     /**
@@ -109,7 +109,7 @@ class TagController extends Controller
         $places = $tag->places()->orderBy('id', 'desc')->take(6)->get();
         $stories = $tag->stories()->orderBy('id', 'desc')->take(6)->get();
 
-        return view('page.tag.show', [
+        return view('pages.tag.show', [
             'tag' => $tag,
             'designers' => $designers,
             'places' => $places,
@@ -137,7 +137,7 @@ class TagController extends Controller
 
         $tag->load('translations');
 
-        return view('page.tag.edit', [
+        return view('pages.tag.edit', [
             'tag' => $tag,
         ]);
     }

@@ -61,7 +61,7 @@ class StoryController extends Controller
             $stories = Story::paginate(12);
         }
 
-        return view('page.story.index', [
+        return view('pages.story.index', [
             'stories' => $stories,
         ]);
     }
@@ -73,7 +73,7 @@ class StoryController extends Controller
      */
     public function create()
     {
-        return view('page.story.create');
+        return view('pages.story.create');
     }
 
     /**
@@ -117,7 +117,7 @@ class StoryController extends Controller
 
         $story->load('translations');
 
-        return view('page.story.show', [
+        return view('pages.story.show', [
             'story' => $story,
             'can_edit' => Gate::allows('edit-page', $story),
         ]);
@@ -143,7 +143,7 @@ class StoryController extends Controller
 
         $story->load('translations');
 
-        return view('page.story.edit', [
+        return view('pages.story.edit', [
             'story' => $story,
         ]);
     }

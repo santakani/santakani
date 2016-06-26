@@ -56,7 +56,7 @@ class PlaceController extends Controller
 
 
 
-        return view('page.place.index', [
+        return view('pages.place.index', [
             'places' => $places,
             'city' => $city,
             'type' => $request->input('type'),
@@ -70,7 +70,7 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        return view('page.place.create');
+        return view('pages.place.create');
     }
 
     /**
@@ -117,7 +117,7 @@ class PlaceController extends Controller
 
         $place->load('translations');
 
-        return view('page.place.show', [
+        return view('pages.place.show', [
             'place' => $place,
             'can_edit' => Gate::allows('edit-page', $place),
         ]);
@@ -142,7 +142,7 @@ class PlaceController extends Controller
             abort(403);
         }
 
-        return view('page.place.edit', ['place' => $place]);
+        return view('pages.place.edit', ['place' => $place]);
     }
 
     /**

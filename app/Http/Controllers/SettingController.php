@@ -49,7 +49,7 @@ class SettingController extends Controller
      */
     public function profile(Request $request)
     {
-        return view('page.setting.profile', ['user' => $request->user()]);
+        return view('pages.setting.profile', ['user' => $request->user()]);
     }
 
     /**
@@ -60,7 +60,7 @@ class SettingController extends Controller
      */
     public function account(Request $request)
     {
-        return view('page.setting.account', ['user' => $request->user()]);
+        return view('pages.setting.account', ['user' => $request->user()]);
     }
 
     /**
@@ -71,7 +71,7 @@ class SettingController extends Controller
      */
     public function page(Request $request)
     {
-        return view('page.setting.page', ['user' => $request->user()]);
+        return view('pages.setting.page', ['user' => $request->user()]);
     }
 
     /**
@@ -82,7 +82,7 @@ class SettingController extends Controller
      */
     public function trash(Request $request)
     {
-        return view('page.setting.trash', ['user' => $request->user()]);
+        return view('pages.setting.trash', ['user' => $request->user()]);
     }
 
     /**

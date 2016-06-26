@@ -65,7 +65,7 @@ class DesignerController extends Controller
             $designers = Designer::paginate(12);
         }
 
-        return view('page.designer.index', [
+        return view('pages.designer.index', [
             'designers' => $designers
         ]);
     }
@@ -79,7 +79,7 @@ class DesignerController extends Controller
      */
     public function create()
     {
-        return view('page.designer.create');
+        return view('pages.designer.create');
     }
 
     /**
@@ -145,7 +145,7 @@ class DesignerController extends Controller
 
         $designer->load('translations');
 
-        return view('page.designer.show', [
+        return view('pages.designer.show', [
             'designer' => $designer,
             'can_edit' => Gate::allows('edit-page', $designer),
             'can_translate' => Gate::allows('translate-page', $designer),
@@ -173,7 +173,7 @@ class DesignerController extends Controller
             abort(403);
         }
 
-        return view('page.designer.edit', ['designer' => $designer]);
+        return view('pages.designer.edit', ['designer' => $designer]);
     }
 
     /**
