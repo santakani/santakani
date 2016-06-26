@@ -18,7 +18,7 @@ module.exports = Backbone.View.extend({
                 likeable_type: this.$el.data('likeableType'),
                 likeable_id: this.$el.data('likeableId'),
                 liked: this.$el.data('liked'),
-                like_count: parseInt(this.$('span').text()),
+                like_count: parseInt(this.$el.data('likeCount')),
             });
         }
 
@@ -74,6 +74,6 @@ module.exports = Backbone.View.extend({
             this.$el.removeClass('disabled');
         }
 
-        this.$('span').text(this.model.get('like_count'));
+        this.$('.like-count').text(this.model.get('like_count'));
     }
 });
