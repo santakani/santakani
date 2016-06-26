@@ -6,8 +6,11 @@
 ])
 
 @section('header')
-<div class="container" style="background-image:url({{ $designer->image_id?$designer->image->file_urls['large']:'http://placehold.it/1200x400?text=NO+IMAGE' }});">
-    <div class="action-buttons">
+<div class="page-cover container" style="background-image:url({{ $designer->image_id?$designer->image->file_urls['large']:'http://placehold.it/1200x400?text=NO+IMAGE' }});">
+
+    <div class="raster raster-dark-dot"></div>
+
+    <div class="action-buttons float">
         @include('components.buttons.like', ['likeable' => $designer])
         @if (Auth::user()->can('edit-designer', $designer))
             @include('components.buttons.edit')
@@ -15,7 +18,7 @@
         @if (Auth::user()->can('delete-designer', $designer))
             @include('components.buttons.delete')
         @endif
-    </div>
+    </div><!-- /.action-buttons -->
 
     <div class="text">
         <div class="container">
@@ -73,6 +76,7 @@
             </div><!-- .row -->
         </div><!--.container-->
     </div><!-- /.text-->
+
 </div><!-- /.container -->
 @endsection
 

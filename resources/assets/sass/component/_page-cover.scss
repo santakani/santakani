@@ -1,0 +1,18 @@
+// A banner with 3:1 sizes, usually used with .container.
+.page-cover {
+    @include image-cover;
+    position: relative;
+    height: $container-sm / 3;
+
+    @media screen and (min-width: $screen-sm-min) {
+        height: $container-sm / 3;
+    }
+
+    @media screen and (min-width: $screen-md-min) {
+        height: $container-md / 3;
+    }
+
+    @media screen and (min-width: $screen-lg-min) {
+        height: $container-lg / 3;
+    }
+}

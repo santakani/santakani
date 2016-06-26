@@ -1,0 +1,40 @@
+#action-buttons, .action-buttons {
+    text-align: left;
+    margin-bottom: 20px;
+
+    &.float {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+
+    @media screen and (min-width: $screen-sm-min) {
+        &.left-sm {
+            text-align: left;
+        }
+
+        &.right-sm {
+            text-align: right;
+        }
+    }
+
+    @media screen and (min-width: $screen-md-min) {
+        &.left-md {
+            text-align: left;
+        }
+
+        &.right-md {
+            text-align: right;
+        }
+    }
+
+    @media screen and (min-width: $screen-lg-min) {
+        &.left-lg {
+            text-align: left;
+        }
+
+        &.right-lg {
+            text-align: right;
+        }
+    }
+}
