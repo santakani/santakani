@@ -2,13 +2,13 @@
 // Base
 //==============================================================================
 
-@import "base/variable";
+@import "base/variables";
 
 // Bootstrap
 $icon-font-path: '../fonts/bootstrap';
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-@import "base/mixin";
+@import "base/mixins";
 @import "base/global";
 @import "base/typography";
 
@@ -51,52 +51,52 @@ $lg-path-images: '../img/lightgallery';
 
 
 //==============================================================================
-// Layout
-//==============================================================================
-
-@import "layout/navbar";
-@import "layout/footer";
-@import "layout/container";
-
-
-//==============================================================================
 // Components
 //==============================================================================
 
-@import "component/image-manager";
-@import "component/coordinate-select";
-@import "component/gallery-editor";
-@import "component/material-card";
-@import "component/tag-list";
-@import "component/tag-filter";
-@import "component/upload/image-preview";
-@import "component/raster";
-@import "component/like-button";
-@import "component/page-cover";
-@import "component/action-buttons";
+@import "components/image-manager";
+@import "components/coordinate-select";
+@import "components/gallery-editor";
+@import "components/material-card";
+@import "components/tag-list";
+@import "components/tag-filter";
+@import "components/upload/image-preview";
+@import "components/raster";
+@import "components/like-button";
+@import "components/page-cover";
+@import "components/action-buttons";
+
+
+//==============================================================================
+// Layout
+//==============================================================================
+
+@import "layouts/app/navbar";
+@import "layouts/app/footer";
+
+@import "layouts/auth";
+
+@import "layouts/create";
+
+@import "layouts/index";
+
+@import "layouts/setting";
 
 
 //==============================================================================
 // Pages
 //==============================================================================
 
-@import "page/home";
+@import "pages/home";
 
-@import "page/auth";
-@import "page/setting";
-@import "page/create";
-@import "page/edit";
-@import "page/index";
-@import "page/show";
+@import "pages/designer/index";
+@import "pages/designer/show";
 
-@import "page/designer/index";
-@import "page/designer/show";
+@import "pages/place/index";
+@import "pages/place/show";
 
-@import "page/place/index";
-@import "page/place/show";
+@import "pages/story/index";
+@import "pages/story/show";
 
-@import "page/story/index";
-@import "page/story/show";
-
-@import "page/tag/index";
-@import "page/tag/show";
+@import "pages/tag/index";
+@import "pages/tag/show";
