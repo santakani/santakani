@@ -1,4 +1,4 @@
-@extends('layout.create', [
+@extends('layouts.create', [
     'title' => 'Create designer profile',
     'body_id' => 'designer-create-page',
     'body_classes' => ['designer-create-page', 'designer-page'],

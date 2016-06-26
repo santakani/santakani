@@ -1,4 +1,4 @@
-@extends('layout.setting', [
+@extends('layouts.setting', [
     'title' => 'Profile settings',
     'body_id' => 'profile-setting-page',
     'body_classes' => ['profile-setting-page'],

@@ -1,4 +1,4 @@
-@extends('layout.auth', [
+@extends('layouts.auth', [
     'title' => 'Request password reset link',
     'body_id' => 'password-email-page',
     'body_classes' => ['password-email-page'],

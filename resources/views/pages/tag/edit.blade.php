@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'title' => 'Edit: ' . $tag->text('name'),
     'body_id' => 'tag-edit-page',
     'body_classes' => ['tag-edit-page', 'tag-page', 'edit-page'],

@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'title' => 'Tags',
     'body_id' => 'tag-index-page',
     'body_classes' => ['tag-index-page', 'tag-page', 'index-page'],

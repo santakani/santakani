@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'title' => 'Design Stories',
     'body_id' => 'story-index-page',
     'body_classes' => ['story-index-page', 'story-page', 'index-page'],

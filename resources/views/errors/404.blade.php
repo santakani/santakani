@@ -1,4 +1,4 @@
-@extends('layout.error', [
+@extends('layouts.error', [
     'error_code' => 404,
     'error_name' => 'Not found',
 ])

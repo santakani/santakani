@@ -1,4 +1,4 @@
-@extends('layout.setting', [
+@extends('layouts.setting', [
     'title' => 'Trash',
     'body_id' => 'trash-setting-page',
     'body_classes' => ['trash-setting-page'],

@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'title' => 'Edit: ' . $story->text('title'),
     'body_id' => 'story-edit-page',
     'body_classes' => ['story-edit-page', 'story-page', 'edit-page'],

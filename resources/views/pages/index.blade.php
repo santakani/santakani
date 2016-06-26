@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'body_id' => 'home-page',
     'body_classes' => ['home-page', 'index-page'],
     'active_nav' => 'home',

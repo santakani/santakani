@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'body_classes' => isset($body_classes)?array_merge($body_classes, ['setting-page', 'setting-layout']):['setting-page', 'setting-layout'],
     'active_nav' => 'user',
 ])

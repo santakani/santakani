@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'title' => 'Cities',
     'body_id' => 'city-index-page',
     'body_classes' => ['city-index-page', 'city-page', 'index-page'],

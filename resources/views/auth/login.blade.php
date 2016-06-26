@@ -1,4 +1,4 @@
-@extends('layout.auth', [
+@extends('layouts.auth', [
     'title' => trans('common.login'),
     'body_id' => 'login-page',
     'body_classes' => ['login-page'],

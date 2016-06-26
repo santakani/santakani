@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'body_classes' => isset($body_classes)?array_merge($body_classes, ['auth-page', 'auth-layout']):[],
 ])
 

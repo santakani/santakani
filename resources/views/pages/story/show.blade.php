@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'title' => $story->text('title') . ' - ' . trans('story.story'),
     'body_id' => 'story-show-page',
     'body_classes' => ['story-show-page', 'story-page', 'show-page'],

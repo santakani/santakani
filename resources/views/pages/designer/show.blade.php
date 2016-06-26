@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'title' => $designer->text('name') . ' - Designer',
     'body_id' => 'designer-show-page',
     'body_classes' => ['designer-show-page', 'show-page', 'designer-page'],

@@ -1,4 +1,4 @@
-@extends('layout.error', [
+@extends('layouts.error', [
     'error_code' => 503,
     'error_name' => 'Service Unavailable',
 ])

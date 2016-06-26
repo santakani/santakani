@@ -1,4 +1,4 @@
-@extends('layout.setting', [
+@extends('layouts.setting', [
     'title' => 'Pages',
     'body_id' => 'page-setting-page',
     'body_classes' => ['page-setting-page'],

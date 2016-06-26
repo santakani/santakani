@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'title' => 'Edit: ' . $place->name,
     'body_id' => 'place-edit-page',
     'body_classes' => ['place-edit-page', 'place-page', 'edit-page'],

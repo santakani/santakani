@@ -1,4 +1,4 @@
-@extends('layout.create', [
+@extends('layouts.create', [
     'title' => trans('story.write_design_story'),
     'body_id' => 'story-create-page',
     'body_classes' => ['story-create-page', 'story-page'],

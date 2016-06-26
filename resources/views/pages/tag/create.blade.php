@@ -1,4 +1,4 @@
-@extends('layout.create', [
+@extends('layouts.create', [
     'title' => 'Create tag',
     'body_id' => 'tag-create-page',
     'body_classes' => ['tag-create-page'],

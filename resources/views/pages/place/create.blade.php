@@ -1,4 +1,4 @@
-@extends('layout.create', [
+@extends('layouts.create', [
     'title' => trans('place.create_place_page'),
     'body_id' => 'place-create-page',
     'body_classes' => ['place-create-page', 'place-page'],

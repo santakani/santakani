@@ -1,4 +1,4 @@
-@extends('layout.app', [
+@extends('layouts.app', [
     'title' => 'Designers',
     'body_id' => 'designer-index-page',
     'body_classes' => ['designer-index-page', 'index-page', 'designer-page'],
