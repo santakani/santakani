@@ -65,6 +65,7 @@ $lg-path-images: '../img/lightgallery';
 @import "components/like-button";
 @import "components/page-cover";
 @import "components/action-buttons";
+@import "components/tab-pane.scss";
 
 
 //==============================================================================
@@ -97,6 +98,7 @@ $lg-path-images: '../img/lightgallery';
 
 @import "pages/story/index";
 @import "pages/story/show";
+@import "pages/story/edit";
 
 @import "pages/tag/index";
 @import "pages/tag/show";

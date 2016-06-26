@@ -1,0 +1,24 @@
+.tab-pane-group {
+
+    .nav-tabs {
+        > li.active a {
+            background-color: #ffffff;
+        }
+
+        > li:not(.active) a {
+            color: $gray-light;
+        }
+    }
+
+    .tab-content {
+        border: 1px solid $nav-tabs-border-color;
+        border-top: none;
+        padding: 15px;
+        background-color: #ffffff;
+    }
+
+    .static-content {
+        padding-top: 20px;
+        background-color: #ffffff;
+    }
+}

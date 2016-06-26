@@ -6,33 +6,19 @@
 ])
 
 @section('header')
-<header>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-offset-2 sol-sm-10 col-md-8">
-                <h1 class="page-header">Edit Story: {{ $story->text('title') }}</h1>
-            </div>
-        </div>
+        <h1 class="page-header">Edit Story: {{ $story->text('title') }}</h1>
     </div>
-</header>
 @endsection
 
 @section('main')
-<div class="container">
-    <form id="story-edit-form" class="form-horizontal" action="{{ $story->url }}"
-        data-id="{{ $story->id }}">
+    <div class="container">
+        <form id="story-edit-form" class="form" action="{{ $story->url }}" data-id="{{ $story->id }}">
 
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10 col-md-8">
-                <div class="alert alert-warning" style="display:none;" role="alert"></div>
-            </div>
-        </div>
-
-        <!-- Nav tabs -->
-        <div class="form-group">
-            <div class="col-sm-offset-2 sol-sm-10 col-md-8">
+            <div class="tab-pane-group">
+                <!-- Nav tabs -->
                 <ul id="translation-tabs" class="nav nav-tabs">
                     @foreach (App\Localization\Languages::getLanguageList() as $locale => $names)
                         <li class="{{ $locale==='en'?'active':'' }}">
@@ -42,45 +28,32 @@
                         </li>
                     @endforeach
                 </ul>
-            </div>
-        </div>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            @foreach (App\Localization\Languages::getLanguageCodeList() as $locale)
-                <?php $translation = $story->translations()->where('locale', $locale)->first(); ?>
-                <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
-                    <div class="form-group">
-                        <label for="title-input-{{ $locale }}" class="col-sm-2 control-label">
-                            Title
-                        </label>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    @foreach (App\Localization\Languages::getLanguageCodeList() as $locale)
+                        <?php $translation = $story->translations()->where('locale', $locale)->first(); ?>
+                        <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
+                            <div class="form-group">
+                                <label class="control-label">Title</label>
+                                <input name="translations[{{ $locale }}][title]" value="{{ $translation->title or '' }}"
+                                    id="title-input-{{ $locale }}" class="form-control" type="text" maxlength="255">
+                            </div>
 
-                        <div class="col-sm-10 col-md-8">
-                            <input name="translations[{{ $locale }}][title]" value="{{ $translation->title or '' }}"
-                                id="title-input-{{ $locale }}" class="form-control" type="text" maxlength="255">
+                            <div class="form-group">
+                                <label class="control-label">Content</label>
+                                <textarea name="translations[{{ $locale }}][content]"
+                                    class="content-editor">{{ $translation->content or '' }}</textarea>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
+                </div><!-- /.tab-content -->
+            </div><!-- /.tab-pane -->
 
-                    <div class="form-group">
-                        <label for="content-editor-{{ $locale }}" class="col-sm-2 control-label">
-                            Content
-                        </label>
+            <br/>
 
-                        <div class="col-sm-10 col-md-8">
-                            <textarea id="content-editor-{{ $locale }}" name="translations[{{ $locale }}][content]"
-                                class="content-editor">{{ $translation->content or '' }}</textarea>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        <div id="image-form-group" class="form-group">
-            <label class="col-sm-2 control-label">
-                Cover image
-            </label>
-
-            <div class="col-sm-10 col-md-8">
+            <div id="image-form-group" class="form-group">
+                <label class="control-label">Cover image</label>
                 <div id="cover-editor" class="cover-editor">
                     <button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button><br><br>
                     @if ($story->image_id)
@@ -90,28 +63,20 @@
                     @endif
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Tags</label>
-
-            <div class="col-sm-10 col-md-8">
+            <div class="form-group">
+                <label class="control-label">Tags</label>
                 <select name="tag_ids[]" class="tag-select form-control" style="width: 100%" multiple="multiple">
                     @foreach ($story->tags as $tag)
                         <option value="{{ $tag->id }}" selected="selected">{{ $tag->text('name') }}</option>
                     @endforeach
                 </select>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Save</button>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-default">Save</button>
 
-    </form>
-</div><!-- .container -->
+        </form>
+    </div><!-- /.container -->
 @endsection
 
 @push('templates')
