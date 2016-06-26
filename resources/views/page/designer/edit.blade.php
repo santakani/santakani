@@ -38,9 +38,9 @@
                 <div id="cover-editor" class="cover-editor">
                     <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
                     @if ($designer->image_id)
-                        @include('component.image-preview', ['image' => $designer->image])
+                        @include('components.image-preview', ['image' => $designer->image])
                     @else
-                        @include('component.image-preview')
+                        @include('components.image-preview')
                     @endif
                 </div>
             </div>
@@ -79,7 +79,7 @@
                     <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
                     <div class="images clearfix">
                         @foreach ($designer->gallery_images as $image)
-                            @include('component.image-preview', ['image' => $image])
+                            @include('components.image-preview', ['image' => $image])
                         @endforeach
                     </div>
                 </div>
@@ -175,5 +175,5 @@
 @endpush
 
 @push('modals')
-    @include('component.image-manager')
+    @include('components.image-manager')
 @endpush

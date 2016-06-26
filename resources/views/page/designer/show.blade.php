@@ -8,12 +8,12 @@
 @section('header')
 <div class="container" style="background-image:url({{ $designer->image_id?$designer->image->file_urls['large']:'http://placehold.it/1200x400?text=NO+IMAGE' }});">
     <div class="action-buttons">
-        @include('component.buttons.like', ['likeable' => $designer])
+        @include('components.buttons.like', ['likeable' => $designer])
         @if (Auth::user()->can('edit-designer', $designer))
-            @include('component.buttons.edit')
+            @include('components.buttons.edit')
         @endif
         @if (Auth::user()->can('delete-designer', $designer))
-            @include('component.buttons.delete')
+            @include('components.buttons.delete')
         @endif
     </div>
 
@@ -82,7 +82,7 @@
 
     {!! $designer->text('content') !!}
 
-    @include('component.tag-list', [
+    @include('components.tag-list', [
         'tags' => $designer->tags,
         'style' => 'plain',
     ])

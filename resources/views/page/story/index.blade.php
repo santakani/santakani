@@ -8,7 +8,7 @@
 @section('main')
 <div class="container">
     <form id="story-filter" class="list-filter" action="/story" method="get">
-        @include('component.tag-filter', ['selected' => app('request')->input('tag_id')])
+        @include('components.tag-filter', ['selected' => app('request')->input('tag_id')])
     </form>
     <div id="story-list" class="story-list row">
         @foreach ($stories as $story)

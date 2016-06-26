@@ -17,12 +17,12 @@
         <div class="raster raster-dark-dot"></div>
 
         <div class="action-buttons">
-            @include('component.buttons.like', ['likeable' => $story])
+            @include('components.buttons.like', ['likeable' => $story])
             @if (Auth::user()->can('edit-story', $story))
-                @include('component.buttons.edit')
+                @include('components.buttons.edit')
             @endif
             @if (Auth::user()->can('delete-story', $story))
-                @include('component.buttons.delete')
+                @include('components.buttons.delete')
             @endif
         </div>
 
@@ -45,7 +45,7 @@
                 {!! $story->text('content') !!}
             </div>
 
-            @include('component.tag-list', [
+            @include('components.tag-list', [
                 'tags' => $story->tags,
                 'style' => 'round',
             ])

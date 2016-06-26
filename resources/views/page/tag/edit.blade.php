@@ -93,9 +93,9 @@
                 <div id="cover-editor" class="cover-editor">
                     <button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button><br><br>
                     @if ($tag->image_id)
-                        @include('component.image-preview', ['image' => $tag->image])
+                        @include('components.image-preview', ['image' => $tag->image])
                     @else
-                        @include('component.image-preview')
+                        @include('components.image-preview')
                     @endif
                 </div>
             </div>
@@ -127,5 +127,5 @@
 @endpush
 
 @push('modals')
-    @include('component.image-manager')
+    @include('components.image-manager')
 @endpush

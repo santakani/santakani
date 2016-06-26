@@ -51,7 +51,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-8">
-            @include('component.tag-list', [
+            @include('components.tag-list', [
                 'tags' => $place->tags,
                 'style' => 'plain',
             ])

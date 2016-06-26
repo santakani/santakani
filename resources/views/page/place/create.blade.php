@@ -30,7 +30,7 @@
         <label for="type-select" class="col-sm-3 control-label">Type</label>
 
         <div class="col-sm-9">
-            @include('component.place-type-select', [
+            @include('components.place-type-select', [
                 'id' => 'type-select',
                 'selected' => old('type'),
                 'required' => true,

@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label for="type-input">Type</label>
-                @include('component.place-type-select', [
+                @include('components.place-type-select', [
                     'selected' => $type,
                     'all' => true,
                 ])

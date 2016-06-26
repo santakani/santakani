@@ -8,7 +8,7 @@
 @section('main')
 <div class="container">
     <form id="designer-filter" class="list-filter" action="/designer" method="get">
-        @include('component.tag-filter', ['selected' => app('request')->input('tag_id')])
+        @include('components.tag-filter', ['selected' => app('request')->input('tag_id')])
     </form>
     <div id="designer-list" class="row">
         @foreach ($designers as $designer)
