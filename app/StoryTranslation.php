@@ -38,6 +38,6 @@ class StoryTranslation extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'content'
+        'story_id', 'locale', 'title', 'content',
     ];
 }

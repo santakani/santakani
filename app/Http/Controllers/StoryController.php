@@ -17,7 +17,7 @@ use Log;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
+use App\Localization\Languages;
 use App\Story;
 use App\StoryTranslation;
 
@@ -163,7 +163,7 @@ class StoryController extends Controller
             abort(404);
         }
 
-        if (Gate::denies('edit-page', $story)) {
+        if ($request->user()->cannot('edit-story', $story)) {
             abort(403);
         }
 
@@ -171,31 +171,31 @@ class StoryController extends Controller
             'image_id' => 'integer|exists:image,id',
             'user_id' => 'integer|exists:user,id',
             'tag_ids.*' => 'integer|exists:tag,id',
+            'translations' => 'array',
+            'translations.*.title' => 'string|max:255',
+            'translations.*.content' => 'string',
         ]);
 
-        $story->update($request->all());
+        $story->update($request->only(['image_id', 'tag_ids']));
 
-        if ($request->has('translations') && is_array($request->input('translations'))) {
+        // TODO transfer story page to another user...
+
+        if ($request->has('translations')) {
             foreach ($request->input('translations') as $locale => $texts) {
-                if ( ( !isset($texts['title']) || empty($texts['title']) ) &&
-                    ( !isset($texts['content']) || empty($texts['content']) ) ) {
+                if ( empty($texts['title']) && empty($texts['content']) ) {
                     continue;
                 }
 
-                $translation = StoryTranslation::where([
-                    'story_id' => $id,
-                    'locale' => $locale,
-                ])->first();
-
-                if (!count($translation)) {
-                    $translation = new StoryTranslation();
-                    $translation->story_id = $id;
-                    $translation->locale = $locale;
+                if (!in_array($locale, Languages::getLanguageCodeList())) {
+                    continue;
                 }
 
-                $translation->fill($texts);
+                $translation = StoryTranslation::firstOrCreate([
+                    'story_id' => $id,
+                    'locale' => $locale,
+                ]);
 
-                $translation->save();
+                $translation->update(array_only($texts, ['title', 'content']));
             }
         }
     }
