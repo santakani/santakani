@@ -10,8 +10,8 @@
     <div class="container">
         <div class="gallery clearfix">
             @if ($place->image)
-                <a href="{{ $place->image->file_urls['large'] }}">
-                    <img src="{{ $place->image->file_urls['thumb'] }}">
+                <a href="{{ $place->image->url('large') }}">
+                    <img src="{{ $place->image->url('thumb') }}">
                 </a>
             @else
                 <a class="placeholder" href="#">
@@ -20,8 +20,8 @@
             @endif
             @forelse ($place->gallery_images as $image)
                 @if ($image->id !== $place->image_id)
-                    <a href="{{ $image->file_urls['large'] }}">
-                        <img src="{{ $image->file_urls['thumb'] }}">
+                    <a href="{{ $image->url('large') }}">
+                        <img src="{{ $image->url('thumb') }}">
                     </a>
                 @endif
             @empty

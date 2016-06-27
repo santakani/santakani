@@ -37,7 +37,7 @@
                 data-id="{{ $place->id }}" data-latitude="{{ $place->latitude }}"
                 data-longitude="{{ $place->longitude }}">
                 <a href="{{ $place->url }}">
-                    <div class="cover-image" style="background-image:url({{ $place->image?$place->image->file_urls['medium']:'' }})">
+                    <div class="cover-image" style="background-image:url({{ $place->image?$place->image->url('medium'):'' }})">
                         <span class="type">{{ $place->type }}</span>
                     </div>
                     <div class="text">

@@ -46,24 +46,24 @@ class Image extends Model
      *
      * @var array
      */
-    protected $fillable = ['mime_type', 'width', 'height'];
+    protected $fillable = ['mime_type', 'width', 'height', 'weight'];
 
     /**
-     * Large size of images (large).
+     * Large size of images.
      *
      * @var int
      */
     const large_size = 1200;
 
     /**
-     * Medium size of images (medium).
+     * Medium size of images.
      *
      * @var int
      */
     const medium_size = 600;
 
     /**
-     * Size of image thumbnails, crop to square (thumb).
+     * Size of image thumbnails, crop to square.
      *
      * @var int
      */
@@ -76,37 +76,14 @@ class Image extends Model
      */
     const storage_path = 'storage/images';
 
-    /**
-     * Allowed MIME types for files. video/youtube and video/vimeo are not included.
-     *
-     * @var array
-     */
-    protected $allowed_mime_types = [
-        'image/jpeg', 'image/png', 'image/gif',
-    ];
-
-    /**
-     * Image sizes that will be generated.
-     *
-     * @var array
-     */
-    protected $image_sizes = [
-        'full', 'large', 'medium', 'thumb',
-    ];
 
 
-
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                          Relationship Methods                          //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
-
+    //==============================================
+    // Relationships
+    //==============================================
 
     /**
      * Owner.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function user()
     {
@@ -114,15 +91,7 @@ class Image extends Model
     }
 
     /**
-     * Parent model. By default, function name must be same with *_type and *_id
-     * columns. But we can pass a string parameter to morphTo() function to define
-     * custom column name. Then we can rename this function to whatever we like.
-     * @see \App\Designer::images()
-     * @see \App\Place::images()
-     * @see \App\Country::images()
-     * @see \App\City::images()
-     *
-     * @return mixed
+     * Parent model.
      */
     public function parent() {
         return $this->morphTo();
@@ -130,67 +99,16 @@ class Image extends Model
 
 
 
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                           Dynamic Properties                           //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
-
-
-    /**
-     * "url" getter.
-     *
-     * Note this is the URL to image page, not image file.
-     *
-     * @return string
-     */
-    public function getUrlAttribute()
-    {
-        return url('image/' . $this->id);
-    }
-
-    /**
-     * "file_urls" getter.
-     *
-     * URL to image files. Contain for sizes: full, large, medium, thumb.
-     * Mainly used to send to browser.
-     *
-     * [Example]
-     *
-     * [
-     *     'full' => 'http://santakani.com/storage/image/0/1/full.jpg',
-     *     'large' => 'http://santakani.com/storage/image/0/1/large.jpg',
-     *     'medium' => 'http://santakani.com/storage/image/0/1/medium.jpg',
-     *     'thumb' => 'http://santakani.com/storage/image/0/1/thumb.jpg',
-     * ]
-     *
-     * @return string[]
-     */
-    public function getFileUrlsAttribute()
-    {
-        return [
-            'full' => $this->getFileUrl('full'),
-            'large' => $this->getFileUrl('large'),
-            'medium' => $this->getFileUrl('medium'),
-            'thumb' => $this->getFileUrl('thumb'),
-        ];
-    }
-
-
-
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                              Other Methods                             //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
-
+    //==============================================
+    // File Information
+    //==============================================
 
     /**
      * Get file extension of image file based on MIME type.
      *
      * @return string
      */
-    public function getFileExtension()
+    public function extension()
     {
         switch ($this->mime_type) {
             case 'image/jpeg':
@@ -200,7 +118,7 @@ class Image extends Model
             case 'image/gif':
                 return '.gif';
             default:
-                return null;
+                return '';
         }
     }
 
@@ -208,54 +126,44 @@ class Image extends Model
      * Get fallback size if the original image is not big enough
      *
      * @param string $size
-     *
      * @return string
      */
-    public function sizeFallback($size)
+    public function fallback($size)
     {
-        return $this->hasSize($size)?$size:'full';
+        return $this->has($size)?$size:'full';
     }
 
     /**
      * Detect if a size exists
      *
      * @param string $size
-     *
      * @return boolean
      */
-    public function hasSize($size)
+    public function has($size)
     {
-        if (!in_array($size, $this->image_sizes)) {
+        if ($size === 'full' or $size === 'thumb') {
+            return true;
+        } elseif ($this->width > self::large_size || $this->height > self::large_size) {
+            return true; // large, medium
+        } elseif ($size === 'medium' && ($this->width > self::medium_size || $this->height > self::medium_size)) {
+            return true;
+        } else {
             return false;
-        } elseif ($size === 'large') {
-            if ($this->width <= self::large_size && $this->height <= self::large_size) {
-                return false;
-            }
-        } elseif ($size === 'medium') {
-            if ($this->width <= self::medium_size && $this->height <= self::medium_size) {
-                return false;
-            }
         }
-
-        return true;
     }
 
     /**
-     * Generate full/relative path to image directory
-     *
-     * [Example]
+     * Generate full/relative path to image directory. For example:
      * Image id: 1009768
-     * Full path: /srv/www/santakani.com/public/storage/image/1009/768
-     * Relative path: storage/image/1009/768
+     * Full path: /srv/www/santakani.com/public/storage/images/1009/768
+     * Relative path: storage/images/1009/768
      *
-     * @param boolean $full Return full path or relative path.
+     * @param boolean $full Return full path or relative path. Default true.
      * @return string
      */
-    public function getDirectoryPath($full = true)
+    public function directory($full = true)
     {
-        $id = $this->id;
-        $path = self::storage_path . '/' . (int)($id/1000) . '/' . $id%1000;
-
+        $path = self::storage_path.'/'.(int)($this->id/1000).'/'.($this->id % 1000);
         return $full?public_path($path):$path;
     }
 
@@ -267,12 +175,12 @@ class Image extends Model
      * @param boolean $size_fallback If check fallback sizes.
      * @return string
      */
-    public function getFilePath($size = 'full', $full = true, $size_fallback = false)
+    public function file($size = 'full', $full = true, $size_fallback = false)
     {
         if ($size_fallback) {
-            $size = $this->sizeFallback($size);
+            $size = $this->fallback($size);
         }
-        return $this->getDirectoryPath($full) . '/' . $size . $this->getFileExtension();
+        return $this->directory($full) . '/' . $size . $this->extension();
     }
 
     /**
@@ -282,15 +190,22 @@ class Image extends Model
      * @param boolean $size_fallback If check fallback sizes.
      * @return string
      */
-    public function getFileUrl($size = 'full', $size_fallback = true)
+    public function url($size = 'full', $size_fallback = true)
     {
-        return url($this->getFilePath($size, false, $size_fallback));
+        return url($this->file($size, false, $size_fallback));
     }
 
+
+
+    //==============================================
+    // File System Operations
+    //==============================================
+
     /**
-     * Save image file and generate sizes.
+     * Save image file and generate sizes. You can choose keep original file or not.
      *
      * @param string $temp_file_path
+     * @param boolean $delete_origin
      */
     public function saveFile($temp_file_path, $delete_origin = true)
     {
@@ -304,29 +219,29 @@ class Image extends Model
 
         // Full (reduce file size)
         $imagick->thumbnailImage($this->width, $this->height);
-        $imagick->writeImage($this->getFilePath('full'));
-        chmod($this->getFilePath('full'), 0644);
+        $imagick->writeImage($this->file('full'));
+        chmod($this->file('full'), 0644);
 
         // Large
-        if ($this->hasSize('large')) {
+        if ($this->has('large')) {
             $imagick->thumbnailImage(self::large_size, self::large_size, true);
-            $imagick->writeImage($this->getFilePath('large'));
-            chmod($this->getFilePath('large'), 0644);
+            $imagick->writeImage($this->file('large'));
+            chmod($this->file('large'), 0644);
         }
 
         // Medium
-        if ($this->hasSize('medium')) {
+        if ($this->has('medium')) {
             $imagick->thumbnailImage(self::medium_size, self::medium_size, true);
-            $imagick->writeImage($this->getFilePath('medium'));
-            chmod($this->getFilePath('medium'), 0644);
+            $imagick->writeImage($this->file('medium'));
+            chmod($this->file('medium'), 0644);
         }
 
         $imagick->destroy();
 
         // Thumb
         $thumb_imagick->cropThumbnailImage(self::thumb_size, self::thumb_size);
-        $thumb_imagick->writeImage($this->getFilePath('thumb'));
-        chmod($this->getFilePath('thumb'), 0644);
+        $thumb_imagick->writeImage($this->file('thumb'));
+        chmod($this->file('thumb'), 0644);
 
         $thumb_imagick->destroy();
 
@@ -340,7 +255,7 @@ class Image extends Model
      */
     public function createDirectory()
     {
-        mkdir($this->getDirectoryPath(), 0755, true);
+        mkdir($this->directory(), 0755, true);
     }
 
     /**
@@ -348,6 +263,6 @@ class Image extends Model
      */
     public function deleteDirectory()
     {
-        FileHelper::rrmdir($this->getDirectoryPath());
+        app_rrmdir($this->directory());
     }
 }

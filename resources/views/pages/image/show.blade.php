@@ -13,8 +13,8 @@
 
     <br>
     <p>
-        <a href="{{ $image->file_urls['full'] }}">
-            <img class="img-responsive" src="{{ $image->file_urls['large'] }}">
+        <a href="{{ $image->url('full') }}">
+            <img class="img-responsive" src="{{ $image->url('large') }}">
         </a>
     </p>
     <p>

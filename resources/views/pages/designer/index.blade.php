@@ -16,8 +16,8 @@
                 <article id="designer-{{ $designer->id }}" class="designer material-card"
                     data-id="{{ $designer->id }}">
                     <a href="{{ $designer->url }}">
-                        <div class="cover-image" style="background-image:url({{ $designer->image_id ? $designer->image->file_urls['medium'] : '' }})">
-                            <img class="logo-image" src="{{ $designer->logo_id ? $designer->logo->file_urls['thumb'] : '' }}" />
+                        <div class="cover-image" style="background-image:url({{ $designer->image_id ? $designer->image->url('medium') : '' }})">
+                            <img class="logo-image" src="{{ $designer->logo_id ? $designer->logo->url('thumb') : '' }}" />
                         </div>
                         <div class="text">
                             <h1>{{ $designer->text('name') }}<br>

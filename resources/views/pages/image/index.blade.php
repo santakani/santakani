@@ -13,7 +13,7 @@
 
     @foreach ($images as $image)
         <a href="{{ $image->url }}">
-            <img src="{{ $image->file_urls['thumb'] }}">
+            <img src="{{ $image->url('thumb') }}">
         </a>
     @endforeach
 

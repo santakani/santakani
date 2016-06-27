@@ -16,7 +16,7 @@
                 <article id="story-{{ $story->id }}" class="story material-card" data-id="{{ $story->id }}">
                     <a href="{{ $story->url }}">
                         @if ($image = $story->image)
-                            <img class="cover-image" src="{{ $image->file_urls['thumb'] }}" />
+                            <img class="cover-image" src="{{ $image->url('thumb') }}" />
                         @else
                             <img class="cover-image" src="http://placehold.it/300x300?text=NO+IMAGE" />
                         @endif

@@ -9,7 +9,7 @@
     <div class="container">
 
         @if ($story->image_id)
-            <div class="cover-image" style="background-image:url({{ $story->image->getFileUrl('large') }})"></div>
+            <div class="cover-image" style="background-image:url({{ $story->image->url('large') }})"></div>
         @else
             <div class="cover-image" style="background-image:url(/img/placeholder/blank/1200x800.svg)"></div>
         @endif

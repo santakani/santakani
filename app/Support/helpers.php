@@ -29,3 +29,28 @@ if (! function_exists('app_array_filter')) {
         return $results;
     }
 }
+
+if (! function_exists('app_rrmdir')) {
+    /**
+     * Remove directory recursively. Require full path
+     *
+     * @param string $dir_path
+     */
+     function app_rrmdir($dir_path)
+     {
+         if (is_dir($dir_path)) {
+             $objects = scandir($dir_path);
+             foreach ($objects as $object) {
+                 if ($object !== '.' && $object !== '..') {
+                     $object_path = $dir_path . '/' . $object;
+                     if (is_dir($object_path)) {
+                         self::rrmdir($object_path);
+                     } else {
+                         unlink($object_path);
+                     }
+                 }
+             }
+             rmdir($dir_path);
+         }
+     }
+}

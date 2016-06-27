@@ -1,13 +1,13 @@
 <?php
 
 if ($designer->image_id) {
-    $cover_image = $designer->image->getFileUrl('large');
+    $cover_image = $designer->image->url('large');
 } else {
     $cover_image = url('img/placeholder/blank/1200x800.svg');
 }
 
 if ($designer->logo_id) {
-    $logo_image = $designer->logo->getFileUrl('thumb');
+    $logo_image = $designer->logo->url('thumb');
 } else {
     $logo_image = url('img/placeholder/blank/300x300.svg');
 }
@@ -110,8 +110,8 @@ if ($designer->logo_id) {
 <div class="container-fluid">
     <div class="gallery">
         @foreach ($designer->gallery_images as $image)
-            <a href="{{ $image->file_urls['large'] }}">
-                <img src="{{ $image->file_urls['thumb'] }}" />
+            <a href="{{ $image->url('large') }}">
+                <img src="{{ $image->url('thumb') }}" />
             </a>
         @endforeach
     </div>
