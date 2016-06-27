@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <div class="col-sm-6 col-sm-offset-3">
                             <a class="btn btn-primary btn-lg btn-block"
-                                href="{{ App\Helpers\UrlHelper::redirectUrl('auth/facebook') }}">
+                                href="{{ app_redirect_url('auth/facebook') }}">
                                 <i class="fa fa-facebook-official fa-lg"></i>
                                 Facebook {{ trans('common.login') }}
                             </a>
@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <div class="col-sm-6 col-sm-offset-3">
                             <a class="btn btn-danger btn-lg btn-block"
-                                href="{{ App\Helpers\UrlHelper::redirectUrl('auth/google') }}">
+                                href="{{ app_redirect_url('auth/google') }}">
                                 <i class="fa fa-google fa-lg"></i>
                                 Google {{ trans('common.login') }}
                             </a>
@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <div class="col-sm-6 col-sm-offset-3">
                             <a class="btn btn-info btn-lg btn-block"
-                                href="{{ App\Helpers\UrlHelper::redirectUrl('auth/twitter') }}">
+                                href="{{ app_redirect_url('auth/twitter') }}">
                                 <i class="fa fa-twitter fa-lg"></i>
                                 Twitter {{ trans('common.login') }}
                             </a>

@@ -11,12 +11,10 @@
 
 namespace App;
 
+use Imagick;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Imagick;
-use Symfony\Component\HttpFoundation\File\File;
-
-use App\Helpers\FileHelper;
 
 /**
  * Image

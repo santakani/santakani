@@ -2,14 +2,12 @@
 
 namespace App;
 
+use Imagick;
+
 use DB;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-use Imagick;
-
-use App\Helpers\FileHelper;
 
 class User extends Authenticatable
 {
@@ -195,7 +193,7 @@ class User extends Authenticatable
     {
         $path = $this->getAvatarDirectoryPath();
         if (is_dir($path)) {
-            FileHelper::rrmdir($path);
+            app_rrmdir($path);
         } elseif (is_file($path)) {
             unlink($path);
         }

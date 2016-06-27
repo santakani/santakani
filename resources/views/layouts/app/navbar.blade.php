@@ -29,12 +29,12 @@ $nav_menu_left = [
 $nav_menu_right = [
     'login' => [
         'text' => 'Login',
-        'url' => App\Helpers\UrlHelper::redirectUrl('login'),
+        'url' => app_redirect_url('login'),
         'icon' =>'sign-in',
     ],
     'register' => [
         'text' => 'Register',
-        'url' => App\Helpers\UrlHelper::redirectUrl('register'),
+        'url' => app_redirect_url('register'),
         'icon' =>'user-plus',
     ],
 ];

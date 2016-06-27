@@ -9,7 +9,15 @@
  * file that was distributed with this source code.
  */
 
-if (! function_exists('app_array_filter')) {
+/**
+ * Helper functions. All start with "app_" to avoid duplicate.
+ */
+
+//===============================================
+// Array
+//===============================================
+
+if (!function_exists('app_array_filter')) {
     /**
      * Get a subset of the items from the given array. DO NOT fill non-exist
      * keys with null. (different from array_only() function)
@@ -30,7 +38,37 @@ if (! function_exists('app_array_filter')) {
     }
 }
 
-if (! function_exists('app_rrmdir')) {
+//===============================================
+// URL
+//===============================================
+
+if (!function_exists('app_redirect_url')) {
+    /**
+     * Generate URL with redirect parameter.
+     *
+     * @param string $base_url
+     * @param string $redirect
+     */
+    function app_redirect_url($base_url, $redirect = null)
+    {
+        // Do not parse redirect URLs on login and register page, avoid redirect loop.
+        if (url()->current() === url('login') || url()->current() === url('register')) {
+            return url($base_url);
+        }
+
+        if ($redirect === null) {
+            $redirect = url()->full();
+        }
+
+        return url($base_url . '?redirect=' . urlencode($redirect));
+    }
+}
+
+//===============================================
+// File
+//===============================================
+
+if (!function_exists('app_rrmdir')) {
     /**
      * Remove directory recursively. Require full path
      *
