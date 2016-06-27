@@ -41,6 +41,17 @@ class Designer extends Model
     protected $table = 'designer';
 
     /**
+     * The attributes that are mass assignable. id, story_id, locale and timestamps
+     * are protected from vulnerability.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'image_id', 'logo_id', 'city_id', 'tag_ids', 'gallery_image_ids', 'email',
+        'website', 'facebook', 'google_plus', 'instagram', 'twitter',
+    ];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array

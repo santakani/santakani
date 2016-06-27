@@ -195,8 +195,10 @@ class DesignerController extends Controller
 
         $this->validate($request, [
             'image_id' => 'integer|exists:image,id',
+            'logo_id' => 'integer|exists:image,id',
             'gallery_image_ids.*' => 'integer|exists:image,id',
             'city_id' => 'integer|exists:city,id',
+            'user_id' => 'integer|exists:user,id',
             'tag_ids.*' => 'integer|exists:tag,id',
             'email' => 'email|max:255',
             'website' => 'url|max:255',
@@ -209,7 +211,10 @@ class DesignerController extends Controller
             'translations.*.content' => 'string',
         ]);
 
-        $designer->update(app_array_filter($request->all(), ['image_id', 'gallery_image_ids', 'city_id', 'tag_ids', 'email', 'website', 'facebook', 'twitter', 'google_plus', 'instagram']));
+        $designer->update(app_array_filter($request->all(), [
+            'image_id', 'logo_id', 'gallery_image_ids', 'city_id', 'tag_ids',
+            'email', 'website', 'facebook', 'twitter', 'google_plus', 'instagram'
+        ]));
 
         // TODO transfer designer page to another user...
 
