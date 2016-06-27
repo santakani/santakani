@@ -1,3 +1,5 @@
+var alert = require('sweetalert');
+
 var $form = $('.edit-form');
 
 // Prevent unexpected form submit caused by "Enter" key press
@@ -18,10 +20,14 @@ $form.find('button[type="submit"]').click(function (e) {
         method: 'patch',
         url: url,
         data: $form.serialize()
-    }).done(function (data) {
+    }).done(function (data, textStatus, jqXHR) {
         location.href = url;
-    }).fail(function (error) {
-        renderErrors(error.responseJSON);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        if (jqXHR.status === 422) {
+            renderErrors(jqXHR.responseJSON);
+        } else {
+            alert('Unknown Error');
+        }
     });
 });
 
@@ -45,5 +51,5 @@ function renderErrors(errors) {
         }
         $formGroup.append('<span class="help-block">' + message + '</span>' );
     }
-    $(window).scrollTo('.has-error', 300);
+    $(window).scrollTo('.has-error', 300, {offset: -100});
 }
