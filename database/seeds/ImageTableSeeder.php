@@ -57,7 +57,7 @@ class ImageTableSeeder extends Seeder
             23 => [3072, 4608, 2, 'place', 2, 9],
             24 => [1600, 900, 1, 'country', 1, null],
             25 => [1600, 1066, 1, 'country', 2, null],
-            26 => [1600, 600, 1, 'country', 3, null],
+            26 => [1200, 600, 1, 'country', 3, null],
             27 => [1024, 768, 1, 'country', 4, null],
             28 => [1600, 946, 1, 'city', 1, null],
             29 => [1600, 1066, 1, 'city', 2, null],
