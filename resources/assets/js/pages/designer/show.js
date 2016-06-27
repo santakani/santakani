@@ -1,5 +1,5 @@
-var LikeButton = require('../../view/like-button');
-var DeleteButton = require('../../view/delete-button');
+var LikeButton = require('../../views/like-button');
+var DeleteButton = require('../../views/delete-button');
 
 
 // Action buttons

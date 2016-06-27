@@ -1,8 +1,8 @@
-var CitySelect = require('../../view/city-select');
+var CitySelect = require('../../views/city-select');
 
 $(function () {
 
-    if ($('#place-create-page').length === 0) {
+    if ($('#designer-create-page').length === 0) {
         return;
     }
 

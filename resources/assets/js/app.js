@@ -1,6 +1,4 @@
-/*
- * Main JavaScript file. Load all JavaScripts.
- */
+// Main JavaScript file. Load all JavaScripts.
 
 
 //==============================================================================
@@ -13,13 +11,13 @@ window.$ = window.jQuery = require('jquery');
 // Underscore is often used.
 window._ = require('underscore');
 
-// Bootstrap is not packaged.
+// Bootstrap, not packaged as Common.js or AMD module.
 require('bootstrap-sass');
 
 // jQuery plugins
 require('selectize');
 require('lightgallery');
-require('./jquery/go-to');
+require('jquery.scrollto');
 
 
 
@@ -38,7 +36,7 @@ require('./components/tabs/auto-collapse');
 //==============================================================================
 
 // App layout
-require('./layout/footer');
+require('./layouts/app/footer');
 
 
 
@@ -47,33 +45,61 @@ require('./layout/footer');
 //==============================================================================
 
 // Home page
-require('./page/home');
-
-// Designer
-require('./page/designer/index');
-require('./page/designer/create');
-
-if($('#designer-show-page').length) {
-    require('./page/designer/show');
+if (document.getElementById('home-page')) {
+    require('./pages/home');
 }
 
-require('./page/designer/edit');
+// Designer
+if (document.getElementById('designer-index-page')) {
+    require('./pages/designer/index');
+}
+if (document.getElementById('designer-create-page')) {
+    require('./pages/designer/create');
+}
+if (document.getElementById('designer-show-page')) {
+    require('./pages/designer/show');
+}
+if (document.getElementById('designer-edit-page')) {
+    require('./pages/designer/edit');
+}
 
 // Place
-require('./page/place/index');
-require('./page/place/create');
-require('./page/place/show');
-require('./page/place/edit');
+if (document.getElementById('place-index-page')) {
+    require('./pages/place/index');
+}
+if (document.getElementById('place-create-page')) {
+    require('./pages/place/create');
+}
+if (document.getElementById('place-show-page')) {
+    require('./pages/place/show');
+}
+if (document.getElementById('place-edit-page')) {
+    require('./pages/place/edit');
+}
 
 // Story
-require('./page/story/index');
-require('./page/story/edit');
-require('./page/story/show');
+if (document.getElementById('story-index-page')) {
+    require('./pages/story/index');
+}
+if (document.getElementById('story-show-page')) {
+    require('./pages/story/show');
+}
+if (document.getElementById('story-edit-page')) {
+    require('./pages/story/edit');
+}
 
 // Tag
-require('./page/tag/edit');
-require('./page/tag/show');
+if (document.getElementById('tag-show-page')) {
+    require('./pages/tag/show');
+}
+if (document.getElementById('tag-edit-page')) {
+    require('./pages/tag/edit');
+}
 
 // User settings
-require('./page/setting/profile');
-require('./page/setting/account');
+if (document.getElementById('profile-setting-page')) {
+    require('./pages/setting/profile');
+}
+if (document.getElementById('account-setting-page')) {
+    require('./pages/setting/account');
+}

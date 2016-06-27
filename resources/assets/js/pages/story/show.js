@@ -1,9 +1,9 @@
-var LikeButton = require('../../view/like-button');
-var DeleteButton = require('../../view/delete-button');
+var LikeButton = require('../../views/like-button');
+var DeleteButton = require('../../views/delete-button');
 
 $(function () {
 
-    if($('#tag-show-page').length === 0) {
+    if($('#story-show-page').length === 0) {
         return;
     }
 

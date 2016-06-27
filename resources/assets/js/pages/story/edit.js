@@ -2,12 +2,12 @@
  * Story edit form.
  */
 
-var Image = require('../../model/image');
+var Image = require('../../models/image');
 
-var ImagePreview = require('../../view/image-preview');
-var ImageManager = require('../../view/image-manager');
-var ContentEditor = require('../../view/content-editor');
-var TagSelect = require('../../view/tag-select');
+var ImagePreview = require('../../views/image-preview');
+var ImageManager = require('../../views/image-manager');
+var ContentEditor = require('../../views/content-editor');
+var TagSelect = require('../../views/tag-select');
 
 $(function () {
 
@@ -73,7 +73,7 @@ $(function () {
                 message += '<p>' + response[id] + '</p>';
             }
 
-            $alert.html(message).show().goTo();
+            $alert.html(message).show().scrollTo();
         });
     });
 

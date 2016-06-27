@@ -1,6 +1,11 @@
 var Backbone = require('backbone');
-var Place = require('../model/place');
+
+var Image = require('../models/image');
 
 module.exports = Backbone.Collection.extend({
-    model: Place,
+
+    model: Image,
+
+    url: '/image'
+
 });

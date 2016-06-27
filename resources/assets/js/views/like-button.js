@@ -1,5 +1,5 @@
 var Backbone = require('backbone');
-var Like = require('../model/like');
+var Like = require('../models/like');
 
 module.exports = Backbone.View.extend({
     el: '#like-button',

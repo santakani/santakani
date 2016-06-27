@@ -2,11 +2,11 @@ var Backbone = require('backbone');
 var ol = require('openlayers');
 var d3 = require('d3');
 
-var CitySelect = require('../../view/city-select');
+var CitySelect = require('../../views/city-select');
 
-var Place = require('../../model/place');
+var Place = require('../../models/place');
 
-var PlaceList = require('../../collection/place-list');
+var PlaceList = require('../../collections/place-list');
 
 var PlaceRow = Backbone.View.extend({
 
@@ -147,7 +147,7 @@ $(function () {
         for (var i = 0; i < placeRows.length; i++) {
             if (pixelFeature === placeRows[i].point) {
                 placeRows[i].model.set('active', true);
-                placeRows[i].$el.goTo($('#place-list').offset().top);
+                placeRows[i].$el.scrollTo($('#place-list').offset().top);
             } else {
                 placeRows[i].model.set('active', false);
             }

@@ -1,6 +1,6 @@
-var Image = require('../../model/image');
-var ImagePreview = require('../../view/image-preview');
-var ImageManager = require('../../view/image-manager');
+var Image = require('../../models/image');
+var ImagePreview = require('../../views/image-preview');
+var ImageManager = require('../../views/image-manager');
 
 (function () {
 
@@ -55,7 +55,7 @@ var ImageManager = require('../../view/image-manager');
                 messages += '<p>' + response[id] + '</p>';
             }
 
-            $alert.html(messages).show().goTo(100);
+            $alert.html(messages).show().scrollTo(100);
         });
     });
 

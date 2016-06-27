@@ -1,6 +1,6 @@
 var swal = require('sweetalert');
-var Place = require('../../model/place');
-var PlaceMap = require('../../view/place-map');
+var Place = require('../../models/place');
+var PlaceMap = require('../../views/place-map');
 
 $(function () {
 

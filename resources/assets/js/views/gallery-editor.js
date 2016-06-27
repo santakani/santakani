@@ -7,7 +7,7 @@
 var Backbone = require('backbone');
 var Sortable = require('sortablejs');
 
-var Image = require('../model/image');
+var Image = require('../models/image');
 var ImagePreview = require('./image-preview');
 
 module.exports = Backbone.View.extend({

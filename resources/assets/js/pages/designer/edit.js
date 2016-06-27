@@ -8,13 +8,13 @@
 
 // TinyMCE is loaded by HTML <script> tag. Browserify support is not finished.
 
-var ImagePreview = require('../../view/image-preview');
-var Image = require('../../model/image');
-var ImageManager = require('../../view/image-manager');
-var ContentEditor = require('../../view/content-editor');
-var GalleryEditor = require('../../view/gallery-editor');
-var CitySelect = require('../../view/city-select');
-var TagSelect = require('../../view/tag-select');
+var ImagePreview = require('../../views/image-preview');
+var Image = require('../../models/image');
+var ImageManager = require('../../views/image-manager');
+var ContentEditor = require('../../views/content-editor');
+var GalleryEditor = require('../../views/gallery-editor');
+var CitySelect = require('../../views/city-select');
+var TagSelect = require('../../views/tag-select');
 
 $(function () {
 
@@ -75,7 +75,7 @@ $(function () {
                 message += '<p>' + response[id] + '</p>';
             }
 
-            $alert.html(message).show().goTo();
+            $alert.html(message).show().scrollTo();
         });
     });
 
