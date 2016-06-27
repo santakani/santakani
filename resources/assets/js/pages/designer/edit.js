@@ -16,6 +16,8 @@ var GalleryEditor = require('../../views/gallery-editor');
 var CitySelect = require('../../views/city-select');
 var TagSelect = require('../../views/tag-select');
 
+require('../../components/forms/edit-form');
+
 $(function () {
 
     // Page check
@@ -55,36 +57,5 @@ $(function () {
 
     var citySelect = new CitySelect({el: '.city-select'});
     var tagSelect = new TagSelect({el: '.tag-select'});
-
-    // Submit form
-    $('button[type="submit"]').click(function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            method: 'PUT',
-            url: $('#designer-edit-form').attr('action'),
-            data: $('#designer-edit-form').serializeArray()
-        }).done(function () {
-            window.location.href = $('#designer-edit-form').attr('action');
-        }).fail(function (error) {
-            var response = error.responseJSON;
-            var $alert = $('#designer-edit-form .alert');
-            var message = '';
-
-            for (var id in response) {
-                message += '<p>' + response[id] + '</p>';
-            }
-
-            $alert.html(message).show().scrollTo();
-        });
-    });
-
-    // Prevent unexpected form submit caused by "Enter" key press
-    $('form input').keydown(function(event){
-        if(event.keyCode == 13) {
-            event.preventDefault();
-            return false;
-        }
-    });
 
 });

@@ -13,7 +13,7 @@
 
 @section('main')
     <div class="container">
-        <form id="designer-edit-form" class="form" action="{{ $designer->url }}"
+        <form class="edit-form form" action="{{ $designer->url }}"
             data-id="{{ $designer->id }}">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
