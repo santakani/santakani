@@ -233,7 +233,7 @@ class DesignerController extends Controller
                     'locale' => $locale,
                 ]);
 
-                $translation->update(app_array_filter($texts, ['title', 'tagline', 'content']));
+                $translation->update(app_array_filter($texts, ['name', 'tagline', 'content']));
             }
         }
     }

@@ -20,6 +20,6 @@ class DesignerTranslation extends Model
      * @var array
      */
     protected $fillable = [
-        'story_id', 'locale', 'name', 'tagline', 'content'
+        'designer_id', 'locale', 'name', 'tagline', 'content'
     ];
 }
