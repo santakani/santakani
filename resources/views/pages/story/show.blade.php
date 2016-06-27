@@ -18,11 +18,13 @@
 
         <div class="action-buttons">
             @include('components.buttons.like', ['likeable' => $story])
-            @if (Auth::user()->can('edit-story', $story))
-                @include('components.buttons.edit')
-            @endif
-            @if (Auth::user()->can('delete-story', $story))
-                @include('components.buttons.delete')
+            @if (Auth::check())
+                @if (Auth::user()->can('edit-story', $story))
+                    @include('components.buttons.edit')
+                @endif
+                @if (Auth::user()->can('delete-story', $story))
+                    @include('components.buttons.delete')
+                @endif
             @endif
         </div>
 

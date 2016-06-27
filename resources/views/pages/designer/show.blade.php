@@ -29,11 +29,13 @@ if ($designer->logo_id) {
 
     <div class="action-buttons float">
         @include('components.buttons.like', ['likeable' => $designer])
-        @if (Auth::user()->can('edit-designer', $designer))
-            @include('components.buttons.edit')
-        @endif
-        @if (Auth::user()->can('delete-designer', $designer))
-            @include('components.buttons.delete')
+        @if (Auth::check())
+            @if (Auth::user()->can('edit-designer', $designer))
+                @include('components.buttons.edit')
+            @endif
+            @if (Auth::user()->can('delete-designer', $designer))
+                @include('components.buttons.delete')
+            @endif
         @endif
     </div><!-- /.action-buttons -->
 
