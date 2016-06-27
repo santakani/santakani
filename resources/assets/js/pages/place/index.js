@@ -3,11 +3,12 @@ var ol = require('openlayers');
 var d3 = require('d3');
 
 var CitySelect = require('../../views/city-select');
-
 var Place = require('../../models/place');
-
 var PlaceList = require('../../collections/place-list');
 
+var map;
+
+// A place item in list + a point in map
 var PlaceRow = Backbone.View.extend({
 
     tagName: 'article',
@@ -73,6 +74,20 @@ var PlaceRow = Backbone.View.extend({
 
     activate: function () {
         this.model.set('active', true);
+        var bounce = ol.animation.bounce({
+          resolution: map.getView().getResolution(),
+          duration: 300,
+        });
+        var pan = ol.animation.pan({
+          source: map.getView().getCenter(),
+          duration: 300,
+        });
+        map.beforeRender(bounce);
+        map.beforeRender(pan);
+        map.getView().setZoom(14);
+        map.getView().setCenter(ol.proj.transform(
+            [this.model.get('longitude'), this.model.get('latitude')],
+            'EPSG:4326', 'EPSG:3857'));
     },
 
     deactivate: function () {
@@ -81,79 +96,76 @@ var PlaceRow = Backbone.View.extend({
 
 });
 
-$(function () {
+var c20 = d3.scale.category20().range(); // 20 different colors
 
-    if ($('#place-index-page').length === 0) {
-        return;
-    }
+var places = new PlaceList();
+var placeRows = [];
+var points = [];
 
-    var c20 = d3.scale.category20().range(); // 20 different colors
-
-    var places = new PlaceList();
-    var placeRows = [];
-    var points = [];
-
-    $('article.place').each(function (index) {
-        var place = new Place({
-            latitude: $(this).data('latitude'),
-            longitude: $(this).data('longitude'),
-            color: c20[index]
-        });
-
-        var placeRow = new PlaceRow({
-            el: this,
-            model: place,
-        });
-
-        places.push(place);
-        placeRows.push(placeRow);
-        points.push(placeRow.point);
+$('article.place').each(function (index) {
+    var place = new Place({
+        latitude: $(this).data('latitude'),
+        longitude: $(this).data('longitude'),
+        color: c20[index]
     });
 
-    var latitude = $('#place-map').data('latitude');
-    var longitude = $('#place-map').data('longitude');
+    var placeRow = new PlaceRow({
+        el: this,
+        model: place,
+    });
 
-    var map = new ol.Map({
-        target: 'place-map',
-        layers: [
-            new ol.layer.Tile({
-                source: new ol.source.OSM({layer: 'sat'})
-            }),
+    places.push(place);
+    placeRows.push(placeRow);
+    points.push(placeRow.point);
+});
 
-            new ol.layer.Vector({
-                source: new ol.source.Vector({
-                    features: points
-                })
+var latitude = $('#place-map').data('latitude');
+var longitude = $('#place-map').data('longitude');
+
+map = new ol.Map({
+    target: 'place-map',
+    layers: [
+        new ol.layer.Tile({
+            source: new ol.source.OSM({layer: 'sat'})
+        }),
+
+        new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: points
             })
-        ],
-        view: new ol.View({
-            center: ol.proj.fromLonLat([longitude, latitude]),
-            zoom: 13
         })
+    ],
+    view: new ol.View({
+        center: ol.proj.fromLonLat([longitude, latitude]),
+        zoom: 14
+    })
+});
+
+map.on('pointermove', function(e) {
+    var pixelFeature;
+
+    map.forEachFeatureAtPixel(e.pixel, function(feature, layer) {
+        for (var i = 0; i < points.length; i++) {
+            if (feature === points[i]) {
+                pixelFeature = feature;
+            }
+        }
     });
 
-    map.on('pointermove', function(e) {
-        var pixelFeature;
 
-        map.forEachFeatureAtPixel(e.pixel, function(feature, layer) {
-            for (var i = 0; i < points.length; i++) {
-                if (feature === points[i]) {
-                    pixelFeature = feature;
-                }
-            }
-        });
-
-
-        for (var i = 0; i < placeRows.length; i++) {
-            if (pixelFeature === placeRows[i].point) {
+    for (var i = 0; i < placeRows.length; i++) {
+        if (pixelFeature === placeRows[i].point) {
+            if (!placeRows[i].model.get('active')) {
                 placeRows[i].model.set('active', true);
-                placeRows[i].$el.scrollTo($('#place-list').offset().top);
-            } else {
+                $(window).scrollTo(placeRows[i].el, 300, {offset: -100});
+            }
+        } else {
+            if (placeRows[i].model.get('active')) {
                 placeRows[i].model.set('active', false);
             }
         }
+    }
 
-    });
-
-    var citySelect = new CitySelect({el: '#city-select'});
 });
+
+var citySelect = new CitySelect({el: '#city-select'});
