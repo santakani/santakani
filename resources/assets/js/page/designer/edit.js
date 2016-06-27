@@ -47,7 +47,9 @@ $(function () {
         });
     });
 
-    var contentEditor = new ContentEditor({el: '#input-content', imageManager: manager});
+    $('.content-editor').each(function () {
+        var contentEditor = new ContentEditor({el: this, imageManager: manager});
+    });
 
     var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: manager});
 
