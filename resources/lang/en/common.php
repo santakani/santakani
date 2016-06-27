@@ -22,6 +22,7 @@ return [
     'save' => 'Save',
     'tag' => 'Tag',
     'title' => 'Title',
+    'unknown' => 'Unknown',
     'update' => 'Update',
     'upload' => 'Upload',
     'user' => 'User',

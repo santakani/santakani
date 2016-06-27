@@ -6,6 +6,11 @@ var DeleteButton = require('../../views/delete-button');
 var likeButton = new LikeButton();
 var deleteButton = new DeleteButton();
 
+$('.nav-tabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+});
+
 
 // Gallery
 $('.gallery').lightGallery({
