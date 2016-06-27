@@ -8,8 +8,10 @@
 
 // TinyMCE is loaded by HTML <script> tag. Browserify support is not finished.
 
-var ImagePreview = require('../../views/image-preview');
 var Image = require('../../models/image');
+
+var ImageChooser = require('../../views/image-upload/image-chooser');
+var ImagePreview = require('../../views/image-preview');
 var ImageManager = require('../../views/image-manager');
 var ContentEditor = require('../../views/content-editor');
 var GalleryEditor = require('../../views/gallery-editor');
@@ -31,22 +33,20 @@ $(function () {
         parentId: parseInt($('form').data('id'))
     });
 
-    // Cover
-    var coverPreview = new ImagePreview({
-        el: '#image-form-group .image-preview',
+    // Cover chooser
+    var coverChooser = new ImageChooser({
+        el: '#cover-chooser',
         width: 600,
         height: 200,
-        size: 'medium',
+        manager: manager,
         inputName: 'image_id',
     });
 
-    $('#image-form-group button').click(function () {
-        manager.call({
-            multiple: false,
-            done: function (image) {
-                coverPreview.model.set(image);
-            }
-        });
+    // Logo chooser
+    var logoChooser = new ImageChooser({
+        el: '#logo-chooser',
+        manager: manager,
+        inputName: 'logo_id',
     });
 
     $('.content-editor').each(function () {

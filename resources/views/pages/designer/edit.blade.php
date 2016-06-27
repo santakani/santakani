@@ -13,8 +13,7 @@
 
 @section('main')
     <div class="container">
-        <form class="edit-form form" action="{{ $designer->url }}"
-            data-id="{{ $designer->id }}">
+        <form class="edit-form form" action="{{ $designer->url }}" data-id="{{ $designer->id }}">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -67,16 +66,22 @@
 
             <br/>
 
-            <div id="image-form-group" class="form-group">
+            <div class="form-group">
                 <label class="control-label">Cover image</label>
-                <div id="cover-editor" class="cover-editor">
-                    <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
-                    @if ($designer->image_id)
-                        @include('components.image-preview', ['image' => $designer->image])
-                    @else
-                        @include('components.image-preview')
-                    @endif
-                </div>
+                <div id="cover-chooser" class="image-chooser"
+                    data-id="{{ $designer->image_id }}"
+                    data-mime="{{ $designer->image->mime_type or '' }}"
+                    data-width="{{ $designer->image->width or '' }}"
+                    data-height="{{ $designer->image->height or '' }}"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Logo/photo</label>
+                <div id="logo-chooser" class="image-chooser"
+                    data-id="{{ $designer->logo_id }}"
+                    data-mime="{{ $designer->logo->mime_type or '' }}"
+                    data-width="{{ $designer->logo->width or '' }}"
+                    data-height="{{ $designer->logo->height or '' }}"></div>
             </div>
 
             <div class="form-group">

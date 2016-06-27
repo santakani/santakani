@@ -1,0 +1,22 @@
+.image-chooser {
+    position: relative;
+    @include image-cover();
+    max-width: 100%;
+    min-width: 150px;
+    min-height: 150px;
+    background-color: $gray-lighter;
+    cursor: pointer;
+
+    button {
+        position: absolute;
+        display: block;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 10px;
+        background-color: rgba(0,0,0,0.3);
+        border: none;
+        color: #ffffff;
+    }
+}

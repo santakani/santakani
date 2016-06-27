@@ -119,37 +119,71 @@ module.exports = Backbone.Model.extend({
         return {width: width, height: height};
     },
 
+    hasSize: function (size) {
+        if (size === 'full' || size === 'thumb') {
+            return true;
+        } else if (this.get('width') > 1200 || this.get('height') > 1200) {
+            return true; // medium, large
+        } else if (size === 'medium' && (this.get('width') > 600 || this.get('height') > 600)) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    sizeFallback: function (size) {
+        if (size === 'full' || size === 'thumb') {
+            return size;
+        } else if (this.hasSize(size)) {
+            return size;
+        } else {
+            return 'full';
+        }
+    },
+
+    extension: function () {
+        switch (this.get('mime_type')) {
+            case 'image/jpeg':
+                return '.jpg';
+            case 'image/png':
+                return '.png';
+            case 'image/gif':
+                return '.gif';
+        };
+    },
+
+    // Legacy
+    fileUrl: function (size) {
+        return this.url(size);
+    },
+
     /**
      * Generate image file urls, based on id, mime type, width and height.
-     * @param {string} size The size name is one of "full", "large", "medium" and "thumb".
+     *
+     * @param {string}|{object} size The size name is one of "full", "large", "medium" and "thumb".
+     * @param {number} size.width
+     * @param {number} size.height
+     * @param {boolean} size.excludeThumb
      * @return {string} Image file URL.
      */
-    fileUrl: function (size) {
+    url: function (size) {
+        if (typeof size === 'object') {
+            if (size.width > 600 || size.height > 600) {
+                size = 'large';
+            } else if (size.width > 300 || size.height > 300) {
+                size = 'medium';
+            } else if (size.excludeThumb) {
+                size = 'medium';
+            } else {
+                size = 'thumb';
+            }
+        }
+
         var url = '/' + this.storagePath + '/';
         url += Math.floor(this.get('id')/1000) + '/';
         url += Math.floor(this.get('id')%1000) + '/';
-
-        if (size === 'large' && this.get('width') >= this.largeSize && this.get('height') >= this.largeSize) {
-            url += 'large';
-        } else if (size === 'medium' && this.get('width') >= this.mediumSize && this.get('height') >= this.mediumSize) {
-            url += 'medium';
-        } else if (size === 'thumb') {
-            url += 'thumb';
-        } else {
-            url += 'full';
-        }
-
-        switch (this.get('mime_type')) {
-            case 'image/jpeg':
-                url += '.jpg';
-                break;
-            case 'image/png':
-                url += '.png';
-                break;
-            case 'image/gif':
-                url += '.gif';
-                break;
-        };
+        url += this.sizeFallback(size);
+        url += this.extension();
 
         return url;
     },
