@@ -81,7 +81,7 @@ $nav_menu_right = [
 
             <li class="dropdown {{ $active_nav === 'user'?'active':'' }}">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img class="avatar" src="{{ Auth::user()->getAvatarFileUrl('medium') }}" />
+                    <img class="avatar" src="{{ Auth::user()->avatar('medium') }}" />
                     <span class="name hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">

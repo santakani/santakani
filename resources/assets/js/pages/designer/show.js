@@ -13,7 +13,6 @@ $('#main-tabs a').click(function (e) {
 
 
 // Gallery
-$('.gallery').lightGallery({
-    thumbWidth: 100,
-    thumbContHeight: 120
+$('#gallery').lightGallery({
+    selector: 'a',
 });

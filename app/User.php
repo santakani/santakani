@@ -101,7 +101,7 @@ class User extends Authenticatable
     // Avatar Methods
     //====================================================================
 
-    public function getAvatarFileUrl($size = 'medium')
+    public function avatar($size = 'medium')
     {
         if ($this->avatar_uploaded_at) {
             if (is_integer($size)) {
@@ -113,7 +113,7 @@ class User extends Authenticatable
                     $size = 'small';
                 }
             }
-            return url($this->getAvatarFilePath($size, false)) . '?v=' .
+            return url($this->avatarFile($size, false)) . '?v=' .
                 urlencode($this->avatar_uploaded_at);
         } else{
             if (is_string($size)) {
@@ -133,7 +133,7 @@ class User extends Authenticatable
         }
     }
 
-    public function getAvatarDirectoryPath($full = true)
+    public function avatarDirectory($full = true)
     {
         $id = $this->id;
         $path = self::avatar_storage_path . '/' . (int)($this->id / 1000) . '/' . $this->id % 1000;
@@ -141,13 +141,13 @@ class User extends Authenticatable
         return $full?public_path($path):$path;
     }
 
-    public function getAvatarFilePath($size = 'medium', $full = true)
+    public function avatarFile($size = 'medium', $full = true)
     {
         if (!in_array($size, ['large', 'medium', 'small'])) {
             $size = 'medium';
         }
 
-        $path = $this->getAvatarDirectoryPath(false) . '/' . $size;
+        $path = $this->avatarDirectory(false) . '/' . $size;
 
         return $full?public_path($path):$path;
     }
@@ -159,19 +159,19 @@ class User extends Authenticatable
 
         $imagick = new Imagick($temp_file_path);
 
-        $path = $this->getAvatarFilePath('large');
+        $path = $this->avatarFile('large');
         $size = self::avatar_large_size;
         $imagick->cropThumbnailImage($size, $size);
         $imagick->writeImage($path);
         chmod($path, 0644);
 
-        $path = $this->getAvatarFilePath('medium');
+        $path = $this->avatarFile('medium');
         $size = self::avatar_medium_size;
         $imagick->cropThumbnailImage($size, $size);
         $imagick->writeImage($path);
         chmod($path, 0644);
 
-        $path = $this->getAvatarFilePath('small');
+        $path = $this->avatarFile('small');
         $size = self::avatar_small_size;
         $imagick->cropThumbnailImage($size, $size);
         $imagick->writeImage($path);
@@ -186,12 +186,12 @@ class User extends Authenticatable
 
     public function createAvatarDirectory()
     {
-        mkdir($this->getAvatarDirectoryPath(), 0755, true);
+        mkdir($this->avatarDirectory(), 0755, true);
     }
 
     public function removeAvatarDirectory()
     {
-        $path = $this->getAvatarDirectoryPath();
+        $path = $this->avatarDirectory();
         if (is_dir($path)) {
             app_rrmdir($path);
         } elseif (is_file($path)) {

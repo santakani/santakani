@@ -1,5 +1,9 @@
 .nav-lg {
     font-size: $font-size-large;
+
+    @media (max-width: $screen-xs-max) {
+        font-size: $font-size-base;
+    }
 }
 
 .nav-sm {

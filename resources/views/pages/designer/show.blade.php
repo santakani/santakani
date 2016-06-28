@@ -22,7 +22,7 @@ if ($designer->logo_id) {
 ])
 
 @section('header')
-    <div class="page-cover container" style="background-image:url({{ $cover_image }});">
+    <div class="page-cover" style="background-image:url({{ $cover_image }});">
 
         <div class="raster raster-dark-dot"></div>
 
@@ -50,7 +50,7 @@ if ($designer->logo_id) {
 @section('main')
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-lg-3">
+            <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
 
                 <h4>Tags</h4>
                 @include('components.tag-list', [
@@ -68,32 +68,32 @@ if ($designer->logo_id) {
                 <h4>Links</h4>
                 <div class="links">
                     @if (!empty($designer->facebook))
-                        <a href="{{ $designer->facebook }}">
+                        <a href="{{ $designer->facebook }}" title="Facebook">
                             <i class="fa fa-facebook-official"></i>
                         </a>
                     @endif
                     @if (!empty($designer->twitter))
-                        <a href="{{ $designer->twitter }}">
+                        <a href="{{ $designer->twitter }}" title="Twitter">
                             <i class="fa fa-twitter"></i>
                         </a>
                     @endif
                     @if (!empty($designer->google_plus))
-                        <a href="{{ $designer->google_plus }}">
+                        <a href="{{ $designer->google_plus }}" title="Google+">
                             <i class="fa fa-google-plus"></i>
                         </a>
                     @endif
                     @if (!empty($designer->instagram))
-                        <a href="{{ $designer->instagram }}">
+                        <a href="{{ $designer->instagram }}" title="Instagram">
                             <i class="fa fa-instagram"></i>
                         </a>
                     @endif
                     @if (!empty($designer->email))
-                        <a href="mailto:{{ $designer->email }}">
+                        <a href="mailto:{{ $designer->email }}" title="{{ trans('common.email') }}">
                             <i class="fa fa-envelope"></i>
                         </a>
                     @endif
                     @if (!empty($designer->email))
-                        <a href="{{ $designer->website }}">
+                        <a href="{{ $designer->website }}" title="{{ trans('common.website') }}">
                             <i class="fa fa-globe"></i>
                         </a>
                     @endif
@@ -111,19 +111,33 @@ if ($designer->logo_id) {
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="gallery">
-                        @foreach ($designer->gallery_images as $image)
-                            <a href="{{ $image->url('large') }}">
-                                <img src="{{ $image->url('thumb') }}" />
-                            </a>
-                        @endforeach
+                        <div class="row">
+                            @foreach ($designer->gallery_images as $image)
+                                <div class="col-xs-4">
+                                    <a href="{{ $image->url('large') }}">
+                                        <img src="{{ $image->url('thumb') }}" />
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="biography">
                         {!! $designer->text('content') !!}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="followers">
-                        @foreach ($designer->likes as $like)
-                            {{ $like->user->name }}
-                        @endforeach
+                        <div class="row">
+                            @foreach ($designer->likes as $like)
+                                <div class="col-sm-6 col-lg-4">
+                                    <article class="user material-card">
+                                        <img class="avatar" src="{{ $like->user->avatar(150) }}"/>
+                                        <div class="text">
+                                            <div class="name">{{ $like->user->name }}</div>
+                                            <div class="description text-muted">{{ $like->user->description }}I am a mountaineer.I am a mountaineer.I am a mountaineer.I am a mountaineer.I am a mountaineer.</div>
+                                        </div>
+                                    </article>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div><!-- /.col-* -->

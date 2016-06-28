@@ -49,7 +49,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div id="avatar-preview" class="avatar-preview"
-                style="background-image:url({{ $user->getAvatarFileUrl() }})"></div>
+                style="background-image:url({{ $user->avatar() }})"></div>
 
             <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
                 <label for="avatar-input"></label>

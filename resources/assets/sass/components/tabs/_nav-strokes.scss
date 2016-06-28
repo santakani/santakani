@@ -22,6 +22,11 @@
     &.nav-justified {
         li {
             float: none;
+
+            @media (max-width: $screen-xs-max) {
+                display: table-cell;
+                width: 1%;
+            }
         }
     }
 }

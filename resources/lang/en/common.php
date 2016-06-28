@@ -26,4 +26,6 @@ return [
     'update' => 'Update',
     'upload' => 'Upload',
     'user' => 'User',
+    'webshop' => 'Webshop',
+    'website' => 'Website',
 ];

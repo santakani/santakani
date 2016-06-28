@@ -59,26 +59,33 @@
     }
 
     .links {
-        font-size: 24px;
-        line-height: 40px;
-
-        * {
-            text-decoration: none;
-        }
-
+        font-size: 28px;
         a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border-radius: 999px;
-            text-align: center;
-            background: #fff;
-            color: #000;
-            text-shadow: none;
+            color: $gray;
         }
     }
 
-    main {
-        padding: 0;
+    #gallery {
+        padding: 10px;
+
+        .row > div {
+            padding: 5px;
+        }
+
+        @media screen and (max-width: $screen-xs-max) {
+            padding: 13px;
+
+            .row > div {
+                padding: 2px;
+            }
+        }
+    }
+
+    #biography {
+        padding-top: 15px;
+    }
+
+    #followers {
+        padding-top: 15px;
     }
 }

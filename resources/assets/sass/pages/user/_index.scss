@@ -1,0 +1,25 @@
+article.user {
+    margin-bottom: 30px;
+
+    .avatar {
+        float: left;
+        width: 75px;
+        height: 75px;
+        margin-right: 10px;
+    }
+
+    .text {
+        height: 75px;
+        padding: 10px;
+    }
+
+    .name {
+        height: 20px;
+    }
+
+    .description {
+        height: 35px;
+        overflow: hidden;
+        font-size: $font-size-small;
+    }
+}
