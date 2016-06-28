@@ -65,7 +65,10 @@ $lg-path-images: '../img/lightgallery';
 @import "components/like-button";
 @import "components/page-cover";
 @import "components/action-buttons";
-@import "components/tab-pane.scss";
+
+@import "components/tabs/tab-pane";
+@import "components/tabs/nav-strokes";
+@import "components/tabs/nav-sizes";
 
 @import "components/input/content-editor";
 

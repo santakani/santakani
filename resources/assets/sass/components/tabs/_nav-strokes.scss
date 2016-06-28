@@ -1,0 +1,22 @@
+.nav-strokes {
+    li {
+        float: left;
+
+        a {
+            color: $gray-light;
+        }
+
+        &.active {
+            a {
+                color: $brand-info;
+                border-bottom: 3px solid $brand-info;
+            }
+        }
+    }
+
+    &.nav-justified {
+        li {
+            float: none;
+        }
+    }
+}
