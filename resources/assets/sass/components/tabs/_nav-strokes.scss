@@ -4,6 +4,11 @@
 
         a {
             color: $gray-light;
+
+            &:focus, &:hover {
+                color: $brand-info;
+                background-color: transparent;
+            }
         }
 
         &.active {
