@@ -132,7 +132,7 @@ if ($designer->logo_id) {
                                         <img class="avatar" src="{{ $like->user->avatar(150) }}"/>
                                         <div class="text">
                                             <div class="name">{{ $like->user->name }}</div>
-                                            <div class="description text-muted">{{ $like->user->description }}I am a mountaineer.I am a mountaineer.I am a mountaineer.I am a mountaineer.I am a mountaineer.</div>
+                                            <div class="description text-muted">{{ $like->user->description }}</div>
                                         </div>
                                     </article>
                                 </div>
