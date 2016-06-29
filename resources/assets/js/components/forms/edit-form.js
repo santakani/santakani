@@ -26,7 +26,7 @@ $form.find('button[type="submit"]').click(function (e) {
         if (jqXHR.status === 422) {
             renderErrors(jqXHR.responseJSON);
         } else {
-            alert('Unknown Error');
+            alert("Oops...", "Something went wrong!", "error");
         }
     });
 });
