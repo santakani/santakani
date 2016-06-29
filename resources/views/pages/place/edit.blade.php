@@ -5,6 +5,12 @@
     'active_nav' => 'place',
 ])
 
+@section('header')
+    <div class="container">
+        <h1 class="page-header">{{ trans('common.edit') }}: {{ $place->text('name') }}</h1>
+    </div>
+@endsection
+
 @section('main')
 
     <form class="edit-form" action="{{ $place->url }}" data-id="{{ $place->id }}">
