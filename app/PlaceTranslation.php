@@ -19,6 +19,6 @@ class PlaceTranslation extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'content',
+        'place_id', 'locale', 'name', 'content',
     ];
 }

@@ -7,6 +7,7 @@ use Gate;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Localization\Languages;
 use App\City;
 use App\Place;
 use App\PlaceTranslation;
@@ -126,10 +127,11 @@ class PlaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $place = Place::find($id);
 
@@ -137,8 +139,7 @@ class PlaceController extends Controller
             abort(404);
         }
 
-        // Check permission
-        if (Gate::denies('edit-page', $place)) {
+        if ($request->user()->cannot('edit-place', $place)) {
             abort(403);
         }
 
@@ -156,21 +157,16 @@ class PlaceController extends Controller
     {
         $place = Place::find($id);
 
-        $translation = $place->translations()->where('locale', 'en')->first();
-
         if (empty($place)) {
             abort(404);
         }
 
-        // Check permission
-        if (Gate::denies('edit-page', $place)) {
+        if ($request->user()->cannot('edit-place', $place)) {
             abort(403);
         }
 
         // Validate data
         $this->validate($request, [
-            'name' => 'string|max:255',
-            'content' => 'string',
             'type' => 'string|in:' . implode(',', Place::types()),
             'image_id' => 'integer|exists:image,id',
             'gallery_image_ids.*' => 'integer|exists:image,id',
@@ -184,42 +180,36 @@ class PlaceController extends Controller
             'website' => 'url|max:255',
             'facebook' => 'url|max:255',
             'google_plus' => 'url|max:255',
+            'translations.*.name' => 'string|max:255',
+            'translations.*.content' => 'string',
         ]);
 
-        foreach (['name', 'content'] as $key) {
-            if ($request->has($key)) {
-                // Not empty, fill the value
-                $translation->$key = $request->input($key);
-            } elseif ($request->exists($key)) {
-                // Empty, set null.
-                $translation->$key = null;
-            } else {
-                // Not provided, untouch properties.
-            }
-        }
-
-        $translation->save();
-
-        // Keys directly filled into designer model
-        $keys = [
+        $place->update(app_array_filter($request->all(), [
             'type', 'city_id', 'image_id', 'address', 'latitude', 'longitude',
             'email', 'phone', 'website', 'facebook', 'google_plus',
             'gallery_image_ids', 'tag_ids'
-        ];
+        ]));
 
-        foreach ($keys as $key) {
-            if ($request->has($key)) {
-                // Not empty, fill the value
-                $place->$key = $request->input($key);
-            } elseif ($request->exists($key)) {
-                // Empty, set null.
-                $place->$key = null;
-            } else {
-                // Not provided, untouch properties.
+        // TODO transfer designer page to another user...
+
+        if ($request->has('translations')) {
+            foreach ($request->input('translations') as $locale => $texts) {
+                if ( empty($texts['name']) && empty($texts['content']) ) {
+                    continue;
+                }
+
+                if (!in_array($locale, Languages::getLanguageCodeList())) {
+                    continue;
+                }
+
+                $translation = PlaceTranslation::firstOrCreate([
+                    'place_id' => $id,
+                    'locale' => $locale,
+                ]);
+
+                $translation->update(app_array_filter($texts, ['name', 'content']));
             }
         }
-
-        $place->save();
     }
 
     /**
