@@ -6,7 +6,6 @@
 ])
 
 @section('header')
-<header>
     <div class="container">
         <div class="gallery clearfix">
             @if ($place->image)
@@ -15,7 +14,7 @@
                 </a>
             @else
                 <a class="placeholder" href="#">
-                    <img src="http://placehold.it/300x300?text=NO+IMAGE">
+                    <img src="{{ url('img/placeholder/blank/300x300.svg') }}">
                 </a>
             @endif
             @forelse ($place->gallery_images as $image)
@@ -27,7 +26,7 @@
             @empty
                 @for ($i = 0; $i < 8; $i++)
                     <a class="placeholder" href="#">
-                        <img src="http://placehold.it/300x300?text=NO+IMAGE">
+                        <img src="{{ url('img/placeholder/blank/300x300.svg') }}">
                     </a>
                 @endfor
             @endforelse
@@ -44,7 +43,6 @@
             @endif
         </h1>
     </div>
-</header>
 @endsection
 
 @section('main')
