@@ -11,6 +11,8 @@
 
 namespace App\Localization;
 
+use App;
+
 /**
  * StoryController
  *
@@ -26,50 +28,14 @@ class Languages {
      *
      * @return array
      */
-    public static function getLanguageList()
+    public static function names()
     {
-        return [
-            'en' => [
-                'localized' => trans('languages.english'),
-                'native' => 'English',
-            ],
-            'fi' => [
-                'localized' => trans('languages.finnish'),
-                'native' => 'suomen',
-            ],
-            'sv' => [
-                'localized' => trans('languages.swedish'),
-                'native' => 'svenska',
-            ],
-            'zh' => [
-                'localized' => trans('languages.chinese'),
-                'native' => '中文',
-            ],
-//             'ja' => [
-//                 'localized' => trans('languages.japanese'),
-//                 'native' => '日本語',
-//             ],
-//             'ko' => [
-//                 'localized' => trans('languages.korean'),
-//                 'native' => '한국어',
-//             ],
-            'pt' => [
-                'localized' => trans('languages.portuguese'),
-                'native' => 'português',
-            ],
-            'es' => [
-                'localized' => trans('languages.spanish'),
-                'native' => 'español',
-            ],
-            'fr' => [
-                'localized' => trans('languages.french'),
-                'native' => 'français',
-            ],
-            'de' => [
-                'localized' => trans('languages.german'),
-                'native' => 'Deutsch',
-            ],
-        ];
+        $names = [];
+        foreach (self::codes() as $code ) {
+            $names[$code]['localized'] = locale_get_display_name($code, App::getLocale());
+            $names[$code]['native'] = locale_get_display_name($code, $code);
+        }
+        return $names;
     }
 
     /**
@@ -77,9 +43,19 @@ class Languages {
      *
      * @return string[]
      */
-    public static function getLanguageCodeList()
+    public static function codes()
     {
-        return array_keys(self::getLanguageList());
+        return ['en', 'fi', 'sv', 'zh', 'pt', 'es', 'fr', 'de'];
     }
 
+    /**
+     * If the language is suppported
+     *
+     * @param string $code Language code (en, fi, zh...)
+     * @return boolean
+     */
+    public static function has($code)
+    {
+        return in_array($code, self::codes());
+    }
 }

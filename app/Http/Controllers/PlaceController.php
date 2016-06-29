@@ -198,7 +198,7 @@ class PlaceController extends Controller
                     continue;
                 }
 
-                if (!in_array($locale, Languages::getLanguageCodeList())) {
+                if (!in_array($locale, Languages::codes())) {
                     continue;
                 }
 

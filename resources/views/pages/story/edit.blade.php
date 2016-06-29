@@ -20,7 +20,7 @@
             <div class="tab-pane-group">
                 <!-- Nav tabs -->
                 <ul id="translation-tabs" class="nav nav-tabs">
-                    @foreach (App\Localization\Languages::getLanguageList() as $locale => $names)
+                    @foreach (App\Localization\Languages::names() as $locale => $names)
                         <li class="{{ $locale==='en'?'active':'' }}">
                             <a href="#translation-{{ $locale }}" data-toggle="tab" title="{{ $names['native'] }}">
                                 {{ $names['localized'] }}
@@ -37,7 +37,7 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    @foreach (App\Localization\Languages::getLanguageCodeList() as $locale)
+                    @foreach (App\Localization\Languages::codes() as $locale)
                         <?php $translation = $story->translations()->where('locale', $locale)->first(); ?>
                         <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
                             <div class="form-group">
