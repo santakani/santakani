@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'author' => 'Author',
-    'story' => 'Story|Stories',
+    'author' => '作者',
+    'story' => '故事',
     'write_design_story' => 'Write design story',
 ];

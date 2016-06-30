@@ -5,22 +5,22 @@ if (!isset($active_nav)) {
 
 $nav_menu_left = [
     'home' => [
-        'text' => 'Home',
+        'text' => trans('common.home'),
         'url' => url('/'),
         'icon' => 'home',
     ],
     'story' => [
-        'text' => 'Stories',
+        'text' => trans_choice('story.story', 10),
         'url' => url('story'),
         'icon' => 'book',
     ],
     'designer' => [
-        'text' => 'Designers',
+        'text' => trans_choice('designer.designer', 10),
         'url' => url('designer'),
         'icon' => 'users',
     ],
     'place' => [
-        'text' => 'Places',
+        'text' => trans_choice('place.place', 10),
         'url' => url('place'),
         'icon' =>'map',
     ],
@@ -28,12 +28,12 @@ $nav_menu_left = [
 
 $nav_menu_right = [
     'login' => [
-        'text' => 'Login',
+        'text' => trans('common.login'),
         'url' => app_redirect_url('login'),
         'icon' =>'sign-in',
     ],
     'register' => [
-        'text' => 'Register',
+        'text' => trans('common.register'),
         'url' => app_redirect_url('register'),
         'icon' =>'user-plus',
     ],
@@ -68,14 +68,14 @@ $nav_menu_right = [
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle bg-primary" data-toggle="dropdown">
                     <i class="fa fa-plus"></i>
-                    <span>Create</span>
+                    <span>{{ trans('common.create') }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="{{ url('/designer/create') }}">New designer</a></li>
-                    <li><a href="{{ url('/place/create') }}">New place</a></li>
-                    <li><a href="{{ url('/story/create') }}">New story</a></li>
+                    <li><a href="{{ url('/designer/create') }}">{{ trans('designer.designer') }}</a></li>
+                    <li><a href="{{ url('/place/create') }}">{{ trans('place.place') }}</a></li>
+                    <li><a href="{{ url('/story/create') }}">{{ trans('story.story') }}</a></li>
                     @if (Auth::user()->can('create-tag'))
-                        <li><a href="{{ url('/tag/create') }}">New tag</a></li>
+                        <li><a href="{{ url('/tag/create') }}">{{ trans('common.tag') }}</a></li>
                     @endif
                 </ul>
             </li>
@@ -86,8 +86,8 @@ $nav_menu_right = [
                     <span class="name hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="{{ url('setting') }}">Settings</a></li>
-                    <li><a href="{{ url('logout') }}">Logout</a></li>
+                    <li><a href="{{ url('setting') }}">{{ trans('common.settings') }}</a></li>
+                    <li><a href="{{ url('logout') }}">{{ trans('common.logout') }}</a></li>
                 </ul>
             </li>
         @endif

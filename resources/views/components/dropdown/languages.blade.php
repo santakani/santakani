@@ -1,7 +1,7 @@
 <li class="dropdown">
     <a href="#" data-toggle="dropdown">
         <i class="fa fa-language"></i>
-        <span class="text">{{ App::getLocale() }}</span>
+        <span class="text">{{ trans('common.language') }}</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-right">
         @foreach (App\Localization\Languages::names() as $locale => $name)
