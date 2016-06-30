@@ -43,6 +43,10 @@ $lg-path-images: '../img/lightgallery';
 // Flickity
 @import "node_modules/flickity/css/flickity";
 
+// Flag Icon CSS
+$flag-icon-css-path: '../img/flags' !default;
+@import "node_modules/flag-icon-css/sass/flag-icon";
+
 // Override Vendor Styles
 @import "vendor/light-gallery";
 @import "vendor/openlayers";
