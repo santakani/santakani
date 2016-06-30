@@ -54,6 +54,7 @@ $nav_menu_right = [
         @endforeach
     </ul>
     <ul class="nav-menu right">
+        @include('components.dropdown.languages')
         @if (Auth::guest())
             @foreach ($nav_menu_right as $key => $value)
                 <li class="{{ $active_nav === $key?'active':'' }}">
