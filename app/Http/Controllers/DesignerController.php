@@ -224,7 +224,7 @@ class DesignerController extends Controller
                     continue;
                 }
 
-                if (!in_array($locale, Languages::codes())) {
+                if (!in_array($locale, Languages::all())) {
                     continue;
                 }
 

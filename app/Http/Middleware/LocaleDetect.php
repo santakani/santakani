@@ -58,7 +58,7 @@ class LocaleDetect {
             $accept_languages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
             foreach ($accept_languages as $lang) {
                 $lang = locale_accept_from_http($lang);
-                $locale = locale_lookup(Languages::codes(), $lang, true, 'en');
+                $locale = locale_lookup(Languages::all(), $lang, true, 'en');
                 if (!empty($locale)) {
                     App::setLocale($locale);
                     break;

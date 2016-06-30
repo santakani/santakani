@@ -38,7 +38,7 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    @foreach (App\Localization\Languages::codes() as $locale)
+                    @foreach (App\Localization\Languages::all() as $locale)
                         <?php $translation = $place->translations()->where('locale', $locale)->first(); ?>
                         <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
                             <div class="form-group">
