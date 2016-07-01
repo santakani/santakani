@@ -1,3 +1,42 @@
 [main]
 host = https://www.transifex.com
 
+[santakanicom.auth]
+file_filter = resources/lang/<lang>/auth.php
+source_lang = en
+type = PHP_ARRAY
+
+[santakanicom.common]
+file_filter = resources/lang/<lang>/common.php
+source_lang = en
+type = PHP_ARRAY
+
+[santakanicom.designer]
+file_filter = resources/lang/<lang>/designer.php
+source_lang = en
+type = PHP_ARRAY
+
+[santakanicom.pagination]
+file_filter = resources/lang/<lang>/pagination.php
+source_lang = en
+type = PHP_ARRAY
+
+[santakanicom.passwords]
+file_filter = resources/lang/<lang>/passwords.php
+source_lang = en
+type = PHP_ARRAY
+
+[santakanicom.place]
+file_filter = resources/lang/<lang>/place.php
+source_lang = en
+type = PHP_ARRAY
+
+[santakanicom.story]
+file_filter = resources/lang/<lang>/story.php
+source_lang = en
+type = PHP_ARRAY
+
+[santakanicom.validation]
+file_filter = resources/lang/<lang>/validation.php
+source_lang = en
+type = PHP_ARRAY
