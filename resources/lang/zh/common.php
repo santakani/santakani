@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'all' => '全部',
     'cancel' => '取消',
     'close' => '关闭',
@@ -32,4 +32,4 @@ return [
     'user' => '用户',
     'webshop' => '网店',
     'website' => '网站',
-];
+);

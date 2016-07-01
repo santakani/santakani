@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'all' => 'All',
     'cancel' => 'Cancel',
     'close' => 'Close',
@@ -32,4 +32,4 @@ return [
     'user' => 'User',
     'webshop' => 'Webshop',
     'website' => 'Website',
-];
+);

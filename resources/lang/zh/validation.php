@@ -21,7 +21,7 @@ return array(
     'alpha_num'            => 'The :attribute may only contain letters and numbers.',
     'array'                => 'The :attribute must be an array.',
     'before'               => 'The :attribute must be a date before :date.',
-    'between.numeric'      => 'The :attribute must be between :min and :max.',
+    'between.numeric'      => ':attribute 必须在 :min 到 :max 之间。',
     'between.file'         => 'The :attribute must be between :min and :max kilobytes.',
     'between.string'       => 'The :attribute must be between :min and :max characters.',
     'between.array'        => 'The :attribute must have between :min and :max items.',

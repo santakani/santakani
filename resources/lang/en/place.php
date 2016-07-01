@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'address' => 'Address',
     'create_place_page' => 'Create place page',
     'location' => 'Location',
@@ -11,4 +11,4 @@ return [
     'shop' => 'Shop',
     'showroom' => 'Showroom',
     'studio' => 'Studio',
-];
+);
