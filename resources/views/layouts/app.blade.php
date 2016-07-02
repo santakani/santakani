@@ -1,5 +1,6 @@
 <?php
 // Default values
+$title = isset($title) ? $title . ' - ' . trans('brand.app_name') : trans('brand.app_name') . ' - ' . trans('brand.app_description');
 $has_navbar = isset($has_navbar)?$has_navbar:true;
 $has_header = isset($has_header)?$has_header:true;
 $has_footer = isset($has_footer)?$has_footer:true;
@@ -7,14 +8,14 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ App::getLocale() }}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ isset($title) ? ($title.' - SantaKani') : 'SantaKani - Stories of design?!' }}</title>
+    <title>{{ $title }}</title>
 
     <link rel="shortcut icon" href="{{ url('img/logo/origin-32x32.png') }}" type="image/png" sizes="32x32">
     <link rel="shortcut icon" href="{{ url('img/logo/origin-64x64.png') }}" type="image/png" sizes="64x64">

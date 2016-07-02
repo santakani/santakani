@@ -6,6 +6,11 @@ file_filter = resources/lang/<lang>/auth.php
 source_lang = en
 type = PHP_ARRAY
 
+[santakani.brand]
+file_filter = resources/lang/<lang>/brand.php
+source_lang = en
+type = PHP_ARRAY
+
 [santakani.common]
 file_filter = resources/lang/<lang>/common.php
 source_lang = en
