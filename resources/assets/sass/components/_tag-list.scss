@@ -6,7 +6,6 @@
 ul.tag-list {
     > li > a {
         text-transform: lowercase;
-        color: $brand-info;
     }
 }
 
@@ -14,7 +13,6 @@ ul.tag-list-plain {
     > li > a {
         &:before {
             content: "#";
-            opacity: 0.5;
         }
     }
 }
@@ -27,6 +25,7 @@ ul.tag-list-round {
         line-height: 1.8em;
         padding: 0 0.5em;
         margin-bottom: 0.5em;
+        color: $brand-info;
 
         &:hover {
             background-color: $brand-info;
