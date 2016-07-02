@@ -1,26 +1,18 @@
 <footer id="site-footer" class="site-footer">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6">
-                2015&ndash;{{ date("Y") }} SantaKani.
-            </div>
-            <div class="col-xs-12 col-sm-6">
-                <ul class="list-inline">
-                    <li><a href="https://www.facebook.com/1116236201740479/"
-                    target="_blank">Facebook</a></li>
-                    <li><a href="https://www.instagram.com/santa.kani/"
-                    target="_blank">Instagram</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#wechat-modal">微信</a></li>
-                    <li><a href="https://www.facebook.com/groups/270204663311876/"
-                    target="_blank">Group</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="text-muted">
-            Powered by free software licensed under GNU Affero GPL version 3.
-            Source code on <a href="https://github.com/santakani/santakani.com"
-            target="_blank">Github</a>.
-        </div>
+        <p>2015&ndash;{{ date("Y") }} {{ trans('brand.app_name') }}</p>
+        <ul class="list-inline">
+            <li><a href="{{ url('privacy') }}">{{ trans('common.privacy') }}</a></li>
+            <li><a href="{{ url('terms') }}">{{ trans('common.terms_of_service') }}</a></li>
+            <li><a href="https://github.com/santakani/santakani.com" target="_blank">{{ trans('common.source_code') }}</a></li>
+            <li><a href="{{ url('help') }}">{{ trans('common.help') }}</a></li>
+            <li><a href="mailto:contact@santakani.com">{{ trans('common.contact') }}</a></li>
+            <li><a href="{{ url('about') }}">{{ trans('common.about_us') }}</a></li>
+            <li><a href="https://www.facebook.com/1116236201740479/" target="_blank">Facebook</a></li>
+            <li><a href="https://www.instagram.com/santa.kani/" target="_blank">Instagram</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#wechat-modal">微信</a></li>
+            <li><a href="https://www.facebook.com/groups/270204663311876/" target="_blank">{{ trans('common.community') }}</a></li>
+        </ul>
     </div>
 </footer>
 
