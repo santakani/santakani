@@ -56,35 +56,47 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-8">
+            {!! $place->text('content') !!}
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <h4>{{ trans('common.tags') }}</h4>
             @include('components.tag-list', [
                 'tags' => $place->tags,
                 'style' => 'plain',
             ])
-            {!! $place->text('content') !!}
-        </div>
-        <div class="col-sm-6 col-md-4">
             <h4>Location</h4>
 
-            <p>{{ $place->address }}<br>{{ $place->city->text('name') }}, {{ $place->country->text('name') }}</p>
+            <p>{{ $place->full_address }}</p>
+            <ul class="list-inline">
+                <li><a href="{{ $place->google_map_url }}">
+                    {{ trans('geo.google_map') }} <i class="fa fa-external-link"></i>
+                </a></li>
+                <li><a href="{{ $place->bing_map_url }}">
+                    {{ trans('geo.bing_map') }} <i class="fa fa-external-link"></i>
+                </a></li>
+                <li><a href="{{ $place->here_map_url }}">
+                    {{ trans('geo.here_map') }} <i class="fa fa-external-link"></i>
+                </a></li>
+            </ul>
 
             <div class="map" data-latitude="{{ $place->latitude }}" data-longitude="{{ $place->longitude }}"></div>
 
             <h4>Contact</h4>
             <ul class="list-unstyled">
-            <li>Phone: {{ $place->phone or '-' }}</li>
-            <li>Email: {{ $place->email or '-' }}</li>
+                <li><i class="fa fa-fw fa-phone"></i> {{ $place->phone or '-' }}</li>
+                <li><i class="fa fa-fw fa-envelope-o"></i> {{ $place->email or '-' }}</li>
             </ul>
 
             <h4>Links</h4>
             <ul class="list-unstyled">
                 @if ($place->website)
-                    <li><a href="{{ $place->website }}">Website</a></li>
+                    <li><i class="fa fa-fw fa-globe"></i> <a href="{{ $place->website }}">Website</a></li>
                 @endif
                 @if ($place->facebook)
-                    <li><a href="{{ $place->facebook }}">Facebook</a></li>
+                    <li><i class="fa fa-fw fa-facebook-square"></i> <a href="{{ $place->facebook }}">Facebook</a></li>
                 @endif
                 @if ($place->google_plus)
-                    <li><a href="{{ $place->google_plus }}">Google+</a></li>
+                    <li><i class="fa fa-fw fa-google-plus-square"></i> <a href="{{ $place->google_plus }}">Google+</a></li>
                 @endif
             </ul>
         </div>

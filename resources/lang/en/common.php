@@ -25,6 +25,7 @@ return array(
     'save' => 'Save',
     'settings' => 'Settings',
     'tag' => 'Tag',
+    'tags' => 'Tags',
     'title' => 'Title',
     'unknown' => 'Unknown',
     'update' => 'Update',

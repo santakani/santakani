@@ -113,6 +113,51 @@ class Place extends Model
         return $this->text('name');
     }
 
+    public function getFullAddressAttribute()
+    {
+        return $this->address . ', ' . $this->city->full_name;
+    }
+
+    /**
+     * bing_map_url getter.
+     *
+     * @return string
+     */
+    public function getBingMapUrlAttribute()
+    {
+        return 'https://www.bing.com/maps/?where1=' . urlencode($this->full_address);
+    }
+
+    /**
+     * google_map_url getter.
+     *
+     * @return string
+     */
+    public function getGoogleMapUrlAttribute()
+    {
+        return 'https://www.google.com/maps/search/' . urlencode($this->full_address);
+    }
+
+    /**
+     * here_map_url getter.
+     *
+     * @return string
+     */
+    public function getHereMapUrlAttribute()
+    {
+        return 'https://maps.here.com/search/' . urlencode($this->full_address);
+    }
+
+    /**
+     * open_street_map_url getter.
+     *
+     * @return string
+     */
+    public function getOpenStreetMapUrlAttribute()
+    {
+        return 'https://www.openstreetmap.org/search?query=' . urlencode($this->full_address);
+    }
+
     /**
      * "url" getter. URL of place page.
      *
