@@ -10,17 +10,17 @@ $nav_menu_left = [
         'icon' => 'home',
     ],
     'story' => [
-        'text' => trans_choice('story.story', 10),
+        'text' => trans('story.stories'),
         'url' => url('story'),
         'icon' => 'book',
     ],
     'designer' => [
-        'text' => trans_choice('designer.designer', 10),
+        'text' => trans('designer.designers'),
         'url' => url('designer'),
         'icon' => 'users',
     ],
     'place' => [
-        'text' => trans_choice('place.place', 10),
+        'text' => trans('place.places'),
         'url' => url('place'),
         'icon' =>'map',
     ],
