@@ -1,64 +1,38 @@
-var swal = require('sweetalert');
+var Flickity = require('flickity');
+
 var Place = require('../../models/place');
 var PlaceMap = require('../../views/place-map');
-
-$(function () {
-
-    if($('#place-show-page').length === 0) {
-        return;
-    }
-
-    // Action bar starts
-
-    $('#delete-button').click(function (e) {
-        e.preventDefault();
-
-        swal({
-            title: "Confirm Delete",
-            text: 'Deleted page can be restored in your <a href="/setting">account setting</a> page.',
-            type: "warning",
-            html: true,
-            showCancelButton: true,
-            closeOnConfirm: false,
-            allowOutsideClick: true,
-            showLoaderOnConfirm: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel please!",
-        },
-        function(){
-            $.ajax({
-                url: location.pathname,
-                method: 'delete',
-                data: {
-                    _token: csrfToken
-                }
-            }).done(function () {
-                swal("Deleted");
-            }).fail(function () {
-                swal("Cannot delete this page.");
-            });
-        });
+var DeleteButton = require('../../views/delete-button');
+var LikeButton = require('../../views/like-button');
 
 
-    });
+var deleteButton = new DeleteButton();
+var likeButton = new LikeButton();
 
-    // Action bar ends
+// Gallery
+var $gallery = $('.gallery');
 
-    // Gallery
-    $('.gallery').lightGallery({
-        selector: 'a:not(.placeholder)',
-        thumbWidth: 100,
-        thumbContHeight: 120,
-    });
+var slider = new Flickity($('.gallery')[0], {
+    cellAlign: 'left',
+    contain: false,
+    freeScroll: true,
+    imagesLoaded: true,
+    pageDots: false,
+    percentPosition: false,
+    draggable: false,
+});
 
-    // Map
-    var place = new Place({
-        latitude: $('.map').data('latitude'),
-        longitude: $('.map').data('longitude'),
-    });
-    var placeMap = new PlaceMap({
-        el: '.map',
-        model: place,
-    });
+$gallery.lightGallery({
+    selector: '.image',
+    download: false,
+});
+
+// Map
+var place = new Place({
+    latitude: $('.map').data('latitude'),
+    longitude: $('.map').data('longitude'),
+});
+var placeMap = new PlaceMap({
+    el: '.map',
+    model: place,
 });

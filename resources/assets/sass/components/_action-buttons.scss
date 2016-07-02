@@ -1,11 +1,18 @@
 #action-buttons, .action-buttons {
     text-align: left;
-    margin-bottom: 20px;
 
     &.float {
         position: absolute;
         right: 15px;
         top: 15px;
+    }
+
+    &.left-xs {
+        text-align: left;
+    }
+
+    &.right-xs {
+        text-align: right;
     }
 
     @media screen and (min-width: $screen-sm-min) {

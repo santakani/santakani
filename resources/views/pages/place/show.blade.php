@@ -7,42 +7,43 @@
 
 @section('header')
     <div class="container">
-        <div class="gallery clearfix">
-            @if ($place->image)
-                <a href="{{ $place->image->url('large') }}">
-                    <img src="{{ $place->image->url('thumb') }}">
-                </a>
-            @else
-                <a class="placeholder" href="#">
-                    <img src="{{ url('img/placeholder/blank/300x300.svg') }}">
-                </a>
-            @endif
-            @forelse ($place->gallery_images as $image)
-                @if ($image->id !== $place->image_id)
-                    <a href="{{ $image->url('large') }}">
-                        <img src="{{ $image->url('thumb') }}">
-                    </a>
-                @endif
-            @empty
-                @for ($i = 0; $i < 8; $i++)
-                    <a class="placeholder" href="#">
-                        <img src="{{ url('img/placeholder/blank/300x300.svg') }}">
-                    </a>
-                @endfor
-            @endforelse
-        </div>
-        <h1 class="page-header">
-            {{ $place->text('name') }}
-            <small>{{ $place->city->text('name') }}, {{ $place->country->text('name') }}</small>
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>{{ $place->text('name') }}</h1>
+            </div>
+            <div class="col-sm-6">
+                <h1>
+                    <div class="action-buttons right-sm">
+                        @include('components.buttons.like', ['likeable' => $place])
+                        @if (Auth::check())
+                            @if (Auth::user()->can('edit-place', $place))
+                                @include('components.buttons.edit')
+                            @endif
+                            @if (Auth::user()->can('delete-place', $place))
+                                @include('components.buttons.delete')
+                            @endif
+                        @endif
+                    </div><!-- /.action-buttons -->
+                </h1>
+            </div>
+        </div><!-- /.row -->
 
-            @if ($can_edit)
-                <div class="pull-right hidden-xs">
-                    <a id="edit-button" class="btn btn-sm btn-default" href="{{ $place->url . '/edit' }}">Edit</a>
-                    <a id="delete-button" class="btn btn-sm btn-danger" href="#">Delete</a>
-                </div>
+        <div id="gallery" class="gallery clearfix">
+            @if ($place->image_id)
+                <img class="cover-image image" src="{{ $place->image->url('thumb') }}"
+                    data-src="{{ $place->image->url('large') }}" width="300" height="300"/>
+            @else
+                <img class="cover-image placeholder" src="{{ url('img/placeholder/blank/300x300.svg') }}">
             @endif
-        </h1>
-    </div>
+            @foreach ($place->gallery_images as $image)
+                {{-- Ignore cover image --}}
+                @if ($image->id !== $place->image_id)
+                    <img class="image" src="{{ $image->url('thumb') }}"
+                        data-src="{{ $image->url('large') }}" width="300" height="300"/>
+                @endif
+            @endforeach
+        </div><!-- /#gallery -->
+    </div><!-- /.container -->
 @endsection
 
 @section('main')

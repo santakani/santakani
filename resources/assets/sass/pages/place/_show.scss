@@ -1,77 +1,16 @@
 #place-show-page {
-    .gallery {
-        $image-gap: 4px;
 
-        margin: - $image-gap / 2;
-
-        a {
-            display: block;
-            float: left;
-            width: 33.33%;
-            padding: $image-gap / 2;
-
-            &:first-child {
-                width: 66.66%;
-            }
-
-            &:nth-child(n+4) {
-                display: none;
-            }
-
-            @media screen and (min-width: 480px) {
-                width: 25%;
-
-                &:first-child {
-                    width: 50%;
-                }
-
-                &:nth-child(n+4) {
-                    display: block;
-                }
-
-                &:nth-child(n+6) {
-                    display: none;
-                }
-            }
-
-            @media screen and (min-width: 640px) {
-                width: 20%;
-
-                &:first-child {
-                    width: 40%;
-                }
-
-                &:nth-child(n+6) {
-                    display: block;
-                }
-
-                &:nth-child(n+8) {
-                    display: none;
-                }
-            }
-
-            @media screen and (min-width: 1280px) {
-                width: 16.66%;
-
-                &:first-child {
-                    width: 33.33%;
-                }
-
-                &:nth-child(n+8) {
-                    display: block;
-                }
-
-                &:nth-child(n+10) {
-                    display: none;
-                }
-            }
-        }
-
-        img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
+    header {
+        padding: 30px 0;
     }
+
+    .gallery {
+         img.image {
+            display: block;
+            height: 300px;
+            width: auto;
+            margin-right: 4px;
+        }
+    }
+
 }
