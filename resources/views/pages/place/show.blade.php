@@ -30,16 +30,22 @@
 
         <div id="gallery" class="gallery clearfix">
             @if ($place->image_id)
-                <img class="cover-image image" src="{{ $place->image->url('thumb') }}"
-                    data-src="{{ $place->image->url('large') }}" width="300" height="300"/>
+                <div class="image-wrap">
+                    <img class="cover-image image" src="{{ $place->image->url('thumb') }}"
+                        data-src="{{ $place->image->url('large') }}" width="300" height="300"/>
+                    <div class="raster"></div>
+                </div><!-- /.image-wrap -->
             @else
                 <img class="cover-image placeholder" src="{{ url('img/placeholder/blank/300x300.svg') }}">
             @endif
             @foreach ($place->gallery_images as $image)
                 {{-- Ignore cover image --}}
                 @if ($image->id !== $place->image_id)
-                    <img class="image" src="{{ $image->url('thumb') }}"
-                        data-src="{{ $image->url('large') }}" width="300" height="300"/>
+                    <div class="image-wrap">
+                        <img class="image" src="{{ $image->url('thumb') }}"
+                            data-src="{{ $image->url('large') }}" width="300" height="300"/>
+                        <div class="raster"></div>
+                    </div><!-- /.image-wrap -->
                 @endif
             @endforeach
         </div><!-- /#gallery -->
