@@ -139,13 +139,13 @@ class Place extends Model
     }
 
     /**
-     * here_map_url getter.
+     * here_map_url getter. Whitespace --> %20. Here Map does not '+' in URL.
      *
      * @return string
      */
     public function getHereMapUrlAttribute()
     {
-        return 'https://maps.here.com/search/' . urlencode($this->full_address);
+        return 'https://maps.here.com/search/' . rawurlencode($this->full_address);
     }
 
     /**
