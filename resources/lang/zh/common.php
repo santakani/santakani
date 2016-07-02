@@ -25,6 +25,7 @@ return array(
     'save' => '保存',
     'settings' => '设置',
     'tag' => '标签',
+    'tags' => '标签',
     'title' => '标题',
     'unknown' => '未知',
     'update' => '更新',

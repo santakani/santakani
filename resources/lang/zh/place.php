@@ -1,14 +1,15 @@
 <?php
 
 return array(
-    'address' => 'Address',
-    'create_place_page' => 'Create place page',
-    'location' => 'Location',
-    'map' => 'Map',
-    'museum' => 'Museum',
-    'place' => 'Place',
-    'school' => 'School',
-    'shop' => 'Shop',
-    'showroom' => 'Showroom',
-    'studio' => 'Studio',
+    'address' => '地址',
+    'create_place_page' => '创建地点',
+    'location' => '位置',
+    'map' => '地图',
+    'museum' => '博物馆',
+    'place' => '地点',
+    'places' => '地点',
+    'school' => '学校',
+    'shop' => '店铺',
+    'showroom' => '展厅',
+    'studio' => '工作室',
 );

@@ -1,5 +1,6 @@
 <?php
 
 return array(
-    'designer' => 'Designer|Designers',
+    'designer' => '设计师',
+    'designers' => '设计师',
 );
