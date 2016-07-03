@@ -11,8 +11,11 @@
 
 namespace App;
 
+use App;
+
 use Illuminate\Database\Eloquent\Model;
-use DB;
+
+use App\Localization\Languages;
 
 /**
  * TranslateFeature
@@ -47,11 +50,16 @@ trait TranslateFeature {
      * @param string $locale Language code, optional. If not set, use English(en).
      * @return string
      */
-    public function text($field, $locale = 'en') {
+    public function text($field, $locale = null) {
+        if (!Languages::has($locale)) {
+            $locale = App::getLocale();
+        }
+
         $translation = $this->translations()->where('locale', $locale)->first();
-        if (empty($translation)) {
+
+        if (empty($translation->$field) || empty(trim(str_replace('&nbsp;', ' ', strip_tags($translation->$field))))) {
             if ($locale === 'en') {
-                return null;
+                return '';
             } else {
                 return $this->text($field, 'en');
             }
@@ -65,7 +73,7 @@ trait TranslateFeature {
      *
      * @return string
      */
-    public function excerpt($field, $locale = 'en', $length = 200)
+    public function excerpt($field, $locale = null, $length = 200)
     {
         $plain_text = strip_tags($this->text($field, $locale));
         return grapheme_strlen($plain_text) > $length ? grapheme_substr($plain_text,0,$length) . '...' : $plain_text;
