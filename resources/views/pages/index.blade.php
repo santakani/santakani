@@ -12,12 +12,12 @@
                 <h1>Designers + Design Lovers</h1>
                 <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
                 <p class="hidden-xs">
-                    <a class="btn btn-info btn-lg" href="/designer" role="button">Designer list</a>
-                    <a class="btn btn-success btn-lg" href="/designer/create" role="button">Create designer profile</a>
+                    <a class="btn btn-info btn-lg" href="/designer" role="button">{{ trans('designer.designer_list') }}</a>
+                    <a class="btn btn-success btn-lg" href="/designer/create" role="button">{{ trans('designer.create_a_designer_page') }}</a>
                 </p>
                 <p class="visible-xs-block">
-                    <a class="btn btn-info" href="/designer" role="button">Designer list</a>
-                    <a class="btn btn-success" href="/designer/create" role="button">Create designer profile</a>
+                    <a class="btn btn-info" href="/designer" role="button">{{ trans('designer.designer_list') }}</a>
+                    <a class="btn btn-success" href="/designer/create" role="button">{{ trans('designer.create_a_designer_page') }}</a>
                 </p>
             </div><!-- .container -->
         </div><!-- .jumbotron -->
@@ -61,9 +61,9 @@
 <section id="story-section">
     <div class="container">
         <h2>
-            Stories
+            {{ trans('story.stories') }}
             <a class="btn btn-default pull-right" href="/story" role="button">
-                More <i class="fa fa-angle-double-right"></i>
+                {{ trans('common.more') }} <i class="fa fa-angle-double-right"></i>
             </a>
         </h2>
         <div id="home-story-list" class="story-list row">
@@ -92,9 +92,9 @@
 <section id="designer-section">
     <div class="container">
         <h2>
-            Designers
+            {{ trans('designer.designers') }}
             <a class="btn btn-default pull-right" href="/designer" role="button">
-                More <i class="fa fa-angle-double-right"></i>
+                {{ trans('common.more') }} <i class="fa fa-angle-double-right"></i>
             </a>
         </h2>
         <div id="home-designer-list" class="designer-list row">
@@ -122,9 +122,9 @@
 <section id="place-section">
     <div class="container">
         <h2>
-            Places
+            {{ trans('place.places') }}
             <a class="btn btn-default pull-right" href="/place" role="button">
-                More <i class="fa fa-angle-double-right"></i>
+                {{ trans('common.more') }} <i class="fa fa-angle-double-right"></i>
             </a>
         </h2>
         <div id="home-place-list" class="place-list row">
@@ -157,9 +157,9 @@
 <section id="tag-section">
     <div class="container">
         <h2>
-            Tags
+            {{ trans('common.tags') }}
             <a class="btn btn-default pull-right" href="/tag" role="button">
-                More <i class="fa fa-angle-double-right"></i>
+                {{ trans('common.more') }} <i class="fa fa-angle-double-right"></i>
             </a>
         </h2>
         <div id="home-tag-list" class="tag-list row">
