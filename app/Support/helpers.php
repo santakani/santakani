@@ -38,6 +38,49 @@ if (!function_exists('app_array_filter')) {
     }
 }
 
+
+//===============================================
+// String
+//===============================================
+
+if (!function_exists('app_empty_text')) {
+    /**
+     * Check if a UTF-8 string is empty. Whitespaces and line breaks are ignored.
+     *
+     * @param  string $text
+     * @return boolean
+     */
+    function app_empty_text($text)
+    {
+        if (empty($text)) {
+            return true;
+        } else {
+            $text = preg_replace('/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $text); // Trim
+            return empty($text);
+        }
+    }
+}
+
+if (!function_exists('app_empty_html')) {
+    /**
+     * Check if HTML(UTF-8) is empty. HTML tag, whitespaces and line breaks are ignored.
+     *
+     * @param  string $html
+     * @return boolean
+     */
+    function app_empty_html($html)
+    {
+        if (empty($html)) {
+            return true;
+        } else {
+            $text = html_entity_decode(strip_tags($html)); // Remove markups
+            $text = preg_replace('/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $text); // Trim
+            return empty($text);
+        }
+    }
+}
+
+
 //===============================================
 // URL
 //===============================================
