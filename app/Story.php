@@ -90,17 +90,6 @@ class Story extends Model
     }
 
     /**
-     * "excerpt" getter. Plain text of content with 200 character length.
-     *
-     * @return string
-     */
-    public function getExcerptAttribute()
-    {
-        $plain_text = strip_tags($this->text('content'));
-        return grapheme_strlen($plain_text) > 200 ? grapheme_substr($plain_text,0,200) . '...' : $plain_text;
-    }
-
-    /**
      * "url" getter.
      *
      * @return string

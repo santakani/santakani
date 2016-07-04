@@ -11,8 +11,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Localization\Translation;
 
 /**
  * StoryTranslation
@@ -22,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @author Guo Yunhe <guoyunhebrave@gmail.com>
  * @see https://github.com/santakani/santakani.com/wiki/Story
  */
-class StoryTranslation extends Model
+class StoryTranslation extends Translation
 {
     /**
      * The table associated with the model.

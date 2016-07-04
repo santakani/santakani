@@ -122,7 +122,7 @@ if ($designer->logo_id) {
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="biography">
-                        {!! $designer->text('content') !!}
+                        {!! $designer->html('content') !!}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="followers">
                         <div class="row">

@@ -26,7 +26,6 @@ use App\Localization\Languages;
  * @author Guo Yunhe <guoyunhebrave@gmail.com>
  * @see https://github.com/santakani/santakani.com/wiki/Translation
  */
-
 trait TranslateFeature {
 
     /**
@@ -57,14 +56,28 @@ trait TranslateFeature {
 
         $translation = $this->translations()->where('locale', $locale)->first();
 
-        if (empty($translation->$field) || empty(trim(str_replace('&nbsp;', ' ', strip_tags($translation->$field))))) {
-            if ($locale === 'en') {
-                return '';
-            } else {
-                return $this->text($field, 'en');
-            }
+        if (count($translation) && $translation->hasText($field)) {
+            return $translation->text($field);
+        } elseif ($locale === 'en') {
+            return '';
         } else {
-            return $translation->$field;
+            return $this->text($field, 'en'); // Fallback
+        }
+    }
+
+    public function html($field, $locale = null) {
+        if (!Languages::has($locale)) {
+            $locale = App::getLocale();
+        }
+
+        $translation = $this->translations()->where('locale', $locale)->first();
+
+        if (count($translation) && $translation->hasHtml($field)) {
+            return $translation->html($field);
+        } elseif ($locale === 'en') {
+            return '';
+        } else {
+            return $this->html($field, 'en'); // Fallback
         }
     }
 
@@ -75,8 +88,19 @@ trait TranslateFeature {
      */
     public function excerpt($field, $locale = null, $length = 200)
     {
-        $plain_text = strip_tags($this->text($field, $locale));
-        return grapheme_strlen($plain_text) > $length ? grapheme_substr($plain_text,0,$length) . '...' : $plain_text;
+        if (!Languages::has($locale)) {
+            $locale = App::getLocale();
+        }
+
+        $translation = $this->translations()->where('locale', $locale)->first();
+
+        if (count($translation) && $translation->hasHtml($field)) {
+            return $translation->excerpt($field, $length);
+        } elseif ($locale === 'en') {
+            return '';
+        } else {
+            return $this->excerpt($field, 'en'); // Fallback
+        }
     }
 
 }

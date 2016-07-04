@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Localization\Translation;
 
-class CountryTranslation extends Model
+class CountryTranslation extends Translation
 {
     /**
      * The table associated with the model.

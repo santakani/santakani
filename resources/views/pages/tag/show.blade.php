@@ -61,7 +61,7 @@
                             <div class="shadow"></div>
                             <div class="text">
                                 <h1>{{ $story->title }}</h1>
-                                {{ $story->excerpt }}
+                                {{ $story->excerpt('content') }}
                             </div>
                         </a>
                     </article>

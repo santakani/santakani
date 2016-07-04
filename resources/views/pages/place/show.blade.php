@@ -56,7 +56,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-8">
-            {!! $place->text('content') !!}
+            {!! $place->html('content') !!}
         </div>
         <div class="col-sm-6 col-md-4">
             <h4>{{ trans('common.tags') }}</h4>
