@@ -1,23 +1,18 @@
-(function () {
+var $body = $('body.app-layout');
+var $window = $(window);
+var $footer = $('#app-footer');
 
-    var $body = $('body.app-layout');
-    var $window = $(window);
-    var $footer = $('#site-footer');
+footerPosition();
 
-    if ($footer.length === 0) {
-        return;
+$window.resize(footerPosition);
+
+setInterval(footerPosition, 50);
+
+function footerPosition() {
+    var bodyHeight = $footer.hasClass('float') ? ($body.outerHeight() + $footer.outerHeight()) : $body.outerHeight();
+    if (bodyHeight < $window.height()) {
+        $footer.addClass('float');
+    } else {
+        $footer.removeClass('float');
     }
-
-    footerPosition();
-
-    $window.resize(footerPosition);
-
-    function footerPosition() {
-        var bodyHeight = $footer.hasClass('float') ? ($body.outerHeight() + $footer.outerHeight()) : $body.outerHeight();
-        if (bodyHeight < $window.height()) {
-            $footer.addClass('float');
-        } else {
-            $footer.removeClass('float');
-        }
-    }
-})();
+}
