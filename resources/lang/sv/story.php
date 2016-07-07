@@ -1,7 +1,8 @@
 <?php
 
 return array(
-    'author' => 'Author',
-    'story' => 'Story|Stories',
-    'write_design_story' => 'Write design story',
+    'author' => 'Författare',
+    'story' => 'berättelse',
+    'stories' => 'berättelser',
+    'write_design_story' => 'Skriv en design berättelse',
 );

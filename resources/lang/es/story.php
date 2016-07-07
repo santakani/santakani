@@ -2,6 +2,7 @@
 
 return array(
     'author' => 'Author',
-    'story' => 'Story|Stories',
+    'story' => 'Story',
+    'stories' => 'Stories',
     'write_design_story' => 'Write design story',
 );

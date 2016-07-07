@@ -13,7 +13,9 @@ return array(
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'remember_me' => 'Remember me',
+    'forgot_your_password' => 'Forgot your password?',
+    'failed' => 'Dessa referenser inte matchar våra register.',
+    'throttle' => 'För många inloggningsförsök . Försök igen :seconds. sekunder.',
 
 );

@@ -1,14 +1,15 @@
 <?php
 
 return array(
-    'address' => 'Address',
-    'create_place_page' => 'Create place page',
-    'location' => 'Location',
-    'map' => 'Map',
+    'address' => 'Adress',
+    'create_place_page' => 'Skapa plats sida',
+    'location' => 'läge',
+    'map' => 'Karta',
     'museum' => 'Museum',
-    'place' => 'Place',
-    'school' => 'School',
-    'shop' => 'Shop',
+    'place' => 'Ställe',
+    'places' => 'Ställen',
+    'school' => 'Skola',
+    'shop' => 'Shoppa',
     'showroom' => 'Showroom',
     'studio' => 'Studio',
 );

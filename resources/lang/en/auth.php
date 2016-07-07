@@ -13,6 +13,13 @@ return array(
     |
     */
 
+    'remember_me' => 'Remember me',
+    'forgot_your_password' => 'Forgot your password?',
+    'confirm_password' => 'Confirm password',
+    'reset_password' => 'Reset password',
+    'request_password_reset_link' => 'Request password reset link',
+
+    // Auth system messages
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
