@@ -25,6 +25,7 @@ return array(
     'more' => 'More',
     'name' => 'Name',
     'ok' => 'OK',
+    'optional' => 'Optional',
     'or' => 'Or',
     'password' => 'Password',
     'privacy' => 'Privacy',
