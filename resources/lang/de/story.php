@@ -4,5 +4,5 @@ return array(
     'author' => 'Author',
     'story' => 'Story',
     'stories' => 'Stories',
-    'write_design_story' => 'Write design story',
+    'write_a_design_story' => 'Write design story',
 );
