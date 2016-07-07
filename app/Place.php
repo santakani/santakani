@@ -205,7 +205,7 @@ class Place extends Model
      */
     public static function types()
     {
-        return array_keys(self::typesWithNames());
+        return ['shop', 'studio', 'showroom', 'museum', 'school'];
     }
 
     /**
@@ -213,14 +213,14 @@ class Place extends Model
      *
      * @return array
      */
-    public static function typesWithNames()
+    public static function typeNames()
     {
-        return [
-            'shop' => 'Shop',
-            'studio' => 'Studio',
-            'showroom' => 'Showroom',
-            'museum' => 'Museum',
-            'school' => 'School',
-        ];
+        $names = [];
+
+        foreach (self::types() as $key) {
+            $names[$key] = trans('place.'.$key);
+        }
+
+        return $names;
     }
 }

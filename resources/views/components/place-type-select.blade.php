@@ -7,13 +7,9 @@ $all = isset($all) ? $all : false;;
 <select id="{{ $id or 'place-type-select' }}" class="{{ $class or '' }} form-control place-type-select"
         name="{{ $name or 'type' }}" {{ $required ? 'required' : '' }}>
     @if ($all)
-        @if (empty($selected))
-            <option value="" selected="selected">All</option>
-        @else
-            <option value="">All</option>
-        @endif
+        <option value="">{{ trans('common.all') }}</option>
     @endif
-    @foreach (\App\Place::typesWithNames() as $key => $text)
+    @foreach (\App\Place::typeNames() as $key => $text)
         @if ($key === $selected)
             <option value="{{ $key }}" selected="selected">
                 {{ $text }}

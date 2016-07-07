@@ -2,7 +2,7 @@
 
 return array(
     'address' => 'Address',
-    'create_place_page' => 'Create place page',
+    'create_a_place_page' => 'Create a place page',
     'location' => 'Location',
     'map' => 'Map',
     'museum' => 'Museum',

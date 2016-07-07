@@ -41,6 +41,7 @@ return array(
     'tags' => 'Tags',
     'terms_of_service' => 'Terms of service',
     'title' => 'Title',
+    'type' => 'Type',
     'unknown' => 'Unknown',
     'update' => 'Update',
     'upload' => 'Upload',

@@ -2,7 +2,7 @@
 
 return array(
     'address' => '地址',
-    'create_place_page' => '创建地点',
+    'create_a_place_page' => '创建地点页面',
     'location' => '位置',
     'map' => '地图',
     'museum' => '博物馆',

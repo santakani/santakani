@@ -1,66 +1,48 @@
 @extends('layouts.create', [
-    'title' => trans('place.create_place_page'),
+    'title' => trans('place.create_a_place_page'),
     'body_id' => 'place-create-page',
     'body_classes' => ['place-create-page', 'place-page'],
     'active_nav' => 'place',
 ])
 
-@section('panel_title', trans('place.create_place_page'))
+@section('panel_title', trans('place.create_a_place_page'))
 
 @section('panel_body')
-<form class="form-horizontal" action="{{ url('place') }}" method="post">
+    <form class="form" action="{{ url('place') }}" method="post">
 
-    {!! csrf_field() !!}
+        {!! csrf_field() !!}
 
-    <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-        <label for="name-input" class="col-sm-3 control-label">{{ trans('common.name') }}</label>
-
-        <div class="col-sm-9">
-            <input name="name" value="{{ old('name') }}" type="text"
-                required maxlength="255" class="form-control" id="name-input">
+        <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+            <label class="control-label">{{ trans('common.name') }}</label>
+            <input name="name" value="{{ old('name') }}" type="text" required
+                   maxlength="255" class="form-control">
             @if ($errors->has('name'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
-                </span>
+                <span class="help-block">{{ $errors->first('name') }}</span>
             @endif
         </div>
-    </div>
 
-    <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-        <label for="type-select" class="col-sm-3 control-label">Type</label>
-
-        <div class="col-sm-9">
+        <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+            <label class="control-label">{{ trans('common.type') }}</label>
             @include('components.place-type-select', [
-                'id' => 'type-select',
                 'selected' => old('type'),
                 'required' => true,
             ])
             @if ($errors->has('type'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('type') }}</strong>
-                </span>
+                <span class="help-block">{{ $errors->first('type') }}</span>
             @endif
         </div>
-    </div>
 
-    <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-        <label for="address-input" class="col-sm-3 control-label">{{ trans('place.address') }}</label>
-
-        <div class="col-sm-9">
+        <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
+            <label class="control-label">{{ trans('place.address') }}</label>
             <input name="address" value="{{ old('address') }}" type="text"
-                required maxlength="255" class="form-control" id="address-input">
+                   required maxlength="255" class="form-control" id="address-input">
             @if ($errors->has('address'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('address') }}</strong>
-                </span>
+                <span class="help-block">{{ $errors->first('address') }}</span>
             @endif
         </div>
-    </div>
 
-    <div class="form-group {{ $errors->has('city_id') ? 'has-error' : '' }}">
-        <label for="city-select" class="col-sm-3 control-label">{{ trans('city.city') }}</label>
-
-        <div class="col-sm-9">
+        <div class="form-group {{ $errors->has('city_id') ? 'has-error' : '' }}">
+            <label class="control-label">{{ trans('geo.city') }}</label>
             <select name="city_id" id="city-select" class="city-select form-control">
                 @if (!empty(old('city_id')))
                     <?php $city = \App\City::find(old('city_id')); ?>
@@ -68,31 +50,25 @@
                 @endif
             </select>
             @if ($errors->has('city_id'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('city_id') }}</strong>
-                </span>
+                <span class="help-block">{{ $errors->first('city_id') }}</span>
             @endif
         </div>
-    </div>
 
-    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-        <label for="email-input" class="col-sm-3 control-label">{{ trans('common.email') }}</label>
-
-        <div class="col-sm-9">
+        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+            <label class="control-label">
+                {{ trans('common.email_address') }}
+                <span class="label label-info">{{ trans('common.optional') }}</span>
+                <span class="label label-warning">{{ trans('common.public') }}</span>
+            </label>
             <input name="email" value="{{ old('email') }}" type="email"
-                maxlength="255" class="form-control" id="email-input">
+                maxlength="255" class="form-control">
             @if ($errors->has('email'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
+                <span class="help-block">{{ $errors->first('email') }}</span>
             @endif
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
+        <div class="form-group">
             <button type="submit" class="btn btn-primary">{{ trans('common.create') }}</button>
         </div>
-    </div>
-</form>
+    </form>
 @endsection
