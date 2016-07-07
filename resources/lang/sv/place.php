@@ -2,7 +2,7 @@
 
 return array(
     'address' => 'Adress',
-    'create_place_page' => 'Skapa plats sida',
+    'create_a_place_page' => 'Create a place page',
     'location' => 'läge',
     'map' => 'Karta',
     'museum' => 'Museum',
