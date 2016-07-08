@@ -44,7 +44,7 @@ module.exports = Backbone.View.extend({
         var data = {
             likeable_type: this.model.get('likeable_type'),
             likeable_id: this.model.get('likeable_id'),
-            _token: csrfToken
+            _token: app.token
         };
 
         if (!this.model.get('liked')) {

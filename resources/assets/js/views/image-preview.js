@@ -138,7 +138,7 @@ module.exports = Backbone.View.extend({
         if (this.destroyOnRemove) {
             this.model.destroy({
                 data: {
-                    _token: csrfToken
+                    _token: app.token
                 },
                 processData: true
             });

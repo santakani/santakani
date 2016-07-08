@@ -37,7 +37,7 @@ module.exports = Backbone.View.extend({
                 url: that.url,
                 method: 'delete',
                 data: {
-                    _token: csrfToken
+                    _token: app.token
                 }
             }).done(function () {
                 swal("Deleted");

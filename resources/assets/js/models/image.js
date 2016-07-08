@@ -36,7 +36,7 @@ module.exports = Backbone.Model.extend({
         var that = this;
 
         var data = new FormData();
-        data.append('_token', csrfToken);
+        data.append('_token', app.token);
         data.append('image', options.image);
 
         if (typeof options.parentType === 'string' && typeof options.parentId === 'number') {

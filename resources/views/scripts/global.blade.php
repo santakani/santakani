@@ -1,8 +1,7 @@
 <script id="global-variables">
     window.app = {
-        user: {!! Auth::check()?Auth::user()->toJSON():'false' !!},
+        user: {!! Auth::check()?Auth::user()->id:'false' !!},
         token: "{!! csrf_token() !!}",
+        locale: "{{ App::getLocale() }}",
     };
-
-    window.csrfToken = window.app.token; // Legacy
 </script>
