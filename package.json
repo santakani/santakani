@@ -16,6 +16,7 @@
     "imagesloaded": "^4.1.0",
     "jquery": "^2.2.4",
     "jquery.scrollto": "^2.1.2",
+    "js-cookie": "^2.1.2",
     "laravel-elixir": "^4.0.0",
     "lightgallery": "^1.2.19",
     "masonry-layout": "^4.1.0",
