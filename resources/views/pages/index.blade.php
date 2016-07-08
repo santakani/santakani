@@ -9,8 +9,8 @@
     <div class="carousel-cell" style="background-image:url(/storage/images/0/1/large.jpg)">
         <div class="jumbotron">
             <div class="container">
-                <h1>Designers + Design Lovers</h1>
-                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <h1>{{ trans('home.slide_1.title') }}</h1>
+                <p>{{ trans('home.slide_1.content') }}</p>
                 <p class="hidden-xs">
                     <a class="btn btn-info btn-lg" href="/designer" role="button">{{ trans('designer.designer_list') }}</a>
                     <a class="btn btn-success btn-lg" href="/designer/create" role="button">{{ trans('designer.create_a_designer_page') }}</a>
@@ -25,15 +25,15 @@
     <div class="carousel-cell" style="background-image:url(/storage/images/0/2/large.jpg)">
         <div class="jumbotron">
             <div class="container">
-                <h1>Design Shops, Museums, and More</h1>
-                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <h1>{{ trans('home.slide_2.title') }}</h1>
+                <p>{{ trans('home.slide_2.content') }}</p>
                 <p class="hidden-xs">
-                    <a class="btn btn-info btn-lg" href="/place" role="button">Design map</a>
-                    <a class="btn btn-success btn-lg" href="/place/create" role="button">Mark a design place</a>
+                    <a class="btn btn-info btn-lg" href="/place" role="button">{{ trans('place.map') }}</a>
+                    <a class="btn btn-success btn-lg" href="/place/create" role="button">{{ trans('place.create_a_place_page') }}</a>
                 </p>
                 <p class="visible-xs-block">
-                    <a class="btn btn-info" href="/place" role="button">Design map</a>
-                    <a class="btn btn-success" href="/place/create" role="button">Mark a design place</a>
+                    <a class="btn btn-info" href="/place" role="button">{{ trans('place.map') }}</a>
+                    <a class="btn btn-success" href="/place/create" role="button">{{ trans('place.create_a_place_page') }}</a>
                 </p>
             </div><!-- .container -->
         </div><!-- .jumbotron -->
@@ -41,15 +41,15 @@
     <div class="carousel-cell" style="background-image:url(/storage/images/0/3/large.jpg)">
         <div class="jumbotron">
             <div class="container">
-                <h1>The Story of Endless Creativity</h1>
-                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <h1>{{ trans('home.slide_3.title') }}</h1>
+                <p>{{ trans('home.slide_3.content') }}</p>
                 <p class="hidden-xs">
-                    <a class="btn btn-info btn-lg" href="/story" role="button">Start reading</a>
-                    <a class="btn btn-success btn-lg" href="/story/create" role="button">Write &amp; publish</a>
+                    <a class="btn btn-info btn-lg" href="/story" role="button">{{ trans('story.story_list') }}</a>
+                    <a class="btn btn-success btn-lg" href="/story/create" role="button">{{ trans('story.write_a_design_story') }}</a>
                 </p>
                 <p class="visible-xs-block">
-                    <a class="btn btn-info" href="/story" role="button">Start reading</a>
-                    <a class="btn btn-success" href="/story/create" role="button">Write an article</a>
+                    <a class="btn btn-info" href="/story" role="button">{{ trans('story.story_list') }}</a>
+                    <a class="btn btn-success" href="/story/create" role="button">{{ trans('story.write_a_design_story') }}</a>
                 </p>
             </div><!-- .container -->
         </div><!-- .jumbotron -->

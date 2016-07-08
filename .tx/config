@@ -26,6 +26,11 @@ file_filter = resources/lang/<lang>/geo.php
 source_lang = en
 type = PHP_ARRAY
 
+[santakani.home]
+file_filter = resources/lang/<lang>/home.php
+source_lang = en
+type = PHP_ARRAY
+
 [santakani.pagination]
 file_filter = resources/lang/<lang>/pagination.php
 source_lang = en

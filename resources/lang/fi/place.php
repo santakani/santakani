@@ -7,6 +7,7 @@ return array(
     'map' => 'Map',
     'museum' => 'Museum',
     'place' => 'Place',
+    'place_list' => 'Place list',
     'places' => 'Places',
     'school' => 'School',
     'shop' => 'Shop',
