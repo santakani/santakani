@@ -209,7 +209,7 @@ class User extends Authenticatable
      */
     public function facebookAvatar($size)
     {
-        return 'http://graph.facebook.com/' . $this->facebook_id . '/picture?type=square'
+        return 'https://graph.facebook.com/' . $this->facebook_id . '/picture?type=square'
             . '&width=' . $size . '&height=' . $size;
     }
 
