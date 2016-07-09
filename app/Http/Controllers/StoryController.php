@@ -55,9 +55,9 @@ class StoryController extends Controller
         if ($request->has('tag_id')) {
             $stories = Story::whereHas('tags', function ($query) use ($request){
                 $query->where('id', $request->input('tag_id'));
-            })->paginate(12);
+            })->orderBy('created_at', 'desc')->paginate(12);
         } else {
-            $stories = Story::paginate(12);
+            $stories = Story::orderBy('created_at', 'desc')->paginate(12);
         }
 
         return view('pages.story.index', [

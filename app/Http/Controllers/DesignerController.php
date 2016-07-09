@@ -56,9 +56,9 @@ class DesignerController extends Controller
         if ($request->has('tag_id')) {
             $designers = Designer::whereHas('tags', function ($query) use ($request){
                 $query->where('id', $request->input('tag_id'));
-            })->paginate(12);
+            })->orderBy('created_at', 'desc')->paginate(12);
         } else {
-            $designers = Designer::paginate(12);
+            $designers = Designer::orderBy('created_at', 'desc')->paginate(12);
         }
 
         return view('pages.designer.index', [

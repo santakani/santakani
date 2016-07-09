@@ -50,12 +50,10 @@ class PlaceController extends Controller
             $places = Place::where([
                 ['city_id', $city->id],
                 ['type', $request->input('type')],
-            ])->paginate(24);
+            ])->orderBy('like_count', 'desc')->paginate(24);
         } else {
-            $places = Place::where('city_id', $city->id)->paginate(24);
+            $places = Place::where('city_id', $city->id)->orderBy('like_count', 'desc')->paginate(24);
         }
-
-
 
         return view('pages.place.index', [
             'places' => $places,
