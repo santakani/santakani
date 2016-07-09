@@ -33,6 +33,7 @@ return array(
     'register' => 'Register',
     'required' => 'Required',
     'save' => 'Save',
+    'search' => 'Search',
     'send' => 'Send',
     'send_email' => 'Send email',
     'settings' => 'Settings',

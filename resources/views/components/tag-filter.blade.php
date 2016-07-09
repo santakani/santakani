@@ -1,22 +1,23 @@
 <?php
 if (!isset($tags)) {
-    $tags = App\Tag::all();
+    $tags = App\Tag::where('level', '>', '199')->get();
 }
+
 if (!isset($selected)) {
-    $selected = 0;
+    $selected = null;
 }
 ?>
 
 <div class="tag-filter" data-toggle="buttons">
-    <label class="btn btn-default {{ $selected == 0 ? 'active' : '' }}">
-        <input type="radio" name="{{ $name or 'tag_id' }}" value="" checked="{{ $selected == 0 ? 'checked' : '' }}" />
+    <input type="hidden" name="{{ $name or 'tag_id' }}" value="{{ $selected }}">
+
+    <button type="button" class="btn btn-default {{ empty($selected) ? 'active' : '' }}" data-id="">
         {{ mb_strtolower(trans('common.all')) }}
-    </label>
+    </button>
 
     @foreach ($tags as $tag)
-        <label class="btn btn-default {{ $selected == $tag->id ? 'active' : '' }}">
-            <input type="radio" name="{{ $name or 'tag_id' }}" value="{{ $tag->id }}" checked="{{ $selected == $tag->id ? 'checked' : '' }}" />
-            {{ $tag->text('name') }}
-        </label>
+        <button type="button" class="btn btn-default {{ intval($selected) === $tag->id ? 'active' : '' }}" data-id="{{ $tag->id }}">
+            {{ mb_strtolower($tag->text('name')) }}
+        </button>
     @endforeach
 </div>

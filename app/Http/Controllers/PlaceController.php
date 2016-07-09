@@ -34,6 +34,7 @@ class PlaceController extends Controller
     {
         $this->validate($request, [
             'city_id' => 'integer|exists:city,id',
+            'tag_id' => 'integer|exists:tag,id',
             'type' => 'string|in:' . implode(',', Place::types()),
         ]);
 
@@ -46,14 +47,19 @@ class PlaceController extends Controller
             }
         }
 
+        $query = Place::where('city_id', $city->id);
+
         if ($request->has('type')) {
-            $places = Place::where([
-                ['city_id', $city->id],
-                ['type', $request->input('type')],
-            ])->orderBy('like_count', 'desc')->paginate(24);
-        } else {
-            $places = Place::where('city_id', $city->id)->orderBy('like_count', 'desc')->paginate(24);
+            $query = $query->where('type', $request->input('type'));
         }
+
+        if ($request->has('tag_id')) {
+            $query = $query->whereHas('tags', function ($sub_query) use ($request) {
+                $sub_query->where('id', $request->input('tag_id'));
+            });
+        }
+
+        $places = $query->orderBy('like_count', 'desc')->paginate(24);
 
         return view('pages.place.index', [
             'places' => $places,

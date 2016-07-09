@@ -6,16 +6,15 @@
 ])
 
 @section('main')
-<div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}">
-</div>
+<div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}"></div>
 
 <div id="place-list">
     <div class="container-fluid">
-        <form class="form-inline" action="/place" method="get">
+
+        <form id="place-filter" class="form" action="{{ url('place') }}" method="get" autocomplete="off">
             <div class="form-group">
-                <label for="city-select">City</label>
-                <select name="city_id" id="city-select" class="city-select form-control"
-                    style="width: 200px">
+                <label>{{ trans('geo.city') }}</label>
+                <select name="city_id" id="city-select" class="city-select form-control">
                     @if (!empty($city))
                         <option value="{{ $city->id }}" selected="selected">
                             {{ $city->full_name }}
@@ -24,14 +23,18 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="type-input">Type</label>
+                <label>{{ trans('common.type') }}</label>
                 @include('components.place-type-select', [
                     'selected' => $type,
                     'all' => true,
                 ])
             </div>
-            <button type="submit" class="btn btn-default">Find</button>
+            <div class="form-group">
+                <label>{{ trans('common.tag') }}</label>
+                @include('components.tag-filter', ['selected' => app('request')->input('tag_id')])
+            </div>
         </form>
+
         @foreach ($places as $place)
             <article id="place-{{ $place->id }}" class="place material-card"
                 data-id="{{ $place->id }}" data-latitude="{{ $place->latitude }}"

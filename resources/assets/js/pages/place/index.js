@@ -168,4 +168,22 @@ map.on('pointermove', function(e) {
 
 });
 
+// Place filter
+
 var citySelect = new CitySelect({el: '#city-select'});
+
+citySelect.$el.change(function () {
+    if (citySelect.$el.val()) {
+        $('#place-filter').submit();
+    }
+});
+
+$('#place-type-select').selectize({allowEmptyOption: true});
+$('#place-type-select').change(function () {
+    $('#place-filter').submit();
+});
+
+$('.tag-filter button').click(function () {
+    $('.tag-filter input').val($(this).data('id'));
+    $('#place-filter').submit();
+});
