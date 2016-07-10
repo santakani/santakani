@@ -68,13 +68,13 @@
 
             <p>{{ $place->full_address }}</p>
             <ul class="list-inline">
-                <li><a href="{{ $place->google_map_url }}">
+                <li><a href="{{ $place->google_map_url }}" target="_blank">
                     {{ trans('geo.google_map') }} <i class="fa fa-external-link"></i>
                 </a></li>
-                <li><a href="{{ $place->bing_map_url }}">
+                <li><a href="{{ $place->bing_map_url }}" target="_blank">
                     {{ trans('geo.bing_map') }} <i class="fa fa-external-link"></i>
                 </a></li>
-                <li><a href="{{ $place->here_map_url }}">
+                <li><a href="{{ $place->here_map_url }}" target="_blank">
                     {{ trans('geo.here_map') }} <i class="fa fa-external-link"></i>
                 </a></li>
             </ul>
