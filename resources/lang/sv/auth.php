@@ -13,11 +13,11 @@ return array(
     |
     */
 
-    'remember_me' => 'Remember me',
-    'forgot_your_password' => 'Forgot your password?',
-    'confirm_password' => 'Confirm password',
-    'reset_password' => 'Reset password',
-    'request_password_reset_link' => 'Request password reset link',
+    'remember_me' => 'Kom ihåg mig',
+    'forgot_your_password' => 'Glömt ditt lösenord?',
+    'confirm_password' => 'Bekräfta lösenord',
+    'reset_password' => 'Återställ lösenord',
+    'request_password_reset_link' => 'Begär återställningslänk av lösenord',
 
     // Auth system messages
     'failed' => 'Dessa referenser inte matchar våra register.',

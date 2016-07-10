@@ -2,8 +2,8 @@
 
 return array(
     'author' => 'Författare',
-    'story' => 'berättelse',
-    'story_list' => 'Story list',
-    'stories' => 'berättelser',
-    'write_a_design_story' => 'Write a design story',
+    'story' => 'Story',
+    'story_list' => 'Story lista',
+    'stories' => 'Stories',
+    'write_a_design_story' => 'Skriv en design story',
 );

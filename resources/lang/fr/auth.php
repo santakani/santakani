@@ -13,14 +13,14 @@ return array(
     |
     */
 
-    'remember_me' => 'Remember me',
-    'forgot_your_password' => 'Forgot your password?',
-    'confirm_password' => 'Confirm password',
-    'reset_password' => 'Reset password',
-    'request_password_reset_link' => 'Request password reset link',
+    'remember_me' => 'Se souvenir de moi',
+    'forgot_your_password' => 'Mot de passe oublié?',
+    'confirm_password' => 'Confirmez le mot de passe',
+    'reset_password' => 'Réinitialiser le mot de passe',
+    'request_password_reset_link' => 'Demande lien de réinitialisation de mot',
 
     // Auth system messages
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Ces informations d\'identification ne correspondent pas à nos dossiers.',
+    'throttle' => 'Trop de tentatives de connexion. Essayer de nouveau dans :seconds secondes, s\'il vous plaît',
 
 );

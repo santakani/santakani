@@ -2,12 +2,12 @@
 
 return array(
     'address' => 'Adress',
-    'create_a_place_page' => 'Create a place page',
-    'location' => 'läge',
+    'create_a_place_page' => 'Skapa en plats sida',
+    'location' => 'Läge',
     'map' => 'Karta',
     'museum' => 'Museum',
     'place' => 'Ställe',
-    'place_list' => 'Place list',
+    'place_list' => 'Plats lista',
     'places' => 'Ställen',
     'school' => 'Skola',
     'shop' => 'Shoppa',
