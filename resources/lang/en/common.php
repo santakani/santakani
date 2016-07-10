@@ -9,6 +9,7 @@ return array(
     'community' => 'Community',
     'confirm' => 'Confirm',
     'contact' => 'Contact',
+    'cover_image' => 'Cover image',
     'create' => 'Create',
     'delete' => 'Delete',
     'done' => 'Done',

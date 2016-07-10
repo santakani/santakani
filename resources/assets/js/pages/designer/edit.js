@@ -20,42 +20,33 @@ var TagSelect = require('../../views/tag-select');
 
 require('../../components/forms/edit-form');
 
-$(function () {
-
-    // Page check
-    if ($('#designer-edit-page').length === 0) {
-        return;
-    }
-
-    // Image manager
-    var manager = new ImageManager({
-        parentType: 'designer',
-        parentId: parseInt($('form').data('id'))
-    });
-
-    // Cover chooser
-    var coverChooser = new ImageChooser({
-        el: '#cover-chooser',
-        width: 600,
-        height: 200,
-        manager: manager,
-        inputName: 'image_id',
-    });
-
-    // Logo chooser
-    var logoChooser = new ImageChooser({
-        el: '#logo-chooser',
-        manager: manager,
-        inputName: 'logo_id',
-    });
-
-    $('.content-editor').each(function () {
-        var contentEditor = new ContentEditor({el: this, imageManager: manager});
-    });
-
-    var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: manager});
-
-    var citySelect = new CitySelect({el: '.city-select'});
-    var tagSelect = new TagSelect({el: '.tag-select'});
-
+// Image manager
+var manager = new ImageManager({
+    parentType: 'designer',
+    parentId: parseInt($('form').data('id'))
 });
+
+// Cover chooser
+var coverChooser = new ImageChooser({
+    el: '#cover-chooser',
+    width: 600,
+    height: 200,
+    manager: manager,
+    inputName: 'image_id',
+});
+
+// Logo chooser
+var logoChooser = new ImageChooser({
+    el: '#logo-chooser',
+    manager: manager,
+    inputName: 'logo_id',
+});
+
+$('.content-editor').each(function () {
+    var contentEditor = new ContentEditor({el: this, imageManager: manager});
+});
+
+var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: manager});
+
+var citySelect = new CitySelect({el: '.city-select'});
+var tagSelect = new TagSelect({el: '.tag-select'});

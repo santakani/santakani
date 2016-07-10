@@ -13,7 +13,7 @@
 
 @section('main')
     <div class="container">
-        <form id="story-edit-form" class="form" action="{{ $story->url }}" data-id="{{ $story->id }}">
+        <form id="story-edit-form" class="edit-form form" action="{{ $story->url }}" data-id="{{ $story->id }}">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -58,16 +58,13 @@
 
             <br/>
 
-            <div id="image-form-group" class="form-group">
-                <label class="control-label">Cover image</label>
-                <div id="cover-editor" class="cover-editor">
-                    <button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button><br><br>
-                    @if ($story->image_id)
-                        @include('components.image-preview', ['image' => $story->image])
-                    @else
-                        @include('components.image-preview')
-                    @endif
-                </div>
+            <div class="form-group">
+                <label class="control-label">{{ trans('common.cover_image') }}</label>
+                <div id="cover-chooser" class="image-chooser"
+                    data-id="{{ $story->image_id }}"
+                    data-mime="{{ $story->image->mime_type or '' }}"
+                    data-width="{{ $story->image->width or '' }}"
+                    data-height="{{ $story->image->height or '' }}"></div>
             </div>
 
             <div class="form-group">
