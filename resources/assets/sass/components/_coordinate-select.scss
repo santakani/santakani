@@ -1,34 +1,80 @@
 .coordinate-select {
-    .grid-lines {
+    position: relative;
+    height: 300px;
 
-        $size: 1000px;
-
+    .map {
         position: absolute;
-        width: 0;
-        height: 0;
-        top: 50%;
+        width: 100%;
+        height: 100%;
+    }
+
+    .map-pin {
+        @include image-cover();
+        position: absolute;
+        width: 50px;
+        height: 50px;
         left: 50%;
-        overflow: visible;
+        top: 50%;
+        margin-left: -25px;
+        margin-top: -25px;
+        background-image: url("/img/icon/map-pin.svg");
 
-        * {
-            position: absolute;
-            background-color: #000000;
+    }
+
+    .locker {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+
+        padding-top: 50px;
+        background-color: rgba(0,0,0,0.5);
+        color: #ffffff;
+        text-align: center;
+        transition: 0.3s;
+        opacity: 0;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 2;
+    }
+
+    .close-button {
+        display: none;
+    }
+
+    .coordiate {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 10px;
+        background-color: rgba(0,0,0,0.5);
+        color: #ffffff;
+    }
+
+    &.edit-mode {
+
+        .locker {
+            display: none;
         }
 
-        :first-child {
-            width: $size;
-            height: 1px;
-            left: - $size * 1.5;
-            top: 0;
-            box-shadow: $size 0 0 #FF00BD;
+        .close-button {
+            display: inline-block;
         }
 
-        :last-child {
-            width: 1px;
-            height: $size;
-            left: 0;
-            top: - $size * 1.5;
-            box-shadow: 0 $size 0 #FF00BD;
+        .lookup-button, .manual-button {
+            display: none;
         }
     }
 }

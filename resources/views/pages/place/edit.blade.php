@@ -78,7 +78,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Gallery</label>
+                <label class="control-label">{{ trans('common.gallery') }}</label>
                 <div id="gallery-editor" class="gallery-editor">
                     <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
                     <div class="images clearfix">
@@ -90,7 +90,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">City</label>
+                <label class="control-label">{{ trans('geo.city') }}</label>
                 <select name="city_id" id="city-select" class="city-select form-control">
                     @if (!empty($place->city_id))
                         <option value="{{ $place->city_id }}" selected="selected">
@@ -101,15 +101,13 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Address</label>
+                <label class="control-label">{{ trans('place.address') }}</label>
                 <input name="address" value="{{ $place->address }}" type="text"
                     maxlength="255" class="form-control" id="address-input">
-                <button id="search-coordinate-button" class="btn btn-info" type="button">
-                    <i class="fa fa-map-marker fa-lg"></i> Mark On Map
-                </button>
             </div>
 
             <div class="form-group">
+                <label class="control-label">{{ trans('geo.mark_location_on_map') }}</label>
                 @include('components.coordinate-select', [
                     'latitude' => $place->latitude,
                     'longitude' => $place->longitude,

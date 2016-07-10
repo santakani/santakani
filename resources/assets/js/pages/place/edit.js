@@ -61,7 +61,7 @@ if (!coordinateSelect.latitude || !coordinateSelect.longitude) {
 
 $('#address-input')[0].oninput = searchCoordinateTimer;
 $('#city-select')[0].onchange = searchCoordinate;
-$('#search-coordinate-button')[0].onclick = searchCoordinate;
+coordinateSelect.$('.lookup-button')[0].onclick = searchCoordinate;
 
 function searchCoordinateTimer () {
     clearTimeout(searchTimeout);

@@ -8,6 +8,13 @@ module.exports = Backbone.View.extend({
 
     zoom: 14,
 
+    events: {
+        'click .lookup-button': 'lookup',
+        'dblclick .locker'     : 'openEditMode',
+        'click .manual-button': 'openEditMode',
+        'click .close-button' : 'closeEditMode',
+    },
+
     initialize: function () {
         this.$latitudeInput = this.$('input[name="latitude"]');
         this.$longitudeInput = this.$('input[name="longitude"]');
@@ -18,8 +25,6 @@ module.exports = Backbone.View.extend({
         this.latitude = parseFloat(this.$latitudeInput.val());
         this.longitude = parseFloat(this.$longitudeInput.val());
 
-        var $gridLines = $('<div class="grid-lines"><div></div><div></div></div>');
-
         var that = this;
 
         this.map = new ol.Map({
@@ -27,11 +32,6 @@ module.exports = Backbone.View.extend({
             layers: [
                 new ol.layer.Tile({
                     source: new ol.source.OSM()
-                })
-            ],
-            controls: [
-                new ol.control.Control({
-                    element: $gridLines[0]
                 })
             ],
             view: new ol.View({
@@ -66,9 +66,27 @@ module.exports = Backbone.View.extend({
 
     updateCenter: function () {
         this.updatingCenter = true;
+        var bounce = ol.animation.bounce({
+          resolution: this.map.getView().getResolution(),
+          duration: 300,
+        });
+        var pan = ol.animation.pan({
+          source: this.map.getView().getCenter(),
+          duration: 300,
+        });
+        this.map.beforeRender(bounce);
+        this.map.beforeRender(pan);
         this.map.getView().setCenter(ol.proj.transform([this.longitude, this.latitude], 'EPSG:4326', 'EPSG:3857'));
         this.map.getView().setZoom(this.zoom);
         this.updatingCenter = false;
+    },
+
+    openEditMode: function () {
+        this.$el.addClass('edit-mode');
+    },
+
+    closeEditMode: function () {
+        this.$el.removeClass('edit-mode');
     },
 
     search: function (query) {
@@ -80,6 +98,8 @@ module.exports = Backbone.View.extend({
                 that.updateCenter();
             }
         });
-    }
+    },
 
+    // This function wil be overrided
+    lookup: function () {}
 });
