@@ -34,7 +34,7 @@ class CreateCountryTable extends Migration
 
             $table->string('code')->unique(); // ISO 3166-1 alpha-2. e.g. "FI", "DE"
             $table->string('continent')->index(); // "EU", "AS"
-            $table->string('currency'); // "EUR", "USD", "RMB"
+            $table->string('currency')->nullable(); // "EUR", "USD", "RMB"
 
             $table->integer('image_id')->unsigned()->nullable();
 

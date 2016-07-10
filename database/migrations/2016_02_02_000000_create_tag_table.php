@@ -47,9 +47,9 @@ class CreateTagTable extends Migration
             $table->integer('tag_id')->unsigned();
             $table->string('locale'); // Language code. ISO 639-1 (2 letters)
 
-            $table->string('name'); // e.g. "wood", "silver", "furniture"
-            $table->string('alias'); // e.g. "cup,mug,glass"
-            $table->string('description'); // Short plain text
+            $table->string('name')->nullable(); // e.g. "wood", "silver", "furniture"
+            $table->string('alias')->nullable(); // e.g. "cup,mug,glass"
+            $table->string('description')->nullable(); // Short plain text
 
             $table->timestamps();
 

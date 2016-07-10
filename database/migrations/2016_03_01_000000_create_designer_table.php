@@ -62,9 +62,9 @@ class CreateDesignerTable extends Migration
             $table->integer('designer_id')->unsigned();
             $table->string('locale'); // ISO 639-1 (2 letters)
 
-            $table->string('name');
-            $table->string('tagline');
-            $table->text('content'); // HTML
+            $table->string('name')->nullable();
+            $table->string('tagline')->nullable();
+            $table->text('content')->nullable(); // HTML
 
             $table->timestamps();
 

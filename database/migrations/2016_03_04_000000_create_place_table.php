@@ -32,20 +32,20 @@ class CreatePlaceTable extends Migration
         Schema::create('place', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('type'); // shop, showroom, studio, school, etc.
+            $table->string('type');
 
             $table->integer('image_id')->unsigned()->nullable();
 
             $table->integer('city_id')->unsigned()->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->float('latitude', 10, 6)->nullable();
             $table->float('longitude', 10, 6)->nullable();
 
-            $table->string('email');
-            $table->string('phone');
-            $table->string('website');
-            $table->string('facebook'); // Facebook page
-            $table->string('google_plus'); // Google+ business page
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('website')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('google_plus')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
 
@@ -65,8 +65,8 @@ class CreatePlaceTable extends Migration
             $table->integer('place_id')->unsigned();
             $table->string('locale');
 
-            $table->string('name');
-            $table->text('content');
+            $table->string('name')->nullable();
+            $table->text('content')->nullable();
 
             $table->timestamps();
 

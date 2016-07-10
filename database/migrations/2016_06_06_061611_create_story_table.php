@@ -49,8 +49,8 @@ class CreateStoryTable extends Migration
             $table->integer('story_id')->unsigned();
             $table->string('locale');
 
-            $table->string('title');
-            $table->text('content');
+            $table->string('title')->nullable();
+            $table->text('content')->nullable();
 
             $table->timestamps();
 
