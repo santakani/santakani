@@ -14,21 +14,13 @@
         <div class="col-sm-8 col-md-8 col-lg-9">
             <h1>{{ $tag->text('name') }}</h1>
             <div class="action-buttons">
-                <button type="button" id="like-button" class="btn btn-default"
-                    data-likeable-id="{{ $tag->id}}" data-likeable-type="tag"
-                    data-liked="{{ $tag->liked }}">
-                    <i class="fa fa-lg {{ $tag->liked?'fa-heart':'fa-heart-o' }}"></i>
-                    Like
-                    <span class="badge">{{ $tag->like_count }}</span>
-                </button>
+                @include('components.buttons.like', ['likeable' => $tag])
                 @if (Auth::check())
                     @if (Auth::user()->can('edit-tag'))
-                        <a id="edit-button" class="btn btn-default" href="{{ $tag->url . '/edit' }}">
-                            <i class="fa fa-pencil-square-o fa-lg"></i> Edit</a>
+                        @include('components.buttons.edit')
                     @endif
                     @if (Auth::user()->can('delete-tag'))
-                        <button type="button" id="delete-button" class="btn btn-danger">
-                            <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+                        @include('components.buttons.delete')
                     @endif
                 @endif
             </div>
