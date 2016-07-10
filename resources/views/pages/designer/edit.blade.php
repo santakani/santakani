@@ -41,21 +41,21 @@
                         <?php $translation = $designer->translations()->where('locale', $locale)->first(); ?>
                         <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
                             <div class="form-group">
-                                <label class="control-label">Name</label>
+                                <label class="control-label">{{ trans('common.name') }}</label>
                                 <input name="translations[{{ $locale }}][name]"
                                     value="{{ $translation->name or '' }}"
                                     class="form-control" type="text" maxlength="255">
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">Tagline</label>
+                                <label class="control-label">{{ trans('designer.design_philosophy') }}</label>
                                 <input name="translations[{{ $locale }}][tagline]"
                                     value="{{ $translation->tagline or '' }}"
                                     class="form-control" type="text" maxlength="255">
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">Content</label>
+                                <label class="control-label">{{ trans('common.about') }}</label>
                                 <textarea name="translations[{{ $locale }}][content]"
                                     class="content-editor">{{ $translation->content or '' }}</textarea>
                             </div>

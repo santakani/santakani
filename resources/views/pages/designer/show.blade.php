@@ -103,9 +103,9 @@ if ($designer->logo_id) {
             <div class="col-md-8 col-lg-9">
                 <!-- Nav tabs -->
                 <ul id="main-tabs" class="nav nav-strokes nav-justified nav-lg" role="tablist">
-                    <li role="presentation" class="active"><a href="#gallery" aria-controls="home" role="tab" data-toggle="tab">Gallery</a></li>
-                    <li role="presentation"><a href="#biography" aria-controls="biography" role="tab" data-toggle="tab">Biography</a></li>
-                    <li role="presentation"><a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">Followers</a></li>
+                    <li role="presentation" class="active"><a href="#gallery" aria-controls="home" role="tab" data-toggle="tab">{{ trans('common.gallery') }}</a></li>
+                    <li role="presentation"><a href="#biography" aria-controls="biography" role="tab" data-toggle="tab">{{ trans('common.about') }}</a></li>
+                    <li role="presentation"><a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">{{ trans('common.followers') }}</a></li>
                 </ul>
 
                 <!-- Tab panes -->
