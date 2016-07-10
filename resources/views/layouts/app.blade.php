@@ -59,6 +59,7 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 
     <!-- Scripts -->
     @include('scripts.global')
+    @include('scripts.analytics')
     <script src="/lib/tinymce/tinymce.js" type="text/javascript"></script>
     <script src="/js/app.js" type="text/javascript"></script>
     @stack('scripts')
