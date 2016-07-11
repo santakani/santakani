@@ -6,7 +6,7 @@
 
 @section('header')
 <div id="home-carousel" class="carousel">
-    <div class="carousel-cell" style="background-image:url(/storage/images/0/1/large.jpg)">
+    <div class="carousel-cell" style="background-image:url(/img/banner/1.jpg)">
         <div class="jumbotron">
             <div class="container">
                 <h1>{{ trans('home.slide_1.title') }}</h1>
@@ -22,7 +22,7 @@
             </div><!-- .container -->
         </div><!-- .jumbotron -->
     </div><!-- .carousel-cell -->
-    <div class="carousel-cell" style="background-image:url(/storage/images/0/2/large.jpg)">
+    <div class="carousel-cell" style="background-image:url(/img/banner/2.jpg)">
         <div class="jumbotron">
             <div class="container">
                 <h1>{{ trans('home.slide_2.title') }}</h1>
@@ -38,7 +38,7 @@
             </div><!-- .container -->
         </div><!-- .jumbotron -->
     </div><!-- .carousel-cell -->
-    <div class="carousel-cell" style="background-image:url(/storage/images/0/3/large.jpg)">
+    <div class="carousel-cell" style="background-image:url(/img/banner/3.jpg)">
         <div class="jumbotron">
             <div class="container">
                 <h1>{{ trans('home.slide_3.title') }}</h1>
