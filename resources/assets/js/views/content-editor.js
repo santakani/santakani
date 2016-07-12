@@ -22,10 +22,10 @@ module.exports = Backbone.View.extend({
         // Initialize TinyMCE
         tinymce.init({
             selector: this.selector,
-            plugins: ['link', 'image', 'paste'],
+            plugins: ['link', 'image', 'paste', 'fullscreen'],
             menubar: false,
             statusbar: false,
-            toolbar: 'undo redo | styleselect | bold italic | link customimage',
+            toolbar: 'undo redo | bold italic | blockquote bullist numlist | link unlink customimage | removeformat | fullscreen',
 
             language: app.locale,
 
