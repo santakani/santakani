@@ -29,7 +29,7 @@
                     @endforeach
                     <li class="more dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            More <span class="caret"></span>
+                            {{ trans('common.more') }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right"></ul>
                     </li>
@@ -41,13 +41,13 @@
                         <?php $translation = $story->translations()->where('locale', $locale)->first(); ?>
                         <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
                             <div class="form-group">
-                                <label class="control-label">Title</label>
+                                <label class="control-label">{{ trans('common.title') }}</label>
                                 <input name="translations[{{ $locale }}][title]" value="{{ $translation->title or '' }}"
                                     id="title-input-{{ $locale }}" class="form-control" type="text" maxlength="255">
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">Content</label>
+                                <label class="control-label">{{ trans('common.content') }}</label>
                                 <textarea name="translations[{{ $locale }}][content]"
                                     class="content-editor">{{ $translation->content or '' }}</textarea>
                             </div>
@@ -60,15 +60,11 @@
 
             <div class="form-group">
                 <label class="control-label">{{ trans('common.cover_image') }}</label>
-                <div id="cover-chooser" class="image-chooser"
-                    data-id="{{ $story->image_id }}"
-                    data-mime="{{ $story->image->mime_type or '' }}"
-                    data-width="{{ $story->image->width or '' }}"
-                    data-height="{{ $story->image->height or '' }}"></div>
+                @include('components.upload.image-chooser', ['id' => 'cover-chooser', 'image' => $story->image])
             </div>
 
             <div class="form-group">
-                <label class="control-label">Tags</label>
+                <label class="control-label">{{ trans('common.tags') }}</label>
                 <select name="tag_ids[]" class="tag-select form-control" style="width: 100%" multiple="multiple">
                     @foreach ($story->tags as $tag)
                         <option value="{{ $tag->id }}" selected="selected">{{ $tag->text('name') }}</option>

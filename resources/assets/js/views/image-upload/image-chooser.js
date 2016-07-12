@@ -8,8 +8,6 @@ module.exports = Backbone.View.extend({
 
     className: 'image-chooser',
 
-    template: _.template('<button type="button"><i class="fa fa-camera"></i> Choose image</button><input type="hidden"/>'),
-
     events: {
         'click': 'choose'
     },
@@ -24,13 +22,8 @@ module.exports = Backbone.View.extend({
     initialize: function (options) {
         _.extend(this, options);
 
-        if (!this.$el.html()) {
-            this.render();
-        }
-
         if (typeof this.model === 'undefined') {
-            this.model = new Image();
-            this.model.readElement(this.el);
+            this.model = new Image(this.$el.data('model'));
         }
 
         this.update();
@@ -41,12 +34,6 @@ module.exports = Backbone.View.extend({
         });
 
         this.listenTo(this.model, 'change', this.update);
-    },
-
-    render: function () {
-        this.$el.html(this.template());
-        this.$el.addClass(this.className);
-        this.$('input').attr('name', this.inputName);
     },
 
     update: function () {

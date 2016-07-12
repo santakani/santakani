@@ -13,6 +13,7 @@ return array(
     |
     */
 
+    // Password reset system messages
     'password' => '密码必须大于 6 个字符长，并且与重复输入匹配。',
     'reset' => '您的密码已被重置！',
     'sent' => '我们已经将密码重置链接通过电子邮件发送给您！',
