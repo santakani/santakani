@@ -83,5 +83,5 @@
 @endpush
 
 @push('modals')
-    @include('components.image-manager')
+    @include('components.upload.image-manager')
 @endpush

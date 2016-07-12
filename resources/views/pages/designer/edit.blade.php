@@ -90,7 +90,7 @@
                     <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
                     <div class="images clearfix">
                         @foreach ($designer->gallery_images as $image)
-                            @include('components.image-preview', ['image' => $image])
+                            @include('components.upload.image-preview', ['image' => $image])
                         @endforeach
                     </div>
                 </div>
@@ -161,5 +161,5 @@
 @endpush
 
 @push('modals')
-    @include('components.image-manager')
+    @include('components.upload.image-manager')
 @endpush
