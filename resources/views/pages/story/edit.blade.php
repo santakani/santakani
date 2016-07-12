@@ -72,7 +72,9 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-default">Save</button>
+            <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>
+
+            <a class="btn btn-link" href="{{ url('story/'.$story->id) }}">{{ trans('common.cancel') }}</a>
 
         </form>
     </div><!-- /.container -->
