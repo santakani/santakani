@@ -24,6 +24,7 @@ return array(
     'help' => 'Hjälp',
     'home' => 'Startsidan',
     'image' => 'Bild',
+    'images' => 'Images',
     'language' => 'Språk',
     'like' => 'Gilla',
     'login' => 'Logga in',

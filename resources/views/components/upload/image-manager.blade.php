@@ -3,17 +3,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <button type="button" class="upload-button btn btn-default"><i class="fa fa-cloud-upload"></i> Upload</button>
-                <input type="file" class="file-input hidden" accept="image/jpeg,image/png,image/gif">
-                <h4 class="modal-title">Images</h4>
+
+                <h4 class="modal-title">
+                    {{ trans('common.images') }}
+
+                    <button type="button" class="upload-button btn btn-success">
+                        <i class="fa fa-cloud-upload"></i> {{ trans('common.upload') }}
+                    </button>
+                    <input type="file" class="file-input hidden" accept="image/jpeg,image/png,image/gif">
+                </h4>
             </div>
             <div class="modal-body">
                 <div class="gallery clearfix"></div>
-                <div class="alert alert-info">No images yet, please upload.</div>
+                <div class="alert alert-info"> {{ trans('image.no_image_please_upload') }}</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="cancel-button btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="ok-button btn btn-primary">OK</button>
+                <button type="button" class="cancel-button btn btn-default" data-dismiss="modal">{{ trans('common.cancel') }}</button>
+                <button type="button" class="ok-button btn btn-primary">{{ trans('common.ok') }}</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

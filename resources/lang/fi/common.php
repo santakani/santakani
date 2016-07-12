@@ -24,6 +24,7 @@ return array(
     'help' => 'Help',
     'home' => 'Home',
     'image' => 'Image',
+    'images' => 'Images',
     'language' => 'Language',
     'like' => 'Like',
     'login' => 'Login',

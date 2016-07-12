@@ -31,6 +31,11 @@ file_filter = resources/lang/<lang>/home.php
 source_lang = en
 type = PHP_ARRAY
 
+[santakani.image]
+file_filter = resources/lang/<lang>/image.php
+source_lang = en
+type = PHP_ARRAY
+
 [santakani.pagination]
 file_filter = resources/lang/<lang>/pagination.php
 source_lang = en

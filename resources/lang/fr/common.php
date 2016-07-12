@@ -24,6 +24,7 @@ return array(
     'help' => 'Aider',
     'home' => 'Accueil',
     'image' => 'Image',
+    'images' => 'Images',
     'language' => 'Langue',
     'like' => 'J\'aime',
     'login' => 'Connectez-vous',

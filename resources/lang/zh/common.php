@@ -24,6 +24,7 @@ return array(
     'help' => '帮助',
     'home' => '首页',
     'image' => '图片',
+    'images' => '图片',
     'language' => '语言',
     'like' => '喜欢',
     'login' => '登录',
