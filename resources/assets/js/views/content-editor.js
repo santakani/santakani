@@ -53,9 +53,9 @@ module.exports = Backbone.View.extend({
                                 var src = image.fileUrl('medium');
                                 var largeUrl = image.fileUrl('large');
                                 var size = image.size('medium');
-                                var html = '<a href="' + largeUrl + '"><img src="'
+                                var html = '<p><a href="' + largeUrl + '"><img src="'
                                     + src + '" width="' + size.width + '" height="'
-                                    + size.height + '" alt="Image ' + id + '"></a>';
+                                    + size.height + '" alt="Image ' + id + '"></a></p>';
                                 editor.insertContent(html);
                             }
                         });
