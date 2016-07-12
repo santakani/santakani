@@ -44,6 +44,7 @@ module.exports = Backbone.View.extend({
                     editor.save();
                 });
                 editor.addButton('customimage', {
+                    tooltip: 'Insert/edit image',
                     icon: 'image',
                     onclick: function () {
                         that.imageManager.call({
