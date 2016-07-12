@@ -26,6 +26,8 @@ module.exports = Backbone.View.extend({
             menubar: false,
             toolbar: 'undo redo | styleselect | bold italic | link customimage',
 
+            language: app.locale,
+
             height: 400,
             min_height: 300,
             max_height: 600,

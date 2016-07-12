@@ -25,6 +25,7 @@ elixir(function(mix) {
     mix.copy('node_modules/flag-icon-css/flags', 'public/img/flags');
     mix.copy('node_modules/roboto-fontface/fonts', 'public/fonts/roboto');
     mix.copy('node_modules/tinymce', 'public/lib/tinymce');
+    mix.copy('resources/assets/js/tinymce', 'public/lib/tinymce');
 
     mix.copy('resources/assets/img', 'public/img');
 });
