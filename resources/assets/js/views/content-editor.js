@@ -24,6 +24,7 @@ module.exports = Backbone.View.extend({
             selector: this.selector,
             plugins: ['link', 'image', 'paste'],
             menubar: false,
+            statusbar: false,
             toolbar: 'undo redo | styleselect | bold italic | link customimage',
 
             language: app.locale,
