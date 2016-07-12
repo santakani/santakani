@@ -28,6 +28,7 @@ return array(
     'language' => 'Language',
     'like' => 'Like',
     'login' => 'Login',
+    'logo' => 'Logo',
     'logout' => 'Logout',
     'manage_pages' => 'Manage pages',
     'manage_stories' => 'Manage stories',

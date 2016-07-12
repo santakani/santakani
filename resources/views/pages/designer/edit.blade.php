@@ -56,6 +56,7 @@
 
                             <div class="form-group">
                                 <label class="control-label">{{ trans('common.about') }}</label>
+                                <p class="text-muted">{{ trans('designer.designer_about_tips') }}</p>
                                 <textarea name="translations[{{ $locale }}][content]"
                                     class="content-editor">{{ $translation->content or '' }}</textarea>
                             </div>
@@ -67,25 +68,24 @@
             <br/>
 
             <div class="form-group">
-                <label class="control-label">Cover image</label>
-                <div id="cover-chooser" class="image-chooser"
-                    data-id="{{ $designer->image_id }}"
-                    data-mime="{{ $designer->image->mime_type or '' }}"
-                    data-width="{{ $designer->image->width or '' }}"
-                    data-height="{{ $designer->image->height or '' }}"></div>
+                <label class="control-label">{{ trans('common.cover_image') }}</label>
+                @include('components.upload.image-chooser', [
+                    'id' => 'cover-chooser',
+                    'image' => $designer->image,
+                ])
             </div>
 
             <div class="form-group">
-                <label class="control-label">Logo/photo</label>
-                <div id="logo-chooser" class="image-chooser"
-                    data-id="{{ $designer->logo_id }}"
-                    data-mime="{{ $designer->logo->mime_type or '' }}"
-                    data-width="{{ $designer->logo->width or '' }}"
-                    data-height="{{ $designer->logo->height or '' }}"></div>
+                <label class="control-label">{{ trans('common.logo') }} / {{ trans('designer.designer_photo') }}</label>
+                @include('components.upload.image-chooser', [
+                    'id' => 'logo-chooser',
+                    'image' => $designer->logo,
+                ])
             </div>
 
             <div class="form-group">
-                <label class="control-label">Gallery</label>
+                <label class="control-label">{{ trans('common.gallery') }}</label>
+                <p class="text-muted">{{ trans('designer.designer_gallery_tips') }}</p>
                 <div id="gallery-editor" class="gallery-editor">
                     <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
                     <div class="images clearfix">
@@ -97,7 +97,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">City</label>
+                <label class="control-label">{{ trans('geo.city') }}</label>
                 <select name="city_id" id="city-select" class="city-select form-control">
                     @if (!empty($designer->city_id))
                         <option value="{{ $designer->city_id }}" selected="selected">{{ $designer->city->full_name }}</option>
@@ -106,7 +106,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Tags</label>
+                <label class="control-label">{{ trans('common.tags') }}</label>
                 <select name="tag_ids[]" class="tag-select" style="width: 100%" multiple="multiple">
                     @foreach ($designer->tags as $tag)
                         <option value="{{ $tag->id }}" selected="selected">{{ $tag->text('name') }}</option>
@@ -115,13 +115,13 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Email</label>
+                <label class="control-label">{{ trans('common.email') }}</label>
                 <input name="email" value="{{ $designer->email }}" type="email"
                     maxlength="255" class="form-control">
             </div>
 
             <div class="form-group">
-                <label class="control-label">Website</label>
+                <label class="control-label">{{ trans('common.website') }}</label>
                 <input name="website" value="{{ $designer->website }}" type="url"
                     maxlength="255" class="form-control">
             </div>
@@ -150,7 +150,9 @@
                     maxlength="255" class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-default">Save</button>
+            <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>
+
+            <a class="btn btn-link" href="{{ url('story/'.$designer->id) }}">{{ trans('common.cancel') }}</a>
 
         </form>
     </div><!-- .container -->
