@@ -86,6 +86,17 @@ $nav_menu_right = [
                     <span class="name hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-header">{{ trans('common.pages') }}</li>
+                    @foreach (Auth::user()->designers()->take(5)->get() as $designer)
+                        <li><a href="{{ url('designer/'.$designer->id) }}">{{ $designer->text('name') }}</a></li>
+                    @endforeach
+                    @foreach (Auth::user()->places()->take(5)->get() as $place)
+                        <li><a href="{{ url('place/'.$place->id) }}">{{ $place->text('name') }}</a></li>
+                    @endforeach
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{{ url('setting/page') }}">{{ trans('common.manage_pages') }}</a></li>
+                    <li><a href="{{ url('setting/story') }}">{{ trans('common.manage_stories') }}</a></li>
+                    <li role="separator" class="divider"></li>
                     <li><a href="{{ url('setting') }}">{{ trans('common.settings') }}</a></li>
                     <li><a href="{{ url('logout') }}">{{ trans('common.logout') }}</a></li>
                 </ul>

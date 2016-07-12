@@ -93,6 +93,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Place');
     }
 
+    /**
+     * User created design stories.
+     */
+    public function stories()
+    {
+        return $this->hasMany('App\Story');
+    }
+
     //====================================================================
     // Dynamic Properties
     //====================================================================

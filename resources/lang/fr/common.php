@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'about' => 'About',
+    'about' => 'À propos',
     'about_us' => 'À propos de Santakani',
     'all' => 'Tout',
     'cancel' => 'Annuler',
@@ -9,7 +9,7 @@ return array(
     'community' => 'Communauté',
     'confirm' => 'Confirmer',
     'contact' => 'Contact',
-    'cover_image' => 'Cover image',
+    'cover_image' => 'Image de couverture',
     'create' => 'Créer',
     'delete' => 'Supprimer',
     'done' => 'Fini',
@@ -18,7 +18,7 @@ return array(
     'email_address' => 'Adresse e-mail',
     'error' => 'Erreur',
     'followers' => 'Followers',
-    'gallery' => 'Gallery',
+    'gallery' => 'Galerie',
     'help' => 'Aider',
     'home' => 'Accueil',
     'image' => 'Image',
@@ -37,7 +37,7 @@ return array(
     'register' => 'Renseignez-vous',
     'required' => 'Obligatoire',
     'save' => 'Enregistrer les modifications',
-    'search' => 'Search',
+    'search' => 'Chercher',
     'send' => 'Envoyer',
     'send_email' => 'Envoyer un mail',
     'settings' => 'Paramètres',
