@@ -1,7 +1,6 @@
 var Flickity = require('flickity');
 
-var Place = require('../../models/place');
-var PlaceMap = require('../../views/place-map');
+var SimpleMap = require('../../views/maps/simple-map');
 var DeleteButton = require('../../views/delete-button');
 var LikeButton = require('../../views/like-button');
 
@@ -46,11 +45,8 @@ $gallery.find('.raster').click(function () {
 });
 
 // Map
-var place = new Place({
+var placeMap = new SimpleMap({
+    el: '.map',
     latitude: $('.map').data('latitude'),
     longitude: $('.map').data('longitude'),
-});
-var placeMap = new PlaceMap({
-    el: '.map',
-    model: place,
 });

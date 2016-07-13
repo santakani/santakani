@@ -21,6 +21,9 @@ $icon-font-path: '../fonts/bootstrap';
 $roboto-font-path: '../fonts/roboto';
 @import "node_modules/roboto-fontface/css/roboto-fontface.scss";
 
+// Leaflet
+@import "node_modules/leaflet/dist/leaflet";
+
 // Openlayers
 @import "node_modules/openlayers/dist/ol";
 
