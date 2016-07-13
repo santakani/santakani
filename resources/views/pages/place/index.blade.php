@@ -42,14 +42,14 @@
         @foreach ($places as $place)
             <article id="place-{{ $place->id }}" class="place material-card"
                 data-id="{{ $place->id }}" data-latitude="{{ $place->latitude }}"
-                data-longitude="{{ $place->longitude }}">
+                data-longitude="{{ $place->longitude }}"
+                data-model="{{ $place->toJSON() }}">
                 <a href="{{ $place->url }}">
                     <div class="cover-image" style="background-image:url({{ $place->image?$place->image->url('medium'):'' }})">
                         <span class="type">{{ $place->type }}</span>
                     </div>
                     <div class="text">
                         <h1 class="name">
-                            <span class="dot"></span>
                             {{ $place->text('name') }}
                             <small>
                                 {{ $place->address }}
