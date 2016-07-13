@@ -7,22 +7,18 @@ $nav_menu_left = [
     'home' => [
         'text' => trans('common.home'),
         'url' => url('/'),
-        'icon' => 'home',
     ],
     'story' => [
         'text' => trans('story.stories'),
         'url' => url('story'),
-        'icon' => 'book',
     ],
     'designer' => [
         'text' => trans('designer.designers'),
         'url' => url('designer'),
-        'icon' => 'users',
     ],
     'place' => [
         'text' => trans('place.places'),
         'url' => url('place'),
-        'icon' =>'map',
     ],
 ];
 
@@ -47,7 +43,7 @@ $nav_menu_right = [
         @foreach ($nav_menu_left as $key => $value)
             <li class="{{ $active_nav === $key?'active':'' }}">
                 <a href="{{ $value['url'] }}">
-                    <i class="fa fa-{{ $value['icon'] }}"></i>
+                    <img class="icon" src="/img/icon/{{ $key }}.svg"/>
                     <span>{{ $value['text'] }}</span>
                 </a>
             </li>
@@ -65,7 +61,7 @@ $nav_menu_right = [
                 </li>
             @endforeach
         @else
-            <li class="dropdown">
+            <li class="dropdown hidden-xs">
                 <a href="#" class="dropdown-toggle bg-primary" data-toggle="dropdown">
                     <i class="fa fa-plus"></i>
                     <span>{{ trans('common.create') }}</span>

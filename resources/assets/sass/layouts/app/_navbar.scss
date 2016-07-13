@@ -28,6 +28,7 @@ nav.custom-navbar {
         }
 
         > li {
+            flex: 0 0 auto;
             height: $custom-navbar-height;
             line-height: $custom-navbar-height;
 
@@ -51,7 +52,6 @@ nav.custom-navbar {
 
             &.active {
                 > a {
-                    color: $brand-info;
                     border-bottom: 4px solid $brand-info;
                 }
             }
@@ -67,6 +67,12 @@ nav.custom-navbar {
             }
         }
 
+    }
+
+    .icon {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
     }
 
     .logo {
@@ -99,21 +105,30 @@ nav.custom-navbar {
 
         padding: 0;
 
-        .nav-menu > li > a {
-            text-align: center;
-            line-height: 28px;
-
-            i.fa {
-                font-size: 18px;
-                vertical-align: bottom;
+        .nav-menu {
+            &.left, &.right {
+                flex: 1 0 auto;
             }
 
-            span {
-                display: block;
-                font-size: 10px;
-                line-height: 15px;
-            }
+            > li {
+                flex: 0 0 50px;
 
+                > a {
+                    padding: 0;
+                    text-align: center;
+                    line-height: 28px;
+
+                    .icon {
+                        vertical-align: bottom;
+                    }
+
+                    span {
+                        display: block;
+                        font-size: 10px;
+                        line-height: 15px;
+                    }
+                }
+            }
         }
 
         .logo {
