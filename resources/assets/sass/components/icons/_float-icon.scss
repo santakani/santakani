@@ -1,0 +1,20 @@
+.float-icon {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 99px;
+    @include material-shadow(low);
+    z-index: 10;
+    cursor: pointer;
+
+    .icon {
+        display: block;
+        font-size: 32px;
+    }
+}

@@ -187,3 +187,14 @@ $('.tag-filter button').click(function () {
     $('.tag-filter input').val($(this).data('id'));
     $('#place-filter').submit();
 });
+
+$('#place-map .float-icon').click(function () {
+    $('#place-map').removeClass('active');
+    $('#place-list').addClass('active');
+});
+
+$('#place-list .float-icon').click(function () {
+    $('#place-list').removeClass('active');
+    $('#place-map').addClass('active');
+    map.updateSize();
+});

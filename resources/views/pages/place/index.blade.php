@@ -3,12 +3,16 @@
     'body_id' => 'place-index-page',
     'body_classes' => ['place-index-page', 'place-page', 'index-page'],
     'active_nav' => 'place',
+    'has_footer' => false,
 ])
 
 @section('main')
-<div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}"></div>
+<div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}">
+    <div class="float-icon"><i class="fa fa-list"></i></div>
+</div>
 
-<div id="place-list">
+<div id="place-list" class="active">
+    <div class="float-icon"><i class="fa fa-map-o"></i></div>
     <div class="container-fluid">
 
         <form id="place-filter" class="form" action="{{ url('place') }}" method="get" autocomplete="off">
