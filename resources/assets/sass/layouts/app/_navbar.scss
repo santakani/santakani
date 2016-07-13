@@ -14,23 +14,24 @@ nav.custom-navbar {
     .nav-menu {
         @include list-unstyled;
 
+        flex: 1 0 auto;
         height: $custom-navbar-height;
         display: flex;
         margin: 0;
         padding: 0;
 
         &.left {
-            flex: 1 0 auto;
+            justify-content: flex-start;
         }
 
         &.right {
-            flex: 0 0 auto;
+            justify-content: flex-end;
         }
 
         > li {
             flex: 0 0 auto;
             height: $custom-navbar-height;
-            line-height: $custom-navbar-height;
+            line-height: $custom-navbar-height - 4px;
 
             > a {
                 display: block;
@@ -90,11 +91,9 @@ nav.custom-navbar {
     }
 
     .avatar {
-        display: block;
-        float: left;
         width: $custom-navbar-height - 10px;
         height: $custom-navbar-height - 10px;
-        margin: 5px 0;
+        vertical-align: middle;
     }
 
     .name {
@@ -106,29 +105,20 @@ nav.custom-navbar {
         padding: 0;
 
         .nav-menu {
-            &.left, &.right {
-                flex: 1 0 auto;
-            }
 
             > li {
-                flex: 0 0 50px;
+                flex: 0 1 50px;
 
                 > a {
                     padding: 0;
                     text-align: center;
-                    line-height: 28px;
-
-                    .icon {
-                        vertical-align: bottom;
-                    }
-
-                    span {
-                        display: block;
-                        font-size: 10px;
-                        line-height: 15px;
-                    }
                 }
             }
+        }
+
+        .icon, .avatar {
+            width: 32px;
+            height: 32px;
         }
 
         .logo {

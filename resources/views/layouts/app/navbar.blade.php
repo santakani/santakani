@@ -44,7 +44,7 @@ $nav_menu_right = [
             <li class="{{ $active_nav === $key?'active':'' }}">
                 <a href="{{ $value['url'] }}">
                     <img class="icon" src="/img/icon/{{ $key }}.svg"/>
-                    <span>{{ $value['text'] }}</span>
+                    <span class="text hidden-xs">{{ $value['text'] }}</span>
                 </a>
             </li>
         @endforeach
@@ -56,7 +56,7 @@ $nav_menu_right = [
                 <li class="{{ $active_nav === $key?'active':'' }}">
                     <a href="{{ $value['url'] }}">
                         <i class="fa fa-{{ $value['icon'] }}"></i>
-                        <span class="text">{{ $value['text'] }}</span>
+                        <span class="text hidden-xs">{{ $value['text'] }}</span>
                     </a>
                 </li>
             @endforeach
