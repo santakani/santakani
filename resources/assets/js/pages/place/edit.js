@@ -17,7 +17,7 @@ var ContentEditor = require('../../views/content-editor');
 var GalleryEditor = require('../../views/gallery-editor');
 var CitySelect = require('../../views/city-select');
 var TagSelect = require('../../views/tag-select');
-var CoordinateSelect = require('../../views/coordinate-select');
+var CoordinateSelect = require('../../views/maps/coordinate-select');
 
 
 // Image manager

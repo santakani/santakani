@@ -24,9 +24,6 @@ $roboto-font-path: '../fonts/roboto';
 // Leaflet
 @import "node_modules/leaflet/dist/leaflet";
 
-// Openlayers
-@import "node_modules/openlayers/dist/ol";
-
 // SweetAlert
 @import "node_modules/sweetalert/dist/sweetalert";
 
@@ -52,7 +49,6 @@ $flag-icon-css-path: '../img/flags' !default;
 
 // Override Vendor Styles
 @import "vendor/light-gallery";
-@import "vendor/openlayers";
 @import "vendor/selectize";
 @import "vendor/sweetalert";
 

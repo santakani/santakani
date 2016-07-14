@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 
-var ol = require('openlayers');
+var Leaflet = require('leaflet');
 
 module.exports = Backbone.View.extend({
 
@@ -27,32 +27,25 @@ module.exports = Backbone.View.extend({
 
         var that = this;
 
-        this.map = new ol.Map({
-            target: this.$('.map')[0],
-            layers: [
-                new ol.layer.Tile({
-                    source: new ol.source.OSM()
-                })
-            ],
-            view: new ol.View({
-                center: [0, 0],
-                zoom: that.zoom
-            })
-        });
+        this.map = Leaflet.map(this.$('.map')[0], {
+            scrollWheelZoom: false,
+        }).setView([this.latitude, this.longitude], 14);
 
-        if (this.latitude && this.longitude) {
-            this.updateCenter();
-        }
+        this.tile = Leaflet.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(this.map);
 
-        var that = this;
+        this.map.on('moveend', this.getCenter, this);
+    },
 
-        this.map.on('moveend', function (event) {
-            if (!that.updatingCenter) {
-                var xy = that.map.getView().getCenter();
-                var lonlat = ol.proj.transform(xy, 'EPSG:3857', 'EPSG:4326');
-                that.setCoordinate(lonlat[1], lonlat[0]);
-            }
-        });
+    // Move map center by hand
+    getCenter: function () {
+        var center = this.map.getCenter();
+        this.setCoordinate(center.lat, center.lng);
+    },
+
+    setCenter: function () {
+        this.map.setView([this.latitude, this.longitude], 14);
     },
 
     setCoordinate: function (latitude, longitude) {
@@ -62,23 +55,6 @@ module.exports = Backbone.View.extend({
         this.$longitudeInput.val(longitude);
         this.$latitudeText.text(latitude);
         this.$longitudeText.text(longitude);
-    },
-
-    updateCenter: function () {
-        this.updatingCenter = true;
-        var bounce = ol.animation.bounce({
-          resolution: this.map.getView().getResolution(),
-          duration: 300,
-        });
-        var pan = ol.animation.pan({
-          source: this.map.getView().getCenter(),
-          duration: 300,
-        });
-        this.map.beforeRender(bounce);
-        this.map.beforeRender(pan);
-        this.map.getView().setCenter(ol.proj.transform([this.longitude, this.latitude], 'EPSG:4326', 'EPSG:3857'));
-        this.map.getView().setZoom(this.zoom);
-        this.updatingCenter = false;
     },
 
     openEditMode: function () {
@@ -95,7 +71,7 @@ module.exports = Backbone.View.extend({
         $.getJSON(url, function(data) {
             if (data.length > 0) {
                 that.setCoordinate(parseFloat(data[0].lat), parseFloat(data[0].lon));
-                that.updateCenter();
+                that.setCenter();
             }
         });
     },
