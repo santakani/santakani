@@ -61,7 +61,6 @@ if (!coordinateSelect.latitude || !coordinateSelect.longitude) {
 
 $('#address-input')[0].oninput = searchCoordinateTimer;
 $('#city-select')[0].onchange = searchCoordinate;
-coordinateSelect.$('.lookup-button')[0].onclick = searchCoordinate;
 
 function searchCoordinateTimer () {
     clearTimeout(searchTimeout);
@@ -77,6 +76,11 @@ function searchCoordinate() {
     }
 }
 
+coordinateSelect.address = function () {
+    var address = $('#address-input').val().trim();
+    var city = $('#city-select option').text().trim();
+    return address + ', ' + city;
+};
 
 // Tag select
 var tagSelect = new TagSelect({el: '.tag-select'});

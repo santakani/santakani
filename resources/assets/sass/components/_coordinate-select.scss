@@ -1,6 +1,6 @@
 .coordinate-select {
     position: relative;
-    height: 300px;
+    height: 400px;
 
     .map {
         position: absolute;
@@ -11,70 +11,31 @@
     .map-pin {
         @include image-cover();
         position: absolute;
-        width: 50px;
-        height: 50px;
+        width: 24px;
+        height: 48px;
         left: 50%;
-        top: 50%;
-        margin-left: -25px;
-        margin-top: -25px;
+        bottom: 50%;
+        margin-left: -12px;
         background-image: url("/img/icon/map-pin.svg");
-
+        border-radius: 99px;
     }
 
-    .locker {
+    .alerts {
         position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 1;
-
-        padding-top: 50px;
-        background-color: rgba(0,0,0,0.5);
-        color: #ffffff;
-        text-align: center;
-        transition: 0.3s;
-        opacity: 0;
-        cursor: pointer;
-
-        &:hover {
-            opacity: 1;
-        }
-    }
-
-    .buttons {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 2;
-    }
-
-    .close-button {
-        display: none;
+        bottom: 60px;
+        left: 10px;
+        max-width: 300px;
     }
 
     .coordiate {
         position: absolute;
         left: 0;
         bottom: 0;
+        right: 0;
         margin: 0;
         padding: 10px;
         background-color: rgba(0,0,0,0.5);
         color: #ffffff;
     }
 
-    &.edit-mode {
-
-        .locker {
-            display: none;
-        }
-
-        .close-button {
-            display: inline-block;
-        }
-
-        .lookup-button, .manual-button {
-            display: none;
-        }
-    }
 }

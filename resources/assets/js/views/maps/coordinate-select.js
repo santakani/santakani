@@ -10,9 +10,6 @@ module.exports = Backbone.View.extend({
 
     events: {
         'click .lookup-button': 'lookup',
-        'dblclick .locker'     : 'openEditMode',
-        'click .manual-button': 'openEditMode',
-        'click .close-button' : 'closeEditMode',
     },
 
     initialize: function () {
@@ -57,25 +54,41 @@ module.exports = Backbone.View.extend({
         this.$longitudeText.text(longitude);
     },
 
-    openEditMode: function () {
-        this.$el.addClass('edit-mode');
+    openFoundAlert: function () {
+        this.$('.alert-success').show();
+        var that = this;
+        setTimeout(function () {
+            that.$('.alert-success').fadeOut();
+        }, 2000);
     },
 
-    closeEditMode: function () {
-        this.$el.removeClass('edit-mode');
+    openNotFoundAlert: function () {
+        this.$('.alert-warning').show();
+        var that = this;
+        setTimeout(function () {
+            that.$('.alert-warning').fadeOut();
+        }, 2000);
     },
 
-    search: function (query) {
+    search: function (query, alert) {
         var url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(query) + '&json_callback=?';
         var that = this;
         $.getJSON(url, function(data) {
             if (data.length > 0) {
                 that.setCoordinate(parseFloat(data[0].lat), parseFloat(data[0].lon));
                 that.setCenter();
+                if (alert) {
+                    that.openFoundAlert();
+                }
+            } else {
+                if (alert) {
+                    that.openNotFoundAlert();
+                }
             }
         });
     },
 
-    // This function wil be overrided
-    lookup: function () {}
+    lookup: function () {
+        this.search(this.address(), true);
+    }
 });
