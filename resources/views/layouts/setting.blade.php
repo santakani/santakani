@@ -5,10 +5,11 @@
 <?php
 
 $sections = [
-    'profile' => ['name' => 'Profile', 'url' => '/setting/profile'],
-    'account' => ['name' => 'Account', 'url' => '/setting/account'],
-    'page' => ['name' => 'Pages', 'url' => '/setting/page'],
-    'trash' => ['name' => 'Trashed content', 'url' => '/setting/trash'],
+    'profile' => ['name' => trans('common.profile'), 'url' => '/setting/profile'],
+    'account' => ['name' => trans('common.account'), 'url' => '/setting/account'],
+    'page' => ['name' => trans('common.pages'), 'url' => '/setting/page'],
+    'story' => ['name' => trans('story.stories'), 'url' => '/setting/story'],
+    //'trash' => ['name' => trans('common.trashed'), 'url' => '/setting/trash'],
 ];
 
 ?>

@@ -80,6 +80,17 @@ class SettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function story(Request $request)
+    {
+        return view('pages.setting.story', ['user' => $request->user()]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function trash(Request $request)
     {
         return view('pages.setting.trash', ['user' => $request->user()]);

@@ -43,6 +43,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('setting/profile', 'SettingController@profile');
     Route::get('setting/account', 'SettingController@account');
     Route::get('setting/page', 'SettingController@page');
+    Route::get('setting/story', 'SettingController@story');
     Route::get('setting/trash', 'SettingController@trash');
     Route::match(['post', 'put', 'patch'], 'setting', 'SettingController@update');
 
