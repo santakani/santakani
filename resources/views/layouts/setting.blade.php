@@ -1,4 +1,5 @@
 @extends('layouts.app', [
+    'title' => $title . ' - ' . trans('common.settings'),
     'body_classes' => isset($body_classes)?array_merge($body_classes, ['setting-page', 'setting-layout']):['setting-page', 'setting-layout'],
     'active_nav' => 'user',
 ])
@@ -7,8 +8,8 @@
 $sections = [
     'profile' => ['name' => trans('common.profile'), 'url' => '/setting/profile'],
     'account' => ['name' => trans('common.account'), 'url' => '/setting/account'],
-    'page' => ['name' => trans('common.pages'), 'url' => '/setting/page'],
-    'story' => ['name' => trans('story.stories'), 'url' => '/setting/story'],
+    'page' => ['name' => trans('common.my_pages'), 'url' => '/setting/page'],
+    'story' => ['name' => trans('story.my_stories'), 'url' => '/setting/story'],
     //'trash' => ['name' => trans('common.trashed'), 'url' => '/setting/trash'],
 ];
 

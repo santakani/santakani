@@ -1,5 +1,5 @@
 @extends('layouts.setting', [
-    'title' => 'Profile settings',
+    'title' => trans('common.profile'),
     'body_id' => 'profile-setting-page',
     'body_classes' => ['profile-setting-page'],
     'active_section' => 'profile',
@@ -8,14 +8,14 @@
 @section('setting_body')
 <div id="basic-panel" class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Basic information</h3>
+        <h3 class="panel-title">{{ trans('common.basic') }}</h3>
     </div>
     <div class="panel-body">
         <form action="/setting" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                <label for="name-input">Name</label>
+                <label for="name-input">{{ trans('common.name') }}</label>
                 <input name="name" value="{{ old('name', $user->name) }}" type="text"
                     class="form-control" id="name-input" required maxlength="255">
                 @if ($errors->has('name'))
@@ -26,7 +26,7 @@
             </div>
 
             <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                <label for="description-input">Description</label>
+                <label for="description-input">{{ trans('common.description') }}</label>
                 <textarea name="description" class="form-control" id="description-input"
                     maxlength="255">{{ old('description', $user->description) }}</textarea>
                 @if ($errors->has('description'))
@@ -35,14 +35,14 @@
                     </span>
                 @endif
             </div>
-            <button type="submit" class="btn btn-default">Update</button>
+            <button type="submit" class="btn btn-default">{{ trans('common.update') }}</button>
         </form>
     </div>
 </div>
 
 <div id="avatar-panel" class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Avatar</h3>
+        <h3 class="panel-title">{{ trans('common.avatar') }}</h3>
     </div>
     <div class="panel-body">
         <form action="/setting" method="post" enctype="multipart/form-data">
@@ -60,7 +60,7 @@
                     </span>
                 @endif
             </div>
-            <button type="submit" class="btn btn-default">Upload avatar</button>
+            <button type="submit" class="btn btn-default">{{ trans('common.upload') }}</button>
         </form>
     </div>
 </div>

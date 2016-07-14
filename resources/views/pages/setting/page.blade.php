@@ -1,5 +1,5 @@
 @extends('layouts.setting', [
-    'title' => 'Pages',
+    'title' => trans('common.my_pages'),
     'body_id' => 'page-setting-page',
     'body_classes' => ['page-setting-page'],
     'active_section' => 'page',

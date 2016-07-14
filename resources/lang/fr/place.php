@@ -8,6 +8,8 @@ return array(
     'museum' => 'Musée',
     'place' => 'Lieu',
     'place_list' => 'liste de lieu',
+    'place_pages' => 'Place pages',
+    'place_pages_description' => 'Place pages you created.',
     'places' => 'Lieux',
     'school' => 'L\'école',
     'shop' => 'Boutique',

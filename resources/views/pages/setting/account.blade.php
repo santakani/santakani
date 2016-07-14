@@ -1,5 +1,5 @@
 @extends('layouts.setting', [
-    'title' => 'Account settings',
+    'title' => trans('common.account'),
     'body_id' => 'account-setting-page',
     'body_classes' => ['account-setting-page'],
     'active_section' => 'account',
@@ -8,7 +8,7 @@
 @section('setting_body')
 <div id="email-panel" class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Email</h3>
+        <h3 class="panel-title">{{ trans('common.email_address') }}</h3>
     </div>
     <div class="panel-body">
         <form action="/setting" method="post">
@@ -24,14 +24,14 @@
                     </span>
                 @endif
             </div>
-            <button type="submit" class="btn btn-default">Change email</button>
+            <button type="submit" class="btn btn-default">{{ trans('common.update') }}</button>
         </form>
     </div>
 </div>
 
 <div id="password-panel" class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Password</h3>
+        <h3 class="panel-title">{{ trans('common.password') }}</h3>
     </div>
     <div class="panel-body">
         <form action="/setting" method="post">
@@ -41,7 +41,7 @@
                 <p class="alert alert-warning">Please fill a valid password for login.</p>
             @else
                 <div class="form-group {{ $errors->has('old_password') ? 'has-error' : '' }}">
-                    <label for="old-password-input">Old password</label>
+                    <label for="old-password-input">{{ trans('common.old_password') }}</label>
                     <input name="old_password" value="{{ old('old_password') }}" type="password" class="form-control" id="old-password-input">
                     @if ($errors->has('old_password'))
                         <span class="help-block">
@@ -51,7 +51,7 @@
                 </div>
             @endif
             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label for="password-input">New password</label>
+                <label for="password-input">{{ trans('common.new_password') }}</label>
                 <input name="password" value="{{ old('password') }}" type="password" class="form-control" id="password-input">
                 @if ($errors->has('password'))
                     <span class="help-block">
@@ -60,7 +60,7 @@
                 @endif
             </div>
             <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-                <label for="password-confirmation-input">Confirm new password</label>
+                <label for="password-confirmation-input">{{ trans('common.confirm_password') }}</label>
                 <input name="password_confirmation" type="password" class="form-control" id="password-confirmation-input">
                 @if ($errors->has('password_confirmation'))
                     <span class="help-block">
@@ -68,14 +68,14 @@
                     </span>
                 @endif
             </div>
-            <button type="submit" class="btn btn-default">Update password</button>
+            <button type="submit" class="btn btn-default">{{ trans('common.update') }}</button>
         </form>
     </div>
 </div>
 
 <div id="social-account-panel" class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Social accounts</h3>
+        <h3 class="panel-title">{{ trans('common.social_accounts') }}</h3>
     </div>
     <div class="panel-body">
         Connect social accounts to login easily and find friends.
@@ -85,31 +85,25 @@
         <tr>
             <td class="text-primary"><i class="fa fa-facebook-official fa-lg"></i> Facebook</td>
             @if (empty($user->facebook_id))
-                <td class="text-muted"><i class="fa fa-times"></i> not connected</td>
-                <td><a class="btn btn-default btn-sm" href="/auth/facebook">connect</a></td>
+                <td><a class="btn btn-default btn-sm" href="/auth/facebook">{{ trans('common.connect') }}</a></td>
             @else
-                <td class="text-success"><i class="fa fa-check"></i> connected</td>
-                <td></td>
+                <td class="text-success"><i class="fa fa-check"></i> {{ trans('common.connected') }}</td>
             @endif
         </tr>
         <tr>
             <td class="text-danger"><i class="fa fa-google-plus-official fa-lg"></i> Google+</td>
             @if (empty($user->google_id))
-                <td class="text-muted"><i class="fa fa-times"></i> not connected</td>
-                <td><a class="btn btn-default btn-sm" href="/auth/google">connect</a></td>
+                <td><a class="btn btn-default btn-sm" href="/auth/google">{{ trans('common.connect') }}</a></td>
             @else
-                <td class="text-success"><i class="fa fa-check"></i> connected</td>
-                <td></td>
+                <td class="text-success"><i class="fa fa-check"></i> {{ trans('common.connected') }}</td>
             @endif
         </tr>
         <tr>
             <td class="text-info"><i class="fa fa-twitter fa-lg"></i> Twitter</td>
             @if (empty($user->twitter_id))
-                <td class="text-muted"><i class="fa fa-times"></i> not connected</td>
-                <td><a class="btn btn-default btn-sm" href="/auth/twitter">connect</a></td>
+                <td><a class="btn btn-default btn-sm" href="/auth/twitter">{{ trans('common.connect') }}</a></td>
             @else
-                <td class="text-success"><i class="fa fa-check"></i> connected</td>
-                <td></td>
+                <td class="text-success"><i class="fa fa-check"></i> {{ trans('common.connected') }}</td>
             @endif
         </tr>
     </table>

@@ -1,5 +1,5 @@
 @extends('layouts.setting', [
-    'title' => 'Stories',
+    'title' => trans('story.my_stories'),
     'body_id' => 'story-setting-page',
     'body_classes' => ['story-setting-page'],
     'active_section' => 'story',
