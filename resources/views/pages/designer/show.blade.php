@@ -52,20 +52,20 @@ if ($designer->logo_id) {
         <div class="row">
             <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
 
-                <h4>Tags</h4>
+                <h4>{{ trans('common.tags') }}</h4>
                 @include('components.tag-list', [
                     'tags' => $designer->tags,
                     'style' => 'round',
                 ])
 
-                <h4>Location</h4>
+                <h4>{{ trans('geo.location') }}</h4>
                 @if ($designer->city_id)
                     <p>{{ $designer->city->full_name }}</p>
                 @else
                     <p>{{ trans('common.unknown') }}</p>
                 @endif
 
-                <h4>Links</h4>
+                <h4>{{ trans('common.links') }}</h4>
                 <div class="links">
                     @if (!empty($designer->facebook))
                         <a href="{{ $designer->facebook }}" title="Facebook">
@@ -143,18 +143,4 @@ if ($designer->logo_id) {
             </div><!-- /.col-* -->
         </div><!-- /.row -->
     </div><!-- /.container -->
-
-
-<div class="content container-600">
-
-
-
-
-</div>
-
-<div class="container-fluid">
-    <div>
-
-    </div>
-</div>
 @endsection
