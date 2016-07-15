@@ -40,13 +40,20 @@ class LocaleDetect {
             // 1. Check URL parameter
             $locale = $request->input('lang');
             App::setLocale($locale);
-            // TODO Logged-in users: save to database
+            // Logged-in users: save to database
             if (Auth::check()) {
                 $user = Auth::user();
                 $user->locale = $locale;
                 $user->save();
             }
             // Guest users: save to cookie. See js/services/locale-detect.js
+
+            // Remove lang parameter from URL and redirect
+            $redirect_url = $request->url();
+            if (count($request->except('lang'))) {
+                $redirect_url .= '?' . http_build_query($request->except('lang'));
+            }
+            return redirect($redirect_url);
         } elseif (Auth::check() && Languages::has(Auth::user()->locale)) {
             // 2. Check database for logged in users
             App::setLocale(Auth::user()->locale);
