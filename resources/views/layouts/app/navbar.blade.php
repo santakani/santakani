@@ -26,12 +26,10 @@ $nav_menu_right = [
     'login' => [
         'text' => trans('common.login'),
         'url' => app_redirect_url('login'),
-        'icon' =>'sign-in',
     ],
     'register' => [
         'text' => trans('common.register'),
         'url' => app_redirect_url('register'),
-        'icon' =>'user-plus',
     ],
 ];
 
@@ -55,7 +53,7 @@ $nav_menu_right = [
             @foreach ($nav_menu_right as $key => $value)
                 <li class="{{ $active_nav === $key?'active':'' }}">
                     <a href="{{ $value['url'] }}">
-                        <i class="fa fa-{{ $value['icon'] }}"></i>
+                        <img class="icon" src="/img/icon/{{ $key }}.svg"/>
                         <span class="text hidden-xs">{{ $value['text'] }}</span>
                     </a>
                 </li>
