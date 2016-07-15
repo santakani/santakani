@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'title' => $place->text('name') . ' - Place',
+    'title' => $place->text('name') . ' - ' . trans('place.'.$place->type) . ' - ' . trans('place.place'),
     'body_id' => 'place-show-page',
     'body_classes' => ['place-show-page', 'place-page', 'show-page'],
     'active_nav' => 'place',
@@ -64,7 +64,8 @@
                 'tags' => $place->tags,
                 'style' => 'plain',
             ])
-            <h4>Location</h4>
+
+            <h4>{{ trans('common.location') }}</h4>
 
             <p>{{ $place->full_address }}</p>
             <ul class="list-inline">
@@ -81,13 +82,13 @@
 
             <div class="map" data-latitude="{{ $place->latitude }}" data-longitude="{{ $place->longitude }}"></div>
 
-            <h4>Contact</h4>
+            <h4>{{ trans('common.contact') }}</h4>
             <ul class="list-unstyled">
                 <li><i class="fa fa-fw fa-phone"></i> {{ $place->phone or '-' }}</li>
                 <li><i class="fa fa-fw fa-envelope-o"></i> {{ $place->email or '-' }}</li>
             </ul>
 
-            <h4>Links</h4>
+            <h4>{{ trans('common.links') }}</h4>
             <ul class="list-unstyled">
                 @if ($place->website)
                     <li><i class="fa fa-fw fa-globe"></i> <a href="{{ $place->website }}">Website</a></li>

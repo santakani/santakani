@@ -30,7 +30,7 @@
                     @endforeach
                     <li class="more dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            More <span class="caret"></span>
+                            {{ trans('common.more') }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right"></ul>
                     </li>
@@ -42,14 +42,14 @@
                         <?php $translation = $place->translations()->where('locale', $locale)->first(); ?>
                         <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
                             <div class="form-group">
-                                <label class="control-label">Name</label>
+                                <label class="control-label">{{ trans('common.name') }}</label>
                                 <input name="translations[{{ $locale }}][name]"
                                     value="{{ $translation->name or '' }}"
                                     class="form-control" type="text" maxlength="255">
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">Content</label>
+                                <label class="control-label">{{ trans('common.description') }}</label>
                                 <textarea name="translations[{{ $locale }}][content]"
                                     class="content-editor">{{ $translation->content or '' }}</textarea>
                             </div>
@@ -61,7 +61,7 @@
             <br/>
 
             <div class="form-group">
-                <label class="control-label">Type</label>
+                <label class="control-label">{{ trans('common.type') }}</label>
                 @include('components.place-type-select', [
                     'selected' => $place->type,
                     'required' => true,
@@ -69,18 +69,14 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Cover image</label>
-                <div id="cover-chooser" class="image-chooser"
-                    data-id="{{ $place->image_id }}"
-                    data-mime="{{ $place->image->mime_type or '' }}"
-                    data-width="{{ $place->image->width or '' }}"
-                    data-height="{{ $place->image->height or '' }}"></div>
+                <label class="control-label">{{ trans('common.cover_image') }}</label>
+                @include('components.upload.image-chooser', ['id' => 'cover-chooser', 'image' => $place->image])
             </div>
 
             <div class="form-group">
                 <label class="control-label">{{ trans('common.gallery') }}</label>
                 <div id="gallery-editor" class="gallery-editor">
-                    <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button></p>
+                    <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> {{ trans('common.add') }}</button></p>
                     <div class="images clearfix">
                         @foreach ($place->gallery_images as $image)
                             @include('components.upload.image-preview', ['image' => $image])
@@ -115,7 +111,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Tags</label>
+                <label class="control-label">{{ trans('common.tags') }}</label>
                 <select name="tag_ids[]" class="tag-select" style="width: 100%" multiple="multiple">
                     @foreach ($place->tags as $tag)
                         <option value="{{ $tag->id }}" selected="selected">
@@ -126,19 +122,19 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Phone</label>
+                <label class="control-label">{{ trans('common.phone_number') }}</label>
                 <input name="phone" value="{{ $place->phone }}" type="tel"
                     id="phone-input" class="form-control" maxlength="255">
             </div>
 
             <div class="form-group">
-                <label class="control-label">Email</label>
+                <label class="control-label">{{ trans('common.email_address') }}</label>
                 <input name="email" value="{{ $place->email }}" type="email"
                     maxlength="255" class="form-control" id="input-email">
             </div>
 
             <div class="form-group">
-                <label class="control-label">Website</label>
+                <label class="control-label">{{ trans('common.address') }}</label>
                 <input name="website" value="{{ $place->website }}" type="url"
                     maxlength="255" class="form-control" id="input-website">
             </div>
@@ -155,7 +151,9 @@
                     maxlength="255" class="form-control" id="input-google-plus">
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>
+
+            <a class="btn btn-link" href="{{ url('place/'.$place->id) }}">{{ trans('common.cancel') }}</a>
 
         </div><!-- /.container -->
     </form>
