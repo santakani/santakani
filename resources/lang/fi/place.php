@@ -1,18 +1,25 @@
 <?php
 
 return array(
-    'address' => 'Address',
-    'create_a_place_page' => 'Create a place page',
-    'location' => 'Location',
-    'map' => 'Map',
-    'museum' => 'Museum',
+
     'place' => 'Place',
+    'places' => 'Places',
     'place_list' => 'Place list',
     'place_pages' => 'Place pages',
+
+    // Manage
     'my_place_pages_description' => 'Place pages you created.',
-    'places' => 'Places',
+
+    // Create
+    'create_a_place_page' => 'Create a place page',
+
+    // Edit
+
+    // Types
+    'museum' => 'Museum',
     'school' => 'School',
     'shop' => 'Shop',
     'showroom' => 'Showroom',
     'studio' => 'Studio',
+
 );

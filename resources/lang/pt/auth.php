@@ -15,6 +15,8 @@ return array(
 
     'remember_me' => 'Remember me',
     'forgot_your_password' => 'Forgot your password?',
+    'old_password' => 'Old password',
+    'new_password' => 'New password',
     'confirm_password' => 'Confirm password',
     'reset_password' => 'Reset password',
     'request_password_reset_link' => 'Request password reset link',

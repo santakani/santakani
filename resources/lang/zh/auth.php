@@ -15,6 +15,8 @@ return array(
 
     'remember_me' => '记住我',
     'forgot_your_password' => '忘记密码？',
+    'old_password' => '旧密码',
+    'new_password' => '新密码',
     'confirm_password' => '确认密码',
     'reset_password' => '重置密码',
     'request_password_reset_link' => '获取密码重置链接',

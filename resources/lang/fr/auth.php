@@ -15,6 +15,8 @@ return array(
 
     'remember_me' => 'Se souvenir de moi',
     'forgot_your_password' => 'Mot de passe oublié?',
+    'old_password' => 'Old password',
+    'new_password' => 'New password',
     'confirm_password' => 'Confirmez le mot de passe',
     'reset_password' => 'Réinitialiser le mot de passe',
     'request_password_reset_link' => 'Demande lien de réinitialisation de mot',

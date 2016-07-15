@@ -1,18 +1,25 @@
 <?php
 
 return array(
-    'address' => 'Adress',
-    'create_a_place_page' => 'Skapa en plats sida',
-    'location' => 'Läge',
-    'map' => 'Karta',
-    'museum' => 'Museum',
+
     'place' => 'Ställe',
+    'places' => 'Ställen',
     'place_list' => 'Plats lista',
     'place_pages' => 'Place pages',
+
+    // Manage
     'my_place_pages_description' => 'Place pages you created.',
-    'places' => 'Ställen',
+
+    // Create
+    'create_a_place_page' => 'Skapa en plats sida',
+
+    // Edit
+
+    // Types
+    'museum' => 'Museum',
     'school' => 'Skola',
     'shop' => 'Shoppa',
     'showroom' => 'Showroom',
     'studio' => 'Studio',
+
 );

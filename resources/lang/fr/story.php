@@ -1,10 +1,15 @@
 <?php
 
 return array(
-    'author' => 'Auteur',
+
     'story' => 'Histoire',
-    'story_list' => 'Liste d\'histoire',
     'stories' => 'Histoires',
+    'story_list' => 'Liste d\'histoire',
+
+    // Manage
     'my_stories' => 'My stories',
+    'my_stories_description' => 'Design stories you published.',
+
+    // Create
     'write_a_design_story' => 'Écrivez une histoire de design',
 );

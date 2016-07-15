@@ -15,6 +15,8 @@ return array(
 
     'remember_me' => 'Kom ihåg mig',
     'forgot_your_password' => 'Glömt ditt lösenord?',
+    'old_password' => 'Old password',
+    'new_password' => 'New password',
     'confirm_password' => 'Bekräfta lösenord',
     'reset_password' => 'Återställ lösenord',
     'request_password_reset_link' => 'Begär återställningslänk av lösenord',

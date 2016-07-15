@@ -15,7 +15,7 @@ return array(
 
     // Location
     'address' => 'Address',
-    'location' => 'location',
+    'location' => 'Location',
     'latitude' => 'Latitude',
     'longitude' => 'Longitude',
 
