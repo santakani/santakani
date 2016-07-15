@@ -39,15 +39,15 @@
         <!-- Default panel contents -->
         <div class="panel-heading">{{ trans('place.place_pages') }}</div>
         <div class="panel-body">
-        <p>{{ trans('place.place_pages_description') }}</p>
+        <p>{{ trans('place.my_place_pages_description') }}</p>
         </div>
 
         <!-- Table -->
         <table class="table">
             <tr>
-                <th>{{ trans('common.cover_image') }}</th>
+                <th>{{ trans('image.cover_image') }}</th>
                 <th>{{ trans('common.name') }}</th>
-                <th>{{ trans('place.address') }}</th>
+                <th>{{ trans('geo.address') }}</th>
                 <th>{{ trans('geo.city') }}</th>
                 <th>{{ trans('common.edit') }}</th>
             </tr>

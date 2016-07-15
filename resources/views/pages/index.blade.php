@@ -31,11 +31,11 @@
                 <div class="text">
                     <p>{{ trans('home.slide_2.content') }}</p>
                     <div class="hidden-md hidden-lg">
-                        <a class="btn btn-info" href="/place" role="button">{{ trans('place.map') }}</a>
+                        <a class="btn btn-info" href="/place" role="button">{{ trans('geo.map') }}</a>
                         <a class="btn btn-success" href="/place/create" role="button">{{ trans('place.create_a_place_page') }}</a>
                     </div>
                     <div class="hidden-xs hidden-sm">
-                        <a class="btn btn-lg btn-info" href="/place" role="button">{{ trans('place.map') }}</a>
+                        <a class="btn btn-lg btn-info" href="/place" role="button">{{ trans('geo.map') }}</a>
                         <a class="btn btn-lg btn-success" href="/place/create" role="button">{{ trans('place.create_a_place_page') }}</a>
                     </div>
                 </div>

@@ -68,7 +68,7 @@
             <br/>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('common.cover_image') }}</label>
+                <label class="control-label">{{ trans('image.cover_image') }}</label>
                 @include('components.upload.image-chooser', [
                     'id' => 'cover-chooser',
                     'image' => $designer->image,

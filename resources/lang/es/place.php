@@ -9,7 +9,7 @@ return array(
     'place' => 'Place',
     'place_list' => 'Place list',
     'place_pages' => 'Place pages',
-    'place_pages_description' => 'Place pages you created.',
+    'my_place_pages_description' => 'Place pages you created.',
     'places' => 'Places',
     'school' => 'School',
     'shop' => 'Shop',

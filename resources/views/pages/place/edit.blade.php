@@ -69,7 +69,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('common.cover_image') }}</label>
+                <label class="control-label">{{ trans('image.cover_image') }}</label>
                 @include('components.upload.image-chooser', ['id' => 'cover-chooser', 'image' => $place->image])
             </div>
 
@@ -97,13 +97,13 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('place.address') }}</label>
+                <label class="control-label">{{ trans('geo.address') }}</label>
                 <input name="address" value="{{ $place->address }}" type="text"
                     maxlength="255" class="form-control" id="address-input">
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('geo.mark_location_on_map') }}</label>
+                <label class="control-label">{{ trans('geo.coordinate_select.label') }}</label>
                 @include('components.coordinate-select', [
                     'latitude' => $place->latitude,
                     'longitude' => $place->longitude,
@@ -134,7 +134,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('common.address') }}</label>
+                <label class="control-label">{{ trans('geo.address') }}</label>
                 <input name="website" value="{{ $place->website }}" type="url"
                     maxlength="255" class="form-control" id="input-website">
             </div>

@@ -9,7 +9,7 @@ return array(
     'place' => 'Ställe',
     'place_list' => 'Plats lista',
     'place_pages' => 'Place pages',
-    'place_pages_description' => 'Place pages you created.',
+    'my_place_pages_description' => 'Place pages you created.',
     'places' => 'Ställen',
     'school' => 'Skola',
     'shop' => 'Shoppa',

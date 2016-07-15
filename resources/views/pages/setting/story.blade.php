@@ -14,7 +14,7 @@
         <!-- Table -->
         <table class="table">
             <tr>
-                <th>{{ trans('common.cover_image') }}</th>
+                <th>{{ trans('image.cover_image') }}</th>
                 <th>{{ trans('common.name') }}</th>
                 <th>{{ trans('common.create_time') }}</th>
                 <th>{{ trans('common.update_time') }}</th>

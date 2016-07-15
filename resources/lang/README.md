@@ -12,7 +12,7 @@ Authentication error messages used by Laravel built-in Auth module.
 
 `common.php`
 
-Contain often used words and sentences.
+Contain often used words and sentences. Any reusable and context-independent texts should be placed here.
 
 `designer.php`
 

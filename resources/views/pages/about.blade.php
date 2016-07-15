@@ -20,7 +20,7 @@
     <section id="community-section">
         <div class="container">
             <h2>{{ trans('common.service') }}</h2>
-            <p>SantaKani is a design platform.</p>
+            <p>Santakani is a design platform.</p>
             <p>Designer profile - designers can share their designs and biography with design lovers.</p>
             <p>Place map - help natives and tourists find best design shops, showrooms, museums and more.</p>
             <p>Design story - everything of design that worths sharing.</p>

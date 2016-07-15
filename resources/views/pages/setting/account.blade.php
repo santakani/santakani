@@ -41,7 +41,7 @@
                 <p class="alert alert-warning">Please fill a valid password for login.</p>
             @else
                 <div class="form-group {{ $errors->has('old_password') ? 'has-error' : '' }}">
-                    <label for="old-password-input">{{ trans('common.old_password') }}</label>
+                    <label for="old-password-input">{{ trans('auth.old_password') }}</label>
                     <input name="old_password" value="{{ old('old_password') }}" type="password" class="form-control" id="old-password-input">
                     @if ($errors->has('old_password'))
                         <span class="help-block">
@@ -51,7 +51,7 @@
                 </div>
             @endif
             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label for="password-input">{{ trans('common.new_password') }}</label>
+                <label for="password-input">{{ trans('auth.new_password') }}</label>
                 <input name="password" value="{{ old('password') }}" type="password" class="form-control" id="password-input">
                 @if ($errors->has('password'))
                     <span class="help-block">
@@ -60,7 +60,7 @@
                 @endif
             </div>
             <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-                <label for="password-confirmation-input">{{ trans('common.confirm_password') }}</label>
+                <label for="password-confirmation-input">{{ trans('auth.confirm_password') }}</label>
                 <input name="password_confirmation" type="password" class="form-control" id="password-confirmation-input">
                 @if ($errors->has('password_confirmation'))
                     <span class="help-block">

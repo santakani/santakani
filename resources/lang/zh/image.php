@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'no_image_please_upload' => '还没有图片，请上传。',
+    'image_manager.no_image_alert' => '还没有图片，请上传。',
 );

@@ -15,7 +15,7 @@
             </div>
             <div class="modal-body">
                 <div class="gallery clearfix"></div>
-                <div class="alert alert-info"> {{ trans('image.no_image_please_upload') }}</div>
+                <div class="alert alert-info"> {{ trans('image.image_manager.no_image_alert') }}</div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="cancel-button btn btn-default" data-dismiss="modal">{{ trans('common.cancel') }}</button>

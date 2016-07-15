@@ -9,7 +9,7 @@ return array(
     'place' => '地点',
     'place_list' => '地点列表',
     'place_pages' => '地点页面',
-    'place_pages_description' => '您创建的地点页面。',
+    'my_place_pages_description' => '您创建的地点页面。',
     'places' => '地点',
     'school' => '学校',
     'shop' => '店铺',

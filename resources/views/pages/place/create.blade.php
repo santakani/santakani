@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-            <label class="control-label">{{ trans('place.address') }}</label>
+            <label class="control-label">{{ trans('geo.address') }}</label>
             <input name="address" value="{{ old('address') }}" type="text"
                    required maxlength="255" class="form-control" id="address-input">
             @if ($errors->has('address'))

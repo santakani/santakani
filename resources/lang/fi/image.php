@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'no_image_please_upload' => 'No images yet, please upload.',
+    'image_manager.no_image_alert' => 'No images yet, please upload.',
 );
