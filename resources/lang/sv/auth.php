@@ -22,7 +22,7 @@ return array(
     'request_password_reset_link' => 'Begär återställningslänk av lösenord',
 
     // Auth system messages
-    'failed' => 'Dessa referenser inte matchar våra register.',
+    'failed' => 'Email address or password is incorrect.',
     'throttle' => 'För många inloggningsförsök . Försök igen :seconds. sekunder.',
 
 );

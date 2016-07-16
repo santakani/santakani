@@ -2,24 +2,24 @@
 
 return array(
 
-    'place' => 'Place',
-    'places' => 'Places',
-    'place_list' => 'Place list',
-    'place_pages' => 'Place pages',
+    'place' => 'Paikka',
+    'places' => 'Paikat',
+    'place_list' => 'Paikka lista',
+    'place_pages' => 'Paikkasivut',
 
     // Manage
-    'my_place_pages_description' => 'Place pages you created.',
+    'my_place_pages_description' => 'Paikka sivut luotu.',
 
     // Create
-    'create_a_place_page' => 'Create a place page',
+    'create_a_place_page' => 'Luo paikka sivulle',
 
     // Edit
 
     // Types
-    'museum' => 'Museum',
-    'school' => 'School',
-    'shop' => 'Shop',
-    'showroom' => 'Showroom',
+    'museum' => 'Museo',
+    'school' => 'Koulu',
+    'shop' => 'Myymälä',
+    'showroom' => 'Esittelytila',
     'studio' => 'Studio',
 
 );

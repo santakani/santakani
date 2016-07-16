@@ -2,5 +2,5 @@
 
 return array(
     'app_name' => 'Santakani',
-    'app_description' => 'Stories of design?!',
+    'app_description' => 'Tarinoita suunnittelu?!',
 );

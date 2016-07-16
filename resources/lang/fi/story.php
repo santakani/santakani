@@ -2,14 +2,14 @@
 
 return array(
 
-    'story' => 'Story',
-    'stories' => 'Stories',
-    'story_list' => 'Story list',
+    'story' => 'Tarina',
+    'stories' => 'Tarinoita',
+    'story_list' => 'Tarina lista',
 
     // Manage
-    'my_stories' => 'My stories',
-    'my_stories_description' => 'Design stories you published.',
+    'my_stories' => 'tarinoitani',
+    'my_stories_description' => 'Suunnittelu juttuja julkaistiin.',
 
     // Create
-    'write_a_design_story' => 'Write a design story',
+    'write_a_design_story' => 'Kirjoita suunnittelu tarina',
 );

@@ -22,7 +22,7 @@ return array(
     'request_password_reset_link' => 'Demande lien de réinitialisation de mot',
 
     // Auth system messages
-    'failed' => 'Ces informations d\'identification ne correspondent pas à nos dossiers.',
+    'failed' => 'Email address or password is incorrect.',
     'throttle' => 'Trop de tentatives de connexion. Essayer de nouveau dans :seconds secondes, s\'il vous plaît',
 
 );

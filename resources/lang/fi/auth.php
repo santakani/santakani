@@ -13,16 +13,16 @@ return array(
     |
     */
 
-    'remember_me' => 'Remember me',
-    'forgot_your_password' => 'Forgot your password?',
-    'old_password' => 'Old password',
-    'new_password' => 'New password',
-    'confirm_password' => 'Confirm password',
-    'reset_password' => 'Reset password',
-    'request_password_reset_link' => 'Request password reset link',
+    'remember_me' => 'Muista minut',
+    'forgot_your_password' => 'Unohditko salasanasi?',
+    'old_password' => 'Vanha salasana',
+    'new_password' => 'Uusi salasana',
+    'confirm_password' => 'Vahvista salasana',
+    'reset_password' => 'Nollaa salasana',
+    'request_password_reset_link' => 'Pyydä salasananvaihtolinkkiä',
 
     // Auth system messages
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'sähköpostiosoite tai salasana on väärä.',
+    'throttle' => 'Liian monta kirjautumisyrityksiä. Yritä uudelleen :seconds sekunnin ajan.',
 
 );

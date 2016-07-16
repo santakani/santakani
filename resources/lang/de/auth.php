@@ -22,7 +22,7 @@ return array(
     'request_password_reset_link' => 'Request password reset link',
 
     // Auth system messages
-    'failed' => 'These credentials do not match our records.',
+    'failed' => 'Email address or password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 );

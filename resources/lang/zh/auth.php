@@ -22,7 +22,7 @@ return array(
     'request_password_reset_link' => '获取密码重置链接',
 
     // Auth system messages
-    'failed' => '用户名密码不匹配。',
+    'failed' => 'Email address or password is incorrect.',
     'throttle' => '登录过于频繁。请等待 :seconds 秒之后再尝试。',
 
 );

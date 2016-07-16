@@ -1,14 +1,15 @@
 <?php
 
 return array(
-    'create_a_designer_page' => 'Create a designer page',
-    'design_philosophy' => 'Design philosophy',
-    'designer_photo' => 'Designer’s photo',
-    'designer' => 'Designer',
-    'designer_pages' => 'Designer pages',
-    'designer_pages_description' => 'Designer pages you created.',
-    'designer_about_tips' => 'Describe the designer’s experience, creation, ideas, etc.',
-    'designer_gallery_tips' => 'Choose best photos to show in the photo gallery of designer page',
-    'designer_list' => 'Designer list',
-    'designers' => 'Designers',
+    'designer' => 'Suunnittelija',
+    'designers' => 'Suunnittelijat',
+    
+    'create_a_designer_page' => 'Luo suunnittelija sivulle',
+    'design_philosophy' => 'Suunnittelufilosofia',
+    'designer_photo' => 'Suunnittelijan valokuva',
+    'designer_pages' => 'Suunnittelija sivut',
+    'designer_pages_description' => 'Suunnittelija sivut luotu.',
+    'designer_about_tips' => 'Kuvaavat suunnittelijan kokemuksen luomiseen, ideoita, jne.',
+    'designer_gallery_tips' => 'Kuvat näkyä kuvagallerian suunnittelija sivun',
+    'designer_list' => 'Suunnittelija lista',
 );

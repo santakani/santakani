@@ -2,34 +2,34 @@
 
 return array(
     // Country
-    'countries' => 'Countries',
-    'country' => 'Country',
-    'country_code' => 'Country code',
-    'continent' => 'Continent',
-    'currency' => 'Currency',
+    'countries' => 'Maat',
+    'country' => 'Maa',
+    'country_code' => 'Maatunnus',
+    'continent' => 'Maanosa',
+    'currency' => 'Valuutta',
 
     // City
-    'cities' => 'Cities',
-    'city' => 'City',
-    'timezone' => 'Timezone',
+    'cities' => 'Kaupungit',
+    'city' => 'Kaupunki',
+    'timezone' => 'Aikavyöhyke',
 
     // Location
-    'address' => 'Address',
-    'location' => 'Location',
-    'latitude' => 'Latitude',
-    'longitude' => 'Longitude',
+    'address' => 'Osoite',
+    'location' => 'Sijainti',
+    'latitude' => 'Leveysaste',
+    'longitude' => 'Pituusaste',
 
     // Maps
-    'map' => 'Map',
-    'bing_map' => 'Bing Map',
-    'google_map' => 'Google Map',
-    'here_map' => 'Here Map',
+    'map' => 'Kartta',
+    'bing_map' => 'Bing Kartat',
+    'google_map' => 'Google Kartat',
+    'here_map' => 'Here Kartat',
 
     // Coordinate select
-    'coordinate_select.found_alert' => 'Successfully marked the location on map!',
-    'coordinate_select.not_found_alert' => 'Cannot find the location. Please drag the map to mark it by hand.',
-    'coordinate_select.help' => 'The map will try to mark location based on address. If not found, please drag and zoom the map to mark it by hand.',
-    'coordinate_select.label' => 'Mark location on map',
-    'coordinate_select.smart_lookup' => 'Smart lookup',
+    'coordinate_select.found_alert' => 'Onnistuneesti merkitty sijainti kartalla!',
+    'coordinate_select.not_found_alert' => 'Ei löydä sijainti. Ole hyvä ja vetää karttaa merkitä sitä käsin.',
+    'coordinate_select.help' => 'Kartan yrittää merkitä sijainti perustuu osoite. Jos ei löydy, ota vedä ja zoomaa karttaa merkitse sitä käsin.',
+    'coordinate_select.label' => 'Merkitse sijainti kartalla',
+    'coordinate_select.smart_lookup' => 'Älykäs haku',
 
 );
