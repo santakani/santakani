@@ -6,6 +6,12 @@
     #auth-panel {
         margin-left: auto;
         margin-right: auto;
-        max-width: 320px;
+        max-width: 360px;
+    }
+}
+
+#auth-modal {
+    .modal-dialog {
+        max-width: 360px;
     }
 }
