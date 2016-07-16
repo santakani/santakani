@@ -11,6 +11,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Gate;
 
 use Illuminate\Http\Request;
@@ -52,13 +53,18 @@ class StoryController extends Controller
             'tag_id' => 'integer|exists:tag,id',
         ]);
 
+        $query = Story::whereHas('translations', function ($sub_query) {
+            $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title')
+                ->whereNotNull('content');
+        });
+
         if ($request->has('tag_id')) {
-            $stories = Story::whereHas('tags', function ($query) use ($request){
-                $query->where('id', $request->input('tag_id'));
-            })->orderBy('created_at', 'desc')->paginate(12);
-        } else {
-            $stories = Story::orderBy('created_at', 'desc')->paginate(12);
+            $query->whereHas('tags', function ($sub_query) use ($request){
+                $sub_query->where('id', $request->input('tag_id'));
+            });
         }
+
+        $stories = $query->orderBy('created_at', 'desc')->paginate(12);
 
         return view('pages.story.index', [
             'stories' => $stories,
@@ -181,11 +187,7 @@ class StoryController extends Controller
 
         if ($request->has('translations')) {
             foreach ($request->input('translations') as $locale => $texts) {
-                if ( empty($texts['title']) && empty($texts['content']) ) {
-                    continue;
-                }
-
-                if (!in_array($locale, Languages::all())) {
+                if (!Languages::has($locale)) {
                     continue;
                 }
 

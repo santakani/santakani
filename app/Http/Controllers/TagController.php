@@ -174,7 +174,7 @@ class TagController extends Controller
 
         if ($request->has('translations') && is_array($request->input('translations'))) {
             foreach ($request->input('translations') as $locale => $texts) {
-                if ( empty($texts['name']) && empty($texts['alias']) && empty($texts['description']) ) {
+                if (!Languages::has($locale)) {
                     continue;
                 }
 

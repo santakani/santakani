@@ -198,11 +198,7 @@ class PlaceController extends Controller
 
         if ($request->has('translations')) {
             foreach ($request->input('translations') as $locale => $texts) {
-                if ( empty($texts['name']) && empty($texts['content']) ) {
-                    continue;
-                }
-
-                if (!in_array($locale, Languages::all())) {
+                if (!Languages::has($locale)) {
                     continue;
                 }
 
