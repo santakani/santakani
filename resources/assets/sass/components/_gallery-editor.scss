@@ -2,13 +2,15 @@
     $image-space: 5px;
 
     .images {
-        margin-right: - $image-space;
-        margin-bottom: - $image-space;
+        padding: $image-space / 2;
+        min-height: 320px;
+        background: $gray-lighter;
+        border-radius: 3px;
     }
+
     .image-preview {
         float: left;
-        margin-right: $image-space;
-        margin-bottom: $image-space;
+        margin: $image-space / 2;
 
         &.sortable-ghost {
             opacity: 0.2;
