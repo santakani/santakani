@@ -72,13 +72,12 @@ module.exports = Backbone.Model.extend({
         });
     },
 
-    delete: function () {
-        $.ajax({
-            method: 'DELETE',
-            url: '/image/' + this.get('id'),
+    destroy: function () {
+        return Backbone.Model.prototype.destroy.call(this, {
             data: {
-                _token: app.token
-            }
+                _token: app.token,
+            },
+            processData: true,
         });
     },
 
@@ -162,11 +161,6 @@ module.exports = Backbone.Model.extend({
         };
     },
 
-    // Legacy
-    fileUrl: function (size) {
-        return this.url(size);
-    },
-
     /**
      * Generate image file urls, based on id, mime type, width and height.
      *
@@ -176,7 +170,7 @@ module.exports = Backbone.Model.extend({
      * @param {boolean} size.excludeThumb
      * @return {string} Image file URL.
      */
-    url: function (size) {
+    fileUrl: function (size) {
         if (typeof size === 'object') {
             if (size.width > 600 || size.height > 600) {
                 size = 'large';

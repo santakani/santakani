@@ -49,7 +49,7 @@ module.exports = Backbone.View.extend({
                 width: realWidth,
                 height: realHeight,
             };
-            this.$el.css('background-image', 'url(' + this.model.url(size) + ')');
+            this.$el.css('background-image', 'url(' + this.model.fileUrl(size) + ')');
         } else {
             this.$el.css('background-image', 'none');
         }
@@ -62,8 +62,8 @@ module.exports = Backbone.View.extend({
         var that = this;
         this.manager.call({
             multiple: false,
-            done: function (image) {
-                that.model.set(image.attributes);
+            done: function (images) {
+                that.model.set(images[0].attributes);
             }
         });
     }

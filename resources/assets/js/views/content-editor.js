@@ -48,16 +48,18 @@ module.exports = Backbone.View.extend({
                     icon: 'image',
                     onclick: function () {
                         that.imageManager.call({
-                            multiple: false,
-                            done: function (image) {
-                                var id = image.get('id');
-                                var src = image.fileUrl('medium');
-                                var largeUrl = image.fileUrl('large');
-                                var size = image.size('medium');
-                                var html = '<p><a href="' + largeUrl + '"><img src="'
-                                    + src + '" width="' + size.width + '" height="'
-                                    + size.height + '" alt="Image ' + id + '"></a></p>';
-                                editor.insertContent(html);
+                            multiple: true,
+                            done: function (images) {
+                                for (var i = 0; i < images.length; i++) {
+                                    var image = images[i];
+                                    var src = image.fileUrl('medium');
+                                    var largeUrl = image.fileUrl('large');
+                                    var size = image.size('medium');
+                                    var html = '<p><a href="' + largeUrl + '"><img src="'
+                                        + src + '" width="' + size.width + '" height="'
+                                        + size.height + '"></a></p>';
+                                    editor.insertContent(html);
+                                }
                             }
                         });
                     }

@@ -93,16 +93,7 @@ module.exports = Backbone.View.extend({
     },
 
     select: function () {
-        if (this.multiple) {
-            this.model.set({selected: !this.model.get('selected')});
-        } else {
-            this.model.set({selected: true});
-            this.trigger('select', this);
-        }
-    },
-
-    unselect: function () {
-        this.model.set({selected: false});
+        this.model.set({selected: !this.model.get('selected')});
     },
 
     /**
@@ -136,7 +127,7 @@ module.exports = Backbone.View.extend({
 
     close: function () {
         if (this.destroyOnRemove) {
-            this.model.delete();
+            this.model.destroy();
         }
         this.remove();
     }

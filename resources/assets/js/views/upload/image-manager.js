@@ -44,6 +44,7 @@ module.exports = Backbone.View.extend({
 
         this.listenTo(this.collection, 'add', this.addImage);
         this.listenTo(this.collection, 'all', this.updateOkButton);
+        this.listenTo(this.collection, 'all', this.toggleNoImageAlert);
 
         var data = {};
         if (this.my) {
@@ -68,6 +69,47 @@ module.exports = Backbone.View.extend({
         this.$el.modal('show');
     },
 
+    openFileBrowser: function () {
+        this.$('.file-input').click();
+    },
+
+    uploadImages: function () {
+        var files = this.$('.file-input')[0].files;
+        for (var i = 0; i < files.length; i++) {
+            var image = new Image();
+            image.upload({
+                image: files[i],
+                parentType: this.parentType,
+                parentId: this.parentId
+            });
+            this.collection.add(image);
+        }
+    },
+
+    /**
+     * When adding new image model, render preview and bind events
+     */
+    addImage: function (image) {
+        var preview = new ImagePreview({
+            model: image,
+            selectable: true,
+            removeable: true,
+            destroyOnRemove: true,
+        });
+        this.$('.gallery').prepend(preview.$el);
+
+        this.listenTo(image, 'change:selected', this.unselectSiblings);
+        image.set('selected', true);
+    },
+
+    unselectSiblings: function (image) {
+        if (!this.multiple && image.get('selected')) {
+            _.each(_.without(this.collection.models, image), function (image) {
+                image.set('selected', false);
+            });
+        }
+    },
+
     resetSelect: function () {
         _.each(this.collection.models, function (model) {
             model.set({
@@ -80,63 +122,12 @@ module.exports = Backbone.View.extend({
         });
     },
 
-    openFileBrowser: function () {
-        this.$('.file-input').click();
-    },
-
-    uploadImages: function () {
-        var files = this.$('.file-input')[0].files;
-        for (var i = 0; i < files.length; i++) {
-            var image = new Image({
-                id: 0,
-                selectable: true,
-                selected: true
-            });
-            image.upload({
-                image: files[i],
-                parentType: this.parentType,
-                parentId: this.parentId
-            });
-            this.collection.add(image);
+    toggleNoImageAlert: function () {
+        if (this.collection.length > 0) {
+            this.$('.alert').hide();
+        } else {
+            this.$('.alert').show();
         }
-    },
-
-    /**
-     * Fetch uploaded images from server.
-     */
-    addImage: function (image) {
-        image.set({
-            selectable: true,
-            selected: true
-        });
-        var preview = new ImagePreview({
-            model: image,
-            selectable: true,
-            removeable: true,
-            destroyOnRemove: true,
-        });
-        this.$('.gallery').prepend(preview.$el);
-        this.previews.push(preview);
-        this.listenTo(preview, 'select', this.unselectSiblings);
-        this.closeAlert();
-    },
-
-    unselectSiblings: function (preview) {
-        _.each(_.without(this.previews, preview), function (preview) {
-            preview.unselect();
-        });
-    },
-
-    showAlert: function (message, type) {
-        if (!type || _.contains(['success', 'info', 'warning', 'danger'], type)) {
-            type = 'info';
-        }
-        this.$('.alert').removeClass('alert-info alert-success alert-warning alert-danger')
-            .addClass('alert-').text(message).show();
-    },
-
-    closeAlert: function () {
-        this.$('.alert').hide();
     },
 
     updateOkButton: function () {
@@ -152,12 +143,8 @@ module.exports = Backbone.View.extend({
     },
 
     finishSelect: function () {
-        var selectedImages = this.collection.where({selected: true});
-        if (this.multiple) {
-            this.done(selectedImages);
-        } else {
-            this.done(selectedImages[0]);
-        }
+        var images = this.collection.where({selected: true});
+        this.done(images);
         this.$el.modal('hide');
     }
 

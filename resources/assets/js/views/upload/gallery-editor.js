@@ -39,13 +39,16 @@ module.exports = Backbone.View.extend({
         var that = this;
 
         this.imageManager.call({
-            done: function (image) {
-                var preview = new ImagePreview({
-                    model: image,
-                    inputName: 'gallery_image_ids[]',
-                    removeable: true,
-                });
-                that.$('.images').append(preview.$el);
+            multiple: true,
+            done: function (images) {
+                _.each(images, function (image) {
+                    var preview = new ImagePreview({
+                        model: image,
+                        inputName: 'gallery_image_ids[]',
+                        removeable: true,
+                    });
+                    that.$('.images').append(preview.$el);
+                }, this);
             }
         });
     },

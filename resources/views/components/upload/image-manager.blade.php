@@ -10,7 +10,7 @@
                     <button type="button" class="upload-button btn btn-success">
                         <i class="fa fa-cloud-upload"></i> {{ trans('common.upload') }}
                     </button>
-                    <input type="file" class="file-input hidden" accept="image/jpeg,image/png,image/gif">
+                    <input type="file" class="file-input hidden" multiple accept="image/jpeg,image/png,image/gif">
                 </h4>
             </div>
             <div class="modal-body">
