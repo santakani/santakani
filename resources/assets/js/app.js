@@ -24,9 +24,6 @@ require('jquery.scrollto');
 // Services
 //==============================
 
-require('./services/locale');
-
-
 
 //==============================
 // Components
