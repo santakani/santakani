@@ -10,11 +10,11 @@ require('../../components/forms/edit-form');
 
 var Image = require('../../models/image');
 
-var ImageChooser = require('../../views/image-upload/image-chooser');
-var ImagePreview = require('../../views/image-preview');
-var ImageManager = require('../../views/image-manager');
+var ImageChooser = require('../../views/upload/image-chooser');
+var ImagePreview = require('../../views/upload/image-preview');
+var ImageManager = require('../../views/upload/image-manager');
 var ContentEditor = require('../../views/content-editor');
-var GalleryEditor = require('../../views/gallery-editor');
+var GalleryEditor = require('../../views/upload/gallery-editor');
 var CitySelect = require('../../views/city-select');
 var TagSelect = require('../../views/tag-select');
 var CoordinateSelect = require('../../views/maps/coordinate-select');

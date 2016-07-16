@@ -57,13 +57,11 @@ $flag-icon-css-path: '../img/flags' !default;
 // Components
 //==============================================================================
 
-@import "components/image-manager";
 @import "components/coordinate-select";
 @import "components/gallery-editor";
 @import "components/material-card";
 @import "components/tag-list";
 @import "components/tag-filter";
-@import "components/upload/image-preview";
 @import "components/raster";
 @import "components/like-button";
 @import "components/page-cover";
@@ -77,7 +75,9 @@ $flag-icon-css-path: '../img/flags' !default;
 
 @import "components/input/content-editor";
 
-@import "components/image-upload/image-chooser";
+@import "components/upload/image-chooser";
+@import "components/upload/image-manager";
+@import "components/upload/image-preview";
 
 
 //==============================================================================

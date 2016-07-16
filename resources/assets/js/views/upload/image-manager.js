@@ -6,8 +6,8 @@
 
 var Backbone = require('backbone');
 
-var ImageList = require('../collections/image-list');
-var Image = require('../models/image');
+var ImageList = require('../../collections/image-list');
+var Image = require('../../models/image');
 var ImagePreview = require('./image-preview');
 
 module.exports = Backbone.View.extend({

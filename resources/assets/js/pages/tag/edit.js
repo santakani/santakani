@@ -1,6 +1,6 @@
 var Image = require('../../models/image');
-var ImagePreview = require('../../views/image-preview');
-var ImageManager = require('../../views/image-manager');
+var ImagePreview = require('../../views/upload/image-preview');
+var ImageManager = require('../../views/upload/image-manager');
 
 (function () {
 

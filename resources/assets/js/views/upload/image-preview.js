@@ -7,8 +7,8 @@
 
 var Backbone = require('backbone');
 
-var Image = require('../models/image');
-var tpl = require('../utility/template');
+var Image = require('../../models/image');
+var tpl = require('../../utility/template');
 
 module.exports = Backbone.View.extend({
 
