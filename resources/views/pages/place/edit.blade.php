@@ -75,14 +75,10 @@
 
             <div class="form-group">
                 <label class="control-label">{{ trans('common.gallery') }}</label>
-                <div id="gallery-editor" class="gallery-editor">
-                    <p><button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> {{ trans('common.add') }}</button></p>
-                    <div class="images clearfix">
-                        @foreach ($place->gallery_images as $image)
-                            @include('components.upload.image-preview', ['image' => $image])
-                        @endforeach
-                    </div>
-                </div>
+                @include('components.upload.gallery-editor', [
+                    'id' => 'gallery-editor',
+                    'images' => $place->gallery_images,
+                ])
             </div>
 
             <div class="form-group">
