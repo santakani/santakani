@@ -72,6 +72,16 @@ module.exports = Backbone.Model.extend({
         });
     },
 
+    delete: function () {
+        $.ajax({
+            method: 'DELETE',
+            url: '/image/' + this.get('id'),
+            data: {
+                _token: app.token
+            }
+        });
+    },
+
     /**
      * Calculate actual width and height of different image sizes. Return an object
      * like {width: 1200, height: 900}

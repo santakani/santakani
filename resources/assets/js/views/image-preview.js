@@ -136,12 +136,7 @@ module.exports = Backbone.View.extend({
 
     close: function () {
         if (this.destroyOnRemove) {
-            this.model.destroy({
-                data: {
-                    _token: app.token
-                },
-                processData: true
-            });
+            this.model.delete();
         }
         this.remove();
     }
