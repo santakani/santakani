@@ -1,7 +1,5 @@
 var elixir = require('laravel-elixir');
 
-require('laravel-elixir-requirejs');
-
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
