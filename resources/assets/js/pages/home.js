@@ -6,7 +6,7 @@
 
     var fkt = new Flickity('#home-carousel', {
         wrapAround: true,
-        autoPlay: true,
+        autoPlay: 10000,
     });
 
 })();
