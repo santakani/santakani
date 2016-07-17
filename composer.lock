@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d07c134736cc4b0064e3525ee49c971d",
-    "content-hash": "a7e619dd41f5d56013d53bf2fdd6c3bd",
+    "hash": "5e1d01d3b0fffd3265a581ae472d9fca",
+    "content-hash": "2326b32c3cca8167b079de23683ac435",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -394,6 +394,7 @@
                 "rest",
                 "web service"
             ],
+            "abandoned": "guzzlehttp/guzzle",
             "time": "2014-01-28 22:29:15"
         },
         {
@@ -1200,6 +1201,55 @@
                 "psr-3"
             ],
             "time": "2016-03-01 18:00:40"
+        },
+        {
+            "name": "msurguy/honeypot",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msurguy/Honeypot.git",
+                "reference": "1ae75cfa11cc02fdc3b1e53363d3122203e7e7f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msurguy/Honeypot/zipball/1ae75cfa11cc02fdc3b1e53363d3122203e7e7f9",
+                "reference": "1ae75cfa11cc02fdc3b1e53363d3122203e7e7f9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "4.*|5.*",
+                "illuminate/support": "4.*|5.*",
+                "illuminate/translation": "4.*|5.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Msurguy\\Honeypot\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maksim Surguy",
+                    "email": "m.surguy@gmail.com"
+                }
+            ],
+            "description": "Honeypot spam prevention",
+            "keywords": [
+                "Forms",
+                "Honeypot",
+                "laravel",
+                "spam"
+            ],
+            "time": "2016-01-31 23:09:00"
         },
         {
             "name": "mtdowling/cron-expression",

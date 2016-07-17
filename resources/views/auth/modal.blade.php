@@ -78,6 +78,7 @@
                         <form class="form" role="form" method="POST" action="{{ url('/register') }}">
 
                             {!! csrf_field() !!}
+                            {!! Honeypot::generate('username', 'birthday') !!}
 
                             <div class="form-group name-form-group">
                                 <label class="control-label">{{ trans('common.name') }}</label>

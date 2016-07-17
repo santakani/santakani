@@ -162,7 +162,7 @@ return [
         * Third Party Service Providers...
         */
         Laravel\Socialite\SocialiteServiceProvider::class,
-
+        Msurguy\Honeypot\HoneypotServiceProvider::class,
     ],
 
     /*
@@ -209,6 +209,9 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+
+        // Third Party Facades
+        'Honeypot'  => Msurguy\Honeypot\HoneypotFacade::class,
 
     ],
 

@@ -35,6 +35,8 @@
 
     {!! csrf_field() !!}
 
+    {!! Honeypot::generate('username', 'birthday') !!}
+
     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
         <label class="control-label">{{ trans('common.name') }}</label>
         <input type="text" class="form-control" name="name" value="{{ old('name') }}">
