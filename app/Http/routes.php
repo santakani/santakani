@@ -68,6 +68,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('place', 'PlaceController');
 
     Route::resource('story', 'StoryController');
+
+    Route::get('admin', 'AdminController@index');
+    Route::get('admin/user', 'AdminController@user');
+    Route::get('admin/user/deleted', 'AdminController@deletedUser');
+    Route::get('admin/image', 'AdminController@image');
+    Route::get('admin/image/deleted', 'AdminController@deletedImage');
+    Route::get('admin/like', 'AdminController@like');
+    Route::get('admin/comment', 'AdminController@comment');
 });
 
 

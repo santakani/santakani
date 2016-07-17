@@ -80,6 +80,10 @@ $nav_menu_right = [
                     <span class="name hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
+                    @if (Auth::user()->role === 'admin')
+                        <li><a href="/admin">Admin panel</a></li>
+                        <li role="separator" class="divider"></li>
+                    @endif
                     <li class="dropdown-header">{{ trans('common.pages') }}</li>
                     @foreach (Auth::user()->designers()->take(5)->get() as $designer)
                         <li><a href="{{ url('designer/'.$designer->id) }}">{{ $designer->text('name') }}</a></li>
