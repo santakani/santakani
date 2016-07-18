@@ -112,3 +112,6 @@ if (document.getElementById('account-setting-page')) {
 if (document.getElementById('user-admin-page')) {
     require('./pages/admin/user');
 }
+if (document.getElementById('deleted-user-admin-page')) {
+    require('./pages/admin/deleted-user');
+}

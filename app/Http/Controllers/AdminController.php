@@ -45,4 +45,21 @@ class AdminController extends Controller
 
         return view('pages.admin.user', ['users' => $users]);
     }
+
+    public function deletedUser(Request $request)
+    {
+        $query = User::onlyTrashed();
+
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%'.$request->input('name').'%' );
+        }
+
+        if ($request->has('email')) {
+            $query->where('email', 'like', '%'.$request->input('email').'%' );
+        }
+
+        $users = $query->orderBy('deleted_at', 'desc')->paginate(100);
+
+        return view('pages.admin.deleted-user', ['users' => $users]);
+    }
 }

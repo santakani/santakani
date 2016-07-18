@@ -100,18 +100,20 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = User::withTrashed()->find($id);
 
         if (empty($user)) {
             abort(404);
         }
 
-        // Check permission
         if ($request->user()->cannot('delete-user', $user)) {
             abort(403);
         }
 
-        // Delete model from database
-        $user->delete();
+        if ($request->has('restore') && $user->trashed()) {
+            $user->restore();
+        } elseif (!$request->has('restore') && !$user->trashed()) {
+            $user->delete();
+        }
     }
 }
