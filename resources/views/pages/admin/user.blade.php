@@ -39,7 +39,7 @@
 
         <br>
 
-        <table class="table">
+        <table id="user-table" class="table">
             <tr>
                 <th>ID</th>
                 <th>Avatar</th>
@@ -47,15 +47,21 @@
                 <th>Email</th>
                 <th>Role</th>
                 <th>Register time</th>
+                <th>Action</th>
             </tr>
             @foreach($users as $user)
-                <tr>
+                <tr data-model="{{ $user->toJSON() }}">
                     <td>{{ $user->id }}</td>
                     <td><img src="{{ $user->avatar('small') }}" width="50" height="50"></td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role }}</td>
                     <td>{{ $user->created_at }}</td>
+                    <td>
+                        @if (Auth::user()->can('delete-user', $user))
+                            <button type="button" class="delete-button btn btn-danger">Delete</button>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </table>

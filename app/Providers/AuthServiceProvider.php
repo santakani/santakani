@@ -61,6 +61,11 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        $gate->define('delete-user', function ($user, $target_user) {
+            // Admins can delete normal users. Admins and editors must be deleted through command line.
+            return $user->role === 'admin' && $target_user->role !== 'admin' && $target_user->role !== 'editor';
+        });
+
 
 
         $gate->define('edit-designer', function ($user, $designer) {

@@ -107,3 +107,8 @@ if (document.getElementById('profile-setting-page')) {
 if (document.getElementById('account-setting-page')) {
     require('./pages/setting/account');
 }
+
+// Admin panel
+if (document.getElementById('user-admin-page')) {
+    require('./pages/admin/user');
+}

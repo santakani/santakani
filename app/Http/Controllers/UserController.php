@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -54,7 +53,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $user = User::find($id);
 
@@ -63,7 +62,7 @@ class UserController extends Controller
         }
 
         // Check permission
-        if (Gate::denies('edit-user', $user)) {
+        if ($request->user()->cannot('edit-user', $user)) {
             abort(403);
         }
 
@@ -86,7 +85,7 @@ class UserController extends Controller
         }
 
         // Check permission
-        if (Gate::denies('edit-user', $user)) {
+        if ($request->user()->cannot('edit-user', $user)) {
             abort(403);
         }
 
@@ -99,7 +98,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $user = User::find($id);
 
@@ -108,7 +107,7 @@ class UserController extends Controller
         }
 
         // Check permission
-        if (Gate::denies('delete-user', $user)) {
+        if ($request->user()->cannot('delete-user', $user)) {
             abort(403);
         }
 
