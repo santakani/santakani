@@ -18,7 +18,7 @@
 
         <h1 class="page-header">Deleted users</h1>
 
-        <form class="form-inline" action="/admin/user" method="get">
+        <form class="form-inline" action="/admin/user/deleted" method="get">
             <div class="form-group">
                 <label class="control-label">Name</label>
                 <input name="name" value="{{ request()->input('name') }}" type="text" class="form-control">

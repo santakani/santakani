@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Image;
+use App\Like;
 use App\User;
 
 class AdminController extends Controller
@@ -61,5 +63,29 @@ class AdminController extends Controller
         $users = $query->orderBy('deleted_at', 'desc')->paginate(100);
 
         return view('pages.admin.deleted-user', ['users' => $users]);
+    }
+
+    public function image(Request $request)
+    {
+        $query = Image::with('parent', 'user');
+
+        $images = $query->orderBy('created_at', 'desc')->paginate(20);
+
+        return view('pages.admin.image', ['images' => $images]);
+    }
+
+    public function deletedImage(Request $request)
+    {
+        return;
+    }
+
+    public function like(Request $request)
+    {
+        return;
+    }
+
+    public function comment(Request $request)
+    {
+        return;
     }
 }
