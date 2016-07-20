@@ -29,11 +29,11 @@ article.tag {
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        background-color: rgba(0,0,0,0.1);
+        background-color: rgba(0,0,0,0.3);
         transition: background-color 0.3s;
 
         &:hover {
-            background-color: rgba(0,0,0,0.3);
+            background-color: rgba(0,0,0,0.5);
         }
     }
 
