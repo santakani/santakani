@@ -58,10 +58,10 @@
                             <img src="{{ $place->image->url('thumb') }}" width="100" height="100"/>
                         @endif
                     </td>
-                    <td><a href="/designer/{{ $place->id }}">{{ $place->text('name') }}</a></td>
+                    <td><a href="/place/{{ $place->id }}">{{ $place->text('name') }}</a></td>
                     <td>{{ $place->address }}</td>
                     <td>{{ $place->city->full_name }}</td>
-                    <td><a href="/designer/{{ $place->id }}/edit">{{ trans('common.edit') }}</a></td>
+                    <td><a href="/place/{{ $place->id }}/edit">{{ trans('common.edit') }}</a></td>
                 </tr>
             @endforeach
         </table>
