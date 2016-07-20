@@ -8,7 +8,7 @@ use Gate;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
+use App\Localization\Languages;
 use App\Tag;
 use App\TagTranslation;
 
