@@ -16,6 +16,8 @@ elixir(function(mix) {
     mix.sass('editor.scss', 'public/css');
     mix.browserify('app.js');
 
+    mix.version(['css/app.css', 'js/app.js']);
+
     mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/fonts/bootstrap');
     mix.copy('node_modules/font-awesome/fonts', 'public/fonts/font-awesome');
     mix.copy('node_modules/lightgallery/dist/fonts', 'public/fonts/lightgallery');
