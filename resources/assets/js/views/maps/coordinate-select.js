@@ -26,13 +26,15 @@ module.exports = Backbone.View.extend({
 
         this.map = Leaflet.map(this.$('.map')[0], {
             scrollWheelZoom: false,
-        }).setView([this.latitude, this.longitude], 14);
+        });
 
         this.tile = Leaflet.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.map);
 
         this.map.on('moveend', this.getCenter, this);
+
+        this.setCenter();
     },
 
     // Move map center by hand
@@ -42,7 +44,9 @@ module.exports = Backbone.View.extend({
     },
 
     setCenter: function () {
-        this.map.setView([this.latitude, this.longitude], 14);
+        if (this.latitude && this.longitude) {
+            this.map.setView([this.latitude, this.longitude], 14);
+        }
     },
 
     setCoordinate: function (latitude, longitude) {
