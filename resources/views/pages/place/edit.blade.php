@@ -130,7 +130,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('geo.address') }}</label>
+                <label class="control-label">{{ trans('common.website') }}</label>
                 <input name="website" value="{{ $place->website }}" type="url"
                     maxlength="255" class="form-control" id="input-website">
             </div>
