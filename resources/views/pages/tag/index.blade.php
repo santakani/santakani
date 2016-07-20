@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'title' => 'Tags',
+    'title' => trans('common.tags'),
     'body_id' => 'tag-index-page',
     'body_classes' => ['tag-index-page', 'tag-page', 'index-page'],
 ])
