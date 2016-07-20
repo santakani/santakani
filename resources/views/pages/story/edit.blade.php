@@ -65,11 +65,7 @@
 
             <div class="form-group">
                 <label class="control-label">{{ trans('common.tags') }}</label>
-                <select name="tag_ids[]" class="tag-select form-control" style="width: 100%" multiple="multiple">
-                    @foreach ($story->tags as $tag)
-                        <option value="{{ $tag->id }}" selected="selected">{{ $tag->text('name') }}</option>
-                    @endforeach
-                </select>
+                @include('components.select.tag', ['selected' => $story->tags])
             </div>
 
             <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>

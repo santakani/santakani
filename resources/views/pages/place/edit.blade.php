@@ -108,13 +108,7 @@
 
             <div class="form-group">
                 <label class="control-label">{{ trans('common.tags') }}</label>
-                <select name="tag_ids[]" class="tag-select" style="width: 100%" multiple="multiple">
-                    @foreach ($place->tags as $tag)
-                        <option value="{{ $tag->id }}" selected="selected">
-                            {{ $tag->text('name') }}
-                        </option>
-                    @endforeach
-                </select>
+                @include('components.select.tag', ['selected' => $place->tags])
             </div>
 
             <div class="form-group">
