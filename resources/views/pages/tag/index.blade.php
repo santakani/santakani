@@ -12,9 +12,9 @@
     @endif
 
     <h1 class="page-header">
-        Tags
+        {{ trans('common.tags') }}
         <a class="btn btn-default" href="/tag/create">
-            <i class="fa fa-plus"></i> New Tag
+            <i class="fa fa-plus"></i> {{ trans('common.create') }}
         </a>
     </h1>
 
