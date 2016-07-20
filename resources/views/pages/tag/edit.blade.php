@@ -1,36 +1,25 @@
 @extends('layouts.app', [
-    'title' => 'Edit: ' . $tag->text('name'),
+    'title' => trans('common.edit') . ': ' . $tag->text('name'),
     'body_id' => 'tag-edit-page',
     'body_classes' => ['tag-edit-page', 'tag-page', 'edit-page'],
     'active_nav' => 'tag',
 ])
 
 @section('header')
-<div class="container">
-    <div class="row">
-        <div class="col-sm-offset-2 sol-sm-10 col-md-8">
-            <h1 class="page-header">Edit: {{ $tag->text('name') }}</h1>
-        </div>
+    <div class="container">
+        <h1 class="page-header">{{ trans('common.edit') }}: {{ $tag->text('name') }}</h1>
     </div>
-</div>
 @endsection
 
 @section('main')
-<div class="container">
-    <form id="tag-edit-form" class="form-horizontal" action="/tag/{{ $tag->id }}"
-        data-id="{{ $tag->id }}">
+    <div class="container">
+        <form id="tag-edit-form" class="edit-form" action="/tag/{{ $tag->id }}"
+            data-id="{{ $tag->id }}">
 
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            {!! csrf_field() !!}
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10 col-md-8">
-                <div class="alert alert-warning" style="display:none;" role="alert"></div>
-            </div>
-        </div>
-
-        <!-- Nav tabs -->
-        <div class="form-group">
-            <div class="col-sm-offset-2 sol-sm-10 col-md-8">
+            <div class="tab-pane-group">
+                <!-- Nav tabs -->
                 <ul id="translation-tabs" class="nav nav-tabs">
                     @foreach (App\Localization\Languages::names() as $locale => $names)
                         <li class="{{ $locale==='en'?'active':'' }}">
@@ -40,86 +29,56 @@
                         </li>
                     @endforeach
                 </ul>
-            </div>
-        </div>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            @foreach (App\Localization\Languages::all() as $locale)
-                <?php $translation = $tag->translations()->where('locale', $locale)->first(); ?>
-                <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
-                    <div class="form-group">
-                        <label for="name-input-{{ $locale }}" class="col-sm-2 control-label">
-                            Name
-                        </label>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    @foreach (App\Localization\Languages::all() as $locale)
+                        <?php $translation = $tag->translations()->where('locale', $locale)->first(); ?>
+                        <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
+                            <div class="form-group">
+                                <label>{{ trans('common.name') }}</label>
+                                <input name="translations[{{ $locale }}][name]" value="{{ $translation->name or '' }}"
+                                       class="form-control" type="text" maxlength="255">
+                            </div>
 
-                        <div class="col-sm-10 col-md-8">
-                            <input name="translations[{{ $locale }}][name]" value="{{ $translation->name or '' }}"
-                                id="name-input-{{ $locale }}" class="form-control" type="text" maxlength="255">
+                            <div class="form-group">
+                                <label>{{ trans('common.alias') }}</label>
+                                <input name="translations[{{ $locale }}][alias]" value="{{ $translation->alias or '' }}"
+                                       class="form-control" type="text" maxlength="255">
+                            </div>
+
+                            <div class="form-group">
+                                <label>{{ trans('common.description') }}</label>
+                                <textarea name="translations[{{ $locale }}][description]"
+                                    class="form-control">{{ $translation->description or '' }}</textarea>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="alias-input-{{ $locale }}" class="col-sm-2 control-label">
-                            Alias
-                        </label>
-
-                        <div class="col-sm-10 col-md-8">
-                            <input name="translations[{{ $locale }}][alias]" value="{{ $translation->alias or '' }}"
-                                id="alias-input-{{ $locale }}" class="form-control" type="text" maxlength="255">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description-input-{{ $locale }}" class="col-sm-2 control-label">
-                            Description
-                        </label>
-
-                        <div class="col-sm-10 col-md-8">
-                            <textarea id="description-input-{{ $locale }}" name="translations[{{ $locale }}][description]"
-                                class="form-control">{{ $translation->description or '' }}</textarea>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        <div id="image-form-group" class="form-group">
-            <label class="col-sm-2 control-label">
-                Cover image
-            </label>
-
-            <div class="col-sm-10 col-md-8">
-                <div id="cover-editor" class="cover-editor">
-                    <button type="button" class="btn btn-default"><i class="fa fa-picture-o"></i> Choose</button><br><br>
-                    @if ($tag->image_id)
-                        @include('components.upload.image-preview', ['image' => $tag->image])
-                    @else
-                        @include('components.upload.image-preview')
-                    @endif
+                    @endforeach
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="level-input" class="col-sm-2 control-label">
-                Level
-            </label>
+            <br>
 
-            <div class="col-sm-4 col-md-2">
+            <div class="form-group">
+                <label>{{ trans('image.cover_image') }}</label>
+                @include('components.upload.image-chooser', [
+                    'id' => 'cover-chooser',
+                    'image' => $tag->image,
+                ])
+            </div>
+
+            <div class="form-group">
+                <label>{{ trans('common.level') }}</label>
                 <input name="level" value="{{ $tag->level or '' }}"
-                    id="level-input" class="form-control" type="number" min="0" max="255">
+                       class="form-control" type="number" min="0" max="255">
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Save</button>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>
 
-    </form>
-</div><!-- .container -->
+            <a class="btn btn-link" href="{{ $tag->url }}">{{ trans('common.cancel') }}</a>
+
+        </form>
+    </div><!-- .container -->
 @endsection
 
 @push('templates')
