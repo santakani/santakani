@@ -29,17 +29,13 @@ var manager = new ImageManager({
 // Cover chooser
 var coverChooser = new ImageChooser({
     el: '#cover-chooser',
-    width: 600,
-    height: 200,
     manager: manager,
-    inputName: 'image_id',
 });
 
 // Logo chooser
 var logoChooser = new ImageChooser({
     el: '#logo-chooser',
     manager: manager,
-    inputName: 'logo_id',
 });
 
 $('.content-editor').each(function () {

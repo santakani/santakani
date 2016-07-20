@@ -72,6 +72,10 @@
                 @include('components.upload.image-chooser', [
                     'id' => 'cover-chooser',
                     'image' => $designer->image,
+                    'name' => 'image_id',
+                    'width' => 600,
+                    'height' => 200,
+                    'size' => 'medium',
                 ])
             </div>
 
@@ -80,6 +84,7 @@
                 @include('components.upload.image-chooser', [
                     'id' => 'logo-chooser',
                     'image' => $designer->logo,
+                    'name' => 'logo_id',
                 ])
             </div>
 
