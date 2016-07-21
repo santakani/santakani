@@ -35,16 +35,19 @@ class TagController extends Controller
             'search' => 'string|max:20',
         ]);
 
+        $query = Tag::query();
+
         if ($request->has('search')) {
             $search = $request->input('search');
 
-            $tags = Tag::whereHas('translations', function ($query) use ($search) {
-                $query->where('name', 'like', $search . '%');
-            })->paginate(24);
-
-        } else {
-            $tags = Tag::paginate(24);
+            $query->whereHas('translations', function ($sub_query) use ($search) {
+                $sub_query->where('name', 'like', $search . '%');
+            });
         }
+
+        $query->orderBy('level', 'desc');
+
+        $tags = $query->paginate(24);
 
         if ($request->wantsJSON()) {
             return response()->json($tags->toArray(), 200);
