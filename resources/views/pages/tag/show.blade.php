@@ -7,6 +7,8 @@
 
 @section('header')
 <div class="container">
+    <p><a href="/tag"><i class="fa fa-angle-double-left"></i> {{ trans('common.tags') }}</a></p>
+
     <div class="row">
         <div class="col-sm-4 col-md-4 col-lg-3">
             <img class="cover-image" src="{{ $tag->image_id?$tag->image->url('thumb'):'/img/placeholder/blank/300x300.svg' }}">
@@ -24,7 +26,7 @@
                     @endif
                 @endif
             </div>
-            <p class="text-muted">{{ $tag->text('alias') }}</p>
+            <br>
             <p>{{ $tag->text('description') }}</p>
         </div><!-- .col -->
     </div><!-- .row -->
