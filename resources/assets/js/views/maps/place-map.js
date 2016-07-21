@@ -48,14 +48,15 @@ var PlaceRow = Backbone.View.extend({
 var PlaceMarker = Backbone.View.extend({
 
     initialize: function () {
-        this.marker = Leaflet.marker([this.model.get('latitude'), this.model.get('longitude')])
-                      .bindPopup(this.model.get('name'));
+        var lat = this.model.get('latitude');
+        var lng = this.model.get('longitude');
 
-        var that = this;
+        if (lat && lng) {
+            this.marker = Leaflet.marker([lat, lng]).bindPopup(this.model.get('name'));
+            this.marker.on('click', this.activate, this);
+        }
 
-        this.marker.on('click', function () {
-            that.activate();
-        });
+        this.listenTo(this.model, 'change:active', this.closePopup);
     },
 
     activate: function () {
@@ -64,7 +65,15 @@ var PlaceMarker = Backbone.View.extend({
     },
 
     openPopup: function () {
-        this.marker.openPopup();
+        if (this.marker) {
+            this.marker.openPopup();
+        }
+    },
+
+    closePopup: function () {
+        if (this.marker && !this.model.get('active')) {
+            this.marker.closePopup();
+        }
     }
 
 });
@@ -94,11 +103,11 @@ module.exports = Backbone.View.extend({
 
             var placeRow = new PlaceRow({el: this, model: model});
 
-            placeRow.map = that.map;
-
             var placeMarker = new PlaceMarker({model: model});
 
-            placeMarker.marker.addTo(that.map);
+            if (placeMarker.marker) {
+                placeMarker.marker.addTo(that.map);
+            }
 
             that.collection.add(model);
 
@@ -113,7 +122,11 @@ module.exports = Backbone.View.extend({
     },
 
     activateRow: function (placeRow) {
-        this.map.setView([placeRow.model.get('latitude'), placeRow.model.get('longitude')]);
+        var lat = placeRow.model.get('latitude');
+        var lng = placeRow.model.get('longitude');
+        if (lat && lng) {
+            this.map.setView([lat, lng]);
+        }
         this.collection.each(function (m) {
             if (m != placeRow.model) {
                 m.set('active', false);

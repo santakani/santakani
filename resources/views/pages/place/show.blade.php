@@ -65,7 +65,7 @@
                 'style' => 'plain',
             ])
 
-            <h4>{{ trans('common.location') }}</h4>
+            <h4>{{ trans('geo.location') }}</h4>
 
             <p>{{ $place->full_address }}</p>
             <ul class="list-inline">
@@ -80,7 +80,10 @@
                 </a></li>
             </ul>
 
-            <div class="map" data-latitude="{{ $place->latitude }}" data-longitude="{{ $place->longitude }}"></div>
+            <div class="map"
+                 data-latitude="{{ $place->latitude }}"
+                 data-longitude="{{ $place->longitude }}"
+                 data-address="{{ $place->full_address }}"></div>
 
             <h4>{{ trans('common.contact') }}</h4>
             <ul class="list-unstyled">

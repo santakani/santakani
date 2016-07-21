@@ -45,8 +45,4 @@ $gallery.find('.raster').click(function () {
 });
 
 // Map
-var placeMap = new SimpleMap({
-    el: '.map',
-    latitude: $('.map').data('latitude'),
-    longitude: $('.map').data('longitude'),
-});
+var placeMap = new SimpleMap({el: '.map'});
