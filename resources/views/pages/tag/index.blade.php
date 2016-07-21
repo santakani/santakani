@@ -18,6 +18,16 @@
         </a>
     </h1>
 
+    <form class="form-inline text-right" action="/tag" method="get">
+        <input name="search" value="{{ request()->input('search') }}"
+               type="search" class="form-control">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-search"></i> {{ trans('common.search') }}
+        </button>
+    </form>
+
+    <br>
+
     <div id="tag-list" class="tag-list row">
         @foreach ($tags as $tag)
             <div class="col-xs-6 col-sm-4 col-md-3">
