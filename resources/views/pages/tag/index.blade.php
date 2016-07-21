@@ -13,9 +13,11 @@
 
     <h1 class="page-header">
         {{ trans('common.tags') }}
-        <a class="btn btn-default" href="/tag/create">
-            <i class="fa fa-plus"></i> {{ trans('common.create') }}
-        </a>
+        @if (Auth::check() && Auth::user()->can('create-tag'))
+            <a class="btn btn-default" href="/tag/create">
+                <i class="fa fa-plus"></i> {{ trans('common.create') }}
+            </a>
+        @endif
     </h1>
 
     <form class="form-inline text-right" action="/tag" method="get">
