@@ -44,7 +44,9 @@ class UserController extends Controller
             abort(404);
         }
 
-        return view('pages.user.show', ['user' => $user]);
+        $stories = $user->stories()->orderBy('created_at', 'desc')->paginate(12);
+
+        return view('pages.user.show', ['user' => $user, 'stories' => $stories]);
     }
 
     /**
