@@ -45,7 +45,7 @@ class TagController extends Controller
             });
         }
 
-        $query->orderBy('level', 'desc');
+        $query->orderBy('level', 'desc')->orderBy('id', 'desc');
 
         $tags = $query->paginate(24);
 
