@@ -84,17 +84,30 @@ $nav_menu_right = [
                         <li><a href="/admin">Admin panel</a></li>
                         <li role="separator" class="divider"></li>
                     @endif
-                    <li class="dropdown-header">{{ trans('common.pages') }}</li>
-                    @foreach (Auth::user()->designers()->take(5)->get() as $designer)
-                        <li><a href="{{ url('designer/'.$designer->id) }}">{{ $designer->text('name') }}</a></li>
-                    @endforeach
-                    @foreach (Auth::user()->places()->take(5)->get() as $place)
-                        <li><a href="{{ url('place/'.$place->id) }}">{{ $place->text('name') }}</a></li>
-                    @endforeach
-                    <li role="separator" class="divider"></li>
-                    <li><a href="{{ url('setting/page') }}">{{ trans('common.manage_pages') }}</a></li>
-                    <li><a href="{{ url('setting/story') }}">{{ trans('common.manage_stories') }}</a></li>
-                    <li role="separator" class="divider"></li>
+                    <?php
+                        $designer_count = Auth::user()->designers()->count();
+                        $place_count = Auth::user()->places()->count();
+                    ?>
+                    @if ($designer_count)
+                        <li class="dropdown-header">{{ trans('designer.designer_pages') }}</li>
+                        @foreach (Auth::user()->designers()->take(5)->get() as $designer)
+                            <li><a href="{{ $designer->url }}">{{ $designer->text('name') }}</a></li>
+                        @endforeach
+                        @if ($designer_count > 5)
+                            <li><a href="{{ url('setting/page') }}">{{ trans('common.more') }}...</a></li>
+                        @endif
+                    @endif
+                    @if ($place_count)
+                        <li class="dropdown-header">{{ trans('place.place_pages') }}</li>
+                        @foreach (Auth::user()->places()->take(5)->get() as $place)
+                            <li><a href="{{ $place->url }}">{{ $place->text('name') }}</a></li>
+                        @endforeach
+                        @if ($place_count > 5)
+                            <li><a href="{{ url('setting/page') }}">{{ trans('common.more') }}...</a></li>
+                        @endif
+                        <li role="separator" class="divider"></li>
+                    @endif
+                    <li><a href="{{ Auth::user()->url }}">{{ trans('common.profile') }}</a></li>
                     <li><a href="{{ url('setting') }}">{{ trans('common.settings') }}</a></li>
                     <li><a href="{{ url('logout') }}">{{ trans('common.logout') }}</a></li>
                 </ul>

@@ -105,6 +105,11 @@ class User extends Authenticatable
     // Dynamic Properties
     //====================================================================
 
+    public function getUrlAttribute()
+    {
+        return url('user/'.$this->id);
+    }
+
     //====================================================================
     // Avatar Methods
     //====================================================================
