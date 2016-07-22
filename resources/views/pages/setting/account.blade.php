@@ -12,6 +12,12 @@
     </div>
     <div class="panel-body">
         <form action="/setting" method="post">
+            @if (session('status') === 'email')
+                <div class="alert alert-success">
+                    Successfully updated email address!
+                </div>
+            @endif
+
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @if (empty($user->email))
                 <p class="alert alert-warning">Please fill a valid email address for login.</p>
@@ -35,6 +41,12 @@
     </div>
     <div class="panel-body">
         <form action="/setting" method="post">
+            @if (session('status') === 'password')
+                <div class="alert alert-success">
+                    Successfully updated password!
+                </div>
+            @endif
+
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="email" value="{{ $user->email }}">
             @if (empty($user->password))

@@ -117,27 +117,30 @@ class SettingController extends Controller
 
         if ($request->has('name')) {
             $user->name = $request->input('name');
+            $status = 'basic';
         }
 
         if ($request->exists('description')) { // Can be empty
             $user->description = $request->input('description');
+            $status = 'basic';
         }
 
         if ($request->hasFile('avatar')) {
             $user->avatar_uploaded_at = Carbon::now()->format('Y-m-d H:i:s');
             $file_path = $request->file('avatar')->getPathName();
             $user->saveAvatarFile($file_path);
+            $status = 'avatar';
         }
 
-        if ($request->has('email')) {
+        if ($request->has('email') && !$request->has('password')) {
             $user->email = $request->input('email');
+            $status = 'email';
         }
 
         if ($request->has('password')) {
-            echo 'exists';
             if ( empty($user->password) || Hash::check($request->input('old_password'), $user->password) ) {
                 $user->password = bcrypt($request->input('password'));
-                echo $user->password;
+                $status = 'password';
             } else {
                 return redirect()->back()->withErrors(['old_password' => ['Old password is incorrect.']]);
             }
@@ -145,7 +148,7 @@ class SettingController extends Controller
 
         $user->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('status', $status);
 
     }
 

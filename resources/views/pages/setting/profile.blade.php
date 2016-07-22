@@ -12,6 +12,13 @@
     </div>
     <div class="panel-body">
         <form action="/setting" method="post">
+
+            @if (session('status') === 'basic')
+                <div class="alert alert-success">
+                    Successfully updated name and description!
+                </div>
+            @endif
+
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
@@ -46,6 +53,12 @@
     </div>
     <div class="panel-body">
         <form action="/setting" method="post" enctype="multipart/form-data">
+            @if (session('status') === 'avatar')
+                <div class="alert alert-success">
+                    Successfully updated avatar!
+                </div>
+            @endif
+
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div id="avatar-preview" class="avatar-preview"
