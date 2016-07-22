@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'title' => 'Places',
+    'title' => trans('place.places'),
     'body_id' => 'place-index-page',
     'body_classes' => ['place-index-page', 'place-page', 'index-page'],
     'active_nav' => 'place',

@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'title' => 'Design Stories',
+    'title' => trans('story.stories'),
     'body_id' => 'story-index-page',
     'body_classes' => ['story-index-page', 'story-page', 'index-page'],
     'active_nav' => 'story',

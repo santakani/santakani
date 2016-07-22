@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'title' => $tag->text('name'),
+    'title' => $tag->text('name') . ' - ' . trans('common.tag'),
     'body_id' => 'tag-show-page',
     'body_classes' => ['tag-show-page', 'tag-page', 'show-page'],
     'active_nav' => 'none',

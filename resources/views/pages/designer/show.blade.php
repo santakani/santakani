@@ -15,7 +15,7 @@ if ($designer->logo_id) {
 ?>
 
 @extends('layouts.app', [
-    'title' => $designer->text('name') . ' - Designer',
+    'title' => $designer->text('name') . ' - ' . trans('designer.designers'),
     'body_id' => 'designer-show-page',
     'body_classes' => ['designer-show-page', 'show-page', 'designer-page'],
     'active_nav' => 'designer',
