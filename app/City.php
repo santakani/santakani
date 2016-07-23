@@ -30,7 +30,7 @@ class City extends Model
      * @var array
      */
     protected $appends = [
-        'url', 'name', 'country_name', 'full_name'
+        'url', 'name', 'country_name', 'full_name', 'search_index'
     ];
 
     /**
@@ -118,6 +118,20 @@ class City extends Model
     public function getFullNameAttribute()
     {
         return $this->text('name') . ', ' . $this->country->text('name');
+    }
+
+    /**
+     * "search_index" getter.
+     *
+     * @return string
+     */
+    public function getSearchIndexAttribute()
+    {
+        $search_index = '';
+        foreach ($this->translations as $translation) {
+            $search_index .= $translation->name;
+        }
+        return $search_index;
     }
 
 

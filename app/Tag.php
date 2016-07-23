@@ -26,7 +26,7 @@ class Tag extends Model
      * @var array
      */
     protected $appends = [
-        'url', 'name'
+        'url', 'name', 'search_index'
     ];
 
     /**
@@ -82,6 +82,20 @@ class Tag extends Model
     public function getNameAttribute()
     {
         return $this->text('name');
+    }
+
+    /**
+     * "search_index" getter.
+     *
+     * @return string
+     */
+    public function getSearchIndexAttribute()
+    {
+        $search_index = '';
+        foreach ($this->translations as $translation) {
+            $search_index .= $translation->name;
+        }
+        return $search_index;
     }
 
     ////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,4 @@
 var Backbone = require('backbone');
-require('selectize');
 
 module.exports = Backbone.View.extend({
 
@@ -15,7 +14,7 @@ module.exports = Backbone.View.extend({
 
             labelField: 'full_name', // Attribute in 'data' object for text in <option></option> tags.
 
-            searchField: ['slug', 'name'],
+            searchField: ['search_index'],
 
             create: false,
 
@@ -28,12 +27,11 @@ module.exports = Backbone.View.extend({
                     data: {
                         search: query
                     },
-                    error: function() {
-                        callback();
-                    },
-                    success: function(res) {
-                        callback(res.data);
-                    }
+                }).done(function (res) {
+                    var data = res.data;
+                    callback(res.data);
+                }).fail(function () {
+                    callback();
                 });
             }
         });

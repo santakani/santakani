@@ -16,7 +16,7 @@ module.exports = Backbone.View.extend({
 
             labelField: 'name',
 
-            searchField: ['slug', 'name'],
+            searchField: ['search_index'],
 
             create: false,
 
@@ -29,19 +29,12 @@ module.exports = Backbone.View.extend({
                     data: {
                         search: query
                     },
-                    error: function() {
-                        callback();
-                    },
-                    success: function(res) {
-                        callback(res.data);
-                    }
+                }).done(function (res) {
+                    var data = res.data;
+                    callback(res.data);
+                }).fail(function () {
+                    callback();
                 });
-            },
-
-            render: {
-                option: function(item, escape) {
-                    return '<div>' + escape(item.name) + '</div>';
-                },
             },
         });
     }

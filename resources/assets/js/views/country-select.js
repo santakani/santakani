@@ -6,14 +6,14 @@ module.exports = Backbone.View.extend({
 
     className: 'country-select',
 
-    initialize: function (options) {
+    initialize: function () {
         this.$el.selectize({
 
-            valueField: 'id',
+            valueField: 'id', // Attribute in 'data' object for value in <option value="..."></option>
 
-            labelField: 'name',
+            labelField: 'full_name', // Attribute in 'data' object for text in <option></option> tags.
 
-            searchField: ['slug', 'name'],
+            searchField: ['search_index'],
 
             create: false,
 
@@ -26,20 +26,12 @@ module.exports = Backbone.View.extend({
                     data: {
                         search: query
                     },
-                    error: function() {
-                        callback();
-                    },
-                    success: function(res) {
-                        callback(res.data);
-                    }
+                }).done(function (res) {
+                    callback(res.data);
+                }).fail(function () {
+                    callback();
                 });
-            },
-
-            render: {
-                option: function(item, escape) {
-                    return '<div>' + escape(item.name) + '</div>';
-                },
-            },
+            }
         });
     }
 });
