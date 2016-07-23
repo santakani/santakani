@@ -2,8 +2,12 @@
 
 namespace App;
 
+use Carbon\Carbon;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+use App\Localization\Languages;
 
 class Country extends Model
 {
@@ -84,5 +88,43 @@ class Country extends Model
     public function getNameAttribute()
     {
         return $this->text('name');
+    }
+
+    //====================================
+    // Other methods
+    //====================================
+
+    /**
+     * Import data from geonames.org
+     */
+    public function import()
+    {
+        $username = env('GEONAMES_USERNAME', 'demo');
+        $json = file_get_contents("http://api.geonames.org/getJSON?geonameId={$this->geoname_id}&username={$username}");
+
+        $data = json_decode($json);
+
+        $names = [];
+
+        foreach ($data->alternateNames as $name_pair) {
+            if (isset($name_pair->lang) && Languages::has($name_pair->lang)) {
+                if (!empty($name_pair->isPreferredName) || empty($names[$name_pair->lang])) {
+                    $names[$name_pair->lang] = $name_pair->name;
+                }
+            }
+        }
+
+        foreach ($names as $locale => $name) {
+            $translation = CountryTranslation::firstOrNew([
+                'country_id' => $this->id,
+                'locale' => $locale,
+            ]);
+
+            $translation->name = $name;
+
+            $translation->save();
+        }
+
+        $this->imported_at = Carbon::now()->format('Y-m-d H:i:s');
     }
 }
