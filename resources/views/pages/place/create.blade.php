@@ -43,12 +43,7 @@
 
         <div class="form-group {{ $errors->has('city_id') ? 'has-error' : '' }}">
             <label class="control-label">{{ trans('geo.city') }}</label>
-            <select name="city_id" id="city-select" class="city-select form-control">
-                @if (!empty(old('city_id')))
-                    <?php $city = \App\City::find(old('city_id')); ?>
-                    <option value="{{ $city->id }}" selected="selected">{{ $city->full_name }}</option>
-                @endif
-            </select>
+            @include('components.select.city', ['selected' => old('city_id')])
             @if ($errors->has('city_id'))
                 <span class="help-block">{{ $errors->first('city_id') }}</span>
             @endif

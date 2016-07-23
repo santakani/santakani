@@ -18,13 +18,7 @@
         <form id="place-filter" class="form" action="{{ url('place') }}" method="get" autocomplete="off">
             <div class="form-group">
                 <label>{{ trans('geo.city') }}</label>
-                <select name="city_id" id="city-select" class="city-select form-control">
-                    @if (!empty($city))
-                        <option value="{{ $city->id }}" selected="selected">
-                            {{ $city->full_name }}
-                        </option>
-                    @endif
-                </select>
+                @include('components.select.city', ['selected' => $city])
             </div>
             <div class="form-group">
                 <label>{{ trans('common.type') }}</label>

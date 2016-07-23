@@ -99,11 +99,7 @@
 
             <div class="form-group">
                 <label class="control-label">{{ trans('geo.city') }}</label>
-                <select name="city_id" id="city-select" class="city-select form-control">
-                    @if (!empty($designer->city_id))
-                        <option value="{{ $designer->city_id }}" selected="selected">{{ $designer->city->full_name }}</option>
-                    @endif
-                </select>
+                @include('components.select.city', ['selected' => $designer->city_id])
             </div>
 
             <div class="form-group">

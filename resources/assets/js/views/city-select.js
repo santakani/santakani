@@ -7,7 +7,6 @@ module.exports = Backbone.View.extend({
     className: 'city-select form-control',
 
     initialize: function (options) {
-        var that = this;
         this.$el.selectize({
 
             valueField: 'id', // Attribute in 'data' object for value in <option value="..."></option>
