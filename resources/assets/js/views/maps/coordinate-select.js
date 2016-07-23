@@ -93,6 +93,7 @@ module.exports = Backbone.View.extend({
     },
 
     lookup: function () {
-        this.search(this.address(), true);
+        var query = this.addressInput.val().trim() + ', ' + this.citySelect.selectedData().english_full_name;
+        this.search(query, true);
     }
 });

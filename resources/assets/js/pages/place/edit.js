@@ -6,8 +6,6 @@
  * Script - assets/js/edit/ajax/designer-edit.js
  */
 
-require('../../components/forms/edit-form');
-
 var Image = require('../../models/image');
 
 var ImageChooser = require('../../views/upload/image-chooser');
@@ -55,6 +53,23 @@ var coordinateSelect = new CoordinateSelect();
 // Update coordinate when changing address
 var searchTimeout;
 
+var searchCoordinateTimer = function () {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(searchCoordinate, 500);
+}
+
+var searchCoordinate = function () {
+    var address = $('#address-input').val().trim();
+    var city = citySelect.selectedData().english_full_name;
+    if (address.length > 0 && city.length > 0) {
+        var query = address + ', ' + city;
+        coordinateSelect.search(query);
+    }
+}
+
+coordinateSelect.addressInput = $('#address-input');
+coordinateSelect.citySelect = citySelect;
+
 if (!coordinateSelect.latitude || !coordinateSelect.longitude) {
     searchCoordinate();
 }
@@ -62,25 +77,8 @@ if (!coordinateSelect.latitude || !coordinateSelect.longitude) {
 $('#address-input')[0].oninput = searchCoordinateTimer;
 $('#city-select')[0].onchange = searchCoordinate;
 
-function searchCoordinateTimer () {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(searchCoordinate, 500);
-}
-
-function searchCoordinate() {
-    var address = $('#address-input').val().trim();
-    var city = $('#city-select option').text().trim();
-    if (address.length > 0 && city.length > 0) {
-        var query = address + ', ' + city;
-        coordinateSelect.search(query);
-    }
-}
-
-coordinateSelect.address = function () {
-    var address = $('#address-input').val().trim();
-    var city = $('#city-select option').text().trim();
-    return address + ', ' + city;
-};
 
 // Tag select
 var tagSelect = new TagSelect({el: '.tag-select'});
+
+require('../../components/forms/edit-form');

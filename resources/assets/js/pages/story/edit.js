@@ -10,8 +10,6 @@ var ImageManager = require('../../views/upload/image-manager');
 var ContentEditor = require('../../views/content-editor');
 var TagSelect = require('../../views/tag-select');
 
-require('../../components/forms/edit-form');
-
 // Image manager
 var manager = new ImageManager({
     parentType: 'story',
@@ -40,3 +38,5 @@ var coverChooser = new ImageChooser({
 });
 
 var tagSelect = new TagSelect({el: '.tag-select'});
+
+require('../../components/forms/edit-form');

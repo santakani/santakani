@@ -32,7 +32,26 @@ module.exports = Backbone.View.extend({
                 }).fail(function () {
                     callback();
                 });
+            },
+
+            render: {
+                item: function(data, escape) {
+                    var $html = $('<div></div>');
+                    $html.text(data.full_name);
+                    $html.data('data', data);
+                    return $html[0];
+                }
             }
         });
-    }
+
+        this.selectize = this.$el[0].selectize;
+    },
+
+    selectedValue: function () {
+        return this.selectize.items[0];
+    },
+
+    selectedData: function () {
+        return this.selectize.getItem(this.selectedValue()).data('data');
+    },
 });

@@ -18,8 +18,6 @@ var GalleryEditor = require('../../views/upload/gallery-editor');
 var CitySelect = require('../../views/city-select');
 var TagSelect = require('../../views/tag-select');
 
-require('../../components/forms/edit-form');
-
 // Image manager
 var manager = new ImageManager({
     parentType: 'designer',
@@ -46,3 +44,5 @@ var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: mana
 
 var citySelect = new CitySelect({el: '.city-select'});
 var tagSelect = new TagSelect({el: '.tag-select'});
+
+require('../../components/forms/edit-form');
