@@ -1,5 +1,4 @@
 var Backbone = require('backbone');
-
 var Leaflet = require('leaflet');
 
 module.exports = Backbone.View.extend({
@@ -12,18 +11,16 @@ module.exports = Backbone.View.extend({
         'click .lookup-button': 'lookup',
     },
 
-    initialize: function () {
-        this.$latitudeInput = this.$('input[name="latitude"]');
-        this.$longitudeInput = this.$('input[name="longitude"]');
+    /**
+     * @param {object} options
+     * @param {CitySelect} options.citySelect
+     * @param {jQuery} options.addressInput
+     */
+    initialize: function (options) {
+        _.extend(this, _.pick(options, 'citySelect', 'addressInput'));
+        _.bindAll(this, 'getCenter', 'setCenter', 'lookup', 'lookupTimer');
 
-        this.$latitudeText = this.$('.latitude');
-        this.$longitudeText = this.$('.longitude');
-
-        this.latitude = parseFloat(this.$latitudeInput.val());
-        this.longitude = parseFloat(this.$longitudeInput.val());
-
-        var that = this;
-
+        // Initinalize map
         this.map = Leaflet.map(this.$('.map')[0], {
             scrollWheelZoom: false,
         });
@@ -32,30 +29,52 @@ module.exports = Backbone.View.extend({
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.map);
 
-        this.map.on('moveend', this.getCenter, this);
+        var latitude = parseFloat(this.$('input[name="latitude"]').val());
+        var longitude = parseFloat(this.$('input[name="longitude"]').val());
 
-        this.setCenter();
+        // When non coordinate
+        if (!latitude || !longitude) {
+            // Insert city coordinate
+            if (this.citySelect && this.citySelect.selectedData()) {
+                latitude = this.citySelect.selectedData().latitude;
+                longitude = this.citySelect.selectedData().longitude;
+            } else {
+                // Default coordinate is Helsinki
+                latitude = 60.167987;
+                longitude = 24.942398;
+            }
+            // Send search request, wait for coordinates
+            this.lookup();
+        }
+        this.setCenter(latitude, longitude);
+
+        this.map.on('moveend', this.getCenter);
+
+        // Update coordinate when changing address and city
+        this.addressInput[0].oninput = this.lookupTimer;
+        this.citySelect.selectize.on("item_add", this.lookup);
     },
 
-    // Move map center by hand
+    // Read coordinate when map center changed by user drag or setCenter()
     getCenter: function () {
         var center = this.map.getCenter();
         this.setCoordinate(center.lat, center.lng);
     },
 
-    setCenter: function () {
-        if (this.latitude && this.longitude) {
-            this.map.setView([this.latitude, this.longitude], 14);
+    setCenter: function (latitude, longitude) {
+        if (latitude && longitude) {
+            this.map.setView([latitude, longitude], 14);
+            this.setCoordinate(latitude, longitude);
         }
     },
 
     setCoordinate: function (latitude, longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.$latitudeInput.val(latitude);
-        this.$longitudeInput.val(longitude);
-        this.$latitudeText.text(latitude);
-        this.$longitudeText.text(longitude);
+        this.$('input[name="latitude"]').val(latitude);
+        this.$('input[name="longitude"]').val(longitude);
+        this.$('.latitude').text(latitude);
+        this.$('.longitude').text(longitude);
     },
 
     openFoundAlert: function () {
@@ -79,8 +98,7 @@ module.exports = Backbone.View.extend({
         var that = this;
         $.getJSON(url, function(data) {
             if (data.length > 0) {
-                that.setCoordinate(parseFloat(data[0].lat), parseFloat(data[0].lon));
-                that.setCenter();
+                that.setCenter(parseFloat(data[0].lat), parseFloat(data[0].lon));
                 if (alert) {
                     that.openFoundAlert();
                 }
@@ -93,7 +111,21 @@ module.exports = Backbone.View.extend({
     },
 
     lookup: function () {
+        if (!this.addressInput || !this.addressInput.val().trim()) {
+            return;
+        }
+
+        if (!this.citySelect || !this.citySelect.selectedData()) {
+            return;
+        }
+
         var query = this.addressInput.val().trim() + ', ' + this.citySelect.selectedData().english_full_name;
+
         this.search(query, true);
-    }
+    },
+
+    lookupTimer: function () {
+        clearTimeout(this.lookupTimeout);
+        this.lookupTimeout = setTimeout(this.lookup, 500);
+    },
 });

@@ -47,35 +47,12 @@ var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: mana
 
 // City select
 var citySelect = new CitySelect({el: '.city-select'});
+
 // Coordinate select
-var coordinateSelect = new CoordinateSelect();
-
-// Update coordinate when changing address
-var searchTimeout;
-
-var searchCoordinateTimer = function () {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(searchCoordinate, 500);
-}
-
-var searchCoordinate = function () {
-    var address = $('#address-input').val().trim();
-    var city = citySelect.selectedData().english_full_name;
-    if (address.length > 0 && city.length > 0) {
-        var query = address + ', ' + city;
-        coordinateSelect.search(query);
-    }
-}
-
-coordinateSelect.addressInput = $('#address-input');
-coordinateSelect.citySelect = citySelect;
-
-if (!coordinateSelect.latitude || !coordinateSelect.longitude) {
-    searchCoordinate();
-}
-
-$('#address-input')[0].oninput = searchCoordinateTimer;
-$('#city-select')[0].onchange = searchCoordinate;
+var coordinateSelect = new CoordinateSelect({
+    citySelect: citySelect,
+    addressInput: $('#address-input'),
+});
 
 
 // Tag select

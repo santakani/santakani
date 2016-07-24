@@ -37,14 +37,14 @@ module.exports = Backbone.View.extend({
             render: {
                 item: function(data, escape) {
                     var $html = $('<div></div>');
-                    $html.text(data.full_name);
-                    $html.data('data', data);
+                    $html.text(data.name);
+                    $html.attr('data-data', JSON.stringify(data));
                     return $html[0];
                 }
             }
         });
 
-        this.selectize = this.$el[0].selectize;
+        this.selectize = this.el.selectize;
     },
 
     selectedValue: function () {
