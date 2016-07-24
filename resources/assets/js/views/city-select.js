@@ -37,7 +37,7 @@ module.exports = Backbone.View.extend({
             render: {
                 item: function(data, escape) {
                     var $html = $('<div></div>');
-                    $html.text(data.name);
+                    $html.text(data.full_name);
                     $html.attr('data-data', JSON.stringify(data));
                     return $html[0];
                 }
