@@ -172,6 +172,14 @@ class StoryController extends Controller
             abort(403);
         }
 
+        if ($request->input('lock')) {
+            if ($story->lock()) {
+                return; // 200 OK
+            } else {
+                abort(423); // 423 Locked
+            }
+        }
+
         $this->validate($request, [
             'image_id' => 'integer|exists:image,id',
             'user_id' => 'integer|exists:user,id',

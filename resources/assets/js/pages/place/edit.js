@@ -16,6 +16,7 @@ var GalleryEditor = require('../../views/upload/gallery-editor');
 var CitySelect = require('../../views/city-select');
 var TagSelect = require('../../views/tag-select');
 var CoordinateSelect = require('../../views/maps/coordinate-select');
+var EditForm = require('../../views/forms/edit-form');
 
 
 // Image manager
@@ -58,4 +59,4 @@ var coordinateSelect = new CoordinateSelect({
 // Tag select
 var tagSelect = new TagSelect({el: '.tag-select'});
 
-require('../../components/forms/edit-form');
+var editForm = new EditForm();

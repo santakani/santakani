@@ -13,7 +13,7 @@
 
 @section('main')
     <div class="container">
-        <form id="tag-edit-form" class="edit-form" action="/tag/{{ $tag->id }}"
+        <form id="edit-form" class="edit-form" action="/tag/{{ $tag->id }}"
             data-id="{{ $tag->id }}">
 
             {!! csrf_field() !!}

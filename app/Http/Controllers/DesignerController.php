@@ -193,6 +193,14 @@ class DesignerController extends Controller
             abort(403);
         }
 
+        if ($request->input('lock')) {
+            if ($designer->lock()) {
+                return; // 200 OK
+            } else {
+                abort(423); // 423 Locked
+            }
+        }
+
         $this->validate($request, [
             'image_id' => 'integer|exists:image,id',
             'logo_id' => 'integer|exists:image,id',

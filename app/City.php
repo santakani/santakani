@@ -13,6 +13,7 @@ class City extends Model
 {
     use SoftDeletes;
 
+    use EditLock;
     use ImageFeature;
     use LikeFeature;
     use TranslateFeature;
@@ -23,6 +24,13 @@ class City extends Model
      * @var string
      */
     protected $table = 'city';
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at', 'locked_at'];
 
     /**
      * Attributes that will be appeded to Array or JSON output.

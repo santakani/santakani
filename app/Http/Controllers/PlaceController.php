@@ -169,6 +169,14 @@ class PlaceController extends Controller
             abort(403);
         }
 
+        if ($request->input('lock')) {
+            if ($place->lock()) {
+                return; // 200 OK
+            } else {
+                abort(423); // 423 Locked
+            }
+        }
+
         // Validate data
         $this->validate($request, [
             'type' => 'string|in:' . implode(',', Place::types()),

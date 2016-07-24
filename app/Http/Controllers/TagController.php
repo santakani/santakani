@@ -164,6 +164,14 @@ class TagController extends Controller
             abort(403);
         }
 
+        if ($request->input('lock')) {
+            if ($tag->lock()) {
+                return; // 200 OK
+            } else {
+                abort(423); // 423 Locked
+            }
+        }
+
         $this->validate($request, [
             'level' => 'integer|between:0,255',
             'image_id' => 'integer|exists:image,id',

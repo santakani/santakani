@@ -13,7 +13,7 @@
 
 @section('main')
     <div class="container">
-        <form id="story-edit-form" class="edit-form form" action="{{ $story->url }}" data-id="{{ $story->id }}">
+        <form id="edit-form" class="edit-form" action="{{ $story->url }}" data-id="{{ $story->id }}">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

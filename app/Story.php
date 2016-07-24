@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Story extends Model
 {
     use SoftDeletes;
-
+    use EditLock;
     use ImageFeature;
     use LikeFeature;
     use TagFeature;
@@ -43,7 +43,7 @@ class Story extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'locked_at'];
 
     /**
      * Dynamic properties that should be included in toArray() or toJSON().

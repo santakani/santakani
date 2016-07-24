@@ -1,9 +1,6 @@
-require('../../components/forms/edit-form');
-
-var Image = require('../../models/image');
 var ImageChooser = require('../../views/upload/image-chooser');
 var ImageManager = require('../../views/upload/image-manager');
-
+var EditForm = require('../../views/forms/edit-form');
 
 // Image manager
 var manager = new ImageManager({
@@ -22,3 +19,5 @@ var coverChooser = new ImageChooser({
     el: '#cover-chooser',
     manager: manager,
 });
+
+var editForm = new EditForm();

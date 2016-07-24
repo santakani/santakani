@@ -9,6 +9,7 @@ var ImagePreview = require('../../views/upload/image-preview');
 var ImageManager = require('../../views/upload/image-manager');
 var ContentEditor = require('../../views/content-editor');
 var TagSelect = require('../../views/tag-select');
+var EditForm = require('../../views/forms/edit-form');
 
 // Image manager
 var manager = new ImageManager({
@@ -39,4 +40,4 @@ var coverChooser = new ImageChooser({
 
 var tagSelect = new TagSelect({el: '.tag-select'});
 
-require('../../components/forms/edit-form');
+var editForm = new EditForm();

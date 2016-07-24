@@ -12,7 +12,7 @@ use App\Localization\Languages;
 class Country extends Model
 {
     use SoftDeletes;
-
+    use EditLock;
     use ImageFeature;
     use LikeFeature;
     use TranslateFeature;
@@ -23,6 +23,13 @@ class Country extends Model
      * @var string
      */
     protected $table = 'country';
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at', 'locked_at'];
 
     /**
      * Attributes that will be appeded to Array or JSON output.

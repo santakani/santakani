@@ -13,7 +13,7 @@ class CityImport extends Command
      *
      * @var string
      */
-    protected $signature = 'city:import {city? : ID of the city} {--all : import all cities}';
+    protected $signature = 'city:import {city? : ID of the city} {--all : import all cities} {--from=} {--to=} {--country=}';
 
     /**
      * The console command description.

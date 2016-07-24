@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Tag extends Model
 {
     use SoftDeletes;
-
+    use EditLock;
     use ImageFeature;
     use LikeFeature;
     use TranslateFeature;
@@ -19,6 +19,13 @@ class Tag extends Model
      * @var string
      */
     protected $table = 'tag';
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at', 'locked_at'];
 
     /**
      * Attributes that will be appeded to Array or JSON output.
