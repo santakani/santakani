@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-4">
                     <div class="team-member">
-                        <img class="img-rounded" src="/img/team/guoyunhe.jpg">
+                        <img class="img-rounded" src="/img/team/duyuexin.jpg">
                         <h3>Du Yuexin</h3>
                         <p>co-founder, designer, business development</p>
                         <a href="mailto:yuexin.du@santakani.com">yuexin.du@santakani.com</a>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-0">
                     <div class="team-member">
-                        <img class="img-rounded" src="/img/team/guoyunhe.jpg">
+                        <img class="img-rounded" src="/img/team/yunxiaotong.jpg">
                         <h3>Yun Xiaotong</h3>
                         <p>co-founder, editor, marketing, customer service</p>
                         <a href="mailto:xiaotong.yun@santakani.com">xiaotong.yun@santakani.com</a>
