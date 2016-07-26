@@ -70,7 +70,9 @@ class StoryController extends Controller
                     // If it is Chinese, use LIKE. Else, use full text index.
                     // http://www.regular-expressions.info/unicode.html#script
                     if (preg_match('/\p{Han}+/u', $word)) {
-                        $sub_query->where('title', 'like', '%'.$word.'%')->orWhere('content', 'like', '%'.$word.'%');
+                        $sub_query->where(function ($q) use ($word) {
+                            $q->where('title', 'like', '%'.$word.'%')->orWhere('content', 'like', '%'.$word.'%');
+                        });
                     } else {
                         $sub_query->whereRaw('MATCH(title,content) AGAINST(? IN BOOLEAN MODE)', [$word.'*']);
                     }
