@@ -39,6 +39,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('privacy', 'PageController@privacy');
     Route::get('terms', 'PageController@terms');
 
+    Route::get('sitemap', 'SitemapController@index');
+
     Route::get('setting', 'SettingController@profile');
     Route::get('setting/profile', 'SettingController@profile');
     Route::get('setting/account', 'SettingController@account');
