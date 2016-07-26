@@ -53,10 +53,30 @@ class StoryController extends Controller
             'tag_id' => 'integer|exists:tag,id',
         ]);
 
-        $query = Story::whereHas('translations', function ($sub_query) {
-            $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title')
-                ->whereNotNull('content');
-        });
+        $query = Story::query();
+
+        // Must have translation of current locale or English
+        if (!$request->has('search')) {
+            $query->whereHas('translations', function ($sub_query) {
+                $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title')
+                    ->whereNotNull('content');
+            });
+        }
+
+        if ($request->has('search')) {
+            $words = explode(" ", $request->input('search'));
+            $query->whereHas('translations', function ($sub_query) use ($words) {
+                foreach ($words as $word) {
+                    // If it is Chinese, use LIKE. Else, use full text index.
+                    // http://www.regular-expressions.info/unicode.html#script
+                    if (preg_match('/\p{Han}+/u', $word)) {
+                        $sub_query->where('title', 'like', '%'.$word.'%')->orWhere('content', 'like', '%'.$word.'%');
+                    } else {
+                        $sub_query->whereRaw('MATCH(title,content) AGAINST(? IN BOOLEAN MODE)', [$word.'*']);
+                    }
+                }
+            });
+        }
 
         if ($request->has('tag_id')) {
             $query->whereHas('tags', function ($sub_query) use ($request){
