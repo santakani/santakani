@@ -46,21 +46,14 @@ class LocaleDetect {
                 $user->locale = $locale;
                 $user->save();
             }
-
-            // Remove lang parameter from URL and redirect
-            $redirect_url = $request->url();
-            if (count($request->except('lang'))) {
-                $redirect_url .= '?' . http_build_query($request->except('lang'));
-            }
-            return redirect($redirect_url)->withCookie(cookie()->forever('locale', $locale));
         } elseif (Auth::check() && Languages::has(Auth::user()->locale)) {
             // 2. Check database for logged in users
             App::setLocale(Auth::user()->locale);
         } elseif (Languages::has($request->cookie('locale'))) {
             // 3. Check cookies
             App::setLocale($request->cookie('locale'));
-        } else {
-            // 4. Check browser languages
+        } elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            // 4. Check browser languages. Note that Googlebot do not have this.
             $accept_languages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
             foreach ($accept_languages as $lang) {
                 $lang = locale_accept_from_http($lang);
