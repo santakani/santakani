@@ -1,5 +1,3 @@
-var Backbone = require('backbone');
-
 var CitySelect = require('../../views/city-select');
 
 var PlaceMap = require('../../views/maps/place-map');
@@ -27,6 +25,13 @@ $('.tag-filter button').click(function () {
     $('#place-filter').submit();
 });
 
+$('#place-filter input[type="search"]').keydown(function (e) {
+    if(e.keyCode == 13) {
+        $('#place-filter').submit();
+    }
+});
+
+// Float icons
 $('#place-map .float-icon').click(function () {
     $('#place-map').removeClass('active');
     $('#place-list').addClass('active');
@@ -35,5 +40,4 @@ $('#place-map .float-icon').click(function () {
 $('#place-list .float-icon').click(function () {
     $('#place-list').removeClass('active');
     $('#place-map').addClass('active');
-    map.updateSize();
 });

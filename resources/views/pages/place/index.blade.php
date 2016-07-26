@@ -7,15 +7,11 @@
 ])
 
 @section('main')
-<div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}">
-    <div class="float-icon"><i class="fa fa-list"></i></div>
-</div>
-
 <div id="place-list" class="active">
     <div class="float-icon"><i class="fa fa-map-o"></i></div>
     <div class="container-fluid">
 
-        <form id="place-filter" class="form" action="{{ url('place') }}" method="get" autocomplete="off">
+        <form id="place-filter" class="form" action="{{ url('place') }}" method="get">
             <div class="form-group">
                 <label>{{ trans('geo.city') }}</label>
                 @include('components.select.city', ['selected' => $city])
@@ -28,8 +24,13 @@
                 ])
             </div>
             <div class="form-group">
+                <label>{{ trans('common.search') }}</label>
+                <input type="search" name="search" value="{{ request()->input('search') }}"
+                       class="form-control" maxlength="50"/>
+            </div>
+            <div class="form-group">
                 <label>{{ trans('common.tag') }}</label>
-                @include('components.tag-filter', ['selected' => app('request')->input('tag_id')])
+                @include('components.tag-filter', ['selected' => request()->input('tag_id')])
             </div>
         </form>
 
@@ -61,4 +62,8 @@
         {!! $places->links() !!}
     </div>
 </div><!-- #place-list -->
+
+<div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}">
+    <div class="float-icon"><i class="fa fa-list"></i></div>
+</div>
 @endsection

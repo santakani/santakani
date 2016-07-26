@@ -49,6 +49,23 @@ class PlaceController extends Controller
 
         $query = Place::where('city_id', $city->id);
 
+        if ($request->has('search')) {
+            $words = explode(" ", $request->input('search'));
+            $query->whereHas('translations', function ($sub_query) use ($words) {
+                foreach ($words as $word) {
+                    // If it is Chinese, use LIKE. Else, use full text index.
+                    // http://www.regular-expressions.info/unicode.html#script
+                    if (preg_match('/\p{Han}+/u', $word)) {
+                        $sub_query->where(function ($q) use ($word) {
+                            $q->where('name', 'like', '%'.$word.'%')->orWhere('content', 'like', '%'.$word.'%');
+                        });
+                    } else {
+                        $sub_query->whereRaw('MATCH(name,content) AGAINST(? IN BOOLEAN MODE)', [$word.'*']);
+                    }
+                }
+            });
+        }
+
         if ($request->has('type')) {
             $query = $query->where('type', $request->input('type'));
         }

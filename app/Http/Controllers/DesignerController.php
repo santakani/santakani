@@ -53,13 +53,34 @@ class DesignerController extends Controller
             'tag_id' => 'integer|exists:tag,id',
         ]);
 
-        if ($request->has('tag_id')) {
-            $designers = Designer::whereHas('tags', function ($query) use ($request){
-                $query->where('id', $request->input('tag_id'));
-            })->orderBy('created_at', 'desc')->paginate(12);
-        } else {
-            $designers = Designer::orderBy('created_at', 'desc')->paginate(12);
+        $query = Designer::query();
+
+        if ($request->has('search')) {
+            $words = explode(" ", $request->input('search'));
+            $query->whereHas('translations', function ($sub_query) use ($words) {
+                foreach ($words as $word) {
+                    // If it is Chinese, use LIKE. Else, use full text index.
+                    // http://www.regular-expressions.info/unicode.html#script
+                    if (preg_match('/\p{Han}+/u', $word)) {
+                        $sub_query->where(function ($q) use ($word) {
+                            $q->where('name', 'like', '%'.$word.'%')
+                              ->orWhere('tagline', 'like', '%'.$word.'%')
+                              ->orWhere('content', 'like', '%'.$word.'%');
+                        });
+                    } else {
+                        $sub_query->whereRaw('MATCH(name,tagline,content) AGAINST(? IN BOOLEAN MODE)', [$word.'*']);
+                    }
+                }
+            });
         }
+
+        if ($request->has('tag_id')) {
+            $query->whereHas('tags', function ($sub_query) use ($request){
+                $sub_query->where('id', $request->input('tag_id'));
+            });
+        }
+
+        $designers = $query->orderBy('created_at', 'desc')->paginate(12);
 
         return view('pages.designer.index', [
             'designers' => $designers

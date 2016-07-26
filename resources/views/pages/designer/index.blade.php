@@ -8,7 +8,16 @@
 @section('main')
 <div class="container">
     <form id="designer-filter" class="list-filter" action="/designer" method="get">
-        @include('components.tag-filter', ['selected' => app('request')->input('tag_id')])
+        <div class="form-group">
+            <label>{{ trans('common.search') }}</label>
+            <input type="search" name="search" value="{{ request()->input('search') }}"
+                   class="form-control" placeholder="{{ trans('common.search') }}"
+                   maxlength="50"/>
+        </div>
+        <div class="form-group">
+            <label>{{ trans('common.tag') }}</label>
+            @include('components.tag-filter', ['selected' => request()->input('tag_id')])
+        </div>
     </form>
     <div id="designer-list" class="row">
         @foreach ($designers as $designer)
