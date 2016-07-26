@@ -163,6 +163,7 @@ return [
         */
         Laravel\Socialite\SocialiteServiceProvider::class,
         Msurguy\Honeypot\HoneypotServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
     ],
 
     /*
