@@ -9,7 +9,12 @@ body#about-page {
             margin: 0;
             padding: 20px;
             background-color: rgba(255,255,255,0.5);
+            font-size: 24px;
             font-weight: 300;
+
+            @media (min-width: $screen-sm-min) {
+                font-size: 36px;
+            }
         }
     }
 
@@ -114,11 +119,16 @@ body#about-page {
         background: none;
 
         .text {
-            font-size: 32px;
+            font-size: 22px;
             font-weight: 300;
             color: #ffffff;
-            padding: 50px;
+            padding: 20px;
             background-color: rgba(0,0,0,0.3);
+
+            @media (min-width: $screen-sm-min) {
+                padding: 50px;
+                font-size: 32px;
+            }
         }
     }
 
@@ -135,10 +145,14 @@ body#about-page {
 
     #team-section {
         h2 {
-            font-size: 48px;
+            font-size: 32px;
             font-weight: 100;
             text-align: center;
             margin-bottom: 50px;
+
+            @media (min-width: $screen-sm-min) {
+                font-size: 48px;
+            }
         }
     }
 

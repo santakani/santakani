@@ -67,8 +67,10 @@
     </section>
 
     <section id="community-section">
-        <div class="text container">
-            Designers, artisits, craftsmen and craftswomen, design students, and design lovers consist of this unique community. People from different cultures, using different languages, meet each other for the same reason: passion of design.
+        <div class="container">
+            <div class="text">
+                Designers, artisits, craftsmen and craftswomen, design students, and design lovers consist of this unique community. People from different cultures, using different languages, meet each other for the same reason: passion of design.
+            </div>
         </div>
         <div class="background"></div>
     </section>
