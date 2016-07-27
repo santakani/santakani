@@ -42,13 +42,27 @@
         </div>
     </section>
 
-    <section id="community-section">
-        <div class="container">
-            <h2>{{ trans('common.service') }}</h2>
-            <p>Santakani is a design platform.</p>
-            <p>Designer profile - designers can share their designs and biography with design lovers.</p>
-            <p>Place map - help natives and tourists find best design shops, showrooms, museums and more.</p>
-            <p>Design story - everything of design that worths sharing.</p>
+    <section id="service-section">
+        <div class="feature-group">
+            <div class="image" style="background-image: url(/img/about/service-design.jpg)"></div>
+            <div class="text">
+                <h3>Designers + Design Lovers</h3>
+                <p>Designers can share their designs and biography with design lovers.</p>
+            </div>
+        </div>
+        <div class="feature-group">
+            <div class="image right" style="background-image: url(/img/about/service-place.jpg)"></div>
+            <div class="text">
+                <h3>Design Shops &amp; Studios</h3>
+                <p>Help natives and tourists find best design shops, showrooms, museums and more.</p>
+            </div>
+        </div>
+        <div class="feature-group">
+            <div class="image" style="background-image: url(/img/about/service-story.jpg)"></div>
+            <div class="text">
+                <h3>Design Stories</h3>
+                <p>Everything of design that worths sharing.</p>
+            </div>
         </div>
     </section>
 

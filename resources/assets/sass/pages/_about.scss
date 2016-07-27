@@ -3,25 +3,13 @@ body#about-page {
         @include item-center();
         @include image-cover();
         background-image: url(/img/about/clothing-design.jpg);
-        height: 300px;
+        height: 600px; // Height will be adjusted by JavaScript
 
         h1 {
             margin: 0;
             padding: 20px;
             background-color: rgba(255,255,255,0.5);
             font-weight: 300;
-        }
-
-        @media (min-width: $screen-sm-min) {
-            height: 400px;
-        }
-
-        @media (min-width: $screen-md-min) {
-            height: 500px;
-        }
-
-        @media (min-width: $screen-lg-min) {
-            height: 600px;
         }
     }
 
@@ -60,6 +48,58 @@ body#about-page {
             }
         }
     }
+
+    .feature-group {
+        height: 500px;
+
+        .image {
+            @include image-cover();
+            height: 250px;
+        }
+
+        .text {
+            height: 250px;
+            padding: 20px;
+        }
+
+        h3 {
+            font-size: 2em;
+            font-weight: 100;
+        }
+
+        @media (min-width: $screen-sm-min) {
+            display: flex;
+            height: 300px;
+            font-size: 18px;
+            font-weight: 300;
+
+            .image, .text {
+                flex: 1 0 50%;
+                height: 100%;
+            }
+
+            .text {
+                padding: 50px;
+                order: 0;
+            }
+
+            .image.right {
+                order: 1;
+            }
+        }
+
+        @media (min-width: $screen-md-min) {
+            height: 400px;
+            font-size: 24px;
+        }
+
+        @media (min-width: $screen-lg-min) {
+            height: 500px;
+            font-size: 32px;
+        }
+    }
+
+
     .team-member {
         position: relative;
         margin-bottom: 30px;
