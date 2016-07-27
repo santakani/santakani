@@ -1,6 +1,6 @@
 <footer id="app-footer" class="app-footer">
     <div class="container">
-        <p>2015&ndash;{{ date("Y") }} {{ trans('brand.app_name') }}</p>
+        <p>2016{{ date("Y") > 2016?'-'.date("Y"):'' }} {{ trans('brand.app_name') }}</p>
         <ul class="list-inline">
             <li><a href="{{ url('privacy') }}">{{ trans('common.privacy') }}</a></li>
             <li><a href="{{ url('terms') }}">{{ trans('common.terms_of_service') }}</a></li>
@@ -12,7 +12,7 @@
 
             <li><a href="https://www.facebook.com/1116236201740479/" target="_blank">Facebook</a></li>
             @if (App::getLocale() === 'zh')
-                <li><a href="#" data-toggle="modal" data-target="#wechat-modal">微信</a></li>    
+                <li><a href="#" data-toggle="modal" data-target="#wechat-modal">微信</a></li>
             @endif
         </ul>
     </div>
