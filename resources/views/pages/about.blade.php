@@ -4,19 +4,13 @@
     'body_classes' => ['about-page', 'site-page'],
 ])
 
-@section('main')
+@section('header')
     <div class="container">
-        <h1 class="page-header">{{ trans('common.about_us') }}</h1>
+        <h1>Our mission: connect independent designers and design lovers, bring creative designs and ideas to more places.</h1>
     </div>
+@endsection
 
-    <section id="mission-section">
-        <div class="container">
-            <blockquote>
-                Our mission: connect independent designers and design lovers, bring creative designs and ideas to more places.
-            </blockquote>
-        </div>
-    </section>
-
+@section('main')
     <section id="data-section">
         <div class="container">
             <div class="row">

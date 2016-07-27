@@ -4,6 +4,13 @@
     background-repeat: no-repeat;
 }
 
+@mixin item-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 // Material design shadows
 @mixin material-shadow($type) {
     @if $type == lower {

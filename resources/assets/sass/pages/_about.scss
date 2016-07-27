@@ -1,4 +1,34 @@
-#about-page {
+body#about-page {
+    header {
+        @include item-center();
+        @include image-cover();
+        background-image: url(/img/about/clothing-design.jpg);
+        height: 300px;
+
+        h1 {
+            margin: 0;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.5);
+            font-weight: 300;
+        }
+
+        @media (min-width: $screen-sm-min) {
+            height: 400px;
+        }
+
+        @media (min-width: $screen-md-min) {
+            height: 500px;
+        }
+
+        @media (min-width: $screen-lg-min) {
+            height: 600px;
+        }
+    }
+
+    #data-section {
+        padding: 50px 0;
+    }
+
     .data-entry {
         margin-bottom: 30px;
         text-align: center;

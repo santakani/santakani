@@ -51,6 +51,8 @@ require('./layouts/app/footer');
 // Home page
 if (document.getElementById('home-page')) {
     require('./pages/home');
+} else if (document.getElementById('about-page')) {
+    require('./pages/about');
 }
 
 // Designer
