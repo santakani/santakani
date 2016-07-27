@@ -80,7 +80,21 @@ class City extends Model
         return $this->belongsTo('App\Image');
     }
 
+    /**
+     * Designers
+     */
+    public function designers()
+    {
+        return $this->hasMany('App\Designer');
+    }
 
+    /**
+     * Places
+     */
+    public function places()
+    {
+        return $this->hasMany('App\Place');
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //

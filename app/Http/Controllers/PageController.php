@@ -13,6 +13,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\City;
+use App\Country;
+use App\Designer;
+use App\Place;
+use App\Story;
+use App\Tag;
+use App\User;
+
 /**
  * Static pages routes.
  *
@@ -49,7 +57,14 @@ class PageController extends Controller
      */
     public function about(Request $request)
     {
-        return view('pages.about');
+        $data['designer_number'] = Designer::count();
+        $data['place_number'] = Place::count();
+        $data['story_number'] = Story::count();
+        $data['tag_number'] = Tag::count();
+        $data['user_number'] = User::count();
+        $data['city_number'] = City::with('places')->count();
+
+        return view('pages.about', $data);
     }
 
     /**

@@ -1,4 +1,35 @@
 #about-page {
+    .data-entry {
+        margin-bottom: 30px;
+        text-align: center;
+        color: $brand-info;
+
+        .number {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            margin: auto;
+            margin-bottom: 15px;
+            border-radius: 999px;
+            border: 1px solid $brand-info;
+
+            font-size: 24px;
+            font-weight: 100;
+
+            @media (min-width: $screen-sm-min) {
+                width: 160px;
+                height: 160px;
+                line-height: 160px;
+                font-size: 48px;
+            }
+        }
+
+        .text {
+            @media (min-width: $screen-sm-min) {
+                font-size: 24px;
+            }
+        }
+    }
     .team-member {
         position: relative;
         margin-bottom: 30px;

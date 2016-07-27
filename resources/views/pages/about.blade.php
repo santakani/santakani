@@ -17,6 +17,37 @@
         </div>
     </section>
 
+    <section id="data-section">
+        <div class="container">
+            <div class="row">
+                <div class="data-entry col-xs-4">
+                    <div class="number">{{ $designer_number }}</div>
+                    <div class="text">{{ trans('designer.designers') }}</div>
+                </div>
+                <div class="data-entry col-xs-4">
+                    <div class="number">{{ $story_number }}</div>
+                    <div class="text">{{ trans('story.stories') }}</div>
+                </div>
+                <div class="data-entry col-xs-4">
+                    <div class="number">{{ $user_number }}</div>
+                    <div class="text">{{ trans('common.users') }}</div>
+                </div>
+                <div class="data-entry col-xs-4">
+                    <div class="number">{{ $place_number }}</div>
+                    <div class="text">{{ trans('place.places') }}</div>
+                </div>
+                <div class="data-entry col-xs-4">
+                    <div class="number">{{ $city_number }}</div>
+                    <div class="text">{{ trans('geo.cities') }}</div>
+                </div>
+                <div class="data-entry col-xs-4">
+                    <div class="number">{{ $tag_number }}</div>
+                    <div class="text">{{ trans('common.tags') }}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="community-section">
         <div class="container">
             <h2>{{ trans('common.service') }}</h2>
