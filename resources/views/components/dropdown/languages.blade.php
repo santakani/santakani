@@ -6,7 +6,7 @@
     <ul class="dropdown-menu dropdown-menu-right">
         @foreach (App\Localization\Languages::names() as $locale => $name)
             <li class="{{ $locale === App::getLocale()?'active':'' }}">
-                <a href="{{ url()->full() }}{{ str_contains(url()->full(), '?')?'&':'?' }}lang={{ $locale }}">
+                <a href="{{ url()->current() }}?{{ http_build_query(array_add(request()->except('lang'), 'lang', $locale)) }}">
                     {{ $name['localized'] }} ({{ $name['native'] }})
                 </a>
             </li>
