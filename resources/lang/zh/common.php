@@ -79,6 +79,7 @@ return array(
     'update_time' => '更新时间',
     'upload' => '上传',
     'user' => '用户',
+    'users' => '用户',
     'webshop' => '网店',
     'website' => '网站',
 );

@@ -79,6 +79,7 @@ return array(
     'update_time' => 'Päivitysaika',
     'upload' => 'Lataa',
     'user' => 'Käyttäjä',
+    'users' => 'Users',
     'webshop' => 'Verkkokauppa',
     'website' => 'verkkosivusto',
 );

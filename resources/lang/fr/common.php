@@ -79,6 +79,7 @@ return array(
     'update_time' => 'Update time',
     'upload' => 'Télécharger',
     'user' => 'Utilisateur',
+    'users' => 'Users',
     'webshop' => 'Webshop',
     'website' => 'Website',
 );
