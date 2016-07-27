@@ -13,6 +13,11 @@ body#about-page {
         }
     }
 
+    section {
+        background-color: #ffffff;
+        padding: 50px 0;
+    }
+
     #data-section {
         padding: 50px 0;
     }
@@ -47,6 +52,10 @@ body#about-page {
                 font-size: 24px;
             }
         }
+    }
+
+    #service-section {
+        padding: 0;
     }
 
     .feature-group {
@@ -99,9 +108,54 @@ body#about-page {
         }
     }
 
+    #community-section {
+        padding: 100px 0;
+        @include item-center();
+        background: none;
+
+        .text {
+            font-size: 32px;
+            font-weight: 300;
+            color: #ffffff;
+            padding: 50px;
+            background-color: rgba(0,0,0,0.3);
+        }
+    }
+
+    .background {
+        @include image-cover();
+        background-image: url(/img/about/background.jpg);
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+
+    #team-section {
+        h2 {
+            font-size: 48px;
+            font-weight: 100;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+    }
 
     .team-member {
         position: relative;
         margin-bottom: 30px;
+        text-align: center;
+
+        img {
+            border-radius: 999px;
+            width: 150px;
+            height: 150px;
+        }
+
+        h3 {
+            font-weight: 300;
+            font-size: 32px;
+        }
     }
 }
