@@ -62,7 +62,7 @@ class PageController extends Controller
         $data['story_number'] = Story::count();
         $data['tag_number'] = Tag::count();
         $data['user_number'] = User::count();
-        $data['city_number'] = City::with('places')->count();
+        $data['city_number'] = City::has('places')->orHas('designers')->count();
 
         return view('pages.about', $data);
     }
