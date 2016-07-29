@@ -1,6 +1,6 @@
 <li class="dropdown">
     <a href="#" data-toggle="dropdown">
-        <img class="icon" src="/img/icon/language.svg"/>
+        <span class="stroke-icon icon-language"></span>
         <span class="text hidden-xs">{{ trans('common.language') }}</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-right">

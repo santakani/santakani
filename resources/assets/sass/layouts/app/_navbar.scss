@@ -38,7 +38,9 @@ nav.custom-navbar {
                 height: 100%;
                 padding: 0 10px;
                 text-decoration: none;
-                color: $gray;
+                font-size: 18px;
+                font-weight: 300;
+                color: #555555;
                 border-bottom: 4px solid transparent;
                 transition: 0.3s;
 
@@ -46,8 +48,8 @@ nav.custom-navbar {
                     text-decoration: none;
                 }
 
-                &.bg-primary {
-                    color: #ffffff;
+                &.create {
+                    color: $brand-primary;
                 }
             }
 
@@ -60,19 +62,17 @@ nav.custom-navbar {
             &:hover {
                 > a {
                     background-color: lighten($brand-info, 35%);
-
-                    &.bg-primary {
-                        background-color: lighten($brand-primary, 10%);
-                    }
                 }
             }
         }
 
     }
 
+
+
     .icon {
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
         vertical-align: middle;
     }
 

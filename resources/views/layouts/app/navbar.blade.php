@@ -41,7 +41,7 @@ $nav_menu_right = [
         @foreach ($nav_menu_left as $key => $value)
             <li class="{{ $active_nav === $key?'active':'' }}">
                 <a href="{{ $value['url'] }}">
-                    <img class="icon" src="/img/icon/{{ $key }}.svg"/>
+                    <span class="stroke-icon icon-{{ $key }}"></span>
                     <span class="text hidden-xs">{{ $value['text'] }}</span>
                 </a>
             </li>
@@ -53,15 +53,15 @@ $nav_menu_right = [
             @foreach ($nav_menu_right as $key => $value)
                 <li class="{{ $active_nav === $key?'active':'' }}">
                     <a href="{{ $value['url'] }}">
-                        <img class="icon" src="/img/icon/{{ $key }}.svg"/>
+                        <span class="stroke-icon icon-{{ $key }}"></span>
                         <span class="text hidden-xs">{{ $value['text'] }}</span>
                     </a>
                 </li>
             @endforeach
         @else
             <li class="dropdown hidden-xs">
-                <a href="#" class="dropdown-toggle bg-primary" data-toggle="dropdown">
-                    <i class="fa fa-plus"></i>
+                <a href="#" class="create dropdown-toggle" data-toggle="dropdown">
+                    <span class="stroke-icon icon-create"></span>
                     <span>{{ trans('common.create') }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
