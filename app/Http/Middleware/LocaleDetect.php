@@ -14,6 +14,7 @@ namespace App\Http\Middleware;
 use App;
 use Auth;
 use Closure;
+use Cookie;
 
 use App\Localization\Languages;
 
@@ -46,6 +47,7 @@ class LocaleDetect {
                 $user->locale = $locale;
                 $user->save();
             }
+            Cookie::queue('locale', $locale, 24*60);
         } elseif (Auth::check() && Languages::has(Auth::user()->locale)) {
             // 2. Check database for logged in users
             App::setLocale(Auth::user()->locale);
