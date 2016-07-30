@@ -12,5 +12,5 @@ var fkt = new Flickity('#home-carousel', {
     wrapAround: true,
     autoPlay: 10000,
     setGallerySize: false, // Set cell height use CSS rather than JavaScript
-    prevNextButtons: false,
+    //prevNextButtons: false,
 });

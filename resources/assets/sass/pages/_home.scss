@@ -46,6 +46,10 @@
             .text {
                 padding: 2em;
             }
+
+            .flickity-prev-next-button {
+                display: block;
+            }
         }
 
         @media screen and (min-width: $screen-md-min) {
@@ -56,6 +60,16 @@
         @media screen and (min-width: $screen-lg-min) {
             font-size: 20px;
             padding: 0 100px;
+        }
+    }
+
+    .flickity-prev-next-button {
+        display: none;
+    }
+
+    @media screen and (min-width: $screen-sm-min) {
+        .flickity-prev-next-button {
+            display: block;
         }
     }
 
