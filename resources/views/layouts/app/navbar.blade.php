@@ -37,7 +37,7 @@ $nav_menu_right = [
 
 <nav class="custom-navbar">
     <a href="{{ url('/') }}" class="logo"></a>
-    <ul class="nav-menu left">
+    <ul class="nav-menu">
         @foreach ($nav_menu_left as $key => $value)
             <li class="{{ $active_nav === $key?'active':'' }}">
                 <a href="{{ $value['url'] }}">
@@ -46,8 +46,7 @@ $nav_menu_right = [
                 </a>
             </li>
         @endforeach
-    </ul>
-    <ul class="nav-menu right">
+        <li class="space"></li>
         @include('components.dropdown.languages')
         @if (Auth::guest())
             @foreach ($nav_menu_right as $key => $value)

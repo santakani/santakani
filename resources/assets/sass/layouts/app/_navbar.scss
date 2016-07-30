@@ -2,43 +2,34 @@ nav.custom-navbar {
     position: fixed;
     width: 100%;
     height: $custom-navbar-height;
-    padding: 0 10px;
 
     @include material-shadow(lower);
 
     background-color: #fff;
     z-index: 100;
 
-    display: flex;
-
     .nav-menu {
         @include list-unstyled;
-
-        flex: 1 0 auto;
         height: $custom-navbar-height;
         display: flex;
         margin: 0;
         padding: 0;
 
-        &.left {
-            justify-content: flex-start;
-        }
-
-        &.right {
-            justify-content: flex-end;
-        }
-
         > li {
-            flex: 0 0 auto;
+            flex: 1 0 auto;
             height: $custom-navbar-height;
             line-height: $custom-navbar-height - 4px;
+
+            &.space {
+                flex: 0 0 0;
+            }
 
             > a {
                 display: block;
                 height: 100%;
                 padding: 0 10px;
                 text-decoration: none;
-                font-size: 18px;
+                text-align: center;
                 font-weight: 300;
                 color: #555555;
                 border-bottom: 4px solid transparent;
@@ -68,8 +59,6 @@ nav.custom-navbar {
 
     }
 
-
-
     .icon {
         width: 32px;
         height: 32px;
@@ -77,7 +66,7 @@ nav.custom-navbar {
     }
 
     .logo {
-        display: block;
+        display: none;
         position: absolute;
         width: $custom-navbar-height;
         height: $custom-navbar-height;
@@ -100,29 +89,47 @@ nav.custom-navbar {
         margin-left: 10px;
     }
 
-    @media screen and (max-width: $screen-xs-max) {
-
-        padding: 0;
-
+    @media screen and (min-width: $screen-sm-min) {
         .nav-menu {
-
-            > li {
-                flex: 0 1 50px;
+            > li{
+                flex: 0 0 auto;
 
                 > a {
-                    padding: 0;
-                    text-align: center;
+                    font-size: 12px;
+                }
+
+                &.space {
+                    flex: 1 1 auto;
+                }
+
+                .text {
+                    display: inline;
                 }
             }
         }
 
-        .icon, .avatar {
-            width: 32px;
-            height: 32px;
-        }
-
         .logo {
-            display: none;
+            display: block;
+        }
+    }
+
+    @media screen and (min-width: $screen-md-min) {
+        .nav-menu {
+            > li{
+                > a {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: $screen-lg-min) {
+        .nav-menu {
+            > li{
+                > a {
+                    font-size: 18px;
+                }
+            }
         }
     }
 }
