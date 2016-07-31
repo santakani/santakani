@@ -1,6 +1,5 @@
 <footer id="app-footer" class="app-footer">
-    <div class="container">
-        <p>2016{{ date("Y") > 2016?'-'.date("Y"):'' }} {{ trans('brand.app_name') }}</p>
+    <div class="container-fluid">
         <ul class="list-inline">
             <li><a href="{{ url('privacy') }}">{{ trans('common.privacy') }}</a></li>
             <li><a href="{{ url('terms') }}">{{ trans('common.terms_of_service') }}</a></li>
@@ -15,6 +14,7 @@
                 <li><a href="#" data-toggle="modal" data-target="#wechat-modal">微信</a></li>
             @endif
         </ul>
+        <p>2016{{ date("Y") > 2016?'-'.date("Y"):'' }} {{ trans('brand.app_name') }}</p>
     </div>
 </footer>
 @if (App::getLocale() === 'zh')
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div><!--.modal-dialog-->
