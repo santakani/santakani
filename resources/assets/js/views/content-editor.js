@@ -33,7 +33,7 @@ module.exports = Backbone.View.extend({
             min_height: 300,
             max_height: 600,
 
-            content_css: ['/css/app.css', '/css/editor.css'],
+            content_css: [$('#app-css').attr('href')],
 
             convert_urls: false, // Keep relative URLs for images and links
 

@@ -22,7 +22,7 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     <link rel="shortcut icon" href="{{ url('img/logo/origin-128x128.png') }}" type="image/png" sizes="128x128">
 
     <!-- CSS -->
-    <link href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css"/>
+    <link id="app-css" href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css"/>
     @stack('styles')
 </head>
 

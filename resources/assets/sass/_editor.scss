@@ -1,0 +1,11 @@
+/**
+ * Additional style for WISIWYG editor content
+ */
+
+body#tinymce {
+    margin: auto;
+    padding: 30px;
+    max-width: 660px;
+    background: #ffffff;
+    box-shadow: 0 0 999px 999px $gray-lighter;
+}
