@@ -16,19 +16,19 @@ use App\Tag;
 class HomeController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * Show the home page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $designers = Designer::whereNotNull('image_id')->orderBy('id', 'desc')->take(6)->get();
-        $places = Place::whereNotNull('image_id')->orderBy('id', 'desc')->take(6)->get();
+        $designers = Designer::orderBy('id', 'desc')->take(12)->get();
+        $places = Place::orderBy('id', 'desc')->take(12)->get();
         $stories = Story::whereHas('translations', function ($sub_query) {
             $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title')
                 ->whereNotNull('content');
-        })->whereNotNull('image_id')->orderBy('id', 'desc')->take(6)->get();
-        $tags = Tag::whereNotNull('image_id')->orderBy('level', 'desc')->take(12)->get();
+        })->orderBy('id', 'desc')->take(12)->get();
+        $tags = Tag::orderByRaw('RAND()')->take(12)->get();
 
         return view('pages.index', [
             'designers' => $designers,
