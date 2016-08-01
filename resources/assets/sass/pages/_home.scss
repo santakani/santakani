@@ -1,4 +1,95 @@
 #home-page {
+
+    header {
+        height: 600px;
+        overflow: hidden;
+
+        #slides {
+            position: relative;
+            height: 100%;
+
+            .slide {
+                position: relative;
+                display: flex;
+                width: 100%;
+                height: 100%;
+                justify-content: flex-start;
+                align-items: center;
+                @include image-cover();
+
+                .text {
+                    max-width: 25em;
+                    padding: 1em;
+                    background-color: rgba(255,255,255,0.6);
+                }
+
+                h1 {
+                    font-weight: 400;
+                    font-size: 1.8em;
+                    padding-bottom: 0.5em;
+                    margin-top: 0;
+                    border-bottom: 2px solid #000;
+                }
+
+                .btn {
+                    font-size: 1em;
+                    border: 2px solid #000;
+                    background-color: transparent;
+                    color: #000;
+                }
+
+                @media screen and (min-width: $screen-sm-min) {
+                    font-size: 16px;
+                    padding: 0 30px;
+
+                    .text {
+                        padding: 2em;
+                    }
+
+                    .flickity-prev-next-button {
+                        display: block;
+                    }
+                }
+
+                @media screen and (min-width: $screen-md-min) {
+                    font-size: 18px;
+                    padding: 0 50px;
+                }
+
+                @media screen and (min-width: $screen-lg-min) {
+                    font-size: 20px;
+                    padding: 0 100px;
+                }
+            }
+
+            .flickity-prev-next-button {
+                display: none;
+
+                @media screen and (min-width: $screen-sm-min) {
+                    display: block;
+                }
+            }
+
+            .flickity-page-dots {
+                bottom: 20px;
+
+                .dot {
+                    width: 12px;
+                    height: 12px;
+                    opacity: 1;
+                    background: transparent;
+                    border: 2px solid white;
+
+                    &.is-selected {
+                        background: white;
+                    }
+                }
+            }
+
+        }
+
+    }
+
     main {
 
         section {
@@ -65,6 +156,7 @@
 
                 a {
                     display: block;
+                    height: 100%;
                     color: inherit;
                 }
 
@@ -85,7 +177,7 @@
                             background-color: rgba(0,0,0,0.5);
                         }
 
-                        h2, h3 {
+                        h3 {
                             margin: 0;
                             padding: 10px;
                             border-radius: 5px;
@@ -105,129 +197,58 @@
                         overflow: hidden;
                     }
 
-                    h2, h3 {
-                        font-size: 1em;
+                    h3 {
+                        font-size: 16px;
                         margin-top: 0;
-                        margin-bottom: 1em;
+                        margin-bottom: 10px;
                         font-weight: 500;
+
+                        small {
+                            font-size: 1em;
+                            font-weight: 300;
+                        }
                     }
 
                     .excerpt {
-                        color: $gray;
+                        color: $gray-light;
                     }
                 }
+            }
+
+            .more-button a {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff;
+                text-align: center;
+                padding: 30px;
+                font-size: 18px;
             }
         }
 
         #story-list {
-            .heading {
+            .heading, .more-button {
                 background-color: #a3d7a3;
             }
         }
 
         #designer-list {
-            .heading {
+            .heading, .more-button {
                 background-color: #f2cd8e;
             }
         }
 
         #place-list {
-            .heading {
+            .heading, .more-button {
                 background-color: #a3d5ed;
             }
         }
 
         #tag-list {
-            .heading {
+            .heading, .more-button {
                 background-color: #f6bdd9;
             }
         }
     }
-}
-
-#home-carousel {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-
-    .carousel-cell {
-        position: relative;
-        display: flex;
-        width: 100%;
-        height: 100%;
-        justify-content: flex-start;
-        align-items: center;
-        @include image-cover();
-
-        .text {
-            max-width: 25em;
-            padding: 1em;
-            background-color: rgba(255,255,255,0.6);
-        }
-
-        h1 {
-            font-weight: 400;
-            font-size: 1.8em;
-            padding-bottom: 0.5em;
-            margin-top: 0;
-            border-bottom: 2px solid #000;
-        }
-
-        .btn {
-            font-size: 1em;
-            border: 2px solid #000;
-            background-color: transparent;
-            color: #000;
-        }
-
-        @media screen and (min-width: $screen-sm-min) {
-            font-size: 16px;
-            padding: 0 30px;
-
-            .text {
-                padding: 2em;
-            }
-
-            .flickity-prev-next-button {
-                display: block;
-            }
-        }
-
-        @media screen and (min-width: $screen-md-min) {
-            font-size: 18px;
-            padding: 0 50px;
-        }
-
-        @media screen and (min-width: $screen-lg-min) {
-            font-size: 20px;
-            padding: 0 100px;
-        }
-    }
-
-    .flickity-prev-next-button {
-        display: none;
-    }
-
-    @media screen and (min-width: $screen-sm-min) {
-        .flickity-prev-next-button {
-            display: block;
-        }
-    }
-
-    .flickity-page-dots {
-        bottom: 20px;
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            opacity: 1;
-            background: transparent;
-            border: 2px solid white;
-
-            &.is-selected {
-                background: white;
-            }
-        }
-    }
-
 }

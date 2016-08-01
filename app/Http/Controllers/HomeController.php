@@ -30,7 +30,7 @@ class HomeController extends Controller
         })->orderBy('id', 'desc')->take(12)->get();
         $tags = Tag::orderByRaw('RAND()')->take(12)->get();
 
-        return view('pages.index', [
+        return view('pages.home', [
             'designers' => $designers,
             'places' => $places,
             'stories' => $stories,

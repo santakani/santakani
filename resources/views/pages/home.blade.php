@@ -5,32 +5,32 @@
 ])
 
 @section('header')
-<div id="home-carousel" class="carousel">
-    <div class="carousel-cell" style="background-image:url(/img/banner/1.jpg)">
-        <div class="text">
-            <h1>{{ trans('home.slide_1.title') }}</h1>
-            <p>{{ trans('home.slide_1.content') }}</p>
-            <a class="btn btn-default" href="/designer" role="button">{{ trans('designer.designer_list') }}</a>
-            <a class="btn btn-default" href="/designer/create" role="button">{{ trans('designer.create_a_designer_page') }}</a>
-        </div><!-- .text -->
-    </div><!-- .carousel-cell -->
-    <div class="carousel-cell" style="background-image:url(/img/banner/2.jpg)">
-        <div class="text">
-            <h1>{{ trans('home.slide_2.title') }}</h1>
-            <p>{{ trans('home.slide_2.content') }}</p>
-            <a class="btn btn-default" href="/place" role="button">{{ trans('geo.map') }}</a>
-            <a class="btn btn-default" href="/place/create" role="button">{{ trans('place.create_a_place_page') }}</a>
-        </div>
-    </div><!-- .carousel-cell -->
-    <div class="carousel-cell" style="background-image:url(/img/banner/3.jpg)">
-        <div class="text">
-            <h1>{{ trans('home.slide_3.title') }}</h1>
-            <p>{{ trans('home.slide_3.content') }}</p>
-            <a class="btn btn-default" href="/story" role="button">{{ trans('story.story_list') }}</a>
-            <a class="btn btn-default" href="/story/create" role="button">{{ trans('story.write_a_design_story') }}</a>
-        </div>
-    </div><!-- .carousel-cell -->
-</div>
+    <div id="slides" class="slides">
+        <div class="slide" style="background-image:url(/img/banner/1.jpg)">
+            <div class="text">
+                <h1>{{ trans('home.slide_1.title') }}</h1>
+                <p>{{ trans('home.slide_1.content') }}</p>
+                <a class="btn btn-default" href="/designer" role="button">{{ trans('designer.designer_list') }}</a>
+                <a class="btn btn-default" href="/designer/create" role="button">{{ trans('designer.create_a_designer_page') }}</a>
+            </div><!-- .text -->
+        </div><!-- .slide -->
+        <div class="slide" style="background-image:url(/img/banner/2.jpg)">
+            <div class="text">
+                <h1>{{ trans('home.slide_2.title') }}</h1>
+                <p>{{ trans('home.slide_2.content') }}</p>
+                <a class="btn btn-default" href="/place" role="button">{{ trans('geo.map') }}</a>
+                <a class="btn btn-default" href="/place/create" role="button">{{ trans('place.create_a_place_page') }}</a>
+            </div>
+        </div><!-- .slide -->
+        <div class="slide" style="background-image:url(/img/banner/3.jpg)">
+            <div class="text">
+                <h1>{{ trans('home.slide_3.title') }}</h1>
+                <p>{{ trans('home.slide_3.content') }}</p>
+                <a class="btn btn-default" href="/story" role="button">{{ trans('story.story_list') }}</a>
+                <a class="btn btn-default" href="/story/create" role="button">{{ trans('story.write_a_design_story') }}</a>
+            </div>
+        </div><!-- .slide -->
+    </div>
 @endsection
 
 @section('main')
@@ -57,6 +57,13 @@
                     </a>
                 </article>
             @endforeach
+            <article class="more-button">
+                <a href="{{ url('story') }}">
+                    <i class="fa fa-2x fa-plus-square-o"></i>
+                    <br>
+                    {{ trans('common.more') }}
+                </a>
+            </article>
         </div>
     </section>
 
@@ -82,6 +89,13 @@
                     </a>
                 </article>
             @endforeach
+            <article class="more-button">
+                <a href="{{ url('designer') }}">
+                    <i class="fa fa-2x fa-plus-square-o"></i>
+                    <br>
+                    {{ trans('common.more') }}
+                </a>
+            </article>
         </div>
     </section>
 
@@ -100,13 +114,21 @@
                         @endif
                         <div class="text">
                             <div class="inner">
-                                <h3>{{ $place->name }}</h3>
+                                <h3>{{ $place->name }} <small>{{ $place->city->full_name }}</small></h3>
+
                                 <p class="excerpt">{{ $place->excerpt('content') }}</p>
                             </div>
                         </div>
                     </a>
                 </article>
             @endforeach
+            <article class="more-button">
+                <a href="{{ url('place') }}">
+                    <i class="fa fa-2x fa-plus-square-o"></i>
+                    <br>
+                    {{ trans('common.more') }}
+                </a>
+            </article>
         </div>
     </section>
 
@@ -130,6 +152,13 @@
                     </a>
                 </article>
             @endforeach
+            <article class="more-button">
+                <a href="{{ url('tag') }}">
+                    <i class="fa fa-2x fa-plus-square-o"></i>
+                    <br>
+                    {{ trans('common.more') }}
+                </a>
+            </article>
         </div>
     </section>
 @endsection
