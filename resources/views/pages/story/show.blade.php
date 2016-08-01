@@ -3,6 +3,10 @@
     'body_id' => 'story-show-page',
     'body_classes' => ['story-show-page', 'story-page', 'show-page'],
     'active_nav' => 'story',
+    'og_title' => $story->text('title'),
+    'og_url' => $story->url,
+    'og_description' => $story->excerpt('content'),
+    'og_image' => empty($story->image_id)?'':$story->image->url('medium'),
 ])
 
 @section('header')

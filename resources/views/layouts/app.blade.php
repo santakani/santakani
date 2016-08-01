@@ -19,6 +19,8 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 
     <!-- Open Graph Protocol -->
     <meta property="og:title" content="{{ $og_title or $title }}">
+    <meta property="og:type" content="{{ $og_type or 'website' }}">
+    <meta property="og:url" content="{{ $og_url or url()->current() }}">
     <meta property="og:description" content="{{ $og_description or trans('brand.app_description') }}">
     <meta property="og:image" content="{{ $og_image or url('img/logo/origin-512x512.png') }}">
 
