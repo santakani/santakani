@@ -8,7 +8,7 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 ?>
 
 <!DOCTYPE html>
-<html lang="{{ App::getLocale() }}">
+<html lang="{{ App::getLocale() }}" prefix="og: http://ogp.me/ns#">
 
 <head>
     <meta charset="utf-8">
@@ -16,6 +16,11 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ $title }}</title>
+
+    <!-- Open Graph Protocol -->
+    <meta property="og:title" content="{{ $og_title or $title }}">
+    <meta property="og:description" content="{{ $og_description or trans('brand.app_description') }}">
+    <meta property="og:image" content="{{ $og_image or url('img/logo/origin-512x512.png') }}">
 
     <link rel="shortcut icon" href="{{ url('img/logo/origin-32x32.png') }}" type="image/png" sizes="32x32">
     <link rel="shortcut icon" href="{{ url('img/logo/origin-64x64.png') }}" type="image/png" sizes="64x64">
