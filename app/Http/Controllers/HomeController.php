@@ -22,13 +22,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $designers = Designer::orderBy('id', 'desc')->take(12)->get();
-        $places = Place::orderBy('id', 'desc')->take(12)->get();
+        $designers = Designer::orderBy('id', 'desc')->take(9)->get();
+        $places = Place::orderBy('id', 'desc')->take(9)->get();
         $stories = Story::whereHas('translations', function ($sub_query) {
             $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title')
                 ->whereNotNull('content');
-        })->orderBy('id', 'desc')->take(12)->get();
-        $tags = Tag::orderByRaw('RAND()')->take(12)->get();
+        })->orderBy('id', 'desc')->take(9)->get();
+        $tags = Tag::orderByRaw('RAND()')->take(9)->get();
 
         return view('pages.home', [
             'designers' => $designers,
