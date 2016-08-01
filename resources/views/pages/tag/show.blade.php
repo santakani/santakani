@@ -2,7 +2,10 @@
     'title' => $tag->text('name') . ' - ' . trans('common.tag'),
     'body_id' => 'tag-show-page',
     'body_classes' => ['tag-show-page', 'tag-page', 'show-page'],
-    'active_nav' => 'none',
+    'og_title' => $tag->text('name'),
+    'og_url' => $tag->url,
+    'og_description' => $tag->excerpt('description'),
+    'og_image' => empty($tag->image_id)?'':$tag->image->url('medium'),
 ])
 
 @section('header')

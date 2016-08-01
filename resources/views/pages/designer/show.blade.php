@@ -19,6 +19,10 @@ if ($designer->logo_id) {
     'body_id' => 'designer-show-page',
     'body_classes' => ['designer-show-page', 'show-page', 'designer-page'],
     'active_nav' => 'designer',
+    'og_title' => $designer->text('name'),
+    'og_url' => $designer->url,
+    'og_description' => $designer->excerpt('content'),
+    'og_image' => empty($designer->image_id)?'':$designer->image->url('medium'),
 ])
 
 @section('header')

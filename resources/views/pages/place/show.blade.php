@@ -3,6 +3,10 @@
     'body_id' => 'place-show-page',
     'body_classes' => ['place-show-page', 'place-page', 'show-page'],
     'active_nav' => 'place',
+    'og_title' => $place->text('name'),
+    'og_url' => $place->url,
+    'og_description' => $place->excerpt('content'),
+    'og_image' => empty($place->image_id)?'':$place->image->url('medium'),
 ])
 
 @section('header')
