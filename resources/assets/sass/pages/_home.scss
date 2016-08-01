@@ -235,7 +235,7 @@
 
             // 3 rows, 2 columns
             @media (min-width: 660px) and (max-width: 1039px) {
-                max-width: 640px;
+                max-width: 660px;
                 article:not(.more-button):nth-child(n+6) {
                     display: none;
                 }
