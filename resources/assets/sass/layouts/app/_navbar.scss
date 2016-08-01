@@ -1,11 +1,11 @@
 nav.custom-navbar {
+    $shadow-size: 5px;
+
     position: fixed;
     width: 100%;
     height: $custom-navbar-height;
-
-    @include material-shadow(lower);
-
     background-color: #fff;
+    box-shadow: 0 $shadow-size 0 rgba(0,0,0,0.2);
     z-index: 100;
 
     .nav-menu {
@@ -18,7 +18,7 @@ nav.custom-navbar {
         > li {
             flex: 1 0 auto;
             height: $custom-navbar-height;
-            line-height: $custom-navbar-height - 4px;
+            line-height: $custom-navbar-height;
 
             &.space {
                 flex: 0 0 0;
@@ -32,7 +32,6 @@ nav.custom-navbar {
                 text-align: center;
                 font-weight: 300;
                 color: #555555;
-                border-bottom: 4px solid transparent;
                 transition: 0.3s;
 
                 &:hover {
@@ -46,7 +45,7 @@ nav.custom-navbar {
 
             &.active {
                 > a {
-                    border-bottom: 4px solid $brand-info;
+                    box-shadow: 0 $shadow-size 0 $brand-info;
                 }
             }
 
