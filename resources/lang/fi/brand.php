@@ -2,5 +2,5 @@
 
 return array(
     'app_name' => 'Santakani',
-    'app_description' => 'Tarinoita suunnittelu?!',
+    'app_description' => 'Designers and design shops from Finland',
 );
