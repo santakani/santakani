@@ -59,6 +59,8 @@ $flag-icon-css-path: '../../img/flags' !default;
 // Components
 //==============================================================================
 
+@import "components/article-filter";
+@import "components/article-list";
 @import "components/coordinate-select";
 @import "components/gallery-editor";
 @import "components/material-card";

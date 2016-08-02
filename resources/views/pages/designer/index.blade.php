@@ -6,40 +6,42 @@
 ])
 
 @section('main')
-<div class="container">
-    <form id="designer-filter" class="list-filter" action="/designer" method="get">
-        <div class="form-group">
-            <label>{{ trans('common.search') }}</label>
-            <input type="search" name="search" value="{{ request()->input('search') }}"
-                   class="form-control" placeholder="{{ trans('common.search') }}"
-                   maxlength="50"/>
-        </div>
-        <div class="form-group">
-            <label>{{ trans('common.tag') }}</label>
-            @include('components.tag-filter', ['selected' => request()->input('tag_id')])
-        </div>
-    </form>
-    <div id="designer-list" class="row">
-        @foreach ($designers as $designer)
-            <div class="col-sm-12 col-md-6">
-                <article id="designer-{{ $designer->id }}" class="designer material-card"
-                    data-id="{{ $designer->id }}">
+    <section id="designer-filter" class="article-filter">
+        <form action="/designer" method="get">
+            <div class="form-group">
+                <label>{{ trans('common.search') }}</label>
+                <input type="search" name="search" value="{{ request()->input('search') }}"
+                       class="form-control" placeholder="{{ trans('common.search') }}"
+                       maxlength="50"/>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('common.tag') }}</label>
+                @include('components.tag-filter', ['selected' => request()->input('tag_id')])
+            </div>
+        </form>
+    </section>
+
+    <section id="designer-list" class="article-list">
+        <div class="list">
+            @foreach ($designers as $designer)
+                <article>
                     <a href="{{ $designer->url }}">
-                        <div class="cover-image" style="background-image:url({{ $designer->image_id ? $designer->image->url('medium') : '' }})">
-                            <img class="logo-image" src="{{ $designer->logo_id ? $designer->logo->url('thumb') : '' }}" />
+                        <div class="cover" style="background-image:url({{ $designer->image_id?$designer->image->url('thumb'):'' }})">
+                            <div class="logo" style="background-image:url({{ $designer->logo_id?$designer->logo->url('thumb'):'' }})"></div>
                         </div>
                         <div class="text">
-                            <h1>{{ $designer->text('name') }}<br>
-                                <small>{{ $designer->text('tagline') }}</small></h1>
-                            <div class="excerpt">{{ $designer->excerpt('content') }}</div>
+                            <div class="inner">
+                                <h2>{{ $designer->text('name') }}<br></h2>
+                                <div class="tagline text-muted">{{ $designer->text('tagline') }}</div>
+                                <div class="excerpt">{{ $designer->excerpt('content') }}</div>
+                            </div>
                         </div>
                     </a>
                 </article>
-            </div>
-        @endforeach
-    </div><!-- #designer-list -->
-    <div class="text-center">
-        {!! $designers->appends(app('request')->all())->links() !!}
-    </div>
-</div><!-- .container -->
+            @endforeach
+        </div>
+        <div class="pagination-wrap">
+            {!! $designers->appends(app('request')->all())->links() !!}
+        </div>
+    </section><!-- #designer-list -->
 @endsection

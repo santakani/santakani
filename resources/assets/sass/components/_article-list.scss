@@ -1,0 +1,98 @@
+.article-list {
+    background-color: #EAEFF2;
+
+    .list {
+        display: flex;
+        max-width: 1300px;
+        padding: 10px 0;
+        margin: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        @media (min-width: $screen-sm-min) {
+            padding: 10px;
+        }
+    }
+
+    article {
+        width: 300px;
+        margin: 10px;
+        background-color: #ffffff;
+
+        a {
+            display: block;
+            height: 100%;
+            color: inherit;
+        }
+
+        .cover {
+            position: relative;
+            @include image-cover();
+            height: 300px;
+
+            .text {
+                display: flex;
+                height: 100%;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                text-align: center;
+                background-color: rgba(0,0,0,0.3);
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: rgba(0,0,0,0.5);
+                }
+
+                h2, h3 {
+                    margin: 0;
+                    padding: 10px;
+                    border-radius: 5px;
+                    font-size: 2em;
+                    font-weight: 400;
+                    color: #ffffff;
+                }
+            }
+
+            .logo {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                width: 79px;
+                height: 79px;
+                @include image-cover();
+                border: 2px solid #ffffff;
+            }
+        }
+
+        .text {
+            height: 200px;
+            padding: 15px;
+
+            .inner {
+                height: 100%;
+                overflow: hidden;
+            }
+
+            h2, h3 {
+                font-size: 16px;
+                margin-top: 0;
+                margin-bottom: 10px;
+                font-weight: 500;
+
+                small {
+                    font-size: 1em;
+                    font-weight: 300;
+                }
+            }
+
+            .excerpt {
+                color: $gray-light;
+            }
+        }
+    }
+
+    .pagination-wrap {
+        text-align: center;
+    }
+}
