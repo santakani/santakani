@@ -1,4 +1,5 @@
-$('.tag-filter button').click(function () {
-    $('.tag-filter input').val($(this).data('id'));
-    $('#story-filter').submit();
+$('.tag-filter a').click(function (e) {
+    e.preventDefault();
+    $('.tag-filter input').val($(this).parents('li').data('id'));
+    $(this).parents('form').submit();
 });

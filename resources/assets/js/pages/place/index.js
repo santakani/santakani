@@ -25,10 +25,10 @@ $('.tag-filter button').click(function () {
     $('#place-filter').submit();
 });
 
-$('#place-filter input[type="search"]').keydown(function (e) {
-    if(e.keyCode == 13) {
-        $('#place-filter').submit();
-    }
+$('.tag-filter a').click(function (e) {
+    e.preventDefault();
+    $('.tag-filter input').val($(this).parents('li').data('id'));
+    $(this).parents('form').submit();
 });
 
 // Float icons

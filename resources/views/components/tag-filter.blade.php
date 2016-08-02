@@ -8,16 +8,18 @@ if (!isset($selected)) {
 }
 ?>
 
-<div class="tag-filter" data-toggle="buttons">
+<div class="tag-filter">
     <input type="hidden" name="{{ $name or 'tag_id' }}" value="{{ $selected }}">
 
-    <button type="button" class="btn btn-default {{ empty($selected) ? 'active' : '' }}" data-id="">
-        {{ mb_strtolower(trans('common.all')) }}
-    </button>
+    <ul class="tag-list">
+        <li class="{{ empty($selected) ? 'active' : '' }}" data-id="">
+            <a href="#">{{ trans('common.all') }}</a>
+        </li>
 
-    @foreach ($tags as $tag)
-        <button type="button" class="btn btn-default {{ intval($selected) === $tag->id ? 'active' : '' }}" data-id="{{ $tag->id }}">
-            {{ mb_strtolower($tag->text('name')) }}
-        </button>
-    @endforeach
+        @foreach ($tags as $tag)
+            <li class="{{ $selected == $tag->id ? 'active' : '' }}" data-id="{{ $tag->id }}">
+                <a href="#">{{ $tag->text('name') }}</a>
+            </li>
+        @endforeach
+    </ul>
 </div>
