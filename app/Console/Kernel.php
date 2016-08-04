@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\UserRole::class,
         Commands\CountryImport::class,
         Commands\CityImport::class,
+        Commands\ImageRegenerate::class,
     ];
 
     /**
