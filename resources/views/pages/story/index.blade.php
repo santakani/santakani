@@ -6,41 +6,48 @@
 ])
 
 @section('main')
-<div class="container">
-    <form id="story-filter" class="list-filter" action="/story" method="get">
-        <div class="form-group">
-            <label>{{ trans('common.search') }}</label>
-            <input type="search" name="search" value="{{ request()->input('search') }}"
-                   class="form-control" placeholder="{{ trans('common.search') }}"
-                   maxlength="50"/>
-        </div>
-        <div class="form-group">
-            <label>{{ trans('common.tag') }}</label>
-            @include('components.tag-filter', ['selected' => request()->input('tag_id')])
-        </div>
-    </form>
-    <div id="story-list" class="story-list row">
-        @foreach ($stories as $story)
-            <div class="col-sm-4 col-lg-3">
-                <article id="story-{{ $story->id }}" class="story material-card" data-id="{{ $story->id }}">
+    <section id="story-filter" class="article-filter">
+        <form action="/story" method="get">
+            <div class="form-group">
+                <label>{{ trans('common.search') }}</label>
+                <input type="search" name="search" value="{{ request()->input('search') }}"
+                       class="form-control" placeholder="{{ trans('common.search') }}"
+                       maxlength="50"/>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('common.tag') }}</label>
+                @include('components.tag-filter', ['selected' => request()->input('tag_id')])
+            </div>
+        </form>
+    </section><!-- #story-filter -->
+
+    <section id="story-list" class="article-list">
+        <div class="list">
+            @foreach ($stories as $story)
+                <article>
                     <a href="{{ $story->url }}">
-                        @if ($image = $story->image)
-                            <img class="cover-image" src="{{ $image->fileUrl('thumb') }}" />
-                        @else
-                            <img class="cover-image" src="http://placehold.it/300x300?text=NO+IMAGE" />
-                        @endif
-                        <div class="shadow"></div>
+                        <div class="cover">
+                            @if ($story->image_id)
+                                <img class="image" src="{{ $story->image->thumb_file_url }}"
+                                    srcset="{{ $story->image->largethumb_file_url }} 2x"/>
+                            @endif
+                            @if ($story->logo_id)
+                                <img class="logo" src="{{ $story->logo->small_file_url or '' }}"/>
+                            @endif
+                        </div>
                         <div class="text">
-                            <h1>{{ $story->title }}</h1>
-                            {{ $story->excerpt('content') }}
+                            <div class="inner">
+                                <h2>{{ $story->text('name') }}<br></h2>
+                                <div class="tagline text-muted">{{ $story->text('tagline') }}</div>
+                                <div class="excerpt">{{ $story->excerpt('content') }}</div>
+                            </div>
                         </div>
                     </a>
                 </article>
-            </div>
-        @endforeach
-    </div><!-- #story-list -->
-    <div class="text-center">
-        {!! $stories->appends(app('request')->all())->links() !!}
-    </div>
-</div><!-- .container -->
+            @endforeach
+        </div>
+        <div class="pagination-wrap">
+            {!! $stories->appends(app('request')->all())->links() !!}
+        </div>
+    </section><!-- #story-list -->
 @endsection
