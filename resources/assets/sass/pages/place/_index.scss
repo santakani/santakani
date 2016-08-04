@@ -19,9 +19,18 @@
     }
 
     #place-list {
-        flex: 2 1 340px;
+        flex: 0 0 320px;
         height: 100%;
         overflow-y: auto;
+        background-color: #EAEFF2;
+
+        @media (min-width: 400px + 2 * 320px + 20px + $scrollbar-width) {
+            min-width: 2 * 320px + 20px + $scrollbar-width;
+        }
+
+        @media (min-width: 400px + 3 * 320px + 20px + $scrollbar-width) {
+            min-width: 3 * 320px + 20px + $scrollbar-width;
+        }
     }
 
     @media screen and (max-width: $screen-xs-max) {
