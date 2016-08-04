@@ -35,7 +35,7 @@
 
 @section('main')
 
-    <section id="story-list">
+    <section id="story-list" class="article-list">
         <h2 class="heading">
             <div class="inner">{{ trans('story.stories') }}</div>
         </h2>
@@ -43,11 +43,12 @@
             @foreach ($stories as $story)
                 <article>
                     <a href="{{ $story->url }}">
-                        @if ($story->image_id)
-                            <div class="cover" style="background-image:url({{ $story->image->fileUrl('thumb') }})"></div>
-                        @else
-                            <div class="cover" style="background-image:url('/img/placeholder/blank/300x300.svg')"></div>
-                        @endif
+                        <div class="cover">
+                            @if ($story->image_id)
+                                <img class="image" src="{{ $story->image->thumb_file_url }}"
+                                    srcset="{{ $story->image->largethumb_file_url }} 2x"/>
+                            @endif
+                        </div>
                         <div class="text">
                             <div class="inner">
                                 <h3>{{ $story->title }}</h3>
@@ -67,7 +68,7 @@
         </div>
     </section>
 
-    <section id="designer-list">
+    <section id="designer-list" class="article-list">
         <h2 class="heading">
             <div class="inner">{{ trans('designer.designers') }}</div>
         </h2>
@@ -75,15 +76,20 @@
             @foreach ($designers as $designer)
                 <article>
                     <a href="{{ $designer->url }}">
-                        @if ($designer->image_id)
-                            <div class="cover" style="background-image:url({{ $designer->image->fileUrl('thumb') }})"></div>
-                        @else
-                            <div class="cover" style="background-image:url('/img/placeholder/blank/300x300.svg')"></div>
-                        @endif
+                        <div class="cover">
+                            @if ($designer->image_id)
+                                <img class="image" src="{{ $designer->image->thumb_file_url }}"
+                                    srcset="{{ $designer->image->largethumb_file_url }} 2x"/>
+                            @endif
+                            @if ($designer->logo_id)
+                                <img class="logo" src="{{ $designer->logo->small_file_url or '' }}"/>
+                            @endif
+                        </div>
                         <div class="text">
                             <div class="inner">
-                                <h3>{{ $designer->name }}</h3>
-                                <p class="excerpt">{{ $designer->excerpt('content') }}</p>
+                                <h2>{{ $designer->text('name') }}<br></h2>
+                                <div class="tagline text-muted">{{ $designer->text('tagline') }}</div>
+                                <div class="excerpt">{{ $designer->excerpt('content') }}</div>
                             </div>
                         </div>
                     </a>
@@ -99,7 +105,7 @@
         </div>
     </section>
 
-    <section id="place-list">
+    <section id="place-list" class="article-list">
         <h2 class="heading">
             <div class="inner">{{ trans('place.places') }}</div>
         </h2>
@@ -107,11 +113,12 @@
             @foreach ($places as $place)
                 <article>
                     <a href="{{ $place->url }}">
-                        @if ($place->image_id)
-                            <div class="cover" style="background-image:url({{ $place->image->fileUrl('thumb') }})"></div>
-                        @else
-                            <div class="cover" style="background-image:url('/img/placeholder/blank/300x300.svg')"></div>
-                        @endif
+                        <div class="cover">
+                            @if ($place->image_id)
+                                <img class="image" src="{{ $place->image->thumb_file_url }}"
+                                    srcset="{{ $place->image->largethumb_file_url }} 2x"/>
+                            @endif
+                        </div>
                         <div class="text">
                             <div class="inner">
                                 <h3>{{ $place->name }} <small>{{ $place->city->full_name }}</small></h3>
@@ -132,7 +139,7 @@
         </div>
     </section>
 
-    <section id="tag-list">
+    <section id="tag-list" class="article-list">
         <h2 class="heading">
             <div class="inner">{{ trans('common.tags') }}</div>
         </h2>
