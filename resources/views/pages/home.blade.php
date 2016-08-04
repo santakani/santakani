@@ -82,7 +82,7 @@
                                     srcset="{{ $designer->image->largethumb_file_url }} 2x"/>
                             @endif
                             @if ($designer->logo_id)
-                                <img class="logo" src="{{ $designer->logo->small_file_url or '' }}"/>
+                                <img class="logo" src="{{ $designer->logo->small_file_url }}"/>
                             @endif
                         </div>
                         <div class="text">

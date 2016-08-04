@@ -7,61 +7,64 @@
 ])
 
 @section('main')
-<div id="place-list" class="active">
-    <div class="float-icon"><i class="fa fa-map-o"></i></div>
-    <div class="container-fluid">
+    <div id="place-list" class="active">
+        <div class="float-icon"><i class="fa fa-map-o"></i></div>
 
-        <form id="place-filter" class="form" action="{{ url('place') }}" method="get">
-            <div class="form-group">
-                <label>{{ trans('geo.city') }}</label>
-                @include('components.select.city', ['selected' => $city])
-            </div>
-            <div class="form-group">
-                <label>{{ trans('common.type') }}</label>
-                @include('components.place-type-select', [
-                    'selected' => $type,
-                    'all' => true,
-                ])
-            </div>
-            <div class="form-group">
-                <label>{{ trans('common.search') }}</label>
-                <input type="search" name="search" value="{{ request()->input('search') }}"
-                       class="form-control" maxlength="50"/>
-            </div>
-            <div class="form-group">
-                <label>{{ trans('common.tag') }}</label>
-                @include('components.tag-filter', ['selected' => request()->input('tag_id')])
-            </div>
-        </form>
+        <section id="place-filter" class="article-filter">
+            <form action="{{ url('place') }}" method="get">
+                <div class="form-group">
+                    <label>{{ trans('geo.city') }}</label>
+                    @include('components.select.city', ['selected' => $city])
+                </div>
+                <div class="form-group">
+                    <label>{{ trans('common.type') }}</label>
+                    @include('components.place-type-select', [
+                        'selected' => $type,
+                        'all' => true,
+                    ])
+                </div>
+                <div class="form-group">
+                    <label>{{ trans('common.search') }}</label>
+                    <input type="search" name="search" value="{{ request()->input('search') }}"
+                           class="form-control" maxlength="50"/>
+                </div>
+                <div class="form-group">
+                    <label>{{ trans('common.tag') }}</label>
+                    @include('components.tag-filter', ['selected' => request()->input('tag_id')])
+                </div>
+            </form>
+        </section><!-- .article-filter -->
 
-        @foreach ($places as $place)
-            <article id="place-{{ $place->id }}" class="place material-card"
-                data-id="{{ $place->id }}" data-latitude="{{ $place->latitude }}"
-                data-longitude="{{ $place->longitude }}"
-                data-model="{{ $place->toJSON() }}">
-                <a href="{{ $place->url }}">
-                    <div class="cover-image" style="background-image:url({{ $place->image?$place->image->fileUrl('medium'):'' }})">
-                        <span class="type">{{ $place->type }}</span>
-                    </div>
-                    <div class="text">
-                        <h1 class="name">
-                            {{ $place->text('name') }}
-                            <small>
-                                {{ $place->address }}
-                            </small>
-                        </h1>
-                        <div class="excerpt">
-                            {{ $place->excerpt('content') }}
-                        </div>
-                    </div>
-                </a>
-            </article>
-        @endforeach
-    </div>
-    <div class="text-center">
-        {!! $places->links() !!}
-    </div>
-</div><!-- #place-list -->
+        <section class="article-list">
+            <div class="list">
+                @foreach ($places as $place)
+                    <article data-model="{{ $place->toJSON() }}">
+                        <a href="{{ $place->url }}">
+                            <div class="cover">
+                                @if ($place->image_id)
+                                    <img class="image" src="{{ $place->image->thumb_file_url }}"
+                                        srcset="{{ $place->image->largethumb_file_url }} 2x"/>
+                                @endif
+                                @if ($place->logo_id)
+                                    <img class="logo" src="{{ $place->logo->small_file_url }}"/>
+                                @endif
+                            </div>
+                            <div class="text">
+                                <div class="inner">
+                                    <h3>{{ $place->name }} <small>{{ $place->address }}</small></h3>
+
+                                    <p class="excerpt">{{ $place->excerpt('content') }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                @endforeach
+            </div><!-- .list -->
+            <div class="pagination-wrap">
+                {!! $places->appends(app('request')->all())->links() !!}
+            </div>
+        </section><!-- .article-list -->
+    </div><!-- #place-list -->
 
 <div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}">
     <div class="float-icon"><i class="fa fa-list"></i></div>

@@ -40,7 +40,7 @@ var PlaceRow = Backbone.View.extend({
     },
 
     scrollTo: function () {
-        $(window).scrollTo(this.el, 300, {offset: -200});
+        $('#place-list').scrollTo(this.el, 300, {offset: -80});
     }
 
 });
@@ -52,7 +52,7 @@ var PlaceMarker = Backbone.View.extend({
         var lng = this.model.get('longitude');
 
         if (lat && lng) {
-            this.marker = Leaflet.marker([lat, lng]).bindPopup(this.model.get('name'));
+            this.marker = Leaflet.marker([lat, lng]).bindPopup('<a href="/place/' + this.model.get('id') + '">' + this.model.get('name') + '</a>');
             this.marker.on('click', this.activate, this);
         }
 
@@ -99,7 +99,7 @@ module.exports = Backbone.View.extend({
 
         var that = this;
 
-        this.$('.place').each(function () {
+        this.$('#place-list article').each(function () {
             var model = new Place($(this).data('model'));
 
             var placeRow = new PlaceRow({el: this, model: model});
