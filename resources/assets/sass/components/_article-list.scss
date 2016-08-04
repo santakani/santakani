@@ -30,6 +30,12 @@
             @include image-cover();
             height: 300px;
 
+            img.image {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
             .text {
                 display: flex;
                 height: 100%;
@@ -54,13 +60,13 @@
                 }
             }
 
-            .logo {
+            img.logo {
                 position: absolute;
+                display: block;
                 right: 10px;
                 bottom: 10px;
                 width: 79px;
-                height: 79px;
-                @include image-cover();
+                height: auto;
                 border: 2px solid #ffffff;
             }
         }

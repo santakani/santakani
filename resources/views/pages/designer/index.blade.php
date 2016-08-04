@@ -26,8 +26,14 @@
             @foreach ($designers as $designer)
                 <article>
                     <a href="{{ $designer->url }}">
-                        <div class="cover" style="background-image:url({{ $designer->image_id?$designer->image->fileUrl('thumb'):'' }})">
-                            <div class="logo" style="background-image:url({{ $designer->logo_id?$designer->logo->fileUrl('thumb'):'' }})"></div>
+                        <div class="cover">
+                            @if ($designer->image_id)
+                                <img class="image" src="{{ $designer->image->thumb_file_url }}"
+                                    srcset="{{ $designer->image->largethumb_file_url }} 2x"/>
+                            @endif
+                            @if ($designer->logo_id)
+                                <img class="logo" src="{{ $designer->logo->small_file_url or '' }}"/>
+                            @endif
                         </div>
                         <div class="text">
                             <div class="inner">
