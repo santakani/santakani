@@ -37,7 +37,7 @@
             @foreach($images as $image)
                 <tr data-model="{{ $image->toJSON() }}">
                     <td>{{ $image->id }}</td>
-                    <td><img src="{{ $image->url('thumb') }}" width="150" height="150"></td>
+                    <td><img src="{{ $image->fileUrl('thumb') }}" width="150" height="150"></td>
                     <td>{{ $image->width }}x{{ $image->height }}</td>
                     <td>
                         @if (count($image->user))

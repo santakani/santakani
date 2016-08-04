@@ -26,8 +26,8 @@
             @foreach ($designers as $designer)
                 <article>
                     <a href="{{ $designer->url }}">
-                        <div class="cover" style="background-image:url({{ $designer->image_id?$designer->image->url('thumb'):'' }})">
-                            <div class="logo" style="background-image:url({{ $designer->logo_id?$designer->logo->url('thumb'):'' }})"></div>
+                        <div class="cover" style="background-image:url({{ $designer->image_id?$designer->image->fileUrl('thumb'):'' }})">
+                            <div class="logo" style="background-image:url({{ $designer->logo_id?$designer->logo->fileUrl('thumb'):'' }})"></div>
                         </div>
                         <div class="text">
                             <div class="inner">

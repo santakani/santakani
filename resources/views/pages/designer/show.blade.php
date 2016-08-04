@@ -1,13 +1,13 @@
 <?php
 
 if ($designer->image_id) {
-    $cover_image = $designer->image->url('large');
+    $cover_image = $designer->image->fileUrl('large');
 } else {
     $cover_image = url('img/placeholder/blank/1200x800.svg');
 }
 
 if ($designer->logo_id) {
-    $logo_image = $designer->logo->url('thumb');
+    $logo_image = $designer->logo->fileUrl('thumb');
 } else {
     $logo_image = url('img/placeholder/blank/300x300.svg');
 }
@@ -22,7 +22,7 @@ if ($designer->logo_id) {
     'og_title' => $designer->text('name'),
     'og_url' => $designer->url,
     'og_description' => $designer->excerpt('content'),
-    'og_image' => empty($designer->image_id)?'':$designer->image->url('medium'),
+    'og_image' => empty($designer->image_id)?'':$designer->image->fileUrl('medium'),
 ])
 
 @section('header')
@@ -118,8 +118,8 @@ if ($designer->logo_id) {
                         <div class="row">
                             @foreach ($designer->gallery_images as $image)
                                 <div class="col-xs-4">
-                                    <a href="{{ $image->url('large') }}">
-                                        <img src="{{ $image->url('thumb') }}" />
+                                    <a href="{{ $image->fileUrl('large') }}">
+                                        <img src="{{ $image->fileUrl('thumb') }}" />
                                     </a>
                                 </div>
                             @endforeach

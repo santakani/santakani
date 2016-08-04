@@ -6,7 +6,7 @@
     'og_title' => $place->text('name'),
     'og_url' => $place->url,
     'og_description' => $place->excerpt('content'),
-    'og_image' => empty($place->image_id)?'':$place->image->url('medium'),
+    'og_image' => empty($place->image_id)?'':$place->image->fileUrl('medium'),
 ])
 
 @section('header')
@@ -35,8 +35,8 @@
         <div id="gallery" class="gallery clearfix">
             @if ($place->image_id)
                 <div class="image-wrap">
-                    <img class="cover-image image" src="{{ $place->image->url('thumb') }}"
-                        data-src="{{ $place->image->url('large') }}" width="300" height="300"/>
+                    <img class="cover-image image" src="{{ $place->image->fileUrl('thumb') }}"
+                        data-src="{{ $place->image->fileUrl('large') }}" width="300" height="300"/>
                     <div class="raster"></div>
                 </div><!-- /.image-wrap -->
             @else
@@ -46,8 +46,8 @@
                 {{-- Ignore cover image --}}
                 @if ($image->id !== $place->image_id)
                     <div class="image-wrap">
-                        <img class="image" src="{{ $image->url('thumb') }}"
-                            data-src="{{ $image->url('large') }}" width="300" height="300"/>
+                        <img class="image" src="{{ $image->fileUrl('thumb') }}"
+                            data-src="{{ $image->fileUrl('large') }}" width="300" height="300"/>
                         <div class="raster"></div>
                     </div><!-- /.image-wrap -->
                 @endif

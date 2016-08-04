@@ -25,7 +25,7 @@
                 <tr>
                     <td>
                         @if ($designer->logo_id)
-                            <img src="{{ $designer->logo->url('thumb') }}" width="100" height="100"/>
+                            <img src="{{ $designer->logo->fileUrl('thumb') }}" width="100" height="100"/>
                         @endif
                     </td>
                     <td><a href="/designer/{{ $designer->id }}">{{ $designer->text('name') }}</a></td>
@@ -55,7 +55,7 @@
                 <tr>
                     <td>
                         @if ($place->image_id)
-                            <img src="{{ $place->image->url('thumb') }}" width="100" height="100"/>
+                            <img src="{{ $place->image->fileUrl('thumb') }}" width="100" height="100"/>
                         @endif
                     </td>
                     <td><a href="/place/{{ $place->id }}">{{ $place->text('name') }}</a></td>

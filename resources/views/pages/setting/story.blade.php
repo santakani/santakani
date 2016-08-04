@@ -24,7 +24,7 @@
                 <tr>
                     <td>
                         @if ($story->image_id)
-                            <img src="{{ $story->image->url('thumb') }}" width="100" height="100"/>
+                            <img src="{{ $story->image->fileUrl('thumb') }}" width="100" height="100"/>
                         @endif
                     </td>
                     <td><a href="/story/{{ $story->id }}">{{ $story->text('title') }}</a></td>

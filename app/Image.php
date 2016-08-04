@@ -47,32 +47,68 @@ class Image extends Model
     protected $fillable = ['mime_type', 'width', 'height', 'weight'];
 
     /**
-     * Large size of images.
-     *
-     * @var int
+     * Image thumbnail file name and sizes
+     * @var array
      */
-    const large_size = 1200;
+    protected $sizes = [
+        // Keep image proportion
+        'small' => [
+            'width' => 300,
+            'height' => 300,
+            'crop' => false,
+            'fallback' => 'full',
+        ],
+        'medium' => [
+            'width' => 600,
+            'height' => 600,
+            'crop' => false,
+            'fallback' => 'full',
+        ],
+        'large' => [
+            'width' => 1200,
+            'height' => 1200,
+            'crop' => false,
+            'fallback' => 'full',
+        ],
+
+        // Crop to square
+        'thumb' => [
+            'width' => 300,
+            'height' => 300,
+            'crop' => true,
+            'fallback' => false,
+        ],
+        'largethumb' => [
+            'width' => 600,
+            'height' => 600,
+            'crop' => true,
+            'fallback' => 'thumb',
+        ],
+    ];
 
     /**
-     * Medium size of images.
+     * Allowed MIME types
      *
-     * @var int
+     * @var array
      */
-    const medium_size = 600;
+    protected $mimes = [
+        'image/jpeg' => [
+            'extension' => '.jpg',
+        ],
+        'image/png' => [
+            'extension' => '.png',
+        ],
+        'image/gif' => [
+            'extension' => '.gif',
+        ],
+    ];
 
     /**
-     * Size of image thumbnails, crop to square.
-     *
-     * @var int
-     */
-    const thumb_size = 300;
-
-    /**
-     * Root directory of image storage, related to /public directory.
+     * Image storage path related to public folder
      *
      * @var string
      */
-    const storage_path = 'storage/images';
+    protected $storage = 'storage/images';
 
 
 
@@ -91,34 +127,124 @@ class Image extends Model
     /**
      * Parent model.
      */
-    public function parent() {
+    public function parent()
+    {
         return $this->morphTo();
     }
 
+
+    //==============================================
+    // Dynamic properties
+    //==============================================
+
+    /**
+     * Getter of "url". URL to image page, not image file.
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return url('image/' . $this->id);
+    }
+
+    /**
+     * Getter of "extension", file extension.
+     *
+     * @return string|null
+     */
+    public function getExtensionAttribute()
+    {
+        if (isset($this->mimes[$this->mime_type]['extension'])) {
+            return $this->mimes[$this->mime_type]['extension'];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Getter of "directory_path".
+     *
+     * @return string Absolute path related to system root. /srv/www/public/storage/images/100/100
+     */
+    public function getDirectoryPathAttribute()
+    {
+        return public_path($this->storage.'/'.(int)($this->id/1000).'/'.($this->id % 1000));
+    }
+
+    /**
+     * Getter of "directory_url".
+     *
+     * @return string URL to the image directory.
+     */
+    public function getDirectoryUrlAttribute()
+    {
+        return url($this->storage.'/'.(int)($this->id/1000).'/'.($this->id % 1000));
+    }
+
+    /**
+     * Getter of "full_file_url".
+     *
+     * @return string
+     */
+    public function getFullFileUrlAttribute()
+    {
+        return $this->fileUrl('full');
+    }
+
+    /**
+     * Getter of "large_file_url".
+     *
+     * @return string
+     */
+    public function getLargeFileUrlAttribute()
+    {
+        return $this->fileUrl('large');
+    }
+
+    /**
+     * Getter of "medium_file_url".
+     *
+     * @return string
+     */
+    public function getMediumFileUrlAttribute()
+    {
+        return $this->fileUrl('medium');
+    }
+
+    /**
+     * Getter of "thumb_file_url".
+     *
+     * @return string
+     */
+    public function getSmallFileUrlAttribute()
+    {
+        return $this->fileUrl('small');
+    }
+
+    /**
+     * Getter of "thumb_file_url".
+     *
+     * @return string
+     */
+    public function getThumbFileUrlAttribute()
+    {
+        return $this->fileUrl('thumb');
+    }
+
+    /**
+     * Getter of "largethumb_file_url".
+     *
+     * @return string
+     */
+    public function getLargethumbFileUrlAttribute()
+    {
+        return $this->fileUrl('largethumb');
+    }
 
 
     //==============================================
     // File Information
     //==============================================
-
-    /**
-     * Get file extension of image file based on MIME type.
-     *
-     * @return string
-     */
-    public function extension()
-    {
-        switch ($this->mime_type) {
-            case 'image/jpeg':
-                return '.jpg';
-            case 'image/png':
-                return '.png';
-            case 'image/gif':
-                return '.gif';
-            default:
-                return '';
-        }
-    }
 
     /**
      * Get fallback size if the original image is not big enough
@@ -128,7 +254,27 @@ class Image extends Model
      */
     public function fallback($size)
     {
-        return $this->has($size)?$size:'full';
+        if (empty($this->sizes[$size])) {
+            return 'full';
+        }
+
+        if (!$this->sizes[$size]['fallback']) {
+            return $size;
+        }
+
+        if ($this->sizes[$size]['crop']) {
+            if ($this->width >= $this->sizes[$size]['width'] && $this->height >= $this->sizes[$size]['height']) {
+                return $size;
+            } else {
+                return $this->fallback($this->sizes[$size]['fallback']);
+            }
+        } else {
+            if ($this->width > $this->sizes[$size]['width'] || $this->height > $this->sizes[$size]['height']) {
+                return $size;
+            } else {
+                return $this->fallback($this->sizes[$size]['fallback']);
+            }
+        }
     }
 
     /**
@@ -139,60 +285,43 @@ class Image extends Model
      */
     public function has($size)
     {
-        if ($size === 'full' or $size === 'thumb') {
-            return true;
-        } elseif ($this->width > self::large_size || $this->height > self::large_size) {
-            return true; // large, medium
-        } elseif ($size === 'medium' && ($this->width > self::medium_size || $this->height > self::medium_size)) {
-            return true;
-        } else {
+        if (empty($this->sizes[$size])) {
             return false;
         }
-    }
 
-    /**
-     * Generate full/relative path to image directory. For example:
-     * Image id: 1009768
-     * Full path: /srv/www/santakani.com/public/storage/images/1009/768
-     * Relative path: storage/images/1009/768
-     *
-     * @param boolean $full Return full path or relative path. Default true.
-     * @return string
-     */
-    public function directory($full = true)
-    {
-        $path = self::storage_path.'/'.(int)($this->id/1000).'/'.($this->id % 1000);
-        return $full?public_path($path):$path;
-    }
-
-    /**
-     * Generate full/relative path to image file
-     *
-     * @param string $size One of full, large, medium, thumb
-     * @param boolean $full Return full path or relative path.
-     * @param boolean $size_fallback If check fallback sizes.
-     * @return string
-     */
-    public function file($size = 'full', $full = true, $size_fallback = false)
-    {
-        if ($size_fallback) {
-            $size = $this->fallback($size);
+        if (!$this->sizes[$size]['fallback']) {
+            return true;
         }
-        return $this->directory($full) . '/' . $size . $this->extension();
+
+        if ($this->sizes[$size]['crop']) {
+            return $this->width >= $this->sizes[$size]['width'] && $this->height >= $this->sizes[$size]['height'];
+        } else {
+            return $this->width > $this->sizes[$size]['width'] || $this->height > $this->sizes[$size]['height'];
+        }
+    }
+
+    /**
+     * Generate full path to image file
+     *
+     * @param string $size One of full, large, medium, small, thumb, largethumb.
+     * @return string
+     */
+    public function filePath($size = 'full')
+    {
+        return $this->directory_path . '/' . $size . $this->extension;
     }
 
     /**
      * Generate URL to image file
      *
-     * @param string $size One of full, large, medium, thumb
-     * @param boolean $size_fallback If check fallback sizes.
+     * @param string $size One of full, large, medium, small, thumb, largethumb.
      * @return string
      */
-    public function url($size = 'full', $size_fallback = true)
+    public function fileUrl($size = 'full')
     {
-        return url($this->file($size, false, $size_fallback));
+        $size = $this->fallback($size);
+        return $this->directory_url . '/' . $size . $this->extension;
     }
-
 
 
     //==============================================
@@ -213,35 +342,33 @@ class Image extends Model
 
         // Imagick instances
         $imagick = new Imagick($temp_file_path);
-        $thumb_imagick = clone $imagick;
 
         // Full (reduce file size)
         $imagick->thumbnailImage($this->width, $this->height);
-        $imagick->writeImage($this->file('full'));
-        chmod($this->file('full'), 0644);
+        $imagick->writeImage($this->filePath('full'));
+        chmod($this->filePath('full'), 0664);
 
-        // Large
-        if ($this->has('large')) {
-            $imagick->thumbnailImage(self::large_size, self::large_size, true);
-            $imagick->writeImage($this->file('large'));
-            chmod($this->file('large'), 0644);
-        }
+        foreach ($this->sizes as $size => $info) {
+            if (!$this->has($size)) {
+                continue;
+            }
 
-        // Medium
-        if ($this->has('medium')) {
-            $imagick->thumbnailImage(self::medium_size, self::medium_size, true);
-            $imagick->writeImage($this->file('medium'));
-            chmod($this->file('medium'), 0644);
+            $imgk = clone $imagick;
+
+            if ($info['crop']) {
+                $imgk->cropThumbnailImage($info['width'], $info['height']);
+            } else {
+                $imgk->thumbnailImage($info['width'], $info['height'], true);
+            }
+
+            $file_path = $this->filePath($size);
+            $imgk->writeImage($file_path);
+            chmod($file_path, 0664);
+
+            $imgk->destroy();
         }
 
         $imagick->destroy();
-
-        // Thumb
-        $thumb_imagick->cropThumbnailImage(self::thumb_size, self::thumb_size);
-        $thumb_imagick->writeImage($this->file('thumb'));
-        chmod($this->file('thumb'), 0644);
-
-        $thumb_imagick->destroy();
 
         if ($delete_origin) {
             unlink($temp_file_path);
@@ -249,11 +376,41 @@ class Image extends Model
     }
 
     /**
+     * Regenerate thumbnail image files.
+     */
+    public function regenerate()
+    {
+        $imagick = new Imagick($this->filePath('full'));
+
+        foreach ($this->sizes as $size => $info) {
+            if (!$this->has($size)) {
+                continue;
+            }
+
+            $imgk = clone $imagick;
+
+            if ($info['crop']) {
+                $imgk->cropThumbnailImage($info['width'], $info['height']);
+            } else {
+                $imgk->thumbnailImage($info['width'], $info['height'], true);
+            }
+
+            $file_path = $this->filePath($size);
+            $imgk->writeImage($file_path);
+            chmod($file_path, 0664);
+
+            $imgk->destroy();
+        }
+
+        $imagick->destroy();
+    }
+
+    /**
      * Create directory for saving images.
      */
     public function createDirectory()
     {
-        mkdir($this->directory(), 0755, true);
+        mkdir($this->directory_path, 0775, true);
     }
 
     /**
@@ -261,6 +418,6 @@ class Image extends Model
      */
     public function deleteDirectory()
     {
-        app_rrmdir($this->directory());
+        app_rrmdir($this->directory_path);
     }
 }

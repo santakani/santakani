@@ -44,7 +44,7 @@
                 <article>
                     <a href="{{ $story->url }}">
                         @if ($story->image_id)
-                            <div class="cover" style="background-image:url({{ $story->image->url('thumb') }})"></div>
+                            <div class="cover" style="background-image:url({{ $story->image->fileUrl('thumb') }})"></div>
                         @else
                             <div class="cover" style="background-image:url('/img/placeholder/blank/300x300.svg')"></div>
                         @endif
@@ -76,7 +76,7 @@
                 <article>
                     <a href="{{ $designer->url }}">
                         @if ($designer->image_id)
-                            <div class="cover" style="background-image:url({{ $designer->image->url('thumb') }})"></div>
+                            <div class="cover" style="background-image:url({{ $designer->image->fileUrl('thumb') }})"></div>
                         @else
                             <div class="cover" style="background-image:url('/img/placeholder/blank/300x300.svg')"></div>
                         @endif
@@ -108,7 +108,7 @@
                 <article>
                     <a href="{{ $place->url }}">
                         @if ($place->image_id)
-                            <div class="cover" style="background-image:url({{ $place->image->url('thumb') }})"></div>
+                            <div class="cover" style="background-image:url({{ $place->image->fileUrl('thumb') }})"></div>
                         @else
                             <div class="cover" style="background-image:url('/img/placeholder/blank/300x300.svg')"></div>
                         @endif
@@ -141,7 +141,7 @@
                 <article>
                     <a href="{{ $tag->url }}">
                         @if ($tag->image_id)
-                            <div class="cover" style="background-image:url({{ $tag->image->url('thumb') }})">
+                            <div class="cover" style="background-image:url({{ $tag->image->fileUrl('thumb') }})">
                                 <div class="text"><h3>{{ $tag->name }}</h3></div>
                             </div>
                         @else

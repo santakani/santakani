@@ -5,7 +5,7 @@
     'og_title' => $tag->text('name'),
     'og_url' => $tag->url,
     'og_description' => $tag->excerpt('description'),
-    'og_image' => empty($tag->image_id)?'':$tag->image->url('medium'),
+    'og_image' => empty($tag->image_id)?'':$tag->image->fileUrl('medium'),
 ])
 
 @section('header')
@@ -14,7 +14,7 @@
 
     <div class="row">
         <div class="col-sm-4 col-md-4 col-lg-3">
-            <img class="cover-image" src="{{ $tag->image_id?$tag->image->url('thumb'):'/img/placeholder/blank/300x300.svg' }}">
+            <img class="cover-image" src="{{ $tag->image_id?$tag->image->fileUrl('thumb'):'/img/placeholder/blank/300x300.svg' }}">
         </div><!-- .col -->
         <div class="col-sm-8 col-md-8 col-lg-9">
             <h1>{{ $tag->text('name') }}</h1>
@@ -51,7 +51,7 @@
                     <article id="story-{{ $story->id }}" class="story material-card" data-id="{{ $story->id }}">
                         <a href="{{ $story->url }}">
                             @if ($image = $story->image)
-                                <img class="cover-image" src="{{ $image->url('thumb') }}" />
+                                <img class="cover-image" src="{{ $image->fileUrl('thumb') }}" />
                             @else
                                 <img class="cover-image" src="http://placehold.it/300x300?text=NO+IMAGE" />
                             @endif
@@ -82,8 +82,8 @@
                     <article id="designer-{{ $designer->id }}" class="designer material-card"
                         data-id="{{ $designer->id }}">
                         <a href="{{ $designer->url }}">
-                            <div class="cover-image" style="background-image:url({{ $designer->image_id ? $designer->image->url('medium') : '' }})">
-                                <img class="logo-image" src="{{ $designer->logo_id ? $designer->logo->url('thumb') : '' }}" />
+                            <div class="cover-image" style="background-image:url({{ $designer->image_id ? $designer->image->fileUrl('medium') : '' }})">
+                                <img class="logo-image" src="{{ $designer->logo_id ? $designer->logo->fileUrl('thumb') : '' }}" />
                             </div>
                             <div class="text">
                                 <h1>{{ $designer->text('name') }}<br>
@@ -111,7 +111,7 @@
                 <div class="col-md-6">
                     <article id="place-{{ $place->id }}" class="place material-card">
                         <a href="{{ $place->url }}">
-                            <div class="cover-image" style="background-image:url({{ $place->image?$place->image->url('medium'):'' }})">
+                            <div class="cover-image" style="background-image:url({{ $place->image?$place->image->fileUrl('medium'):'' }})">
                                 <span class="type">{{ $place->type }}</span>
                             </div>
                             <div class="text">

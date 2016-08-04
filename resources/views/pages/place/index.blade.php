@@ -40,7 +40,7 @@
                 data-longitude="{{ $place->longitude }}"
                 data-model="{{ $place->toJSON() }}">
                 <a href="{{ $place->url }}">
-                    <div class="cover-image" style="background-image:url({{ $place->image?$place->image->url('medium'):'' }})">
+                    <div class="cover-image" style="background-image:url({{ $place->image?$place->image->fileUrl('medium'):'' }})">
                         <span class="type">{{ $place->type }}</span>
                     </div>
                     <div class="text">

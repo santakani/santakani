@@ -6,14 +6,14 @@
     'og_title' => $story->text('title'),
     'og_url' => $story->url,
     'og_description' => $story->excerpt('content'),
-    'og_image' => empty($story->image_id)?'':$story->image->url('medium'),
+    'og_image' => empty($story->image_id)?'':$story->image->fileUrl('medium'),
 ])
 
 @section('header')
     <div class="container">
 
         @if ($story->image_id)
-            <div class="cover-image" style="background-image:url({{ $story->image->url('large') }})"></div>
+            <div class="cover-image" style="background-image:url({{ $story->image->fileUrl('large') }})"></div>
         @else
             <div class="cover-image" style="background-image:url(/img/placeholder/blank/1200x800.svg)"></div>
         @endif
