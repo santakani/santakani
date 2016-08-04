@@ -8,7 +8,7 @@
 
 @section('main')
     <div id="place-list" class="active">
-        <div class="float-icon"><i class="fa fa-map-o"></i></div>
+        <div class="float-icon"><span class="stroke-icon icon-place"></span></div>
 
         <section id="place-filter" class="article-filter">
             <form action="{{ url('place') }}" method="get">
@@ -67,6 +67,6 @@
     </div><!-- #place-list -->
 
 <div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}">
-    <div class="float-icon"><i class="fa fa-list"></i></div>
+    <div class="float-icon"><span class="stroke-icon icon-list"></span></div>
 </div>
 @endsection

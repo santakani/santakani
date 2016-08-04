@@ -1,20 +1,26 @@
 .float-icon {
+    $size: 50px;
+    $icon-size: 32px;
     position: fixed;
-    right: 15px;
-    bottom: 15px;
-    display: flex;
-    width: 40px;
-    height: 40px;
-    align-items: center;
-    justify-content: center;
+    right: 20px;
+    bottom: 20px;
+    width: $size;
+    height: $size;
+    padding: ($size - $icon-size) / 2;
+    text-align: center;
     background-color: #ffffff;
     border-radius: 99px;
-    @include material-shadow(low);
     z-index: 10;
     cursor: pointer;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.3);
 
-    .icon {
+    &:hover, &:active {
+        box-shadow: 0 0 0 4px $brand-primary;
+    }
+
+    .stroke-icon {
         display: block;
-        font-size: 32px;
+        width: $icon-size;
+        height: $icon-size;
     }
 }
