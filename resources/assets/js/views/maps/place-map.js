@@ -91,7 +91,8 @@ module.exports = Backbone.View.extend({
         this.map = Leaflet.map('place-map').setView([this.latitude, this.longitude], 13);
 
         this.tile = Leaflet.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            detectRetina: true,
         }).addTo(this.map);
 
         this.collection = new PlaceList();

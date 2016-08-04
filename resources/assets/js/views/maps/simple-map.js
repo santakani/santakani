@@ -33,7 +33,8 @@ module.exports = Backbone.View.extend({
         }).setView([this.latitude, this.longitude], this.zoom);
 
         this.tile = Leaflet.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            detectRetina: true,
         }).addTo(this.map);
 
         if (this.marker) {
