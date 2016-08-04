@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label>{{ trans('common.search') }}</label>
                     <input type="search" name="search" value="{{ request()->input('search') }}"
-                           class="form-control" maxlength="50"/>
+                           id="place-search" class="form-control" maxlength="50"/>
                 </div>
                 <div class="form-group">
                     <label>{{ trans('common.tag') }}</label>

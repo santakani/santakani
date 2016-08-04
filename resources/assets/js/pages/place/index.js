@@ -1,5 +1,4 @@
 var CitySelect = require('../../views/city-select');
-
 var PlaceMap = require('../../views/maps/place-map');
 
 // Map
@@ -10,19 +9,19 @@ var placeMap = new PlaceMap({el: 'main'});
 var citySelect = new CitySelect({el: '#city-select'});
 
 citySelect.$el.change(function () {
-    if (citySelect.$el.val()) {
-        $('#place-filter').submit();
+    if ($(this).val()) {
+        $(this).parents('form').submit();
     }
 });
 
-$('#place-type-select').selectize({allowEmptyOption: true});
 $('#place-type-select').change(function () {
-    $('#place-filter').submit();
+    $(this).parents('form').submit();
 });
 
-$('.tag-filter button').click(function () {
-    $('.tag-filter input').val($(this).data('id'));
-    $('#place-filter').submit();
+$('#place-search').keydown(function (e) {
+    if(e.keyCode == 13) {
+        $(this).parents('form').submit();
+    }
 });
 
 $('.tag-filter a').click(function (e) {
