@@ -37,7 +37,7 @@
                         </div>
                         <div class="text">
                             <div class="inner">
-                                <h2>{{ $story->text('name') }}<br></h2>
+                                <h2>{{ $story->text('title') }}</h2>
                                 <div class="tagline text-muted">{{ $story->text('tagline') }}</div>
                                 <div class="excerpt">{{ $story->excerpt('content') }}</div>
                             </div>
