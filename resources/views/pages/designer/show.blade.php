@@ -1,19 +1,3 @@
-<?php
-
-if ($designer->image_id) {
-    $cover_image = $designer->image->fileUrl('large');
-} else {
-    $cover_image = url('img/placeholder/blank/1200x800.svg');
-}
-
-if ($designer->logo_id) {
-    $logo_image = $designer->logo->fileUrl('thumb');
-} else {
-    $logo_image = url('img/placeholder/blank/300x300.svg');
-}
-
-?>
-
 @extends('layouts.app', [
     'title' => $designer->text('name') . ' - ' . trans('designer.designers'),
     'body_id' => 'designer-show-page',
@@ -26,11 +10,15 @@ if ($designer->logo_id) {
 ])
 
 @section('header')
-    <div class="page-cover" style="background-image:url({{ $cover_image }});">
+    <div class="page-cover"
+        @if ($designer->image_id)
+            style="background-image:url({{ $designer->image->large_file_url }})"
+        @endif
+        >
 
         <div class="raster raster-dark-dot"></div>
 
-        <div class="action-buttons float">
+        <div class="buttons">
             @include('components.buttons.like', ['likeable' => $designer])
             @if (Auth::check())
                 @if (Auth::user()->can('edit-designer', $designer))
@@ -40,111 +28,92 @@ if ($designer->logo_id) {
                     @include('components.buttons.delete')
                 @endif
             @endif
-        </div><!-- /.action-buttons -->
+        </div><!-- /.buttons -->
 
-        <div class="text">
-            <img class="logo-image" src="{{ $logo_image }}"/>
-            <h1 class="name">{{ $designer->text('name') }}</h1>
-            <p class="tagline">{{ $designer->text('tagline') }}</p>
-        </div><!-- /.text-->
+        @if ($designer->logo_id)
+            <img class="logo" src="{{ $designer->logo->small_file_url }}"/>
+        @endif
+        <h1 class="name">{{ $designer->text('name') }}</h1>
+        <p class="tagline">{{ $designer->text('tagline') }}</p>
+        <p class="city">{{ $designer->city->full_name }}</p>
+        <div class="links">
+            @if (!empty($designer->facebook))
+                <a href="{{ $designer->facebook }}" title="Facebook">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            @endif
+            @if (!empty($designer->twitter))
+                <a href="{{ $designer->twitter }}" title="Twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            @endif
+            @if (!empty($designer->google_plus))
+                <a href="{{ $designer->google_plus }}" title="Google+">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            @endif
+            @if (!empty($designer->instagram))
+                <a href="{{ $designer->instagram }}" title="Instagram">
+                    <i class="fa fa-instagram"></i>
+                </a>
+            @endif
+            @if (!empty($designer->email))
+                <a href="mailto:{{ $designer->email }}" title="{{ trans('common.email') }}">
+                    <i class="fa fa-envelope-o"></i>
+                </a>
+            @endif
+            @if (!empty($designer->email))
+                <a href="{{ $designer->website }}" title="{{ trans('common.website') }}">
+                    <i class="fa fa-globe"></i>
+                </a>
+            @endif
+        </div>
 
-    </div><!-- /.page-cover.container -->
+        @include('components.tag-list', ['tags' => $designer->tags])
+
+    </div><!-- /.page-cover -->
 @endsection
 
 @section('main')
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
+        <!-- Nav tabs -->
+        <ul id="main-tabs" class="nav nav-strokes nav-justified nav-lg" role="tablist">
+            <li role="presentation" class="active"><a href="#gallery" aria-controls="home" role="tab" data-toggle="tab">{{ trans('common.gallery') }}</a></li>
+            <li role="presentation"><a href="#biography" aria-controls="biography" role="tab" data-toggle="tab">{{ trans('common.about') }}</a></li>
+            <li role="presentation"><a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">{{ trans('common.followers') }}</a></li>
+        </ul>
 
-                <h4>{{ trans('common.tags') }}</h4>
-                @include('components.tag-list', [
-                    'tags' => $designer->tags,
-                    'style' => 'round',
-                ])
-
-                <h4>{{ trans('geo.location') }}</h4>
-                @if ($designer->city_id)
-                    <p>{{ $designer->city->full_name }}</p>
-                @else
-                    <p>{{ trans('common.unknown') }}</p>
-                @endif
-
-                <h4>{{ trans('common.links') }}</h4>
-                <div class="links">
-                    @if (!empty($designer->facebook))
-                        <a href="{{ $designer->facebook }}" title="Facebook">
-                            <i class="fa fa-facebook-official"></i>
-                        </a>
-                    @endif
-                    @if (!empty($designer->twitter))
-                        <a href="{{ $designer->twitter }}" title="Twitter">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    @endif
-                    @if (!empty($designer->google_plus))
-                        <a href="{{ $designer->google_plus }}" title="Google+">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                    @endif
-                    @if (!empty($designer->instagram))
-                        <a href="{{ $designer->instagram }}" title="Instagram">
-                            <i class="fa fa-instagram"></i>
-                        </a>
-                    @endif
-                    @if (!empty($designer->email))
-                        <a href="mailto:{{ $designer->email }}" title="{{ trans('common.email') }}">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    @endif
-                    @if (!empty($designer->email))
-                        <a href="{{ $designer->website }}" title="{{ trans('common.website') }}">
-                            <i class="fa fa-globe"></i>
-                        </a>
-                    @endif
-                </div>
-            </div><!-- /.col-* -->
-
-            <div class="col-md-8 col-lg-9">
-                <!-- Nav tabs -->
-                <ul id="main-tabs" class="nav nav-strokes nav-justified nav-lg" role="tablist">
-                    <li role="presentation" class="active"><a href="#gallery" aria-controls="home" role="tab" data-toggle="tab">{{ trans('common.gallery') }}</a></li>
-                    <li role="presentation"><a href="#biography" aria-controls="biography" role="tab" data-toggle="tab">{{ trans('common.about') }}</a></li>
-                    <li role="presentation"><a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">{{ trans('common.followers') }}</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="gallery">
-                        <div class="row">
-                            @foreach ($designer->gallery_images as $image)
-                                <div class="col-xs-4">
-                                    <a href="{{ $image->fileUrl('large') }}">
-                                        <img src="{{ $image->fileUrl('thumb') }}" />
-                                    </a>
-                                </div>
-                            @endforeach
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="gallery">
+                <div class="row">
+                    @foreach ($designer->gallery_images as $image)
+                        <div class="col-xs-4">
+                            <a href="{{ $image->fileUrl('large') }}">
+                                <img src="{{ $image->fileUrl('thumb') }}" />
+                            </a>
                         </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="biography">
-                        {!! $designer->html('content') !!}
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="followers">
-                        <div class="row">
-                            @foreach ($designer->likes as $like)
-                                <div class="col-sm-6 col-lg-4">
-                                    <article class="user material-card">
-                                        <img class="avatar" src="{{ $like->user->avatar(150) }}"/>
-                                        <div class="text">
-                                            <div class="name">{{ $like->user->name }}</div>
-                                            <div class="description text-muted">{{ $like->user->description }}</div>
-                                        </div>
-                                    </article>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-            </div><!-- /.col-* -->
-        </div><!-- /.row -->
+            </div>
+            <div role="tabpanel" class="tab-pane" id="biography">
+                {!! $designer->html('content') !!}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="followers">
+                <div class="row">
+                    @foreach ($designer->likes as $like)
+                        <div class="col-sm-6 col-lg-4">
+                            <article class="user material-card">
+                                <img class="avatar" src="{{ $like->user->avatar(150) }}"/>
+                                <div class="text">
+                                    <div class="name">{{ $like->user->name }}</div>
+                                    <div class="description text-muted">{{ $like->user->description }}</div>
+                                </div>
+                            </article>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div><!-- /.container -->
 @endsection

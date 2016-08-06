@@ -10,17 +10,15 @@
 ])
 
 @section('header')
-    <div class="container">
-
+    <div class="page-cover"
         @if ($story->image_id)
-            <div class="cover-image" style="background-image:url({{ $story->image->fileUrl('large') }})"></div>
-        @else
-            <div class="cover-image" style="background-image:url(/img/placeholder/blank/1200x800.svg)"></div>
+            style="background-image:url({{ $story->image->large_file_url }})"
         @endif
+        >
 
         <div class="raster raster-dark-dot"></div>
 
-        <div class="action-buttons">
+        <div class="buttons">
             @include('components.buttons.like', ['likeable' => $story])
             @if (Auth::check())
                 @if (Auth::user()->can('edit-story', $story))
@@ -34,10 +32,20 @@
 
         <h1 class="title">{{ $story->text('title') }}</h1>
 
-        <div class="meta">
-            <p class="author">{{ $story->user->name }}</p>
-            <p>{{ $story->created_at }}</p>
-        </div>
+        <p class="author">
+            <a href="{{ $story->user->url }}">
+                <img class="avatar" src="{{ $story->user->small_avatar_url }}"
+                    srcset="{{ $story->user->medium_avatar_url }} 3x, {{ $story->user->large_avatar_url }} 6x"
+                    width="50" height="50">
+                <span class="user-name">{{ $story->user->name }}</span>
+            </a>
+        </p>
+
+        <p class="date">{{ $story->created_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</p>
+
+        @include('components.tag-list', [
+            'tags' => $story->tags,
+        ])
 
     </div><!-- .container -->
 @endsection
@@ -50,12 +58,6 @@
             <div class="content">
                 {!! $story->html('content') !!}
             </div>
-
-            @include('components.tag-list', [
-                'tags' => $story->tags,
-                'style' => 'round',
-            ])
-
         </div><!-- .col -->
     </div><!-- .row -->
 </div><!-- .container -->

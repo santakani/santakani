@@ -1,18 +1,119 @@
 // A banner with 3:1 sizes, usually used with .container.
 .page-cover {
     @include image-cover;
+    display: flex;
     position: relative;
-    height: 300px;
+    height: 600px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    color: #ffffff;
+    text-align: center;
 
-    @media screen and (min-width: $screen-sm-min) {
-        height: $container-sm / 3;
+    * {
+        z-index: 1;
     }
 
-    @media screen and (min-width: $screen-md-min) {
-        height: $container-md / 3;
+    .raster {
+        z-index: 0;
     }
 
-    @media screen and (min-width: $screen-lg-min) {
-        height: $container-lg / 3;
+    .buttons {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+
+        .btn {
+            border: none;
+            background: none;
+            color: inherit;
+        }
+
+        .delete-button {
+            background: $brand-danger;
+        }
+    }
+
+    .logo {
+        height: 108px;
+        width: auto;
+        border: 4px solid #ffffff;
+        margin-top: 2em;
+    }
+
+    h1 {
+        font-size: 2em;
+        margin: 0.5em 0;
+        font-weight: 400;
+    }
+
+    a {
+        color: inherit;
+    }
+
+    .avatar {
+        width: 54px;
+        height: 54px;
+        margin-right: 10px;
+        border-radius: 99px;
+        border: 2px solid #ffffff;
+    }
+
+    .user-name {
+        font-size: 1.5em;
+    }
+
+    .tagline {
+        font-size: 1.5em;
+    }
+
+    .links {
+        a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            padding: 4px;
+            font-size: 28px;
+            line-height: 32px;
+            text-align: center;
+        }
+    }
+
+    .tag-list {
+        position: absolute;
+        bottom: 0;
+        left: 20px;
+        right: 20px;
+        color: inherit;
+
+        li a {
+            border-color: #ffffff;
+            color: inherit;
+
+            &:hover, &:active {
+                color: $gray;
+                background-color: #ffffff;
+            }
+        }
+    }
+
+    @media (min-width: $screen-sm-min) {
+        h1 {
+            font-size: 3.5em;
+            font-weight: 300;
+        }
+    }
+
+    @media (min-width: $screen-md-min) {
+        h1 {
+            font-size: 4em;
+        }
+    }
+
+    @media (min-width: $screen-lg-min) {
+        h1 {
+            font-size: 4.5em;
+        }
     }
 }

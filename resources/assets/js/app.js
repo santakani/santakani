@@ -31,6 +31,8 @@ require('jquery.scrollto');
 
 require('./components/auth-modal');
 
+require('./components/page-cover');
+
 require('./components/tabs/auto-collapse');
 
 
