@@ -34,7 +34,6 @@
             <img class="logo" src="{{ $designer->logo->small_file_url }}"/>
         @endif
         <h1 class="name">{{ $designer->text('name') }}</h1>
-        <p class="tagline">{{ $designer->text('tagline') }}</p>
         <p class="city">{{ $designer->city->full_name }}</p>
         <div class="links">
             @if (!empty($designer->facebook))
