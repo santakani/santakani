@@ -62,12 +62,10 @@ class User extends Authenticatable
 
     const avatar_small_size = 50;
 
-    ////////////////////////////////////////////////////////////////////////////
-    //                                                                        //
-    //                          Relationship Methods                          //
-    //                                                                        //
-    ////////////////////////////////////////////////////////////////////////////
 
+    //====================================================================
+    // Relationship Methods
+    //====================================================================
 
     /**
      * User uploaded images.
@@ -105,9 +103,36 @@ class User extends Authenticatable
     // Dynamic Properties
     //====================================================================
 
+    /**
+     * "url"
+     */
     public function getUrlAttribute()
     {
         return url('user/'.$this->id);
+    }
+
+    /**
+     * "small_avatar_url"
+     */
+    public function getSmallAvatarUrlAttribute()
+    {
+        return $this->avatar('small');
+    }
+
+    /**
+     * "medium_avatar_url"
+     */
+    public function getMediumAvatarUrlAttribute()
+    {
+        return $this->avatar('medium');
+    }
+
+    /**
+     * "large_avatar_url"
+     */
+    public function getLargeAvatarUrlAttribute()
+    {
+        return $this->avatar('large');
     }
 
     //====================================================================
