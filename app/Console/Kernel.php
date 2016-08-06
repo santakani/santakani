@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\CountryImport::class,
         Commands\CityImport::class,
         Commands\ImageRegenerate::class,
+        Commands\ResetFilePermission::class,
     ];
 
     /**
