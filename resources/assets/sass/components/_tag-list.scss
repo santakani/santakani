@@ -10,17 +10,15 @@ ul.tag-list {
         display: inline-block;
 
         > a {
-            display: inline-block;
+            display: block;
             border: 1px solid $brand-info;
             border-radius: 99px;
             line-height: 1.8em;
             padding: 0 0.5em;
             margin-bottom: 0.5em;
             color: $brand-info;
-        }
 
-        &:hover, &.active {
-            > a {
+            &:hover, &.active {
                 background-color: $brand-info;
                 color: #ffffff;
             }
