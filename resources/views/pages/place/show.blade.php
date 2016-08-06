@@ -11,68 +11,94 @@
 ])
 
 @section('header')
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <h1>{{ $place->text('name') }}</h1>
-            </div>
-            <div class="col-sm-6">
-                <h1>
-                    <div class="action-buttons right-sm">
-                        @include('components.buttons.like', ['likeable' => $place])
-                        @if (Auth::check())
-                            @if (Auth::user()->can('edit-place', $place))
-                                @include('components.buttons.edit')
-                            @endif
-                            @if (Auth::user()->can('delete-place', $place))
-                                @include('components.buttons.delete')
-                            @endif
-                        @endif
-                    </div><!-- /.action-buttons -->
-                </h1>
-            </div>
-        </div><!-- /.row -->
+    <div class="page-cover"
+        @if ($place->image_id)
+            style="background-image:url({{ $place->image->large_file_url }})"
+        @endif
+        >
 
-        <div id="gallery" class="gallery clearfix">
-            @if ($place->image_id)
-                <div class="image-wrap">
-                    <img class="cover-image image" src="{{ $place->image->fileUrl('thumb') }}"
-                        data-src="{{ $place->image->fileUrl('large') }}" width="300" height="300"/>
-                    <div class="raster"></div>
-                </div><!-- /.image-wrap -->
-            @else
-                <img class="cover-image placeholder" src="{{ url('img/placeholder/blank/300x300.svg') }}">
-            @endif
-            @foreach ($place->gallery_images as $image)
-                {{-- Ignore cover image --}}
-                @if ($image->id !== $place->image_id)
-                    <div class="image-wrap">
-                        <img class="image" src="{{ $image->fileUrl('thumb') }}"
-                            data-src="{{ $image->fileUrl('large') }}" width="300" height="300"/>
-                        <div class="raster"></div>
-                    </div><!-- /.image-wrap -->
+        <div class="raster raster-dark-dot"></div>
+
+        <div class="type type-{{ $place->type }}">{{ trans('place.'.$place->type) }}</div>
+
+        <div class="buttons">
+            @include('components.buttons.like', ['likeable' => $place])
+            @if (Auth::check())
+                @if (Auth::user()->can('edit-designer', $place))
+                    @include('components.buttons.edit')
                 @endif
-            @endforeach
-        </div><!-- /#gallery -->
-    </div><!-- /.container -->
+                @if (Auth::user()->can('delete-designer', $place))
+                    @include('components.buttons.delete')
+                @endif
+            @endif
+        </div><!-- /.buttons -->
+
+        @if ($place->logo_id)
+            <img class="logo" src="{{ $place->logo->small_file_url }}"/>
+        @endif
+
+        <h1 class="name">{{ $place->text('name') }}</h1>
+        <p class="address">{{ $place->full_address }}</p>
+
+        <div class="links">
+            @if (!empty($place->facebook))
+                <a href="{{ $place->facebook }}" title="Facebook">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            @endif
+            @if (!empty($place->twitter))
+                <a href="{{ $place->twitter }}" title="Twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            @endif
+            @if (!empty($place->google_plus))
+                <a href="{{ $place->google_plus }}" title="Google+">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            @endif
+            @if (!empty($place->instagram))
+                <a href="{{ $place->instagram }}" title="Instagram">
+                    <i class="fa fa-instagram"></i>
+                </a>
+            @endif
+            @if (!empty($place->email))
+                <a href="mailto:{{ $place->email }}" title="{{ trans('common.email') }}">
+                    <i class="fa fa-envelope-o"></i>
+                </a>
+            @endif
+            @if (!empty($place->email))
+                <a href="{{ $place->website }}" title="{{ trans('common.website') }}">
+                    <i class="fa fa-globe"></i>
+                </a>
+            @endif
+        </div>
+
+        @include('components.tag-list', ['tags' => $place->tags])
+
+    </div><!-- /.page-cover -->
 @endsection
 
 @section('main')
 <div class="container">
+
+    <div id="gallery" class="gallery clearfix">
+        @foreach ($place->gallery_images as $image)
+            <div class="image-wrap">
+                <img class="image" src="{{ $image->fileUrl('thumb') }}"
+                    data-src="{{ $image->fileUrl('large') }}" width="300" height="300"/>
+                <div class="raster"></div>
+            </div><!-- /.image-wrap -->
+        @endforeach
+    </div><!-- /#gallery -->
+
+    <br>
+
     <div class="row">
         <div class="col-sm-6 col-md-8">
             {!! $place->html('content') !!}
         </div>
         <div class="col-sm-6 col-md-4">
-            <h4>{{ trans('common.tags') }}</h4>
-            @include('components.tag-list', [
-                'tags' => $place->tags,
-                'style' => 'plain',
-            ])
 
-            <h4>{{ trans('geo.location') }}</h4>
-
-            <p>{{ $place->full_address }}</p>
             <ul class="list-inline">
                 <li><a href="{{ $place->google_map_url }}" target="_blank">
                     {{ trans('geo.google_map') }} <i class="fa fa-external-link"></i>
@@ -90,23 +116,11 @@
                  data-longitude="{{ $place->longitude }}"
                  data-address="{{ $place->full_address }}"></div>
 
-            <h4>{{ trans('common.contact') }}</h4>
+            <br>
+
             <ul class="list-unstyled">
                 <li><i class="fa fa-fw fa-phone"></i> {{ $place->phone or '-' }}</li>
                 <li><i class="fa fa-fw fa-envelope-o"></i> {{ $place->email or '-' }}</li>
-            </ul>
-
-            <h4>{{ trans('common.links') }}</h4>
-            <ul class="list-unstyled">
-                @if ($place->website)
-                    <li><i class="fa fa-fw fa-globe"></i> <a href="{{ $place->website }}">Website</a></li>
-                @endif
-                @if ($place->facebook)
-                    <li><i class="fa fa-fw fa-facebook-square"></i> <a href="{{ $place->facebook }}">Facebook</a></li>
-                @endif
-                @if ($place->google_plus)
-                    <li><i class="fa fa-fw fa-google-plus-square"></i> <a href="{{ $place->google_plus }}">Google+</a></li>
-                @endif
             </ul>
         </div>
     </div>
