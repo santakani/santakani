@@ -67,6 +67,8 @@ class LocaleDetect {
             }
         }
 
+        setlocale(LC_TIME, Languages::withRegion(App::getLocale()).'.utf8');
+
         return $next($request);
     }
 }

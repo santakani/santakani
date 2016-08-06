@@ -93,4 +93,40 @@ class Languages {
         }
         return $names;
     }
+
+    public static function withRegion($locale)
+    {
+        $regions = [
+            'de' => 'de_DE',
+            'en' => 'en_US',
+            'es' => 'es_ES',
+            'fi' => 'fi_FI',
+            'fr' => 'fr_FR',
+            'pt' => 'pt_PT',
+            'sv' => 'sv_SE',
+            'zh' => 'zh_CN',
+        ];
+
+        return isset($regions[$locale]) ? $regions[$locale] : $locale;
+    }
+
+    public static function dateFormat($locale = null)
+    {
+        if (!$locale) {
+            $locale = App::getLocale();
+        }
+
+        $formats = [
+            'de' => '%A %d %B %Y',
+            'en' => '%A %d %B %Y',
+            'es' => '%A %d %B %Y',
+            'fi' => '%A %d %B %Y',
+            'fr' => '%A %d %B %Y',
+            'pt' => '%A %d %B %Y',
+            'sv' => '%A %d %B %Y',
+            'zh' => '%Y 年%B %d 日%A',
+        ];
+
+        return isset($formats[$locale]) ? $formats[$locale] : '%A %d %B %Y';
+    }
 }
