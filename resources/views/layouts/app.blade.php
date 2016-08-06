@@ -66,11 +66,14 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 
     <!-- Scripts -->
     @include('scripts.global')
-    @if(App::environment('production'))
-        @include('scripts.analytics')
-    @endif
     <script src="/lib/tinymce/tinymce.js" type="text/javascript"></script>
     <script src="{{ elixir('js/app.js') }}" type="text/javascript"></script>
+    @if (App::environment('production'))
+        @include('scripts.analytics')
+    @endif
+    @if (isset($has_share_buttons) && $has_share_buttons)
+        @include('scripts.addthis')
+    @endif
     @stack('scripts')
 
     @if(App::environment('test'))

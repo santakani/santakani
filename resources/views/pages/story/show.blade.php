@@ -7,6 +7,7 @@
     'og_url' => $story->url,
     'og_description' => $story->excerpt('content'),
     'og_image' => empty($story->image_id)?'':$story->image->fileUrl('medium'),
+    'has_share_buttons' => true,
 ])
 
 @section('header')

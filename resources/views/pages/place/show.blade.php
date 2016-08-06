@@ -7,6 +7,7 @@
     'og_url' => $place->url,
     'og_description' => $place->excerpt('content'),
     'og_image' => empty($place->image_id)?'':$place->image->fileUrl('medium'),
+    'has_share_buttons' => true,
 ])
 
 @section('header')
