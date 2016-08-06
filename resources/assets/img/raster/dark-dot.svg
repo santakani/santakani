@@ -17,21 +17,7 @@
    inkscape:version="0.91 r13725"
    sodipodi:docname="dark-dot.svg">
   <defs
-     id="defs4">
-    <filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter4342"
-       x="-0.24"
-       width="1.48"
-       y="-0.24"
-       height="1.48">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.2"
-         id="feGaussianBlur4344" />
-    </filter>
-  </defs>
+     id="defs4" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -41,7 +27,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="194"
      inkscape:cx="2"
-     inkscape:cy="2"
+     inkscape:cy="1.7938144"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -77,14 +63,14 @@
      id="layer1"
      transform="translate(0,-1048.3622)">
     <rect
-       style="opacity:0.1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#000000;fill-opacity:0.3764706;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4365"
        width="4"
        height="4"
        x="0"
        y="1048.3622" />
     <circle
-       style="opacity:0.4;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter4342)"
+       style="opacity:1;fill:#000000;fill-opacity:0.25098041;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4140"
        cx="2"
        cy="1050.3622"
