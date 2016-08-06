@@ -3,7 +3,7 @@
     @include image-cover;
     display: flex;
     position: relative;
-    height: 600px;
+    min-height: 400px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -36,10 +36,13 @@
     }
 
     .logo {
-        height: 108px;
+        display: block;
+        box-sizing: content-box;
+        height: 106px;
+        min-height: 106px;
+        max-height: 106px;
         width: auto;
-        border: 4px solid #ffffff;
-        margin-top: 2em;
+        border: 3px solid #ffffff;
     }
 
     h1 {

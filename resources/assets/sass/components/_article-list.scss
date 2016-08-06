@@ -65,11 +65,12 @@
             }
 
             img.logo {
+                box-sizing: content-box;
                 position: absolute;
                 display: block;
                 right: 10px;
                 bottom: 10px;
-                width: 79px;
+                width: 75px;
                 height: auto;
                 border: 2px solid #ffffff;
             }
