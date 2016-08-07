@@ -71,17 +71,18 @@
     .logo {
         display: block;
         box-sizing: content-box;
-        height: 106px;
-        min-height: 106px;
-        max-height: 106px;
-        width: auto;
-        border: 3px solid #ffffff;
+        width: 79px;
+        height: auto;
+        border: 2px solid #ffffff;
     }
 
     h1 {
         font-size: 2em;
+        line-height: 1.2em;
+        max-height: 3.6em;
         margin: 0.5em 0;
         font-weight: 400;
+        overflow: hidden;
     }
 
     a {
@@ -101,7 +102,10 @@
     }
 
     .tagline {
-        font-size: 1.5em;
+        flex: 0 0 auto;
+        line-height: 1.5em;
+        max-height: 3em;
+        overflow-y: hidden;
     }
 
     .links {
@@ -119,17 +123,25 @@
     .tag-list {
         position: absolute;
         bottom: 0;
-        left: 20px;
-        right: 20px;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
         color: inherit;
+        white-space: nowrap;
+        overflow: auto;
 
-        > li > a {
-            border-color: #ffffff;
-            color: inherit;
+        > li{
+            margin: 0;
 
-            &:hover, &:active {
-                color: $gray;
-                background-color: #ffffff;
+            > a {
+                border-color: #ffffff;
+                color: inherit;
+
+                &:hover, &:active {
+                    color: $gray;
+                    background-color: #ffffff;
+                }
             }
         }
     }
@@ -138,6 +150,14 @@
         h1 {
             font-size: 3.5em;
             font-weight: 300;
+        }
+
+        .logo {
+            height: 106px;
+            min-height: 106px;
+            max-height: 106px;
+            width: auto;
+            border: 3px solid #ffffff;
         }
     }
 
