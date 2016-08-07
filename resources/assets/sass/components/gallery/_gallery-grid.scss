@@ -1,5 +1,6 @@
 .gallery.gallery-grid {
     display: flex;
+    margin: -2px;
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
@@ -7,6 +8,7 @@
     a {
         display: block;
         width: 33.3333%;
+        padding: 2px;
 
         img {
             width: 100%;
