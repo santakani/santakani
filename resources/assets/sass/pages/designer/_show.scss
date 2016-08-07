@@ -1,26 +1,3 @@
 #designer-show-page {
 
-    #gallery {
-        padding: 10px;
-
-        .row > div {
-            padding: 5px;
-        }
-
-        @media screen and (max-width: $screen-xs-max) {
-            padding: 13px;
-
-            .row > div {
-                padding: 2px;
-            }
-        }
-    }
-
-    #biography {
-        padding-top: 15px;
-    }
-
-    #followers {
-        padding-top: 15px;
-    }
 }

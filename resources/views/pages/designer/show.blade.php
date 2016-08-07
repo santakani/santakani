@@ -78,28 +78,36 @@
 @section('main')
     <div class="container">
         <!-- Nav tabs -->
-        <ul id="main-tabs" class="nav nav-strokes nav-justified nav-lg" role="tablist">
-            <li role="presentation" class="active"><a href="#gallery" aria-controls="home" role="tab" data-toggle="tab">{{ trans('common.gallery') }}</a></li>
-            <li role="presentation"><a href="#biography" aria-controls="biography" role="tab" data-toggle="tab">{{ trans('common.about') }}</a></li>
-            <li role="presentation"><a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">{{ trans('common.followers') }}</a></li>
+        <ul id="main-tabs" class="nav nav-justified nav-strokes" role="tablist">
+            <li class="active"><a href="#gallery" data-toggle="tab">
+                {{ trans('common.gallery') }}
+            </a></li>
+            <li><a href="#biography" data-toggle="tab">
+                {{ trans('common.about') }}
+            </a></li>
+            <li><a href="#followers" data-toggle="tab">
+                {{ trans('common.followers') }}
+            </a></li>
         </ul>
+
+        <br>
 
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="gallery">
-                <div class="row">
+                <div class="gallery gallery-grid">
                     @foreach ($designer->gallery_images as $image)
-                        <div class="col-xs-4">
                             <a href="{{ $image->fileUrl('large') }}">
                                 <img src="{{ $image->fileUrl('thumb') }}" />
                             </a>
-                        </div>
                     @endforeach
                 </div>
             </div>
+
             <div role="tabpanel" class="tab-pane" id="biography">
                 {!! $designer->html('content') !!}
             </div>
+
             <div role="tabpanel" class="tab-pane" id="followers">
                 <div class="row">
                     @foreach ($designer->likes as $like)

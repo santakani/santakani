@@ -72,6 +72,9 @@ $flag-icon-css-path: '../../img/flags' !default;
 @import "components/page-cover";
 @import "components/action-buttons";
 
+@import "components/gallery/gallery-grid";
+@import "components/gallery/gallery-slide";
+
 @import "components/icons/float-icon";
 @import "components/icons/stroke-icon";
 

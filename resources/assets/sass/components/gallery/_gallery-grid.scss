@@ -1,0 +1,22 @@
+.gallery.gallery-grid {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    a {
+        display: block;
+        width: 33.3333%;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    @media (min-width: $screen-lg-min) {
+        a {
+            width: 25%;
+        }
+    }
+}
