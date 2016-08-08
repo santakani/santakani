@@ -1,0 +1,16 @@
+.gallery-slider-wrap {
+    padding: 10px 0;
+    background-color: $bg-light;
+
+    .gallery-slider {
+        li {
+            cursor: pointer;
+        }
+    }
+
+    .lSAction {
+        a {
+            opacity: 1;
+        }
+    }
+}

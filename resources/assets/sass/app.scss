@@ -39,6 +39,12 @@ $lg-path-fonts: '/fonts/lightgallery';
 $lg-path-images: '/img/lightgallery';
 @import "node_modules/lightgallery/src/sass/lightgallery";
 
+// LightSlider
+@import "node_modules/lightslider/src/css/lightslider";
+.lSAction > a {
+    background-image: url('/img/lightslider/controls.png');
+}
+
 // Selectize
 @import "node_modules/selectize/dist/css/selectize";
 @import "node_modules/selectize/dist/css/selectize.bootstrap3";
@@ -75,7 +81,7 @@ $flag-icon-css-path: '/img/flags' !default;
 @import "components/action-buttons";
 
 @import "components/gallery/gallery-grid";
-@import "components/gallery/gallery-slide";
+@import "components/gallery/gallery-slider";
 
 @import "components/icons/float-icon";
 @import "components/icons/stroke-icon";

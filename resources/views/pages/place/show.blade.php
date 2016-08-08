@@ -79,20 +79,19 @@
 @endsection
 
 @section('main')
-<div class="container">
-
-    <div id="gallery" class="gallery clearfix">
-        @foreach ($place->gallery_images as $image)
-            <div class="image-wrap">
-                <img class="image" src="{{ $image->fileUrl('thumb') }}"
-                    data-src="{{ $image->fileUrl('large') }}" width="300" height="300"/>
-                <div class="raster"></div>
-            </div><!-- /.image-wrap -->
-        @endforeach
-    </div><!-- /#gallery -->
+    <div class="gallery-slider-wrap">
+        <ul id="gallery" class="gallery gallery-slider">
+            @foreach ($place->gallery_images as $image)
+                <li data-src="{{ $image->large_file_url }}">
+                    <img class="image" src="{{ $image->thumb_file_url }}"  width="300" height="300"/>
+                </li>
+            @endforeach
+        </ul>
+    </div>
 
     <br>
 
+<div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-8">
             {!! $place->html('content') !!}

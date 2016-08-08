@@ -21,6 +21,7 @@ elixir(function(mix) {
     mix.copy('node_modules/font-awesome/fonts', 'public/fonts/font-awesome');
     mix.copy('node_modules/lightgallery/dist/fonts', 'public/fonts/lightgallery');
     mix.copy('node_modules/lightgallery/dist/img', 'public/img/lightgallery');
+    mix.copy('node_modules/lightslider/dist/img', 'public/img/lightslider');
     mix.copy('node_modules/flag-icon-css/flags', 'public/img/flags');
     mix.copy('node_modules/roboto-fontface/fonts', 'public/fonts/roboto');
     mix.copy('node_modules/leaflet/dist/images', 'public/img/leaflet');

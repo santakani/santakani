@@ -17,6 +17,7 @@ require('bootstrap-sass');
 // jQuery plugins
 require('selectize');
 require('lightgallery');
+require('lightslider');
 require('jquery.scrollto');
 
 
