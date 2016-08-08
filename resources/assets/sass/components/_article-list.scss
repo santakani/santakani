@@ -1,10 +1,18 @@
+$article-list-2-column-width: 2 * $article-list-column-width + 3 * $article-list-column-space;
+$article-list-3-column-width: 3 * $article-list-column-width + 4 * $article-list-column-space;
+$article-list-4-column-width: 4 * $article-list-column-width + 5 * $article-list-column-space;
+
 .article-list {
     background-color: $bg-light;
 
+    > h1.heading, h2.heading {
+        margin: 0 auto;
+        padding: 20px;
+    }
+
     .list {
         display: flex;
-        max-width: 1300px;
-        padding: 10px 0;
+        padding: $article-list-column-space / 2 0;
         margin: auto;
         flex-wrap: wrap;
         justify-content: center;
@@ -15,8 +23,8 @@
     }
 
     article {
-        width: 300px;
-        margin: 10px;
+        width: $article-list-column-width;
+        margin: $article-list-column-space / 2;
         background-color: #ffffff;
 
         &.active {
@@ -101,9 +109,87 @@
                 color: $gray-light;
             }
         }
+
+        &.more-button a {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            font-size: 18px;
+        }
     }
 
     .pagination-wrap {
+        margin: auto;
         text-align: center;
+    }
+}
+
+.article-list-header {
+    .container {
+        width: auto;
+        padding: 20px;
+    }
+}
+
+@media (min-width: $article-list-2-column-width + $scrollbar-width) {
+    .article-list {
+        .list, .pagination-wrap, .heading {
+            max-width: $article-list-2-column-width;
+        }
+    }
+
+    .article-filter {
+        form {
+            max-width: $article-list-2-column-width;
+        }
+    }
+
+    .article-list-header {
+        .container {
+            max-width: $article-list-2-column-width;
+        }
+    }
+}
+
+@media (min-width: $article-list-3-column-width + $scrollbar-width) {
+    .article-list {
+        .list, .pagination-wrap, .heading {
+            max-width: $article-list-3-column-width;
+        }
+    }
+
+    .article-filter {
+        form {
+            max-width: $article-list-3-column-width;
+        }
+    }
+
+    .article-list-header {
+        .container {
+            max-width: $article-list-3-column-width;
+        }
+    }
+}
+
+@media (min-width: $article-list-4-column-width + $scrollbar-width) {
+    .article-list {
+        .list, .pagination-wrap, .heading {
+            max-width: $article-list-4-column-width;
+        }
+    }
+
+    .article-filter {
+        form {
+            max-width: $article-list-4-column-width;
+        }
+    }
+
+    .article-list-header {
+        .container {
+            max-width: $article-list-4-column-width;
+        }
     }
 }

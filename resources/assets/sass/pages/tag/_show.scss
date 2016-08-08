@@ -1,19 +1,49 @@
 #tag-show-page {
     header {
-        padding: 30px 0;
+        padding: 20px 0;
+    }
 
-        .cover-image {
+    .header-content {
+        > .cover {
             display: block;
-            width: 100%;
+            max-width: 100%;
+            margin: auto;
         }
 
-        h1 {
-            margin-top: 0;
+        > .text {
+            margin-top: 20px;
+
+            h1 {
+                margin-top: 0;
+            }
         }
     }
 
-    main {
-        padding: 30px 0;
-        background-color: #f0f0f0;
+    article:not(.more-button):nth-child(n+6) {
+        display: none;
+    }
+
+    @media (min-width: $article-list-2-column-width + $scrollbar-width) {
+        .header-content {
+            display: flex;
+
+            > .cover {
+                display: block;
+                flex: 0 0 300px;
+                width: 300px;
+            }
+
+            > .text {
+                flex: 1 0 300px;
+                margin-top: 0;
+                margin-left: 20px;
+            }
+        }
+    }
+
+    @media (min-width: $article-list-4-column-width + $scrollbar-width) {
+        article:not(.more-button):nth-child(n+6) {
+            display: block;
+        }
     }
 }

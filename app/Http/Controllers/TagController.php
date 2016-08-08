@@ -108,9 +108,9 @@ class TagController extends Controller
             abort(404);
         }
 
-        $designers = $tag->designers()->orderBy('id', 'desc')->take(6)->get();
-        $places = $tag->places()->orderBy('id', 'desc')->take(6)->get();
-        $stories = $tag->stories()->orderBy('id', 'desc')->take(6)->get();
+        $designers = $tag->designers()->orderBy('id', 'desc')->take(7)->get();
+        $places = $tag->places()->orderBy('id', 'desc')->take(7)->get();
+        $stories = $tag->stories()->orderBy('id', 'desc')->take(7)->get();
 
         return view('pages.tag.show', [
             'tag' => $tag,
