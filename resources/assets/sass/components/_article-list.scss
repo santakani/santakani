@@ -15,7 +15,6 @@ $article-list-4-column-width: 4 * $article-list-column-width + 5 * $article-list
         padding: $article-list-column-space / 2 0;
         margin: auto;
         flex-wrap: wrap;
-        justify-content: center;
 
         @media (min-width: $screen-sm-min) {
             padding: 10px;
