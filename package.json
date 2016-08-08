@@ -19,6 +19,7 @@
     "laravel-elixir": "^4.0.0",
     "leaflet": "^0.7.7",
     "lightgallery": "^1.2.19",
+    "lightslider": "^1.1.5",
     "masonry-layout": "^4.1.0",
     "roboto-fontface": "^0.4.5",
     "selectize": "^0.12.1",
