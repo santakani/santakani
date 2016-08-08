@@ -22,7 +22,7 @@
         flex: 0 0 320px;
         height: 100%;
         overflow-y: auto;
-        background-color: #EAEFF2;
+        background-color: $bg-light;
 
         @media (min-width: 400px + 2 * 320px + 20px + $scrollbar-width) {
             min-width: 2 * 320px + 20px + $scrollbar-width;

@@ -5,8 +5,9 @@
 @import "base/variables";
 
 // Bootstrap
-$icon-font-path: '../../fonts/bootstrap';
+@import "vendor/bootstrap"; // Override Bootstrap variables
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
 
 @import "base/mixins";
 @import "base/global";
@@ -20,7 +21,7 @@ $icon-font-path: '../../fonts/bootstrap';
 //==============================================================================
 
 // Roboto fonts
-$roboto-font-path: '../../fonts/roboto';
+$roboto-font-path: '/fonts/roboto';
 @import "node_modules/roboto-fontface/css/roboto-fontface.scss";
 
 // Leaflet
@@ -30,12 +31,12 @@ $roboto-font-path: '../../fonts/roboto';
 @import "node_modules/sweetalert/dist/sweetalert";
 
 // FontAwesome Icons
-$fa-font-path: "../../fonts/font-awesome";
+$fa-font-path: "/fonts/font-awesome";
 @import "node_modules/font-awesome/scss/font-awesome";
 
 // LightGallery
-$lg-path-fonts: '../../fonts/lightgallery';
-$lg-path-images: '../../img/lightgallery';
+$lg-path-fonts: '/fonts/lightgallery';
+$lg-path-images: '/img/lightgallery';
 @import "node_modules/lightgallery/src/sass/lightgallery";
 
 // Selectize
@@ -46,7 +47,7 @@ $lg-path-images: '../../img/lightgallery';
 @import "node_modules/flickity/css/flickity";
 
 // Flag Icon CSS
-$flag-icon-css-path: '../../img/flags' !default;
+$flag-icon-css-path: '/img/flags' !default;
 @import "node_modules/flag-icon-css/sass/flag-icon";
 
 // Override Vendor Styles

@@ -1,0 +1,23 @@
+/**
+ * Override Bootstrap variables
+ * @see http://getbootstrap.com/customize/#less-variables
+ */
+
+// Colors
+$brand-primary: #158CBA;
+$brand-success: #28B62C;
+$brand-info:    #75CAEB;
+$brand-warning: #FF851B;
+$brand-danger:  #FF4136;
+
+// Scaffolding
+$link-hover-decoration: none;
+
+// Typography
+$font-family-sans-serif: "Roboto", "Microsoft YaHei", "Hiragino Sans GB",
+    "STHeiti", "WenQuanYi Micro Hei", sans-serif;
+$headings-font-weight: 300;
+$headings-line-height: 1.2;
+
+// Iconography
+$icon-font-path: "/fonts/bootstrap/";
