@@ -16,7 +16,7 @@
             <div class="text">
                 <h1 class="user-name">
                     {{ $user->name }}
-                    @if (Auth::user()->id === $user->id)
+                    @if (Auth::check() && Auth::user()->id === $user->id)
                         <a class="btn btn-default" href="/setting/profile">
                             <i class="fa fa-pencil"></i>
                             {{ trans('common.edit') }}
@@ -29,7 +29,7 @@
                     @else
                         No description.
                     @endif
-                    @if (Auth::user()->id === $user->id)
+                    @if (Auth::check() && Auth::user()->id === $user->id)
                         <a href="/setting/profile">
                             <i class="fa fa-pencil"></i>
                             {{ trans('common.edit') }}
