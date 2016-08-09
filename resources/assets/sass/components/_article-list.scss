@@ -126,6 +126,7 @@ $article-list-4-column-width: 4 * $article-list-column-width + 5 * $article-list
     }
 }
 
+// Page header with same width as article list columns
 .article-list-header {
     .container {
         width: auto;
@@ -133,6 +134,7 @@ $article-list-4-column-width: 4 * $article-list-column-width + 5 * $article-list
     }
 }
 
+// Container width, considering scrollbar
 @media (min-width: $article-list-2-column-width + $scrollbar-width) {
     .article-list {
         .list, .pagination-wrap, .heading {
