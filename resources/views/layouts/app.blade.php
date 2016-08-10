@@ -29,7 +29,20 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     <meta name="twitter:site" content="@santakanidesign" />
 
     <!-- Schema.Org: Google Search -->
-
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "name": "{{ trans('brand.app_name') }}",
+        "url": "{{ url('/') }}",
+        "logo": "{{ url('img/logo/origin-512x512.png') }}",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ url('search') }}?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
 
     <link rel="shortcut icon" href="{{ url('img/logo/origin-32x32.png') }}" type="image/png" sizes="32x32">
     <link rel="shortcut icon" href="{{ url('img/logo/origin-64x64.png') }}" type="image/png" sizes="64x64">
