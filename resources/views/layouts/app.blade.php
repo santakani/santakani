@@ -17,12 +17,19 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 
     <title>{{ $title }}</title>
 
-    <!-- Open Graph Protocol -->
+    <!-- Open Graph Protocol: Facebook, Google+ -->
     <meta property="og:title" content="{{ $og_title or $title }}">
     <meta property="og:type" content="{{ $og_type or 'website' }}">
     <meta property="og:url" content="{{ $og_url or url()->current() }}">
     <meta property="og:description" content="{{ $og_description or trans('brand.app_description') }}">
     <meta property="og:image" content="{{ $og_image or url('img/logo/origin-512x512.png') }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="{{ $twitter_card_type or 'summary' }}">
+    <meta name="twitter:site" content="@santakanidesign" />
+
+    <!-- Schema.Org: Google Search -->
+
 
     <link rel="shortcut icon" href="{{ url('img/logo/origin-32x32.png') }}" type="image/png" sizes="32x32">
     <link rel="shortcut icon" href="{{ url('img/logo/origin-64x64.png') }}" type="image/png" sizes="64x64">
