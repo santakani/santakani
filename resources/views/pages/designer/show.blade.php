@@ -7,6 +7,7 @@
     'og_url' => $designer->url,
     'og_description' => $designer->excerpt('content'),
     'og_image' => empty($designer->image_id)?'':$designer->image->fileUrl('medium'),
+    'twitter_card_type' => 'summary_large_image',
     'has_share_buttons' => true,
 ])
 
