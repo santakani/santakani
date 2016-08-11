@@ -1,10 +1,10 @@
 <?php
 // Default values
-$title = isset($title) ? $title . ' - ' . trans('brand.app_name') : trans('brand.app_name') . ' - ' . trans('brand.app_description');
+$title = isset($title) ? $title . ' - ' . trans('brand.app_name') : trans('brand.app_name') . ': ' . trans('brand.app_define');
 $has_navbar = isset($has_navbar)?$has_navbar:true;
 $has_header = isset($has_header)?$has_header:true;
 $has_footer = isset($has_footer)?$has_footer:true;
-$body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):[];
+$body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):['app-layout'];
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     @endif
 
     @if ($has_header)
-        <header id="site-header" class="site-header">
+        <header id="app-header" class="app-header {{ $header_class or '' }}">
             @yield('header')
         </header>
     @endif
