@@ -56,7 +56,7 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 
     <!-- Apple Touch Icon -->
     @foreach ([120, 152, 167, 180] as $size)
-    <link rel="apple-touch-icon" href="{{ url('img/logo/apple-touch-icon-'.$size.'.png') }}" type="image/png" sizes="{{ $size }}x{{ $size }}">
+    <link rel="apple-touch-icon" href="{{ url('img/logo/app-icon-'.$size.'.png') }}" type="image/png" sizes="{{ $size }}x{{ $size }}">
     @endforeach
 
     <!-- CSS -->
