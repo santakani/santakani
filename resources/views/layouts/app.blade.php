@@ -47,15 +47,14 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     </script>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ url('img/logo/origin-32x32.png') }}" type="image/png" sizes="32x32">
-    <link rel="shortcut icon" href="{{ url('img/logo/origin-64x64.png') }}" type="image/png" sizes="64x64">
-    <link rel="shortcut icon" href="{{ url('img/logo/origin-128x128.png') }}" type="image/png" sizes="128x128">
+    @foreach ([16, 32, 48, 64, 72, 96, 128, 144, 192] as $size)
+    <link rel="icon" href="{{ url('img/logo/app-icon-'.$size.'.png') }}" type="image/png" sizes="{{ $size }}x{{ $size }}">
+    @endforeach
 
     <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="{{ url('img/logo/apple-touch-icon-120x120.png') }}" type="image/png" sizes="120x120">
-    <link rel="apple-touch-icon" href="{{ url('img/logo/apple-touch-icon-152x152.png') }}" type="image/png" sizes="152x152">
-    <link rel="apple-touch-icon" href="{{ url('img/logo/apple-touch-icon-167x167.png') }}" type="image/png" sizes="167x167">
-    <link rel="apple-touch-icon" href="{{ url('img/logo/apple-touch-icon-180x180.png') }}" type="image/png" sizes="180x180">
+    @foreach ([120, 152, 167, 180] as $size)
+    <link rel="apple-touch-icon" href="{{ url('img/logo/apple-touch-icon-'.$size.'.png') }}" type="image/png" sizes="{{ $size }}x{{ $size }}">
+    @endforeach
 
     <!-- CSS -->
     <link id="app-css" href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css"/>
