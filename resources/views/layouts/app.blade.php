@@ -46,6 +46,9 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     }
     </script>
 
+    <!-- Chrome Android Web App -->
+    <meta name="mobile-web-app-capable" content="yes">
+
     <!-- Favicon -->
     @foreach ([16, 32, 48, 64, 72, 96, 128, 144, 192] as $size)
     <link rel="icon" href="{{ url('img/logo/app-icon-'.$size.'.png') }}" type="image/png" sizes="{{ $size }}x{{ $size }}">
