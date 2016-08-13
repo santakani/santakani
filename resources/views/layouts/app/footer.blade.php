@@ -7,9 +7,7 @@
             <li><a href="{{ url('help') }}">{{ trans('common.help') }}</a></li>
             <li><a href="mailto:contact@santakani.com">{{ trans('common.contact') }}</a></li>
             <li><a href="{{ url('about') }}">{{ trans('common.about_us') }}</a></li>
-            <li><a href="https://www.facebook.com/groups/270204663311876/" target="_blank">{{ trans('common.community') }}</a></li>
-
-            <li><a href="https://www.facebook.com/1116236201740479/" target="_blank">Facebook</a></li>
+            <li><a href="https://www.facebook.com/santakanidesign" target="_blank">Facebook</a></li>
             @if (App::getLocale() === 'zh')
                 <li><a href="#" data-toggle="modal" data-target="#wechat-modal">微信</a></li>
             @endif
