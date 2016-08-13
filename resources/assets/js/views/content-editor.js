@@ -45,7 +45,7 @@ module.exports = Backbone.View.extend({
 
                 // Remove empty <p>, <div> DOM
                 $root.find('p, div').each(function () {
-                    if (!$(this).text().trim()) {
+                    if (!$(this).html().trim()) {
                         $(this).remove();
                     }
                 });
