@@ -53,5 +53,5 @@
 @endsection
 
 @section('main')
-    <div class="page-content">{!! $story->html('content') !!}</div>
+    <div id="page-content" class="page-content">{!! $story->html('content') !!}</div>
 @endsection
