@@ -8,6 +8,7 @@
             <li><a href="mailto:contact@santakani.com">{{ trans('common.contact') }}</a></li>
             <li><a href="{{ url('about') }}">{{ trans('common.about_us') }}</a></li>
             <li><a href="https://www.facebook.com/santakanidesign" target="_blank">Facebook</a></li>
+            <li><a href="https://twitter.com/santakanidesign" target="_blank">Twitter</a></li>
             @if (App::getLocale() === 'zh')
                 <li><a href="#" data-toggle="modal" data-target="#wechat-modal">微信</a></li>
             @endif
