@@ -22,7 +22,7 @@ module.exports = Backbone.View.extend({
         // Initialize TinyMCE
         tinymce.init({
             selector: this.selector,
-            plugins: ['link', 'image', 'paste', 'fullscreen'],
+            plugins: ['link', 'autolink', 'image', 'paste', 'fullscreen'],
             menubar: false,
             statusbar: false,
             toolbar: 'undo redo | formatselect bold italic | blockquote bullist numlist | link unlink customimage | removeformat | fullscreen',
@@ -37,7 +37,19 @@ module.exports = Backbone.View.extend({
 
             convert_urls: false, // Keep relative URLs for images and links
 
-            paste_as_text: true, // Paste as plain text, remove styles and tags.
+            paste_postprocess: function(plugin, args) {
+                var $root = $(args.node);
+
+                // Remove <br> DOM
+                $root.find('br').remove();
+
+                // Remove empty <p>, <div> DOM
+                $root.find('p, div').each(function () {
+                    if (!$(this).text().trim()) {
+                        $(this).remove();
+                    }
+                });
+            },
 
             setup: function (editor) {
                 editor.on('change', function () {
