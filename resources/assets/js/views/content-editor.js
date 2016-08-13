@@ -25,7 +25,7 @@ module.exports = Backbone.View.extend({
             plugins: ['link', 'image', 'paste', 'fullscreen'],
             menubar: false,
             statusbar: false,
-            toolbar: 'undo redo | bold italic | blockquote bullist numlist | link unlink customimage | removeformat | fullscreen',
+            toolbar: 'undo redo | formatselect bold italic | blockquote bullist numlist | link unlink customimage | removeformat | fullscreen',
 
             language: app.locale,
 
