@@ -11,6 +11,7 @@
             <li><a href="https://twitter.com/santakanidesign" target="_blank">Twitter</a></li>
             @if (App::getLocale() === 'zh')
                 <li><a href="#" data-toggle="modal" data-target="#wechat-modal">微信</a></li>
+                <li><a href="http://weibo.com/santakani" target="_blank">微博</a></li>
             @endif
         </ul>
         <p>2016{{ date("Y") > 2016?'-'.date("Y"):'' }} {{ trans('brand.app_name') }}</p>
