@@ -88,7 +88,32 @@ nav.custom-navbar {
         margin-left: 10px;
     }
 
-    @media screen and (min-width: $screen-sm-min) {
+    @media (max-width: $screen-xs-max) {
+        .dropdown {
+            .dropdown-menu {
+                position: fixed;
+                min-width: 200px;
+                max-width: 300px;
+                right: 0;
+                top: $custom-navbar-height;
+                bottom: 0;
+                margin: 0;
+                padding: 0;
+                border: none;
+                border-radius: 0;
+                overflow-y: auto;
+                z-index: 99;
+
+                > li {
+                    > a {
+                        line-height: 40px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (min-width: $screen-sm-min) {
         .nav-menu {
             > li{
                 flex: 0 0 auto;
@@ -112,7 +137,7 @@ nav.custom-navbar {
         }
     }
 
-    @media screen and (min-width: $screen-md-min) {
+    @media (min-width: $screen-md-min) {
         .nav-menu {
             > li{
                 > a {
@@ -122,11 +147,11 @@ nav.custom-navbar {
         }
     }
 
-    @media screen and (min-width: $screen-lg-min) {
+    @media (min-width: $screen-lg-min) {
         .nav-menu {
             > li{
                 > a {
-                    font-size: 18px;
+                    font-size: 16px;
                 }
             }
         }
