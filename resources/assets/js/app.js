@@ -20,6 +20,8 @@ require('lightgallery');
 require('lightslider');
 require('jquery.scrollto');
 
+require('./jquery/remove-attributes');
+
 
 //==============================
 // Services

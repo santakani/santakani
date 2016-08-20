@@ -8,4 +8,15 @@ body#tinymce {
     max-width: 660px;
     background: #ffffff;
     box-shadow: 0 0 999px 999px $gray-lighter;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+
+    td, th {
+        font-size: inherit;
+        font-family: inherit;
+    }
+
+    table {
+        @extend .table;
+    }
 }

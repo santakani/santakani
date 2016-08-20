@@ -49,6 +49,15 @@ module.exports = Backbone.View.extend({
                         $(this).remove();
                     }
                 });
+
+                // Remove all data and style attributes
+                $root.find('*').each(function () {
+                    $(this).removeAttr('style');
+                    $(this).removeAttrs(/^data-/);
+                    $(this).removeAttrs(/^data-/); // For unknown reason, we need do it twice to remove all data- attributes
+                });
+
+                $root.find('table').removeAttr('border').removeAttr('cellpadding').removeAttr('cellspacing');
             },
 
             setup: function (editor) {
