@@ -5,6 +5,7 @@
  */
 
 var Backbone = require('backbone');
+var sweetalert = require('sweetalert');
 
 var ImageList = require('../../collections/image-list');
 var Image = require('../../models/image');
@@ -34,7 +35,8 @@ module.exports = Backbone.View.extend({
         'click .upload-button': 'openFileBrowser',
         'change .file-input': 'uploadImages',
         'click .cancel-button': 'cancelSelect',
-        'click .ok-button': 'finishSelect'
+        'click .ok-button': 'finishSelect',
+        'click .delete-button': 'deleteSelect',
     },
 
     initialize: function (options) {
@@ -44,7 +46,10 @@ module.exports = Backbone.View.extend({
 
         this.listenTo(this.collection, 'add', this.addImage);
         this.listenTo(this.collection, 'all', this.updateOkButton);
+        this.listenTo(this.collection, 'all', this.updateDeleteButton);
         this.listenTo(this.collection, 'all', this.toggleNoImageAlert);
+
+        $(window).resize(this.fitSize.bind(this));
 
         var data = {};
         if (this.my) {
@@ -67,6 +72,7 @@ module.exports = Backbone.View.extend({
         _.extend(this, _.pick(options, 'multiple', 'max', 'done', 'fail'));
         this.resetSelect();
         this.$el.modal('show');
+        this.fitSize();
     },
 
     openFileBrowser: function () {
@@ -93,8 +99,6 @@ module.exports = Backbone.View.extend({
         var preview = new ImagePreview({
             model: image,
             selectable: true,
-            removeable: true,
-            destroyOnRemove: true,
         });
         this.$('.gallery').prepend(preview.$el);
 
@@ -122,6 +126,11 @@ module.exports = Backbone.View.extend({
         });
     },
 
+    fitSize: function () {
+        var height = $(window).height() - 200;
+        this.$('.modal-body').outerHeight(height);
+    },
+
     toggleNoImageAlert: function () {
         if (this.collection.length > 0) {
             this.$('.alert').hide();
@@ -136,6 +145,42 @@ module.exports = Backbone.View.extend({
         } else {
             this.$('.ok-button').prop('disabled', true);
         }
+    },
+
+    updateDeleteButton: function () {
+        if (this.collection.where({selected: true}).length > 0) {
+            this.$('.delete-button').show();
+        } else {
+            this.$('.delete-button').hide();
+        }
+    },
+
+    deleteSelect: function () {
+        var images = this.collection.where({selected: true});
+        var html = '<br/><br/>';
+        var size = 100;
+        if (images.length > 3) {
+            size = 50;
+        }
+        for (var i in images) {
+            html += '<img width="' + size + '" height="' + size + '" src="' +
+                    images[i].fileUrl('thumb') + '""/> ';
+        }
+
+        sweetalert({
+            title: this.$('.delete-alert-title').text(),
+            text: this.$('.delete-alert-text').text() + html,
+            html: true,
+            type: "warning",
+            allowOutsideClick: true,
+            showCancelButton: true,
+            confirmButtonText: this.$('.delete-alert-confirm-text').text(),
+            cancelButtonText: this.$('.delete-alert-cancel-text').text(),
+        }, function () {
+            for (var i in images) {
+                images[i].destroy();
+            }
+        })
     },
 
     cancelSelect: function () {

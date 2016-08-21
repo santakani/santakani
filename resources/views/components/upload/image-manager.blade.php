@@ -18,6 +18,11 @@
                 <div class="alert alert-info"> {{ trans('image.image_manager.no_image_alert') }}</div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="delete-button btn btn-danger pull-left">{{ trans('common.delete') }}</button>
+                <span class="delete-alert-title hidden">{{ trans('image.image_manager.delete_alert_title') }}</span>
+                <span class="delete-alert-text hidden">{{ trans('image.image_manager.delete_alert_text') }}</span>
+                <span class="delete-alert-confirm-text hidden">{{ trans('common.confirm') }}</span>
+                <span class="delete-alert-cancel-text hidden">{{ trans('common.cancel') }}</span>
                 <button type="button" class="cancel-button btn btn-default" data-dismiss="modal">{{ trans('common.cancel') }}</button>
                 <button type="button" class="ok-button btn btn-primary">{{ trans('common.ok') }}</button>
             </div>

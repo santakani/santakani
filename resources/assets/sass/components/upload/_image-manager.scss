@@ -1,4 +1,9 @@
 #image-manager {
+    .modal-body {
+        min-height: 300px;
+        overflow-y: auto;
+    }
+
     .upload-button {
         margin-left: 20px;
     }

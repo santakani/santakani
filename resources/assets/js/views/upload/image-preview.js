@@ -28,20 +28,15 @@ module.exports = Backbone.View.extend({
 
     selectable: false,
 
-    multiple: false, // true: select like checkbox; false: select like radio button
-
     inputName: null,
 
-    destroyOnRemove: false, // true: destroy model on server through ajax. false: only remove view.
-
     events: {
-        'click .remove': 'close',
+        'click .remove': 'remove',
         'click': 'select'
     },
 
     initialize: function (options) {
-        _.extend(this, _.pick(options, 'width', 'height', 'size', 'removeable',
-            'selectable', 'multiple', 'inputName', 'destroyOnRemove'));
+        _.extend(this, _.pick(options, 'width', 'height', 'size', 'removeable', 'selectable', 'inputName'));
 
         if (!this.model) {
             this.model = new Image();
@@ -58,6 +53,7 @@ module.exports = Backbone.View.extend({
         });
 
         this.listenTo(this.model, 'change', this.update);
+        this.listenTo(this.model, 'destroy', this.remove);
     },
 
     render: function () {
@@ -124,11 +120,4 @@ module.exports = Backbone.View.extend({
             this.$el.css('background-image', 'none');
         }
     },
-
-    close: function () {
-        if (this.destroyOnRemove) {
-            this.model.destroy();
-        }
-        this.remove();
-    }
 });
