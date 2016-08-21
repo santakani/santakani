@@ -14,6 +14,6 @@ return array(
 
     // Image manager
     'image_manager.no_image_alert' => '还没有图片，请上传。',
-    'image_manager.delete_alert_title' => 'Image Delete Confirm',
-    'image_manager.delete_alert_text' => 'You are going to delete these images:',
+    'image_manager.delete_alert_title' => '确认删除图片',
+    'image_manager.delete_alert_text' => '您将要删除以下图片：',
 );
