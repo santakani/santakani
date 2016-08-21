@@ -50,6 +50,12 @@ module.exports = Backbone.View.extend({
                     }
                 });
 
+                // Remove <span>
+                $root.find('span').each(function () {
+                    $(this).before($(this).contents());
+                    $(this).remove();
+                });
+
                 // Remove all data and style attributes
                 $root.find('*').each(function () {
                     $(this).removeAttr('style');
