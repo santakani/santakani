@@ -14,22 +14,22 @@ return array(
     'timezone' => 'Tidszon',
 
     // Location
-    'address' => 'Address',
-    'location' => 'Location',
+    'address' => 'Adress',
+    'location' => 'Plats',
     'latitude' => 'Latitud',
     'longitude' => 'Longitud',
 
     // Maps
-    'map' => 'Map',
+    'map' => 'Karta',
     'bing_map' => 'Bing Map',
     'google_map' => 'Google Map',
     'here_map' => 'Here Map',
 
     // Coordinate select
-    'coordinate_select.found_alert' => 'Successfully marked the location on map!',
-    'coordinate_select.not_found_alert' => 'Cannot find the location. Please drag the map to mark it by hand.',
-    'coordinate_select.help' => 'The map will try to mark location based on address. If not found, please drag and zoom the map to mark it by hand.',
-    'coordinate_select.label' => 'Mark location on map',
+    'coordinate_select.found_alert' => 'Markera platsen på kartan framgångsrikt!',
+    'coordinate_select.not_found_alert' => 'Det går inte att hitta platsen. Vänligen dra kartan för att markera den för hand.',
+    'coordinate_select.help' => 'Kartan kommer att markera plats baserat på adressen. Om den inte hittas vänligen dra och zooma kartan för att markera den för hand.',
+    'coordinate_select.label' => 'Mark plats på kartan',
     'coordinate_select.smart_lookup' => 'Smart lookup',
 
 );

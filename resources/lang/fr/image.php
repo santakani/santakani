@@ -14,4 +14,6 @@ return array(
 
     // Image manager
     'image_manager.no_image_alert' => 'No images yet, please upload.',
+    'image_manager.delete_alert_title' => 'Image Delete Confirm',
+    'image_manager.delete_alert_text' => 'You are going to delete these images:',
 );

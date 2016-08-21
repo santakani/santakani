@@ -2,16 +2,16 @@
 
 return array(
 
-    'place' => 'Ställe',
-    'places' => 'Ställen',
+    'place' => 'Plats',
+    'places' => 'Platser',
     'place_list' => 'Plats lista',
-    'place_pages' => 'Place pages',
+    'place_pages' => 'Sidor plats',
 
     // Manage
-    'my_place_pages_description' => 'Place pages you created.',
+    'my_place_pages_description' => 'Sidor plats du har skapat',
 
     // Create
-    'create_a_place_page' => 'Skapa en plats sida',
+    'create_a_place_page' => 'Skapa en sida plats',
 
     // Edit
 

@@ -2,5 +2,6 @@
 
 return array(
     'app_name' => 'Santakani',
-    'app_description' => '来自芬兰的设计师和设计店铺',
+    'app_define' => 'Designers and design shops from Finland',
+    'app_description' => 'Connect independent designers and design lovers. Bring creative designs and ideas to more places.',
 );
