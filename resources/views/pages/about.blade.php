@@ -6,7 +6,7 @@
 
 @section('header')
     <div class="container">
-        <h1>Our mission: connect independent designers and design lovers, bring creative designs and ideas to more places.</h1>
+        <h1>{{ trans('brand.app_description') }}</h1>
     </div>
 @endsection
 
@@ -69,7 +69,7 @@
     <section id="community-section">
         <div class="container">
             <div class="text">
-                Designers, artisits, craftsmen and craftswomen, design students, and design lovers consist of this unique community. People from different cultures, using different languages, meet each other for the same reason: passion of design.
+                {{ trans('about.community_intro') }}
             </div>
         </div>
         <div class="background"></div>
@@ -77,33 +77,33 @@
 
     <section id="team-section">
         <div class="container">
-            <h2>Our Lovely Team</h2>
+            <h2>{{ trans('about.team_title') }}</h2>
 
             <div class="row">
                 <div class="col-sm-4">
                     <div class="team-member">
                         <img src="/img/team/duyuexin.jpg">
-                        <h3>Du Yuexin</h3>
-                        <p>co-founder, designer, business development</p>
-                        <p>Aalto University, School of Arts</p>
+                        <h3>{{ trans('about.du_yuexin') }}</h3>
+                        <p>{{ trans('about.co_founder') }} / {{ trans('about.designer') }}</p>
+                        <p>{{ trans('about.aalto_arts') }}</p>
                         <a href="mailto:yuexin.du@santakani.com">yuexin.du@santakani.com</a>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="team-member">
                         <img src="/img/team/guoyunhe.jpg">
-                        <h3>Guo Yunhe</h3>
-                        <p>co-founder, programmer, technical support</p>
-                        <p>Aalto University, School of Arts</p>
+                        <h3>{{ trans('about.guo_yunhe') }}</h3>
+                        <p>{{ trans('about.co_founder') }} / {{ trans('about.programmer') }}</p>
+                        <p>{{ trans('about.aalto_arts') }}</p>
                         <a href="mailto:yunhe.guo@santakani.com">yunhe.guo@santakani.com</a>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="team-member">
                         <img src="/img/team/yunxiaotong.jpg">
-                        <h3>Yun Xiaotong</h3>
-                        <p>co-founder, editor, marketing, customer service</p>
-                        <p>Aalto University, School of Business</p>
+                        <h3>{{ trans('about.yun_xiaotong') }}</h3>
+                        <p>{{ trans('about.co_founder') }} / {{ trans('about.editor') }} / {{ trans('about.marketing') }}</p>
+                        <p>{{ trans('about.aalto_biz') }}</p>
                         <a href="mailto:xiaotong.yun@santakani.com">xiaotong.yun@santakani.com</a>
                     </div>
                 </div>
