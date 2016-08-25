@@ -12,6 +12,6 @@ return array(
     'editor' => 'Editor',
     'marketing' => 'Marketing',
     'aalto_university' => 'Aalto University',
-    'aalto_arts' => 'Aalto Uinversity School of Arts, Design and Architecture',
+    'aalto_arts' => 'Aalto University School of Arts, Design and Architecture',
     'aalto_biz' => 'Aalto University School of Business',
 );
