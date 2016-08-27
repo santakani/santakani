@@ -44,4 +44,23 @@ class Design extends Model
      * @var array
      */
     protected $appends = ['name', 'url'];
+
+    //====================================================================
+    // Relationship
+    //====================================================================
+
+    public function designer()
+    {
+        return $this->belongsTo('App\Designer');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function image()
+    {
+        return $this->belongsTo('App\Image');
+    }
 }
