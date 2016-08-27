@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Localization;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 

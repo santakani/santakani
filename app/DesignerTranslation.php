@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Localization\Translation;
-
 class DesignerTranslation extends Translation
 {
     /**

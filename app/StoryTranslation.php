@@ -11,8 +11,6 @@
 
 namespace App;
 
-use App\Localization\Translation;
-
 /**
  * StoryTranslation
  *
