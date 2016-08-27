@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Design extends Model
 {
     use SoftDeletes;
-    use EditLock;
-    use ImageFeature;
-    use LikeFeature;
-    use TagFeature;
-    use TranslateFeature;
+    use Features\EditLockFeature;
+    use Features\ImageFeature;
+    use Features\LikeFeature;
+    use Features\TagFeature;
+    use Features\TranslationFeature;
 
     /**
      * The table associated with the model.

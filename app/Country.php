@@ -12,10 +12,10 @@ use App\Localization\Languages;
 class Country extends Model
 {
     use SoftDeletes;
-    use EditLock;
-    use ImageFeature;
-    use LikeFeature;
-    use TranslateFeature;
+    use Features\EditLockFeature;
+    use Features\ImageFeature;
+    use Features\LikeFeature;
+    use Features\TranslationFeature;
 
     /**
      * The table associated with the model.

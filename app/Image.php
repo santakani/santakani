@@ -30,7 +30,7 @@ class Image extends Model
 {
     use SoftDeletes;
 
-    use LikeFeature;
+    use Features\LikeFeature;
 
     /**
      * The table associated with the model.

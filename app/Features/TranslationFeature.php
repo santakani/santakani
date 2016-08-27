@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App;
+namespace App\Features;
 
 use App;
 
@@ -26,7 +26,7 @@ use App\Localization\Languages;
  * @author Guo Yunhe <guoyunhebrave@gmail.com>
  * @see https://github.com/santakani/santakani.com/wiki/Translation
  */
-trait TranslateFeature {
+trait TranslationFeature {
 
     /**
      * Get translations.

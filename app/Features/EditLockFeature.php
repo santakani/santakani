@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App;
+namespace App\Features;
 
 use Carbon\Carbon;
 
@@ -22,7 +22,7 @@ use Auth;
  * @see https://github.com/santakani/santakani.com/wiki/Edit-Lock
  */
 
-trait EditLock {
+trait EditLockFeature {
 
     public function lock() {
         if (!Auth::check()) {
