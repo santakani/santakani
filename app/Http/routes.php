@@ -66,6 +66,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('city', 'CityController');
 
     Route::resource('designer', 'DesignerController');
+    Route::resource('design', 'DesignController');
 
     Route::resource('place', 'PlaceController');
 
