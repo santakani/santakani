@@ -8,17 +8,22 @@ $nav_menu_left = [
         'text' => trans('common.home'),
         'url' => url('/'),
     ],
-    'story' => [
-        'text' => trans('story.stories'),
-        'url' => url('story'),
+    'design' => [
+        'text' => trans('designer.designs'),
+        'url' => url('design'),
     ],
     'designer' => [
         'text' => trans('designer.designers'),
         'url' => url('designer'),
     ],
+
     'place' => [
         'text' => trans('place.places'),
         'url' => url('place'),
+    ],
+    'story' => [
+        'text' => trans('story.stories'),
+        'url' => url('story'),
     ],
 ];
 
