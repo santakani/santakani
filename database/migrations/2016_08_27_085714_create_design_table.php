@@ -57,8 +57,7 @@ class CreateDesignTable extends Migration
             $table->foreign('design_id')->references('id')->on('design')->onDelete('cascade');
         });
 
-        DB::statement('ALTER TABLE design_translation ADD FULLTEXT INDEX design_translation_name_ft_index(name)');
-        DB::statement('ALTER TABLE design_translation ADD FULLTEXT INDEX design_translation_content_ft_index(content)');
+        DB::statement('ALTER TABLE design_translation ADD FULLTEXT INDEX design_translation_name_content_ft_index(name,content)');
     }
 
     /**
