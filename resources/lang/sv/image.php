@@ -14,6 +14,6 @@ return array(
 
     // Image manager
     'image_manager.no_image_alert' => 'Inga bilder ännu, ladda upp.',
-    'image_manager.delete_alert_title' => 'Image Delete Confirm',
-    'image_manager.delete_alert_text' => 'You are going to delete these images:',
+    'image_manager.delete_alert_title' => 'Bild Radera Bekräfta',
+    'image_manager.delete_alert_text' => 'Du kommer att ta bort dessa bilder',
 );

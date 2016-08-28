@@ -5,10 +5,10 @@
  */
 
 return array(
-    'slide_1.title' => 'For Independent Design',
-    'slide_1.content' => 'Santakani focuses on independent designers and small design brands. Meet the most creative people and find the most special design!',
+    'slide_1.title' => 'För Oberoende Design',
+    'slide_1.content' => 'Santakani fokuserar på Oberoende designer och små designmärken. Träffa den mest kreativa människor och hitta den mest speciella design!',
     'slide_2.title' => 'Design Shops & Studios',
-    'slide_2.content' => 'Santakani helps you discover local design shops, studios and more!',
+    'slide_2.content' => 'Santakani hjälper dig att upptäcka lokala designbutiker , ateljéer och mer!',
     'slide_3.title' => 'Stories of Design',
-    'slide_3.content' => 'Share design events, designer interviews, design knowledge and ideas.',
+    'slide_3.content' => 'Dela designevent , designer intervjuer, design kunskaper och idéer.',
 );

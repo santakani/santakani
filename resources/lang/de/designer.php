@@ -1,14 +1,18 @@
 <?php
 
 return array(
-    'create_a_designer_page' => 'Create a designer page',
-    'design_philosophy' => 'Design philosophy',
-    'designer_photo' => 'Designer’s photo',
     'designer' => 'Designer',
-    'designer_pages' => 'Designer pages',
-    'designer_pages_description' => 'Designer pages you created.',
-    'designer_about_tips' => 'Describe the designer’s experience, creation, ideas, etc.',
-    'designer_gallery_tips' => 'Choose best photos to show in the photo gallery of designer page',
-    'designer_list' => 'Designer list',
     'designers' => 'Designers',
+
+    'create_a_designer_page' => 'Designer-Seite erstellen',
+    'design_philosophy' => 'Design-Philosophie',
+    'designer_photo' => 'Designers Foto',
+    'designer_pages' => 'Designer Seiten',
+    'designer_pages_description' => 'Designer Seiten, die Sie erstellt haben.',
+    'designer_about_tips' => 'Beschreiben der Designer die Erfahrung, Kreation, Ideen etc.',
+    'designer_gallery_tips' => 'Wählen Sie am besten Fotos in der Fotogalerie von Designer-Seite zu zeigen,',
+    'designer_list' => 'Designer-Liste',
+
+    'design' => 'Design',
+    'designs' => 'Designs',
 );

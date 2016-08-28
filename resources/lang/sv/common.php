@@ -15,7 +15,7 @@ return array(
     'community' => 'Gemenskap',
     'confirm' => 'Konfirmera',
     'connect' => 'Skapa kontakt',
-    'connected' => 'Connected',
+    'connected' => 'Ansluten',
     'contact' => 'Kontakt',
     'content' => 'Innehåll',
     'create' => 'Skapa',

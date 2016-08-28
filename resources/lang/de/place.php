@@ -2,24 +2,24 @@
 
 return array(
 
-    'place' => 'Place',
-    'places' => 'Places',
-    'place_list' => 'Place list',
-    'place_pages' => 'Place pages',
+    'place' => 'Platz',
+    'places' => 'Plätze',
+    'place_list' => 'platz liste',
+    'place_pages' => 'Platz Seiten',
 
     // Manage
-    'my_place_pages_description' => 'Place pages you created.',
+    'my_place_pages_description' => 'Platzieren Sie Seiten, die Sie erstellt haben.',
 
     // Create
-    'create_a_place_page' => 'Create a place page',
+    'create_a_place_page' => 'Erstellen Sie eine Seite Platz',
 
     // Edit
 
     // Types
     'museum' => 'Museum',
-    'school' => 'School',
-    'shop' => 'Shop',
-    'showroom' => 'Showroom',
+    'school' => 'Schule',
+    'shop' => 'Geschäft',
+    'showroom' => 'Ausstellungsraum',
     'studio' => 'Studio',
 
 );

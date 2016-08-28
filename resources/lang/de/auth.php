@@ -13,16 +13,16 @@ return array(
     |
     */
 
-    'remember_me' => 'Remember me',
-    'forgot_your_password' => 'Forgot your password?',
-    'old_password' => 'Old password',
-    'new_password' => 'New password',
-    'confirm_password' => 'Confirm password',
-    'reset_password' => 'Reset password',
-    'request_password_reset_link' => 'Request password reset link',
+    'remember_me' => 'Erinnere dich an mich',
+    'forgot_your_password' => 'Passwort vergessen?',
+    'old_password' => 'Altes Passwort',
+    'new_password' => 'Neues Passwort',
+    'confirm_password' => 'Passwort Bestätigen',
+    'reset_password' => 'Passwort zurücksetzen',
+    'request_password_reset_link' => 'Passwort anfordern Link zum Zurücksetzen',
 
     // Auth system messages
-    'failed' => 'Email address or password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'E-Mail-Adresse oder Passwort ist nicht korrekt.',
+    'throttle' => 'Zu viele Login-Versuche. Bitte versuchen Sie es erneut in: seconds Sekunden.',
 
 );
