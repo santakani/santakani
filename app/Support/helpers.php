@@ -80,6 +80,26 @@ if (!function_exists('app_empty_html')) {
     }
 }
 
+if (!function_exists('html_purify')) {
+    /**
+     * Remove JavaScript and other unsafe things from HTML.
+     *
+     * @param  string $html
+     * @return string
+     */
+    function html_purify($html)
+    {
+        $html_purifier_cache_path = storage_path('app/cache/html_purifier');
+        if (!file_exists($html_purifier_cache_path)) {
+            mkdir($html_purifier_cache_path, 0775, true);
+        }
+        $html_purifier_config = HTMLPurifier_Config::createDefault();
+        $html_purifier_config->set('Cache.SerializerPath', $html_purifier_cache_path);
+        $html_purifier = new HTMLPurifier($html_purifier_config);
+        return $html_purifier->purify($html);
+    }
+}
+
 
 //===============================================
 // URL
