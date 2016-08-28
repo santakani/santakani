@@ -63,4 +63,28 @@ class Design extends Model
     {
         return $this->belongsTo('App\Image');
     }
+
+    //====================================================================
+    // Dynamic Attributes
+    //====================================================================
+
+    /**
+     * "name" getter.
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->text('name');
+    }
+
+    /**
+     * "url" getter.
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return url('design/' . $this->id);
+    }
 }
