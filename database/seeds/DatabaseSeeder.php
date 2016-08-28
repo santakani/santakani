@@ -39,5 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StoryTableSeeder::class);
 
         $this->call(TaggableTableSeeder::class);
+
+        $this->call(DesignTableSeeder::class);
     }
 }
