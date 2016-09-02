@@ -5,9 +5,13 @@ $article-list-4-column-width: 4 * $article-list-column-width + 5 * $article-list
 .article-list {
     background-color: $bg-light;
 
-    > h1.heading, h2.heading {
+    > .heading {
         margin: 0 auto;
         padding: 20px;
+
+        form {
+            display: inline-block;
+        }
     }
 
     .list {

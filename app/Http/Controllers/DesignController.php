@@ -65,6 +65,28 @@ class DesignController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * Any logged-in users can create designer page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'designer_id' => 'required|integer|exists:designer,id',
+        ]);
+
+        $design = new Design();
+        $design->designer_id = $request->input('designer_id');
+        $design->user_id = $request->user()->id;
+        $design->save();
+
+        return redirect()->action('DesignController@edit', [$design]);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id

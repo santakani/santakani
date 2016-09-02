@@ -77,6 +77,39 @@
 @endsection
 
 @section('main')
+    <section id="design-list" class="article-list">
+        <h2 class="heading">
+            {{ trans('designer.designs') }}
+            @if (Auth::user()->can('edit-designer', $designer))
+                <form id="design-create-form" action="{{ url('design')}}" method="post">
+                    {!! csrf_field() !!}
+                    <input type="hidden" name="designer_id" value="{{ $designer->id }}"/>
+                    <button type="submit" id="design-create-button" class="btn btn-default"><i class="fa fa-plus"></i> {{ trans('common.create') }}</button>
+                </form>
+            @endif
+        </h2>
+        <div class="list">
+            @foreach ($designer->designs as $design)
+                <article>
+                    <a href="{{ $design->url }}">
+                        <div class="cover">
+                            @if ($design->image_id)
+                                <img class="image" src="{{ $design->image->thumb_file_url }}"
+                                    srcset="{{ $design->image->largethumb_file_url }} 2x"/>
+                            @endif
+                        </div>
+                        <div class="text">
+                            <div class="inner">
+                                <h2>{{ $design->text('name') }}<br></h2>
+                                <div class="excerpt">{{ $design->excerpt('content') }}</div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            @endforeach
+        </div><!-- .list -->
+    </section><!-- #design-list.article-list -->
+
     <div class="container">
         <!-- Nav tabs -->
         <ul id="main-tabs" class="nav nav-justified nav-strokes" role="tablist">

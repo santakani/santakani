@@ -114,6 +114,15 @@ class Designer extends Model
         return $this->belongsTo('App\City');
     }
 
+    /**
+     * Designs of the designer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function designs()
+    {
+        return $this->hasMany('App\Design');
+    }
 
 
     ////////////////////////////////////////////////////////////////////////////

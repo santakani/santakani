@@ -82,6 +82,20 @@ class AuthServiceProvider extends ServiceProvider
 
 
 
+        $gate->define('edit-design', function ($user, $design) {
+            return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
+        });
+
+        $gate->define('delete-designer', function ($user, $design) {
+            return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
+        });
+
+        $gate->define('force-delete-designer', function ($user, $design) {
+            return $user->role === 'admin' || $user->role === 'editor';
+        });
+
+
+
         $gate->define('edit-place', function ($user, $place) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $place->user_id;
         });
