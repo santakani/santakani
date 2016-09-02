@@ -63,4 +63,23 @@ class DesignController extends Controller
             'designs' => $designs
         ]);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $design = Design::find($id);
+
+        if (empty($design)) {
+            abort(404);
+        }
+
+        return view('pages.design.show', [
+            'design' => $design,
+        ]);
+    }
 }

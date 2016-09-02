@@ -163,8 +163,6 @@ class DesignerController extends Controller
 
         return view('pages.designer.show', [
             'designer' => $designer,
-            'can_edit' => Gate::allows('edit-page', $designer),
-            'can_translate' => Gate::allows('translate-page', $designer),
         ]);
     }
 
@@ -277,7 +275,7 @@ class DesignerController extends Controller
             abort(404);
         }
 
-        if (Gate::denies('edit-page', $designer)) {
+        if ($request->user()->cannot('edit-designer-page', $designer)) {
             abort(403);
         }
 
