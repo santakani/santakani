@@ -1,34 +1,24 @@
-$article-list-2-column-width: 2 * $grid-column-width + 3 * $grid-column-space;
-$article-list-3-column-width: 3 * $grid-column-width + 4 * $grid-column-space;
-$article-list-4-column-width: 4 * $grid-column-width + 5 * $grid-column-space;
+.article-grid {
+    display: flex;
+    max-width: $grid-two-column-width;
+    padding: $grid-padding - $grid-column-space / 2;
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
 
-.article-list {
-    background-color: $bg-light;
-
-    > .heading {
-        margin: 0 auto;
-        padding: 20px;
-
-        form {
-            display: inline-block;
-        }
+    @media (min-width: $grid-three-column-width + $scrollbar-width) {
+        max-width: $grid-three-column-width;
     }
 
-    .list {
-        display: flex;
-        padding: $grid-column-space / 2 0;
-        margin: auto;
-        flex-wrap: wrap;
-
-        @media (min-width: $screen-sm-min) {
-            padding: 10px;
-        }
+    @media (min-width: $grid-four-column-width + $scrollbar-width) {
+        max-width: $grid-four-column-width;
     }
 
     article {
         width: $grid-column-width;
         margin: $grid-column-space / 2;
-        background-color: #ffffff;
+        background-color: $gray-lighter;
 
         &.active {
             box-shadow: 0 0 0 4px $brand-primary;
@@ -121,80 +111,6 @@ $article-list-4-column-width: 4 * $grid-column-width + 5 * $grid-column-space;
             text-align: center;
             padding: 30px;
             font-size: 18px;
-        }
-    }
-
-    .pagination-wrap {
-        margin: auto;
-        text-align: center;
-    }
-}
-
-// Page header with same width as article list columns
-.article-list-header {
-    .container {
-        width: auto;
-        padding: 20px;
-    }
-}
-
-// Container width, considering scrollbar
-@media (min-width: $article-list-2-column-width + $scrollbar-width) {
-    .article-list {
-        .list, .pagination-wrap, .heading {
-            max-width: $article-list-2-column-width;
-        }
-    }
-
-    .article-filter {
-        form {
-            max-width: $article-list-2-column-width;
-        }
-    }
-
-    .article-list-header {
-        .container {
-            max-width: $article-list-2-column-width;
-        }
-    }
-}
-
-@media (min-width: $article-list-3-column-width + $scrollbar-width) {
-    .article-list {
-        .list, .pagination-wrap, .heading {
-            max-width: $article-list-3-column-width;
-        }
-    }
-
-    .article-filter {
-        form {
-            max-width: $article-list-3-column-width;
-        }
-    }
-
-    .article-list-header {
-        .container {
-            max-width: $article-list-3-column-width;
-        }
-    }
-}
-
-@media (min-width: $article-list-4-column-width + $scrollbar-width) {
-    .article-list {
-        .list, .pagination-wrap, .heading {
-            max-width: $article-list-4-column-width;
-        }
-    }
-
-    .article-filter {
-        form {
-            max-width: $article-list-4-column-width;
-        }
-    }
-
-    .article-list-header {
-        .container {
-            max-width: $article-list-4-column-width;
         }
     }
 }

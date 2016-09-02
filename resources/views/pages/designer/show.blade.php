@@ -77,18 +77,20 @@
 @endsection
 
 @section('main')
-    <section id="design-list" class="article-list">
-        <h2 class="heading">
-            {{ trans('designer.designs') }}
-            @if (Auth::user()->can('edit-designer', $designer))
-                <form id="design-create-form" action="{{ url('design')}}" method="post">
-                    {!! csrf_field() !!}
-                    <input type="hidden" name="designer_id" value="{{ $designer->id }}"/>
-                    <button type="submit" id="design-create-button" class="btn btn-default"><i class="fa fa-plus"></i> {{ trans('common.create') }}</button>
-                </form>
-            @endif
-        </h2>
-        <div class="list">
+    <section id="designs">
+        <div class="grid-container">
+            <h1>
+                {{ trans('designer.designs') }}
+                @if (Auth::user()->can('edit-designer', $designer))
+                    <form id="design-create-form" class="pull-right" action="{{ url('design')}}" method="post">
+                        {!! csrf_field() !!}
+                        <input type="hidden" name="designer_id" value="{{ $designer->id }}"/>
+                        <button type="submit" id="design-create-button" class="btn btn-default"><i class="fa fa-plus"></i> {{ trans('common.create') }}</button>
+                    </form>
+                @endif
+            </h1>
+        </div>
+        <div class="article-grid">
             @foreach ($designer->designs as $design)
                 <article>
                     <a href="{{ $design->url }}">
@@ -110,53 +112,23 @@
         </div><!-- .list -->
     </section><!-- #design-list.article-list -->
 
-    <div class="container">
-        <!-- Nav tabs -->
-        <ul id="main-tabs" class="nav nav-justified nav-strokes" role="tablist">
-            <li class="active"><a href="#gallery" data-toggle="tab">
-                {{ trans('common.gallery') }}
-            </a></li>
-            <li><a href="#biography" data-toggle="tab">
-                {{ trans('common.about') }}
-            </a></li>
-            <li><a href="#followers" data-toggle="tab">
-                {{ trans('common.followers') }}
-            </a></li>
-        </ul>
-
-        <br>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="gallery">
-                <div class="gallery gallery-grid">
-                    @foreach ($designer->gallery_images as $image)
-                            <a href="{{ $image->fileUrl('large') }}">
-                                <img src="{{ $image->fileUrl('thumb') }}" />
-                            </a>
-                    @endforeach
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="biography">
-                {!! $designer->html('content') !!}
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="followers">
-                <div class="row">
-                    @foreach ($designer->likes as $like)
-                        <div class="col-sm-6 col-lg-4">
-                            <article class="user material-card">
-                                <img class="avatar" src="{{ $like->user->avatar(150) }}"/>
-                                <div class="text">
-                                    <div class="name">{{ $like->user->name }}</div>
-                                    <div class="description text-muted">{{ $like->user->description }}</div>
-                                </div>
-                            </article>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+    <section id="gallery">
+        <div class="grid-container">
+            <h1>{{ trans('common.gallery') }}</h1>
         </div>
-    </div><!-- /.container -->
+        <div class="image-grid">
+            @foreach ($designer->gallery_images as $image)
+                    <a href="{{ $image->fileUrl('large') }}">
+                        <img src="{{ $image->fileUrl('thumb') }}" />
+                    </a>
+            @endforeach
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="grid-container">
+            <h1>{{ trans('common.about') }}</h1>
+            <div class="page-content">{!! $designer->html('content') !!}</div>
+        </div>
+    </section>
 @endsection

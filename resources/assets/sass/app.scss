@@ -70,6 +70,10 @@ $flag-icon-css-path: '/img/flags' !default;
 @import "components/article-filter";
 @import "components/article-list";
 
+@import "components/grid/grid-container";
+@import "components/grid/article-grid";
+@import "components/grid/image-grid";
+
 @import "components/coordinate-select";
 @import "components/gallery-editor";
 @import "components/material-card";

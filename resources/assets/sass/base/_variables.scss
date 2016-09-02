@@ -14,6 +14,15 @@ $custom-navbar-height: 50px;
 $scrollbar-width: 20px;
 
 
-// Article list
-$article-list-column-width: 300px;
-$article-list-column-space: 20px;
+// Image thumbnail sizes
+$image-thumb-size: 300px;
+$image-medium-size: 600px;
+$image-large-size: 1200px;
+
+// Grid layout
+$grid-column-width: 300px;
+$grid-column-space: 20px;
+$grid-padding: 10px;
+$grid-two-column-width: 2 * $grid-column-width + 1 * $grid-column-space + 2 * $grid-padding;
+$grid-three-column-width: 3 * $grid-column-width + 2 * $grid-column-space + 2 * $grid-padding;
+$grid-four-column-width: 4 * $grid-column-width + 3 * $grid-column-space + 2 * $grid-padding;

@@ -1,0 +1,22 @@
+.grid-container {
+    display: block;
+    position: relative;
+    max-width: $grid-two-column-width;
+    margin-left: auto;
+    margin-right: auto;
+    padding: $grid-padding;
+
+    @media (min-width: $grid-three-column-width + $scrollbar-width) {
+        max-width: $grid-three-column-width;
+    }
+
+    @media (min-width: $grid-four-column-width + $scrollbar-width) {
+        max-width: $grid-four-column-width;
+    }
+
+    .page-content {
+        margin: 0;
+        padding: 0;
+        max-width: $image-medium-size;
+    }
+}
