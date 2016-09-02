@@ -11,9 +11,8 @@
 
 namespace App\Features;
 
-use Carbon\Carbon;
-
 use Auth;
+use Carbon\Carbon;
 
 /**
  * Functions to lock and unlock models which are being edited

@@ -11,6 +11,8 @@
 
 namespace App\Features;
 
+use App\Image;
+
 /**
  * ImageFeature
  *
@@ -19,7 +21,6 @@ namespace App\Features;
  * @author Guo Yunhe <guoyunhebrave@gmail.com>
  * @see https://github.com/santakani/santakani.com/wiki/Image
  */
-
 trait ImageFeature {
 
     /**

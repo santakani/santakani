@@ -12,10 +12,8 @@
 namespace App\Features;
 
 use App;
-
-use Illuminate\Database\Eloquent\Model;
-
 use App\Localization\Languages;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * TranslateFeature
