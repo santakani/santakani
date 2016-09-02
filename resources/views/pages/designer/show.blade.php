@@ -38,41 +38,6 @@
         <h1 class="name">{{ $designer->text('name') }}</h1>
         <p class="tagline"><em>{{ $designer->excerpt('tagline', null, 140) }}</em></p>
         <p class="city">{{ $designer->city->full_name }}</p>
-        <div class="links">
-            @if (!empty($designer->facebook))
-                <a href="{{ $designer->facebook }}" title="Facebook">
-                    <i class="fa fa-facebook-official"></i>
-                </a>
-            @endif
-            @if (!empty($designer->twitter))
-                <a href="{{ $designer->twitter }}" title="Twitter">
-                    <i class="fa fa-twitter"></i>
-                </a>
-            @endif
-            @if (!empty($designer->google_plus))
-                <a href="{{ $designer->google_plus }}" title="Google+">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-            @endif
-            @if (!empty($designer->instagram))
-                <a href="{{ $designer->instagram }}" title="Instagram">
-                    <i class="fa fa-instagram"></i>
-                </a>
-            @endif
-            @if (!empty($designer->email))
-                <a href="mailto:{{ $designer->email }}" title="{{ trans('common.email') }}">
-                    <i class="fa fa-envelope-o"></i>
-                </a>
-            @endif
-            @if (!empty($designer->email))
-                <a href="{{ $designer->website }}" title="{{ trans('common.website') }}">
-                    <i class="fa fa-globe"></i>
-                </a>
-            @endif
-        </div>
-
-        @include('components.tag-list', ['tags' => $designer->tags])
-
     </div><!-- /.page-cover -->
 @endsection
 
@@ -127,8 +92,64 @@
 
     <section id="about">
         <div class="grid-container">
-            <h1>{{ trans('common.about') }}</h1>
-            <div class="page-content">{!! $designer->html('content') !!}</div>
+            <div class="grid">
+                <div class="column column-2-2 column-2-3 column-2-4">
+                    <h1>{{ trans('common.about') }}</h1>
+                    <div class="page-content">{!! $designer->html('content') !!}</div>
+                </div>
+                <div class="column column-2-2 column-1-3 column-2-4">
+                    <h3>{{ trans('common.tags') }}</h3>
+                    @include('components.tag-list', ['tags' => $designer->tags])
+
+                    <h3>{{ trans('common.links') }}</h3>
+                    <ul class="links list-unstyled">
+                        @if (!empty($designer->facebook))
+                            <li>
+                                <a href="{{ $designer->facebook }}">
+                                    <i class="fa fa-fw fa-2x fa-facebook-official"></i> Facebook
+                                </a>
+                            </li>
+                        @endif
+                        @if (!empty($designer->twitter))
+                            <li>
+                                <a href="{{ $designer->twitter }}">
+                                    <i class="fa fa-fw fa-2x fa-twitter"></i> Twitter
+                                </a>
+                            </li>
+                        @endif
+                        @if (!empty($designer->instagram))
+                            <li>
+                                <a href="{{ $designer->instagram }}">
+                                    <i class="fa fa-fw fa-2x fa-instagram"></i> Instagram
+                                </a>
+                            </li>
+                        @endif
+                        @if (!empty($designer->website))
+                            <li>
+                                <a href="{{ $designer->website }}">
+                                    <i class="fa fa-fw fa-2x fa-globe"></i> {{ trans('common.website') }}
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+
+                    <h3>{{ trans('common.contact') }}</h3>
+                    @if (!empty($designer->email))
+                        <p>
+                            <a href="mailto:{{ $designer->email }}">
+                                {{ $designer->email }}
+                            </a>
+                        </p>
+                    @endif
+                    @if (!empty($designer->phone))
+                        <p>
+                            <a href="tel:{{ $designer->phone }}">
+                                {{ $designer->phone }}
+                            </a>
+                        </p>
+                    @endif
+                </div>
+            </div>
         </div>
     </section>
 @endsection
