@@ -110,4 +110,14 @@ class Currencies {
             return null;
         }
     }
+
+    public static function name($currency)
+    {
+        return trans('currency.' . strtolower($currency) . '_name');
+    }
+
+    public static function unit($currency)
+    {
+        return trans('currency.' . strtolower($currency) . '_unit');
+    }
 }
