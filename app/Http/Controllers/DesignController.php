@@ -104,4 +104,27 @@ class DesignController extends Controller
             'design' => $design,
         ]);
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * Only owner and admin, editor can edit designer page.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id, Request $request)
+    {
+        $design = Design::find($id);
+
+        if (empty($design)) {
+            abort(404);
+        }
+
+        if ($request->user()->cannot('edit-design', $design)) {
+            abort(403);
+        }
+
+        return view('pages.design.edit', ['design' => $design]);
+    }
 }
