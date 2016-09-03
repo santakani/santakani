@@ -11,15 +11,15 @@ ul.tag-list {
 
         > a {
             display: block;
-            border: 1px solid $brand-info;
+            border: 1px solid $brand-primary;
             border-radius: 99px;
             line-height: 1.8em;
             padding: 0 0.5em;
             margin-bottom: 0.5em;
-            color: $brand-info;
+            color: $brand-primary;
 
             &:hover, &.active {
-                background-color: $brand-info;
+                background-color: $brand-primary;
                 color: #ffffff;
             }
         }

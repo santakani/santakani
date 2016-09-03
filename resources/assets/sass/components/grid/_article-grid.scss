@@ -18,7 +18,7 @@
     article {
         width: $grid-column-width;
         margin: $grid-column-space / 2;
-        background-color: $gray-lighter;
+        background-color: #f8f8f8;
 
         &.active {
             box-shadow: 0 0 0 4px $brand-primary;
