@@ -46,7 +46,7 @@
         <div class="grid-container">
             <h1>
                 {{ trans('designer.designs') }}
-                @if (Auth::user()->can('edit-designer', $designer))
+                @if (Auth::check() && Auth::user()->can('edit-designer', $designer))
                     <form id="design-create-form" class="pull-right" action="{{ url('design')}}" method="post">
                         {!! csrf_field() !!}
                         <input type="hidden" name="designer_id" value="{{ $designer->id }}"/>
