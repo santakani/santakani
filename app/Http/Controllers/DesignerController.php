@@ -275,14 +275,11 @@ class DesignerController extends Controller
             abort(404);
         }
 
-        if ($request->user()->cannot('edit-designer-page', $designer)) {
+        if ($request->user()->cannot('delete-designer', $designer)) {
             abort(403);
         }
 
-        if ($request->has('force_delete')) {
-            if ($request->has('with_images')) {
-                $designer->images()->forceDelete();
-            }
+        if ($request->has('force_delete') && $request->user()->can('delete-designer', $designer)) {
             $designer->forceDelete();
         } elseif ($request->has('restore')) {
             $designer->restore();

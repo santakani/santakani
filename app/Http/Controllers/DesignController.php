@@ -199,4 +199,32 @@ class DesignController extends Controller
             }
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $design = Design::find($id);
+
+        if (empty($design)) {
+            abort(404);
+        }
+
+        if ($request->user()->cannot('edit-design', $design)) {
+            abort(403);
+        }
+
+        if ($request->has('force_delete') && $request->user()->can('force-delete-design', $design)) {
+            $design->forceDelete();
+        } elseif ($request->has('restore')) {
+            $design->restore();
+        } else {
+            $design->delete();
+        }
+    }
 }

@@ -63,8 +63,12 @@ if (document.getElementById('home-page')) {
 // Design
 else if (document.getElementById('design-index-page')) {
     require('./pages/design/index');
-}else if (document.getElementById('design-edit-page')) {
+}
+else if (document.getElementById('design-edit-page')) {
     require('./pages/design/edit');
+}
+else if (document.getElementById('design-show-page')) {
+    require('./pages/design/show');
 }
 
 // Designer
