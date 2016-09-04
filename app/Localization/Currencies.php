@@ -120,4 +120,9 @@ class Currencies {
     {
         return trans('currency.' . strtolower($currency) . '_unit');
     }
+
+    public static function validator()
+    {
+        return 'string|in:' . implode(',', self::$currency_list);
+    }
 }

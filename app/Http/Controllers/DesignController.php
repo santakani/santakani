@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Design;
+use App\DesignTranslation;
+use App\Http\Requests;
+use App\Localization\Currencies;
+use App\Localization\Languages;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
-
-use App\Design;
-use App\Http\Requests;
 
 class DesignController extends Controller
 {
@@ -126,5 +128,73 @@ class DesignController extends Controller
         }
 
         return view('pages.design.edit', ['design' => $design]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * Only owner and admin, editor can edit designer page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $design = Design::find($id);
+
+        if (empty($design)) {
+            abort(404);
+        }
+
+        if ($request->user()->cannot('edit-design', $design)) {
+            abort(403);
+        }
+
+        if ($request->input('lock')) {
+            if ($design->lock()) {
+                return; // 200 OK
+            } else {
+                abort(423); // 423 Locked
+            }
+        }
+
+        $this->validate($request, [
+            'image_id' => 'integer|exists:image,id',
+            'gallery_image_ids.*' => 'integer|exists:image,id',
+            'designer_id' => 'integer|exists:designer,id',
+            'user_id' => 'integer|exists:user,id',
+            'tag_ids.*' => 'integer|exists:tag,id',
+            'price' => 'numeric|between:0.01,999999.99',
+            'currency' => 'required_with:price|' . Currencies::validator(),
+            'webshop' => 'url|max:255',
+            'translations.*.name' => 'string|max:255',
+        ]);
+
+        $design->update($request->all());
+
+        // TODO transfer designer page to another user...
+
+        if ($request->has('translations')) {
+            foreach ($request->input('translations') as $locale => $texts) {
+                if (!Languages::has($locale)) {
+                    continue;
+                }
+
+                $translation = DesignTranslation::where([
+                    ['design_id', $design->id],
+                    ['locale', $locale],
+                ])->first();
+
+                if (!count($translation)) {
+                    $translation = new DesignTranslation();
+                    $translation->design_id = $design->id;
+                    $translation->locale = $locale;
+                    $translation->save();
+                }
+
+                $translation->update($texts);
+            }
+        }
     }
 }

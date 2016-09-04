@@ -27,7 +27,7 @@ class Design extends Model
      * @var array
      */
     protected $fillable = [
-        'image_id', 'designer_id', 'tag_ids', 'gallery_image_ids', 'webshop',
+        'image_id', 'tag_ids', 'gallery_image_ids', 'webshop',
         'price', 'currency', 'taobao', 'taobao_price',
     ];
 

@@ -22,10 +22,10 @@ class CreateDesignTable extends Migration
             $table->string('webshop')->nullable();
             $table->decimal('price', 8, 2)->unsigned()->nullable();
             $table->string('currency')->nullable();
-            $table->decimal('eur_price', 6, 2)->unsigned()->nullable(); // for sort only
+            $table->decimal('eur_price', 8, 2)->unsigned()->nullable(); // for sort only
 
             $table->string('taobao')->nullable();
-            $table->decimal('taobao_price', 6, 2)->unsigned()->nullable();
+            $table->decimal('taobao_price', 8, 2)->unsigned()->nullable();
 
             $table->integer('like_count')->unsigned()->default(0);
 

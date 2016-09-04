@@ -89,7 +89,7 @@ class ImageController extends Controller
     {
         $this->validate($request, [
             'image' => 'required|image|mimes:jpeg,png,gif',
-            'parent_type' => 'string|in:city,country,designer,place,story,tag',
+            'parent_type' => 'string|in:city,country,design,designer,place,story,tag',
             'parent_id' => 'integer',
         ]);
 

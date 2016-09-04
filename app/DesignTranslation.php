@@ -18,6 +18,6 @@ class DesignTranslation extends Translation
      * @var array
      */
     protected $fillable = [
-        'design_id', 'locale', 'name', 'content',
+        'name', 'content',
     ];
 }
