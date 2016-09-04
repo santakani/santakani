@@ -121,6 +121,19 @@ class Currencies {
         return trans('currency.' . strtolower($currency) . '_unit');
     }
 
+    /**
+     * Convert price to euro
+     */
+    public static function euro($number, $currency)
+    {
+        $rate = self::rate($currency);
+        if (empty($rate)) {
+            return null;
+        } else {
+            return $number / $rate;
+        }
+    }
+
     public static function validator()
     {
         return 'string|in:' . implode(',', self::$currency_list);

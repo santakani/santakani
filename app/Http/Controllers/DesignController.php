@@ -171,7 +171,9 @@ class DesignController extends Controller
             'translations.*.name' => 'string|max:255',
         ]);
 
-        $design->update($request->all());
+        $design->fill($request->all());
+        $design->updateEuroPrice();
+        $design->save();
 
         // TODO transfer designer page to another user...
 
@@ -190,10 +192,10 @@ class DesignController extends Controller
                     $translation = new DesignTranslation();
                     $translation->design_id = $design->id;
                     $translation->locale = $locale;
-                    $translation->save();
                 }
 
-                $translation->update($texts);
+                $translation->fill($texts);
+                $translation->save();
             }
         }
     }

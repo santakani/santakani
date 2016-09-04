@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Localization\Currencies;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -86,5 +87,16 @@ class Design extends Model
     public function getUrlAttribute()
     {
         return url('design/' . $this->id);
+    }
+
+    //====================================================================
+    // Others
+    //====================================================================
+
+    public function updateEuroPrice()
+    {
+        if (!empty($this->price) && !empty($this->currency)) {
+            $this->eur_price = Currencies::euro($this->price, $this->currency);
+        }
     }
 }
