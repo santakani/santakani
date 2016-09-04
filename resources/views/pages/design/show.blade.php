@@ -12,65 +12,69 @@
 ])
 
 @section('header')
-    <div class="page-cover"
-        @if ($design->image_id)
-            style="background-image:url({{ $design->image->large_file_url }})"
-        @endif
-        >
-
-        <div class="raster raster-dark-dot"></div>
-
-        <div class="buttons">
-            @include('components.buttons.like', ['likeable' => $design])
+    <div id="gallery-wrap" class="gallery-wrap">
+        <ul id="gallery" class="gallery">
+            @foreach ($design->gallery_images as $image)
+                <li data-thumb="{{ $image->fileUrl('largethumb') }}"
+                    data-src="{{ $image->fileUrl('large') }}">
+                    <img src="{{ $image->fileUrl('largethumb') }}" width="600" height="600"/>
+                </li>
+            @endforeach
+        </ul>
+    </div><!-- /#gallery-wrap -->
+    <div class="info">
+        <h1 class="name">
+            {{ $design->text('name') }}
             @if (Auth::check())
-                @if (Auth::user()->can('edit-design', $design))
-                    @include('components.buttons.edit')
-                @endif
-                @if (Auth::user()->can('delete-design', $design))
-                    @include('components.buttons.delete')
-                @endif
+                <div class="pull-right">
+                    @if (Auth::user()->can('edit-design', $design))
+                        @include('components.buttons.edit')
+                    @endif
+                    @if (Auth::user()->can('delete-design', $design))
+                        @include('components.buttons.delete')
+                    @endif
+                </div>
             @endif
-        </div><!-- /.buttons -->
-
-        @if ($design->logo_id)
-            <img class="logo" src="{{ $design->logo->small_file_url }}"/>
+        </h1>
+        @if ($design->price && $design->currency)
+            <h2 class="price">
+                {{ $design->price }}
+                <small title="{{ App\Localization\Currencies::name($design->currency) }}">{{ $design->currency }}</small>
+            </h2>
+            @if ($design->currency !== 'EUR')
+                <p class="text-muted">~ {{ $design->eur_price }} EUR</p>
+            @endif
         @endif
-        <h1 class="name">{{ $design->text('name') }}</h1>
-        @include('components.tag-list', ['tags' => $design->tags])
 
-    </div><!-- /.page-cover -->
+        <p class="buttons">
+            <a class="btn btn-lg btn-default" href="{{ $design->webshop }}" target="_blank"><i class="fa fa-lg fa-shopping-basket"></i> {{ trans('common.buy') }}</a>
+            @include('components.buttons.like', ['class' => 'btn-lg','likeable' => $design])
+        </p><!-- /.buttons -->
+
+        <p>{{ trans('common.tags') }}</p>
+        <p>@include('components.tag-list', ['tags' => $design->tags])</p>
+
+        <p>{{ trans('designer.designer') }}</p>
+        <p>
+            <a href="{{ $design->designer->url }}">
+                {{ $design->designer->text('name') }} ({{ $design->designer->city->full_name }})
+            </a>
+        </p>
+    </div><!-- /.info -->
 @endsection
 
 @section('main')
-    <div class="container">
-        <div role="tabpanel" class="tab-pane active" id="gallery">
-            <div class="gallery gallery-grid">
-                @foreach ($design->gallery_images as $image)
-                        <a href="{{ $image->fileUrl('large') }}">
-                            <img src="{{ $image->fileUrl('thumb') }}" />
-                        </a>
-                @endforeach
-            </div>
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="biography">
-            {!! $design->html('content') !!}
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="followers">
-            <div class="row">
-                @foreach ($design->likes as $like)
-                    <div class="col-sm-6 col-lg-4">
-                        <article class="user material-card">
-                            <img class="avatar" src="{{ $like->user->avatar(150) }}"/>
-                            <div class="text">
-                                <div class="name">{{ $like->user->name }}</div>
-                                <div class="description text-muted">{{ $like->user->description }}</div>
-                            </div>
-                        </article>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div><!-- /.container -->
+    <div id="content" class="page-content">
+        {!! $design->html('content') !!}
+    </div><!-- /#content.page-content -->
+    <div id="sidebar" class="sidebar">
+        <h3>{{ trans('designer.designer') }}</h3>
+        <p>
+            <img class="img-responsive" src="{{ $design->designer->image->fileUrl('largethumb') }}" width="600" height="600"/>
+        </p>
+        <p><strong><a href="{{ $design->designer->url }}">{{ $design->designer->text('name') }}</a></strong></p>
+        <p><em>{{ $design->designer->city->full_name }}</em></p>
+        <blockquote>{{ $design->designer->text('tagline') }}</blockquote>
+        <p>{{ $design->designer->excerpt('content') }} <a href="{{ $design->designer->url }}">{{ strtolower(trans('common.more')) }}</a></p>
+    </div>
 @endsection

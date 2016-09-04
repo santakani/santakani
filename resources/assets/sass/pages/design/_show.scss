@@ -1,0 +1,43 @@
+#design-show-page {
+
+    header {
+        max-width: 1000px;
+        margin: 30px auto;
+
+        .gallery-wrap {
+            flex: 0 1 520px;
+            padding: 0 10px;
+            overflow: hidden;
+        }
+
+        .info {
+            flex: 1 1 400px;
+            padding: 0 10px;
+        }
+
+        @media (min-width: 700px) {
+            display: flex;
+        }
+    }
+
+    main {
+        max-width: 1000px;
+        margin: 30px auto;
+
+        .page-content {
+            flex: 0 1 620px;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .sidebar {
+            flex: 1 1 400px;
+            padding: 0 10px;
+        }
+
+        @media (min-width: 700px) {
+            display: flex;
+        }
+    }
+
+}

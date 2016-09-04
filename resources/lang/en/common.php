@@ -10,6 +10,7 @@ return array(
     'author' => 'Author',
     'avatar' => 'Avatar',
     'basic' => 'Basic',
+    'buy' => 'Buy',
     'cancel' => 'Cancel',
     'close' => 'Close',
     'community' => 'Community',
