@@ -70,7 +70,6 @@
 
             <div class="form-group">
                 <label>{{ trans('common.gallery') }}</label>
-                <p class="text-muted">{{ trans('designer.design_gallery_tips') }}</p>
                 @include('components.upload.gallery-editor', [
                     'id' => 'gallery-editor',
                     'images' => $design->gallery_images,
@@ -97,7 +96,7 @@
 
             <div class="form-group">
                 <label>{{ trans('design.webshop_link') }}</label>
-                <input name="website" value="{{ $design->webshop }}" type="url"
+                <input name="webshop" value="{{ $design->webshop }}" type="url"
                     maxlength="255" class="form-control">
             </div>
 

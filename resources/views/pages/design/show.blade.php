@@ -14,12 +14,17 @@
 @section('header')
     <div id="gallery-wrap" class="gallery-wrap">
         <ul id="gallery" class="gallery">
-            @foreach ($design->gallery_images as $image)
+            @forelse ($design->gallery_images as $image)
                 <li data-thumb="{{ $image->fileUrl('largethumb') }}"
                     data-src="{{ $image->fileUrl('large') }}">
                     <img src="{{ $image->fileUrl('largethumb') }}" width="600" height="600"/>
                 </li>
-            @endforeach
+            @empty
+                <li data-thumb="{{ url('img/placeholder/square.png') }}"
+                    data-src="{{ url('img/placeholder/square.png') }}">
+                    <img src="{{ url('img/placeholder/square.png') }}" width="600" height="600"/>
+                </li>
+            @endforelse
         </ul>
     </div><!-- /#gallery-wrap -->
     <div class="info">
@@ -47,7 +52,7 @@
         @endif
 
         <p class="buttons">
-            <a class="btn btn-lg btn-default" href="{{ $design->webshop }}" target="_blank"><i class="fa fa-lg fa-shopping-basket"></i> {{ trans('common.buy') }}</a>
+            <a class="btn btn-lg btn-default {{ empty($design->webshop)?'disabled':'' }}" href="{{ $design->webshop }}" target="_blank"><i class="fa fa-lg fa-shopping-basket"></i> {{ trans('common.buy') }}</a>
             @include('components.buttons.like', ['class' => 'btn-lg','likeable' => $design])
         </p><!-- /.buttons -->
 
