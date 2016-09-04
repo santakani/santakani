@@ -13,7 +13,7 @@
 
 @section('main')
     <div class="container">
-        <form id="edit-form" class="edit-form form" action="{{ $design->url }}" data-id="{{ $design->id }}">
+        <form id="edit-form" class="edit-form" action="{{ $design->url }}" data-id="{{ $design->id }}" data-type="design">
 
             {!! csrf_field() !!}
 
