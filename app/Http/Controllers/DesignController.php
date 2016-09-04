@@ -85,6 +85,12 @@ class DesignController extends Controller
         $design->user_id = $request->user()->id;
         $design->save();
 
+        $translation = new DesignTranslation();
+        $translation->design_id = $design->id;
+        $translation->locale = 'en';
+        $translation->name = 'New design';
+        $translation->save();
+
         return redirect()->action('DesignController@edit', [$design]);
     }
 
