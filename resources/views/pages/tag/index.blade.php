@@ -38,7 +38,7 @@
                         @if ($tag->image_id)
                             <img class="cover-image" src="{{ $tag->image->fileUrl('thumb') }}" width="300" height="300" />
                         @else
-                            <img class="cover-image" src="/img/placeholder/blank/300x300.svg" width="300" height="300" />
+                            <img class="cover-image" src="/img/placeholder/square.png" width="300" height="300" />
                         @endif
                         <div class="text">
                             <h3>{{ $tag->text('name') }}</h3>

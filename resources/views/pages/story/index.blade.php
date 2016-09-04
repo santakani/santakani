@@ -30,9 +30,8 @@
                             @if ($story->image_id)
                                 <img class="image" src="{{ $story->image->thumb_file_url }}"
                                     srcset="{{ $story->image->largethumb_file_url }} 2x"/>
-                            @endif
-                            @if ($story->logo_id)
-                                <img class="logo" src="{{ $story->logo->small_file_url or '' }}"/>
+                            @else
+                                <img class="image" src="{{ url('img/placeholder/square.png') }}"/>
                             @endif
                         </div>
                         <div class="text">

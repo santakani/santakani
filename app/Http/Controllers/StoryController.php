@@ -57,8 +57,7 @@ class StoryController extends Controller
         // Must have translation of current locale or English
         if (!$request->has('search')) {
             $query->whereHas('translations', function ($sub_query) {
-                $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title')
-                    ->whereNotNull('content');
+                $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title');
             });
         }
 

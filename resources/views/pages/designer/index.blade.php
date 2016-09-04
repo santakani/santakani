@@ -30,6 +30,8 @@
                             @if ($designer->image_id)
                                 <img class="image" src="{{ $designer->image->thumb_file_url }}"
                                     srcset="{{ $designer->image->largethumb_file_url }} 2x"/>
+                            @else
+                                <img class="image" src="{{ url('img/placeholder/square.png') }}"/>
                             @endif
                             @if ($designer->logo_id)
                                 <img class="logo" src="{{ $designer->logo->small_file_url }}"/>

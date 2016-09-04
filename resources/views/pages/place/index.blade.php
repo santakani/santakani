@@ -44,6 +44,8 @@
                                 @if ($place->image_id)
                                     <img class="image" src="{{ $place->image->thumb_file_url }}"
                                         srcset="{{ $place->image->largethumb_file_url }} 2x"/>
+                                @else
+                                    <img class="image" src="{{ url('img/placeholder/square.png') }}"/>
                                 @endif
                                 @if ($place->logo_id)
                                     <img class="logo" src="{{ $place->logo->small_file_url }}"/>
