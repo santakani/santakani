@@ -29,7 +29,6 @@
     </div><!-- /#gallery-wrap -->
     <div class="info">
         <h1 class="name">
-            {{ $design->text('name') }}
             @if (Auth::check())
                 <div class="pull-right">
                     @if (Auth::user()->can('edit-design', $design))
@@ -40,6 +39,7 @@
                     @endif
                 </div>
             @endif
+            {{ $design->text('name') }}
         </h1>
         @if ($design->price && $design->currency)
             <h2 class="price">
@@ -47,7 +47,7 @@
                 <small title="{{ App\Localization\Currencies::name($design->currency) }}">{{ $design->currency }}</small>
             </h2>
             @if ($design->currency !== 'EUR')
-                <p class="text-muted">~ {{ $design->eur_price }} EUR</p>
+                <p class="text-muted">~ {{ $design->eur_price }} <span title="{{ trans('currency.eur_name') }}">EUR</span></p>
             @endif
         @endif
 
