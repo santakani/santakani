@@ -10,6 +10,7 @@ return array(
     'author' => '作者',
     'avatar' => '头像',
     'basic' => '基本',
+    'buy' => '购买',
     'cancel' => '取消',
     'close' => '关闭',
     'community' => '社群',

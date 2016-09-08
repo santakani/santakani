@@ -21,8 +21,18 @@ file_filter = resources/lang/<lang>/common.php
 source_lang = en
 type = PHP_ARRAY
 
+[santakani.currency]
+file_filter = resources/lang/<lang>/currency.php
+source_lang = en
+type = PHP_ARRAY
+
 [santakani.designer]
 file_filter = resources/lang/<lang>/designer.php
+source_lang = en
+type = PHP_ARRAY
+
+[santakani.design]
+file_filter = resources/lang/<lang>/design.php
 source_lang = en
 type = PHP_ARRAY
 

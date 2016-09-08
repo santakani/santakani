@@ -10,6 +10,7 @@ return array(
     'author' => 'Kirjailija',
     'avatar' => 'Avatar',
     'basic' => 'Perustiedot',
+    'buy' => 'Buy',
     'cancel' => 'Peruuttaa',
     'close' => 'Sulkea',
     'community' => 'Yhteisö',

@@ -10,6 +10,7 @@ return array(
     'author' => 'Auktor',
     'avatar' => 'Avatar',
     'basic' => 'Grundläggande',
+    'buy' => 'Buy',
     'cancel' => 'Avbryt',
     'close' => 'Stänga',
     'community' => 'Gemenskap',
