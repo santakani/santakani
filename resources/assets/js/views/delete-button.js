@@ -17,7 +17,8 @@ module.exports = Backbone.View.extend({
         _.extend(this, _.pick(options, 'url', 'redirect'));
     },
 
-    delete: function () {
+    delete: function (e) {
+        e.preventDefault();
         var that = this;
         swal({
             title: "Confirm Delete",

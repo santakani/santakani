@@ -29,16 +29,26 @@
     </div><!-- /#gallery-wrap -->
     <div class="info">
         <h1 class="name">
-            @if (Auth::check())
-                <div class="pull-right">
-                    @if (Auth::user()->can('edit-design', $design))
-                        @include('components.buttons.edit')
-                    @endif
-                    @if (Auth::user()->can('delete-design', $design))
-                        @include('components.buttons.delete')
-                    @endif
-                </div>
-            @endif
+            <div class="btn-group pull-right">
+                @if (Auth::check() && Auth::user()->can('edit-design', $design))
+                    <a id="edit-button" class="btn btn-default" href="{{ url()->current() . '/edit' }}">
+                        <i class="fa fa-pencil"></i> {{ trans('common.edit') }}
+                    </a>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a id="transfer-button" href="#"><i class="fa fa-fw fa-exchange"></i> {{ trans('common.transfer') }}</a></li>
+                        @if (Auth::user()->can('delete-design', $design))
+                            <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
+                        @endif
+                    </ul>
+                @else
+                    <a id="report-button" class="btn btn-default" href="mailto:support@santakani.com?subject=[Report Design Page] {{ $design->text('name') }}&body=URL {{ $design->url }}">
+                        <i class="fa fa-flag"></i> {{ trans('common.report') }}
+                    </a>
+                @endif
+            </div>
             {{ $design->text('name') }}
         </h1>
         @if ($design->price && $design->currency)
