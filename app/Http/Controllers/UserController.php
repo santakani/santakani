@@ -24,10 +24,27 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('pages.user.index', ['users' => $users]);
+        $this->validate($request, [
+            'search' => 'string|max:20',
+        ]);
+
+        $query = User::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', $search . '%')
+                ->orWhere('email', 'like', $search . '%');
+        }
+
+        $users = $query->paginate(15);
+
+        if ($request->wantsJSON()) {
+            return response()->json($users->toArray(), 200);
+        } else {
+            return view('pages.user.index', ['users' => $users]);
+        }
     }
 
     /**

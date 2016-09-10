@@ -86,6 +86,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
         });
 
+        $gate->define('transfer-design', function ($user, $design) {
+            return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
+        });
+
         $gate->define('delete-design', function ($user, $design) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
         });

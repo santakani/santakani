@@ -38,7 +38,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a id="transfer-button" href="#"><i class="fa fa-fw fa-exchange"></i> {{ trans('common.transfer') }}</a></li>
+                        <li><a id="transfer-button" href="#" data-toggle="modal" data-target="#transfer-modal"><i class="fa fa-fw fa-exchange"></i> {{ trans('common.transfer') }}</a></li>
                         @if (Auth::user()->can('delete-design', $design))
                             <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
                         @endif
@@ -93,3 +93,9 @@
         <p>{{ $design->designer->excerpt('content') }} <a href="{{ $design->designer->url }}">{{ strtolower(trans('common.more')) }}</a></p>
     </div>
 @endsection
+
+@if (Auth::check() && Auth::user()->can('edit-design', $design))
+    @push('modals')
+        @include('components.modals.transfer-modal', ['user' => $design->user])
+    @endpush
+@endif

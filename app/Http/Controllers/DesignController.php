@@ -179,6 +179,13 @@ class DesignController extends Controller
 
         $design->fill($request->all());
         $design->updateEuroPrice();
+
+        if ($request->user()->can('transfer-design', $design)) {
+            $design->user_id = $request->input('user_id');
+        } else {
+            abort(403);
+        }
+
         $design->save();
 
         // TODO transfer designer page to another user...

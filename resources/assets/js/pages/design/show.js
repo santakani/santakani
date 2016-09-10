@@ -1,5 +1,6 @@
 var LikeButton = require('../../views/like-button');
 var DeleteButton = require('../../views/delete-button');
+var TransferModal = require('../../views/modals/transfer-modal');
 
 new LikeButton();
 new DeleteButton();
@@ -18,3 +19,5 @@ $('#gallery').lightSlider({
         });
     }
 });
+
+new TransferModal();
