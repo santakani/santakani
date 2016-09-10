@@ -11,15 +11,11 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use DB;
-use Gate;
-use Illuminate\Http\Request;
-use Imagick;
-
 use App\Http\Requests;
 use App\Designer;
 use App\Image;
+use Illuminate\Http\Request;
+use Imagick;
 
 /**
  * ImageController
@@ -60,7 +56,7 @@ class ImageController extends Controller
         ]);
 
         if ($request->has('my')) {
-            $images = Image::where('user_id', Auth::user()->id)->get();
+            $images = Image::where('user_id', $request->user()->id)->get();
         } elseif ($request->has('user')) {
             $images = Image::where('user_id', $request->input('user'))->get();
         } elseif ($request->has('parent_type') && $request->has('parent_id')) {
@@ -114,7 +110,7 @@ class ImageController extends Controller
             $image->parent_type = $request->input('parent_type');
             $image->parent_id = $request->input('parent_id');
 
-            if (!Gate::allows('edit-page', $image->parent)) {
+            if ($request->user()->cannot('edit-'.$image->parent_type, $image->parent)) {
                 $image->parent_type = null;
                 $image->parent_id = null;
             }
@@ -153,14 +149,12 @@ class ImageController extends Controller
     {
         $image = Image::find($id);
 
-        $parent = $image->parent;
-
         if (empty($image)) {
             abort(404);
         }
 
-        if (Gate::allows('edit-page', $image)) {
-            if ($request->has('force_delete')) {
+        if ($request->user()->can('delete-image', $image)) {
+            if ($request->has('force_delete') && $request->user()->can('force-delete-image', $image)) {
                 $image->deleteDirectory();
                 $image->forceDelete();
             } elseif ($request->has('restore')) {
@@ -168,7 +162,7 @@ class ImageController extends Controller
             } else {
                 $image->delete();
             }
-        } elseif (Gate::allows('edit-page', $parent)) {
+        } elseif ($request->user()->can('edit-'.$image->parent_type, $image->parent)) {
             $image->parent_type = null;
             $image->parent_id = null;
             $image->save();

@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use Gate;
-
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Localization\Languages;
 use App\Tag;
 use App\TagTranslation;
+use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -123,10 +119,11 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $tag = Tag::find($id);
 
@@ -134,7 +131,7 @@ class TagController extends Controller
             abort(404);
         }
 
-        if (Gate::denies('edit-page', $tag)) {
+        if ($request->user()->cannot('edit-tag', $tag)) {
             abort(403);
         }
 
@@ -160,7 +157,7 @@ class TagController extends Controller
             abort(404);
         }
 
-        if (Gate::denies('edit-page', $tag)) {
+        if ($request->user()->cannot('edit-tag', $tag)) {
             abort(403);
         }
 
@@ -213,7 +210,7 @@ class TagController extends Controller
             abort(404);
         }
 
-        if (Gate::denies('edit-page', $tag)) {
+        if ($request->user()->cannot('delete-tag', $tag)) {
             abort(403);
         }
 

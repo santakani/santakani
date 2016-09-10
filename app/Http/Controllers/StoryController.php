@@ -12,14 +12,10 @@
 namespace App\Http\Controllers;
 
 use App;
-use Gate;
-
-use Illuminate\Http\Request;
-
 use App\Localization\Languages;
-
 use App\Story;
 use App\StoryTranslation;
+use Illuminate\Http\Request;
 
 /**
  * StoryController
@@ -142,19 +138,17 @@ class StoryController extends Controller
 
         $story->load('translations');
 
-        return view('pages.story.show', [
-            'story' => $story,
-            'can_edit' => Gate::allows('edit-page', $story),
-        ]);
+        return view('pages.story.show', ['story' => $story]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $story = Story::find($id);
 
@@ -162,7 +156,7 @@ class StoryController extends Controller
             abort(404);
         }
 
-        if (Gate::denies('edit-page', $story)) {
+        if ($request->user()->cannot('edit-story', $story)) {
             abort(403);
         }
 
@@ -244,7 +238,7 @@ class StoryController extends Controller
             abort(404);
         }
 
-        if (Gate::denies('edit-page', $story)) {
+        if ($request->user()->cannot('delete-story', $story)) {
             abort(403);
         }
 

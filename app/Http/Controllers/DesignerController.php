@@ -11,8 +11,6 @@
 
 namespace App\Http\Controllers;
 
-use Gate;
-
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 
@@ -169,12 +167,11 @@ class DesignerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * Only owner and admin, editor can edit designer page.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $designer = Designer::find($id);
 
@@ -183,7 +180,7 @@ class DesignerController extends Controller
         }
 
         // Check permission
-        if (Gate::denies('edit-page', $designer)) {
+        if ($request->user()->cannot('edit-designer', $designer)) {
             abort(403);
         }
 

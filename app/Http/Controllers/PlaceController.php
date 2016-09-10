@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Gate;
-
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -138,10 +136,7 @@ class PlaceController extends Controller
 
         $place->load('translations');
 
-        return view('pages.place.show', [
-            'place' => $place,
-            'can_edit' => Gate::allows('edit-page', $place),
-        ]);
+        return view('pages.place.show', ['place' => $place]);
     }
 
     /**
@@ -250,11 +245,11 @@ class PlaceController extends Controller
             abort(404);
         }
 
-        if (Gate::denies('edit-page', $place)) {
+        if ($request->user()->cannot('delete-place', $place)) {
             abort(403);
         }
 
-        if ($request->has('force_delete')) {
+        if ($request->has('force_delete') && $request->user()->can('force-delete-place', $place)) {
             if ($request->has('with_images')) {
                 $place->images()->forceDelete();
             }
