@@ -39,12 +39,7 @@ class AuthServiceProvider extends ServiceProvider
          * 3. Always use whitelist logic.
          */
 
-        // Legacy
-        $gate->define('edit-page', function ($user, $page) {
-            return $user->role === 'admin' || $user->role === 'editor' || $user->id === $page->user_id;
-        });
-
-
+        // User
 
         $gate->define('set-user-role', function ($user, $target_user) {
             // Admin cannot set roles of other admins
@@ -67,8 +62,13 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // Designer page
 
         $gate->define('edit-designer', function ($user, $designer) {
+            return $user->role === 'admin' || $user->role === 'editor' || $user->id === $designer->user_id;
+        });
+
+        $gate->define('transfer-designer', function ($user, $designer) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $designer->user_id;
         });
 
@@ -81,6 +81,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // Design page
 
         $gate->define('edit-design', function ($user, $design) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
@@ -99,8 +100,13 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // Place page
 
         $gate->define('edit-place', function ($user, $place) {
+            return $user->role === 'admin' || $user->role === 'editor' || $user->id === $place->user_id;
+        });
+
+        $gate->define('transfer-place', function ($user, $place) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $place->user_id;
         });
 
@@ -113,8 +119,13 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // Story page
 
         $gate->define('edit-story', function ($user, $story) {
+            return $user->role === 'admin' || $user->role === 'editor' || $user->id === $story->user_id;
+        });
+
+        $gate->define('transfer-story', function ($user, $story) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $story->user_id;
         });
 
@@ -127,6 +138,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // Image
 
         $gate->define('delete-image', function ($user, $image) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $image->user_id;
@@ -137,6 +149,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // City page
 
         $gate->define('create-city', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
@@ -155,6 +168,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // Country page
 
         $gate->define('create-country', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
@@ -173,6 +187,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // Tag page
 
         $gate->define('create-tag', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
