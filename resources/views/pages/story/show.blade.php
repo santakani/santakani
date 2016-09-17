@@ -22,13 +22,20 @@
 
         <div class="buttons">
             @include('components.buttons.like', ['likeable' => $story])
-            @if (Auth::check())
-                @if (Auth::user()->can('edit-story', $story))
-                    @include('components.buttons.edit')
-                @endif
-                @if (Auth::user()->can('delete-story', $story))
-                    @include('components.buttons.delete')
-                @endif
+            @if (Auth::check() && Auth::user()->can('edit-story', $story))
+                <div class="btn-group">
+                    <a id="edit-button" class="btn btn-default" href="{{ url()->current() . '/edit' }}">
+                        <i class="fa fa-lg fa-pencil"></i> {{ trans('common.edit') }}
+                    </a>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-lg fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        @if (Auth::user()->can('delete-story', $story))
+                            <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
+                        @endif
+                    </ul>
+                </div><!--/.btn-group -->
             @endif
         </div>
 

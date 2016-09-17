@@ -24,16 +24,24 @@
                 <div class="text">
                     <h1>
                         {{ $tag->text('name') }}
-                        @include('components.buttons.like', ['likeable' => $tag])
-                        @if (Auth::check())
-                            @if (Auth::user()->can('edit-tag'))
-                                @include('components.buttons.edit')
-                            @endif
-                            @if (Auth::user()->can('delete-tag'))
-                                @include('components.buttons.delete')
-                            @endif
+
+                        @if (Auth::check() && Auth::user()->can('edit-tag', $tag))
+                            <div class="btn-group pull-right">
+                                <a id="edit-button" class="btn btn-default" href="{{ url()->current() . '/edit' }}">
+                                    <i class="fa fa-pencil"></i> {{ trans('common.edit') }}
+                                </a>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    @if (Auth::user()->can('delete-tag', $tag))
+                                        <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
+                                    @endif
+                                </ul>
+                            </div><!--/.btn-group -->
                         @endif
                     </h1>
+                    <p>@include('components.buttons.like', ['likeable' => $tag])</p>
                     <br>
                     <p>{{ $tag->text('description') }}</p>
                 </div><!-- .text -->
