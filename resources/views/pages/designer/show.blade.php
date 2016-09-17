@@ -114,7 +114,7 @@
                     @include('components.tag-list', ['tags' => $designer->tags])
 
                     <h3>{{ trans('common.links') }}</h3>
-                    <ul class="links list-unstyled">
+                    <ul class="link-list">
                         @if (!empty($designer->facebook))
                             <li>
                                 <a href="{{ $designer->facebook }}">

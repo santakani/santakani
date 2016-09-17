@@ -1,0 +1,8 @@
+.link-list {
+    @extend .list-unstyled;
+    line-height: 3em;
+
+    .fa {
+        vertical-align: middle;
+    }
+}

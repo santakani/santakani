@@ -51,39 +51,6 @@
         <h1 class="name">{{ $place->text('name') }}</h1>
         <p class="address">{{ $place->full_address }}</p>
 
-        <div class="links">
-            @if (!empty($place->facebook))
-                <a href="{{ $place->facebook }}" title="Facebook">
-                    <i class="fa fa-facebook-official"></i>
-                </a>
-            @endif
-            @if (!empty($place->twitter))
-                <a href="{{ $place->twitter }}" title="Twitter">
-                    <i class="fa fa-twitter"></i>
-                </a>
-            @endif
-            @if (!empty($place->google_plus))
-                <a href="{{ $place->google_plus }}" title="Google+">
-                    <i class="fa fa-google-plus"></i>
-                </a>
-            @endif
-            @if (!empty($place->instagram))
-                <a href="{{ $place->instagram }}" title="Instagram">
-                    <i class="fa fa-instagram"></i>
-                </a>
-            @endif
-            @if (!empty($place->email))
-                <a href="mailto:{{ $place->email }}" title="{{ trans('common.email') }}">
-                    <i class="fa fa-envelope-o"></i>
-                </a>
-            @endif
-            @if (!empty($place->email))
-                <a href="{{ $place->website }}" title="{{ trans('common.website') }}">
-                    <i class="fa fa-globe"></i>
-                </a>
-            @endif
-        </div>
-
         @include('components.tag-list', ['tags' => $place->tags])
 
     </div><!-- /.page-cover -->
@@ -109,6 +76,8 @@
         </div>
         <div class="col-sm-6 col-md-4">
 
+            <h3>{{ trans('geo.location') }}</h3>
+
             <ul class="list-inline">
                 <li><a href="{{ $place->google_map_url }}" target="_blank">
                     {{ trans('geo.google_map') }} <i class="fa fa-external-link"></i>
@@ -128,10 +97,55 @@
 
             <br>
 
-            <ul class="list-unstyled">
-                <li><i class="fa fa-fw fa-phone"></i> {{ $place->phone or '-' }}</li>
-                <li><i class="fa fa-fw fa-envelope-o"></i> {{ $place->email or '-' }}</li>
+            <h3>{{ trans('common.links') }}</h3>
+
+            <ul class="link-list">
+                @if (!empty($place->facebook))
+                    <li>
+                        <a href="{{ $place->facebook }}">
+                            <i class="fa fa-fw fa-2x fa-facebook-official"></i> Facebook
+                        </a>
+                    </li>
+                @endif
+                @if (!empty($place->twitter))
+                    <li>
+                        <a href="{{ $place->twitter }}">
+                            <i class="fa fa-fw fa-2x fa-twitter"></i> Twitter
+                        </a>
+                    </li>
+                @endif
+                @if (!empty($place->instagram))
+                    <li>
+                        <a href="{{ $place->instagram }}">
+                            <i class="fa fa-fw fa-2x fa-instagram"></i> Instagram
+                        </a>
+                    </li>
+                @endif
+                @if (!empty($place->website))
+                    <li>
+                        <a href="{{ $place->website }}">
+                            <i class="fa fa-fw fa-2x fa-globe"></i> {{ trans('common.website') }}
+                        </a>
+                    </li>
+                @endif
             </ul>
+
+            <h3>{{ trans('common.contact') }}</h3>
+
+            @if (!empty($place->email))
+                <p>
+                    <a href="mailto:{{ $place->email }}">
+                        {{ $place->email }}
+                    </a>
+                </p>
+            @endif
+            @if (!empty($place->phone))
+                <p>
+                    <a href="tel:{{ $place->phone }}">
+                        {{ $place->phone }}
+                    </a>
+                </p>
+            @endif
         </div>
     </div>
 </div>

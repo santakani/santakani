@@ -62,8 +62,7 @@ class Place extends Model
      */
     protected $fillable = [
         'type', 'city_id', 'image_id', 'address', 'latitude', 'longitude',
-        'email', 'phone', 'website', 'facebook', 'google_plus', 'tag_ids',
-        'gallery_image_ids',
+        'email', 'phone', 'website', 'facebook', 'tag_ids', 'gallery_image_ids',
     ];
 
     //====================================================================

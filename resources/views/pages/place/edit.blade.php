@@ -129,12 +129,6 @@
                     maxlength="255" class="form-control" id="input-facebook">
             </div>
 
-            <div class="form-group">
-                <label class="control-label">Google+</label>
-                <input name="google_plus" value="{{ $place->google_plus }}" type="url"
-                    maxlength="255" class="form-control" id="input-google-plus">
-            </div>
-
             <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>
 
             <a class="btn btn-link" href="{{ url('place/'.$place->id) }}">{{ trans('common.cancel') }}</a>

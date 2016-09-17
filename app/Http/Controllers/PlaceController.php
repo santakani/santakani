@@ -202,7 +202,6 @@ class PlaceController extends Controller
             'phone' => 'string|max:255',
             'website' => 'url|max:255',
             'facebook' => 'url|max:255',
-            'google_plus' => 'url|max:255',
             'translations.*.name' => 'string|max:255',
             'translations.*.content' => 'string',
         ]);
