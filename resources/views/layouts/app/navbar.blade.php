@@ -54,14 +54,18 @@ $nav_menu_right = [
         <li class="space"></li>
         @include('components.dropdown.languages')
         @if (Auth::guest())
-            @foreach ($nav_menu_right as $key => $value)
-                <li class="{{ $active_nav === $key?'active':'' }}">
-                    <a href="{{ $value['url'] }}">
-                        <span class="stroke-icon icon-{{ $key }}"></span>
-                        <span class="text hidden-xs">{{ $value['text'] }}</span>
-                    </a>
-                </li>
-            @endforeach
+            <li>
+                <a href="{{ app_redirect_url('login') }}">
+                    <span class="stroke-icon icon-login"></span>
+                    <span class="text hidden-xs">{{ trans('common.login') }}</span>
+                </a>
+            </li>
+            <li class="hidden-xs">
+                <a href="{{ app_redirect_url('register') }}">
+                    <span class="stroke-icon icon-register"></span>
+                    <span class="text hidden-xs">{{ trans('common.register') }}</span>
+                </a>
+            </li>
         @else
             <li class="dropdown hidden-xs">
                 <a href="#" class="create dropdown-toggle" data-toggle="dropdown">

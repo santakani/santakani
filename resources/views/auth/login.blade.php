@@ -71,6 +71,7 @@
         </button>
 
         <a class="btn btn-link" href="{{ url('/password/reset') }}">{{ trans('auth.forgot_your_password') }}</a>
+        <a class="btn btn-link" href="{{ url('register') }}"><em>{{ trans('common.register') }}</em> <i class="fa fa-long-arrow-right"></i></a>
     </div>
 </form>
 @endsection
