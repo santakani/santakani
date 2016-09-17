@@ -132,12 +132,6 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Google+</label>
-                <input name="google_plus" value="{{ $designer->google_plus }}" type="url"
-                    maxlength="255" class="form-control">
-            </div>
-
-            <div class="form-group">
                 <label class="control-label">Instagram</label>
                 <input name="instagram" value="{{ $designer->instagram }}" type="url"
                     maxlength="255" class="form-control">

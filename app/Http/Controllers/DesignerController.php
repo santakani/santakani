@@ -227,7 +227,6 @@ class DesignerController extends Controller
             'website' => 'url|max:255',
             'facebook' => 'url|max:255',
             'twitter' => 'url|max:255',
-            'google_plus' => 'url|max:255',
             'instagram' => 'url|max:255',
             'translations.*.name' => 'string|max:255',
             'translations.*.tagline' => 'string|max:255',
