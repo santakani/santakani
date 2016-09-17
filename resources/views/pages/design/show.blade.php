@@ -43,10 +43,6 @@
                             <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
                         @endif
                     </ul>
-                @else
-                    <a id="report-button" class="btn btn-default" href="mailto:support@santakani.com?subject=[Report Design Page] {{ $design->text('name') }}&body=URL {{ $design->url }}">
-                        <i class="fa fa-flag"></i> {{ trans('common.report') }}
-                    </a>
                 @endif
             </div>
             {{ $design->text('name') }}

@@ -234,12 +234,17 @@ class DesignerController extends Controller
             'translations.*.content' => 'string',
         ]);
 
-        $designer->update(app_array_filter($request->all(), [
-            'image_id', 'logo_id', 'gallery_image_ids', 'city_id', 'tag_ids',
-            'email', 'website', 'facebook', 'twitter', 'google_plus', 'instagram'
-        ]));
+        if ($request->has('user_id')) {
+            if ($request->user()->can('transfer-designer', $designer)) {
+                $designer->user_id = $request->input('user_id');
+            } else {
+                abort(403);
+            }
+        }
 
-        // TODO transfer designer page to another user...
+        $designer->fill($request->all());
+
+        $designer->save();
 
         if ($request->has('translations')) {
             foreach ($request->input('translations') as $locale => $texts) {

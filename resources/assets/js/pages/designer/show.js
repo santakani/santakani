@@ -1,5 +1,6 @@
 var LikeButton = require('../../views/like-button');
 var DeleteButton = require('../../views/delete-button');
+var TransferModal = require('../../views/modals/transfer-modal');
 
 
 // Action buttons
@@ -16,3 +17,5 @@ $('#main-tabs a').click(function (e) {
 $('#gallery').lightGallery({
     selector: 'a',
 });
+
+new TransferModal();

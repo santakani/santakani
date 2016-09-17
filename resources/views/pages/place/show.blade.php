@@ -24,13 +24,23 @@
 
         <div class="buttons">
             @include('components.buttons.like', ['likeable' => $place])
-            @if (Auth::check())
-                @if (Auth::user()->can('edit-designer', $place))
-                    @include('components.buttons.edit')
-                @endif
-                @if (Auth::user()->can('delete-designer', $place))
-                    @include('components.buttons.delete')
-                @endif
+            @if (Auth::check() && Auth::user()->can('edit-place', $place))
+                <div class="btn-group">
+                    <a id="edit-button" class="btn btn-default" href="{{ url()->current() . '/edit' }}">
+                        <i class="fa fa-lg fa-pencil"></i> {{ trans('common.edit') }}
+                    </a>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-lg fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        @if (Auth::user()->can('transfer-place', $place))
+                            <li><a id="transfer-button" href="#" data-toggle="modal" data-target="#transfer-modal"><i class="fa fa-fw fa-exchange"></i> {{ trans('common.transfer') }}</a></li>
+                        @endif
+                        @if (Auth::user()->can('delete-place', $place))
+                            <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
+                        @endif
+                    </ul>
+                </div><!--/.btn-group -->
             @endif
         </div><!-- /.buttons -->
 
@@ -126,3 +136,9 @@
     </div>
 </div>
 @endsection
+
+@if (Auth::check() && Auth::user()->can('edit-place', $place))
+    @push('modals')
+        @include('components.modals.transfer-modal', ['user' => $place->user])
+    @endpush
+@endif

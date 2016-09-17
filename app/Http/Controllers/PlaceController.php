@@ -207,13 +207,17 @@ class PlaceController extends Controller
             'translations.*.content' => 'string',
         ]);
 
-        $place->update(app_array_filter($request->all(), [
-            'type', 'city_id', 'image_id', 'address', 'latitude', 'longitude',
-            'email', 'phone', 'website', 'facebook', 'google_plus',
-            'gallery_image_ids', 'tag_ids'
-        ]));
+        if ($request->has('user_id')) {
+            if ($request->user()->can('transfer-place', $place)) {
+                $place->user_id = $request->input('user_id');
+            } else {
+                abort(403);
+            }
+        }
 
-        // TODO transfer designer page to another user...
+        $place->fill($request->all());
+
+        $place->save();
 
         if ($request->has('translations')) {
             foreach ($request->input('translations') as $locale => $texts) {

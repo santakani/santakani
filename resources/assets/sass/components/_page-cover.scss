@@ -30,8 +30,16 @@
             color: inherit;
         }
 
-        .delete-button {
-            background: $brand-danger;
+        .btn-group {
+            .dropdown-toggle {
+                border-radius: 0;
+
+                &, &:hover, &:focus {
+                    color: #ffffff;
+                    background-color: transparent;
+                    box-shadow: none;
+                }
+            }
         }
     }
 

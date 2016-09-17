@@ -177,18 +177,18 @@ class DesignController extends Controller
             'translations.*.name' => 'string|max:255',
         ]);
 
+        if ($request->has('user_id')) {
+            if ($request->user()->can('transfer-design', $design)) {
+                $design->user_id = $request->input('user_id');
+            } else {
+                abort(403);
+            }
+        }
+
         $design->fill($request->all());
         $design->updateEuroPrice();
 
-        if ($request->user()->can('transfer-design', $design)) {
-            $design->user_id = $request->input('user_id');
-        } else {
-            abort(403);
-        }
-
         $design->save();
-
-        // TODO transfer designer page to another user...
 
         if ($request->has('translations')) {
             foreach ($request->input('translations') as $locale => $texts) {
