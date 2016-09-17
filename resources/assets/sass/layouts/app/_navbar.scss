@@ -1,5 +1,6 @@
 nav.custom-navbar {
     $shadow-size: 5px;
+    $icon-size: 32px;
 
     position: fixed;
     width: 100%;
@@ -58,20 +59,22 @@ nav.custom-navbar {
 
     }
 
-    .icon {
-        width: 32px;
-        height: 32px;
-        vertical-align: middle;
+    .stroke-icon {
+        width: $icon-size;
+        height: $icon-size;
+        margin-top: ($custom-navbar-height - $icon-size) / 2;
+        vertical-align: top;
     }
 
     .logo {
+        $logo-size: $icon-size * 1.3;
         display: none;
         position: absolute;
-        width: $custom-navbar-height;
-        height: $custom-navbar-height;
+        width: $logo-size;
+        height: $logo-size;
         left: 50%;
-        top: 0;
-        margin-left: - $custom-navbar-height / 2;
+        top: ($custom-navbar-height - $logo-size) / 2;
+        margin-left: - $logo-size / 2;
         background-image: url(/img/logo/without-shadow.svg);
         background-repeat: no-repeat;
         background-position: center;
@@ -79,13 +82,15 @@ nav.custom-navbar {
     }
 
     .avatar {
-        width: $custom-navbar-height - 10px;
-        height: $custom-navbar-height - 10px;
-        vertical-align: middle;
+        width: $icon-size;
+        height: $icon-size;
+        margin-top: ($custom-navbar-height - $icon-size) / 2;
+        border-radius: 3px;
+        vertical-align: top;
     }
 
     .name {
-        margin-left: 10px;
+        margin-left: 5px;
     }
 
     @media (max-width: $screen-xs-max) {
