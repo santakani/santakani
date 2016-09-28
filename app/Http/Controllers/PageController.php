@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 use App\City;
 use App\Country;
+use App\Design;
 use App\Designer;
 use App\Place;
 use App\Story;
@@ -22,7 +23,7 @@ use App\Tag;
 use App\User;
 
 /**
- * Static pages routes.
+ * Static pages controller.
  *
  * @author Guo Yunhe <guoyunhebrave@gmail.com>
  */
@@ -58,6 +59,7 @@ class PageController extends Controller
     public function about(Request $request)
     {
         $data['designer_number'] = Designer::count();
+        $data['design_number'] = Design::count();
         $data['place_number'] = Place::count();
         $data['story_number'] = Story::count();
         $data['tag_number'] = Tag::count();

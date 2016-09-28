@@ -19,12 +19,12 @@
                     <div class="text">{{ trans('designer.designers') }}</div>
                 </div>
                 <div class="data-entry col-xs-4">
-                    <div class="number">{{ $story_number }}</div>
-                    <div class="text">{{ trans('story.stories') }}</div>
+                    <div class="number">{{ $design_number }}</div>
+                    <div class="text">{{ trans('design.designs') }}</div>
                 </div>
                 <div class="data-entry col-xs-4">
-                    <div class="number">{{ $user_number }}</div>
-                    <div class="text">{{ trans('common.users') }}</div>
+                    <div class="number">{{ $story_number }}</div>
+                    <div class="text">{{ trans('story.stories') }}</div>
                 </div>
                 <div class="data-entry col-xs-4">
                     <div class="number">{{ $place_number }}</div>
