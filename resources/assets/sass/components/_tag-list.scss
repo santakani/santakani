@@ -6,10 +6,10 @@
 ul.tag-list {
     @include list-unstyled();
 
-    > li {
+    li {
         display: inline-block;
 
-        > a {
+        a {
             display: block;
             border: 1px solid $brand-primary;
             border-radius: 99px;
@@ -17,19 +17,13 @@ ul.tag-list {
             padding: 0 0.5em;
             margin-bottom: 0.5em;
             color: $brand-primary;
+        }
 
-            &:hover, &.active {
+        &:hover, &:active, &.active {
+            a {
                 background-color: $brand-primary;
                 color: #ffffff;
             }
-        }
-    }
-}
-
-ul.tag-list-plain {
-    > li > a {
-        &:before {
-            content: "#";
         }
     }
 }
