@@ -8,5 +8,10 @@ module.exports = Backbone.View.extend({
             selector: this.$el.find('a > img').parent(),
             download: false,
         });
+        
+        this.$('iframe').each(function () {
+            $(this).attr('frameborder', 0);
+            $(this).attr('allowfullscreen', true);
+        });
     }
 });
