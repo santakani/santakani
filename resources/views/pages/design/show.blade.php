@@ -75,7 +75,7 @@
 @endsection
 
 @section('main')
-    <div id="content" class="page-content">
+    <div id="page-content" class="page-content">
         {!! $design->html('content') !!}
     </div><!-- /#content.page-content -->
     <div id="sidebar" class="sidebar">
