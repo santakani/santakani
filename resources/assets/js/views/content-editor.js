@@ -22,10 +22,10 @@ module.exports = Backbone.View.extend({
         // Initialize TinyMCE
         tinymce.init({
             selector: this.selector,
-            plugins: ['link', 'autolink', 'image', 'paste', 'table', 'fullscreen'],
+            plugins: ['link', 'autolink', 'image', 'media', 'paste', 'table', 'fullscreen'],
             menubar: false,
             statusbar: false,
-            toolbar: 'undo redo | formatselect bold italic | blockquote bullist numlist table | link unlink customimage | removeformat | fullscreen',
+            toolbar: 'undo redo | formatselect bold italic | blockquote bullist numlist table | link unlink customimage media | removeformat | fullscreen',
 
             language: app.locale,
 
@@ -36,6 +36,10 @@ module.exports = Backbone.View.extend({
             content_css: [$('#app-css').attr('href')],
 
             convert_urls: false, // Keep relative URLs for images and links
+
+            media_alt_source: false,
+            media_dimensions: false,
+            media_poster: false,
 
             paste_postprocess: function(plugin, args) {
                 var $root = $(args.node);

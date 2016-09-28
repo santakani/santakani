@@ -95,6 +95,9 @@ if (!function_exists('html_purify')) {
         }
         $html_purifier_config = HTMLPurifier_Config::createDefault();
         $html_purifier_config->set('Cache.SerializerPath', $html_purifier_cache_path);
+        //allow iframes from trusted sources
+        $html_purifier_config->set('HTML.SafeIframe', true);
+        $html_purifier_config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%'); //allow YouTube and Vimeo
         $html_purifier = new HTMLPurifier($html_purifier_config);
         return $html_purifier->purify($html);
     }
