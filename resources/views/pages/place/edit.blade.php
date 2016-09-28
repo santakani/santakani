@@ -131,7 +131,7 @@
 
             <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>
 
-            <a class="btn btn-link" href="{{ url('place/'.$place->id) }}">{{ trans('common.cancel') }}</a>
+            <a class="btn btn-link" href="{{ $place->url }}">{{ trans('common.cancel') }}</a>
 
         </div><!-- /.container -->
     </form>

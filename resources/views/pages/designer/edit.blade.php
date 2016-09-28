@@ -139,7 +139,7 @@
 
             <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>
 
-            <a class="btn btn-link" href="{{ url('story/'.$designer->id) }}">{{ trans('common.cancel') }}</a>
+            <a class="btn btn-link" href="{{ $designer->url }}">{{ trans('common.cancel') }}</a>
 
         </form>
     </div><!-- .container -->
