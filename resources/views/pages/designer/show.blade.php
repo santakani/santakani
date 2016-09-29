@@ -107,7 +107,7 @@
             <div class="grid">
                 <div class="column column-2-2 column-2-3 column-2-4">
                     <h1>{{ trans('common.about') }}</h1>
-                    <div class="page-content">{!! $designer->html('content') !!}</div>
+                    <div id="page-content" class="page-content">{!! $designer->html('content') !!}</div>
                 </div>
                 <div class="column column-2-2 column-1-3 column-2-4">
                     <h3>{{ trans('common.tags') }}</h3>

@@ -7,6 +7,7 @@ module.exports = Backbone.View.extend({
         this.$el.lightGallery({
             selector: this.$el.find('a > img').parent(),
             download: false,
+            getCaptionFromTitleOrAlt: false,
         });
 
         this.initMedia();
