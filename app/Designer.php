@@ -49,7 +49,7 @@ class Designer extends Model
      */
     protected $fillable = [
         'image_id', 'logo_id', 'city_id', 'tag_ids', 'gallery_image_ids', 'email',
-        'website', 'facebook', 'instagram', 'twitter',
+        'website', 'facebook', 'instagram', 'pinterest', 'youtube', 'vimeo'
     ];
 
     /**

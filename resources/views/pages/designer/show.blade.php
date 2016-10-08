@@ -122,17 +122,31 @@
                                 </a>
                             </li>
                         @endif
-                        @if (!empty($designer->twitter))
-                            <li>
-                                <a href="{{ $designer->twitter }}">
-                                    <i class="fa fa-fw fa-2x fa-twitter"></i> Twitter
-                                </a>
-                            </li>
-                        @endif
                         @if (!empty($designer->instagram))
                             <li>
                                 <a href="{{ $designer->instagram }}">
                                     <i class="fa fa-fw fa-2x fa-instagram"></i> Instagram
+                                </a>
+                            </li>
+                        @endif
+                        @if (!empty($designer->pinterest))
+                            <li>
+                                <a href="{{ $designer->pinterest }}">
+                                    <i class="fa fa-fw fa-2x fa-pinterest"></i> Pinterest
+                                </a>
+                            </li>
+                        @endif
+                        @if (!empty($designer->youtube))
+                            <li>
+                                <a href="{{ $designer->youtube }}">
+                                    <i class="fa fa-fw fa-2x fa-youtube-play"></i> YouTube
+                                </a>
+                            </li>
+                        @endif
+                        @if (!empty($designer->vimeo))
+                            <li>
+                                <a href="{{ $designer->vimeo }}">
+                                    <i class="fa fa-fw fa-2x fa-vimeo-square"></i> Vimeo
                                 </a>
                             </li>
                         @endif

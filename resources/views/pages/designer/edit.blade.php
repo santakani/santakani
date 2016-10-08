@@ -41,21 +41,21 @@
                         <?php $translation = $designer->translations()->where('locale', $locale)->first(); ?>
                         <div id="translation-{{ $locale }}" class="tab-pane {{ $locale==='en'?'active':'' }}">
                             <div class="form-group">
-                                <label class="control-label">{{ trans('common.name') }}</label>
+                                <label>{{ trans('common.name') }}</label>
                                 <input name="translations[{{ $locale }}][name]"
                                     value="{{ $translation->name or '' }}"
                                     class="form-control" type="text" maxlength="255">
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">{{ trans('designer.design_philosophy') }}</label>
+                                <label>{{ trans('designer.design_philosophy') }}</label>
                                 <input name="translations[{{ $locale }}][tagline]"
                                     value="{{ $translation->tagline or '' }}"
                                     class="form-control" type="text" maxlength="255">
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">{{ trans('common.about') }}</label>
+                                <label>{{ trans('common.about') }}</label>
                                 <p class="text-muted">{{ trans('designer.designer_about_tips') }}</p>
                                 <textarea name="translations[{{ $locale }}][content]"
                                     class="content-editor">{{ $translation->content or '' }}</textarea>
@@ -68,7 +68,7 @@
             <br/>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('image.cover_image') }}</label>
+                <label>{{ trans('image.cover_image') }}</label>
                 @include('components.upload.image-chooser', [
                     'id' => 'cover-chooser',
                     'image' => $designer->image,
@@ -80,7 +80,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('common.logo') }} / {{ trans('designer.designer_photo') }}</label>
+                <label>{{ trans('common.logo') }} / {{ trans('designer.designer_photo') }}</label>
                 @include('components.upload.image-chooser', [
                     'id' => 'logo-chooser',
                     'image' => $designer->logo,
@@ -89,7 +89,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('common.gallery') }}</label>
+                <label>{{ trans('common.gallery') }}</label>
                 <p class="text-muted">{{ trans('designer.designer_gallery_tips') }}</p>
                 @include('components.upload.gallery-editor', [
                     'id' => 'gallery-editor',
@@ -98,42 +98,54 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('geo.city') }}</label>
+                <label>{{ trans('geo.city') }}</label>
                 @include('components.select.city', ['selected' => $designer->city_id])
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('common.tags') }}</label>
+                <label>{{ trans('common.tags') }}</label>
                 @include('components.select.tag', ['selected' => $designer->tags])
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('common.email') }}</label>
+                <label>{{ trans('common.email') }}</label>
                 <input name="email" value="{{ $designer->email }}" type="email"
                     maxlength="255" class="form-control">
             </div>
 
             <div class="form-group">
-                <label class="control-label">{{ trans('common.website') }}</label>
+                <label>{{ trans('common.website') }}</label>
                 <input name="website" value="{{ $designer->website }}" type="url"
                     maxlength="255" class="form-control">
             </div>
 
             <div class="form-group">
-                <label class="control-label">Facebook</label>
+                <label>Facebook</label>
                 <input name="facebook" value="{{ $designer->facebook }}" type="url"
                     maxlength="255" class="form-control">
             </div>
 
             <div class="form-group">
-                <label class="control-label">Twitter</label>
-                <input name="twitter" value="{{ $designer->twitter }}" type="url"
+                <label>Instagram</label>
+                <input name="instagram" value="{{ $designer->instagram }}" type="url"
                     maxlength="255" class="form-control">
             </div>
 
             <div class="form-group">
-                <label class="control-label">Instagram</label>
-                <input name="instagram" value="{{ $designer->instagram }}" type="url"
+                <label>Pinterest</label>
+                <input name="pinterest" value="{{ $designer->pinterest }}" type="url"
+                    maxlength="255" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>YouTube</label>
+                <input name="youtube" value="{{ $designer->youtube }}" type="url"
+                    maxlength="255" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Vimeo</label>
+                <input name="vimeo" value="{{ $designer->vimeo }}" type="url"
                     maxlength="255" class="form-control">
             </div>
 
