@@ -37,6 +37,12 @@ module.exports = Backbone.View.extend({
 
             convert_urls: false, // Keep relative URLs for images and links
 
+            // Link plugin options
+            target_list: false,
+            link_title: false,
+
+
+            // Media plugin options
             media_alt_source: false,
             media_dimensions: false,
             media_poster: false,
@@ -88,7 +94,7 @@ module.exports = Backbone.View.extend({
                                     var size = image.size('medium');
                                     var html = '<p><a href="' + largeUrl + '"><img src="'
                                         + src + '" width="' + size.width + '" height="'
-                                        + size.height + '"></a></p>';
+                                        + size.height + '" alt="Image"></a></p>';
                                     editor.insertContent(html);
                                 }
                             }

@@ -10,7 +10,17 @@ module.exports = Backbone.View.extend({
             getCaptionFromTitleOrAlt: false,
         });
 
+        this.initLinks();
         this.initMedia();
+    },
+
+    initLinks: function () {
+        this.$('a').each(function () {
+            console.log(this.hostname);
+            if (this.hostname && this.hostname !== location.hostname) {
+                this.target = '_blank';
+            }
+        });
     },
 
     initMedia: function () {
