@@ -31,7 +31,7 @@ module.exports = Backbone.View.extend({
     inputName: null,
 
     events: {
-        'click .remove': 'remove',
+        'click .remove': 'fireRemove',
         'click': 'select'
     },
 
@@ -119,5 +119,10 @@ module.exports = Backbone.View.extend({
         } else {
             this.$el.css('background-image', 'none');
         }
+    },
+
+    fireRemove: function () {
+        this.trigger('remove', this);
+        this.remove();
     },
 });
