@@ -28,10 +28,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Image extends Model
 {
-    use SoftDeletes;
-
-    use Features\LikeFeature;
-
     /**
      * The table associated with the model.
      *
@@ -111,6 +107,18 @@ class Image extends Model
     protected $storage = 'storage/images';
 
 
+    //==========================================================================
+    // Parent methods override
+    //==========================================================================
+
+    /**
+     * Delete image files and database records
+     */
+    public function delete()
+    {
+        $this->deleteDirectory();
+        parent::delete();
+    }
 
     //==============================================
     // Relationships
