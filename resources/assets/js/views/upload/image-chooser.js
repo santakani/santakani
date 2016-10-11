@@ -23,7 +23,9 @@ module.exports = Backbone.View.extend({
 
         this.update();
 
+        // Bind events
         this.listenTo(this.model, 'change', this.update);
+        this.listenTo(this.manager.collection, 'remove', this.checkExistence);
     },
 
     update: function () {
@@ -46,5 +48,15 @@ module.exports = Backbone.View.extend({
                 that.model.set(images[0].attributes);
             }
         });
+    },
+
+    /**
+     * Fire when an image model is removed from image manager. If the chosen image
+     * was deleted from image manager, set the image model to null.
+     */
+    checkExistence: function () {
+        if (!this.manager.collection.get(this.model)) {
+            this.model.clear();
+        }
     }
 });
