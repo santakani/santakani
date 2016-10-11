@@ -141,11 +141,28 @@ class AuthServiceProvider extends ServiceProvider
         // Image
 
         $gate->define('delete-image', function ($user, $image) {
-            return $user->role === 'admin' || $user->role === 'editor' || $user->id === $image->user_id;
-        });
+            if ( $user->role === 'admin' || $user->role === 'editor' ) {
+                return true;
+            }
 
-        $gate->define('force-delete-image', function ($user, $image) {
-            return $user->role === 'admin' || $user->role === 'editor';
+            if ( $user->id === $image->user_id ) {
+                return true;
+            }
+
+            if ( !count($image->parent) ) {
+                return false;
+            }
+
+            if ( $image->parent->user_id === $user->id ) {
+                return true;
+            }
+
+            if ( $image->parent_type === 'design' && count($image->parent->designer)
+                && $image->parent->designer->user_id === $user->id) {
+                return true;
+            }
+
+            return false;
         });
 
 

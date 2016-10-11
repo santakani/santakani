@@ -153,22 +153,10 @@ class ImageController extends Controller
             abort(404);
         }
 
-        if ($request->user()->can('delete-image', $image)) {
-            if ($request->has('force_delete') && $request->user()->can('force-delete-image', $image)) {
-                $image->deleteDirectory();
-                $image->forceDelete();
-            } elseif ($request->has('restore')) {
-                $image->restore();
-            } else {
-                $image->delete();
-            }
-        } elseif ($request->user()->can('edit-'.$image->parent_type, $image->parent)) {
-            $image->parent_type = null;
-            $image->parent_id = null;
-            $image->save();
-        } else {
+        if ($request->user()->cannot('delete-image', $image)) {
             abort(403);
         }
 
+        $image->delete();
     }
 }
