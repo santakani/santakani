@@ -237,7 +237,7 @@ class DesignerController extends Controller
 
         if ($request->has('user_id')) {
             if ($request->user()->can('transfer-designer', $designer)) {
-                $designer->user_id = $request->input('user_id');
+                $designer->transfer($request->input('user_id'));
             } else {
                 abort(403);
             }

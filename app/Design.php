@@ -13,6 +13,7 @@ class Design extends Model
     use Features\ImageFeature;
     use Features\LikeFeature;
     use Features\TagFeature;
+    use Features\TransferFeature;
     use Features\TranslationFeature;
 
     /**
@@ -45,6 +46,14 @@ class Design extends Model
      * @var array
      */
     protected $appends = ['name', 'url'];
+
+    /**
+     * Children properties that should be transfered with parent. Key is property
+     * name and value is boolean: if the child is a collection.
+     *
+     * @var array
+     */
+    protected $transfer_children = ['images' => true];
 
     //====================================================================
     // Relationship

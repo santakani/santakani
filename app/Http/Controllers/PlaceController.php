@@ -208,7 +208,7 @@ class PlaceController extends Controller
 
         if ($request->has('user_id')) {
             if ($request->user()->can('transfer-place', $place)) {
-                $place->user_id = $request->input('user_id');
+                $place->transfer($request->input('user_id'));
             } else {
                 abort(403);
             }

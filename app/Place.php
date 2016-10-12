@@ -32,6 +32,7 @@ class Place extends Model
     use Features\ImageFeature;
     use Features\LikeFeature;
     use Features\TagFeature;
+    use Features\TransferFeature;
     use Features\TranslationFeature;
 
     /**
@@ -64,6 +65,14 @@ class Place extends Model
         'type', 'city_id', 'image_id', 'address', 'latitude', 'longitude',
         'email', 'phone', 'website', 'facebook', 'tag_ids', 'gallery_image_ids',
     ];
+
+    /**
+     * Children properties that should be transfered with parent. Key is property
+     * name and value is boolean: if the child is a collection.
+     *
+     * @var array
+     */
+    protected $transfer_children = ['images' => true];
 
     //====================================================================
     // Relationship Methods

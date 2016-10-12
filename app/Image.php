@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Image extends Model
 {
+    use Features\TransferFeature;
+
     /**
      * The table associated with the model.
      *
