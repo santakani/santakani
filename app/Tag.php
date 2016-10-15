@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
 {
-    use SoftDeletes;
     use Features\EditLockFeature;
     use Features\ImageFeature;
     use Features\LikeFeature;

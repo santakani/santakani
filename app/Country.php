@@ -11,7 +11,6 @@ use App\Localization\Languages;
 
 class Country extends Model
 {
-    use SoftDeletes;
     use Features\EditLockFeature;
     use Features\ImageFeature;
     use Features\LikeFeature;

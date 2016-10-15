@@ -11,8 +11,6 @@ use App\Localization\Languages;
 
 class City extends Model
 {
-    use SoftDeletes;
-
     use Features\EditLockFeature;
     use Features\ImageFeature;
     use Features\LikeFeature;
