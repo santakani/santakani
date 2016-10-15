@@ -13,6 +13,7 @@ return array(
     |
     */
 
+    // Password reset system messages
     'password' => 'Lösenordet måste vara minst sex tecken och matcha bekräftelsen.',
     'reset' => 'Ditt lösenord har blivit återställt!',
     'sent' => 'Vi har mailade återställning av lösenord länk!',
