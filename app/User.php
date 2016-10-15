@@ -264,4 +264,32 @@ class User extends Authenticatable
         $url .= "?s=$size&d=mm&r=g";
         return $url;
     }
+
+    /**
+     * Delete with content. For cleaning abuse and spam.
+     */
+    public function deleteWithContent()
+    {
+        foreach ($this->images as $image) {
+            $image->delete();
+        }
+
+        foreach ($this->designs as $design) {
+            $design->forceDelete();
+        }
+
+        foreach ($this->designers as $designer) {
+            $designer->forceDelete();
+        }
+
+        foreach ($this->places as $place) {
+            $place->forceDelete();
+        }
+
+        foreach ($this->stories as $story) {
+            $story->forceDelete();
+        }
+
+        $this->delete();
+    }
 }
