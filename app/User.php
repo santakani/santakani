@@ -279,7 +279,7 @@ class User extends Authenticatable
     public function deleteWithContent()
     {
         foreach ($this->images as $image) {
-            $image->delete();
+            $image->deleteWithFiles();
         }
 
         foreach ($this->designs as $design) {

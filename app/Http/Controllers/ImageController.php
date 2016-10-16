@@ -157,6 +157,6 @@ class ImageController extends Controller
             abort(403);
         }
 
-        $image->delete();
+        $image->deleteWithFiles();
     }
 }

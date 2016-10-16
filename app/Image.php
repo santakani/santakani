@@ -116,10 +116,10 @@ class Image extends Model
     /**
      * Delete image files and database records
      */
-    public function delete()
+    public function deleteWithFiles()
     {
         $this->deleteDirectory();
-        parent::delete();
+        $this->delete();
     }
 
     //==============================================
