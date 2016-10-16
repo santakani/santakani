@@ -272,7 +272,11 @@ class DesignerController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $designer = Designer::find($id);
+        $this->validate($request, [
+            'action' => 'string|in:delete,restore,force_delete',
+        ]);
+
+        $designer = Designer::withTrashed()->find($id);
 
         if (empty($designer)) {
             abort(404);
@@ -282,12 +286,15 @@ class DesignerController extends Controller
             abort(403);
         }
 
-        if ($request->has('force_delete') && $request->user()->can('delete-designer', $designer)) {
-            $designer->forceDelete();
-        } elseif ($request->has('restore')) {
-            $designer->restore();
-        } else {
-            $designer->delete();
+        switch ($request->input('action')) {
+            case 'restore':
+                $designer->restoreWithRelationships();
+                break;
+            case 'force_delete':
+                $designer->forceDeleteWithRelationships();
+                break;
+            default:
+                $designer->deleteWithRelationships();
         }
     }
 }

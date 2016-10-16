@@ -46,8 +46,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('setting/account', 'SettingController@account');
     Route::get('setting/page', 'SettingController@page');
     Route::get('setting/story', 'SettingController@story');
-    Route::get('setting/trash', 'SettingController@trash');
+
     Route::match(['post', 'put', 'patch'], 'setting', 'SettingController@update');
+
+    Route::get('trash', 'TrashController@index');
+    Route::get('trash/designer', 'TrashController@designer');
+    Route::get('trash/design', 'TrashController@design');
+    Route::get('trash/place', 'TrashController@place');
+    Route::get('trash/story', 'TrashController@story');
 
     Route::resource('user', 'UserController', ['except' => [
         'create', 'store'

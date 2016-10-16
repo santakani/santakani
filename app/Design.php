@@ -56,6 +56,45 @@ class Design extends Model
     protected $transfer_children = ['images' => true];
 
     //====================================================================
+    // Management Methods
+    //====================================================================
+
+    /**
+     * Soft delete with relationships.
+     */
+    public function deleteWithRelationships()
+    {
+        $this->delete();
+    }
+
+    /**
+     * Restore with relationships.
+     */
+    public function restoreWithRelationships()
+    {
+        $this->restore();
+    }
+
+    /**
+     * Hard delete with relationships.
+     */
+    public function forceDeleteWithRelationships()
+    {
+        // Hard delete images with files
+        foreach ($this->images as $image) {
+            $image->deleteWithFiles();
+        }
+
+        // Hard delete likes
+        $this->likes()->delete();
+
+        // Detach tags
+        $this->tags()->detach();
+
+        $this->forceDelete();
+    }
+
+    //====================================================================
     // Relationship
     //====================================================================
 

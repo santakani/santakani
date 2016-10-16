@@ -133,3 +133,7 @@ else if (document.getElementById('user-admin-page')) {
 else if (document.getElementById('deleted-user-admin-page')) {
     require('./pages/admin/deleted-user');
 }
+
+else if (document.getElementById('trash-page')) {
+    require('./pages/trash');
+}

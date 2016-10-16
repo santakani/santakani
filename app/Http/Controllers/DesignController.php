@@ -222,22 +222,29 @@ class DesignController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $design = Design::find($id);
+        $this->validate($request, [
+            'action' => 'string|in:delete,restore,force_delete',
+        ]);
+
+        $design = Design::withTrashed()->find($id);
 
         if (empty($design)) {
             abort(404);
         }
 
-        if ($request->user()->cannot('edit-design', $design)) {
+        if ($request->user()->cannot('delete-design', $design)) {
             abort(403);
         }
 
-        if ($request->has('force_delete') && $request->user()->can('force-delete-design', $design)) {
-            $design->forceDelete();
-        } elseif ($request->has('restore')) {
-            $design->restore();
-        } else {
-            $design->delete();
+        switch ($request->input('action')) {
+            case 'restore':
+                $design->restoreWithRelationships();
+                break;
+            case 'force_delete':
+                $design->forceDeleteWithRelationships();
+                break;
+            default:
+                $design->deleteWithRelationships();
         }
     }
 }

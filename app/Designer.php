@@ -75,7 +75,61 @@ class Designer extends Model
      */
     protected $transfer_children = ['images' => true, 'designs' => true];
 
+    //====================================================================
+    // Management Methods
+    //====================================================================
 
+    /**
+     * Soft delete with relationships.
+     */
+    public function deleteWithRelationships()
+    {
+        $this->delete();
+
+        // Soft delete designs
+        foreach ($this->designs as $design) {
+            $design->deleteWithRelationships();
+        }
+    }
+
+    /**
+     * Restore with relationships.
+     */
+    public function restoreWithRelationships()
+    {
+        // Restore designs deleted at the same time
+        foreach ($this->designs()->withTrashed()->get() as $design) {
+            if ($this->deleted_at->lte($design->deleted_at)) {
+                $design->restoreWithRelationships();
+            }
+        }
+
+        $this->restore();
+    }
+
+    /**
+     * Hard delete with relationships.
+     */
+    public function forceDeleteWithRelationships()
+    {
+        // Hard delete designs with relationships
+        foreach ($this->designs()->withTrashed()->get() as $design) {
+            $design->forceDeleteWithRelationships();
+        }
+
+        // Hard delete images with files
+        foreach ($this->images as $image) {
+            $image->deleteWithFiles();
+        }
+
+        // Hard delete likes
+        $this->likes()->delete();
+
+        // Detach tags
+        $this->tags()->detach();
+
+        $this->forceDelete();
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //

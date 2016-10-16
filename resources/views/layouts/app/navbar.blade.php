@@ -98,23 +98,24 @@ $nav_menu_right = [
                     ?>
                     @if ($designer_count)
                         <li class="dropdown-header">{{ trans('designer.designer_pages') }}</li>
-                        @foreach (Auth::user()->designers()->take(5)->get() as $designer)
+                        @foreach (Auth::user()->designers()->take(4)->get() as $designer)
                             <li><a href="{{ $designer->url }}">{{ $designer->text('name') }}</a></li>
                         @endforeach
-                        @if ($designer_count > 5)
-                            <li><a href="{{ url('setting/page') }}">{{ trans('common.more') }}...</a></li>
-                        @endif
+                        <li role="separator" class="divider"></li>
                     @endif
                     @if ($place_count)
                         <li class="dropdown-header">{{ trans('place.place_pages') }}</li>
-                        @foreach (Auth::user()->places()->take(5)->get() as $place)
+                        @foreach (Auth::user()->places()->take(4)->get() as $place)
                             <li><a href="{{ $place->url }}">{{ $place->text('name') }}</a></li>
                         @endforeach
-                        @if ($place_count > 5)
-                            <li><a href="{{ url('setting/page') }}">{{ trans('common.more') }}...</a></li>
-                        @endif
                         <li role="separator" class="divider"></li>
                     @endif
+                    <li><a href="{{ url('setting/page') }}">{{ trans('common.pages') }}</a></li>
+                    <li><a href="{{ url('trash') }}">
+                        {{ trans('common.deleted_pages') }}
+                        <span class="badge">{{ Auth::user()->trash_count }}</span>
+                    </a></li>
+                    <li role="separator" class="divider"></li>
                     <li><a href="{{ Auth::user()->url }}">{{ trans('common.profile') }}</a></li>
                     <li><a href="{{ url('setting') }}">{{ trans('common.settings') }}</a></li>
                     <li><a href="{{ url('logout') }}">{{ trans('common.logout') }}</a></li>

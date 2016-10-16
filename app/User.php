@@ -90,6 +90,14 @@ class User extends Authenticatable
     }
 
     /**
+     * User created design pages.
+     */
+    public function designs()
+    {
+        return $this->hasMany('App\Design');
+    }
+
+    /**
      * User created place pages.
      */
     public function places()
@@ -139,6 +147,17 @@ class User extends Authenticatable
     public function getLargeAvatarUrlAttribute()
     {
         return $this->avatar('large');
+    }
+
+    /**
+     * trash_count
+     */
+    public function getTrashCountAttribute()
+    {
+        return $this->designs()->onlyTrashed()->count()
+            + $this->designers()->onlyTrashed()->count()
+            + $this->places()->onlyTrashed()->count()
+            + $this->stories()->onlyTrashed()->count();
     }
 
     //====================================================================

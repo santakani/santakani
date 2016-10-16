@@ -237,12 +237,17 @@ class PlaceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
     {
-        $place = Place::find($id);
+        $this->validate($request, [
+            'action' => 'string|in:delete,restore,force_delete',
+        ]);
+
+        $place = Place::withTrashed()->find($id);
 
         if (empty($place)) {
             abort(404);
@@ -252,15 +257,15 @@ class PlaceController extends Controller
             abort(403);
         }
 
-        if ($request->has('force_delete') && $request->user()->can('force-delete-place', $place)) {
-            if ($request->has('with_images')) {
-                $place->images()->forceDelete();
-            }
-            $place->forceDelete();
-        } elseif ($request->has('restore')) {
-            $place->restore();
-        } else {
-            $place->delete();
+        switch ($request->input('action')) {
+            case 'restore':
+                $place->restoreWithRelationships();
+                break;
+            case 'force_delete':
+                $place->forceDeleteWithRelationships();
+                break;
+            default:
+                $place->deleteWithRelationships();
         }
     }
 }
