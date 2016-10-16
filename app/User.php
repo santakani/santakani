@@ -74,6 +74,14 @@ class User extends Authenticatable
     }
 
     /**
+     * User likes.
+     */
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
+
+    /**
      * User created designer pages.
      */
     public function designers()
