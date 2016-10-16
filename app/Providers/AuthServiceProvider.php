@@ -57,8 +57,22 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $gate->define('delete-user', function ($user, $target_user) {
-            // Admins can delete normal users. Admins and editors must be deleted through command line.
-            return $user->role === 'admin' && $target_user->role !== 'admin' && $target_user->role !== 'editor';
+            // Admins and editors must be deleted through command line.
+            if ($target_user->role === 'admin' || $target_user->role === 'editor') {
+                return false;
+            }
+
+            // Admins can delete normal users.
+            if ($user->role === 'admin') {
+                return true;
+            }
+
+            // Normal users can delete themselves.
+            if ($user->id === $target_user->id) {
+                return true;
+            }
+
+            return false;
         });
 
 
@@ -76,10 +90,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $designer->user_id;
         });
 
-        $gate->define('force-delete-designer', function ($user, $designer) {
-            return $user->role === 'admin' || $user->role === 'editor';
-        });
-
 
         // Design page
 
@@ -93,10 +103,6 @@ class AuthServiceProvider extends ServiceProvider
 
         $gate->define('delete-design', function ($user, $design) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
-        });
-
-        $gate->define('force-delete-design', function ($user, $design) {
-            return $user->role === 'admin' || $user->role === 'editor';
         });
 
 
@@ -114,10 +120,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $place->user_id;
         });
 
-        $gate->define('force-delete-place', function ($user, $place) {
-            return $user->role === 'admin' || $user->role === 'editor';
-        });
-
 
         // Story page
 
@@ -131,10 +133,6 @@ class AuthServiceProvider extends ServiceProvider
 
         $gate->define('delete-story', function ($user, $story) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $story->user_id;
-        });
-
-        $gate->define('force-delete-story', function ($user, $story) {
-            return $user->role === 'admin' || $user->role === 'editor';
         });
 
 
@@ -180,10 +178,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
-        $gate->define('force-delete-city', function ($user) {
-            return $user->role === 'admin' || $user->role === 'editor';
-        });
-
 
         // Country page
 
@@ -199,10 +193,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
-        $gate->define('force-delete-country', function ($user) {
-            return $user->role === 'admin' || $user->role === 'editor';
-        });
-
 
         // Tag page
 
@@ -215,10 +205,6 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $gate->define('delete-tag', function ($user) {
-            return $user->role === 'admin' || $user->role === 'editor';
-        });
-
-        $gate->define('force-delete-tag', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
     }
