@@ -232,7 +232,11 @@ class StoryController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $story = Story::find($id);
+        $this->validate($request, [
+            'action' => 'string|in:delete,restore,force_delete',
+        ]);
+
+        $story = Story::withTrashed()->find($id);
 
         if (empty($story)) {
             abort(404);
@@ -242,13 +246,15 @@ class StoryController extends Controller
             abort(403);
         }
 
-        if ($request->has('force_delete')) {
-            $story->images()->forceDelete();
-            $story->forceDelete();
-        } elseif ($request->has('restore')) {
-            $story->restore();
-        } else {
-            $story->delete();
+        switch ($request->input('action')) {
+            case 'restore':
+                $story->restoreWithRelationships();
+                break;
+            case 'force_delete':
+                $story->forceDeleteWithRelationships();
+                break;
+            default:
+                $story->deleteWithRelationships();
         }
     }
 }
