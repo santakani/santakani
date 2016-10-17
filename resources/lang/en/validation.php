@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
 
     /*
@@ -10,6 +19,8 @@ return array(
     | The following language lines contain the default error messages used by
     | the validator class. Some of these rules have multiple versions such
     | as the size rules. Feel free to tweak each of these messages here.
+    |
+    | Priority: low
     |
     */
 

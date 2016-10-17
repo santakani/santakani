@@ -1,6 +1,27 @@
 <?php
 
+/*
+ * This file is part of santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
+
+    /*
+    |--------------------------------------------------------------------------
+    | Common Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | Common words, phrases, sentences that are shared by multiple pages/interface.
+    |
+    | Priority: high
+    |
+    */
+
     'about' => 'About',
     'about_us' => 'About us',
     'account' => 'Account',

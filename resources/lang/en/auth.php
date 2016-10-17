@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
 
     /*
@@ -11,6 +20,8 @@ return array(
     | messages that we need to display to the user. You are free to modify
     | these language lines according to your application's requirements.
     |
+    | Priority: medium
+    |
     */
 
     'remember_me' => 'Remember me',
@@ -20,8 +31,6 @@ return array(
     'confirm_password' => 'Confirm password',
     'reset_password' => 'Reset password',
     'request_password_reset_link' => 'Request password reset link',
-
-    // Auth system messages
     'failed' => 'Email address or password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

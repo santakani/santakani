@@ -1,6 +1,28 @@
 <?php
 
+/*
+ * This file is part of santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
+
+    /*
+    |--------------------------------------------------------------------------
+    | Privacy Page Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used in privacy page. See
+    | https://santakani.com/privacy
+    |
+    | Priority: low
+    |
+    */
+
     's_1' => 'Information Collected or Received',
     's_1_p_1' => 'We collect and use your information below to provide our Services and to measure and improve them over time.',
     's_1_1' => 'Account Information',
