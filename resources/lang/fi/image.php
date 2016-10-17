@@ -3,17 +3,17 @@
 return array(
 
     // Types
-    'cover_image' => 'Cover image',
+    'cover_image' => 'Kansikuva',
 
     // Action
-    'add_image' => 'Add image',
+    'add_image' => 'Lisää kuva',
     'upload_image' => 'Upload image',
-    'choose_image' => 'Choose image',
-    'remove_image' => 'Remove image',
-    'delete_image' => 'Delete image',
+    'choose_image' => 'Valitse kuva',
+    'remove_image' => 'Poista kuva',
+    'delete_image' => 'Poista kuva',
 
     // Image manager
-    'image_manager.no_image_alert' => 'No images yet, please upload.',
-    'image_manager.delete_alert_title' => 'Image Delete Confirm',
-    'image_manager.delete_alert_text' => 'You are going to delete these images:',
+    'image_manager.no_image_alert' => 'Ei vielä kuvia, ole hyvä ja lataa.',
+    'image_manager.delete_alert_title' => 'Kuva Poista Vahvista',
+    'image_manager.delete_alert_text' => 'Aiot poistaa nämä kuvat:',
 );

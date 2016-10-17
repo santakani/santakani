@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'community_intro' => 'Designers, artisits, craftsmen and craftswomen, design students, and design lovers consist of this unique community. People from different cultures, using different languages, meet each other for the same reason: passion of design.',
+    'community_intro' => '设计师，艺术家，手工艺人，设计学生和爱好者组成了这个独一无二的社群。来自不同文化，使用不同语言的人们，因对设计的热情而相聚此处。',
     'team_title' => '我们的团队',
     'du_yuexin' => '杜玥辛',
     'guo_yunhe' => '郭云鹤',
