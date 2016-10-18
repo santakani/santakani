@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
 
     /*
@@ -11,13 +20,15 @@ return array(
     | that are given by the password broker for a password update attempt
     | has failed, such as for an invalid token or invalid new password.
     |
+    | Priority: low
+    |
     */
 
     // Password reset system messages
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address.",
+    'password' => 'Salasanan on oltava vähintään kuusi merkkiä ja vastaavat vahvistuksen.',
+    'reset' => 'Salasanasi on nollattu!',
+    'sent' => 'Olemme lähettäneet salasanan vaihtolinkkiä!',
+    'token' => 'Tämä salasanan on virheellinen.',
+    'user' => "Emme voi löytää käyttäjälle kyseiseen sähköpostiosoitteeseen.",
 
 );

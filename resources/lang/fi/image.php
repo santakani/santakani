@@ -1,13 +1,34 @@
 <?php
 
+/*
+ * This file is part of santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
+
+    /*
+    |--------------------------------------------------------------------------
+    | Image Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines contain messages for image uploading and
+    | management.
+    |
+    | Priority: high
+    |
+    */
 
     // Types
     'cover_image' => 'Kansikuva',
 
     // Action
     'add_image' => 'Lisää kuva',
-    'upload_image' => 'Upload image',
+    'upload_image' => 'Lataa kuva',
     'choose_image' => 'Valitse kuva',
     'remove_image' => 'Poista kuva',
     'delete_image' => 'Poista kuva',
