@@ -59,7 +59,11 @@ class DesignController extends Controller
             });
         }
 
-        $designs = $query->orderBy('created_at', 'desc')->paginate(12);
+        $query->whereNotNull('image_id');
+
+        $query->orderBy('created_at', 'desc');
+
+        $designs = $query->paginate(12);
 
         return view('pages.design.index', [
             'designs' => $designs
