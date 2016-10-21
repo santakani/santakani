@@ -13,7 +13,7 @@
 
 @section('header')
     <div class="page-cover"
-        @if ($designer->image_id)
+        @if (count($designer->image))
             style="background-image:url({{ $designer->image->large_file_url }})"
         @endif
         >
@@ -47,7 +47,9 @@
         @endif
         <h1 class="name">{{ $designer->text('name') }}</h1>
         <p class="tagline"><em>{{ $designer->excerpt('tagline', null, 140) }}</em></p>
-        <p class="city">{{ $designer->city->full_name }}</p>
+        @if (count($designer->city))
+            <p class="city">{{ $designer->city->full_name }}</p>
+        @endif
     </div><!-- /.page-cover -->
 @endsection
 
