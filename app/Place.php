@@ -207,6 +207,18 @@ class Place extends Model
     }
 
     /**
+     * geo_url
+     *
+     * @see https://en.wikipedia.org/wiki/Geo_URI_scheme
+     *
+     * @return string
+     */
+    public function getGeoUrl()
+    {
+        return 'geo:' . $this->latitude . ',' . $this->longitude;
+    }
+
+    /**
      * "url" getter. URL of place page.
      *
      * @return string
