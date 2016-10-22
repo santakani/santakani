@@ -9,6 +9,6 @@ module.exports = Backbone.Model.extend({
     urlRoot: '/place',
 
     getGeoUrl: function () {
-        return 'geo:' + this.get('latitude') + ',' + this.get('longitude');
+        return 'geo:' + this.get('latitude') + ',' + this.get('longitude') + '?z=10&q=' + this.get('address');
     },
 });
