@@ -16,6 +16,48 @@
 
     #place-map {
         flex: 1 1 400px;
+
+        .leaflet-popup {
+            $image-size: 150px;
+
+            .leaflet-popup-close-button {
+                background-color: $gray-dark;
+                color: #ffffff;
+                padding: 2px;
+                width: 22px;
+                height: 22px;
+                font-size: 24px;
+                font-weight: normal;
+            }
+
+            .leaflet-popup-content-wrapper {
+                max-width: $image-size;
+                padding: 0;
+                border-radius: 0;
+
+                .leaflet-popup-content {
+                    margin: 0;
+                    max-width: $image-size;
+
+                    img {
+                        display: block;
+                    }
+
+                    p {
+                        margin: 0;
+                        padding: 6px;
+                    }
+
+                    a {
+                        color: inherit;
+                    }
+
+                    a.btn {
+                        color: white;
+                    }
+                }
+            }
+        }
     }
 
     #place-list {

@@ -73,6 +73,8 @@ class PlaceController extends Controller
             });
         }
 
+        $query->with('image');
+
         $places = $query->orderBy('like_count', 'desc')->paginate(24);
 
         return view('pages.place.index', [

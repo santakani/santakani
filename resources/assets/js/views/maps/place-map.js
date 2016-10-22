@@ -6,6 +6,7 @@
 var Backbone = require('backbone');
 var Leaflet = require('leaflet');
 
+var Image = require('../../models/image');
 var Place = require('../../models/place');
 var PlaceList = require('../../collections/place-list');
 
@@ -51,8 +52,17 @@ var PlaceMarker = Backbone.View.extend({
         var lat = this.model.get('latitude');
         var lng = this.model.get('longitude');
 
+        this.imageModel = new Image(this.model.get('image'));
+
         if (lat && lng) {
-            this.marker = Leaflet.marker([lat, lng]).bindPopup('<a href="/place/' + this.model.get('id') + '">' + this.model.get('name') + '</a>');
+            this.marker = Leaflet.marker([lat, lng]).bindPopup(
+                '<a href="' + this.model.url() + '">' +
+                '<img src="' + this.imageModel.fileUrl('thumb') +
+                '" width="150" height="150"></a>' +
+                '<p class="clearfix"><a class="btn btn-xs btn-success pull-right visible-xs-block" href="' + this.model.getGeoUrl() +
+                '"><i class="fa fa-lg fa-location-arrow"></i></a>' +
+                '<a href="' + this.model.url() + '">' + this.model.get('name') + '</a></p>'
+            );
             this.marker.on('click', this.activate, this);
         }
 
