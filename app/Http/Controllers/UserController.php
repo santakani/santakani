@@ -119,7 +119,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $user = User::withTrashed()->find($id);
+        $user = User::find($id);
 
         if (empty($user)) {
             abort(404);
@@ -129,10 +129,6 @@ class UserController extends Controller
             abort(403);
         }
 
-        if ($request->has('restore') && $user->trashed()) {
-            $user->restore();
-        } elseif (!$request->has('restore') && !$user->trashed()) {
-            $user->delete();
-        }
+        $user->delete();
     }
 }
