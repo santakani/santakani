@@ -1,0 +1,45 @@
+#help-page {
+    $step-number-size: 48px;
+
+    .step {
+        @extend .clearfix;
+        position: relative;
+        padding-left: $step-number-size + 10px;
+        margin-bottom: 30px;
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: $step-number-size;
+            height: $step-number-size;
+            font-size: $step-number-size / 1.5;
+            line-height: $step-number-size;
+            text-align: center;
+            border-radius: $step-number-size / 2;
+            color: #ffffff;
+            background-color: $brand-info;
+        }
+
+        .step-text {
+            float: left;
+            width: 50%;
+
+            h4 {
+                font-size: $step-number-size / 1.5;
+                line-height: $step-number-size;
+                margin-top: 0;
+            }
+        }
+
+        .step-image {
+            float: right;
+            width: 50%;
+            padding-left: 15px;
+
+            img {
+                border: 1px solid $gray-light;
+            }
+        }
+    }
+}

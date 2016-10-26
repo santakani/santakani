@@ -85,6 +85,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('admin/image/deleted', 'AdminController@deletedImage');
     Route::get('admin/like', 'AdminController@like');
     Route::get('admin/comment', 'AdminController@comment');
+
+    Route::get('help', 'HelpController@index');
 });
 
 
