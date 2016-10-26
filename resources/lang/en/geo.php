@@ -46,6 +46,8 @@ return array(
     'bing_map' => 'Bing Map',
     'google_map' => 'Google Map',
     'here_map' => 'Here Map',
+    'navigate' => 'Navigate',
+    'Navigation' => 'Navigation',
 
     // Coordinate select
     'coordinate_select.found_alert' => 'Successfully marked the location on map!',
