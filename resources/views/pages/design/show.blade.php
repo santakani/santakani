@@ -78,19 +78,37 @@
 @endsection
 
 @section('main')
+
     <div id="page-content" class="page-content">
         {!! $design->html('content') !!}
     </div><!-- /#content.page-content -->
+
     <div id="sidebar" class="sidebar">
-        <h3>{{ trans('designer.designer') }}</h3>
-        <p>
-            <img class="img-responsive" src="{{ $design->designer->image->fileUrl('largethumb') }}" width="600" height="600"/>
-        </p>
-        <p><strong><a href="{{ $design->designer->url }}">{{ $design->designer->text('name') }}</a></strong></p>
-        <p><em>{{ $design->designer->city->full_name }}</em></p>
-        <blockquote>{{ $design->designer->text('tagline') }}</blockquote>
-        <p>{{ $design->designer->excerpt('content') }} <a href="{{ $design->designer->url }}">{{ strtolower(trans('common.more')) }}</a></p>
+
+        @if (count($design->designer))
+
+            <h3>{{ trans('designer.designer') }}</h3>
+
+            @if (count($design->designer->image))
+                <p>
+                    <img class="img-responsive" src="{{ $design->designer->image->fileUrl('largethumb') }}" width="600" height="600"/>
+                </p>
+            @endif
+
+            <p><strong><a href="{{ $design->designer->url }}">{{ $design->designer->text('name') }}</a></strong></p>
+
+            @if (count($design->designer->city))
+                <p><em>{{ $design->designer->city->full_name }}</em></p>
+            @endif
+
+            <blockquote>{{ $design->designer->text('tagline') }}</blockquote>
+
+            <p>{{ $design->designer->excerpt('content') }} <a href="{{ $design->designer->url }}">{{ strtolower(trans('common.more')) }}</a></p>
+
+        @endif
+
     </div>
+
 @endsection
 
 @if (Auth::check() && Auth::user()->can('edit-design', $design))
