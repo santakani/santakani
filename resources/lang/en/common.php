@@ -45,6 +45,7 @@ return array(
     'create' => 'Create',
     'create_time' => 'Create time',
     'delete' => 'Delete',
+    'delete_permanently' => 'Delete permanently',
     'delete_time' => 'Delete time',
     'deleted_pages' => 'Deleted pages',
     'description' => 'Description',

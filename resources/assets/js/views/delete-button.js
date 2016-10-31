@@ -9,20 +9,30 @@ module.exports = Backbone.View.extend({
 
     redirect: '/', // Set false if do not want redirect after delete.
 
+    forceDelete: false,
+
     events: {
         'click': 'delete',
     },
 
     initialize: function (options) {
-        _.extend(this, _.pick(options, 'url', 'redirect'));
+        _.extend(this, _.pick(options, 'url', 'redirect', 'forceDelete'));
     },
 
     delete: function (e) {
         e.preventDefault();
         var that = this;
+
+        var deleteMessage;
+        if (that.forceDelete) {
+            deleteMessage = 'Deleted page can NOT be restored!';
+        } else {
+            deleteMessage = 'Deleted page can be restored in <strong><a href="/trash">Trash</a></strong> page.';
+        }
+
         swal({
             title: "Confirm Delete",
-            text: 'Deleted page can be restored in your <a href="/setting">account setting</a> page.',
+            text: deleteMessage,
             type: "warning",
             html: true,
             showCancelButton: true,
@@ -34,12 +44,16 @@ module.exports = Backbone.View.extend({
             cancelButtonText: "No, cancel please!",
         },
         function(){
+            var data = {
+                _token: app.token
+            };
+            if (that.forceDelete) {
+                data.action = 'force_delete';
+            }
             $.ajax({
                 url: that.url,
                 method: 'delete',
-                data: {
-                    _token: app.token
-                }
+                data: data
             }).done(function () {
                 swal("Deleted");
                 setTimeout(function () {

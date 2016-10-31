@@ -36,6 +36,9 @@
                         @endif
                         @if (Auth::user()->can('delete-designer', $designer))
                             <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
+                            @if (Auth::user()->role === 'admin' || Auth::user()->role === 'editor')
+                                <li><a id="force-delete-button" href="#"><i class="fa fa-fw fa-ban"></i> {{ trans('common.delete_permanently') }}</a></li>
+                            @endif
                         @endif
                     </ul>
                 </div><!--/.btn-group -->

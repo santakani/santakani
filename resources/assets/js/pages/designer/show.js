@@ -5,8 +5,9 @@ var TransferModal = require('../../views/modals/transfer-modal');
 
 
 // Action buttons
-var likeButton = new LikeButton();
-var deleteButton = new DeleteButton();
+new LikeButton();
+new DeleteButton({el: '#delete-button'});
+new DeleteButton({el: '#force-delete-button', forceDelete: true});
 
 $('#main-tabs a').click(function (e) {
     e.preventDefault();

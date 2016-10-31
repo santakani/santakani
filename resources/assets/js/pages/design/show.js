@@ -4,7 +4,8 @@ var PageContent = require('../../views/content/page-content');
 var TransferModal = require('../../views/modals/transfer-modal');
 
 new LikeButton();
-new DeleteButton();
+new DeleteButton({el: '#delete-button'});
+new DeleteButton({el: '#force-delete-button', forceDelete: true});
 
 $('#gallery').lightSlider({
     gallery:true,

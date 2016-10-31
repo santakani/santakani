@@ -5,7 +5,8 @@ var LikeButton = require('../../views/like-button');
 var TransferModal = require('../../views/modals/transfer-modal');
 
 
-new DeleteButton();
+new DeleteButton({el: '#delete-button'});
+new DeleteButton({el: '#force-delete-button', forceDelete: true});
 new LikeButton();
 new TransferModal();
 
