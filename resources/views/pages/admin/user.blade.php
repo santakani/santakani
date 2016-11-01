@@ -35,7 +35,6 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-            <a href="/admin/user/deleted" class="btn btn-link">Deleted users</a>
         </form>
 
         <br>
