@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of santakani.com
+ * This file is part of Santakani
  *
  * (c) Guo Yunhe <guoyunhebrave@gmail.com>
  *
