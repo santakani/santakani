@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'title' => trans('designer.design'),
+    'title' => trans('design.design'),
     'body_id' => 'design-index-page',
     'body_classes' => ['design-index-page', 'index-page', 'design-page'],
     'active_nav' => 'design',

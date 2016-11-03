@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'title' => $design->text('name') . ' - ' . trans('designer.designs'),
+    'title' => $design->text('name') . ' - ' . trans('design.designs'),
     'body_id' => 'design-show-page',
     'body_classes' => ['design-show-page', 'show-page', 'design-page'],
     'active_nav' => 'design',

@@ -9,7 +9,7 @@ $nav_menu_left = [
         'url' => url('/'),
     ],
     'design' => [
-        'text' => trans('designer.designs'),
+        'text' => trans('design.designs'),
         'url' => url('design'),
     ],
     'designer' => [
