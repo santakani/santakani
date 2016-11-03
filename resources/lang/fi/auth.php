@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
 
     /*
@@ -11,6 +20,8 @@ return array(
     | messages that we need to display to the user. You are free to modify
     | these language lines according to your application's requirements.
     |
+    | Priority: medium
+    |
     */
 
     'remember_me' => 'Muista minut',
@@ -20,9 +31,7 @@ return array(
     'confirm_password' => 'Vahvista salasana',
     'reset_password' => 'Nollaa salasana',
     'request_password_reset_link' => 'Pyydä salasananvaihtolinkkiä',
-
-    // Auth system messages
-    'failed' => 'sähköpostiosoite tai salasana on väärä.',
-    'throttle' => 'Liian monta kirjautumisyrityksiä. Yritä uudelleen :seconds sekunnin ajan.',
+    'failed' => 'Sähköpostiosoite tai salasana on väärä.',
+    'throttle' => 'Liian monta kirjautumisyritystä. Yritä uudelleen :seconds sekunnin kuluttua.',
 
 );

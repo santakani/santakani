@@ -23,10 +23,10 @@ return array(
     |
     */
 
-    'slide_1.title' => 'Itsenäinen Suunnittelu',
-    'slide_1.content' => 'Santakani focuses on independent designers and small design brands. Meet the most creative people and find the most special design!',
-    'slide_2.title' => 'Design Kauppoja ja Suunnittelutoimistot',
-    'slide_2.content' => 'Santakani helps you discover local design shops, studios and more!',
-    'slide_3.title' => 'Suunnittelu tarinoita',
-    'slide_3.content' => 'Share design events, designer interviews, design knowledge and ideas.',
+    'slide_1.title' => 'Itsenäisille Muotoilijoille',
+    'slide_1.content' => 'Santakani keskittyy itsenäisiin muotoilijoihin ja pieniin design brändeihin. Kohtaa luovimmat ihmiset ja löydä ainutlaatuisimmat designit!',
+    'slide_2.title' => 'Design Kauppoja ja Suunnittelutoimistoja',
+    'slide_2.content' => 'Santakani auttaa sinua löytämään paikalliset designkaupat, -studiot ja paljon muuta!',
+    'slide_3.title' => 'Tarinoita Muotoilusta',
+    'slide_3.content' => 'Jaa designtapahtumia, suunnitelijahaastatteluja, suunnittelutietoa ja ideoita.',
 );

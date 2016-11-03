@@ -1,6 +1,28 @@
 <?php
 
+/*
+ * This file is part of santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
+
+    /*
+    |--------------------------------------------------------------------------
+    | GEO Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are related to countries, cities, addresses, maps,
+    | coordinates and locations. Mainly used in place page and map.
+    |
+    | Priority: high
+    |
+    */
+
     // Country
     'countries' => 'Maat',
     'country' => 'Maa',
@@ -26,9 +48,9 @@ return array(
     'here_map' => 'Here Kartat',
 
     // Coordinate select
-    'coordinate_select.found_alert' => 'Onnistuneesti merkitty sijainti kartalla!',
-    'coordinate_select.not_found_alert' => 'Ei löydä sijainti. Ole hyvä ja vetää karttaa merkitä sitä käsin.',
-    'coordinate_select.help' => 'Kartan yrittää merkitä sijainti perustuu osoite. Jos ei löydy, ota vedä ja zoomaa karttaa merkitse sitä käsin.',
+    'coordinate_select.found_alert' => 'Sijainti merkitty onnistuneesti kartalle!',
+    'coordinate_select.not_found_alert' => 'Sijaintia ei löytynyt. Siirrä karttaa vetämäällä.',
+    'coordinate_select.help' => 'Kartta yrittää löytää sijainnin osoitteen perusteella. Jos sijaintia ei löydy, siirrä karttaa merkataksesi oikea paikka.',
     'coordinate_select.label' => 'Merkitse sijainti kartalla',
     'coordinate_select.smart_lookup' => 'Älykäs haku',
 

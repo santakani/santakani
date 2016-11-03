@@ -23,7 +23,7 @@ return array(
     |
     */
 
-    'community_intro' => 'Designers, artisits, craftsmen and craftswomen, design students, and design lovers consist of this unique community. People from different cultures, using different languages, meet each other for the same reason: passion of design.',
+    'community_intro' => 'Muotoilijat, taiteilijat, käsityöläiset, muotoilun opiskelijat ja designin harrastajat muodostavat tämän ainutlaatuisen yhteisön. Eri maiden, kulttuurien ja kielien edustajat kohtaavat toisensa samasta syystä: intohimosta designiin.',
     'team_title' => 'Ihana Tiimimme',
     'du_yuexin' => 'Du Yuexin',
     'guo_yunhe' => 'Guo Yunhe',

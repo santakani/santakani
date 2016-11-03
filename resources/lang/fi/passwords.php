@@ -25,10 +25,10 @@ return array(
     */
 
     // Password reset system messages
-    'password' => 'Salasanan on oltava vähintään kuusi merkkiä ja vastaavat vahvistuksen.',
+    'password' => 'Salasanan on oltava vähintään kuusi merkkiä ja vastattava vahvistusta.',
     'reset' => 'Salasanasi on nollattu!',
-    'sent' => 'Olemme lähettäneet salasanan vaihtolinkkiä!',
-    'token' => 'Tämä salasanan on virheellinen.',
-    'user' => "Emme voi löytää käyttäjälle kyseiseen sähköpostiosoitteeseen.",
+    'sent' => 'Olemme lähettäneet salasananvaihtolinkin!',
+    'token' => 'Tämä salasanan vaihtolinkki on virheellinen.',
+    'user' => "Antamallanne sähköpostiosoitteella ei löydy käyttäjää.",
 
 );
