@@ -46,11 +46,6 @@ file_filter = resources/lang/<lang>/image.php
 source_lang = en
 type = PHP_ARRAY
 
-[santakani.pagination]
-file_filter = resources/lang/<lang>/pagination.php
-source_lang = en
-type = PHP_ARRAY
-
 [santakani.passwords]
 file_filter = resources/lang/<lang>/passwords.php
 source_lang = en
