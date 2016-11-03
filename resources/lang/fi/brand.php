@@ -22,7 +22,7 @@ return array(
     |
     */
 
-    'app_name' => 'Santakani',
-    'app_define' => 'Suunnittelijat ja designliikkeet Suomesta',
-    'app_description' => 'Tuomme yhteen suunnittelijat ja designharrastajat. Levitämme luovia tuotteita ja ideoita uusille alueille.',
+    'name' => 'Santakani',
+    'summary' => 'Suunnittelijat ja designliikkeet Suomesta',
+    'description' => 'Tuomme yhteen suunnittelijat ja designharrastajat. Levitämme luovia tuotteita ja ideoita uusille alueille.',
 );

@@ -43,9 +43,8 @@ return array(
 
     // Maps
     'map' => '地图',
-    'bing_map' => '必应地图',
-    'google_map' => '谷歌地图',
-    'here_map' => 'Here 地图',
+    'navigate' => '导航',
+    'navigation' => '导航',
 
     // Coordinate select
     'coordinate_select.found_alert' => '成功地在地图上标出了位置！',

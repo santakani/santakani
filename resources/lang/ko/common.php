@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of santakani
+ * This file is part of Santakani
  *
  * (c) Guo Yunhe <guoyunhebrave@gmail.com>
  *
@@ -45,6 +45,7 @@ return array(
     'create' => 'Create',
     'create_time' => 'Create time',
     'delete' => 'Delete',
+    'delete_permanently' => 'Delete permanently',
     'delete_time' => 'Delete time',
     'deleted_pages' => 'Deleted pages',
     'description' => 'Description',

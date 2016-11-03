@@ -6,7 +6,7 @@
 
 @section('header')
     <div class="container">
-        <h1>{{ trans('brand.app_description') }}</h1>
+        <h1>{{ trans('brand.description') }}</h1>
     </div>
 @endsection
 

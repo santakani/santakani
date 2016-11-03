@@ -1,6 +1,28 @@
 <?php
 
+/*
+ * This file is part of Santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
+
+    /*
+    |--------------------------------------------------------------------------
+    | GEO Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are related to countries, cities, addresses, maps,
+    | coordinates and locations. Mainly used in place page and map.
+    |
+    | Priority: high
+    |
+    */
+
     // Country
     'countries' => 'Countries',
     'country' => 'Country',
@@ -21,9 +43,8 @@ return array(
 
     // Maps
     'map' => 'Map',
-    'bing_map' => 'Bing Map',
-    'google_map' => 'Google Map',
-    'here_map' => 'Here Map',
+    'navigate' => 'Navigate',
+    'navigation' => 'Navigation',
 
     // Coordinate select
     'coordinate_select.found_alert' => 'Successfully marked the location on map!',

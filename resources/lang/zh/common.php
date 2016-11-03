@@ -45,6 +45,7 @@ return array(
     'create' => '创建',
     'create_time' => '创建时间',
     'delete' => '删除',
+    'delete_permanently' => '永久删除',
     'delete_time' => '删除时间',
     'deleted_pages' => '删除的页面',
     'description' => '描述',

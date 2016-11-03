@@ -14,7 +14,7 @@
                 <li><a href="http://weibo.com/santakani" target="_blank">微博</a></li>
             @endif
         </ul>
-        <p>2016{{ date("Y") > 2016?'-'.date("Y"):'' }} {{ trans('brand.app_name') }}</p>
+        <p>2016{{ date("Y") > 2016?'-'.date("Y"):'' }} {{ trans('brand.name') }}</p>
     </div>
 </footer>
 @if (App::getLocale() === 'zh')

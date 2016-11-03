@@ -1,7 +1,28 @@
 <?php
 
+/*
+ * This file is part of Santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
-    'app_name' => 'Santakani',
-    'app_define' => 'Designer und Design-Shops aus Finnland',
-    'app_description' => 'Verbrden Sie unabhängige Designer und Design-Liebhaber. Bringen Sie kreative Entwürfe und Ideen zu mehr Orten.',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Branding Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | Website/application name, description and ideas.
+    |
+    | Priority: high
+    |
+    */
+
+    'name' => 'Santakani',
+    'summary' => 'Designers and design shops from Finland',
+    'description' => 'Connect independent designers and design lovers. Bring creative designs and ideas to more places.',
 );

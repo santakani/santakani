@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of santakani
+ * This file is part of Santakani
  *
  * (c) Guo Yunhe <guoyunhebrave@gmail.com>
  *
@@ -43,9 +43,8 @@ return array(
 
     // Maps
     'map' => 'Map',
-    'bing_map' => 'Bing Map',
-    'google_map' => 'Google Map',
-    'here_map' => 'Here Map',
+    'navigate' => 'Navigate',
+    'navigation' => 'Navigation',
 
     // Coordinate select
     'coordinate_select.found_alert' => 'Successfully marked the location on map!',

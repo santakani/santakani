@@ -43,9 +43,8 @@ return array(
 
     // Maps
     'map' => 'Kartta',
-    'bing_map' => 'Bing Kartat',
-    'google_map' => 'Google Kartat',
-    'here_map' => 'Here Kartat',
+    'navigate' => 'Navigoida',
+    'navigation' => 'Navigaatio',
 
     // Coordinate select
     'coordinate_select.found_alert' => 'Sijainti merkitty onnistuneesti kartalle!',

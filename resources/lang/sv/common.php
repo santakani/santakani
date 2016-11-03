@@ -1,6 +1,27 @@
 <?php
 
+/*
+ * This file is part of Santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
+
+    /*
+    |--------------------------------------------------------------------------
+    | Common Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | Common words, phrases, sentences that are shared by multiple pages/interface.
+    |
+    | Priority: high
+    |
+    */
+
     'about' => 'Om',
     'about_us' => 'Om Santakani',
     'account' => 'Konto',
@@ -24,6 +45,7 @@ return array(
     'create' => 'Skapa',
     'create_time' => 'Skapa tid',
     'delete' => 'Radera',
+    'delete_permanently' => 'Delete permanently',
     'delete_time' => 'Delete time',
     'deleted_pages' => 'Deleted pages',
     'description' => 'Beskrivning',

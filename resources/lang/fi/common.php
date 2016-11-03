@@ -45,6 +45,7 @@ return array(
     'create' => 'Luo',
     'create_time' => 'Luotu',
     'delete' => 'Poista',
+    'delete_permanently' => 'Poista pysyvästi',
     'delete_time' => 'Poistettu',
     'deleted_pages' => 'Poistetut sivut',
     'description' => 'Kuvaus',
