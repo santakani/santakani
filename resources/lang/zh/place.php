@@ -1,6 +1,26 @@
 <?php
 
+/*
+ * This file is part of santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
+
+    /*
+    |--------------------------------------------------------------------------
+    | Place Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used in place pages.
+    |
+    | Priority: high
+    |
+    */
 
     'place' => '地点',
     'places' => '地点',
