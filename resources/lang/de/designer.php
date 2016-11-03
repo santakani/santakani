@@ -1,6 +1,27 @@
 <?php
 
+/*
+ * This file is part of Santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
+
+    /*
+    |--------------------------------------------------------------------------
+    | Designer Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used in designer pages.
+    |
+    | Priority: high
+    |
+    */
+
     'designer' => 'Designer',
     'designers' => 'Designers',
 
@@ -12,7 +33,4 @@ return array(
     'designer_about_tips' => 'Beschreiben der Designer die Erfahrung, Kreation, Ideen etc.',
     'designer_gallery_tips' => 'Wählen Sie am besten Fotos in der Fotogalerie von Designer-Seite zu zeigen,',
     'designer_list' => 'Designer-Liste',
-
-    'design' => 'Design',
-    'designs' => 'Designs',
 );

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of santakani
+ * This file is part of Santakani
  *
  * (c) Guo Yunhe <guoyunhebrave@gmail.com>
  *
@@ -33,7 +33,4 @@ return array(
     'designer_about_tips' => 'Describe the designer’s experience, creation, ideas, etc.',
     'designer_gallery_tips' => 'Choose best photos to show in the photo gallery of designer page',
     'designer_list' => 'Designer list',
-
-    'design' => 'Design',
-    'designs' => 'Designs',
 );

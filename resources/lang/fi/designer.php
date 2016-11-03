@@ -33,7 +33,4 @@ return array(
     'designer_about_tips' => 'Kuvaile suunnittelijan osaamista, luomuksia, ideoita, jne.',
     'designer_gallery_tips' => 'Valitse parhaat kuvat näytettäväksi suunnittelijasivun valokuvagalleriassa',
     'designer_list' => 'Lista suunnittelijoista',
-
-    'design' => 'Design',
-    'designs' => 'Designs',
 );

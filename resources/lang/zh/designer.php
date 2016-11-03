@@ -33,7 +33,4 @@ return array(
     'designer_about_tips' => '介绍设计师的经历，作品，理念等等。',
     'designer_gallery_tips' => '选择最佳的照片显示在设计师页面的照片库中。',
     'designer_list' => '设计师列表',
-
-    'design' => '设计',
-    'designs' => '设计',
 );
