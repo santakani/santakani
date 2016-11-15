@@ -7,6 +7,7 @@ use App\DesignTranslation;
 use App\Http\Requests;
 use App\Localization\Currencies;
 use App\Localization\Languages;
+use App\Support\Random;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 
@@ -61,7 +62,7 @@ class DesignController extends Controller
 
         $query->whereNotNull('image_id');
 
-        $query->orderBy('created_at', 'desc');
+        $query->orderByRaw('RAND(' . Random::getUserSeed() . ')');
 
         $designs = $query->paginate(12);
 

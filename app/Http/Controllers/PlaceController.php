@@ -9,6 +9,7 @@ use App\Localization\Languages;
 use App\City;
 use App\Place;
 use App\PlaceTranslation;
+use App\Support\Random;
 
 class PlaceController extends Controller
 {
@@ -75,7 +76,9 @@ class PlaceController extends Controller
 
         $query->with('image');
 
-        $places = $query->orderBy('like_count', 'desc')->paginate(24);
+        $query->orderByRaw('RAND(' . Random::getUserSeed() . ')');
+
+        $places = $query->paginate(24);
 
         return view('pages.place.index', [
             'places' => $places,

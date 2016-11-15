@@ -18,6 +18,7 @@ use App\Designer;
 use App\DesignerTranslation;
 use App\Http\Requests;
 use App\Localization\Languages;
+use App\Support\Random;
 
 /**
  * DesignerController
@@ -77,7 +78,9 @@ class DesignerController extends Controller
             });
         }
 
-        $designers = $query->orderBy('created_at', 'desc')->paginate(12);
+        $query->orderByRaw('RAND(' . Random::getUserSeed() . ')');
+
+        $designers = $query->paginate(12);
 
         return view('pages.designer.index', [
             'designers' => $designers
