@@ -81,17 +81,19 @@
 
             <h3>{{ trans('geo.location') }}</h3>
 
-            <ul class="list-inline">
-                <li><a href="{{ $place->google_map_url }}" target="_blank">
-                    {{ trans('geo.google_map') }} <i class="fa fa-external-link"></i>
-                </a></li>
-                <li><a href="{{ $place->bing_map_url }}" target="_blank">
-                    {{ trans('geo.bing_map') }} <i class="fa fa-external-link"></i>
-                </a></li>
-                <li><a href="{{ $place->here_map_url }}" target="_blank">
-                    {{ trans('geo.here_map') }} <i class="fa fa-external-link"></i>
-                </a></li>
-            </ul>
+            <div class="btn-group">
+                <a class="btn btn-default" href="{{ $place->google_map_url }}" target="_blank">
+                    Google Maps
+                </a>
+                <a class="btn btn-default" href="{{ $place->bing_map_url }}" target="_blank">
+                    Bing Maps
+                </a>
+                <a class="btn btn-default" href="{{ $place->here_map_url }}" target="_blank">
+                    Here
+                </a>
+            </div>
+
+            <br/><br/>
 
             <div class="map"
                  data-latitude="{{ $place->latitude }}"
