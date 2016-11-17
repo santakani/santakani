@@ -26,4 +26,14 @@ class ActivityLog extends Model
      * @var string
      */
     protected $table = 'activity_log';
+
+    /**
+     * The attributes that are mass assignable. id, story_id, locale and timestamps
+     * are protected from vulnerability.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'action', 'message', 'metadata', 'level', 'target_type', 'target_id', 'user_id'
+    ];
 }
