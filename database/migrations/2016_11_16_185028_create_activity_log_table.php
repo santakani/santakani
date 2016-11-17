@@ -17,7 +17,7 @@ use Illuminate\Database\Migrations\Migration;
  *
  * @see https://github.com/santakani/santakani/wiki/Activity-Log
  */
-class CreateLogTable extends Migration
+class CreateActivityLogTable extends Migration
 {
     /**
      * Run the migrations.
@@ -26,7 +26,7 @@ class CreateLogTable extends Migration
      */
     public function up()
     {
-        Schema::create('log', function (Blueprint $table) {
+        Schema::create('activity_log', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('action')->nullable()->index();
@@ -52,6 +52,6 @@ class CreateLogTable extends Migration
      */
     public function down()
     {
-        Schema::drop('log');
+        Schema::drop('activity_log');
     }
 }
