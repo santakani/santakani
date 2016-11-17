@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
@@ -9,7 +9,7 @@ use App\Image;
 use App\Like;
 use App\User;
 
-class AdminController extends Controller
+class HomeController extends AdminController
 {
     /**
      * Create a new controller instance.

@@ -32,7 +32,7 @@ class LoginListener
 
         ActivityLog::create([
             'action' => 'login',
-            'message' => "User <a href=\"{$event->user->name}\">{$event->user->name}</a> logged in. IP: {$ip}. Client",
+            'message' => "User <a href=\"{$event->user->url}\">{$event->user->name}</a> logged in. (IP: {$ip}. Client: {$client})",
             'metadata' => json_encode([
                 'remember' => $event->remember,
                 'ip' => $ip,

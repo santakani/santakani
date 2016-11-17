@@ -78,12 +78,13 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::resource('story', 'StoryController');
 
-    Route::get('admin', 'AdminController@index');
-    Route::get('admin/user', 'AdminController@user');
-    Route::get('admin/image', 'AdminController@image');
-    Route::get('admin/image/deleted', 'AdminController@deletedImage');
-    Route::get('admin/like', 'AdminController@like');
-    Route::get('admin/comment', 'AdminController@comment');
+    // Admin panel
+    Route::group(['middleware' => ['auth', 'admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
+        Route::get('/', 'HomeController@index');
+        Route::get('log/activity', 'ActivityLogController@index');
+        Route::get('user', 'HomeController@user');
+        Route::get('image', 'HomeController@image');
+    });
 
     Route::get('help', 'HelpController@index');
 });
