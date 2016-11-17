@@ -32,6 +32,8 @@ class CreateLogTable extends Migration
             $table->string('action')->nullable()->index();
             $table->text('message')->nullable();
 
+            $table->tinyInteger('level')->unsigned()->default(0);
+
             $table->string('target_type')->nullable();
             $table->integer('target_id')->unsigned()->nullable();
 
