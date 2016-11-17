@@ -265,7 +265,7 @@ class DesignerController extends Controller
                         'old_user_id' => $old_user_id,
                         'new_user_id' => $new_user_id,
                     ]),
-                    'level' => 100,
+                    'level' => 150,
                     'target_type' => 'designer',
                     'target_id' => $designer->id,
                     'user_id' => $request->user()->id,
@@ -340,7 +340,7 @@ class DesignerController extends Controller
                     'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
                                 '</a> restored designer page <a href="'.$designer->url.'">'.
                                 $designer->text('name').'</a>.',
-                    'level' => 100,
+                    'level' => 150,
                     'target_type' => 'designer',
                     'target_id' => $designer->id,
                     'user_id' => $request->user()->id,
@@ -355,7 +355,7 @@ class DesignerController extends Controller
                     'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
                                 '</a> deleted designer page <a href="'.$designer->url.'">'.
                                 $designer->text('name').'</a>.',
-                    'level' => 100,
+                    'level' => 150,
                     'target_type' => 'designer',
                     'target_id' => $designer->id,
                     'user_id' => $request->user()->id,
@@ -373,7 +373,7 @@ class DesignerController extends Controller
                     'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
                                 '</a> trashed designer page <a href="'.$designer->url.'">'.
                                 $designer->text('name').'</a>.',
-                    'level' => 100,
+                    'level' => 150,
                     'target_type' => 'designer',
                     'target_id' => $designer->id,
                     'user_id' => $request->user()->id,

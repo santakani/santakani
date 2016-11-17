@@ -239,7 +239,7 @@ class PlaceController extends Controller
                         'old_user_id' => $old_user_id,
                         'new_user_id' => $new_user_id,
                     ]),
-                    'level' => 100,
+                    'level' => 150,
                     'target_type' => 'place',
                     'target_id' => $place->id,
                     'user_id' => $request->user()->id,
@@ -314,7 +314,7 @@ class PlaceController extends Controller
                     'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
                                 '</a> restored place page <a href="'.$place->url.'">'.
                                 $place->text('name').'</a>.',
-                    'level' => 100,
+                    'level' => 150,
                     'target_type' => 'place',
                     'target_id' => $place->id,
                     'user_id' => $request->user()->id,
@@ -328,7 +328,7 @@ class PlaceController extends Controller
                     'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
                                 '</a> deleted place page <a href="'.$place->url.'">'.
                                 $place->text('name').'</a>.',
-                    'level' => 100,
+                    'level' => 150,
                     'target_type' => 'place',
                     'target_id' => $place->id,
                     'user_id' => $request->user()->id,
@@ -346,7 +346,7 @@ class PlaceController extends Controller
                     'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
                                 '</a> trashed place page <a href="'.$place->url.'">'.
                                 $place->text('name').'</a>.',
-                    'level' => 100,
+                    'level' => 150,
                     'target_type' => 'place',
                     'target_id' => $place->id,
                     'user_id' => $request->user()->id,
