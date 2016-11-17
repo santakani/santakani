@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\ActivityLog;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -21,11 +22,24 @@ class LoginListener
     /**
      * Handle the event.
      *
-     * @param  Login  $event
+     * @param  \Illuminate\Auth\Events\Login  $event
      * @return void
      */
     public function handle(Login $event)
     {
-        //
+        $ip = request()->ip();
+        $client = 'web';
+
+        ActivityLog::create([
+            'action' => 'login',
+            'message' => "User <a href=\"{$event->user->name}\">{$event->user->name}</a> logged in. IP: {$ip}. Client",
+            'metadata' => json_encode([
+                'remember' => $event->remember,
+                'ip' => $ip,
+                'client' => $client,
+            ]),
+            'level' => 50,
+            'user_id' => $event->user->id,
+        ]);
     }
 }
