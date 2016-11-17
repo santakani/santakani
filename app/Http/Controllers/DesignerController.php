@@ -348,7 +348,7 @@ class DesignerController extends Controller
 
                 break;
             case 'force_delete':
-                $designer->forceDeleteWithRelationships();
+                // Hard delete with related models
 
                 ActivityLog::create([
                     'action' => 'delete',
@@ -361,8 +361,11 @@ class DesignerController extends Controller
                     'user_id' => $request->user()->id,
                 ]);
 
+                $designer->forceDeleteWithRelationships();
+
                 break;
             default:
+                // Soft delete with related models
                 $designer->deleteWithRelationships();
 
                 ActivityLog::create([

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\ActivityLog;
 use App\Http\Requests;
 use App\Localization\Languages;
 use App\City;
@@ -122,6 +122,17 @@ class PlaceController extends Controller
         $translation->locale = 'en';
         $translation->save();
 
+        ActivityLog::create([
+            'action' => 'create',
+            'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                         '</a> created place page <a href="'.$place->url.'">'.
+                         $place->text('name').'</a>.',
+            'level' => 100,
+            'target_type' => 'place',
+            'target_id' => $place->id,
+            'user_id' => $request->user()->id,
+        ]);
+
         return redirect()->action('PlaceController@edit', [$place]);
     }
 
@@ -211,9 +222,30 @@ class PlaceController extends Controller
             'translations.*.content' => 'string',
         ]);
 
+        // Transfer ownership
         if ($request->has('user_id')) {
             if ($request->user()->can('transfer-place', $place)) {
+                $old_user_id = $place->user_id;
                 $place->transfer($request->input('user_id'));
+                $new_user_id = $place->user_id;
+
+                ActivityLog::create([
+                    'action' => 'transfer',
+                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                                '</a> transfered place page <a href="'.$place->url.'">'.
+                                $place->text('name').'</a> to <a href="'.$place->user->url.
+                                '">'.$place->user->name.'</a>.',
+                    'metadata' => json_encode([
+                        'old_user_id' => $old_user_id,
+                        'new_user_id' => $new_user_id,
+                    ]),
+                    'level' => 100,
+                    'target_type' => 'place',
+                    'target_id' => $place->id,
+                    'user_id' => $request->user()->id,
+                ]);
+
+                return;
             } else {
                 abort(403);
             }
@@ -237,6 +269,17 @@ class PlaceController extends Controller
                 $translation->update(app_array_filter($texts, ['name', 'content']));
             }
         }
+
+        ActivityLog::create([
+            'action' => 'edit',
+            'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                         '</a> edited place page <a href="'.$place->url.'">'.
+                         $place->text('name').'</a>.',
+            'level' => 100,
+            'target_type' => 'place',
+            'target_id' => $place->id,
+            'user_id' => $request->user()->id,
+        ]);
     }
 
     /**
@@ -265,12 +308,49 @@ class PlaceController extends Controller
         switch ($request->input('action')) {
             case 'restore':
                 $place->restoreWithRelationships();
+
+                ActivityLog::create([
+                    'action' => 'restore',
+                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                                '</a> restored place page <a href="'.$place->url.'">'.
+                                $place->text('name').'</a>.',
+                    'level' => 100,
+                    'target_type' => 'place',
+                    'target_id' => $place->id,
+                    'user_id' => $request->user()->id,
+                ]);
+
                 break;
             case 'force_delete':
+                // Hard delete with related models
+                ActivityLog::create([
+                    'action' => 'delete',
+                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                                '</a> deleted place page <a href="'.$place->url.'">'.
+                                $place->text('name').'</a>.',
+                    'level' => 100,
+                    'target_type' => 'place',
+                    'target_id' => $place->id,
+                    'user_id' => $request->user()->id,
+                ]);
+
                 $place->forceDeleteWithRelationships();
+
                 break;
             default:
+                // Soft delete with related models
                 $place->deleteWithRelationships();
+
+                ActivityLog::create([
+                    'action' => 'trash',
+                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                                '</a> trashed place page <a href="'.$place->url.'">'.
+                                $place->text('name').'</a>.',
+                    'level' => 100,
+                    'target_type' => 'place',
+                    'target_id' => $place->id,
+                    'user_id' => $request->user()->id,
+                ]);
         }
     }
 }
