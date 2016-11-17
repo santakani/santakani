@@ -13,7 +13,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Create log table for system activity log
+ * Create table for system activity log
  *
  * @see https://github.com/santakani/santakani/wiki/Activity-Log
  */
@@ -31,6 +31,7 @@ class CreateActivityLogTable extends Migration
 
             $table->string('action')->nullable()->index();
             $table->text('message')->nullable();
+            $table->text('metadata')->nullable();
 
             $table->tinyInteger('level')->unsigned()->default(0);
 
