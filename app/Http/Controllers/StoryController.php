@@ -12,6 +12,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use App\ActivityLog;
 use App\Localization\Languages;
 use App\Story;
 use App\StoryTranslation;
@@ -119,6 +120,17 @@ class StoryController extends Controller
         $translation->title = $request->input('title');
         $translation->save();
 
+        ActivityLog::create([
+            'action' => 'create',
+            'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                         '</a> created story <a href="'.$story->url.'">'.
+                         htmlspecialchars($story->text('title')).'</a>.',
+            'level' => 100,
+            'target_type' => 'story',
+            'target_id' => $story->id,
+            'user_id' => $request->user()->id,
+        ]);
+
         return redirect()->action('StoryController@edit', [$story]);
     }
 
@@ -205,8 +217,6 @@ class StoryController extends Controller
 
         $story->update(app_array_filter($request->all(), ['image_id', 'tag_ids']));
 
-        // TODO transfer story page to another user...
-
         if ($request->has('translations')) {
             foreach ($request->input('translations') as $locale => $texts) {
                 if (!Languages::has($locale)) {
@@ -221,6 +231,17 @@ class StoryController extends Controller
                 $translation->update(app_array_filter($texts, ['title', 'content']));
             }
         }
+
+        ActivityLog::create([
+            'action' => 'edit',
+            'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                         '</a> edited story <a href="'.$story->url.'">'.
+                         htmlspecialchars($story->text('title')).'</a>.',
+            'level' => 100,
+            'target_type' => 'story',
+            'target_id' => $story->id,
+            'user_id' => $request->user()->id,
+        ]);
     }
 
     /**
@@ -249,12 +270,49 @@ class StoryController extends Controller
         switch ($request->input('action')) {
             case 'restore':
                 $story->restoreWithRelationships();
+
+                ActivityLog::create([
+                    'action' => 'restore',
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                                '</a> restored story <a href="'.$story->url.'">'.
+                                htmlspecialchars($story->text('title')).'</a>.',
+                    'level' => 150,
+                    'target_type' => 'story',
+                    'target_id' => $story->id,
+                    'user_id' => $request->user()->id,
+                ]);
+
                 break;
             case 'force_delete':
+                // Hard delete with related models
+                ActivityLog::create([
+                    'action' => 'delete',
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                                '</a> deleted story <a href="'.$story->url.'">'.
+                                htmlspecialchars($story->text('title')).'</a>.',
+                    'level' => 150,
+                    'target_type' => 'story',
+                    'target_id' => $story->id,
+                    'user_id' => $request->user()->id,
+                ]);
+
                 $story->forceDeleteWithRelationships();
+
                 break;
             default:
+                // Soft delete with related models
                 $story->deleteWithRelationships();
+
+                ActivityLog::create([
+                    'action' => 'trash',
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                                '</a> trashed story <a href="'.$story->url.'">'.
+                                htmlspecialchars($story->text('title')).'</a>.',
+                    'level' => 150,
+                    'target_type' => 'story',
+                    'target_id' => $story->id,
+                    'user_id' => $request->user()->id,
+                ]);
         }
     }
 }
