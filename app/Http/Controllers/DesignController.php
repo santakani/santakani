@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ActivityLog;
 use App\Design;
 use App\Designer;
 use App\DesignTranslation;
@@ -117,6 +118,17 @@ class DesignController extends Controller
         $translation->name = $request->input('name');
         $translation->save();
 
+        ActivityLog::create([
+            'action' => 'create',
+            'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                         '</a> created design page <a href="'.$design->url.'">'.
+                         htmlspecialchars($design->text('name')).'</a>.',
+            'level' => 100,
+            'target_type' => 'design',
+            'target_id' => $design->id,
+            'user_id' => $request->user()->id,
+        ]);
+
         return redirect()->action('DesignController@edit', [$design]);
     }
 
@@ -205,7 +217,29 @@ class DesignController extends Controller
 
         if ($request->has('user_id')) {
             if ($request->user()->can('transfer-design', $design)) {
+                $old_user = $design->user;
                 $design->transfer($request->input('user_id'));
+                $new_user = \App\User::find($request->input('user_id'));
+
+                ActivityLog::create([
+                    'action' => 'transfer',
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                                '</a> transfered design page <a href="'.$design->url.'">'.
+                                htmlspecialchars($design->text('name')).'</a> from <a href="'.
+                                $old_user->url.'">'.htmlspecialchars($old_user->name).
+                                '</a> to <a href="'.$new_user->url.
+                                '">'.htmlspecialchars($new_user->name).'</a>.',
+                    'metadata' => json_encode([
+                        'old_user_id' => $old_user->id,
+                        'new_user_id' => $new_user->id,
+                    ]),
+                    'level' => 150,
+                    'target_type' => 'design',
+                    'target_id' => $design->id,
+                    'user_id' => $request->user()->id,
+                ]);
+
+                return;
             } else {
                 abort(403);
             }
@@ -237,6 +271,17 @@ class DesignController extends Controller
                 $translation->save();
             }
         }
+
+        ActivityLog::create([
+            'action' => 'edit',
+            'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                         '</a> edited design page <a href="'.$design->url.'">'.
+                         htmlspecialchars($design->text('name')).'</a>.',
+            'level' => 100,
+            'target_type' => 'design',
+            'target_id' => $design->id,
+            'user_id' => $request->user()->id,
+        ]);
     }
 
     /**
@@ -265,12 +310,49 @@ class DesignController extends Controller
         switch ($request->input('action')) {
             case 'restore':
                 $design->restoreWithRelationships();
+
+                ActivityLog::create([
+                    'action' => 'restore',
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                                '</a> restored design page <a href="'.$design->url.'">'.
+                                htmlspecialchars($design->text('name')).'</a>.',
+                    'level' => 150,
+                    'target_type' => 'design',
+                    'target_id' => $design->id,
+                    'user_id' => $request->user()->id,
+                ]);
+
                 break;
             case 'force_delete':
+                // Hard delete with related models
+                ActivityLog::create([
+                    'action' => 'delete',
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                                '</a> deleted design page <a href="'.$design->url.'">'.
+                                htmlspecialchars($design->text('name')).'</a>.',
+                    'level' => 150,
+                    'target_type' => 'design',
+                    'target_id' => $design->id,
+                    'user_id' => $request->user()->id,
+                ]);
+
                 $design->forceDeleteWithRelationships();
+
                 break;
             default:
+                // Soft delete with related models
                 $design->deleteWithRelationships();
+
+                ActivityLog::create([
+                    'action' => 'trash',
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
+                                '</a> trashed design page <a href="'.$design->url.'">'.
+                                htmlspecialchars($design->text('name')).'</a>.',
+                    'level' => 150,
+                    'target_type' => 'design',
+                    'target_id' => $design->id,
+                    'user_id' => $request->user()->id,
+                ]);
         }
     }
 }
