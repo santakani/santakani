@@ -144,9 +144,9 @@ class DesignerController extends Controller
 
         ActivityLog::create([
             'action' => 'create',
-            'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+            'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                          '</a> created designer page <a href="'.$designer->url.'">'.
-                         $designer->text('name').'</a>.',
+                         htmlspecialchars($designer->text('name')).'</a>.',
             'level' => 100,
             'target_type' => 'designer',
             'target_id' => $designer->id,
@@ -257,10 +257,10 @@ class DesignerController extends Controller
                 $new_user_id = $designer->user_id;
                 ActivityLog::create([
                     'action' => 'transfer',
-                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> transfered designer page <a href="'.$designer->url.'">'.
-                                $designer->text('name').'</a> to <a href="'.$designer->user->url.
-                                '">'.$designer->user->name.'</a>.',
+                                htmlspecialchars($designer->text('name')).'</a> to <a href="'.$designer->user->url.
+                                '">'.htmlspecialchars($designer->user->name).'</a>.',
                     'metadata' => json_encode([
                         'old_user_id' => $old_user_id,
                         'new_user_id' => $new_user_id,
@@ -298,9 +298,9 @@ class DesignerController extends Controller
 
         ActivityLog::create([
             'action' => 'edit',
-            'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+            'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                          '</a> edited designer page <a href="'.$designer->url.'">'.
-                         $designer->text('name').'</a>.',
+                         htmlspecialchars($designer->text('name')).'</a>.',
             'level' => 100,
             'target_type' => 'designer',
             'target_id' => $designer->id,
@@ -337,9 +337,9 @@ class DesignerController extends Controller
 
                 ActivityLog::create([
                     'action' => 'restore',
-                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> restored designer page <a href="'.$designer->url.'">'.
-                                $designer->text('name').'</a>.',
+                                htmlspecialchars($designer->text('name')).'</a>.',
                     'level' => 150,
                     'target_type' => 'designer',
                     'target_id' => $designer->id,
@@ -352,9 +352,9 @@ class DesignerController extends Controller
 
                 ActivityLog::create([
                     'action' => 'delete',
-                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> deleted designer page <a href="'.$designer->url.'">'.
-                                $designer->text('name').'</a>.',
+                                htmlspecialchars($designer->text('name')).'</a>.',
                     'level' => 150,
                     'target_type' => 'designer',
                     'target_id' => $designer->id,
@@ -370,9 +370,9 @@ class DesignerController extends Controller
 
                 ActivityLog::create([
                     'action' => 'trash',
-                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> trashed designer page <a href="'.$designer->url.'">'.
-                                $designer->text('name').'</a>.',
+                                htmlspecialchars($designer->text('name')).'</a>.',
                     'level' => 150,
                     'target_type' => 'designer',
                     'target_id' => $designer->id,

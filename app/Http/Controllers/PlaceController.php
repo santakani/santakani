@@ -124,9 +124,9 @@ class PlaceController extends Controller
 
         ActivityLog::create([
             'action' => 'create',
-            'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+            'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                          '</a> created place page <a href="'.$place->url.'">'.
-                         $place->text('name').'</a>.',
+                         htmlspecialchars($place->text('name')).'</a>.',
             'level' => 100,
             'target_type' => 'place',
             'target_id' => $place->id,
@@ -231,10 +231,10 @@ class PlaceController extends Controller
 
                 ActivityLog::create([
                     'action' => 'transfer',
-                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> transfered place page <a href="'.$place->url.'">'.
-                                $place->text('name').'</a> to <a href="'.$place->user->url.
-                                '">'.$place->user->name.'</a>.',
+                                htmlspecialchars($place->text('name')).'</a> to <a href="'.$place->user->url.
+                                '">'.htmlspecialchars($place->user->name).'</a>.',
                     'metadata' => json_encode([
                         'old_user_id' => $old_user_id,
                         'new_user_id' => $new_user_id,
@@ -272,9 +272,9 @@ class PlaceController extends Controller
 
         ActivityLog::create([
             'action' => 'edit',
-            'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+            'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                          '</a> edited place page <a href="'.$place->url.'">'.
-                         $place->text('name').'</a>.',
+                         htmlspecialchars($place->text('name')).'</a>.',
             'level' => 100,
             'target_type' => 'place',
             'target_id' => $place->id,
@@ -311,9 +311,9 @@ class PlaceController extends Controller
 
                 ActivityLog::create([
                     'action' => 'restore',
-                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> restored place page <a href="'.$place->url.'">'.
-                                $place->text('name').'</a>.',
+                                htmlspecialchars($place->text('name')).'</a>.',
                     'level' => 150,
                     'target_type' => 'place',
                     'target_id' => $place->id,
@@ -325,9 +325,9 @@ class PlaceController extends Controller
                 // Hard delete with related models
                 ActivityLog::create([
                     'action' => 'delete',
-                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> deleted place page <a href="'.$place->url.'">'.
-                                $place->text('name').'</a>.',
+                                htmlspecialchars($place->text('name')).'</a>.',
                     'level' => 150,
                     'target_type' => 'place',
                     'target_id' => $place->id,
@@ -343,9 +343,9 @@ class PlaceController extends Controller
 
                 ActivityLog::create([
                     'action' => 'trash',
-                    'message' => '<a href="'.$request->user()->url.'">'.$request->user()->name.
+                    'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> trashed place page <a href="'.$place->url.'">'.
-                                $place->text('name').'</a>.',
+                                htmlspecialchars($place->text('name')).'</a>.',
                     'level' => 150,
                     'target_type' => 'place',
                     'target_id' => $place->id,
