@@ -62,11 +62,9 @@
             <h1>
                 {{ trans('design.designs') }}
                 @if (Auth::check() && Auth::user()->can('edit-designer', $designer))
-                    <form id="design-create-form" class="pull-right" action="{{ url('design')}}" method="post">
-                        {!! csrf_field() !!}
-                        <input type="hidden" name="designer_id" value="{{ $designer->id }}"/>
-                        <button type="submit" id="design-create-button" class="btn btn-default"><i class="fa fa-plus"></i> {{ trans('common.create') }}</button>
-                    </form>
+                    <div class="pull-right">
+                        <a id="design-create-button" class="btn btn-default" href="{{ url('design/create?designer_id='.$designer->id) }}"><i class="fa fa-plus"></i> {{ trans('common.create') }}</a>
+                    </div>
                 @endif
             </h1>
         </div>

@@ -28,4 +28,5 @@ return array(
     'webshop_link' => 'Webshop link',
     'taobao_price' => 'Taobao price',
     'taobao_link' => 'Taobao link',
+    'create_a_design' => 'Create a design',
 );

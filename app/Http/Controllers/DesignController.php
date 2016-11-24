@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Design;
+use App\Designer;
 use App\DesignTranslation;
 use App\Http\Requests;
 use App\Localization\Currencies;
@@ -72,9 +73,28 @@ class DesignController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating a new resource.
      *
-     * Any logged-in users can create designer page.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        $this->validate($request, [
+            'designer_id' => 'integer|exists:designer,id',
+        ]);
+
+        $data = [];
+
+        if ($request->has('designer_id')) {
+            $data['designer'] = Designer::find($request->input('designer_id'));
+        }
+
+        return view('pages.design.create', $data);
+    }
+
+    /**
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -83,6 +103,7 @@ class DesignController extends Controller
     {
         $this->validate($request, [
             'designer_id' => 'required|integer|exists:designer,id',
+            'name' => 'required|string|max:255',
         ]);
 
         $design = new Design();
@@ -93,7 +114,7 @@ class DesignController extends Controller
         $translation = new DesignTranslation();
         $translation->design_id = $design->id;
         $translation->locale = 'en';
-        $translation->name = 'New design';
+        $translation->name = $request->input('name');
         $translation->save();
 
         return redirect()->action('DesignController@edit', [$design]);
