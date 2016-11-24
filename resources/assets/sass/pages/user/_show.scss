@@ -2,26 +2,37 @@ body#user-show-page {
     header {
         .container {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
 
             .avatar {
                 display: block;
-                flex: 0 0 150px;
-                border-radius: 99px;
+                width: 150px;
+                height: 150px;
+                border-radius: 5px;
             }
 
             .text {
-                display: flex;
-                flex: 1 1 150px;
-                margin-left: 20px;
-                flex-direction: column;
-                justify-content: center;
+                text-align: center;
+            }
 
-                > :first-child {
-                    margin-top: 0;
+            @media screen and (min-width: $screen-sm-min) {
+                .avatar {
+                    flex: 0 0 150px;
                 }
 
-                > :last-child {
-                    margin-bottom: 0;
+                .text {
+                    flex: 1 1 400px;
+                    margin-left: 20px;
+                    text-align: left;
+
+                    > :first-child {
+                        margin-top: 0;
+                    }
+
+                    > :last-child {
+                        margin-bottom: 0;
+                    }
                 }
             }
         }
