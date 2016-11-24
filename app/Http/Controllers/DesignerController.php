@@ -252,18 +252,21 @@ class DesignerController extends Controller
         // Transfer ownership
         if ($request->has('user_id')) {
             if ($request->user()->can('transfer-designer', $designer)) {
-                $old_user_id = $designer->user_id;
+                $old_user = $designer->user;
                 $designer->transfer($request->input('user_id'));
-                $new_user_id = $designer->user_id;
+                $new_user = \App\User::find($request->input('user_id'));
+
                 ActivityLog::create([
                     'action' => 'transfer',
                     'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> transfered designer page <a href="'.$designer->url.'">'.
-                                htmlspecialchars($designer->text('name')).'</a> to <a href="'.$designer->user->url.
-                                '">'.htmlspecialchars($designer->user->name).'</a>.',
+                                htmlspecialchars($designer->text('name')).'</a> from <a href="'.
+                                $old_user->url.'">'.htmlspecialchars($old_user->name).
+                                '</a> to <a href="'.$new_user->url.
+                                '">'.htmlspecialchars($new_user->name).'</a>.',
                     'metadata' => json_encode([
-                        'old_user_id' => $old_user_id,
-                        'new_user_id' => $new_user_id,
+                        'old_user_id' => $old_user->id,
+                        'new_user_id' => $new_user->id,
                     ]),
                     'level' => 150,
                     'target_type' => 'designer',

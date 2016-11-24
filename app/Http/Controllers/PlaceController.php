@@ -225,19 +225,21 @@ class PlaceController extends Controller
         // Transfer ownership
         if ($request->has('user_id')) {
             if ($request->user()->can('transfer-place', $place)) {
-                $old_user_id = $place->user_id;
+                $old_user = $place->user;
                 $place->transfer($request->input('user_id'));
-                $new_user_id = $place->user_id;
+                $new_user = \App\User::find($request->input('user_id'));
 
                 ActivityLog::create([
                     'action' => 'transfer',
                     'message' => '<a href="'.$request->user()->url.'">'.htmlspecialchars($request->user()->name).
                                 '</a> transfered place page <a href="'.$place->url.'">'.
-                                htmlspecialchars($place->text('name')).'</a> to <a href="'.$place->user->url.
-                                '">'.htmlspecialchars($place->user->name).'</a>.',
+                                htmlspecialchars($place->text('name')).'</a> from <a href="'.
+                                $old_user->url.'">'.htmlspecialchars($old_user->name).
+                                '</a> to <a href="'.$new_user->url.
+                                '">'.htmlspecialchars($new_user->name).'</a>.',
                     'metadata' => json_encode([
-                        'old_user_id' => $old_user_id,
-                        'new_user_id' => $new_user_id,
+                        'old_user_id' => $old_user->id,
+                        'new_user_id' => $new_user->id,
                     ]),
                     'level' => 150,
                     'target_type' => 'place',
