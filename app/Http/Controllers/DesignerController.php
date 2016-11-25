@@ -54,7 +54,11 @@ class DesignerController extends Controller
         $query = Designer::query();
 
         if ($request->has('search')) {
-            $words = explode(" ", $request->input('search'));
+            // Escape some special SQL characters. Not sure if it is safe enough.
+            $search = str_replace(['@', '*', '%', '"', "'"], ' ', $request->input('search'));
+            // array_filter() remove empty string in $words array.
+            $words = array_filter(explode(" ", $search));
+
             $query->whereHas('translations', function ($sub_query) use ($words) {
                 foreach ($words as $word) {
                     // If it is Chinese, use LIKE. Else, use full text index.
