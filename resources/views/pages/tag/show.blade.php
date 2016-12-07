@@ -43,7 +43,7 @@
                     </h1>
                     <p>@include('components.buttons.like', ['likeable' => $tag])</p>
                     <br>
-                    <p>{{ $tag->text('description') }}</p>
+                    <p>{!! nl2br(htmlspecialchars($tag->text('description'))) !!}</p>
                 </div><!-- .text -->
             </div><!-- .header-content -->
         </div><!-- .container -->

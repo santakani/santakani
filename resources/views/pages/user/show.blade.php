@@ -25,7 +25,7 @@
                 </h1>
                 <p class="description">
                     @if ($user->description)
-                        {{ $user->description }}
+                        {!! nl2br(htmlspecialchars($user->description)) !!}
                     @else
                         No description.
                     @endif
