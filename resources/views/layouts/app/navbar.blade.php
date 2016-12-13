@@ -27,11 +27,11 @@ $nav_menu_left = [
     ],
 ];
 
-if ($nav_no_design) {
+if (!empty($nav_no_design)) {
     unset($nav_menu_left['design']);
 }
 
-if ($nav_no_story) {
+if (!empty($nav_no_story)) {
     unset($nav_menu_left['story']);
 }
 

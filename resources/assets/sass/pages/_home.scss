@@ -2,7 +2,6 @@
 
     header {
         min-height: 300px;
-        max-height: 600px;
         overflow: hidden;
 
         #slides {
@@ -213,6 +212,29 @@
             .heading, .more-button {
                 background-color: #f6bdd9;
             }
+        }
+    }
+}
+
+// Test 1A
+
+#home-page.home1a {
+    header {
+        h1 {
+            font-weight: 900;
+        }
+
+        input {
+            width: 500px;
+            max-width: 80%;
+            border: none;
+            background-color: rgba(255,255,255,0.5);
+            box-shadow: none;
+            text-align: center;
+        }
+
+        input::-moz-placeholder {
+            color: $gray;
         }
     }
 }
