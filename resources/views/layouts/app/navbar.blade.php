@@ -27,6 +27,15 @@ $nav_menu_left = [
     ],
 ];
 
+if ($nav_no_design) {
+    unset($nav_menu_left['design']);
+}
+
+if ($nav_no_story) {
+    unset($nav_menu_left['story']);
+}
+
+
 $nav_menu_right = [
     'login' => [
         'text' => trans('common.login'),
