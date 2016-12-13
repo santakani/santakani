@@ -149,23 +149,26 @@ class HomeController extends Controller
     public function index2b()
     {
         $query = Design::query();
-
         $query->whereNotNull('image_id');
+        $query->orderByRaw('RAND()');
+        $query->take(8);
 
-        $query->orderByRaw('RAND(' . Random::getUserSeed() . ')');
+        $designs1 = $query->get();
+        $designs2 = $query->get();
+        $designs3 = $query->get();
 
-        $designs = $query->paginate(24);
-
-        $designers = Designer::orderByRaw('RAND(' . Random::getUserSeed() . ')')->take(9)->get();
-        $places = Place::orderByRaw('RAND(' . Random::getUserSeed() . ')')->take(9)->get();
+        $designers = Designer::orderByRaw('RAND(' . Random::getUserSeed() . ')')->take(4)->get();
+        $places = Place::orderByRaw('RAND(' . Random::getUserSeed() . ')')->take(4)->get();
         $stories = Story::whereHas('translations', function ($sub_query) {
             $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title')
                 ->whereNotNull('content');
-        })->orderBy('created_at', 'desc')->take(9)->get();
-        $tags = Tag::orderByRaw('RAND(' . Random::getUserSeed() . ')')->take(9)->get();
+        })->orderBy('created_at', 'desc')->take(4)->get();
+        $tags = Tag::orderByRaw('RAND(' . Random::getUserSeed() . ')')->take(4)->get();
 
         return view('pages.home2b', [
-            'designs' => $designs,
+            'designs1' => $designs1,
+            'designs2' => $designs2,
+            'designs3' => $designs3,
             'designers' => $designers,
             'places' => $places,
             'stories' => $stories,

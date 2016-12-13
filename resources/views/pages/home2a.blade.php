@@ -2,28 +2,41 @@
     'body_id' => 'home-page',
     'body_classes' => ['home-page', 'index-page'],
     'active_nav' => 'home',
+    'nav_no_design' => true,
 ])
 
 @section('header')
-    <div class="video-header page-cover">
-        <video class="video-background" src="/video/home-page-header.mp4" width="1280" height="720" autoplay="autoplay" loop="loop"></video>
-        <h1 class="title">Find Independent Design</h1>
-        <p>
-            <a class="btn btn-lg btn-info" href="/designer/create" role="button">{{ strtoupper(trans('designer.create_a_designer_page')) }}</a>
-            <a class="btn btn-lg btn-success" href="/place/create" role="button">{{ strtoupper(trans('place.create_a_place_page')) }}</a>
-        </p>
-
-        <p><br></p>
-
-        <input type="search" class="form-control input-lg" placeholder="Search"/>
-
-        <div class="browse-down"><i class="fa fa-angle-double-down"></i></div>
+    <div id="slides" class="slides">
+        <div class="slide" style="background-image:url(/img/banner/1.jpg)">
+            <div class="text">
+                <h1>{{ trans('home.slide_1.title') }}</h1>
+                <p>{{ trans('home.slide_1.content') }}</p>
+                <a class="btn btn-default" href="/designer" role="button">{{ trans('designer.designer_list') }}</a>
+                <a class="btn btn-default" href="/designer/create" role="button">{{ trans('designer.create_a_designer_page') }}</a>
+            </div><!-- .text -->
+        </div><!-- .slide -->
+        <div class="slide" style="background-image:url(/img/banner/2.jpg)">
+            <div class="text">
+                <h1>{{ trans('home.slide_2.title') }}</h1>
+                <p>{{ trans('home.slide_2.content') }}</p>
+                <a class="btn btn-default" href="/place" role="button">{{ trans('geo.map') }}</a>
+                <a class="btn btn-default" href="/place/create" role="button">{{ trans('place.create_a_place_page') }}</a>
+            </div>
+        </div><!-- .slide -->
+        <div class="slide" style="background-image:url(/img/banner/3.jpg)">
+            <div class="text">
+                <h1>{{ trans('home.slide_3.title') }}</h1>
+                <p>{{ trans('home.slide_3.content') }}</p>
+                <a class="btn btn-default" href="/story" role="button">{{ trans('story.story_list') }}</a>
+                <a class="btn btn-default" href="/story/create" role="button">{{ trans('story.write_a_design_story') }}</a>
+            </div>
+        </div><!-- .slide -->
     </div>
 @endsection
 
 @section('main')
 
-    <section id="design-list" class="article-list">
+    <div id="design-list" class="article-list">
         <div class="list">
             @foreach ($designs as $design)
                 <article>
@@ -58,6 +71,6 @@
 
         <br><br>
 
-    </section><!-- #design-list -->
+    </div><!-- #design-list -->
 
 @endsection

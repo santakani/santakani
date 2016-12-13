@@ -300,3 +300,31 @@
         }
     }
 }
+
+// Test 2B
+
+#home-page.home2b {
+    .article-list {
+        .heading {
+            flex: 1 0 100%;
+            width: 100%;
+            min-width: 100%;
+            max-width: 100%;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .cover {
+            position: relative;
+        }
+
+        .label {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            background-color: $brand-primary;
+            font-size: 1em;
+        }
+    }
+}
