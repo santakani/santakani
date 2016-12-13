@@ -146,7 +146,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index2a()
+    public function index2b()
     {
         $query = Design::query();
 
