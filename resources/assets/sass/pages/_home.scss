@@ -238,3 +238,65 @@
         }
     }
 }
+
+// Test 1B
+
+#home-page.home1b {
+    header {
+        max-height: 400px;
+        .page-cover {
+            max-height: 400px;
+            background-position: 0 0;
+            background-size: contain;
+            background-color: #ececec;
+        }
+
+        h1 {
+            font-weight: 200;
+            color: $gray;
+        }
+
+        input {
+            width: 500px;
+            max-width: 80%;
+            border: none;
+            background-color: rgba(255,255,255,0.5);
+            box-shadow: none;
+            text-align: center;
+        }
+
+        input::-moz-placeholder {
+            color: $gray;
+        }
+    }
+}
+
+// Test 1C
+
+#home-page.home1c {
+    header {
+        max-height: 400px;
+        .page-cover {
+            max-height: 400px;
+            background-color: #EAEFF2;
+        }
+
+        h1 {
+            font-weight: 200;
+            color: $gray;
+        }
+
+        input {
+            width: 500px;
+            max-width: 80%;
+            border: none;
+            background-color: rgba(255,255,255,0.5);
+            box-shadow: none;
+            text-align: center;
+        }
+
+        input::-moz-placeholder {
+            color: $gray;
+        }
+    }
+}
