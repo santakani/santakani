@@ -34,6 +34,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('auth/twitter/callback', 'Auth\OAuthController@handleTwitterCallback');
 
     Route::get('/', 'HomeController@index');
+    Route::get('/home', 'HomeController@index');
+    Route::get('/home1a', 'HomeController@index1a');
+    Route::get('/home1b', 'HomeController@index1b');
+    Route::get('/home1c', 'HomeController@index1c');
+    Route::get('/home2a', 'HomeController@index2a');
+    Route::get('/home2b', 'HomeController@index2b');
 
     Route::get('about', 'PageController@about');
     Route::get('privacy', 'PageController@privacy');
