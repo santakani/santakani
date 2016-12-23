@@ -9,6 +9,7 @@
  * file that was distributed with this source code.
  */
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 /**
@@ -29,27 +30,54 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user')->insert([
-            'name' => 'Guo Yunhe',
-            'email' => 'yunhe.guo@example.com',
+        $faker = Faker\Factory::create();
+        $admin = App\User::create([
+            'name' => 'Admin Rabbit',
+            'description' => $faker->text,
+            'email' => 'admin@example.com',
             'password' => bcrypt('abcd123456'),
             'api_token' => str_random(60),
-            'role' => 'admin',
         ]);
+        $admin->role = 'admin';
+        $admin->save();
 
-        DB::table('user')->insert([
-            'name' => 'Du Yuexin',
-            'email' => 'yuexin.du@example.com',
+        $faker = Faker\Factory::create();
+        $editor = App\User::create([
+            'name' => 'Editor Panda',
+            'description' => $faker->text,
+            'email' => 'editor@example.com',
             'password' => bcrypt('abcd123456'),
             'api_token' => str_random(60),
             'role' => 'editor',
         ]);
+        $editor->role = 'editor';
+        $editor->save();
 
-        DB::table('user')->insert([
-            'name' => 'Yun Xiaotong',
-            'email' => 'xiaotong.yun@example.com',
+        $faker = Faker\Factory::create();
+        $user = App\User::create([
+            'name' => 'User Doge',
+            'description' => $faker->text,
+            'email' => 'user@example.com',
             'password' => bcrypt('abcd123456'),
             'api_token' => str_random(60),
         ]);
+
+        $users = factory(App\User::class, 47)->create();
+
+        $users->push($admin);
+        $users->push($editor);
+        $users->push($user);
+
+        $temp = tempnam(sys_get_temp_dir(), 'santakani-avatar-download-');
+
+        foreach ($users as $user) {
+            $user->avatar_uploaded_at = Carbon::now();
+            $user->save();
+            file_put_contents($temp, fopen("https://source.unsplash.com/category/people/300x300", 'r'));
+            $user->saveAvatarFile($temp, false);
+            sleep(3);
+        }
+
+        unlink($temp);
     }
 }
