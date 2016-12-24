@@ -68,16 +68,13 @@ class UserTableSeeder extends Seeder
         $users->push($editor);
         $users->push($user);
 
-        $temp = tempnam(sys_get_temp_dir(), 'santakani-avatar-download-');
-
         foreach ($users as $user) {
             $user->avatar_uploaded_at = Carbon::now();
             $user->save();
+            $temp = tempnam(sys_get_temp_dir(), 'santakani-avatar-download-');
             file_put_contents($temp, fopen("https://source.unsplash.com/category/people/300x300", 'r'));
-            $user->saveAvatarFile($temp, false);
-            sleep(3);
+            $user->saveAvatarFile($temp);
+            sleep(3); // Avoid downloading the same image because HTTP cache
         }
-
-        unlink($temp);
     }
 }
