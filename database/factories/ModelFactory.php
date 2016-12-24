@@ -30,10 +30,31 @@ $factory->define(App\Tag::class, function (Faker\Generator $faker) {
 
 $factory->define(App\TagTranslation::class, function (Faker\Generator $faker) {
     return [
-        'tag_id' => rand(0,50),
         'locale' => 'en',
         'name' => $faker->word,
         'alias' => implode(',', $faker->words),
         'description' => $faker->text,
+    ];
+});
+
+$factory->define(App\Designer::class, function (Faker\Generator $faker) {
+    return [
+        'email' => $faker->email,
+        'website' => $faker->url,
+        'facebook' => 'https://www.facebook.com/',
+        'instagram' => 'https://www.instagram.com/',
+        'pinterest' => 'https://www.pinterest.com/',
+        'youtube' => 'https://www.youtube.com/',
+        'vimeo' => 'https://www.vimeo.com/',
+        'like_count' => rand(0,200),
+    ];
+});
+
+$factory->define(App\DesignerTranslation::class, function (Faker\Generator $faker) {
+    return [
+        'locale' => 'en',
+        'name' => $faker->name,
+        'tagline' => $faker->sentence,
+        'content' => file_get_contents('http://loripsum.net/api/'.intval(rand(3,15))),
     ];
 });

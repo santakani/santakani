@@ -12,10 +12,6 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-use App\City;
-use App\Image;
-use App\User;
-
 /**
  * DesignerTableSeeder
  *
@@ -34,49 +30,71 @@ class DesignerTableSeeder extends Seeder
      */
     public function run()
     {
-        $cities = [];
+        $cities = App\City::where('geoname_id', 658225)
+                  ->orWhere('geoname_id', 649360)
+                  ->orWhere('geoname_id', 660158)
+                  ->orWhere('geoname_id', 632453)
+                  ->orWhere('geoname_id', 634963)
+                  ->get();
 
-        $cities[] = City::where('geoname_id', 658225)->first();
-        $cities[] = City::where('geoname_id', 649360)->first();
-        $cities[] = City::where('geoname_id', 660158)->first();
-        $cities[] = City::where('geoname_id', 632453)->first();
-        $cities[] = City::where('geoname_id', 634963)->first();
+        $users = App\User::all();
 
-        $images = Image::all();
+        $designers = factory(App\Designer::class, 50)->create()->each(function ($designer) use ($cities, $users) {
+            $designer->translations()->save(factory(App\DesignerTranslation::class)->make());
 
-        $users = User::all();
+            $designer->city()->associate($cities->get(intval(rand(0,5))));
+            $designer->user()->associate($users->pop());
 
-        for ($i = 0; $i < 100; $i++) {
-            $city = $cities[rand(0, count($cities)-1)];
-            $image = $images[rand(0, count($images)-1)];
-            $logo_image = $images[rand(0, count($images)-1)];
-            $user = $users[rand(0, count($users)-1)];
+            // Download cover image
+            $image = new App\Image();
+            $temp = tempnam(sys_get_temp_dir(), 'santakani-image-download-');
+            file_put_contents($temp, fopen("https://source.unsplash.com/category/people", 'r'));
+            $size = getimagesize($temp);
+            $image->mime_type = $size['mime'];
+            $image->width = $size[0];
+            $image->height = $size[1];
+            $image->save();
+            $image->saveFile($temp);
 
-            $id = DB::table('designer')->insertGetId([
-                'city_id' => $city->id,
-                'image_id' => $image->id,
-                'logo_id' => $logo_image->id,
-                'user_id' => $user->id,
-                'email' => 'contact@example.com',
-                'website' => 'http://www.example.com/',
-                'facebook' => 'https://www.facebook.com/',
-                'twitter' => 'https://twitter.com/',
-                'google_plus' => 'https://plus.google.com/',
-                'instagram' => 'https://www.instagram.com/',
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            ]);
+            $designer->image()->associate($image);
+            $designer->save();
+            $designer->images()->save($image);
 
-            DB::table('designer_translation')->insert([
-                'designer_id' => $id,
-                'locale' => 'en',
-                'name' => 'Test Designer ' . $id,
-                'tagline' => 'Good typeface make any text easier to read',
-                'content' => file_get_contents('http://loripsum.net/api'),
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            ]);
-        }
+            // Download logo image
+            $logo = new App\Image();
+            $temp = tempnam(sys_get_temp_dir(), 'santakani-image-download-');
+            file_put_contents($temp, fopen('http://www.gravatar.com/avatar/'.md5($designer->email).'?s=300&d=identicon', 'r'));
+            $size = getimagesize($temp);
+            $logo->mime_type = $size['mime'];
+            $logo->width = $size[0];
+            $logo->height = $size[1];
+            $logo->save();
+            $logo->saveFile($temp);
 
+            $designer->logo()->associate($logo);
+            $designer->save();
+            $designer->images()->save($logo);
+
+            sleep(3); // Avoid downloading the same image because of HTTP cache
+
+            $n = rand(0, 10);
+
+            for ($i = 0; $i < $n; $i++) {
+                $image = new App\Image();
+                $temp = tempnam(sys_get_temp_dir(), 'santakani-image-download-');
+                file_put_contents($temp, fopen("https://source.unsplash.com/random", 'r'));
+                $size = getimagesize($temp);
+                $image->mime_type = $size['mime'];
+                $image->width = $size[0];
+                $image->height = $size[1];
+                $image->weight = rand(1,255);
+                $image->save();
+                $image->saveFile($temp);
+
+                $designer->images()->save($image);
+
+                sleep(3); // Avoid downloading the same image because of HTTP cache
+            }
+        });
     }
 }
