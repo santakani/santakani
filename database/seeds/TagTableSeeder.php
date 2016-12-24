@@ -30,41 +30,24 @@ class TagTableSeeder extends Seeder
      */
     public function run()
     {
-        $tags = [
-            'bags',
-            'clothing',
-            'decoration',
-            'eardrop',
-            'earring',
-            'furniture',
-            'handmade',
-            'illustration',
-            'interior',
-            'jewelry',
-            'keychain',
-            'kitchenware',
-            'magnet',
-            'postcard',
-            'tableware',
-            'timeless',
-            'wood fire',
-        ];
+        $tags = factory(App\Tag::class, 50)->create()->each(function ($tag) {
+            $tag->translations()->save(factory(App\TagTranslation::class)->make());
 
-        foreach ($tags as $tag) {
-            $id = DB::table('tag')->insertGetId([
-                'level' => rand(0,255),
-                'image_id' => rand(1,30),
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            ]);
+            $image = new App\Image();
+            $temp = tempnam(sys_get_temp_dir(), 'santakani-image-download-');
+            file_put_contents($temp, fopen("https://source.unsplash.com/category/objects", 'r'));
+            $size = getimagesize($temp);
+            $image->mime_type = $size['mime'];
+            $image->width = $size[0];
+            $image->height = $size[1];
+            $image->save();
+            $image->saveFile($temp);
 
-            DB::table('tag_translation')->insert([
-                'tag_id' => $id,
-                'locale' => 'en',
-                'name' => $tag,
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            ]);
-        }
+            $tag->image()->associate($image);
+            $tag->save();
+            $tag->images()->save($image);
+
+            sleep(3); // Avoid downloading the same image because HTTP cache
+        });
     }
 }

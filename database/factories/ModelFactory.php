@@ -20,3 +20,20 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'api_token' => str_random(60),
     ];
 });
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'level' => rand(150,255),
+        'like_count' => rand(0,50),
+    ];
+});
+
+$factory->define(App\TagTranslation::class, function (Faker\Generator $faker) {
+    return [
+        'tag_id' => rand(0,50),
+        'locale' => 'en',
+        'name' => $faker->word,
+        'alias' => implode(',', $faker->words),
+        'description' => $faker->text,
+    ];
+});
