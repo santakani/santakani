@@ -95,6 +95,14 @@ class DesignerTableSeeder extends Seeder
 
                 sleep(3); // Avoid downloading the same image because of HTTP cache
             }
+
+            $n = rand(1, 10);
+
+            $tags = App\Tag::take(intval($n))->orderByRaw('RAND()')->get();
+
+            for ($i = 0; $i < $n; $i++) {
+                $designer->tags()->attach($tags->pop()->id);
+            }
         });
     }
 }
