@@ -55,6 +55,27 @@ $factory->define(App\DesignerTranslation::class, function (Faker\Generator $fake
         'locale' => 'en',
         'name' => $faker->name,
         'tagline' => $faker->sentence,
-        'content' => file_get_contents('http://loripsum.net/api/'.intval(rand(3,15))),
+        'content' => file_get_contents('http://loripsum.net/api/' . intval(rand(1,10))),
+    ];
+});
+
+$factory->define(App\Design::class, function (Faker\Generator $faker) {
+    $price = rand(0, 300);
+    return [
+        'webshop' => $faker->url,
+        'price' => $price,
+        'currency' => 'EUR',
+        'eur_price' => $price,
+        'taobao' => 'https://www.taobao.com/',
+        'taobao_price' => $price * 7,
+        'like_count' => rand(0,200),
+    ];
+});
+
+$factory->define(App\DesignTranslation::class, function (Faker\Generator $faker) {
+    return [
+        'locale' => 'en',
+        'name' => $faker->sentence,
+        'content' => file_get_contents('http://loripsum.net/api/' . intval(rand(1,10))),
     ];
 });

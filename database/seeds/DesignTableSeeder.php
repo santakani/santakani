@@ -13,32 +13,64 @@ class DesignTableSeeder extends Seeder
      */
     public function run()
     {
-        $content = file_get_contents('http://loripsum.net/api');
+        $designers = App\Designer::all();
 
-        for ($i = 0; $i < 1000; $i++) {
-            $price = rand(1,99999) / 100;
-            $id = DB::table('design')->insertGetId([
-                'image_id' => rand(1,30),
-                'designer_id' => rand(1,100),
-                'user_id' => rand(1,3),
-                'webshop' => 'http://example.com/',
-                'price' => $price,
-                'currency' => 'EUR',
-                'eur_price' => $price,
-                'taobao' => 'http://taobao.com',
-                'taobao_price' => $price * 7,
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            ]);
+        $designers->each(function ($designer) {
+            $n1 = intval(rand(0,10));
 
-            DB::table('design_translation')->insert([
-                'design_id' => $id,
-                'locale' => 'en',
-                'name' => 'Test Design ' . $id,
-                'content' => $content,
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            ]);
-        }
+            for ($i1 = 0; $i1 < $n1; $i1++) {
+                $design = factory(App\Design::class)->make();
+                $designer->designs()->save($design);
+                $designer->user->designs()->save($design);
+                $design->translations()->save(factory(App\DesignTranslation::class)->make());
+
+                // Download cover image
+                $image = new App\Image();
+                $temp = tempnam(sys_get_temp_dir(), 'santakani-image-download-');
+                file_put_contents($temp, fopen("https://source.unsplash.com/category/objects", 'r'));
+                $size = getimagesize($temp);
+                $image->mime_type = $size['mime'];
+                $image->width = $size[0];
+                $image->height = $size[1];
+                $image->weight = 255;
+                $image->save();
+                $image->saveFile($temp);
+
+                $design->image()->associate($image);
+                $design->save();
+                $design->images()->save($image);
+
+                sleep(3); // Avoid downloading the same image because of HTTP cache
+
+                // Download gallery images
+
+                $n2 = rand(0, 10);
+
+                for ($i2 = 0; $i2 < $n2; $i2++) {
+                    $image = new App\Image();
+                    $temp = tempnam(sys_get_temp_dir(), 'santakani-image-download-');
+                    file_put_contents($temp, fopen("https://source.unsplash.com/category/objects", 'r'));
+                    $size = getimagesize($temp);
+                    $image->mime_type = $size['mime'];
+                    $image->width = $size[0];
+                    $image->height = $size[1];
+                    $image->weight = rand(1,255);
+                    $image->save();
+                    $image->saveFile($temp);
+
+                    $design->images()->save($image);
+
+                    sleep(3); // Avoid downloading the same image because of HTTP cache
+                }
+
+                $n3 = rand(1, 10);
+
+                $tags = App\Tag::take(intval($n3))->orderByRaw('RAND()')->get();
+
+                for ($i3 = 0; $i3 < $n3; $i3++) {
+                    $design->tags()->attach($tags->pop()->id);
+                }
+            }
+        });
     }
 }
