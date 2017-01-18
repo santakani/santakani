@@ -36,23 +36,9 @@
         }
     }
 
-    sidebar {
-        position: relative; // Important for Affix detection!
-
-        // Before fixed position, scroll top
-        &.affix-top {
-            //
-        }
-
-        // In fixed position
-        &.affix {
-            position: fixed; // Important for Affix detection!
-            bottom: 0;
-        }
-
-        // After fixed position, scroll bottom
-        &.affix-bottom {
-            //
-        }
+    .sticky {
+        position: sticky;
+        top: $custom-navbar-height + 20px;
+        z-index: 100;
     }
 }

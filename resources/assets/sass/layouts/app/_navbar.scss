@@ -1,7 +1,9 @@
 nav.custom-navbar {
     $icon-size: 32px;
 
-    position: fixed;
+    position: sticky;
+    top: 0;
+    left: 0;
     width: 100%;
     height: $custom-navbar-height;
     background-color: #fff;

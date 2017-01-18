@@ -100,4 +100,3 @@
         @endif
     </ul>
 </nav>
-<div class="custom-navbar-space"></div>
