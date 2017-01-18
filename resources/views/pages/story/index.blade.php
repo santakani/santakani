@@ -6,47 +6,68 @@
 ])
 
 @section('main')
-    <section id="story-filter" class="article-filter">
-        <form action="/story" method="get">
-            <div class="form-group">
-                <label>{{ trans('common.search') }}</label>
-                <input type="search" name="search" value="{{ request()->input('search') }}"
-                       class="form-control" placeholder="{{ trans('common.search') }}"
-                       maxlength="50"/>
-            </div>
-            <div class="form-group">
-                <label>{{ trans('common.tag') }}</label>
-                @include('components.tag-filter', ['selected' => request()->input('tag_id')])
-            </div>
-        </form>
-    </section><!-- #story-filter -->
 
-    <section id="story-list" class="article-list">
-        <div class="list">
+<div class="container">
+
+    <h1 class="page-header">Stories</h1>
+    <p class="lead">Share design skills, ideas and dreams.</p>
+
+    <div class="row">
+        <!-- article list -->
+        <div class="col-sm-8">
             @foreach ($stories as $story)
-                <article>
-                    <a href="{{ $story->url }}">
-                        <div class="cover">
-                            @if ($story->image_id)
-                                <img class="image" src="{{ $story->image->thumb_file_url }}"
-                                    srcset="{{ $story->image->largethumb_file_url }} 2x"/>
-                            @else
-                                <img class="image" src="{{ url('img/placeholder/square.png') }}"/>
-                            @endif
-                        </div>
-                        <div class="text">
-                            <div class="inner">
-                                <h2>{{ $story->text('title') }}</h2>
-                                <div class="tagline text-muted">{{ $story->text('tagline') }}</div>
-                                <div class="excerpt">{{ $story->excerpt('content') }}</div>
-                            </div>
-                        </div>
-                    </a>
+                <article class="story panel panel-default">
+                    <div class="clearfix panel-body" href="{{ $story->url }}">
+                        @if ($story->image)
+                            <a href="{{ $story->url }}">
+                                <img class="pull-right" src="{{ $story->image->small_file_url }}" srcset="{{ $story->image->medium_file_url }} 2x"/>
+                            </a>
+                        @endif
+                        <h2><a href="{{ $story->url }}">{{ $story->text('title') }}</a></h2>
+                        <p class="excerpt">{{ $story->excerpt('content') }}</p>
+                    </div>
+                    <footer class="panel-footer text-muted">
+                        <ul class="list-inline">
+                            <li>
+                                <a href="{{ $story->user->url }}">
+                                    <img class="avatar" src="{{ $story->user->small_avatar_url }}" width="25" height="25">
+                                    {{ $story->user->name }}
+                                </a>
+                            </li>
+                            <li>{{ $story->created_at->toDateString() }}</li>
+                            <li><i class="fa fa-lg fa-heart-o"></i> {{ $story->like_count }}</li>
+                        </ul>
+                    </footer>
                 </article>
             @endforeach
-        </div>
-        <div class="pagination-wrap">
+
             {!! $stories->appends(app('request')->all())->links() !!}
         </div>
-    </section><!-- #story-list -->
+
+        <!-- sidebar -->
+        <div class="col-sm-4">
+            <sidebar data-spy="affix" data-offset-top="350" data-offset-bottom="200">
+                <form action="/story" method="get">
+                    <input type="search" name="search" value="{{ request('search') }}" class="form-control" placeholder="{{ trans('common.search') }}" maxlength="50"/>
+                </form>
+
+                <br><br>
+
+                <div class="list-group">
+                    <a class="list-group-item {{ request('tag_id')?'':'active' }}" href="/story">
+                        <span class="badge">{{ App\Story::count() }}</span>
+                        {{ trans('common.all') }}</a>
+                    @foreach (App\Tag::take(20)->orderBy('level', 'desc')->orderBy('id')->get() as $tag)
+                        <a class="list-group-item {{ request('tag_id')==$tag->id?'active':'' }}" href="/story?tag_id={{ $tag->id }}">
+                            <span class="badge">{{ $tag->stories()->count() }}</span>
+                            {{ $tag->text('name') }}
+                        </a>
+                    @endforeach
+                </div>
+            </sidebar>
+        </div>
+    </div>
+
+</div>
+
 @endsection
