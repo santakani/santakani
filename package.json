@@ -1,31 +1,28 @@
 {
   "private": true,
-  "devDependencies": {
-    "gulp": "^3.8.8"
-  },
+  "devDependencies": {},
   "dependencies": {
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "backbone": "^1.3.3",
+    "bootstrap": "^3.3.7",
     "bootstrap-sass": "^3.3.6",
-    "d3": "^3.5.17",
     "flag-icon-css": "^2.3.0",
-    "flickity": "^1.2.1",
     "font-awesome": "^4.6.3",
-    "imagesloaded": "^4.1.0",
+    "gulp": "^3.8.8",
     "jquery": "^2.2.4",
     "jquery.scrollto": "^2.1.2",
     "js-cookie": "^2.1.2",
     "laravel-elixir": "^4.0.0",
+    "laravel-elixir-svgstore": "^1.0.3",
     "leaflet": "^0.7.7",
     "lightgallery": "^1.2.19",
     "lightslider": "^1.1.5",
-    "masonry-layout": "^4.1.0",
     "roboto-fontface": "^0.4.5",
     "selectize": "^0.12.3",
     "sortablejs": "^1.4.2",
     "sweetalert": "^1.1.3",
-    "tinymce": "^4.3.12",
+    "tinymce": "^4.5.2",
     "underscore": "^1.8.3"
   }
 }

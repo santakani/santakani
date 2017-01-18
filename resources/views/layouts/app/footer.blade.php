@@ -1,6 +1,6 @@
 <footer id="app-footer" class="app-footer">
     <div class="container-fluid">
-        <ul class="list-inline">
+        <ul class="link-list list-inline">
             <li><a href="{{ url('privacy') }}">{{ trans('common.privacy') }}</a></li>
             <li><a href="{{ url('terms') }}">{{ trans('common.terms_of_service') }}</a></li>
             <li><a href="https://github.com/santakani/santakani.com" target="_blank">{{ trans('common.source_code') }}</a></li>
@@ -13,8 +13,24 @@
                 <li><a href="#" data-toggle="modal" data-target="#wechat-modal">微信</a></li>
                 <li><a href="http://weibo.com/santakani" target="_blank">微博</a></li>
             @endif
+            <li class="dropup">
+                <a href="#" data-toggle="dropdown">
+                    {{ trans('common.language') }}:
+                    {{ locale_get_display_name(App::getLocale(), App::getLocale()) }}
+                    ({{ locale_get_display_name(App::getLocale(), 'en') }})
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    @foreach (App\Localization\Languages::names() as $locale => $name)
+                        <li class="{{ $locale === App::getLocale()?'active':'' }}">
+                            <a href="{{ url()->current() }}?{{ http_build_query(array_add(request()->except('lang'), 'lang', $locale)) }}">
+                                {{ $name['native'] }} ({{ $name['english'] }})
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </li>
         </ul>
-        <p>2016{{ date("Y") > 2016?'-'.date("Y"):'' }} {{ trans('brand.name') }}</p>
+        <p>2016{{ date("Y") > 2016?'&ndash;'.date("Y"):'' }} {{ trans('brand.name') }}</p>
     </div>
 </footer>
 @if (App::getLocale() === 'zh')

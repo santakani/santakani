@@ -1,94 +1,13 @@
 #home-page {
 
-    header {
-        min-height: 300px;
-        overflow: hidden;
+    header#home-page-header {
+        h1 {
+            font-size: 3em;
 
-        #slides {
-            position: relative;
-            height: 100%;
-
-            .slide {
-                position: relative;
-                display: flex;
-                width: 100%;
-                height: 100%;
-                justify-content: center;
-                align-items: center;
-                @include image-cover();
-
-                .text {
-                    max-width: 25em;
-                    padding: 1em;
-                    background-color: rgba(255,255,255,0.6);
-                    color: #000000;
-                }
-
-                h1 {
-                    //
-                }
-
-                p {
-                    font-weight: 300;
-                }
-
-                .btn {
-                    font-size: 14px;
-                    font-weight: 300;
-                    border: 1px solid #000000;
-                    background-color: transparent;
-                    color: #000000;
-                }
-
-                @media screen and (min-width: $screen-sm-min) {
-                    font-size: 16px;
-                    padding: 0 30px;
-                    justify-content: flex-start;
-
-                    .text {
-                        padding: 2em;
-                    }
-
-                    .flickity-prev-next-button {
-                        display: block;
-                    }
-                }
-
-                @media screen and (min-width: $screen-md-min) {
-                    padding: 0 50px;
-                }
-
-                @media screen and (min-width: $screen-lg-min) {
-                    padding: 0 100px;
-                }
+            small {
+                font-size: 0.5em;
             }
-
-            .flickity-prev-next-button {
-                display: none;
-
-                @media screen and (min-width: $screen-sm-min) {
-                    display: block;
-                }
-            }
-
-            .flickity-page-dots {
-                bottom: 20px;
-
-                .dot {
-                    width: 12px;
-                    height: 12px;
-                    opacity: 1;
-                    background: transparent;
-                    border: 2px solid white;
-
-                    &.is-selected {
-                        background: white;
-                    }
-                }
-            }
-
         }
-
     }
 
     main {

@@ -1,39 +1,18 @@
 @extends('layouts.app', [
     'body_id' => 'home-page',
     'body_classes' => ['home-page', 'index-page'],
-    'active_nav' => 'home',
+    'active_nav' => 'design',
 ])
 
-@section('header')
-    <div id="slides" class="slides">
-        <div class="slide" style="background-image:url(/img/banner/1.jpg)">
-            <div class="text">
-                <h1>{{ trans('home.slide_1.title') }}</h1>
-                <p>{{ trans('home.slide_1.content') }}</p>
-                <a class="btn btn-default" href="/designer" role="button">{{ trans('designer.designer_list') }}</a>
-                <a class="btn btn-default" href="/designer/create" role="button">{{ trans('designer.create_a_designer_page') }}</a>
-            </div><!-- .text -->
-        </div><!-- .slide -->
-        <div class="slide" style="background-image:url(/img/banner/2.jpg)">
-            <div class="text">
-                <h1>{{ trans('home.slide_2.title') }}</h1>
-                <p>{{ trans('home.slide_2.content') }}</p>
-                <a class="btn btn-default" href="/place" role="button">{{ trans('geo.map') }}</a>
-                <a class="btn btn-default" href="/place/create" role="button">{{ trans('place.create_a_place_page') }}</a>
-            </div>
-        </div><!-- .slide -->
-        <div class="slide" style="background-image:url(/img/banner/3.jpg)">
-            <div class="text">
-                <h1>{{ trans('home.slide_3.title') }}</h1>
-                <p>{{ trans('home.slide_3.content') }}</p>
-                <a class="btn btn-default" href="/story" role="button">{{ trans('story.story_list') }}</a>
-                <a class="btn btn-default" href="/story/create" role="button">{{ trans('story.write_a_design_story') }}</a>
-            </div>
-        </div><!-- .slide -->
-    </div>
-@endsection
-
 @section('main')
+    <header id="home-page-header" class="home-page-header">
+        <div class="container">
+            <h1>
+                <small>Santakani</small><br>
+                Explore Original, Special Designs
+            </h1>
+        </div>
+    </header>
 
     <section id="story-list" class="article-list">
         <h2 class="heading">

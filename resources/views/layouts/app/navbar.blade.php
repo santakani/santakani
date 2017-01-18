@@ -1,84 +1,51 @@
-<?php
-if (!isset($active_nav)) {
-    $active_nav = '';
-}
-
-$nav_menu_left = [
-    'home' => [
-        'text' => trans('common.home'),
-        'url' => url('/'),
-    ],
-    'design' => [
-        'text' => trans('design.designs'),
-        'url' => url('design'),
-    ],
-    'designer' => [
-        'text' => trans('designer.designers'),
-        'url' => url('designer'),
-    ],
-
-    'place' => [
-        'text' => trans('place.places'),
-        'url' => url('place'),
-    ],
-    'story' => [
-        'text' => trans('story.stories'),
-        'url' => url('story'),
-    ],
-];
-
-if (!empty($nav_no_design)) {
-    unset($nav_menu_left['design']);
-}
-
-if (!empty($nav_no_story)) {
-    unset($nav_menu_left['story']);
-}
-
-
-$nav_menu_right = [
-    'login' => [
-        'text' => trans('common.login'),
-        'url' => app_redirect_url('login'),
-    ],
-    'register' => [
-        'text' => trans('common.register'),
-        'url' => app_redirect_url('register'),
-    ],
-];
-
-?>
+<?php isset($active_nav) || $active_nav = null; ?>
 
 <nav class="custom-navbar">
-    <a href="{{ url('/') }}" class="logo"></a>
     <ul class="nav-menu">
-        @foreach ($nav_menu_left as $key => $value)
-            <li class="{{ $active_nav === $key?'active':'' }}">
-                <a href="{{ $value['url'] }}">
-                    <span class="stroke-icon icon-{{ $key }}"></span>
-                    <span class="text hidden-xs">{{ $value['text'] }}</span>
-                </a>
-            </li>
-        @endforeach
+        <li class="brand hidden-xs">
+            <a href="{{ url('/') }}">
+                <svg class="icon"><use xlink:href="/svg/sprites.svg#santakani"/></svg>
+                <span class="text">{{ trans('brand.name') }}</span>
+            </a>
+        </li>
+        <li class="{{ $active_nav === 'design'?'active':'' }}">
+            <a href="{{ url('/') }}">
+                <svg class="icon"><use xlink:href="/svg/sprites.svg#design"/></svg>
+                <span class="text">{{ trans('design.design') }}</span>
+            </a>
+        </li>
+        <li class="{{ $active_nav === 'place'?'active':'' }}">
+            <a href="{{ url('place') }}">
+                <svg class="icon"><use xlink:href="/svg/sprites.svg#map"/></svg>
+                <span class="text">{{ trans('geo.map') }}</span>
+            </a>
+        </li>
+        <li class="{{ $active_nav === 'story'?'active':'' }}">
+            <a href="{{ url('story') }}">
+                <svg class="icon"><use xlink:href="/svg/sprites.svg#story"/></svg>
+                <span class="text">{{ trans('story.story') }}</span>
+            </a>
+        </li>
+
         <li class="space"></li>
-        @include('components.dropdown.languages')
+
         @if (Auth::guest())
-            <li>
+            <li class="{{ $active_nav === 'login'?'active':'' }}">
                 <a href="{{ app_redirect_url('login') }}">
-                    <span class="stroke-icon icon-login"></span>
-                    <span class="text hidden-xs">{{ trans('common.login') }}</span>
+                    <svg class="icon"><use xlink:href="/svg/sprites.svg#login"/></svg>
+                    <span class="text">{{ trans('common.login') }}</span>
                 </a>
             </li>
-            <li class="hidden-xs">
+            <li class="hidden-xs {{ $active_nav === 'register'?'active':'' }}">
                 <a href="{{ app_redirect_url('register') }}">
-                    <span class="stroke-icon icon-register"></span>
-                    <span class="text hidden-xs">{{ trans('common.register') }}</span>
+                    <svg class="icon"><use xlink:href="/svg/sprites.svg#register"/></svg>
+                    <span class="text">{{ trans('common.register') }}</span>
                 </a>
             </li>
         @else
             <li class="dropdown hidden-xs">
                 <a href="#" class="create dropdown-toggle" data-toggle="dropdown">
-                    <span class="stroke-icon icon-create"></span>
+                    <svg class="icon"><use xlink:href="/svg/sprites.svg#create"/></svg>
                     <span>{{ trans('common.create') }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">

@@ -11,6 +11,7 @@
 /public/css
 /public/js
 /public/build
+/public/svg
 
 # Copyed files
 /public/lib

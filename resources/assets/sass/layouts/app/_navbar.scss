@@ -1,12 +1,11 @@
 nav.custom-navbar {
-    $shadow-size: 5px;
     $icon-size: 32px;
 
     position: fixed;
     width: 100%;
     height: $custom-navbar-height;
     background-color: #fff;
-    box-shadow: 0 $shadow-size 0 rgba(0,0,0,0.2);
+    border-bottom: 1px solid $gray-lighter;
     z-index: 100;
 
     .nav-menu {
@@ -25,13 +24,16 @@ nav.custom-navbar {
                 flex: 0 0 0;
             }
 
+            &.brand {
+                font-weight: 500;
+            }
+
             > a {
                 display: block;
                 height: 100%;
                 padding: 0 5px;
                 text-decoration: none;
                 text-align: center;
-                font-weight: 300;
                 color: #555555;
                 transition: 0.3s;
 
@@ -46,39 +48,24 @@ nav.custom-navbar {
 
             &.active {
                 > a {
-                    box-shadow: 0 $shadow-size 0 $brand-info;
+                    box-shadow: 0 -3px 0 $brand-info inset;
                 }
             }
 
             &:hover {
                 > a {
-                    background-color: lighten($brand-info, 35%);
+                    background-color: lighten($brand-info, 25%);
                 }
             }
         }
 
     }
 
-    .stroke-icon {
+    svg.icon {
         width: $icon-size;
         height: $icon-size;
         margin-top: ($custom-navbar-height - $icon-size) / 2;
         vertical-align: top;
-    }
-
-    .logo {
-        $logo-size: $icon-size * 1.3;
-        display: none;
-        position: absolute;
-        width: $logo-size;
-        height: $logo-size;
-        left: 50%;
-        top: ($custom-navbar-height - $logo-size) / 2;
-        margin-left: - $logo-size / 2;
-        background-image: url(/img/logo/without-shadow.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 80%;
     }
 
     .avatar {
@@ -122,40 +109,12 @@ nav.custom-navbar {
             > li{
                 flex: 0 0 auto;
 
-                > a {
-                    font-size: 12px;
-                }
-
                 &.space {
                     flex: 1 1 auto;
                 }
 
                 .text {
                     display: inline;
-                }
-            }
-        }
-
-        .logo {
-            display: block;
-        }
-    }
-
-    @media (min-width: $screen-md-min) {
-        .nav-menu {
-            > li{
-                > a {
-                    font-size: 14px;
-                }
-            }
-        }
-    }
-
-    @media (min-width: $screen-lg-min) {
-        .nav-menu {
-            > li{
-                > a {
-                    font-size: 16px;
                 }
             }
         }

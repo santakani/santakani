@@ -11,7 +11,7 @@
         right: 0;
     }
 
-    a {
+    .link-list > li > a:not(:hover) {
         color: inherit;
     }
 }
