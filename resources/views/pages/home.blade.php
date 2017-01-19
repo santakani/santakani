@@ -8,9 +8,17 @@
     <header id="home-page-header" class="home-page-header">
         <div class="container">
             <h1>
-                <small>Santakani</small><br>
-                Explore Original, Special Designs
+                <small>{{ trans('brand.name') }}&mdash;{{ trans('brand.summary') }}</small><br>
+                {{ trans('brand.mission') }}
             </h1>
+            <a href="{{ url('designer/create') }}" class="btn btn-primary">
+                <i class="fa fa-address-card"></i>
+                Create Designer Profile
+            </a>
+            <a href="{{ url('place/create') }}" class="btn btn-default">
+                <i class="fa fa-map-marker"></i>
+                Mark Design Shop/Studio
+            </a>
         </div>
     </header>
 
