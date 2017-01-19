@@ -1,6 +1,6 @@
 <?php
 // Default values
-$title = isset($title) ? $title . ' - ' . trans('brand.name') : trans('brand.name') . ': ' . trans('brand.summary');
+$title = isset($title) ? $title . ' - ' . trans('brand.name') : trans('brand.name') . ' - ' . trans('brand.title');
 $has_navbar = isset($has_navbar)?$has_navbar:true;
 $has_header = isset($has_header)?$has_header:true;
 $has_footer = isset($has_footer)?$has_footer:true;
@@ -18,6 +18,7 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     <title>{{ $title }}</title>
 
     <meta name="description" content="{{ $og_description or trans('brand.description') }}">
+    <meta name="keywords" content="{{ $keywords or trans('brand.keywords') }}">
 
     <!-- Open Graph Protocol: Facebook, Google+ -->
     <meta property="og:title" content="{{ $og_title or $title }}">

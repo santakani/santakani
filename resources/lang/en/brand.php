@@ -23,9 +23,9 @@ return array(
     */
 
     'name' => 'Santakani',
-    'summary' => 'Platform of Independent Design',
-    'summary_seo' => 'Platform of Independent Design from Finland',
-    'keywords' => 'design, designer, design shop, independent design, Finland, Finnish design',
+    'summary' => 'Platform & Community of Independent Design',
+    'title' => 'Find amazing Finnish design by independent designers. Explore local design shops in Helsinki.',
+    'keywords' => 'design, designer, design shop, independent design, Finland, Finnish design, furniture, fashion, jewelry, graphics, ceramics, glass',
     'mission' => 'Connect Design Enthusiasts & Designers',
     'description' => 'Connect independent designers and design lovers. Bring creative designs and ideas to more places.',
 );
