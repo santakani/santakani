@@ -39,6 +39,6 @@
     .sticky {
         position: sticky;
         top: $custom-navbar-height + 20px;
-        z-index: 100;
+        z-index: 10;
     }
 }
