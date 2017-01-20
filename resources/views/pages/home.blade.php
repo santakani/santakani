@@ -43,11 +43,11 @@
                     </header>
 
                     <div class="image-gallery gallery">
-                        <a class="cover-wrap image-wrap" href="{{ $designer->image->large_file_url }}">
-                            @if ($designer->image_id)
+                        @if ($designer->image_id)
+                            <a class="cover-wrap image-wrap" href="{{ $designer->image->large_file_url }}">
                                 <img class="cover image" src="{{ $designer->image->medium_file_url }}"/>
-                            @endif
-                        </a>
+                            </a>
+                        @endif
                         @foreach ($designer->gallery_images as $image)
                             <a class="image-wrap" href="{{ $image->large_file_url }}">
                                 <img class="image" src="{{ $image->medium_file_url }}"/>
@@ -57,9 +57,11 @@
                     <div class="design-gallery gallery">
                         @foreach ($designer->designs as $design)
                             <a class="design-wrap image-wrap" href="{{ $design->url }}">
-                                <img class="design-cover image" src="{{ $design->image->medium_file_url }}"/>
+                                @if ($design->image_id)
+                                    <img class="design-cover image" src="{{ $design->image->medium_file_url }}"/>
+                                @endif
                                 @if ($design->price && $design->currency)
-                                <span class="price">{{ $design->price . ' ' . $design->currency }}</span>
+                                    <span class="price">{{ $design->price . ' ' . $design->currency }}</span>
                                 @endif
                             </a>
                         @endforeach
