@@ -1,1 +1,1 @@
-// Noting to do
+$('.designer .image-gallery').lightGallery();

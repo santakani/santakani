@@ -68,6 +68,8 @@ $flag-icon-css-path: '/img/flags' !default;
 @import "components/article-filter";
 @import "components/article-list";
 
+@import "components/buttons.scss";
+
 @import "components/grid/grid-container";
 @import "components/grid/grid";
 @import "components/grid/article-grid";

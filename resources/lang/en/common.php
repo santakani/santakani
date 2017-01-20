@@ -61,6 +61,7 @@ return array(
     'image' => 'Image',
     'images' => 'Images',
     'language' => 'Language',
+    'learn_more' => 'Learn more',
     'level' => 'Level',
     'like' => 'Like',
     'link' => 'Link',
