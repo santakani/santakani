@@ -103,6 +103,12 @@ $flag-icon-css-path: '/img/flags' !default;
 @import "components/upload/image-manager";
 @import "components/upload/image-preview";
 
+//==============================================================================
+// Graphics
+//==============================================================================
+
+@import "graphics/textures";
+
 
 //==============================================================================
 // Layout
