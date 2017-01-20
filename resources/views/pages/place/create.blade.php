@@ -1,11 +1,11 @@
 @extends('layouts.create', [
-    'title' => trans('place.create_a_place_page'),
+    'title' => trans('place.create_place'),
     'body_id' => 'place-create-page',
     'body_classes' => ['place-create-page', 'place-page'],
     'active_nav' => 'place',
 ])
 
-@section('panel_title', trans('place.create_a_place_page'))
+@section('panel_title', trans('place.create_place'))
 
 @section('panel_body')
     <form class="form" action="{{ url('place') }}" method="post">

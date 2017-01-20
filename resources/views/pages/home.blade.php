@@ -11,13 +11,11 @@
                 <small>{{ trans('brand.name') }}&mdash;{{ trans('brand.summary') }}</small><br>
                 {{ trans('brand.mission') }}
             </h1>
-            <a href="{{ url('designer/create') }}" class="btn btn-primary">
-                <i class="fa fa-address-card"></i>
-                Create Designer Profile
+            <a href="{{ url('designer/create') }}" class="btn btn-default">
+                {{ trans('design.create_designer') }}
             </a>
             <a href="{{ url('place/create') }}" class="btn btn-default">
-                <i class="fa fa-map-marker"></i>
-                Mark Design Shop/Studio
+                {{ trans('place.create_place') }}
             </a>
         </div>
     </header>

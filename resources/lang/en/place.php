@@ -31,7 +31,7 @@ return array(
     'my_place_pages_description' => 'Place pages you created.',
 
     // Create
-    'create_a_place_page' => 'Create a place page',
+    'create_place' => 'Mark Shop/Studio',
 
     // Edit
 

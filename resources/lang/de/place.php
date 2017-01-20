@@ -11,7 +11,7 @@ return array(
     'my_place_pages_description' => 'Platzieren Sie Seiten, die Sie erstellt haben.',
 
     // Create
-    'create_a_place_page' => 'Erstellen Sie eine Seite Platz',
+    'create_place' => 'Erstellen Sie eine Seite Platz',
 
     // Edit
 

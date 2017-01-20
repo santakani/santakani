@@ -11,7 +11,7 @@ return array(
     'my_place_pages_description' => 'Sidor plats du har skapat',
 
     // Create
-    'create_a_place_page' => 'Skapa en sida plats',
+    'create_place' => 'Skapa en sida plats',
 
     // Edit
 

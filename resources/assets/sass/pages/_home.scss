@@ -3,12 +3,19 @@
     header#home-page-header {
         padding: 50px 0;
         background-image: url(/img/textures/light-natural-01.svg);
+
         h1 {
             font-size: 3em;
 
             small {
                 font-size: 0.5em;
             }
+        }
+
+        .btn-default {
+            background: rgba(0,0,0,0.7);
+            color: #ffffff;
+            border: none;
         }
     }
 
@@ -75,119 +82,6 @@
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
-        }
-    }
-}
-
-// Test 1A
-
-#home-page.home1a {
-    header {
-        h1 {
-            font-weight: 900;
-        }
-
-        input {
-            width: 500px;
-            max-width: 80%;
-            border: none;
-            background-color: rgba(255,255,255,0.5);
-            box-shadow: none;
-            text-align: center;
-        }
-
-        input::-moz-placeholder {
-            color: $gray;
-        }
-    }
-}
-
-// Test 1B
-
-#home-page.home1b {
-    header {
-        max-height: 400px;
-        .page-cover {
-            max-height: 400px;
-            background-position: 0 0;
-            background-size: contain;
-            background-color: #ececec;
-        }
-
-        h1 {
-            font-weight: 200;
-            color: $gray;
-        }
-
-        input {
-            width: 500px;
-            max-width: 80%;
-            border: none;
-            background-color: rgba(255,255,255,0.5);
-            box-shadow: none;
-            text-align: center;
-        }
-
-        input::-moz-placeholder {
-            color: $gray;
-        }
-    }
-}
-
-// Test 1C
-
-#home-page.home1c {
-    header {
-        max-height: 400px;
-        .page-cover {
-            max-height: 400px;
-            background-color: #EAEFF2;
-        }
-
-        h1 {
-            font-weight: 200;
-            color: $gray;
-        }
-
-        input {
-            width: 500px;
-            max-width: 80%;
-            border: none;
-            background-color: rgba(255,255,255,0.5);
-            box-shadow: none;
-            text-align: center;
-        }
-
-        input::-moz-placeholder {
-            color: $gray;
-        }
-    }
-}
-
-// Test 2B
-
-#home-page.home2b {
-    .article-list {
-        .heading {
-            flex: 1 0 100%;
-            width: 100%;
-            min-width: 100%;
-            max-width: 100%;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .cover {
-            position: relative;
-        }
-
-        .label {
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            background-color: $brand-primary;
-            font-size: 1em;
         }
     }
 }

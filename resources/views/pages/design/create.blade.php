@@ -1,11 +1,11 @@
 @extends('layouts.create', [
-    'title' => trans('design.create_a_design'),
+    'title' => trans('design.create_design'),
     'body_id' => 'story-create-page',
     'body_classes' => ['story-create-page', 'story-page'],
     'active_nav' => 'story',
 ])
 
-@section('panel_title', trans('design.create_a_design'))
+@section('panel_title', trans('design.create_design'))
 
 @section('panel_body')
 

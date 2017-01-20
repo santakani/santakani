@@ -28,4 +28,6 @@ return array(
     'webshop_link' => '网店链接',
     'taobao_price' => '淘宝价格',
     'taobao_link' => '淘宝链接',
+    'create_designer' => '创建设计师主页',
+    'create_design' => '创建设计',
 );

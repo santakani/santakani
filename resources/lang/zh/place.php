@@ -31,7 +31,7 @@ return array(
     'my_place_pages_description' => '您创建的地点页面。',
 
     // Create
-    'create_a_place_page' => '创建地点页面',
+    'create_place' => '标记设计店/工作室',
 
     // Edit
 

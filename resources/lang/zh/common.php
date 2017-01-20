@@ -61,6 +61,7 @@ return array(
     'image' => '图片',
     'images' => '图片',
     'language' => '语言',
+    'learn_more' => '了解更多',
     'level' => '等级',
     'like' => '喜欢',
     'link' => '链接',

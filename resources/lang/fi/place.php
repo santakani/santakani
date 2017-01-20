@@ -31,7 +31,7 @@ return array(
     'my_place_pages_description' => 'Sinun luomat paikat',
 
     // Create
-    'create_a_place_page' => 'Luo paikka sivulle',
+    'create_place' => 'Luo paikka sivulle',
 
     // Edit
 
