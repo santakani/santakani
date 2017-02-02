@@ -71,6 +71,8 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
         @include('layouts.app.navbar')
     @endif
 
+    @include('layouts.app.alerts')
+
     @if ($has_header)
         <header id="app-header" class="app-header {{ $header_class or '' }}">
             @yield('header')

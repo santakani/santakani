@@ -98,9 +98,13 @@ class DesignerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('pages.designer.create');
+        if ($request->user()->can('create-designer')) {
+            return view('pages.designer.create');
+        } else {
+            return back()->with('warning', trans('designer.designer_number_limit'));
+        }
     }
 
     /**
@@ -113,6 +117,11 @@ class DesignerController extends Controller
      */
     public function store(Request $request)
     {
+        // Check permission, a user can create ONLY ONE designer page
+        if ($request->user()->cannot('create-designer')) {
+            abort(403);
+        }
+
         // Validate data
         $this->validate($request, [
             'name' => 'required|string|max:255',
