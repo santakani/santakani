@@ -45,6 +45,9 @@ nav.custom-navbar {
 
                 &.create {
                     color: $brand-primary;
+                    svg use path {
+                        fill: $brand-primary;
+                    }
                 }
             }
 
