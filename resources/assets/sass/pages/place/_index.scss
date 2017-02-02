@@ -1,22 +1,15 @@
 #place-index-page {
     main {
-        display: flex;
         position: fixed;
         top: $custom-navbar-height;
         left: 0;
         right: 0;
         bottom: 0;
-    }
-
-    #place-map, #place-list {
-        .float-icon {
-            display: none;
-        }
+        display: flex;
     }
 
     #place-map {
-        flex: 1 1 400px;
-
+        flex: 1 1 800px;
         .leaflet-popup {
             $image-size: 150px;
 
@@ -61,35 +54,51 @@
     }
 
     #place-list {
-        flex: 0 0 360px;
-        height: 100%;
-        overflow-y: auto;
-        background-color: $bg-light;
+        display: flex;
+        flex-direction: column;
+        flex: 0 1 450px;
+        padding: 10px;
+        background-color: #ffffff;
 
-        @media (min-width: 400px + 2 * 320px + 20px + $scrollbar-width) {
-            min-width: 2 * 320px + 20px + $scrollbar-width;
+        form.filter {
+            flex: 0 0 auto;
         }
 
-        @media (min-width: 400px + 3 * 320px + 20px + $scrollbar-width) {
-            min-width: 3 * 320px + 20px + $scrollbar-width;
+        .list {
+            flex: 1 1 auto;
+            margin-top: 20px;
+            overflow-y: auto;
+
+            .place {
+                .image {
+                    width: 100px;
+                }
+
+                h3 {
+                    font-size: $font-size-base;
+                    font-weight: 500;
+                    margin-top: 0;
+                    margin-bottom: 10px;
+                }
+
+                p {
+                    margin-bottom: 10px;
+                }
+            }
         }
     }
 
-    @media screen and (max-width: $screen-xs-max) {
-        #place-map, #place-list {
-            position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            z-index: -1;
+    @media (max-width: $screen-xs-max) {
+        main {
+            flex-direction: column;
+        }
 
-            &.active {
-                z-index: 1;
-            }
+        #place-list {
+            flex: 0 1 300px;
+            max-height: 300px;
 
-            .float-icon {
-                display: block;
+            .list {
+                display: none;
             }
         }
     }

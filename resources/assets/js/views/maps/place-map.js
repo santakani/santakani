@@ -109,7 +109,7 @@ module.exports = Backbone.View.extend({
 
         var that = this;
 
-        this.$('#place-list article').each(function () {
+        this.$('#place-list .place').each(function () {
             var model = new Place($(this).data('model'));
 
             var placeRow = new PlaceRow({el: this, model: model});

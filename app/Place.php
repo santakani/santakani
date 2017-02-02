@@ -265,7 +265,7 @@ class Place extends Model
      */
     public static function types()
     {
-        return ['shop', 'studio', 'showroom', 'museum', 'school'];
+        return ['shop', 'studio', 'showroom', 'museum'];
     }
 
     /**

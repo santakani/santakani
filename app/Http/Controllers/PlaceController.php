@@ -69,8 +69,12 @@ class PlaceController extends Controller
         }
 
         if ($request->has('type')) {
-            $query = $query->where('type', $request->input('type'));
+            $type = $request->input('type');
+        } else {
+            $type = 'shop';
         }
+
+        $query = $query->where('type', $type);
 
         if ($request->has('tag_id')) {
             $query = $query->whereHas('tags', function ($sub_query) use ($request) {
@@ -82,12 +86,12 @@ class PlaceController extends Controller
 
         $query->orderByRaw('RAND(' . Random::getUserSeed() . ')');
 
-        $places = $query->paginate(24);
+        $places = $query->paginate(100);
 
         return view('pages.place.index', [
             'places' => $places,
             'city' => $city,
-            'type' => $request->input('type'),
+            'type' => $type,
         ]);
     }
 
