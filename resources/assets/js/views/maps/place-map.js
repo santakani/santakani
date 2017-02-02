@@ -41,7 +41,7 @@ var PlaceRow = Backbone.View.extend({
     },
 
     scrollTo: function () {
-        $('#place-list').scrollTo(this.el, 300, {offset: -80});
+        $('#place-list .list').scrollTo(this.el, 300, {offset: -80});
     }
 
 });
