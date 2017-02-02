@@ -24,6 +24,7 @@ return array(
 
     'place' => 'Place',
     'places' => 'Places',
+    'list_title' => 'Design shops, showrooms and museums in :cityname',
     'place_list' => 'Place list',
     'place_pages' => 'Place pages',
 
