@@ -17,8 +17,11 @@
             <div class="form-group">
                 @include('inputs.place-type', ['selected' => $type])
             </div>
-            <div class="form-group">
+            <div class="input-group">
                 <input type="search" name="search" value="{{ request()->input('search') }}" id="place-search" class="form-control" maxlength="50" placeholder="{{ trans('common.search') }}" autocomplete="off" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i> {{ trans('common.search') }}</button>
+                </span>
             </div>
             @include('inputs.tag-filter', ['selected' => request()->input('tag_id')])
         </form>
