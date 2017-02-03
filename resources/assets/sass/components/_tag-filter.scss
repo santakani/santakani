@@ -2,5 +2,10 @@
     a {
         margin: 5px;
         display: inline-block; // avoid line break
+
+        &.active {
+            color: inherit;
+            font-weight: bold;
+        }
     }
 }
