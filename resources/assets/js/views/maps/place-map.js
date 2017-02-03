@@ -109,12 +109,16 @@ module.exports = Backbone.View.extend({
 
         var that = this;
 
+        var bounds = [];
+
         this.$('#place-list .place').each(function () {
             var model = new Place($(this).data('model'));
 
             var placeRow = new PlaceRow({el: this, model: model});
 
             var placeMarker = new PlaceMarker({model: model});
+
+            bounds.push([model.get('latitude'), model.get('longitude')]);
 
             if (placeMarker.marker) {
                 placeMarker.marker.addTo(that.map);
@@ -130,6 +134,8 @@ module.exports = Backbone.View.extend({
 
             placeRow.listenTo(placeMarker, 'activate', placeRow.scrollTo);
         });
+
+        this.map.fitBounds(bounds, {paddingTopLeft: [40, 15], paddingBottomRight: [15, 15]});
     },
 
     activateRow: function (placeRow) {
