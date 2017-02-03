@@ -135,7 +135,9 @@ module.exports = Backbone.View.extend({
             placeRow.listenTo(placeMarker, 'activate', placeRow.scrollTo);
         });
 
-        this.map.fitBounds(bounds, {paddingTopLeft: [40, 15], paddingBottomRight: [15, 15]});
+        if (bounds.length > 0) {
+            this.map.fitBounds(bounds, {paddingTopLeft: [40, 15], paddingBottomRight: [15, 15]});
+        }
     },
 
     activateRow: function (placeRow) {
