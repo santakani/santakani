@@ -25,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $designers = Designer::orderBy('editor_pick', 'desc')->orderByRaw('RAND(' . Random::getUserSeed() . ')')->paginate(30);
+        $designers = Designer::has('images')
+            ->orderBy('editor_pick', 'desc')
+            ->orderByRaw('RAND(' . Random::getUserSeed() . ')')
+            ->paginate(30);
         return view('pages.home', [
             'designers' => $designers,
         ]);
