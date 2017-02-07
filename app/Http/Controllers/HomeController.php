@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App;
+use App\Http\Requests;
+use App\Designer;
+use App\Support\Random;
+
+use Auth;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
-use App\Design;
-use App\Designer;
-use App\Place;
-use App\Story;
-use App\Support\Random;
-use App\Tag;
 
 class HomeController extends Controller
 {
@@ -21,14 +16,16 @@ class HomeController extends Controller
     /**
      * Home page.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $designers = Designer::has('images')
             ->orderBy('editor_pick', 'desc')
             ->orderByRaw('RAND(' . Random::getUserSeed() . ')')
             ->paginate(30);
+
         return view('pages.home', [
             'designers' => $designers,
         ]);
