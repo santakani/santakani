@@ -39,6 +39,12 @@
             margin-bottom: 5px;
         }
 
+        .editor-pick-icon {
+            margin-left: 20px;
+            color: $brand-info;
+            cursor: normal;
+        }
+
         .gallery {
             display: flex;
             max-height: ($image-height + $image-space) * $image-row-num;

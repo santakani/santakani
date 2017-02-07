@@ -35,6 +35,9 @@
                             <a href="{{ $designer->url }}">
                                 {{ $designer->text('name') }}
                             </a>
+                            @if ($designer->editor_pick)
+                                <i class="editor-pick-icon fa fa-diamond" title="{{ trans('common.editor_pick') }}"></i>
+                            @endif
                         </h3>
 
                         <p class="tagline text-muted">{{ $designer->text('tagline') }}</p>
