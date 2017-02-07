@@ -51,6 +51,7 @@ return array(
     'description' => 'Description',
     'done' => 'Done',
     'edit' => 'Edit',
+    'editor_pick' => 'Editor\'s Pick',
     'email' => 'Email',
     'email_address' => 'Email address',
     'error' => 'Error',

@@ -235,6 +235,7 @@ class DesignerController extends Controller
             abort(403);
         }
 
+        // Edit lock
         if ($request->input('lock')) {
             if ($designer->lock()) {
                 return; // 200 OK
@@ -260,7 +261,18 @@ class DesignerController extends Controller
             'translations.*.name' => 'string|max:255',
             'translations.*.tagline' => 'string|max:255',
             'translations.*.content' => 'string',
+            'editor_pick' => 'boolean',
         ]);
+
+        // Editor's pick
+        if ($request->has('editor_pick')) {
+            if ($request->user()->can('editor-pick')) {
+                $designer->pick( $request->input('editor_pick') );
+                return;
+            } else {
+                abort(403);
+            }
+        }
 
         // Transfer ownership
         if ($request->has('user_id')) {

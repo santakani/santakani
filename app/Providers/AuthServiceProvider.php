@@ -94,6 +94,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $designer->user_id;
         });
 
+        $gate->define('editor-pick', function ($user) {
+            return $user->role === 'admin' || $user->role === 'editor';
+        });
+
 
         // Design page
 

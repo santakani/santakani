@@ -1,0 +1,14 @@
+#editor-pick-button, .editor-pick-button {
+
+    &:not(.picked) {
+        .picked-icon {
+            display: none;
+        }
+    }
+
+    &.picked {
+        .unpicked-icon {
+            display: none;
+        }
+    }
+}

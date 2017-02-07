@@ -31,6 +31,15 @@
                         <i class="fa fa-lg fa-ellipsis-v"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
+                        @if (Auth::user()->can('editor-pick'))
+                            <li>
+                                <a id="editor-pick-button" class="{{ $designer->editor_pick?'picked':'' }}" href="#">
+                                    <i class="fa fa-fw fa-toggle-on picked-icon"></i>
+                                    <i class="fa fa-fw fa-toggle-off unpicked-icon"></i>
+                                    {{ trans('common.editor_pick') }}
+                                </a>
+                            </li>
+                        @endif
                         @if (Auth::user()->can('transfer-designer', $designer))
                             <li><a id="transfer-button" href="#" data-toggle="modal" data-target="#transfer-modal"><i class="fa fa-fw fa-exchange"></i> {{ trans('common.transfer') }}</a></li>
                         @endif

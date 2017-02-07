@@ -65,6 +65,8 @@ $flag-icon-css-path: '/img/flags' !default;
 // Components
 //==============================================================================
 
+@import "actions/editor-pick-button";
+
 @import "components/article-filter";
 @import "components/article-list";
 

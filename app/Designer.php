@@ -232,5 +232,24 @@ class Designer extends Model
     //                                                                        //
     ////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Set editor's pick property. Save to database but won't touch timestamps.
+     *
+     * @param editor_pick
+     */
+    public function pick($editor_pick = true)
+    {
+        $timestamps = $this->timestamps;
+        $this->timestamps = false;
 
+        $this->editor_pick = $editor_pick;
+        $this->save();
+
+        $this->timestamps = $timestamps;
+    }
+
+    public function unpick()
+    {
+        $this->pick(false);
+    }
 }
