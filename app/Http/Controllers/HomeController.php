@@ -22,6 +22,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $designers = Designer::has('images')
+            ->whereNotNull('logo_id')
             ->orderBy('editor_pick', 'desc')
             ->orderByRaw('RAND(' . Random::getUserSeed() . ')')
             ->paginate(30);
