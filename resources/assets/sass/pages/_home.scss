@@ -46,32 +46,11 @@
         }
 
         .gallery {
-            display: flex;
-            max-height: ($image-height + $image-space) * $image-row-num;
+            @include flexbin(200px, 4px);
+            max-height: 204px;
+            margin-bottom: 0;
+            margin-top: 0;
             overflow: hidden;
-            flex-wrap: wrap;
-            margin: 0 (- $image-space / 2);
-
-            &:after {
-                content: '';
-                flex-grow: 999999999;
-            }
-        }
-
-        .image-wrap {
-            position: relative;
-            display: block;
-            height: $image-height;
-            margin: $image-space / 2;
-            flex-grow: 1;
-        }
-
-        .image {
-            height: $image-height;
-            object-fit: cover;
-            max-width: 100%;
-            min-width: 100%;
-            vertical-align: bottom;
         }
 
         .price {

@@ -53,6 +53,9 @@ $lg-path-images: '/img/lightgallery';
 $flag-icon-css-path: '/img/flags' !default;
 @import "node_modules/flag-icon-css/sass/flag-icon";
 
+// Flexbin
+@import "node_modules/flexbin/flexbin.scss";
+
 // Override Vendor Styles
 @import "vendor/light-gallery";
 @import "vendor/selectize";
