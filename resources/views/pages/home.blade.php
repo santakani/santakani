@@ -74,7 +74,11 @@
                     </footer>
                 </article>
             @endforeach
-        </div>
+
+            <div class="text-center">
+                {!! $designers->appends(app('request')->all())->links() !!}
+            </div>
+        </div><!-- /.container -->
     </section>
 
 @endsection
