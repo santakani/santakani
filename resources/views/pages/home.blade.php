@@ -44,12 +44,7 @@
                     </header>
 
                     <div class="image-gallery gallery">
-                        @if ($designer->image_id)
-                            <a class="cover-wrap image-wrap" href="{{ $designer->image->large_file_url }}">
-                                <img class="cover image" src="{{ $designer->image->medium_file_url }}"/>
-                            </a>
-                        @endif
-                        @foreach ($designer->gallery_images->forget($designer->image_id) as $image)
+                        @foreach ($designer->gallery_images as $image)
                             <a class="image-wrap" href="{{ $image->large_file_url }}">
                                 <img class="image" src="{{ $image->medium_file_url }}"/>
                             </a>
