@@ -21,11 +21,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $designers = Designer::has('images')
+        $designers = Designer::with('logo', 'image', 'translations', 'designs', 'designs.image', 'designs.translations')
             ->whereNotNull('logo_id')
+            ->whereNotNull('image_id')
             ->orderBy('editor_pick', 'desc')
             ->orderByRaw('RAND(' . Random::getUserSeed() . ')')
-            ->paginate(30);
+            ->paginate(24);
 
         return view('pages.home', [
             'designers' => $designers,

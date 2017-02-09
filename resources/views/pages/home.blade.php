@@ -49,7 +49,7 @@
                                 <img class="cover image" src="{{ $designer->image->medium_file_url }}"/>
                             </a>
                         @endif
-                        @foreach ($designer->gallery_images as $image)
+                        @foreach ($designer->gallery_images->forget($designer->image_id) as $image)
                             <a class="image-wrap" href="{{ $image->large_file_url }}">
                                 <img class="image" src="{{ $image->medium_file_url }}"/>
                             </a>
