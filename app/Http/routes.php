@@ -80,10 +80,10 @@ Route::group(['middleware' => 'web'], function () {
 
     // Admin panel
     Route::group(['middleware' => ['auth', 'admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
-        Route::get('/', 'HomeController@index');
+        Route::get('/', 'AdminController@index');
         Route::get('log/activity', 'ActivityLogController@index');
-        Route::get('user', 'HomeController@user');
-        Route::get('image', 'HomeController@image');
+        Route::get('user', 'AdminController@user');
+        Route::get('image', 'AdminController@image');
     });
 
     Route::get('help', 'HelpController@index');
