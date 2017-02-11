@@ -148,7 +148,7 @@ if (!function_exists('app_rrmdir')) {
                  if ($object !== '.' && $object !== '..') {
                      $object_path = $dir_path . '/' . $object;
                      if (is_dir($object_path)) {
-                         self::rrmdir($object_path);
+                         app_rrmdir($object_path);
                      } else {
                          unlink($object_path);
                      }
