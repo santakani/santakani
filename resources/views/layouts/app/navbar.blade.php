@@ -94,7 +94,7 @@
                     <li role="separator" class="divider"></li>
                     <li><a href="{{ Auth::user()->url }}">{{ trans('common.profile') }}</a></li>
                     <li><a href="{{ url('setting') }}">{{ trans('common.settings') }}</a></li>
-                    <li><a href="{{ url('logout') }}">{{ trans('common.logout') }}</a></li>
+                    <li><a class="logout-action" href="{{ url('logout') }}">{{ trans('common.logout') }}</a></li>
                 </ul>
             </li>
         @endif

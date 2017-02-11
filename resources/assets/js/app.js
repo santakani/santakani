@@ -137,3 +137,17 @@ else if (document.getElementById('deleted-user-admin-page')) {
 else if (document.getElementById('trash-page')) {
     require('./pages/trash');
 }
+
+$('.logout-action').click(function (e) {
+    e.preventDefault();
+
+    $.ajax({
+        url: '/logout',
+        method: 'post',
+        data: {
+            _token: app.token
+        }
+    }).done(function () {
+        window.location = '/';
+    });
+});
