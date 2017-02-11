@@ -5,9 +5,11 @@ namespace App;
 use claviska\SimpleImage;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable as Notifiable;
 
 class User extends Authenticatable
 {
+    use Notifiable;
     /**
      * Change table name from users to user.
      *

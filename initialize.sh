@@ -27,8 +27,8 @@ echo "Done!"
 
 echo "#2 Initializing file system permission"
 
-sudo chgrp -R www storage public/storage bootstrap/cache
-sudo chmod -R ug-x+rwX,o-wx+rX storage public/storage bootstrap/cache
+sudo chgrp -R www storage public/storage bootstrap/cache/ bootstrap/cache/*.php
+sudo chmod -R ug-x+rwX,o-wx+rX storage public/storage bootstrap/cache/ bootstrap/cache/*.php
 
 echo "Done!"
 

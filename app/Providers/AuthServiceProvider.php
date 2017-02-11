@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-use Auth;
+use Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,12 +21,11 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register any application authentication / authorization services.
      *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      * @return void
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $this->registerPolicies($gate);
+        $this->registerPolicies();
 
         //======================================================================
         // Authorization Based On Action
@@ -41,12 +40,12 @@ class AuthServiceProvider extends ServiceProvider
 
         // User
 
-        $gate->define('set-user-role', function ($user, $target_user) {
+        Gate::define('set-user-role', function ($user, $target_user) {
             // Admin cannot set roles of other admins
             return $user->role === 'admin' && $target_user->role !== 'admin';
         });
 
-        $gate->define('unset-user-role', function ($user, $target_user) {
+        Gate::define('unset-user-role', function ($user, $target_user) {
             if ($user->id === $target_user->id) {
                 return true; // User can unset own role
             } elseif ($user->role === 'admin' && $target_user->role !== 'admin') {
@@ -56,7 +55,7 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        $gate->define('delete-user', function ($user, $target_user) {
+        Gate::define('delete-user', function ($user, $target_user) {
             // Admins and editors must be deleted through command line.
             if ($target_user->role === 'admin' || $target_user->role === 'editor') {
                 return false;
@@ -78,75 +77,75 @@ class AuthServiceProvider extends ServiceProvider
 
         // Designer page
 
-        $gate->define('create-designer', function ($user) {
+        Gate::define('create-designer', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->designers()->count() === 0;
         });
 
-        $gate->define('edit-designer', function ($user, $designer) {
+        Gate::define('edit-designer', function ($user, $designer) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $designer->user_id;
         });
 
-        $gate->define('transfer-designer', function ($user, $designer) {
+        Gate::define('transfer-designer', function ($user, $designer) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $designer->user_id;
         });
 
-        $gate->define('delete-designer', function ($user, $designer) {
+        Gate::define('delete-designer', function ($user, $designer) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $designer->user_id;
         });
 
-        $gate->define('editor-pick', function ($user) {
+        Gate::define('editor-pick', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
 
         // Design page
 
-        $gate->define('edit-design', function ($user, $design) {
+        Gate::define('edit-design', function ($user, $design) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
         });
 
-        $gate->define('transfer-design', function ($user, $design) {
+        Gate::define('transfer-design', function ($user, $design) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
         });
 
-        $gate->define('delete-design', function ($user, $design) {
+        Gate::define('delete-design', function ($user, $design) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $design->user_id || $user->id === $design->designer->user_id;
         });
 
 
         // Place page
 
-        $gate->define('edit-place', function ($user, $place) {
+        Gate::define('edit-place', function ($user, $place) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $place->user_id;
         });
 
-        $gate->define('transfer-place', function ($user, $place) {
+        Gate::define('transfer-place', function ($user, $place) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $place->user_id;
         });
 
-        $gate->define('delete-place', function ($user, $place) {
+        Gate::define('delete-place', function ($user, $place) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $place->user_id;
         });
 
 
         // Story page
 
-        $gate->define('edit-story', function ($user, $story) {
+        Gate::define('edit-story', function ($user, $story) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $story->user_id;
         });
 
-        $gate->define('transfer-story', function ($user, $story) {
+        Gate::define('transfer-story', function ($user, $story) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $story->user_id;
         });
 
-        $gate->define('delete-story', function ($user, $story) {
+        Gate::define('delete-story', function ($user, $story) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $story->user_id;
         });
 
 
         // Image
 
-        $gate->define('delete-image', function ($user, $image) {
+        Gate::define('delete-image', function ($user, $image) {
             if ( $user->role === 'admin' || $user->role === 'editor' ) {
                 return true;
             }
@@ -174,45 +173,45 @@ class AuthServiceProvider extends ServiceProvider
 
         // City page
 
-        $gate->define('create-city', function ($user) {
+        Gate::define('create-city', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
-        $gate->define('edit-city', function ($user) {
+        Gate::define('edit-city', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
-        $gate->define('delete-city', function ($user) {
+        Gate::define('delete-city', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
 
         // Country page
 
-        $gate->define('create-country', function ($user) {
+        Gate::define('create-country', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
-        $gate->define('edit-country', function ($user) {
+        Gate::define('edit-country', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
-        $gate->define('delete-country', function ($user) {
+        Gate::define('delete-country', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
 
         // Tag page
 
-        $gate->define('create-tag', function ($user) {
+        Gate::define('create-tag', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
-        $gate->define('edit-tag', function ($user) {
+        Gate::define('edit-tag', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
 
-        $gate->define('delete-tag', function ($user) {
+        Gate::define('delete-tag', function ($user) {
             return $user->role === 'admin' || $user->role === 'editor';
         });
     }
