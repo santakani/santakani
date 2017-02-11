@@ -11,7 +11,7 @@
 
 namespace App;
 
-use Imagick;
+use claviska\SimpleImage;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -344,75 +344,44 @@ class Image extends Model
      * @param string $temp_file_path
      * @param boolean $delete_origin
      */
-    public function saveFile($temp_file_path, $delete_origin = true)
+    public function saveFile($temp_file_path)
     {
         // Create an empty new folder
         $this->deleteDirectory();
         $this->createDirectory();
 
-        // Imagick instances
-        $imagick = new Imagick($temp_file_path);
+        // SimpleImage instances
+        $image = new SimpleImage();
 
-        // Full (reduce file size)
-        $imagick->thumbnailImage($this->width, $this->height);
-        $imagick->writeImage($this->filePath('full'));
-        chmod($this->filePath('full'), 0664);
+        // Compressed full size image
+        $image->fromFile($temp_file_path)->autoOrient()->toFile($this->filePath('full'));
 
-        foreach ($this->sizes as $size => $info) {
-            if (!$this->has($size)) {
-                continue;
-            }
-
-            $imgk = clone $imagick;
-
-            if ($info['crop']) {
-                $imgk->cropThumbnailImage($info['width'], $info['height']);
-            } else {
-                $imgk->thumbnailImage($info['width'], $info['height'], true);
-            }
-
-            $file_path = $this->filePath($size);
-            $imgk->writeImage($file_path);
-            chmod($file_path, 0664);
-
-            $imgk->destroy();
-        }
-
-        $imagick->destroy();
-
-        if ($delete_origin) {
-            unlink($temp_file_path);
-        }
+        $this->generateThumbnails();
     }
 
     /**
      * Regenerate thumbnail image files.
      */
-    public function regenerate()
+    public function generateThumbnails()
     {
-        $imagick = new Imagick($this->filePath('full'));
+        $image = new SimpleImage();
+        $image->fromFile($this->filePath('full'));
 
         foreach ($this->sizes as $size => $info) {
             if (!$this->has($size)) {
                 continue;
             }
 
-            $imgk = clone $imagick;
+            $img = clone $image;
 
             if ($info['crop']) {
-                $imgk->cropThumbnailImage($info['width'], $info['height']);
+                $img->thumbnail($info['width'], $info['height']);
             } else {
-                $imgk->thumbnailImage($info['width'], $info['height'], true);
+                $img->bestFit($info['width'], $info['height'], true);
             }
 
-            $file_path = $this->filePath($size);
-            $imgk->writeImage($file_path);
-            chmod($file_path, 0664);
-
-            $imgk->destroy();
+            $img->toFile($this->filePath($size));
         }
-
-        $imagick->destroy();
     }
 
     /**
@@ -420,7 +389,7 @@ class Image extends Model
      */
     public function createDirectory()
     {
-        mkdir($this->directory_path, 0775, true);
+        mkdir($this->directory_path, 0755, true);
     }
 
     /**

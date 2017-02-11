@@ -2,10 +2,7 @@
 
 namespace App;
 
-use Imagick;
-
-use DB;
-
+use claviska\SimpleImage;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -57,6 +54,12 @@ class User extends Authenticatable
     const avatar_medium_size = 150;
 
     const avatar_small_size = 50;
+
+    const avatar_sizes = [
+        'large' => 300,
+        'medium' => 150,
+        'small' => 50,
+    ];
 
 
     //====================================================================
@@ -213,35 +216,18 @@ class User extends Authenticatable
         return $full?public_path($path):$path;
     }
 
-    public function saveAvatarFile($temp_file_path, $delete_origin = true)
+    public function saveAvatarFile($temp_file_path)
     {
         $this->removeAvatarDirectory();
         $this->createAvatarDirectory();
 
-        $imagick = new Imagick($temp_file_path);
+        // SimpleImage instances
+        $image = new SimpleImage();
 
-        $path = $this->avatarFile('large');
-        $size = self::avatar_large_size;
-        $imagick->cropThumbnailImage($size, $size);
-        $imagick->writeImage($path);
-        chmod($path, 0644);
-
-        $path = $this->avatarFile('medium');
-        $size = self::avatar_medium_size;
-        $imagick->cropThumbnailImage($size, $size);
-        $imagick->writeImage($path);
-        chmod($path, 0644);
-
-        $path = $this->avatarFile('small');
-        $size = self::avatar_small_size;
-        $imagick->cropThumbnailImage($size, $size);
-        $imagick->writeImage($path);
-        chmod($path, 0644);
-
-        $imagick->destroy();
-
-        if ($delete_origin) {
-            unlink($temp_file_path);
+        // Compressed full size image
+        $image->fromFile($temp_file_path)->autoOrient();
+        foreach (self::avatar_sizes as $name => $size) {
+            $image->thumbnail($size, $size)->toFile($this->avatarFile($name));
         }
     }
 

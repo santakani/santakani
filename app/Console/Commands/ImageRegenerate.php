@@ -41,12 +41,12 @@ class ImageRegenerate extends Command
     {
         if ($this->option('all')) {
             foreach(Image::all() as $image) {
-                $image->regenerate();
+                $image->generateThumbnails();
             }
         } elseif ($this->argument('image')) {
             $image = Image::find($this->argument('image'));
             if (count($image)) {
-                $image->regenerate();
+                $image->generateThumbnails();
             }
         }
     }
