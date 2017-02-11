@@ -35,4 +35,23 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_API_KEY'),
+        'client_secret' => env('FACEBOOK_API_SECRET'),
+        'redirect' => env('APP_URL') . '/auth/facebook/callback',
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_API_KEY'),
+        'client_secret' => env('GOOGLE_API_SECRET'),
+        'redirect' => env('APP_URL') . '/auth/google/callback',
+    ],
+
+    'twitter' => [
+        'client_id' => env('TWITTER_API_KEY'),
+        'client_secret' => env('TWITTER_API_SECRET'),
+        'redirect' => env('APP_URL') . '/auth/twitter/callback',
+    ],
+
+
 ];
