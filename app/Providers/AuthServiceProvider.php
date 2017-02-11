@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
-use Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Register any application authentication / authorization services.
+     * Register any authentication / authorization services.
      *
      * @return void
      */

@@ -61,7 +61,7 @@ return [
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
-            'strict'    => false,
+            'strict'    => true,
             'engine'    => null,
         ],
 
@@ -114,7 +114,7 @@ return [
 
     'redis' => [
 
-        'cluster' => false,
+        'client' => 'predis',
 
         'default' => [
             'host'     => env('REDIS_HOST', 'localhost'),

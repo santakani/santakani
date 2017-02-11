@@ -12,6 +12,7 @@
 /public/js
 /public/build
 /public/svg
+/public/hot
 
 # Copyed files
 /public/lib
@@ -20,10 +21,13 @@
 
 # Storage
 /public/storage
+/storage/*.key
 
 # Homestead configuration
 Homestead.yaml
 Homestead.json
+
+/.idea
 
 # Kate
 *.kate-swp
