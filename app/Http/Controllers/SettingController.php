@@ -108,7 +108,7 @@ class SettingController extends Controller
 
         $this->validate($request, [
             'name' => 'filled|max:255',
-            'description' => 'max:255',
+            'description' => 'string|nullable|max:255',
             'avatar' => 'image|mimes:jpeg,png,gif',
             'email' => 'filled|email|max:255|unique:user,email,'.$user->id,
             'old_password' => 'filled',

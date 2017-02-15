@@ -125,8 +125,8 @@ class DesignerController extends Controller
         // Validate data
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'tagline' => 'string|max:255',
-            'email' => 'email|max:255',
+            'tagline' => 'string|nullable|max:255',
+            'email' => 'email|nullable|max:255',
             'city_id' => 'integer|exists:city,id',
         ]);
 
@@ -251,16 +251,18 @@ class DesignerController extends Controller
             'city_id' => 'integer|exists:city,id',
             'user_id' => 'integer|exists:user,id',
             'tag_ids.*' => 'integer|exists:tag,id',
-            'email' => 'email|max:255',
-            'website' => 'url|max:255',
-            'facebook' => 'url|max:255',
-            'instagram' => 'url|max:255',
-            'pinterest' => 'url|max:255',
-            'youtube' => 'url|max:255',
-            'vimeo' => 'url|max:255',
-            'translations.*.name' => 'string|max:255',
-            'translations.*.tagline' => 'string|max:255',
-            'translations.*.content' => 'string',
+            'email' => 'email|nullable|max:255',
+            'website' => 'url|nullable|max:255',
+            'facebook' => 'url|nullable|max:255',
+            'instagram' => 'url|nullable|max:255',
+            'pinterest' => 'url|nullable|max:255',
+            'youtube' => 'url|nullable|max:255',
+            'vimeo' => 'url|nullable|max:255',
+            'translations' => 'array',
+            'translations.*' => 'array',
+            'translations.*.name' => 'string|nullable|max:255',
+            'translations.*.tagline' => 'string|nullable|max:255',
+            'translations.*.content' => 'string|nullable',
             'editor_pick' => 'boolean',
         ]);
 

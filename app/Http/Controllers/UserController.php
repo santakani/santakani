@@ -27,7 +27,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $this->validate($request, [
-            'search' => 'string|max:20',
+            'search' => 'string|nullable|max:20',
         ]);
 
         $query = User::query();

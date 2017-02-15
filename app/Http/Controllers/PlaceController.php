@@ -31,9 +31,9 @@ class PlaceController extends Controller
     public function index(Request $request)
     {
         $this->validate($request, [
-            'city_id' => 'integer|exists:city,id',
-            'tag_id' => 'integer|exists:tag,id',
-            'type' => 'string|in:' . implode(',', Place::types()),
+            'city_id' => 'integer|nullable|exists:city,id',
+            'tag_id' => 'integer|nullable|exists:tag,id',
+            'type' => 'string|nullable|in:' . implode(',', Place::types()),
         ]);
 
         if ($request->has('city_id')) {
@@ -117,7 +117,7 @@ class PlaceController extends Controller
             'type' => 'required|string|in:' . implode(',', Place::types()),
             'city_id' => 'required|integer|exists:city,id',
             'address' => 'required|string|max:255',
-            'email' => 'email|max:255',
+            'email' => 'email|nullable|max:255',
             'name' => 'required|string|max:255',
         ]);
 
@@ -222,12 +222,16 @@ class PlaceController extends Controller
             'latitude' => 'numeric',
             'longitude' => 'numeric',
             'tag_ids.*' => 'integer|exists:tag,id',
-            'email' => 'email|max:255',
-            'phone' => 'string|max:255',
-            'website' => 'url|max:255',
-            'facebook' => 'url|max:255',
-            'translations.*.name' => 'string|max:255',
-            'translations.*.content' => 'string',
+            'email' => 'email|nullable|max:255',
+            'phone' => 'string|nullable|max:255',
+            'website' => 'url|nullable|max:255',
+            'facebook' => 'url|nullable|max:255',
+            'translations' => 'array',
+            'translations.*' => 'array',
+            'translations.*.name' => 'string|nullable|max:255',
+            'translations.*.tagline' => 'string|nullable|max:255',
+            'translations.*.content' => 'string|nullable',
+            'editor_pick' => 'boolean',
         ]);
 
         // Transfer ownership

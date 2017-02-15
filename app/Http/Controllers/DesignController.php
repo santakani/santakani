@@ -215,8 +215,11 @@ class DesignController extends Controller
             'tag_ids.*' => 'integer|exists:tag,id',
             'price' => 'numeric|between:0.01,999999.99',
             'currency' => 'required_with:price|' . Currencies::validator(),
-            'webshop' => 'url|max:255',
-            'translations.*.name' => 'string|max:255',
+            'webshop' => 'url|nullable|max:255',
+            'translations' => 'array',
+            'translations.*' => 'array',
+            'translations.*.name' => 'string|nullable|max:255',
+            'translations.*.content' => 'string|nullable',
         ]);
 
         if ($request->has('user_id')) {

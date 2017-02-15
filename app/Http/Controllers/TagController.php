@@ -28,7 +28,7 @@ class TagController extends Controller
     public function index(Request $request)
     {
         $this->validate($request, [
-            'search' => 'string|max:20',
+            'search' => 'string|nullable|max:20',
         ]);
 
         $query = Tag::query();
@@ -173,9 +173,10 @@ class TagController extends Controller
             'level' => 'integer|between:0,255',
             'image_id' => 'integer|exists:image,id',
             'translations' => 'array',
-            'translations.*.name' => 'string|max:255',
-            'translations.*.alias' => 'string|max:255',
-            'translations.*.description' => 'string|max:255',
+            'translations.*' => 'array',
+            'translations.*.name' => 'string|nullable|max:255',
+            'translations.*.alias' => 'string|nullable|max:255',
+            'translations.*.description' => 'string|nullable|max:255',
         ]);
 
         $tag->update($request->only(['level', 'image_id']));

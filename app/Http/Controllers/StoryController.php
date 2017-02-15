@@ -215,8 +215,9 @@ class StoryController extends Controller
             'user_id' => 'integer|exists:user,id',
             'tag_ids.*' => 'integer|exists:tag,id',
             'translations' => 'array',
-            'translations.*.title' => 'string|max:255',
-            'translations.*.content' => 'string',
+            'translations.*' => 'array',
+            'translations.*.title' => 'string|nullable|max:255',
+            'translations.*.content' => 'string|nullable',
         ]);
 
         $story->update(app_array_filter($request->all(), ['image_id', 'tag_ids']));
