@@ -5,6 +5,7 @@ namespace App;
 use App\Localization\Currencies;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Design extends Model
 {
@@ -15,6 +16,7 @@ class Design extends Model
     use Features\TagFeature;
     use Features\TransferFeature;
     use Features\TranslationFeature;
+    use Searchable;
 
     /**
      * The table associated with the model.
@@ -45,7 +47,7 @@ class Design extends Model
      *
      * @var array
      */
-    protected $appends = ['name', 'url'];
+    protected $appends = [];
 
     /**
      * Children properties that should be transfered with parent. Key is property
@@ -146,5 +148,23 @@ class Design extends Model
         if (!empty($this->price) && !empty($this->currency)) {
             $this->eur_price = Currencies::euro($this->price, $this->currency);
         }
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        // Load relationships
+        $this->load('translations', 'tags.translations', 'designer.translations', 'designer.city.translations', 'designer.city.country.translations');
+
+        // Generate array data
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
     }
 }

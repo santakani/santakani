@@ -167,7 +167,8 @@ return [
          * Package Service Providers...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
-        //Laravel\Tinker\TinkerServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
         Msurguy\Honeypot\HoneypotServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
 
