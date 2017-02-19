@@ -1,131 +1,118 @@
-nav.custom-navbar {
-    $icon-size: 32px;
+nav.navbar {
+    $icon-size: 24px;
 
     position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    height: $custom-navbar-height;
-    background-color: #fff;
-    border-bottom: 1px solid $gray-lighter;
+    height: $navbar-height;
+    background-color: #f8f8f8;
     z-index: 100;
 
     .nav-menu {
         @include list-unstyled;
-        height: $custom-navbar-height;
+        height: $navbar-height;
         display: flex;
         margin: 0;
-        padding: 0;
+        padding: 0 5px;
 
         > li {
-            flex: 1 0 auto;
-            height: $custom-navbar-height;
-            line-height: $custom-navbar-height;
+            flex: 0 0 auto;
+            height: $navbar-height;
+            line-height: $navbar-height - 5px; // For better vertical alignment
 
             &.space {
-                flex: 0 0 0;
-            }
-
-            &.brand {
-                font-weight: 500;
+                flex: 1 1 300px;
             }
 
             > a {
                 display: block;
                 height: 100%;
+                margin: 0 5px;
                 padding: 0 5px;
                 text-decoration: none;
                 text-align: center;
-                color: #555555;
+                color: $gray;
                 transition: 0.3s;
 
                 &:hover {
                     text-decoration: none;
                 }
 
-                &.create {
-                    color: $brand-primary;
-                    svg use path {
-                        fill: $brand-primary;
-                    }
+                .icon {
+                    font-size: $icon-size;
+                    width: $icon-size;
+                    vertical-align: middle;
+                }
+
+                .text {
+                    font-size: $font-size-small;
+                    vertical-align: middle;
+                    text-transform: uppercase;
                 }
             }
 
             &.active {
                 > a {
-                    box-shadow: 0 -3px 0 $brand-info inset;
+                    color: $brand-primary;
+                    box-shadow: 0 2px 0 $brand-primary inset;
                 }
             }
 
             &:hover {
                 > a {
-                    background-color: lighten($brand-info, 25%);
+                    opacity: 0.6;
+                    color: $brand-primary;
+                    box-shadow: 0 3px 0 $brand-primary inset;
                 }
             }
         }
 
     }
 
-    svg.icon {
-        width: $icon-size;
-        height: $icon-size;
-        margin-top: ($custom-navbar-height - $icon-size) / 2;
-        vertical-align: top;
-    }
-
     .avatar {
-        width: $icon-size;
-        height: $icon-size;
-        margin-top: ($custom-navbar-height - $icon-size) / 2;
-        border-radius: 3px;
-        vertical-align: top;
-    }
-
-    .name {
-        margin-left: 5px;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
     }
 
     @media (max-width: $screen-xs-max) {
-        .dropdown {
-            .dropdown-menu {
-                position: fixed;
-                min-width: 200px;
-                max-width: 300px;
-                right: 0;
-                top: $custom-navbar-height;
-                bottom: 0;
-                margin: 0;
-                padding: 0;
-                border: none;
-                border-radius: 0;
-                overflow-y: auto;
+        position: fixed;
+        top: auto;
+        bottom: 0;
 
-                > li {
-                    > a {
-                        line-height: 40px;
+        .nav-menu {
+            > li{
+                flex: 1 1 50px;
+                text-align: center;
+
+                > a {
+                    .icon {
+                        display: block;
+                        width: 100%;
+                        height: $icon-size + 12px;
+                        line-height: $icon-size;
+                        padding-top: 8px;
+                        padding-bottom: 4px;
                     }
+
+                    .text {
+                        display: block;
+                        font-size: 10px;
+                        height: 10px + 4px;
+                        line-height: 10px;
+                        padding-bottom: 4px;
+                    }
+                }
+
+                &.space {
+                    display: none;
                 }
             }
         }
     }
 
     @media (min-width: $screen-sm-min) {
-        .nav-menu {
-            > li{
-                flex: 0 0 auto;
 
-                &.space {
-                    flex: 1 1 auto;
-                }
-
-                .text {
-                    display: inline;
-                }
-            }
-        }
     }
-}
-
-.custom-navbar-space {
-    height: $custom-navbar-height;
 }

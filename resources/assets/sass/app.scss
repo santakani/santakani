@@ -2,27 +2,18 @@
 // Base
 //==============================================================================
 
-@import "base/variables";
-
-// Bootstrap
 @import "vendor/bootstrap"; // Override Bootstrap variables
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
-
+@import "base/variables";
 @import "base/mixins";
 @import "base/global";
 @import "base/typography";
-
-@import "editor";
+@import "base/links";
+@import "base/editor";
 
 
 //==============================================================================
 // Front-end Libraries
 //==============================================================================
-
-// Roboto fonts
-$roboto-font-path: '/fonts/roboto';
-@import "node_modules/roboto-fontface/css/roboto-fontface.scss";
 
 // Leaflet
 @import "node_modules/leaflet/dist/leaflet";
@@ -48,10 +39,6 @@ $lg-path-images: '/img/lightgallery';
 // Selectize
 @import "node_modules/selectize/dist/css/selectize";
 @import "node_modules/selectize/dist/css/selectize.bootstrap3";
-
-// Flag Icon CSS
-$flag-icon-css-path: '/img/flags' !default;
-@import "node_modules/flag-icon-css/sass/flag-icon";
 
 // Flexbin
 @import "node_modules/flexbin/flexbin.scss";
@@ -118,7 +105,7 @@ $flag-icon-css-path: '/img/flags' !default;
 //==============================================================================
 // Layout
 //==============================================================================
-
+@import "layouts/containers";
 @import "layouts/app/navbar";
 @import "layouts/app/footer";
 @import "layouts/app/alerts";

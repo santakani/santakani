@@ -1,5 +1,4 @@
 #story-index-page {
-    background-color: #fafafa;
 
     article.story {
         .panel-body {
@@ -39,7 +38,7 @@
 
     .sticky {
         position: sticky;
-        top: $custom-navbar-height + 20px;
+        top: $navbar-height + 20px;
         z-index: 10;
     }
 }

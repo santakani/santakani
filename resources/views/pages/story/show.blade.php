@@ -11,57 +11,96 @@
     'has_share_buttons' => true,
 ])
 
-@section('header')
-    <div class="page-cover"
-        @if ($story->image_id)
-            style="background-image:url({{ $story->image->large_file_url }})"
-        @endif
-        >
+@section('main')
+    <div class="container-content">
+        <img class="img-responsive img-rounded" src="{{ $story->image->large_file_url }}">
 
-        <div class="raster raster-dark-dot"></div>
+        <h1 class="page-header">{{ $story->text('title') }}</h1>
 
-        <div class="buttons">
-            @include('components.buttons.like', ['likeable' => $story])
-            @if (Auth::check() && Auth::user()->can('edit-story', $story))
-                <div class="btn-group">
-                    <a id="edit-button" class="btn btn-default" href="{{ url()->current() . '/edit' }}">
-                        <i class="fa fa-lg fa-pencil"></i> {{ trans('common.edit') }}
-                    </a>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-lg fa-ellipsis-v"></i>
+        <ul class="info list-inline text-muted">
+            <li>{{ $story->created_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
+            <li>{{ trans_choice('common.like_count', $story->like_count) }}</li>
+        </ul>
+
+        <div class="row text-center">
+            <div class="col-xs-3">
+                @include('components.buttons.like', ['likeable' => $story])
+            </div>
+            <div class="col-xs-3">
+                <div class="dropdown">
+                    <button type="button" class="btn-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ trans('common.share') }}">
+                        <span class="icon ion-ios-upload-outline"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        @if (Auth::user()->can('delete-story', $story))
-                            <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
+                        <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($story->url) }}" target="_blank">Facebook</a></li>
+                        <li><a href="https://plus.google.com/share?url={{ urlencode($story->url) }}" target="_blank">Google+</a></li>
+                        <li><a href="https://twitter.com/intent/tweet?hashtags=santakanidesign&amp;url={{ urlencode($story->url) }}" target="_blank">Twitter</a></li>
+                        <li><a href="http://www.tumblr.com/share/link?url={{ urlencode($story->url) }}" target="_blank">Tumblr</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                @if (Auth::check() && Auth::user()->can('edit-story', $story))
+                    <a id="edit-button" class="btn-icon" href="{{ url()->current() . '/edit' }}" title=" {{ trans('common.edit') }}">
+                        <span class="icon ion-ios-compose-outline"></span>
+                    </a>
+                @endif
+            </div>
+            <div class="col-xs-3">
+                <div class="dropdown">
+                    <button type="button" class="btn-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ trans('common.more') }}">
+                        <span class="icon ion-ios-more-outline"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        @if (Auth::check() && Auth::user()->can('delete-story', $story))
+                            <li>
+                                <a id="delete-button" href="#">
+                                    {{ trans('common.delete') }}
+                                </a>
+                            </li>
                             @if (Auth::user()->role === 'admin' || Auth::user()->role === 'editor')
-                                <li><a id="force-delete-button" href="#"><i class="fa fa-fw fa-ban"></i> {{ trans('common.delete_permanently') }}</a></li>
+                                <li>
+                                    <a id="force-delete-button" href="#">
+                                        {{ trans('common.delete_permanently') }}
+                                    </a>
+                                </li>
                             @endif
                         @endif
+                        <li>
+                            <a href="report">
+                                {{ trans('common.report') }}
+                            </a>
+                        </li>
                     </ul>
-                </div><!--/.btn-group -->
-            @endif
-        </div>
+                </div><!-- /.dropdown -->
+            </div>
+        </div><!-- /.row -->
 
-        <h1 class="title">{{ $story->text('title') }}</h1>
-
-        <p class="author">
-            <a href="{{ $story->user->url }}">
-                <img class="avatar" src="{{ $story->user->small_avatar_url }}"
-                    srcset="{{ $story->user->medium_avatar_url }} 3x, {{ $story->user->large_avatar_url }} 6x"
-                    width="50" height="50">
-                <span class="user-name">{{ $story->user->name }}</span>
-            </a>
-        </p>
-
-        <p class="date">{{ $story->created_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</p>
+        <div id="page-content" class="page-content">{!! $story->html('content') !!}</div>
 
         @include('components.tag-list', [
             'tags' => $story->tags,
         ])
 
-    </div><!-- .container -->
-@endsection
-
-@section('main')
-    <div id="page-content" class="page-content">{!! $story->html('content') !!}</div>
+        @if ($story->user_id)
+            <div class="author">
+                <h3>{{ trans('common.author') }}</h3>
+                <a class="link-unstyled" href="{{ $story->user->url }}">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-2">
+                            <img class="avatar img-rounded img-responsive" src="{{ $story->user->medium_avatar_url }}">
+                        </div>
+                        <div class="col-xs-9 col-sm-10">
+                            <div class="user-name text-lg">
+                                {{ $story->user->name }}
+                            </div>
+                            <div class="user-description text-muted">
+                                {{ $story->user->description }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        @endif
+    </div>
 @endsection

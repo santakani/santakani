@@ -10,10 +10,3 @@ blockquote,
 address {
     margin-bottom: $line-height-computed;
 }
-
-a {
-    text-decoration: none;
-    &:active, &:hover, &:focus {
-        text-decoration: none;
-    }
-}

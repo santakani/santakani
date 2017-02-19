@@ -3,21 +3,235 @@
  * @see http://getbootstrap.com/customize/#less-variables
  */
 
-// Colors
-$brand-primary: #158CBA;
-$brand-success: #28B62C;
-$brand-info:    #75CAEB;
-$brand-warning: #FF851B;
-$brand-danger:  #FF4136;
+/*
+| Colors
+|------------------------------------------------------------------------------
+| Gray and brand colors for use across Bootstrap.
+*/
 
-// Scaffolding
-$link-hover-decoration: none;
+// Gray colors
 
-// Typography
-$font-family-sans-serif: "Roboto", "Microsoft YaHei", "Hiragino Sans GB",
-    "STHeiti", "WenQuanYi Micro Hei", sans-serif;
-$headings-font-weight: 300;
-$headings-line-height: 1.2;
+$gray-darker:   #222222;
+$gray-dark:     #333333;
+$gray:          #555555;
+$gray-light:    #999999;
+$gray-lighter:  #cccccc;
+$gray-lightest: #f2f2f2;
+
+// Brand colors
+
+$brand-primary: #a126a0;
+$brand-success: #6aa126;
+$brand-info:    #2eb1c2;
+$brand-warning: #eeaa30;
+$brand-danger:  #d81f2d;
+
+
+/*
+| Scaffolding
+|------------------------------------------------------------------------------
+| Settings for some of the most global styles.
+*/
+
+$link-color: $brand-primary;
+$link-hover-color: $link-color;
+
+
+/*
+| Typography
+|------------------------------------------------------------------------------
+| Font, line-height, and color for body text, headings, and more.
+*/
+
+$font-family-sans-serif:  "Roboto", sans-serif;
+$font-family-serif:       "Roboto Slab", serif;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   "Roboto Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-base:        $font-family-sans-serif;
+
+$font-size-base:  16px;
+$font-size-large: 18px;
+$font-size-small: 14px;
+
+$font-size-h1:    36px;
+$font-size-h2:    30px;
+$font-size-h3:    24px;
+$font-size-h4:    20px;
+$font-size-h5:    18px;
+$font-size-h6:    16px;
+
+$line-height-base:     1.5;
+$line-height-computed: $font-size-base * $line-height-base; // 24px
+
+// Heading fonts
+$headings-font-family: $font-family-serif;
+$headings-font-weight: normal;
+$headings-line-height: 1.3;
+
 
 // Iconography
 $icon-font-path: "/fonts/bootstrap/";
+
+
+//== Components
+//
+//## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
+
+$padding-base-vertical:     4px;
+$padding-base-horizontal:   8px;
+
+$padding-large-vertical:    7px;
+$padding-large-horizontal:  12px;
+
+$padding-small-vertical:    4px;
+$padding-small-horizontal:  8px;
+
+$padding-xs-vertical:       1px;
+$padding-xs-horizontal:     4px;
+
+$line-height-large:         1.25;
+$line-height-small:         1.5;
+
+$border-radius-base:        2px;
+$border-radius-large:       3px;
+$border-radius-small:       1px;
+
+
+//== Tables
+//
+//## Customizes the `.table` component with basic values, each used across all table variations.
+
+
+
+
+//== Buttons
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+
+
+$btn-default-bg:     $gray-lightest;
+$btn-default-border: $gray-lighter;
+
+$btn-primary-bg:     $brand-primary;
+$btn-primary-border: $btn-primary-bg;
+
+$btn-success-bg:     $brand-success;
+$btn-success-border: $btn-success-bg;
+
+$btn-info-bg:        $brand-info;
+$btn-info-border:    $btn-info-bg;
+
+$btn-warning-bg:     $brand-warning;
+$btn-warning-border: $btn-warning-bg;
+
+$btn-danger-bg:      $brand-danger;
+$btn-danger-border:  $btn-danger-bg;
+
+
+//== Forms
+//
+//##
+
+$input-bg:                #fff;
+$input-bg-disabled:       $gray-lightest;
+$input-color:             $gray-dark;
+$input-border:            $gray-lighter;
+$input-border-focus:      $brand-info;
+$input-color-placeholder: $gray-light;
+
+$form-group-margin-bottom:       15px;
+
+$legend-color:            $gray-dark;
+$legend-border-color:     $gray-lighter;
+
+//** Background color for textual input addons
+$input-group-addon-bg:           $gray-lighter;
+//** Border color for textual input addons
+$input-group-addon-border-color: $input-border;
+
+//** Disabled cursor for form controls and buttons.
+$cursor-disabled:                not-allowed;
+
+
+//== Dropdowns
+//
+//## Dropdown menu container and contents.
+
+$dropdown-bg:                    #ffffff;
+$dropdown-border:                rgba(0,0,0,.15);
+$dropdown-fallback-border:       #ccc;
+$dropdown-divider-bg:            #e5e5e5;
+
+
+/*
+| Import Bootstrap
+|------------------------------------------------------------------------------
+| Import Bootstrap styles. Dropped some unused components.
+*/
+
+// Core variables and mixins
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+
+// Reset and dependencies
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/print";
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
+
+// Core CSS
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/code";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/forms";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+
+// Components
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/navs";
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/navbar";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/pagination";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/pager";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/labels";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/badges";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/jumbotron";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/thumbnails";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/progress-bars";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/media";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/list-group";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/panels";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/wells";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/close";
+
+// Components w/ JavaScript
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/modals";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tooltip";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/popovers";
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/carousel";
+
+// Utility classes
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
+
+
+/*
+| Override Bootstrap
+|------------------------------------------------------------------------------
+| Override some Bootstrap styles which cannot be done by changing variables.
+*/
+
+// Dropdown border, minimum width and vertical padding
+
+.dropdown-menu {
+    min-width: 0;
+    padding: 0;
+    border: none;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.15);
+}

@@ -61,7 +61,9 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
     @endforeach
 
     <!-- CSS -->
-    <link id="app-css" href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto+Slab|Roboto:400,400i,700" rel="stylesheet">
+    <link id="app-css" href="{{ elixir('css/app.css') }}" rel="stylesheet"/>
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
     @stack('styles')
 </head>
 

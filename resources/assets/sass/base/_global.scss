@@ -7,3 +7,15 @@ iframe {
     display: block;
     max-width: 100%;
 }
+
+// Selection colors
+
+::selection {
+    background: $brand-primary; /* WebKit/Blink Browsers */
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: $brand-primary; /* Gecko Browsers */
+    color: #ffffff;
+}

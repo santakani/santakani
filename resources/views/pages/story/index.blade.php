@@ -7,6 +7,10 @@
 
 @section('main')
 
+<header>
+
+</header>
+
 <div class="container">
 
     <h1 class="page-header">Stories</h1>
@@ -34,8 +38,8 @@
                                     {{ $story->user->name }}
                                 </a>
                             </li>
-                            <li>{{ $story->created_at->toDateString() }}</li>
-                            <li><i class="fa fa-lg fa-heart-o"></i> {{ $story->like_count }}</li>
+                            <li>{{ $story->created_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
+                            <li>{{ trans_choice('common.like_count', $story->like_count) }}</li>
                         </ul>
                     </footer>
                 </article>

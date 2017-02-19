@@ -1,54 +1,89 @@
 <?php isset($active_nav) || $active_nav = null; ?>
 
-<nav class="custom-navbar">
+<nav class="navbar">
+
     <ul class="nav-menu">
-        <li class="brand hidden-xs">
+
+        <!-- Logo -->
+        <li class="hidden-xs">
             <a href="{{ url('/') }}">
-                <svg class="icon"><use xlink:href="/svg/sprites.svg#santakani"/></svg>
+                <img src="{{ url('img/logo/without-shadow.svg') }}" width="24" height="24">
                 <span class="text">{{ trans('brand.name') }}</span>
             </a>
         </li>
+
+        <!-- Flexible space for desktop navbar -->
+        <li class="space">
+            <form class="form-inline">
+                <input class="form-control" type="search" name="query" placeholder="{{ trans('common.search') }}">
+            </form>
+        </li>
+
+        <!-- Home/design icon -->
         <li class="{{ $active_nav === 'design'?'active':'' }}">
             <a href="{{ url('/') }}">
-                <svg class="icon"><use xlink:href="/svg/sprites.svg#design"/></svg>
-                <span class="text">{{ trans('design.design') }}</span>
+                <span class="icon ion-ios-home{{ $active_nav === 'design'?'':'-outline' }} visible-xs-block"></span>
+                <span class="text">{{ trans('common.home') }}</span>
             </a>
         </li>
+
+        <!-- Designer icon -->
+        <li class="{{ $active_nav === 'designer'?'active':'' }}">
+            <a href="{{ url('designer') }}">
+                <span class="icon ion-ios-people{{ $active_nav === 'designer'?'':'-outline' }} visible-xs-block"></span>
+                <span class="text">{{ trans('designer.designer') }}</span>
+            </a>
+        </li>
+
+        <!-- Map/place icon -->
         <li class="{{ $active_nav === 'place'?'active':'' }}">
             <a href="{{ url('place') }}">
-                <svg class="icon"><use xlink:href="/svg/sprites.svg#map"/></svg>
+                <span class="icon ion-ios-location{{ $active_nav === 'place'?'':'-outline' }} visible-xs-block"></span>
                 <span class="text">{{ trans('geo.map') }}</span>
             </a>
         </li>
+
+        <!-- Story icon -->
         <li class="{{ $active_nav === 'story'?'active':'' }}">
             <a href="{{ url('story') }}">
-                <svg class="icon"><use xlink:href="/svg/sprites.svg#story"/></svg>
+                <span class="icon ion-ios-book{{ $active_nav === 'story'?'':'-outline' }} visible-xs-block"></span>
                 <span class="text">{{ trans('story.story') }}</span>
             </a>
         </li>
 
+        <li class="dropdown hidden-xs">
+            <a href="#" class="create dropdown-toggle" data-toggle="dropdown" title="{{ trans('common.more') }}">
+                <span class="icon ion-ios-more-outline"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ url('tag') }}">{{ trans('common.tag') }}</a></li>
+                <li><a href="{{ url('about') }}">{{ trans('common.about_us') }}</a></li>
+                <li><a href="{{ url('help') }}">{{ trans('common.help') }}</a></li>
+            </ul>
+        </li>
+
+        <!-- Flexible space for desktop navbar -->
         <li class="space"></li>
 
         @if (Auth::guest())
+
+            <!-- Login icon -->
             <li class="{{ $active_nav === 'login'?'active':'' }}">
                 <a href="{{ app_redirect_url('login') }}">
-                    <svg class="icon"><use xlink:href="/svg/sprites.svg#login"/></svg>
+                    <span class="icon ion-ios-person-outline"></span>
                     <span class="text">{{ trans('common.login') }}</span>
                 </a>
             </li>
-            <li class="hidden-xs {{ $active_nav === 'register'?'active':'' }}">
-                <a href="{{ app_redirect_url('register') }}">
-                    <svg class="icon"><use xlink:href="/svg/sprites.svg#register"/></svg>
-                    <span class="text">{{ trans('common.register') }}</span>
-                </a>
-            </li>
+
         @else
+
+            <!-- Create dropdown, only in desktop -->
             <li class="dropdown hidden-xs">
-                <a href="#" class="create dropdown-toggle" data-toggle="dropdown">
-                    <svg class="icon"><use xlink:href="/svg/sprites.svg#create"/></svg>
-                    <span>{{ trans('common.create') }}</span>
+                <a href="#" class="create dropdown-toggle" data-toggle="dropdown" title="{{ trans('common.create') }}">
+                    <span class="icon ion-ios-compose-outline"></span>
+                    <span class="text">{{ trans('common.create') }}</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-right">
+                <ul class="dropdown-menu">
                     <li><a href="{{ url('/designer/create') }}">{{ trans('designer.designer') }}</a></li>
                     <li><a href="{{ url('/place/create') }}">{{ trans('place.place') }}</a></li>
                     <li><a href="{{ url('/story/create') }}">{{ trans('story.story') }}</a></li>
@@ -58,16 +93,21 @@
                 </ul>
             </li>
 
-            <li class="dropdown {{ $active_nav === 'user'?'active':'' }}">
+            <!-- Mobile user icon -->
+            <li class="visible-xs-block {{ $active_nav === 'user'?'active':'' }}">
+                <a href="{{ Auth::user()->url }}">
+                    <span class="icon ion-ios-person{{ $active_nav === 'user'?'':'-outline' }}"></span>
+                    <span class="text">{{ trans('common.user') }}</span>
+                </a>
+            </li>
+
+            <!-- Desktop user menu -->
+            <li class="dropdown {{ $active_nav === 'user'?'active':'' }} hidden-xs">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <img class="avatar" src="{{ Auth::user()->avatar('medium') }}" />
-                    <span class="name hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    @if (Auth::user()->role === 'admin')
-                        <li><a href="/admin">Admin panel</a></li>
-                        <li role="separator" class="divider"></li>
-                    @endif
+                    <li class="name"><a href="{{ Auth::user()->url }}">{{ Auth::user()->name }}</a></li>
                     <?php
                         $designer_count = Auth::user()->designers()->count();
                         $place_count = Auth::user()->places()->count();
@@ -77,22 +117,17 @@
                         @foreach (Auth::user()->designers()->take(4)->get() as $designer)
                             <li><a href="{{ $designer->url }}">{{ $designer->text('name') }}</a></li>
                         @endforeach
-                        <li role="separator" class="divider"></li>
                     @endif
                     @if ($place_count)
                         <li class="dropdown-header">{{ trans('place.place_pages') }}</li>
                         @foreach (Auth::user()->places()->take(4)->get() as $place)
                             <li><a href="{{ $place->url }}">{{ $place->text('name') }}</a></li>
                         @endforeach
-                        <li role="separator" class="divider"></li>
                     @endif
-                    <li><a href="{{ url('setting/page') }}">{{ trans('common.pages') }}</a></li>
-                    <li><a href="{{ url('trash') }}">
-                        {{ trans('common.deleted_pages') }}
-                        <span class="badge">{{ Auth::user()->trash_count }}</span>
-                    </a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="{{ Auth::user()->url }}">{{ trans('common.profile') }}</a></li>
+                    @if (Auth::user()->role === 'admin')
+                        <li><a href="/admin">Admin panel</a></li>
+                    @endif
                     <li><a href="{{ url('setting') }}">{{ trans('common.settings') }}</a></li>
                     <li><a class="logout-action" href="{{ url('logout') }}">{{ trans('common.logout') }}</a></li>
                 </ul>

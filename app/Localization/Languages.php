@@ -117,16 +117,16 @@ class Languages {
         }
 
         $formats = [
-            'de' => '%A %d %B %Y',
-            'en' => '%A %d %B %Y',
-            'es' => '%A %d %B %Y',
-            'fi' => '%A %d %B %Y',
-            'fr' => '%A %d %B %Y',
-            'pt' => '%A %d %B %Y',
-            'sv' => '%A %d %B %Y',
-            'zh' => '%Y 年%B %d 日%A',
+            'de' => '%d %B %Y',
+            'en' => '%d %B %Y',
+            'es' => '%d %B %Y',
+            'fi' => '%d %B %Y',
+            'fr' => '%d %B %Y',
+            'pt' => '%d %B %Y',
+            'sv' => '%d %B %Y',
+            'zh' => '%Y 年%B %d 日',
         ];
 
-        return isset($formats[$locale]) ? $formats[$locale] : '%A %d %B %Y';
+        return isset($formats[$locale]) ? $formats[$locale] : '%d %B %Y';
     }
 }

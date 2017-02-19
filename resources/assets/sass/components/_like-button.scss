@@ -1,4 +1,8 @@
 .like-button {
+    &.liked {
+        color: $brand-danger;
+    }
+
     .icon {
         display: none;
     }
