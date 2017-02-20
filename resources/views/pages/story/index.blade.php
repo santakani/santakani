@@ -19,32 +19,7 @@
     <div class="row">
         <!-- article list -->
         <div class="col-sm-8">
-            @foreach ($stories as $story)
-                <article class="story panel panel-default">
-                    <div class="clearfix panel-body" href="{{ $story->url }}">
-                        @if ($story->image)
-                            <a href="{{ $story->url }}">
-                                <img class="pull-right" src="{{ $story->image->small_file_url }}" srcset="{{ $story->image->medium_file_url }} 2x"/>
-                            </a>
-                        @endif
-                        <h2><a href="{{ $story->url }}">{{ $story->text('title') }}</a></h2>
-                        <p class="excerpt">{{ $story->excerpt('content') }}</p>
-                    </div>
-                    <footer class="panel-footer text-muted">
-                        <ul class="list-inline">
-                            <li>
-                                <a href="{{ $story->user->url }}">
-                                    <img class="avatar" src="{{ $story->user->small_avatar_url }}" width="25" height="25">
-                                    {{ $story->user->name }}
-                                </a>
-                            </li>
-                            <li>{{ $story->created_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
-                            <li>{{ trans_choice('common.like_count', $story->like_count) }}</li>
-                        </ul>
-                    </footer>
-                </article>
-            @endforeach
-
+            @each('components.cards.story-card', $stories, 'story')
             {!! $stories->appends(app('request')->all())->links() !!}
         </div>
 

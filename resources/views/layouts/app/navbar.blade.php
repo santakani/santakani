@@ -14,8 +14,8 @@
 
         <!-- Flexible space for desktop navbar -->
         <li class="space">
-            <form class="form-inline">
-                <input class="form-control" type="search" name="query" placeholder="{{ trans('common.search') }}">
+            <form class="form-inline" action="{{ url('search') }}" method="get">
+                <input class="form-control" type="search" name="query" placeholder="&#xf4a4; {{ trans('common.search') }}" required>
             </form>
         </li>
 
@@ -70,7 +70,7 @@
             <!-- Login icon -->
             <li class="{{ $active_nav === 'login'?'active':'' }}">
                 <a href="{{ app_redirect_url('login') }}">
-                    <span class="icon ion-ios-person-outline"></span>
+                    <span class="icon ion-ios-person{{ $active_nav === 'login'?'':'-outline' }} visible-xs-block"></span>
                     <span class="text">{{ trans('common.login') }}</span>
                 </a>
             </li>

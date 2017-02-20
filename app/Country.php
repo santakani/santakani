@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Laravel\Scout\Searchable;
 use App\Localization\Languages;
 
 class Country extends Model
@@ -15,6 +15,7 @@ class Country extends Model
     use Features\ImageFeature;
     use Features\LikeFeature;
     use Features\TranslationFeature;
+    use Searchable;
 
     /**
      * The table associated with the model.
@@ -146,5 +147,23 @@ class Country extends Model
         }
 
         $this->imported_at = Carbon::now()->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        // Load relationships
+        $this->load('translations');
+
+        // Generate array data
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
     }
 }

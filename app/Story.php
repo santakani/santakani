@@ -13,6 +13,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 /**
  * Story
@@ -31,6 +32,7 @@ class Story extends Model
     use Features\TagFeature;
     use Features\TransferFeature;
     use Features\TranslationFeature;
+    use Searchable;
 
     /**
      * The table associated with the model.
@@ -162,7 +164,23 @@ class Story extends Model
     // Other Methods
     //====================================================================
 
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        // Load relationships
+        $this->load('translations', 'tags.translations', 'user');
 
+        // Generate array data
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
+    }
 
     //====================================================================
     // Static Functions

@@ -15,6 +15,7 @@ use DB;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 /**
  * Place
@@ -34,6 +35,8 @@ class Place extends Model
     use Features\TagFeature;
     use Features\TransferFeature;
     use Features\TranslationFeature;
+
+    use Searchable;
 
     /**
      * The table associated with the model.
@@ -282,5 +285,23 @@ class Place extends Model
         }
 
         return $names;
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        // Load relationships
+        $this->load('translations', 'tags.translations', 'city.translations', 'city.country.translations');
+
+        // Generate array data
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
     }
 }

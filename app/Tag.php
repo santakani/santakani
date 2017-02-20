@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Tag extends Model
 {
@@ -11,6 +12,7 @@ class Tag extends Model
     use Features\ImageFeature;
     use Features\LikeFeature;
     use Features\TranslationFeature;
+    use Searchable;
 
     /**
      * The table associated with the model.
@@ -110,5 +112,21 @@ class Tag extends Model
     //                                                                        //
     ////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        // Load relationships
+        $this->load('translations');
 
+        // Generate array data
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
+    }
 }

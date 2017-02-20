@@ -34,6 +34,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('auth/twitter/callback', 'Auth\OAuthController@handleTwitterCallback');
 
     Route::get('/', 'HomeController@index');
+    Route::get('search', 'SearchController@index');
 
     Route::get('about', 'PageController@about');
     Route::get('privacy', 'PageController@privacy');
@@ -89,20 +90,3 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('help', 'HelpController@index');
 });
 
-
-/*
-|--------------------------------------------------------------------------
-| API Routes (version 1)
-|--------------------------------------------------------------------------
-|
-| This route group applies the "api" middleware group to every route
-| it contains. The "api" middleware group is defined in your HTTP
-| kernel and includes throttle (limit API rates by 60 times per second) and
-| auth through API rather than session.
-|
-*/
-
-Route::group(['middleware' => 'api', 'prefix' => 'api/v1'], function () {
-
-
-});

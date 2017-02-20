@@ -60,8 +60,8 @@ $lg-path-images: '/img/lightgallery';
 @import "components/article-filter";
 @import "components/article-list";
 
-@import "components/buttons.scss";
-
+@import "components/buttons";
+@import "components/cards";
 @import "components/grid/grid-container";
 @import "components/grid/grid";
 @import "components/grid/article-grid";
@@ -124,6 +124,7 @@ $lg-path-images: '/img/lightgallery';
 //==============================================================================
 
 @import "pages/home";
+@import "pages/search";
 @import "pages/about";
 @import "pages/help";
 
