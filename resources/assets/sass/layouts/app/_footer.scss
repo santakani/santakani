@@ -1,15 +1,9 @@
 #app-footer {
     text-align: center;
-    padding: 30px 0;
-    background-color: #ffffff;
-    color: #666666;
-
-    &.float {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
+    padding: $grid-gutter-width 0;
+    background-color: $gray-lightest;
+    color: $gray-light;
+    font-size: $font-size-small;
 
     .link-list > li > a:not(:hover) {
         color: inherit;

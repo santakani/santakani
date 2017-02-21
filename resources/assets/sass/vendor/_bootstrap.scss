@@ -11,12 +11,12 @@
 
 // Gray colors
 
-$gray-darker:   #222222;
-$gray-dark:     #333333;
+$gray-darker:   #222222; // For dark background
+$gray-dark:     #333333; // For dark text
 $gray:          #555555;
-$gray-light:    #999999;
-$gray-lighter:  #cccccc;
-$gray-lightest: #f2f2f2;
+$gray-light:    #999999; // For light text
+$gray-lighter:  #cccccc; // For light border
+$gray-lightest: #f8f8f8; // For light background
 
 // Brand colors
 
@@ -49,16 +49,17 @@ $font-family-serif:       "Roboto Slab", serif;
 $font-family-monospace:   "Roboto Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 $font-family-base:        $font-family-sans-serif;
 
-$font-size-base:  16px;
-$font-size-large: 18px;
-$font-size-small: 14px;
+$font-size-base:    16px; // Body text
+$font-size-large:   18px; // Leading text
+$font-size-small:   14px; // Image captions and card description
+$font-size-smaller: 12px; // Card metadata
 
-$font-size-h1:    36px;
-$font-size-h2:    30px;
-$font-size-h3:    24px;
-$font-size-h4:    20px;
-$font-size-h5:    18px;
-$font-size-h6:    16px;
+$font-size-h1:      36px;
+$font-size-h2:      30px;
+$font-size-h3:      24px;
+$font-size-h4:      20px;
+$font-size-h5:      18px;
+$font-size-h6:      16px;
 
 $line-height-base:     1.5;
 $line-height-computed: $font-size-base * $line-height-base; // 24px
