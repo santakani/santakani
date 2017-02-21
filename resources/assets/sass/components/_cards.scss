@@ -9,8 +9,18 @@ $card-bg: $gray-lightest;
     margin-bottom: $grid-gutter-width;
     overflow: hidden;
 
+    .card-cover-wrap {
+        display: block;
+    }
+
+    .card-cover {
+        display: block;
+        object-fit: cover;
+    }
+
     .card-body {
         padding: $grid-gutter-width / 2;
+        font-size: $font-size-small;
     }
 
     .card-title {
@@ -24,43 +34,64 @@ $card-bg: $gray-lightest;
         padding-bottom: $grid-gutter-width / 2;
         padding-left: $grid-gutter-width / 2;
         padding-right: $grid-gutter-width / 2;
+        font-size: $font-size-smaller;
     }
 }
 
 .story-card {
-    $cover-width: 300px;
+    // Phone, width < 480px, usually 320px, 360px, 400px
     $cover-height: 200px;
 
-    position: relative;
-    height: $cover-height;
-
-    .card-cover-wrap {
-        display: block;
-        float: left;
-    }
-
     .card-cover {
-        display: block;
-        object-fit: cover;
-        width: $cover-width;
+        width: 100%;
         height: $cover-height;
     }
 
-    .card-body {
-        position: relative;
-        margin-left: $cover-width;
-    }
-
     .card-footer {
-        position: absolute;
-        padding: $grid-gutter-width / 2 ($grid-gutter-width / 2);
-        left: $cover-width;
-        right: 0;
-        bottom: 0;
-        background: $card-bg;
-
         .list-inline {
             margin-bottom: 0;
+        }
+    }
+
+    // Tablet, width >= 480px, usually 600px, 720px
+    @media (min-width: $screen-xs-min) {
+        $cover-height: 320px;
+
+        .card-cover {
+            width: 100%;
+            height: $cover-height;
+        }
+    }
+
+    // Large tablet, width >= 768px, usually 768px, 800px
+    @media (min-width: $screen-sm-min) {
+        $cover-width: 300px;
+        $cover-height: 200px;
+
+        position: relative;
+        height: $cover-height;
+
+        .card-cover-wrap {
+            float: left;
+        }
+
+        .card-cover {
+            width: $cover-width;
+            height: $cover-height;
+        }
+
+        .card-body {
+            position: relative;
+            margin-left: $cover-width;
+        }
+
+        .card-footer {
+            position: absolute;
+            padding: $grid-gutter-width / 2 ($grid-gutter-width / 2);
+            left: $cover-width;
+            right: 0;
+            bottom: 0;
+            background: $card-bg;
         }
     }
 }

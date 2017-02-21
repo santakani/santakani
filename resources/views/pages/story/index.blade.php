@@ -18,13 +18,13 @@
 
     <div class="row">
         <!-- article list -->
-        <div class="col-sm-8">
+        <div class="col-md-8">
             @each('components.cards.story-card', $stories, 'story')
             {!! $stories->appends(app('request')->all())->links() !!}
         </div>
 
         <!-- sidebar -->
-        <div class="col-sm-4 sticky">
+        <div class="col-md-4 sticky">
             <sidebar>
                 <form class="form" action="/story" method="get">
                     <input type="search" name="search" value="{{ request('search') }}" class="form-control" placeholder="{{ trans('common.search') }}" maxlength="50"/>
