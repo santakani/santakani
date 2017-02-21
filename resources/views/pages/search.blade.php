@@ -50,9 +50,13 @@
 <div id="search-results">
     <div class="container">
         @if ($type === 'design')
-            @foreach ($results as $design)
-                {{ $design->text('name') }}
-            @endforeach
+            <div class="row">
+                @foreach ($results as $design)
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        @include('components.cards.design-card', ['design' => $design])
+                    </div>
+                @endforeach
+            </div>
         @endif
 
         @if ($type === 'designer')

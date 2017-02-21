@@ -70,9 +70,11 @@
 
         <p>{{ trans('designer.designer') }}</p>
         <p>
-            <a href="{{ $design->designer->url }}">
-                {{ $design->designer->text('name') }} ({{ $design->designer->city->full_name }})
-            </a>
+            @if ($design->designer_id)
+                <a href="{{ $design->designer->url }}">
+                    {{ $design->designer->text('name') }}
+                </a>
+            @endif
         </p>
     </div><!-- /.info -->
 @endsection
