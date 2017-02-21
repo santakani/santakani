@@ -11,6 +11,7 @@ $card-bg: $gray-lightest;
 
     .card-cover-wrap {
         display: block;
+        position: relative;
     }
 
     .card-cover {
@@ -19,6 +20,7 @@ $card-bg: $gray-lightest;
     }
 
     .card-body {
+        position: relative;
         padding: $grid-gutter-width / 2;
         font-size: $font-size-small;
     }
@@ -35,6 +37,47 @@ $card-bg: $gray-lightest;
         padding-left: $grid-gutter-width / 2;
         padding-right: $grid-gutter-width / 2;
         font-size: $font-size-smaller;
+
+        .list-inline {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.designer-card {
+    $cover-height: 200px;
+    $body-height: 150px;
+
+    position: relative;
+    height: $cover-height + $body-height;
+
+    .card-cover {
+        width: 100%;
+        height: $cover-height;
+    }
+
+    .card-logo {
+        position: absolute;
+        right: $grid-gutter-width / 2;
+        bottom: $grid-gutter-width / 2;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+
+    .card-body {
+        height: $body-height;
+    }
+
+    .card-title a {
+        color: $gray-dark;
+    }
+
+    .card-footer {
+        position: absolute;
+        padding: $grid-gutter-width / 2;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: $card-bg;
     }
 }
 
@@ -45,12 +88,6 @@ $card-bg: $gray-lightest;
     .card-cover {
         width: 100%;
         height: $cover-height;
-    }
-
-    .card-footer {
-        .list-inline {
-            margin-bottom: 0;
-        }
     }
 
     // Tablet, width >= 480px, usually 600px, 720px
@@ -87,7 +124,7 @@ $card-bg: $gray-lightest;
 
         .card-footer {
             position: absolute;
-            padding: $grid-gutter-width / 2 ($grid-gutter-width / 2);
+            padding: $grid-gutter-width / 2;
             left: $cover-width;
             right: 0;
             bottom: 0;

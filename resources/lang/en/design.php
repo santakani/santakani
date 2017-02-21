@@ -24,6 +24,7 @@ return array(
 
     'design' => 'Design',
     'designs' => 'Designs',
+    'design_count' => '{0} No design|{1} 1 design|[2,*] :count designs',
     'price' => 'Price',
     'webshop_link' => 'Webshop link',
     'taobao_price' => 'Taobao price',

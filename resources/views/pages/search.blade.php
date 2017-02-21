@@ -56,9 +56,13 @@
         @endif
 
         @if ($type === 'designer')
-            @foreach ($results as $designer)
-                {{ $designer->text('name') }}
-            @endforeach
+            <div class="row">
+                @foreach ($results as $designer)
+                    <div class="col-sm-6 col-lg-4">
+                        @include('components.cards.designer-card', ['designer' => $designer])
+                    </div>
+                @endforeach
+            </div>
         @endif
 
         @if ($type === 'place')
@@ -77,8 +81,8 @@
             @endforeach
         @endif
 
-        {{ $results->links() }}
-    </div>
+        {{ $results->appends(app('request')->all())->links() }}
+    </div><!-- /.container -->
 </div><!-- /#search-results -->
 
 @endsection
