@@ -214,14 +214,14 @@ class PlaceController extends Controller
 
         // Validate data
         $this->validate($request, [
-            'type' => 'string|in:' . implode(',', Place::types()),
-            'image_id' => 'integer|exists:image,id',
-            'gallery_image_ids.*' => 'integer|exists:image,id',
-            'city_id' => 'integer|exists:city,id',
-            'address' => 'string|max:255',
+            'type' => 'string|nullable|in:' . implode(',', Place::types()),
+            'image_id' => 'integer|nullable|exists:image,id',
+            'gallery_image_ids.*' => 'integer|nullable|exists:image,id',
+            'city_id' => 'integer|nullable|exists:city,id',
+            'address' => 'string|nullable|max:255',
             'latitude' => 'numeric',
             'longitude' => 'numeric',
-            'tag_ids.*' => 'integer|exists:tag,id',
+            'tag_ids.*' => 'integer|nullable|exists:tag,id',
             'email' => 'email|nullable|max:255',
             'phone' => 'string|nullable|max:255',
             'website' => 'url|nullable|max:255',

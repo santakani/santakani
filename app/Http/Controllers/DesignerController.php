@@ -245,12 +245,12 @@ class DesignerController extends Controller
         }
 
         $this->validate($request, [
-            'image_id' => 'integer|exists:image,id',
-            'logo_id' => 'integer|exists:image,id',
-            'gallery_image_ids.*' => 'integer|exists:image,id',
-            'city_id' => 'integer|exists:city,id',
-            'user_id' => 'integer|exists:user,id',
-            'tag_ids.*' => 'integer|exists:tag,id',
+            'image_id' => 'integer|nullable|exists:image,id',
+            'logo_id' => 'integer|nullable|exists:image,id',
+            'gallery_image_ids.*' => 'integer|nullable|exists:image,id',
+            'city_id' => 'integer|nullable|exists:city,id',
+            'user_id' => 'integer|nullable|exists:user,id',
+            'tag_ids.*' => 'integer|nullable|exists:tag,id',
             'email' => 'email|nullable|max:255',
             'website' => 'url|nullable|max:255',
             'facebook' => 'url|nullable|max:255',

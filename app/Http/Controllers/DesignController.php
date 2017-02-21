@@ -208,12 +208,12 @@ class DesignController extends Controller
         }
 
         $this->validate($request, [
-            'image_id' => 'integer|exists:image,id',
-            'gallery_image_ids.*' => 'integer|exists:image,id',
-            'designer_id' => 'integer|exists:designer,id',
-            'user_id' => 'integer|exists:user,id',
-            'tag_ids.*' => 'integer|exists:tag,id',
-            'price' => 'numeric|between:0.01,999999.99',
+            'image_id' => 'integer|nullable|exists:image,id',
+            'gallery_image_ids.*' => 'integer|nullable|exists:image,id',
+            'designer_id' => 'integer|nullable|exists:designer,id',
+            'user_id' => 'integer|nullable|exists:user,id',
+            'tag_ids.*' => 'integer|nullable|exists:tag,id',
+            'price' => 'numeric|nullable|between:0.01,999999.99',
             'currency' => 'required_with:price|' . Currencies::validator(),
             'webshop' => 'url|nullable|max:255',
             'translations' => 'array',

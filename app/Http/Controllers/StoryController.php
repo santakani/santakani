@@ -211,9 +211,9 @@ class StoryController extends Controller
         }
 
         $this->validate($request, [
-            'image_id' => 'integer|exists:image,id',
-            'user_id' => 'integer|exists:user,id',
-            'tag_ids.*' => 'integer|exists:tag,id',
+            'image_id' => 'integer|nullable|exists:image,id',
+            'user_id' => 'integer|nullable|exists:user,id',
+            'tag_ids.*' => 'integer|nullable|exists:tag,id',
             'translations' => 'array',
             'translations.*' => 'array',
             'translations.*.title' => 'string|nullable|max:255',

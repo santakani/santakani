@@ -170,8 +170,8 @@ class TagController extends Controller
         }
 
         $this->validate($request, [
-            'level' => 'integer|between:0,255',
-            'image_id' => 'integer|exists:image,id',
+            'level' => 'integer|nullable|between:0,255',
+            'image_id' => 'integer|nullable|exists:image,id',
             'translations' => 'array',
             'translations.*' => 'array',
             'translations.*.name' => 'string|nullable|max:255',
