@@ -138,6 +138,11 @@
             <li class="{{ $tab === 'overview' ? 'active' : '' }}">
                 <a href="{{ $designer->url }}">{{ trans('common.overview') }}</a>
             </li>
+            <li class="{{ $tab === 'description' ? 'active' : '' }}">
+                <a href="{{ $designer->url }}?tab=description">
+                    {{ trans('common.description') }}
+                </a>
+            </li>
             <li class="{{ $tab === 'designs' ? 'active' : '' }}">
                 <a href="{{ $designer->url }}?tab=designs">
                     {{ trans('design.designs') }}
@@ -148,11 +153,6 @@
                 <a href="{{ $designer->url }}?tab=images">
                     {{ trans('common.images') }}
                     <span class="badge">{{ $designer->images()->where('weight', '>', 0)->count() }}</span>
-                </a>
-            </li>
-            <li class="{{ $tab === 'description' ? 'active' : '' }}">
-                <a href="{{ $designer->url }}?tab=description">
-                    {{ trans('common.description') }}
                 </a>
             </li>
             <li class="{{ $tab === 'likes' ? 'active' : '' }}">
