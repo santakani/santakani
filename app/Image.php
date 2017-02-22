@@ -298,26 +298,10 @@ class Image extends Model
      */
     public function fallback($size)
     {
-        if (empty($this->sizes[$size])) {
-            return 'full';
-        }
-
-        if (!$this->sizes[$size]['fallback']) {
+        if ($this->has($size)) {
             return $size;
-        }
-
-        if ($this->sizes[$size]['crop']) {
-            if ($this->width >= $this->sizes[$size]['width'] && $this->height >= $this->sizes[$size]['height']) {
-                return $size;
-            } else {
-                return $this->fallback($this->sizes[$size]['fallback']);
-            }
         } else {
-            if ($this->width > $this->sizes[$size]['width'] || $this->height > $this->sizes[$size]['height']) {
-                return $size;
-            } else {
-                return $this->fallback($this->sizes[$size]['fallback']);
-            }
+            return $this->fallback($this->sizes[$size]['fallback']);
         }
     }
 
@@ -329,6 +313,10 @@ class Image extends Model
      */
     public function has($size)
     {
+        if ($size === 'full') {
+            return true;
+        }
+
         if (empty($this->sizes[$size])) {
             return false;
         }
@@ -337,9 +325,13 @@ class Image extends Model
             return true;
         }
 
+        $fallback = $this->sizes[$size]['fallback'];
+
         if ($this->sizes[$size]['crop']) {
-            return $this->width >= $this->sizes[$size]['width'] && $this->height >= $this->sizes[$size]['height'];
+            // Cropped images fallback to specific smaller size
+            return $this->width > $this->sizes[$fallback]['width'] && $this->height > $this->sizes[$fallback]['height'];
         } else {
+            // Non-cropped images fallback to full size
             return $this->width > $this->sizes[$size]['width'] || $this->height > $this->sizes[$size]['height'];
         }
     }
