@@ -38,6 +38,8 @@ require('./components/page-cover');
 
 require('./components/tabs/auto-collapse');
 
+require('./components/qrcode');
+
 
 
 //==============================

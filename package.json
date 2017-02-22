@@ -19,6 +19,7 @@
     "leaflet": "^0.7.7",
     "lightgallery": "^1.2.19",
     "lightslider": "^1.1.5",
+    "qrcode-js": "0.0.2",
     "roboto-fontface": "^0.4.5",
     "selectize": "^0.12.3",
     "sortablejs": "^1.4.2",

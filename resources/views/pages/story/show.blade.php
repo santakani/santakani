@@ -8,7 +8,6 @@
     'og_description' => $story->excerpt('content'),
     'og_image' => empty($story->image_id)?'':$story->image->fileUrl('medium'),
     'twitter_card_type' => 'summary_large_image',
-    'has_share_buttons' => true,
 ])
 
 @section('main')
@@ -36,6 +35,12 @@
                         <li><a href="https://plus.google.com/share?url={{ urlencode($story->url) }}" target="_blank">Google+</a></li>
                         <li><a href="https://twitter.com/intent/tweet?hashtags=santakanidesign&amp;url={{ urlencode($story->url) }}" target="_blank">Twitter</a></li>
                         <li><a href="http://www.tumblr.com/share/link?url={{ urlencode($story->url) }}" target="_blank">Tumblr</a></li>
+
+                        <li><a href="#">
+                            微信
+                            <img class="qrcode img-responsive" src="" data-url="{{ $story->url }}" width="300" height="300">
+                        </a></li>
+
                     </ul>
                 </div>
             </div>
