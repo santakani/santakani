@@ -12,6 +12,10 @@ new DeleteButton({el: '#delete-button'});
 new DeleteButton({el: '#force-delete-button', forceDelete: true});
 
 // Gallery
+$('#overview-images').lightGallery({
+    selector: 'a',
+});
+
 $('#gallery').lightGallery({
     selector: 'a',
 });

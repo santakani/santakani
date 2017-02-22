@@ -8,188 +8,164 @@
     'og_description' => $designer->excerpt('content'),
     'og_image' => empty($designer->image_id)?'':$designer->image->fileUrl('medium'),
     'twitter_card_type' => 'summary_large_image',
-    'has_share_buttons' => true,
 ])
 
-@section('header')
-    <div class="page-cover"
-        @if (count($designer->image))
-            style="background-image:url({{ $designer->image->large_file_url }})"
-        @endif
-        >
-
-        <div class="raster raster-dark-dot"></div>
-
-        <div class="buttons">
-            @include('components.buttons.like', ['likeable' => $designer])
-            @if (Auth::check() && Auth::user()->can('edit-designer', $designer))
-                <div class="btn-group">
-                    <a id="edit-button" class="btn btn-default" href="{{ url()->current() . '/edit' }}">
-                        <i class="fa fa-lg fa-pencil"></i> {{ trans('common.edit') }}
-                    </a>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-lg fa-ellipsis-v"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        @if (Auth::user()->can('editor-pick'))
-                            <li>
-                                <a id="editor-pick-button" class="{{ $designer->editor_pick?'picked':'' }}" href="#">
-                                    <i class="fa fa-fw fa-toggle-on picked-icon"></i>
-                                    <i class="fa fa-fw fa-toggle-off unpicked-icon"></i>
-                                    {{ trans('common.editor_pick') }}
-                                </a>
-                            </li>
-                        @endif
-                        @if (Auth::user()->can('transfer-designer', $designer))
-                            <li><a id="transfer-button" href="#" data-toggle="modal" data-target="#transfer-modal"><i class="fa fa-fw fa-exchange"></i> {{ trans('common.transfer') }}</a></li>
-                        @endif
-                        @if (Auth::user()->can('delete-designer', $designer))
-                            <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
-                            @if (Auth::user()->role === 'admin' || Auth::user()->role === 'editor')
-                                <li><a id="force-delete-button" href="#"><i class="fa fa-fw fa-ban"></i> {{ trans('common.delete_permanently') }}</a></li>
-                            @endif
-                        @endif
-                    </ul>
-                </div><!--/.btn-group -->
-            @endif
-        </div><!-- /.buttons -->
-
-        @if ($designer->logo_id)
-            <img class="logo" src="{{ $designer->logo->small_file_url }}"/>
-        @endif
-        <h1 class="name">{{ $designer->text('name') }}</h1>
-        <p class="tagline"><em>{{ $designer->excerpt('tagline', null, 140) }}</em></p>
-        @if (count($designer->city))
-            <p class="city">{{ $designer->city->full_name }}</p>
-        @endif
-    </div><!-- /.page-cover -->
-@endsection
-
 @section('main')
-    <section id="designs">
-        <div class="grid-container">
-            <h1>
-                {{ trans('design.designs') }}
-                @if (Auth::check() && Auth::user()->can('edit-designer', $designer))
-                    <div class="pull-right">
-                        <a id="design-create-button" class="btn btn-default" href="{{ url('design/create?designer_id='.$designer->id) }}"><i class="fa fa-plus"></i> {{ trans('common.create') }}</a>
-                    </div>
+    <header id="designer-header">
+        <div class="container">
+            <div class="clearfix">
+                @if ($designer->logo_id)
+                    <img class="logo" src="{{ $designer->logo->thumb_file_url }}" width="300" height="300" alt="Logo" title="Logo">
+                @else
+                    <img class="logo" src="{{ url('img/placeholder/thumb.svg') }}" width="300" height="300" alt="Logo" title="Logo">
                 @endif
-            </h1>
-        </div>
-        <div class="article-grid">
-            @foreach ($designer->designs as $design)
-                <article>
-                    <a href="{{ $design->url }}">
-                        <div class="cover">
-                            @if ($design->image_id)
-                                <img class="image" src="{{ $design->image->thumb_file_url }}"
-                                    srcset="{{ $design->image->largethumb_file_url }} 2x"/>
-                            @else
-                                <img class="image" src="{{ url('img/placeholder/square.png') }}"/>
-                            @endif
+
+                <h1 class="title text-nowrap">
+                    <span class="name">{{ $designer->text('name') }}</span>
+                </h1>
+
+                <p>{{ $designer->text('tagline') }}</p>
+            </div><!-- /.clearfix -->
+
+            <div class="row">
+                <div class="col-sm-6 col-md-8">
+                    <ul class="info list-inline text-muted">
+                        @if ($designer->city_id)
+                            <li>{{ $designer->city->full_name }}</li>
+                        @endif
+                        <li>{{ trans_choice('design.design_count', $designer->designs->count()) }}</li>
+                        <li>{{ trans_choice('common.like_count', $designer->like_count) }}</li>
+                    </ul>
+                </div><!-- /.col -->
+
+                <div class="col-sm-6 col-md-4">
+
+                    <div class="action-bar">
+                        <div class="action">
+                            @include('components.buttons.like', ['likeable' => $designer])
                         </div>
-                        <div class="text">
-                            <div class="inner">
-                                <h2>{{ $design->text('name') }}<br></h2>
-                                <div class="excerpt">{{ $design->excerpt('content') }}</div>
+                        <div class="action">
+                            <div class="dropdown">
+                                <button type="button" class="btn-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ trans('common.share') }}">
+                                    <span class="icon ion-ios-upload-outline"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($designer->url) }}" target="_blank">Facebook</a></li>
+                                    <li><a href="https://plus.google.com/share?url={{ urlencode($designer->url) }}" target="_blank">Google+</a></li>
+                                    <li><a href="https://twitter.com/intent/tweet?hashtags=santakanidesign&amp;url={{ urlencode($designer->url) }}" target="_blank">Twitter</a></li>
+                                    <li><a href="http://www.tumblr.com/share/link?url={{ urlencode($designer->url) }}" target="_blank">Tumblr</a></li>
+
+                                    <li><a href="#">
+                                        微信
+                                        <img class="qrcode img-responsive" src="" data-url="{{ $designer->url }}" width="300" height="300">
+                                    </a></li>
+
+                                </ul>
                             </div>
                         </div>
-                    </a>
-                </article>
-            @endforeach
-        </div><!-- .list -->
-    </section><!-- #design-list.article-list -->
+                        <div class="action">
+                            @if (Auth::check() && Auth::user()->can('edit-designer', $designer))
+                                <a id="edit-button" class="btn-icon" href="{{ url()->current() . '/edit' }}" title=" {{ trans('common.edit') }}">
+                                    <span class="icon ion-ios-compose-outline"></span>
+                                </a>
+                            @endif
+                        </div>
+                        <div class="action">
+                            <div class="dropdown">
+                                <button type="button" class="btn-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ trans('common.more') }}">
+                                    <span class="icon ion-ios-more-outline"></span>
+                                </button>
 
-    <section id="gallery">
-        <div class="grid-container">
-            <h1>{{ trans('common.gallery') }}</h1>
-        </div>
-        <div class="image-grid">
-            @foreach ($designer->gallery_images as $image)
-                    <a href="{{ $image->fileUrl('large') }}">
-                        <img src="{{ $image->fileUrl('thumb') }}" />
-                    </a>
-            @endforeach
-        </div>
-    </section>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    @if (Auth::check() && Auth::user()->can('editor-pick'))
+                                        <li>
+                                            <a id="editor-pick-button" class="{{ $designer->editor_pick?'picked':'' }}" href="#">
+                                                {{ trans('common.editor_pick') }}
+                                                @if ($designer->editor_pick)
+                                                    <span class="text-success">&#x2713;</span>
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endif
 
-    <section id="about">
-        <div class="grid-container">
-            <div class="grid">
-                <div class="column column-2-2 column-2-3 column-2-4">
-                    <h1>{{ trans('common.about') }}</h1>
-                    <div id="page-content" class="page-content">{!! $designer->html('content') !!}</div>
-                </div>
-                <div class="column column-2-2 column-1-3 column-2-4">
-                    <h3>{{ trans('common.tags') }}</h3>
-                    @include('components.tag-list', ['tags' => $designer->tags])
+                                    @if (Auth::check() && Auth::user()->can('transfer-designer', $designer))
+                                        <li>
+                                            <a id="transfer-button" href="#" data-toggle="modal" data-target="#transfer-modal">
+                                                {{ trans('common.transfer') }}
+                                            </a>
+                                        </li>
+                                    @endif
 
-                    <h3>{{ trans('common.links') }}</h3>
-                    <ul class="link-list">
-                        @if (!empty($designer->facebook))
-                            <li>
-                                <a href="{{ $designer->facebook }}">
-                                    <i class="fa fa-fw fa-2x fa-facebook-official"></i> Facebook
-                                </a>
-                            </li>
-                        @endif
-                        @if (!empty($designer->instagram))
-                            <li>
-                                <a href="{{ $designer->instagram }}">
-                                    <i class="fa fa-fw fa-2x fa-instagram"></i> Instagram
-                                </a>
-                            </li>
-                        @endif
-                        @if (!empty($designer->pinterest))
-                            <li>
-                                <a href="{{ $designer->pinterest }}">
-                                    <i class="fa fa-fw fa-2x fa-pinterest"></i> Pinterest
-                                </a>
-                            </li>
-                        @endif
-                        @if (!empty($designer->youtube))
-                            <li>
-                                <a href="{{ $designer->youtube }}">
-                                    <i class="fa fa-fw fa-2x fa-youtube-play"></i> YouTube
-                                </a>
-                            </li>
-                        @endif
-                        @if (!empty($designer->vimeo))
-                            <li>
-                                <a href="{{ $designer->vimeo }}">
-                                    <i class="fa fa-fw fa-2x fa-vimeo-square"></i> Vimeo
-                                </a>
-                            </li>
-                        @endif
-                        @if (!empty($designer->website))
-                            <li>
-                                <a href="{{ $designer->website }}">
-                                    <i class="fa fa-fw fa-2x fa-globe"></i> {{ trans('common.website') }}
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
+                                    @if (Auth::check() && Auth::user()->can('delete-designer', $designer))
+                                        <li>
+                                            <a id="delete-button" href="#">
+                                                {{ trans('common.delete') }}
+                                            </a>
+                                        </li>
+                                        @if (Auth::user()->role === 'admin' || Auth::user()->role === 'editor')
+                                            <li>
+                                                <a id="force-delete-button" href="#">
+                                                    {{ trans('common.delete_permanently') }}
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endif
+                                    <li>
+                                        <a href="mailto:contact@santakani.com?subject=[Santakani] Report Problems&amp;body=Please describe problems on page {{ $designer->url }}">
+                                            {{ trans('common.report') }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div><!-- /.dropdown -->
+                        </div>
+                    </div><!-- /.action-bar -->
 
-                    <h3>{{ trans('common.contact') }}</h3>
-                    @if (!empty($designer->email))
-                        <p>
-                            <a href="mailto:{{ $designer->email }}">
-                                {{ $designer->email }}
-                            </a>
-                        </p>
-                    @endif
-                    @if (!empty($designer->phone))
-                        <p>
-                            <a href="tel:{{ $designer->phone }}">
-                                {{ $designer->phone }}
-                            </a>
-                        </p>
-                    @endif
-                </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+            <div class="cover-wrap">
+                @if ($designer->image_id)
+                    <img class="cover" src="{{ $designer->image->largebanner_file_url }}" width="1200" height="600">
+                @else
+                    <img class="cover" src="{{ url('img/placeholder/largebanner.svg') }}" width="1200" height="600">
+                @endif
             </div>
-        </div>
-    </section>
+        </div><!-- /.container -->
+    </header>
+
+    <div class="container">
+        <ul id="tabs" class="nav nav-tabs">
+            <li class="{{ $tab === 'overview' ? 'active' : '' }}">
+                <a href="{{ $designer->url }}">{{ trans('common.overview') }}</a>
+            </li>
+            <li class="{{ $tab === 'designs' ? 'active' : '' }}">
+                <a href="{{ $designer->url }}?tab=designs">
+                    {{ trans('design.designs') }}
+                    <span class="badge">{{ $designer->designs()->count() }}</span>
+                </a>
+            </li>
+            <li class="{{ $tab === 'images' ? 'active' : '' }}">
+                <a href="{{ $designer->url }}?tab=images">
+                    {{ trans('common.images') }}
+                    <span class="badge">{{ $designer->images()->where('weight', '>', 0)->count() }}</span>
+                </a>
+            </li>
+            <li class="{{ $tab === 'description' ? 'active' : '' }}">
+                <a href="{{ $designer->url }}?tab=description">
+                    {{ trans('common.description') }}
+                </a>
+            </li>
+            <li class="{{ $tab === 'likes' ? 'active' : '' }}">
+                <a href="{{ $designer->url }}?tab=likes">
+                    {{ trans_choice('common.like_noun', 10) }}
+                    <span class="badge">{{ $designer->likes()->count() }}</span>
+                </a>
+            </li>
+        </ul>
+
+        @include('pages.designer.show-' . $tab)
+    </div>
+
 @endsection
 
 @if (Auth::check() && Auth::user()->can('edit-designer', $designer))

@@ -72,7 +72,7 @@
                             @endif
                         @endif
                         <li>
-                            <a href="report">
+                            <a href="mailto:contact@santakani.com?subject=[Santakani] Report Problems&amp;body=Please describe problems on page {{ $story->url }}">
                                 {{ trans('common.report') }}
                             </a>
                         </li>

@@ -9,8 +9,9 @@ Style:
     components/_card.scss
 
 Parameter:
-    \App\Design $design     (required)
-    string      $class      (optional)
+    \App\Design $design         (required)
+    string      $class          (optional)
+    boolean     $hide_designer  (optional)
 
 --}}
 
@@ -39,7 +40,7 @@ Parameter:
     </div>
     <footer class="card-footer text-muted">
         <ul class="list-inline">
-            @if ($design->designer_id)
+            @if ($design->designer_id && !$hide_designer)
                 <li>
                     <a class="link-unstyled" href="{{ $design->designer->url }}">
                         @if ($design->designer->logo_id)

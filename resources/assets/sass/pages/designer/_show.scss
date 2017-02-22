@@ -1,3 +1,71 @@
 #designer-show-page {
+    #designer-header {
+        padding-top: $grid-gutter-width;
 
+        .logo {
+            display: block;
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin-right: $grid-gutter-width / 2;
+            margin-bottom: $grid-gutter-width / 2;
+        }
+
+        .title {
+            margin-top: 0;
+            overflow: hidden;
+        }
+
+        .cover-wrap {
+            position: relative;
+        }
+
+        .action-bar {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .info {
+            line-height: 48px;
+        }
+    }
+
+    #tabs {
+        margin: $grid-gutter-width 0;
+    }
+
+    #overview-images img {
+        width: 100%;
+        margin-bottom: $grid-gutter-width;
+    }
+
+    #overview-likes img {
+        width: 100%;
+    }
+
+    @media (max-width: $screen-xs-max) {
+        #designer-header {
+            .logo {
+                float: none;
+                width: 60px;
+                height: 60px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .title {
+                font-size: 22px;
+                text-align: center;
+            }
+
+            .info {
+                line-height: $line-height-computed;
+            }
+
+            .cover-wrap {
+                margin-left: - $grid-gutter-width / 2;
+                margin-right: - $grid-gutter-width / 2;
+            }
+        }
+    }
 }

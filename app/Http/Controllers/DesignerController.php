@@ -173,10 +173,11 @@ class DesignerController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $designer = Designer::find($id);
 
@@ -186,9 +187,36 @@ class DesignerController extends Controller
 
         $designer->load('translations');
 
-        return view('pages.designer.show', [
+        $tab = $request->input('tab', 'overview');
+
+        if (!in_array($tab, ['overview', 'designs', 'images', 'description', 'likes'])) {
+            $tab = 'overview';
+        }
+
+        $data = [
             'designer' => $designer,
-        ]);
+            'tab' => $tab,
+        ];
+
+        switch ($tab) {
+            case 'overview':
+                $data['designs'] = $designer->designs()->take(6)->get();
+                $data['images'] = $designer->images()->where('weight', '>', 0)->orderBy('weight', 'desc')->take(6)->get();
+                $data['likes'] = $designer->likes()->with('user')->take(6)->get();
+                break;
+            case 'designs':
+                $data['designs'] = $designer->designs()->paginate(12);
+                break;
+            case 'images':
+                $data['images'] = $designer->images()->where('weight', '>', 0)->orderBy('weight', 'desc')->paginate(12);
+                break;
+            case 'likes':
+                $data['likes'] = $designer->likes()->with('user')->paginate(12);
+                break;
+        }
+
+
+        return view('pages.designer.show', $data);
     }
 
     /**
