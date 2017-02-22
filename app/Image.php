@@ -82,6 +82,20 @@ class Image extends Model
             'crop' => true,
             'fallback' => 'thumb',
         ],
+
+        // Crop to 2:1
+        'banner' => [
+            'width' => 600,
+            'height' => 300,
+            'crop' => 'true',
+            'fallback' => false,
+        ],
+        'largebanner' => [
+            'width' => 1200,
+            'height' => 600,
+            'crop' => 'true',
+            'fallback' => 'banner',
+        ],
     ];
 
     /**
@@ -251,6 +265,26 @@ class Image extends Model
         return $this->fileUrl('largethumb');
     }
 
+    /**
+     * Getter of "banner_file_url".
+     *
+     * @return string
+     */
+    public function getBannerFileUrlAttribute()
+    {
+        return $this->fileUrl('banner');
+    }
+
+    /**
+     * Getter of "largebanner_file_url".
+     *
+     * @return string
+     */
+    public function getLargebannerFileUrlAttribute()
+    {
+        return $this->fileUrl('largebanner');
+    }
+
 
     //==============================================
     // File Information
@@ -364,6 +398,10 @@ class Image extends Model
      */
     public function generateThumbnails()
     {
+        if (!is_file($this->filePath('full'))) {
+            return;
+        }
+
         $image = new SimpleImage();
         $image->fromFile($this->filePath('full'));
 
