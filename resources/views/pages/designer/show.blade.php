@@ -13,23 +13,30 @@
 @section('main')
     <header id="designer-header">
         <div class="container">
-            <div class="clearfix">
-                @if ($designer->logo_id)
-                    <img class="logo" src="{{ $designer->logo->thumb_file_url }}" width="300" height="300" alt="Logo" title="Logo">
+
+            <div class="cover-wrap">
+                @if ($designer->image_id)
+                    <img class="cover" src="{{ $designer->image->largebanner_file_url }}" width="1200" height="600">
                 @else
-                    <img class="logo" src="{{ url('img/placeholder/thumb.svg') }}" width="300" height="300" alt="Logo" title="Logo">
+                    <img class="cover" src="{{ url('img/placeholder/largebanner.svg') }}" width="1200" height="600">
                 @endif
 
-                <h1 class="title text-nowrap">
-                    <span class="name">{{ $designer->text('name') }}</span>
-                </h1>
-
-                <p>{{ $designer->text('tagline') }}</p>
-            </div><!-- /.clearfix -->
+                <div class="brand clearfix">
+                    @if ($designer->logo_id)
+                        <img class="logo" src="{{ $designer->logo->thumb_file_url }}" width="300" height="300" alt="Logo" title="Logo">
+                    @else
+                        <img class="logo" src="{{ url('img/placeholder/thumb.svg') }}" width="300" height="300" alt="Logo" title="Logo">
+                    @endif
+                    <div class="text">
+                        <h1 class="name text-nowrap">{{ $designer->text('name') }}</h1>
+                        <div class="tagline">{{ $designer->text('tagline') }}</div>
+                    </div>
+                </div><!-- /.clearfix -->
+            </div>
 
             <div class="row">
                 <div class="col-sm-6 col-md-8">
-                    <ul class="info list-inline text-muted">
+                    <ul class="metadata list-inline text-muted">
                         @if ($designer->city_id)
                             <li>{{ $designer->city->full_name }}</li>
                         @endif
@@ -123,13 +130,6 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
 
-            <div class="cover-wrap">
-                @if ($designer->image_id)
-                    <img class="cover" src="{{ $designer->image->largebanner_file_url }}" width="1200" height="600">
-                @else
-                    <img class="cover" src="{{ url('img/placeholder/largebanner.svg') }}" width="1200" height="600">
-                @endif
-            </div>
         </div><!-- /.container -->
     </header>
 
@@ -146,19 +146,19 @@
             <li class="{{ $tab === 'designs' ? 'active' : '' }}">
                 <a href="{{ $designer->url }}?tab=designs">
                     {{ trans('design.designs') }}
-                    <span class="badge">{{ $designer->designs()->count() }}</span>
+                    <span class="badge hidden-xs">{{ $designer->designs()->count() }}</span>
                 </a>
             </li>
             <li class="{{ $tab === 'images' ? 'active' : '' }}">
                 <a href="{{ $designer->url }}?tab=images">
                     {{ trans('common.images') }}
-                    <span class="badge">{{ $designer->images()->where('weight', '>', 0)->count() }}</span>
+                    <span class="badge hidden-xs">{{ $designer->images()->where('weight', '>', 0)->count() }}</span>
                 </a>
             </li>
             <li class="{{ $tab === 'likes' ? 'active' : '' }}">
                 <a href="{{ $designer->url }}?tab=likes">
                     {{ trans_choice('common.like_noun', 10) }}
-                    <span class="badge">{{ $designer->likes()->count() }}</span>
+                    <span class="badge hidden-xs">{{ $designer->likes()->count() }}</span>
                 </a>
             </li>
         </ul>

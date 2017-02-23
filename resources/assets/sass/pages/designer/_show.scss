@@ -1,23 +1,42 @@
 #designer-show-page {
+    .container {
+        //max-width: $container-md;
+    }
+
     #designer-header {
-        padding-top: $grid-gutter-width;
+
+        .cover-wrap {
+            position: relative;
+        }
+
+        .brand {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            padding: $grid-gutter-width / 2;
+            background: rgba(255,255,255,0.5);
+        }
 
         .logo {
             display: block;
             float: left;
-            width: 100px;
-            height: 100px;
+            width: 75px;
+            height: 75px;
+            flex: 0 0 auto;
             margin-right: $grid-gutter-width / 2;
-            margin-bottom: $grid-gutter-width / 2;
         }
 
-        .title {
-            margin-top: 0;
+        .text {
+            flex: 1 1 auto;
+            color: $gray-darker;
+        }
+
+        .name {
+            font-size: 28px;
+            margin: 0;
             overflow: hidden;
-        }
-
-        .cover-wrap {
-            position: relative;
         }
 
         .action-bar {
@@ -25,13 +44,14 @@
             justify-content: space-around;
         }
 
-        .info {
+        .metadata {
             line-height: 48px;
+            margin-bottom: 0;
         }
     }
 
     #tabs {
-        margin: $grid-gutter-width 0;
+        margin-bottom: $grid-gutter-width;
     }
 
     #overview-images img {
@@ -55,28 +75,69 @@
         }
     }
 
+    // Tablet <= 768px
     @media (max-width: $screen-xs-max) {
         #designer-header {
+
             .logo {
-                float: none;
                 width: 60px;
                 height: 60px;
-                margin-left: auto;
-                margin-right: auto;
             }
 
-            .title {
-                font-size: 22px;
-                text-align: center;
+            .name {
+                font-size: 24px;
             }
 
-            .info {
+            .tagline {
+                font-size: $font-size-small;
+            }
+
+            .metadata {
                 line-height: $line-height-computed;
+                font-size: $font-size-small;
             }
 
             .cover-wrap {
                 margin-left: - $grid-gutter-width / 2;
                 margin-right: - $grid-gutter-width / 2;
+            }
+        }
+
+        #tabs {
+            font-size: $font-size-small;
+        }
+    }
+
+    // Phone <= 480px
+    @media (max-width: $screen-xs-min) {
+        #designer-header {
+            .brand {
+                position: relative;
+            }
+
+            .logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .name {
+                font-size: 20px;
+            }
+
+            .tagline {
+                font-size: $font-size-smaller;
+            }
+
+            .metadata {
+                font-size: $font-size-smaller;
+            }
+        }
+
+        #tabs {
+            font-size: $font-size-smaller;
+
+            li > a {
+                padding: 6px 8px;
             }
         }
     }
