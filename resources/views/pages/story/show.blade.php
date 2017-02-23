@@ -12,7 +12,7 @@
 
 @section('main')
     <div class="container-content">
-        <img class="img-responsive img-rounded" src="{{ $story->image->large_file_url }}">
+        <img class="img-responsive" src="{{ $story->image->banner_file_url }}" srcset="{{ $story->image->largebanner_file_url }} x2">
 
         <h1 class="page-header">{{ $story->text('title') }}</h1>
 
