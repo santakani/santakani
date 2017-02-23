@@ -40,7 +40,7 @@ Parameter:
     </div>
     <footer class="card-footer text-muted">
         <ul class="list-inline">
-            @if ($design->designer_id && !$hide_designer)
+            @if ($design->designer_id && empty($hide_designer))
                 <li>
                     <a class="link-unstyled" href="{{ $design->designer->url }}">
                         @if ($design->designer->logo_id)
