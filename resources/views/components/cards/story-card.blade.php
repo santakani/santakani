@@ -14,11 +14,13 @@ Parameter:
 --}}
 
 <article id="story-{{ $story->id }}" class="story-card card clearfix">
-    @if ($story->image_id)
-        <a class="card-cover-wrap" href="{{ $story->url }}">
-            <img class="card-cover" src="{{ $story->image->small_file_url }}" srcset="{{ $story->image->medium_file_url }} x2">
-        </a>
-    @endif
+    <a class="card-cover-wrap" href="{{ $story->url }}">
+        @if ($story->image_id)
+            <img class="card-cover" src="{{ $story->image->banner_file_url }}">
+        @else
+            <img class="card-cover" src="{{ url('img/placeholder/banner.svg') }}">
+        @endif
+    </a>
     <div class="card-body">
         <h3 class="card-title"><a href="{{ $story->url }}">{{ $story->text('title') }}</a></h3>
         <div class="card-description">{{ $story->excerpt('content') }}</div>

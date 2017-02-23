@@ -23,6 +23,7 @@ $card-bg: $gray-lightest;
         position: relative;
         padding: $grid-gutter-width / 2;
         font-size: $font-size-small;
+        overflow: hidden;
     }
 
     .card-title {
@@ -84,15 +85,13 @@ $card-bg: $gray-lightest;
 }
 
 .designer-card {
-    $cover-height: 200px;
     $body-height: 150px;
 
     position: relative;
-    height: $cover-height + $body-height;
 
     .card-cover {
         width: 100%;
-        height: $cover-height;
+        height: auto;
     }
 
     .card-logo {
@@ -122,26 +121,15 @@ $card-bg: $gray-lightest;
 
 .story-card {
     // Phone, width < 480px, usually 320px, 360px, 400px
-    $cover-height: 200px;
 
     .card-cover {
         width: 100%;
-        height: $cover-height;
-    }
-
-    // Tablet, width >= 480px, usually 600px, 720px
-    @media (min-width: $screen-xs-min) {
-        $cover-height: 320px;
-
-        .card-cover {
-            width: 100%;
-            height: $cover-height;
-        }
+        height: auto;
     }
 
     // Large tablet, width >= 768px, usually 768px, 800px
     @media (min-width: $screen-sm-min) {
-        $cover-width: 300px;
+        $cover-width: 400px;
         $cover-height: 200px;
 
         position: relative;

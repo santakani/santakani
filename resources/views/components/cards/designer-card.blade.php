@@ -17,17 +17,17 @@ Parameter:
 <article id="designer-{{ $designer->id }}" class="designer-card card clearfix {{ $class or '' }}">
     <a class="card-cover-wrap" href="{{ $designer->url }}">
         @if ($designer->image_id)
-            <img class="card-cover" src="{{ $designer->image->medium_file_url }}" srcset="{{ $designer->image->large_file_url }} x2">
+            <img class="card-cover" src="{{ $designer->image->banner_file_url }}" srcset="{{ $designer->image->largebanner_file_url }} x2">
         @else
             <!-- Fallback cover -->
-            <img class="card-cover" src="https://source.unsplash.com/category/nature/600x300" srcset="https://source.unsplash.com/category/nature/1200x600 x2">
+            <img class="card-cover" src="{{ url('img/placeholder/banner.svg') }}">
         @endif
 
         @if ($designer->logo_id)
             <img class="card-logo" src="{{ $designer->image->thumb_file_url }}" width="50" height="50">
         @else
             <!-- Fallback logo -->
-            <img class="card-logo" src="http://www.gravatar.com/avatar/'{{ md5($designer->email) }}?s=300&amp;d=identicon" width="50" height="50">
+            <img class="card-logo" src="{{ url('img/placeholder/thumb.svg') }}" width="50" height="50">
         @endif
     </a>
 
