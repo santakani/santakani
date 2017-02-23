@@ -80,9 +80,13 @@
         @endif
 
         @if ($type === 'user')
-            @foreach ($results as $user)
-                {{ $user->name }}
-            @endforeach
+            <div class="row">
+                @foreach ($results as $user)
+                    <div class="col-sm-6 col-lg-4">
+                        @include('components.cards.user-card', ['user' => $user])
+                    </div>
+                @endforeach
+            </div>
         @endif
 
         {{ $results->appends(app('request')->all())->links() }}
