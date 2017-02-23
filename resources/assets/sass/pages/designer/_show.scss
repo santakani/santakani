@@ -39,9 +39,14 @@
             overflow: hidden;
         }
 
+        .data-action {
+            display: flex;
+            justify-content: space-between;
+        }
+
         .action-bar {
             display: flex;
-            justify-content: space-around;
+            justify-content: right;
         }
 
         .metadata {
@@ -54,13 +59,9 @@
         margin-bottom: $grid-gutter-width;
     }
 
-    #overview-images img {
+    .images img {
         width: 100%;
         margin-bottom: $grid-gutter-width;
-    }
-
-    #overview-likes img {
-        width: 100%;
     }
 
     #social-links {
@@ -89,11 +90,6 @@
             }
 
             .tagline {
-                font-size: $font-size-small;
-            }
-
-            .metadata {
-                line-height: $line-height-computed;
                 font-size: $font-size-small;
             }
 
@@ -128,8 +124,16 @@
                 font-size: $font-size-smaller;
             }
 
+            .data-action {
+                display: block;
+            }
+
             .metadata {
                 font-size: $font-size-smaller;
+            }
+
+            .action-bar {
+                justify-content: space-around;
             }
         }
 

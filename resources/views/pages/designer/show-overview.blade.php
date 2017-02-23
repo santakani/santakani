@@ -15,17 +15,20 @@ Overview tab
 </div>
 
 <div class="text-right">
-    <a class="btn btn-link" href="{{ url('design/create?designer_id='.$designer->id) }}">
-        {{ trans('common.create') }}
-    </a>
+    @if (Auth::check() && Auth::user()->can('edit-designer', $designer))
+        <a class="btn btn-link" href="{{ url('design/create?designer_id='.$designer->id) }}">
+            {{ trans('design.create_design') }}
+        </a>
+    @endif
     <a class="btn btn-link" href="{{ $designer->url }}?tab=designs">
         {{ trans('common.more') }}...
     </a>
 </div>
 
+
 <h2>{{ trans('common.images') }}</h2>
 
-<div id="overview-images" class="row">
+<div id="overview-images" class="images row">
     @foreach ($images as $image)
         <div class="col-sm-6 col-md-4 col-lg-3 {{ $loop->index >= 4 ? 'visible-md-block' : ''}}">
             <a href="{{ $image->large_file_url }}">
@@ -36,23 +39,36 @@ Overview tab
 </div>
 
 <div class="text-right">
-    <a class="btn btn-link" href="{{ $designer->url }}/edit#images">
-        {{ trans('common.upload') }}
-    </a>
+    @if (Auth::check() && Auth::user()->can('edit-designer', $designer))
+        <a class="btn btn-link" href="{{ $designer->url }}/edit#images">
+            {{ trans('image.upload_image') }}
+        </a>
+    @endif
     <a class="btn btn-link" href="{{ $designer->url }}?tab=images">
         {{ trans('common.more') }}...
     </a>
 </div>
 
-<h2>{{ trans_choice('common.like_noun', 10) }}</h2>
 
-<div id="overview-likes" class="row">
+<div id="overview-description">
+    <h2>{{ trans('common.description') }}</h2>
+    <p>
+        {{ $designer->excerpt('content', null, 400) }}
+        <a href="{{ $designer->url }}?tab=description">[{{ mb_strtolower(trans('common.more')) }}]</a>
+    </p>
+</div>
+
+
+<div id="overview-likes">
+    <p class="text-muted">{{ trans_choice('common.like_count', $designer->likes()->count()) }}</p>
+
     @foreach ($likes as $like)
-        <div class="col-xs-4 col-sm-3 col-md-2 {{ $loop->index >= 4 ? 'visible-md-block' : ''}}">
-            <a href="{{ $like->user->url }}" title="{{ $like->user->name }}">
-                <img class="img-circle img-responsive" src="{{ $like->user->avatar('medium') }}" srcset="{{ $like->user->avatar('large') }} x2" width="150" height="150">
+        <span class="like">
+            <a class="link-unstyled" href="{{ $like->user->url }}">
+                <img src="{{ $like->user->avatar('small') }}" srcset="{{ $like->user->avatar('medium') }} x3" width="50" height="50">
+                {{ $like->user->name }}
             </a>
-        </div>
+        </span>
     @endforeach
 </div>
 
