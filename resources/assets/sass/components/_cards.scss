@@ -119,6 +119,45 @@ $card-bg: $gray-lightest;
     }
 }
 
+.place-card {
+    $body-height: 120px;
+
+    position: relative;
+
+    .card-cover {
+        width: 100%;
+        height: auto;
+    }
+
+    .card-logo {
+        position: absolute;
+        right: $grid-gutter-width / 2;
+        bottom: $grid-gutter-width / 2;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+
+    .card-body {
+        height: $body-height;
+    }
+
+    .card-title {
+        overflow: hidden;
+    }
+
+    .card-description {
+        overflow: hidden;
+    }
+
+    .card-footer {
+        position: absolute;
+        padding: $grid-gutter-width / 2;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: $card-bg;
+    }
+}
+
 .story-card {
     // Phone, width < 480px, usually 320px, 360px, 400px
 

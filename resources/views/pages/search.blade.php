@@ -70,9 +70,13 @@
         @endif
 
         @if ($type === 'place')
-            @foreach ($results as $place)
-                {{ $place->text('name') }}
-            @endforeach
+            <div class="row">
+                @foreach ($results as $place)
+                    <div class="col-sm-6 col-lg-4">
+                        @include('components.cards.place-card', ['place' => $place])
+                    </div>
+                @endforeach
+            </div>
         @endif
 
         @if ($type === 'story')
