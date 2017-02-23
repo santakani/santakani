@@ -20,7 +20,7 @@ Parameter:
     </a>
 
     <div class="card-body">
-        <h3 class="card-title">
+        <h3 class="card-title text-nowrap">
             <a class="link-unstyled" href="{{ $user->url }}">
                 {{ $user->name }}
             </a>

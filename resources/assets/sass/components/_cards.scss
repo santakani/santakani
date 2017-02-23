@@ -220,5 +220,17 @@ $card-bg: $gray-lightest;
         margin-left: $cover-width;
         height: $cover-height;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title {
+        flex: 0 0 auto;
+        overflow: hidden;
+    }
+
+    .card-description {
+        flex: 1 1 auto;
+        overflow: hidden;
     }
 }
