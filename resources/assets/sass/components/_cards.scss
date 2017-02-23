@@ -171,3 +171,27 @@ $card-bg: $gray-lightest;
         }
     }
 }
+
+.user-card {
+    $cover-width: 150px;
+    $cover-height: 150px;
+
+    position: relative;
+    height: $cover-height;
+
+    .card-cover-wrap {
+        float: left;
+    }
+
+    .card-cover {
+        width: $cover-width;
+        height: $cover-height;
+    }
+
+    .card-body {
+        position: relative;
+        margin-left: $cover-width;
+        height: $cover-height;
+        overflow: hidden;
+    }
+}
