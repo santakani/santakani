@@ -65,7 +65,7 @@
 
             <div class="form-group">
                 <label class="control-label">{{ trans('common.tags') }}</label>
-                @include('components.select.tag', ['selected' => $story->tags])
+                @include('components.selects.tag-select', ['selected' => $story->tags])
             </div>
 
             <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>

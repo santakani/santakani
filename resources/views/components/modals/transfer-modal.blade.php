@@ -18,7 +18,7 @@
                     @endif
                 </p>
                 <p class="text-center"><i class="fa fa-angle-double-down"></i></p>
-                @include('components.select.user-select')
+                @include('components.selects.user-select')
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('common.cancel') }}</button>

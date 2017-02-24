@@ -36,11 +36,17 @@ module.exports = Backbone.View.extend({
 
             render: {
                 item: function(data, escape) {
+                    var $html = $('<div class="text-nowrap"></div>');
+                    $html.text(data.name);
+                    $html.attr('data-data', JSON.stringify(data));
+                    return $html[0];
+                },
+                option: function(data, escape) {
                     var $html = $('<div></div>');
                     $html.text(data.full_name);
                     $html.attr('data-data', JSON.stringify(data));
                     return $html[0];
-                }
+                },
             }
         });
 

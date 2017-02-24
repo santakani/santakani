@@ -78,7 +78,7 @@
 
             <div class="form-group">
                 <label>{{ trans('common.tags') }}</label>
-                @include('components.select.tag', ['selected' => $design->tags])
+                @include('components.selects.tag-select', ['selected' => $design->tags])
             </div>
 
             <div class="form-group">
@@ -89,7 +89,7 @@
                             maxlength="255" class="form-control">
                     </div>
                     <div class="col-xs-6">
-                        @include('components.select.currency-select', ['selected' => $design->currency])
+                        @include('components.selects.currency-select', ['selected' => $design->currency])
                     </div>
                 </div>
             </div>

@@ -99,12 +99,12 @@
 
             <div class="form-group">
                 <label>{{ trans('geo.city') }}</label>
-                @include('components.select.city', ['selected' => $designer->city_id])
+                @include('components.selects.city-select', ['selected' => $designer->city_id])
             </div>
 
             <div class="form-group">
                 <label>{{ trans('common.tags') }}</label>
-                @include('components.select.tag', ['selected' => $designer->tags])
+                @include('components.selects.tag-select', ['selected' => $designer->tags])
             </div>
 
             <div class="form-group">

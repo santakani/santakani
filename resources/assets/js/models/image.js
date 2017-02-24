@@ -15,11 +15,50 @@ module.exports = Backbone.Model.extend({
 
     urlRoot: '/image',
 
-    largeSize: 1200,
-
-    mediumSize: 600,
-
-    thumbSize: 300,
+    sizes: {
+        large: {
+            width: 1200,
+            height: 1200,
+            crop: false,
+            fallback: 'full'
+        },
+        medium: {
+            width: 600,
+            height: 600,
+            crop: false,
+            fallback: 'full'
+        },
+        small: {
+            width: 300,
+            height: 300,
+            crop: false,
+            fallback: 'full'
+        },
+        thumb: {
+            width: 300,
+            height: 300,
+            crop: true,
+            fallback: false
+        },
+        largethumb: {
+            width: 600,
+            height: 600,
+            crop: true,
+            fallback: 'thumb'
+        },
+        banner: {
+            width: 600,
+            height: 300,
+            crop: true,
+            fallback: false
+        },
+        largebanner: {
+            width: 1200,
+            height: 600,
+            crop: true,
+            fallback: 'banner'
+        }
+    },
 
     storagePath: 'storage/images', // Related to document root
 
@@ -89,65 +128,82 @@ module.exports = Backbone.Model.extend({
      * @return {Object} Object with width and height properties.
      */
     size: function (size) {
-        var width, height;
 
-        if (size === 'large') {
-            if (this.get('width') <= 1200 && this.get('height') <= 1200) {
-                width = this.get('width');
-                height = this.get('height');
-            } else if (this.get('width') >= this.get('height')) {
-                width = 1200;
-                height = Math.round(1200 * this.get('height') / this.get('width'));
-            } else {
-                width = Math.round(1200 * this.get('width') / this.get('height'));
-                height = 1200;
-            }
-        } else if (size === 'medium') {
-            if (this.get('width') <= 600 && this.get('height') <= 600) {
-                width = this.get('width');
-                height = this.get('height');
-            } else if (this.get('width') >= this.get('height')) {
-                width = 600;
-                height = Math.round(600 * this.get('height') / this.get('width'));
-            } else {
-                width = Math.round(600 * this.get('width') / this.get('height'));
-                height = 600;
-            }
-        } else if (size === 'thumb') {
-            if (this.get('width') >= 300 && this.get('height') >= 300) {
-                width = 300;
-                height = 300;
-            } else {
-
-            }
-        } else {
-            width = this.get('width');
-            height = this.get('height');
+        // By default, return full size
+        if (!size || size === 'full' || !_.has(this.sizes, size)) {
+            return {
+                width: this.get('width'),
+                height: this.get('height')
+            };
         }
 
-        return {width: width, height: height};
+        var sizeData = this.sizes[size];
+
+        if (sizeData.crop) {
+            // Thumbnails and banners
+            return {
+                width: sizeData.width,
+                height: sizeData.height
+            };
+        } else {
+            // Large, medium and small
+            if (this.get('width') / this.get('height') > sizeData.width / sizeData.height) {
+                return {
+                    width: sizeData.width,
+                    height: this.get('height') * sizeData.width / this.get('width')
+                }
+            } else {
+                return {
+                    width: this.get('width') * sizeData.height / this.get('height'),
+                    height: sizeData.height
+                }
+            }
+        }
     },
 
     hasSize: function (size) {
-        if (size === 'full' || size === 'thumb') {
+
+        if (size === 'full') {
             return true;
-        } else if (this.get('width') > 1200 || this.get('height') > 1200) {
-            return true; // medium, large
-        } else if (size === 'medium' && (this.get('width') > 600 || this.get('height') > 600)) {
-            return true;
-        } else {
+        }
+
+        if (!_.has(this.sizes, size)) {
             return false;
+        }
+
+        var sizeData = this.sizes[size];
+
+        if (sizeData.crop) {
+            // Thumbnails and banners
+            if (!sizeData.fallback) {
+                return true;
+            } else {
+                // Fallback shouldn't be full if crop is true
+                fallbackSizeData = this.sizes[sizeData.fallback];
+                return this.get('width') >= fallbackSizeData.width &&
+                    this.get('height') >= fallbackSizeData.height;
+            }
+        } else {
+            // Large, medium and small
+            return this.get('width') > sizeData.width || this.get('height') > sizeData.height;
         }
     },
 
     sizeFallback: function (size) {
-        if (size === 'full' || size === 'thumb') {
+        // Don't fallback if exists
+        if (this.hasSize(size)) {
             return size;
-        } else if (this.hasSize(size)) {
-            return size;
-        } else {
-            return 'full';
         }
+
+        // Fallback if not exists
+        if (_.has(this.sizes, size)) {
+            var sizeData = this.sizes[size];
+
+            return this.sizeFallback(sizeData.fallback);
+        }
+
+        // If it doesn't match any sizes
+        return 'full';
     },
 
     extension: function () {

@@ -83,7 +83,7 @@
 
             <div class="form-group">
                 <label class="control-label">{{ trans('geo.city') }}</label>
-                @include('components.select.city', ['selected' => $place->city_id])
+                @include('components.selects.city-select', ['selected' => $place->city_id])
             </div>
 
             <div class="form-group">
@@ -102,7 +102,7 @@
 
             <div class="form-group">
                 <label class="control-label">{{ trans('common.tags') }}</label>
-                @include('components.select.tag', ['selected' => $place->tags])
+                @include('components.selects.tag-select', ['selected' => $place->tags])
             </div>
 
             <div class="form-group">

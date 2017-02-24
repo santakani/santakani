@@ -10,8 +10,8 @@
 
     #place-map {
         flex: 1 1 800px;
+
         .leaflet-popup {
-            $image-size: 150px;
 
             .leaflet-popup-close-button {
                 background-color: $gray-dark;
@@ -24,29 +24,39 @@
             }
 
             .leaflet-popup-content-wrapper {
-                max-width: $image-size;
+                width: 200px;
                 padding: 0;
                 border-radius: 0;
 
                 .leaflet-popup-content {
                     margin: 0;
-                    max-width: $image-size;
+                    width: 200px;
+                    font-size: $font-size-small;
 
                     img {
                         display: block;
                     }
 
-                    p {
-                        margin: 0;
+                    .info {
+                        display: flex;
                         padding: 6px;
+                    }
+
+                    .name {
+                        flex: 1 1 0;
+                        line-height: 32px;
+                        margin-right: 6px;
                     }
 
                     a {
                         color: inherit;
                     }
 
-                    a.btn {
-                        color: white;
+                    .btn-icon {
+                        color: $brand-info;
+                        width: 32px;
+                        height: 32px;
+                        line-height: 32px;
                     }
                 }
             }
@@ -56,51 +66,64 @@
     #place-list {
         display: flex;
         flex-direction: column;
-        flex: 0 1 450px;
-        padding: 10px;
+        flex: 0 0 400px;
+
         background-color: #ffffff;
 
-        form.filter {
+        form {
             flex: 0 0 auto;
+            padding: $grid-gutter-width / 2;
+
+            .city-search {
+                display: flex;
+                margin-bottom: 10px;
+            }
+
+            .city-select {
+                flex: 1 1 40%;
+                margin-right: 5px;
+                font-size: $font-size-small;
+
+                .selectize-input {
+                    padding: 4px 8px;
+                    overflow: hidden;
+                }
+            }
+
+            .search-input {
+                flex: 1 1 60%;
+                font-size: $font-size-small;
+                min-width: 0;
+            }
+
+            .tag-filter {
+                margin-bottom: 0;
+                font-size: $font-size-small;
+            }
         }
 
         .list {
             flex: 1 1 auto;
-            margin-top: 20px;
             overflow-y: auto;
+            padding: $grid-gutter-width / 2;
+        }
+    }
 
-            .place {
-                .image {
-                    width: 100px;
-                    margin-left: 10px;
-                }
-
-                h3 {
-                    font-size: $font-size-base;
-                    font-weight: 500;
-                    margin-top: 0;
-                    margin-bottom: 10px;
-                }
-
-                p {
-                    margin-bottom: 10px;
-                }
-            }
+    .place-card {
+        &.active {
+            box-shadow: 0 0 0 2px $brand-info;
         }
     }
 
     @media (max-width: $screen-xs-max) {
         main {
             flex-direction: column;
+            top: 0;
+            bottom: $navbar-height;
         }
 
         #place-list {
-            flex: 0 1 300px;
-            max-height: 300px;
-
-            .list {
-                display: none;
-            }
+            flex: 0 0 auto;
         }
     }
 }

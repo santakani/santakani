@@ -12,10 +12,11 @@ Parameter:
     \App\Place  $place      (required)
     string      $class      (optional)
     boolean     $hide_city  (optional)
+    boolean     $with_data  (optional)
 
 --}}
 
-<article id="place-{{ $place->id }}" class="place-card card clearfix {{ $class or '' }}">
+<article id="place-{{ $place->id }}" class="place-card card clearfix {{ $class or '' }}" data-model="{{ empty($with_data) ? '' : $place }}">
     <a class="card-cover-wrap" href="{{ $place->url }}">
         @if ($place->image_id)
             <img class="card-cover" src="{{ $place->image->banner_file_url }}" srcset="{{ $place->image->largebanner_file_url }} x2" width="600" height="300">

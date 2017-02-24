@@ -7,42 +7,20 @@
 ])
 
 @section('main')
-    <div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}"></div>
 
     <div id="place-list">
-        <form action="{{ url('place') }}" method="get">
-            <div class="form-group">
-                @include('components.select.city', ['selected' => $city])
+
+        <form class="form-inline" action="{{ url('place') }}" method="get">
+            <div class="city-search">
+                @include('components.selects.city-select', ['selected' => $city])
+                <input type="search" name="search" value="{{ request()->input('search') }}" id="place-search" class="search-input form-control" maxlength="50" placeholder="&#xf4a4; {{ trans('common.search') }}" autocomplete="off" />
             </div>
-            <div class="form-group">
-                @include('inputs.place-type', ['selected' => $type])
-            </div>
-            <div class="form-group input-group">
-                <input type="search" name="search" value="{{ request()->input('search') }}" id="place-search" class="form-control" maxlength="50" placeholder="{{ trans('common.search') }}" autocomplete="off" />
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i> {{ trans('common.search') }}</button>
-                </span>
-            </div>
-            @include('inputs.tag-filter', ['selected' => request()->input('tag_id')])
+            @include('components.tags.tag-filter', ['selected' => request()->input('tag_id'), 'class' => 'hidden-xs'])
         </form>
 
-        <div class="list list-group">
+        <div class="list hidden-xs">
             @forelse ($places as $place)
-                <a href="{{ $place->url }}" class="place list-group-item clearfix" data-model="{{ $place->toJSON() }}">
-                    @if ($place->image_id)
-                        <img class="image pull-right" src="{{ $place->image->small_file_url }}" srcset="{{ $place->image->medium_file_url }} 2x"/>
-                    @endif
-                    <h3>
-                        @if ($place->logo_id)
-                            <img class="logo" src="{{ $place->logo->small_file_url }}"/>
-                        @endif
-                        {{ $place->name }}
-                    </h3>
-
-                    <p>{{ $place->address }}</p>
-
-                    {{ $place->text('tagline') }}
-                </a>
+                @include('components.cards.place-card', ['place' => $place, 'hide_city' => true, 'with_data' => true])
             @empty
                 <p class="lead text-center">{{ trans('place.no_place_found') }}</p>
             @endforelse
@@ -50,5 +28,7 @@
         </div><!-- .list -->
 
     </div><!-- #place-list -->
+
+    <div id="place-map" data-latitude="{{ $city->latitude }}" data-longitude="{{ $city->longitude }}"></div>
 
 @endsection
