@@ -45,6 +45,7 @@ return array(
     'map' => 'Map',
     'navigate' => 'Navigate',
     'navigation' => 'Navigation',
+    'open_google_maps' => 'Open in Google Maps',
 
     // Coordinate select
     'coordinate_select.found_alert' => 'Successfully marked the location on map!',

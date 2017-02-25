@@ -1,0 +1,12 @@
+.action-bar {
+    display: flex;
+    justify-content: space-around;
+    font-family: $font-family-sans-serif;
+
+    .dropdown-menu {
+        .qrcode {
+            display: block;
+            max-width: 164px;
+        }
+    }
+}

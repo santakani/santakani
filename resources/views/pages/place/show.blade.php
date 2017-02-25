@@ -8,9 +8,9 @@
     'og_description' => $place->excerpt('content'),
     'og_image' => empty($place->image_id)?'':$place->image->fileUrl('medium'),
     'twitter_card_type' => 'summary_large_image',
-    'has_share_buttons' => true,
 ])
 
+{{--
 @section('header')
     <div class="page-cover"
         @if ($place->image_id)
@@ -58,102 +58,68 @@
 
     </div><!-- /.page-cover -->
 @endsection
+--}}
 
 @section('main')
-    <div class="gallery-slider-wrap">
-        <ul id="gallery" class="gallery gallery-slider">
-            @foreach ($place->gallery_images as $image)
-                <li data-src="{{ $image->large_file_url }}">
-                    <img class="image" src="{{ $image->thumb_file_url }}"  width="300" height="300"/>
-                </li>
-            @endforeach
-        </ul>
-    </div>
 
-    <br>
+<header>
+    <div class="container">
+        <div class="row no-gutter">
+            <div class="col-sm-8 col-md-6">
+                @if ($place->image_id)
+                    <img class="cover" src="{{ $place->image->banner_file_url }}">
+                @else
+                    <img class="cover" src="{{ url('img/placeholder/banner.svg') }}">
+                @endif
+            </div>
+            <div class="col-sm-4 col-md-6">
+                @include('components.maps.simple-map', ['place' => $place])
+            </div>
+        </div>
+
+        <h1 class="title">
+            {{ $place->text('name') }}
+            @include('pages.place.show-action-bar')
+        </h1>
+
+        <ul class="metadata list-inline text-muted">
+            <li>{{ $place->address }}</li>
+            @if ($place->city_id)
+                <li>{{ $place->city->full_name }}</li>
+            @endif
+            <li>{{ trans_choice('common.like_count', $place->like_count) }}</li>
+        </ul>
+
+    </div><!-- /.container -->
+</header>
 
 <div class="container">
+
     <div class="row">
         <div class="col-sm-6 col-md-8">
             {!! $place->html('content') !!}
         </div>
         <div class="col-sm-6 col-md-4">
 
-            <h3>{{ trans('geo.location') }}</h3>
+            @include('components.social-links', ['model' => $place])
 
-            <div class="btn-group">
-                <a class="btn btn-default" href="{{ $place->google_map_url }}" target="_blank">
-                    Google Maps
-                </a>
-                <a class="btn btn-default" href="{{ $place->bing_map_url }}" target="_blank">
-                    Bing Maps
-                </a>
-                <a class="btn btn-default" href="{{ $place->here_map_url }}" target="_blank">
-                    Here
-                </a>
-            </div>
+            @include('components.tags.tags-hash', ['tags' => $place->tags, 'linked' => true])
 
-            <br/><br/>
-
-            <div class="map"
-                 data-latitude="{{ $place->latitude }}"
-                 data-longitude="{{ $place->longitude }}"
-                 data-address="{{ $place->full_address }}"></div>
-
-            <br>
-
-            <h3>{{ trans('common.links') }}</h3>
-
-            <ul class="link-list">
-                @if (!empty($place->facebook))
-                    <li>
-                        <a href="{{ $place->facebook }}">
-                            <i class="fa fa-fw fa-2x fa-facebook-official"></i> Facebook
-                        </a>
-                    </li>
-                @endif
-                @if (!empty($place->twitter))
-                    <li>
-                        <a href="{{ $place->twitter }}">
-                            <i class="fa fa-fw fa-2x fa-twitter"></i> Twitter
-                        </a>
-                    </li>
-                @endif
-                @if (!empty($place->instagram))
-                    <li>
-                        <a href="{{ $place->instagram }}">
-                            <i class="fa fa-fw fa-2x fa-instagram"></i> Instagram
-                        </a>
-                    </li>
-                @endif
-                @if (!empty($place->website))
-                    <li>
-                        <a href="{{ $place->website }}">
-                            <i class="fa fa-fw fa-2x fa-globe"></i> {{ trans('common.website') }}
-                        </a>
-                    </li>
-                @endif
-            </ul>
-
-            <h3>{{ trans('common.contact') }}</h3>
-
-            @if (!empty($place->email))
-                <p>
-                    <a href="mailto:{{ $place->email }}">
-                        {{ $place->email }}
-                    </a>
-                </p>
-            @endif
-            @if (!empty($place->phone))
-                <p>
-                    <a href="tel:{{ $place->phone }}">
-                        {{ $place->phone }}
-                    </a>
-                </p>
-            @endif
         </div>
     </div>
+
+    <h2>{{ trans('common.gallery') }}</h2>
+
+    <div class="images">
+        @foreach ($place->gallery_images as $image)
+            <a href="{{ $image->large_file_url }}">
+                <img class="image" src="{{ $image->thumb_file_url }}"  width="300" height="300"/>
+            </a>
+        @endforeach
+    </div>
+
 </div>
+
 @endsection
 
 @if (Auth::check() && Auth::user()->can('edit-place', $place))

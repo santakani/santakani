@@ -184,9 +184,10 @@ class Place extends Model
      *
      * @return string
      */
-    public function getGoogleMapUrlAttribute()
+    public function getGoogleMapsUrlAttribute()
     {
-        return 'https://www.google.com/maps/search/' . urlencode($this->full_address);
+        return 'https://www.google.com/maps/place/' . urlencode($this->address)
+            . '/@' . $this->latitude . ',' . $this->longitude . ',14z/';
     }
 
     /**
