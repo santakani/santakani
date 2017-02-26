@@ -8,108 +8,90 @@
     'og_description' => $design->excerpt('content'),
     'og_image' => empty($design->image_id)?'':$design->image->fileUrl('medium'),
     'twitter_card_type' => 'summary_large_image',
-    'has_share_buttons' => true,
 ])
-
-@section('header')
-    <div id="gallery-wrap" class="gallery-wrap">
-        <ul id="gallery" class="gallery">
-            @forelse ($design->gallery_images as $image)
-                <li data-thumb="{{ $image->fileUrl('largethumb') }}"
-                    data-src="{{ $image->fileUrl('large') }}">
-                    <img src="{{ $image->fileUrl('largethumb') }}" width="600" height="600"/>
-                </li>
-            @empty
-                <li data-thumb="{{ url('img/placeholder/square.png') }}"
-                    data-src="{{ url('img/placeholder/square.png') }}">
-                    <img src="{{ url('img/placeholder/square.png') }}" width="600" height="600"/>
-                </li>
-            @endforelse
-        </ul>
-    </div><!-- /#gallery-wrap -->
-    <div class="info">
-        <h1 class="name">
-            <div class="btn-group pull-right">
-                @if (Auth::check() && Auth::user()->can('edit-design', $design))
-                    <a id="edit-button" class="btn btn-default" href="{{ url()->current() . '/edit' }}">
-                        <i class="fa fa-pencil"></i> {{ trans('common.edit') }}
-                    </a>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a id="transfer-button" href="#" data-toggle="modal" data-target="#transfer-modal"><i class="fa fa-fw fa-exchange"></i> {{ trans('common.transfer') }}</a></li>
-                        @if (Auth::user()->can('delete-design', $design))
-                            <li><a id="delete-button" href="#"><i class="fa fa-fw fa-trash"></i> {{ trans('common.delete') }}</a></li>
-                            @if (Auth::user()->role === 'admin' || Auth::user()->role === 'editor')
-                                <li><a id="force-delete-button" href="#"><i class="fa fa-fw fa-ban"></i> {{ trans('common.delete_permanently') }}</a></li>
-                            @endif
-                        @endif
-                    </ul>
-                @endif
-            </div>
-            {{ $design->text('name') }}
-        </h1>
-        @if ($design->price && $design->currency)
-            <h2 class="price">
-                {{ $design->price }}
-                <small title="{{ App\Localization\Currencies::name($design->currency) }}">{{ $design->currency }}</small>
-            </h2>
-            @if ($design->currency !== 'EUR')
-                <p class="text-muted">~ {{ $design->eur_price }} <span title="{{ trans('currency.eur_name') }}">EUR</span></p>
-            @endif
-        @endif
-
-        <p class="buttons">
-            <a class="btn btn-lg btn-default {{ empty($design->webshop)?'disabled':'' }}" href="{{ $design->webshop }}" target="_blank"><i class="fa fa-lg fa-shopping-basket"></i> {{ trans('common.buy') }}</a>
-            @include('components.buttons.like', ['class' => 'btn-lg','likeable' => $design])
-        </p><!-- /.buttons -->
-
-        <p>{{ trans('common.tags') }}</p>
-        <p>@include('components.tag-list', ['tags' => $design->tags])</p>
-
-        <p>{{ trans('designer.designer') }}</p>
-        <p>
-            @if ($design->designer_id)
-                <a href="{{ $design->designer->url }}">
-                    {{ $design->designer->text('name') }}
-                </a>
-            @endif
-        </p>
-    </div><!-- /.info -->
-@endsection
 
 @section('main')
 
-    <div id="page-content" class="page-content">
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <ul id="gallery" class="gallery">
+                    @forelse ($design->gallery_images as $image)
+                        <li data-thumb="{{ $image->fileUrl('largethumb') }}"
+                            data-src="{{ $image->fileUrl('large') }}">
+                            <img src="{{ $image->fileUrl('largethumb') }}" width="600" height="600"/>
+                        </li>
+                    @empty
+                        <li data-thumb="{{ url('img/placeholder/thumb.svg') }}"
+                            data-src="{{ url('img/placeholder/largethumb.svg') }}">
+                            <img src="{{ url('img/placeholder/square.svg') }}" width="600" height="600"/>
+                        </li>
+                    @endforelse
+                </ul>
+            </div><!-- /.col-* -->
+
+            <div class="info col-sm-6">
+                <h1 class="name">
+                    {{ $design->text('name') }}
+                </h1>
+                @if ($design->price && $design->currency)
+                    <div class="price lead text-success">
+                        {{ $design->price }}
+                        {{ $design->currency }}
+                    </div>
+                    @if ($design->currency !== 'EUR')
+                        <p class="text-muted">~ {{ $design->eur_price }} <span title="{{ trans('currency.eur_name') }}">EUR</span></p>
+                    @endif
+                @endif
+
+                <ul class="metadata list-inline text-muted">
+                    @if ($design->designer_id)
+                        <li>
+                            <a href="{{ $design->designer->url }}">
+                                {{ $design->designer->text('name') }}
+                            </a>
+                        </li>
+                        @if ($design->designer->city_id)
+                            <li>{{ $design->designer->city->text('name') }}</li>
+                        @endif
+                    @endif
+                    <li>{{ trans_choice('common.like_count', $design->like_count) }}</li>
+                </ul>
+
+                @include('pages.design.show-action-bar')
+
+                @include('components.tags.tags-hash', ['tags' => $design->tags, 'class' => 'text-muted'])
+            </div><!-- /.col-* -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</header>
+
+
+<div class="container">
+    <div id="page-content" class="page-content ">
         {!! $design->html('content') !!}
-    </div><!-- /#content.page-content -->
+    </div><!-- /#page-content -->
 
-    <div id="sidebar" class="sidebar">
+    @if ($design->designer_id)
+        <h2>{{ trans('designer.designer') }}</h2>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                @include('components.cards.designer-card', ['designer' => $design->designer])
+            </div><!-- /.col-* -->
+        </div><!-- /.row -->
 
-        @if (count($design->designer))
+        <h2>{{ trans('design.more_designs_by_designer') }}</h2>
+        <div class="row">
+            @foreach($design->designer->designs as $design)
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    @include('components.cards.design-card', ['design' => $design])
+                </div><!-- /.col-* -->
+            @endforeach
+        </div><!-- /.row -->
+    @endif
 
-            <h3>{{ trans('designer.designer') }}</h3>
-
-            @if (count($design->designer->image))
-                <p>
-                    <img class="img-responsive" src="{{ $design->designer->image->fileUrl('largethumb') }}" width="600" height="600"/>
-                </p>
-            @endif
-
-            <p><strong><a href="{{ $design->designer->url }}">{{ $design->designer->text('name') }}</a></strong></p>
-
-            @if (count($design->designer->city))
-                <p><em>{{ $design->designer->city->full_name }}</em></p>
-            @endif
-
-            <blockquote>{{ $design->designer->text('tagline') }}</blockquote>
-
-            <p>{{ $design->designer->excerpt('content') }} <a href="{{ $design->designer->url }}">{{ strtolower(trans('common.more')) }}</a></p>
-
-        @endif
-
-    </div>
+</div><!-- /.container -->
 
 @endsection
 

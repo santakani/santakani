@@ -1,56 +1,19 @@
+/*
+ * Style for design page
+ *
+ * Example URL: https://santakani.com/design/2
+ * Template: resources/views/pages/design/show.blade.php
+ * JavaScript: resources/js/pages/design/show.js
+ */
+
 #design-show-page {
 
     header {
-        max-width: 1000px;
-        margin: 30px auto;
-
-        .gallery-wrap {
-            flex: 0 1 520px;
-            padding: 0 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .info {
-            flex: 1 1 400px;
-            padding: 0 10px;
-
-            h1.name {
-                margin-top: 0;
-
-                .btn {
-                    vertical-align: top;
-                }
-            }
-        }
-
-        @media (min-width: 700px) {
-            display: flex;
-
-            .gallery-wrap {
-                margin-bottom: 0;
-            }
-        }
+        padding: $grid-gutter-width / 2 0;
     }
 
-    main {
-        max-width: 1000px;
-        margin: 30px auto;
-
-        .page-content {
-            flex: 0 1 620px;
-            padding: 10px;
-            margin: 0;
-        }
-
-        .sidebar {
-            flex: 1 1 400px;
-            padding: 0 10px;
-        }
-
-        @media (min-width: 700px) {
-            display: flex;
-        }
+    .action-bar {
+        margin-bottom: $grid-gutter-width;
     }
 
 }

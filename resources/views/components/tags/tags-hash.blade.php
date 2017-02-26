@@ -10,10 +10,11 @@ Parameter:
     Collection<Tag> $tags   (required)
     string          $class  (optional)
     boolean         $linked (optional)
+    string          $class  (optional)
 
 --}}
 
-<ul class="tags tags-hash list-inline text-lowercase">
+<ul class="tags tags-hash list-inline text-lowercase {{ $class or '' }}">
     @foreach ($tags as $tag)
         <li>
             @if (empty($linked))

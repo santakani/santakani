@@ -16,6 +16,16 @@
     color: inherit;
     text-decoration: none;
 
+    .icon {
+        display: block;
+    }
+
+    .text {
+        display: block;
+        font-size: $font-size-small;
+        line-height: $font-size-small * 1.2;
+    }
+
     &:hover {
         opacity: 0.8;
         color: inherit;

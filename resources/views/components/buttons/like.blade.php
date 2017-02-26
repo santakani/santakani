@@ -7,4 +7,7 @@
     title="{{ trans('common.like') }}">
     <span class="liked-icon icon ion-ios-heart"></span>
     <span class="not-liked-icon icon ion-ios-heart-outline"></span>
+    @if (!empty($has_text))
+        <span class="text">{{ trans('common.like') }}</span>
+    @endif
 </button>
