@@ -5,18 +5,18 @@
 ])
 
 @section('main')
-    <header id="home-page-header" class="home-page-header">
+    <header id="home-page-header" class="home-page-header {{ rand(0,1) ? 'light' : 'dark' }}">
         <div class="container">
-            <h1>
-                <small>{{ trans('brand.name') }}&mdash;{{ trans('brand.summary') }}</small><br>
-                {{ trans('brand.mission') }}
-            </h1>
-            <a href="{{ url('designer/create') }}" class="btn btn-default">
-                {{ trans('design.create_designer') }}
-            </a>
-            <a href="{{ url('place/create') }}" class="btn btn-default">
-                {{ trans('place.create_place') }}
-            </a>
+            <h1>{{ trans('brand.name') }}</h1>
+            <div class="lead">{{ trans('brand.mission') }}</div>
+            <div class="buttons">
+                <a href="{{ url('designer/create') }}" class="btn btn-default">
+                    {{ trans('design.create_designer') }}
+                </a>
+                <a href="{{ url('place/create') }}" class="btn btn-default">
+                    {{ trans('place.create_place') }}
+                </a>
+            </div>
         </div>
     </header>
 
