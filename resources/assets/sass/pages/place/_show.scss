@@ -1,14 +1,26 @@
+/*
+ * Style for place page
+ *
+ * Example URL: https://santakani.com/place/{id}
+ * Template: resources/views/pages/place/show.blade.php
+ * JavaScript: resources/js/pages/place/show.js
+ */
 #place-show-page {
 
+    // Map height is controlled by JavaScript, but in case JavaScript is not loaded yet,
+    // we provide css style control.
     .map {
         height: 300px;
     }
 
+    // Image gallery
     .images {
         display: flex;
     }
 
     @media (min-width: $screen-sm-min) {
+        // Mobile: inline-flex
+        // Desktop: flex
         .action-bar {
             display: inline-flex;
         }
