@@ -54,12 +54,10 @@ var PlaceMarker = Backbone.View.extend({
         var lat = this.model.get('latitude');
         var lng = this.model.get('longitude');
 
-        this.imageModel = new Image(this.model.get('image'));
-
         if (lat && lng) {
             this.marker = Leaflet.marker([lat, lng]).bindPopup(
                 '<a href="' + this.model.url() + '">' +
-                '<img class="cover" src="' + this.imageModel.fileUrl('banner') +
+                '<img class="cover" src="' + this.model.get('image_url') +
                 '" width="200" height="100"></a>' +
                 '<div class="info"><a class="name" href="' + this.model.url() + '">' +
                 this.model.get('name') + '</a><a class="button btn-icon pull-right" href="' +
@@ -118,6 +116,7 @@ var PlaceMap = Backbone.View.extend({
 
         this.$('#place-list .place-card').each(function () {
             var model = new Place($(this).data('model'));
+            model.set('image_url', $(this).find('.card-cover').attr('src'));
 
             var placeRow = new PlaceCard({el: this, model: model});
 

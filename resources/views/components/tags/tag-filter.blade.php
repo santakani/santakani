@@ -26,7 +26,7 @@ if (empty($selected)) {
 <ul class="tag-filter list-inline {{ $class or '' }}">
     <li>
         @if (!empty($selected) && count($selected))
-            <a href="{{ url()->current() }}?{{ http_build_query(request()->except('page', 'tag_id')) }}">{{ trans('common.all') }}</a>
+            <a href="{{ url()->current() }}?{{ http_build_query(request()->except('search', 'page', 'tag_id')) }}">{{ trans('common.all') }}</a>
         @else
             <strong>{{ trans('common.all') }}</strong>
         @endif
@@ -37,7 +37,7 @@ if (empty($selected)) {
             @if (!empty($selected) && count($selected) && $selected->id === $tag->id)
                 <strong>{{ $tag->text('name') }}</strong>
             @else
-                <a href="{{ url()->current() }}?tag_id={{ $tag->id }}&amp;{{ http_build_query(request()->except('page', 'tag_id')) }}">{{ $tag->text('name') }}</a>
+                <a href="{{ url()->current() }}?tag_id={{ $tag->id }}&amp;{{ http_build_query(request()->except('search', 'page', 'tag_id')) }}">{{ $tag->text('name') }}</a>
             @endif
         </li>
     @endforeach

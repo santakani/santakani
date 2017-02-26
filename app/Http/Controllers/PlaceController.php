@@ -33,7 +33,6 @@ class PlaceController extends Controller
         $this->validate($request, [
             'city_id' => 'integer|nullable|exists:city,id',
             'tag_id' => 'integer|nullable|exists:tag,id',
-            'type' => 'string|nullable|in:' . implode(',', Place::types()),
         ]);
 
         if ($request->has('city_id')) {
@@ -45,53 +44,19 @@ class PlaceController extends Controller
             }
         }
 
-        $query = Place::where('city_id', $city->id);
-
         if ($request->has('search')) {
-            // Escape some special SQL characters. Not sure if it is safe enough.
-            $search = str_replace(['@', '*', '%', '"', "'"], ' ', $request->input('search'));
-            // array_filter() remove empty string in $words array.
-            $words = array_filter(explode(" ", $search));
-
-            $query->whereHas('translations', function ($sub_query) use ($words) {
-                foreach ($words as $word) {
-                    // If it is Chinese, use LIKE. Else, use full text index.
-                    // http://www.regular-expressions.info/unicode.html#script
-                    if (preg_match('/\p{Han}+/u', $word)) {
-                        $sub_query->where(function ($q) use ($word) {
-                            $q->where('name', 'like', '%'.$word.'%')->orWhere('content', 'like', '%'.$word.'%');
-                        });
-                    } else {
-                        $sub_query->whereRaw('MATCH(name,content) AGAINST(? IN BOOLEAN MODE)', [$word.'*']);
-                    }
-                }
-            });
-        }
-
-        if ($request->has('type')) {
-            $type = $request->input('type');
+            $places = Place::search($request->input('search'))->where('city_id', $city->id)->paginate(100);
+        } elseif ($request->has('tag_id')) {
+            $places = Place::where('city_id', $city->id)->whereHas('tags', function ($q) use ($request) {
+                $q->where('id', $request->input('tag_id'));
+            })->orderByRaw('RAND(' . Random::getUserSeed() . ')')->paginate(100);
         } else {
-            $type = 'shop';
+            $places = Place::where('city_id', $city->id)->orderByRaw('RAND(' . Random::getUserSeed() . ')')->paginate(100);
         }
-
-        $query = $query->where('type', $type);
-
-        if ($request->has('tag_id')) {
-            $query = $query->whereHas('tags', function ($sub_query) use ($request) {
-                $sub_query->where('id', $request->input('tag_id'));
-            });
-        }
-
-        $query->with('image');
-
-        $query->orderByRaw('RAND(' . Random::getUserSeed() . ')');
-
-        $places = $query->paginate(100);
 
         return view('pages.place.index', [
             'places' => $places,
             'city' => $city,
-            'type' => $type,
         ]);
     }
 
