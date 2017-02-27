@@ -23,10 +23,20 @@
             margin-bottom: 10px;
         }
 
-        .btn {
+        .btn, .form-control {
             background: none;
             border-width: 2px;
             border-radius: 99px;
+            color: inherit;
+            text-align: center;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+        }
+
+        .form-control::placeholder {
+            color: inherit;
         }
 
         .icons {
@@ -56,8 +66,7 @@
             background-image: url("https://source.unsplash.com/collection/580227/1600x800");
             color: $light-color;
 
-            .btn {
-                color: $light-color;
+            .btn, .form-control {
                 border-color: $light-color;
             }
         }
@@ -67,8 +76,7 @@
             background-image: url("https://source.unsplash.com/collection/580306/1600x800");
             color: $dark-color;
 
-            .btn {
-                color: $dark-color;
+            .btn, .form-control {
                 border-color: $dark-color;
             }
         }
