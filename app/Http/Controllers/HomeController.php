@@ -26,7 +26,7 @@ class HomeController extends Controller
         ]);
         // Designs
         $query = Design::with('image', 'translations', 'designer.logo', 'designer.translations')
-            ->whereNotNull('image_id');
+            ->whereNotNull('image_id')->where('editor_rating', '>', -1);
 
         if ($request->has('tag_id')) {
             $query->whereHas('tags', function ($sub_query) use ($request){
@@ -34,14 +34,14 @@ class HomeController extends Controller
             });
         }
 
-        $designs = $query->orderByRaw('RAND(' . Random::getUserSeed() . ')')
+        $designs = $query->orderByRaw('editor_rating * 0.01 + RAND(' . Random::getUserSeed() . ') desc')
             ->paginate(24);
 
         // Featured designers
         $designers = Designer::with('logo', 'image', 'translations')
             ->whereNotNull('logo_id')
             ->whereNotNull('image_id')
-            ->where('editor_pick', 1)
+            ->where('editor_rating', '>', 80)
             ->orderByRaw('RAND()')
             ->take(4)->get();
 
