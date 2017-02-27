@@ -3,6 +3,7 @@
     $header-height: 300px;
 
     header#home-page-header {
+        position: relative;
         display: flex;
         height: $header-height;
         padding: $grid-gutter-width / 2;
@@ -15,35 +16,67 @@
         h1 {
             font-family: $font-family-display;
             font-size: 48px;
+            margin: 10px 0;
+        }
+
+        .buttons {
+            margin-bottom: 10px;
         }
 
         .btn {
-            border: none;
+            background: none;
+            border-width: 2px;
+            border-radius: 99px;
         }
+
+        .icons {
+            position: absolute;
+            text-align: center;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+
+            a {
+                display: inline-block;
+                color: inherit;
+                font-size: 32px;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                padding: 0;
+                text-align: center;
+            }
+        }
+
+        $light-color: rgba(255,255,255, 0.95);
+        $dark-color: rgba(0,0,0,0.8);
 
         // Dark background images
         &.dark {
             background-image: url("https://source.unsplash.com/collection/580227/1600x800");
-
-            color: rgba(255,255,255, 0.9);
+            color: $light-color;
 
             .btn {
-                background: rgba(255,255,255, 0.9);
-                color: $gray-dark;
-                border: none;
+                color: $light-color;
+                border-color: $light-color;
             }
         }
 
         // Light background images
         &.light {
             background-image: url("https://source.unsplash.com/collection/580306/1600x800");
-
-            color: rgba(0,0,0,0.9);
+            color: $dark-color;
 
             .btn {
-                background: rgba(0,0,0,0.9);
-                color: #ffffff;
-                border: none;
+                color: $dark-color;
+                border-color: $dark-color;
+            }
+        }
+
+        // Landscape, from 800x400px to 1900x950px
+        @for $i from 0 through 11 {
+            @media (min-width: $i * 100px + 800px) and (min-height: $i * 50px + 400px) {
+                height: $i * 30px + 240px;
             }
         }
     }

@@ -6,17 +6,26 @@
 
 @section('main')
     <header id="home-page-header" class="home-page-header {{ rand(0,1) ? 'light' : 'dark' }}">
-        <div class="container">
-            <h1>{{ trans('brand.name') }}</h1>
-            <div class="lead">{{ trans('brand.mission') }}</div>
-            <div class="buttons">
-                <a href="{{ url('designer/create') }}" class="btn btn-default">
-                    {{ trans('design.create_designer') }}
-                </a>
-                <a href="{{ url('place/create') }}" class="btn btn-default">
-                    {{ trans('place.create_place') }}
-                </a>
-            </div>
+        <h1>{{ trans('brand.name') }}</h1>
+        <p class="hidden-xs">{{ trans('brand.mission') }}</p>
+        <div class="buttons hidden-xs">
+            <a href="{{ url('designer/create') }}" class="btn btn-lg btn-default text-capitalize">
+                {{ trans('design.create_designer') }}
+            </a>
+            <a href="{{ url('place/create') }}" class="btn btn-default hidden">
+                {{ trans('place.create_place') }}
+            </a>
+        </div>
+        <div class="icons hidden-xs">
+            <a href="https://www.facebook.com/santakanidesign" target="_blank" title="Facebook">
+                <span class="icon ion-social-facebook"></span>
+            </a>
+            <a href="https://twitter.com/santakanidesign" target="_blank" title="Twitter">
+                <span class="icon ion-social-twitter"></span>
+            </a>
+            <a href="https://www.instagram.com/santakanidesign" target="_blank" title="Instagram">
+                <span class="icon ion-social-instagram"></span>
+            </a>
         </div>
     </header>
 
