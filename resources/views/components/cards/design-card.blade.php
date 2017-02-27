@@ -23,6 +23,9 @@ Parameter:
             <!-- Fallback cover -->
             <img class="card-cover" src="https://source.unsplash.com/category/nature/300x300" srcset="https://source.unsplash.com/category/nature/600x600 x2" width="300" height="300">
         @endif
+        <span class="price label label-info">
+            {{ $design->price }} {{ $design->currency }}
+        </span>
     </a>
 
     <div class="card-body">
@@ -30,13 +33,7 @@ Parameter:
             <a class="link-unstyled" href="{{ $design->url }}">
                 {{ $design->text('name') }}
             </a>
-            <span class="label label-info">
-                {{ $design->price }} {{ $design->currency }}
-            </span>
         </h3>
-        <div class="card-description">
-            @include('components.tags.tags-hash', ['tags' => $design->tags])
-        </div>
     </div>
     <footer class="card-footer text-muted">
         <ul class="list-inline">
@@ -44,7 +41,9 @@ Parameter:
                 <li>
                     <a class="link-unstyled" href="{{ $design->designer->url }}">
                         @if ($design->designer->logo_id)
-                            <img src="{{ $design->designer->logo->thumb_file_url }}" width="30" height="30">
+                            <img src="{{ $design->designer->logo->thumb_file_url }}" width="24" height="24">
+                        @else
+                            <img src="{{ url('img/placeholder/thumb.svg') }}" width="24" height="24">
                         @endif
                         {{ $design->designer->text('name') }}
                     </a>

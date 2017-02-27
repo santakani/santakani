@@ -46,7 +46,6 @@ $card-bg: $gray-lightest;
 }
 
 .design-card {
-    $body-height: 200px;
 
     position: relative;
 
@@ -55,32 +54,23 @@ $card-bg: $gray-lightest;
         height: auto;
     }
 
-    .card-body {
-        height: $body-height;
+    .price {
+        position: absolute;
+        right: $grid-gutter-width / 2;
+        bottom: $grid-gutter-width / 2;
     }
 
     .card-title {
         font-size: $font-size-base;
         line-height: $line-height-computed;
-        height: $line-height-computed * 3;
+        height: $line-height-computed * 2;
+        margin: 0;
 
         a {
             display: block;
             height: $line-height-computed * 2;
             overflow: hidden;
         }
-        .label {
-            display: inline-block;
-        }
-    }
-
-    .card-footer {
-        position: absolute;
-        padding: $grid-gutter-width / 2;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: $card-bg;
     }
 }
 
