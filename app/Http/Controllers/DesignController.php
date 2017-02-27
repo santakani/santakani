@@ -220,7 +220,19 @@ class DesignController extends Controller
             'translations.*' => 'array',
             'translations.*.name' => 'string|nullable|max:255',
             'translations.*.content' => 'string|nullable',
+            'editor_rating' => 'integer|max:100|min:-100',
         ]);
+
+        // Editor rating
+        if ($request->has('editor_rating')) {
+            if ($request->user()->can('editor-rating')) {
+                $design->editor_rating = $request->input('editor_rating');
+                $design->save();
+                return;
+            } else {
+                abort(403);
+            }
+        }
 
         if ($request->has('user_id')) {
             if ($request->user()->can('transfer-design', $design)) {

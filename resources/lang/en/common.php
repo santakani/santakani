@@ -52,7 +52,7 @@ return array(
     'description' => 'Description',
     'done' => 'Done',
     'edit' => 'Edit',
-    'editor_pick' => 'Editor\'s Pick',
+    'editor_rating' => 'Editor rating',
     'email' => 'Email',
     'email_address' => 'Email address',
     'error' => 'Error',

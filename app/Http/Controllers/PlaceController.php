@@ -196,8 +196,19 @@ class PlaceController extends Controller
             'translations.*.name' => 'string|nullable|max:255',
             'translations.*.tagline' => 'string|nullable|max:255',
             'translations.*.content' => 'string|nullable',
-            'editor_pick' => 'boolean',
+            'editor_rating' => 'integer|max:100|min:-100',
         ]);
+
+        // Editor rating
+        if ($request->has('editor_rating')) {
+            if ($request->user()->can('editor-rating')) {
+                $place->editor_rating = $request->input('editor_rating');
+                $place->save();
+                return;
+            } else {
+                abort(403);
+            }
+        }
 
         // Transfer ownership
         if ($request->has('user_id')) {

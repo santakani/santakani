@@ -291,13 +291,14 @@ class DesignerController extends Controller
             'translations.*.name' => 'string|nullable|max:255',
             'translations.*.tagline' => 'string|nullable|max:255',
             'translations.*.content' => 'string|nullable',
-            'editor_pick' => 'boolean',
+            'editor_rating' => 'integer|max:100|min:-100',
         ]);
 
-        // Editor's pick
-        if ($request->has('editor_pick')) {
-            if ($request->user()->can('editor-pick')) {
-                $designer->pick( $request->input('editor_pick') );
+        // Editor rating
+        if ($request->has('editor_rating')) {
+            if ($request->user()->can('editor-rating')) {
+                $designer->editor_rating = $request->input('editor_rating');
+                $designer->save();
                 return;
             } else {
                 abort(403);

@@ -57,6 +57,13 @@
                         <span class="icon ion-ios-more-outline"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
+                        @if (Auth::check() && Auth::user()->can('editor-rating'))
+                            <li>
+                                <a id="editor-rating-button" class="editor-rating-button" href="#" data-url="{{ $story->url }}" data-rating="{{ $story->editor_rating }}">
+                                    {{ trans('common.editor_rating') }}
+                                </a>
+                            </li>
+                        @endif
                         @if (Auth::check() && Auth::user()->can('delete-story', $story))
                             <li>
                                 <a id="delete-button" href="#">

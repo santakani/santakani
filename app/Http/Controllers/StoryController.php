@@ -218,7 +218,19 @@ class StoryController extends Controller
             'translations.*' => 'array',
             'translations.*.title' => 'string|nullable|max:255',
             'translations.*.content' => 'string|nullable',
+            'editor_rating' => 'integer|max:100|min:-100',
         ]);
+
+        // Editor rating
+        if ($request->has('editor_rating')) {
+            if ($request->user()->can('editor-rating')) {
+                $story->editor_rating = $request->input('editor_rating');
+                $story->save();
+                return;
+            } else {
+                abort(403);
+            }
+        }
 
         $story->update(app_array_filter($request->all(), ['image_id', 'tag_ids']));
 

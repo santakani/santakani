@@ -73,6 +73,13 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // Editor powers
+
+        Gate::define('editor-rating', function ($user) {
+            return $user->role === 'admin' || $user->role === 'editor';
+        });
+
+
         // Designer page
 
         Gate::define('create-designer', function ($user) {
@@ -89,10 +96,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('delete-designer', function ($user, $designer) {
             return $user->role === 'admin' || $user->role === 'editor' || $user->id === $designer->user_id;
-        });
-
-        Gate::define('editor-pick', function ($user) {
-            return $user->role === 'admin' || $user->role === 'editor';
         });
 
 

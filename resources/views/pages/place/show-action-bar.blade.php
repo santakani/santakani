@@ -39,13 +39,10 @@
             </button>
 
             <ul class="dropdown-menu dropdown-menu-right">
-                @if (Auth::check() && Auth::user()->can('editor-pick'))
+                @if (Auth::check() && Auth::user()->can('editor-rating'))
                     <li>
-                        <a id="editor-pick-button" class="{{ $place->editor_pick?'picked':'' }}" href="#">
-                            {{ trans('common.editor_pick') }}
-                            @if ($place->editor_pick)
-                                <span class="text-success">&#x2713;</span>
-                            @endif
+                        <a id="editor-rating-button" class="editor-rating-button" href="#" data-url="{{ $place->url }}" data-rating="{{ $place->editor_rating }}">
+                            {{ trans('common.editor_rating') }}
                         </a>
                     </li>
                 @endif

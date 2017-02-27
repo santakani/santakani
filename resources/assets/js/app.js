@@ -34,6 +34,8 @@ require('./jquery/remove-attributes');
 
 require('./components/auth-modal');
 
+require('./components/buttons/editor-rating-button');
+
 require('./components/page-cover');
 
 require('./components/tabs/auto-collapse');
