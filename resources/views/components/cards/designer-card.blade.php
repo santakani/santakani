@@ -24,7 +24,7 @@ Parameter:
         @endif
 
         @if ($designer->logo_id)
-            <img class="card-logo" src="{{ $designer->image->thumb_file_url }}" width="50" height="50">
+            <img class="card-logo" src="{{ $designer->logo->thumb_file_url }}" width="50" height="50">
         @else
             <!-- Fallback logo -->
             <img class="card-logo" src="{{ url('img/placeholder/thumb.svg') }}" width="50" height="50">
