@@ -32,6 +32,7 @@ return array(
     'choose_image' => 'Valitse kuva',
     'remove_image' => 'Poista kuva',
     'delete_image' => 'Poista kuva pysyvästi',
+    'manage_images' => 'Manage images',
 
     // Image manager
     'image_manager.no_image_alert' => 'Ei vielä kuvia, ole hyvä ja lataa.',

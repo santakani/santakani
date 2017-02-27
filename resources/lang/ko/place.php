@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of santakani
+ * This file is part of Santakani
  *
  * (c) Guo Yunhe <guoyunhebrave@gmail.com>
  *
@@ -24,6 +24,8 @@ return array(
 
     'place' => 'Place',
     'places' => 'Places',
+    'list_title' => 'Design shops, showrooms and museums in :cityname',
+    'no_place_found' => 'No place found. Please change search filters.',
     'place_list' => 'Place list',
     'place_pages' => 'Place pages',
 
@@ -31,7 +33,7 @@ return array(
     'my_place_pages_description' => 'Place pages you created.',
 
     // Create
-    'create_place' => 'Create a place page',
+    'create_place' => 'Mark Shop/Studio',
 
     // Edit
 

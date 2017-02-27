@@ -24,8 +24,12 @@ return array(
 
     'design' => 'Tuote',
     'designs' => 'Tuotteet',
+    'design_count' => '{0} No design|{1} 1 design|[2,*] :count designs',
+    'more_designs_by_designer' => 'More designs by the designer',
     'price' => 'Hinta',
     'webshop_link' => 'Verkkokauppa linkki',
     'taobao_price' => 'Taobao hinta',
     'taobao_link' => 'Taobao linkki',
+    'create_designer' => 'Create designer profile',
+    'create_design' => 'Create design',
 );

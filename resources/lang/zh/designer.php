@@ -33,4 +33,5 @@ return array(
     'designer_about_tips' => '介绍设计师的经历，作品，理念等等。',
     'designer_gallery_tips' => '选择最佳的照片显示在设计师页面的照片库中。',
     'designer_list' => '设计师列表',
+    'designer_number_limit' => '每个用户只能创建一个设计师页面！要发布多个设计产品，请使用设计页面。',
 );

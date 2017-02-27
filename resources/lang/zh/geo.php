@@ -45,6 +45,7 @@ return array(
     'map' => '地图',
     'navigate' => '导航',
     'navigation' => '导航',
+    'open_google_maps' => '在 Google 地图中打开',
 
     // Coordinate select
     'coordinate_select.found_alert' => '成功地在地图上标出了位置！',

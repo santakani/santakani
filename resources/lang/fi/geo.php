@@ -45,6 +45,7 @@ return array(
     'map' => 'Kartta',
     'navigate' => 'Navigoida',
     'navigation' => 'Navigaatio',
+    'open_google_maps' => 'Open in Google Maps',
 
     // Coordinate select
     'coordinate_select.found_alert' => 'Sijainti merkitty onnistuneesti kartalle!',

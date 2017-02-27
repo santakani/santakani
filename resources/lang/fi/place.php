@@ -24,6 +24,8 @@ return array(
 
     'place' => 'Paikka',
     'places' => 'Paikat',
+    'list_title' => 'Design shops, showrooms and museums in :cityname',
+    'no_place_found' => 'No place found. Please change search filters.',
     'place_list' => 'Paikka lista',
     'place_pages' => 'Paikkasivut',
 
@@ -31,7 +33,7 @@ return array(
     'my_place_pages_description' => 'Sinun luomat paikat',
 
     // Create
-    'create_place' => 'Luo paikka sivulle',
+    'create_place' => 'Merkitä Kaupan/Studio',
 
     // Edit
 

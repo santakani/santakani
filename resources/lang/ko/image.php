@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of santakani
+ * This file is part of Santakani
  *
  * (c) Guo Yunhe <guoyunhebrave@gmail.com>
  *
@@ -32,6 +32,7 @@ return array(
     'choose_image' => 'Choose image',
     'remove_image' => 'Remove image',
     'delete_image' => 'Delete image',
+    'manage_images' => 'Manage images',
 
     // Image manager
     'image_manager.no_image_alert' => 'No images yet, please upload.',

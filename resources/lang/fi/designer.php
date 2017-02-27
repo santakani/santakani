@@ -33,4 +33,5 @@ return array(
     'designer_about_tips' => 'Kuvaile suunnittelijan osaamista, luomuksia, ideoita, jne.',
     'designer_gallery_tips' => 'Valitse parhaat kuvat näytettäväksi suunnittelijasivun valokuvagalleriassa',
     'designer_list' => 'Lista suunnittelijoista',
+    'designer_number_limit' => 'Each user can only create one designer page! To publish multiple design products, use design pages.',
 );

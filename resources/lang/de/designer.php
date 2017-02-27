@@ -33,4 +33,5 @@ return array(
     'designer_about_tips' => 'Beschreiben der Designer die Erfahrung, Kreation, Ideen etc.',
     'designer_gallery_tips' => 'Wählen Sie am besten Fotos in der Fotogalerie von Designer-Seite zu zeigen,',
     'designer_list' => 'Designer-Liste',
+    'designer_number_limit' => 'Each user can only create one designer page! To publish multiple design products, use design pages.',
 );

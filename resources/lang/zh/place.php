@@ -24,6 +24,8 @@ return array(
 
     'place' => '地点',
     'places' => '地点',
+    'list_title' => ':cityname的设计店铺，展厅和博物馆',
+    'no_place_found' => '没有找到地点。请更改搜索过滤条件。',
     'place_list' => '地点列表',
     'place_pages' => '地点页面',
 

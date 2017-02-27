@@ -23,6 +23,9 @@ return array(
     */
 
     'name' => 'Santakani',
-    'summary' => 'Suunnittelijat ja designliikkeet Suomesta',
+    'summary' => 'Platform & Community of Independent Design',
+    'title' => 'Find amazing Finnish design by independent designers. Explore local design shops in Helsinki.',
+    'keywords' => 'design, designer, design shop, independent design, Finland, Finnish design, furniture, fashion, jewelry, graphics, ceramics, glass',
+    'mission' => 'Connect Design Enthusiasts & Designers',
     'description' => 'Tuomme yhteen suunnittelijat ja designharrastajat. Levitämme luovia tuotteita ja ideoita uusille alueille.',
 );

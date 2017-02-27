@@ -1,14 +1,28 @@
 <?php
 
 /*
- * Translation messages for home page
+ * This file is part of Santakani
+ *
+ * (c) Guo Yunhe <guoyunhebrave@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 return array(
-    'slide_1.title' => 'För Oberoende Design',
-    'slide_1.content' => 'Santakani fokuserar på Oberoende designer och små designmärken. Träffa den mest kreativa människor och hitta den mest speciella design!',
-    'slide_2.title' => 'Design Shops & Studios',
-    'slide_2.content' => 'Santakani hjälper dig att upptäcka lokala designbutiker , ateljéer och mer!',
-    'slide_3.title' => 'Stories of Design',
-    'slide_3.content' => 'Dela designevent , designer intervjuer, design kunskaper och idéer.',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Home Page Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines contain the text of home page. See
+    | https://santakani.com/
+    |
+    | Priority: high
+    |
+    */
+
+    'featured_designers' => 'Featured designers',
+    'explore_designs' => 'Explore designs',
 );

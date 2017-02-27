@@ -32,6 +32,7 @@ return array(
     'choose_image' => '选择图片',
     'remove_image' => '移除图片',
     'delete_image' => '删除图片',
+    'manage_images' => '管理图片',
 
     // Image manager
     'image_manager.no_image_alert' => '还没有图片，请上传。',

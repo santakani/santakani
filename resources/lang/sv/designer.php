@@ -33,4 +33,5 @@ return array(
     'designer_about_tips' => 'Beskriv designerns erfarenhet, skapande, idéer, etc.',
     'designer_gallery_tips' => 'Välj bästa bilderna ska visas i fotogalleriet av designade sidan',
     'designer_list' => 'Designer lista',
+    'designer_number_limit' => 'Each user can only create one designer page! To publish multiple design products, use design pages.',
 );
