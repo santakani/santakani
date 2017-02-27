@@ -33,7 +33,7 @@ Parameter:
     <div class="card-body">
         <h3 class="card-title text-nowrap"><a class="link-unstyled" href="{{ $place->url }}">{{ $place->text('name') }}</a></h3>
         <div class="card-description text-nowrap">
-            @include('components.tags.tags-hash', ['tags' => $place->tags])
+            @include('components.tags.tags-hash', ['tags' => $place->tags->sortByDesc('level')])
         </div>
     </div>
     <footer class="card-footer text-muted">
