@@ -33,58 +33,35 @@
         </div>
     </header>
 
-    <section id="designer-list" class="designer-list">
+    <section id="featured-designers" class="featured-designers">
         <div class="container">
-            @foreach ($designers as $designer)
-                <article id="designer-{{ $designer->id }}" class="designer">
-                    <header class="clearfix">
-                        <a class="logo-wrap pull-left" href="{{ $designer->url }}">
-                            @if ($designer->logo_id)
-                                <img class="logo" src="{{ $designer->logo->small_file_url }}"/>
-                            @endif
-                        </a>
-
-                        <h3 class="name">
-                            <a href="{{ $designer->url }}">
-                                {{ $designer->text('name') }}
-                            </a>
-                            @if ($designer->editor_pick)
-                                <i class="editor-pick-icon fa fa-diamond" title="{{ trans('common.editor_pick') }}"></i>
-                            @endif
-                        </h3>
-
-                        <p class="tagline text-muted">{{ $designer->text('tagline') }}</p>
-                    </header>
-
-                    <div class="image-gallery gallery">
-                        @foreach ($designer->gallery_images as $image)
-                            <a class="image-wrap" href="{{ $image->large_file_url }}">
-                                <img class="image" src="{{ $image->medium_file_url }}"/>
-                            </a>
-                        @endforeach
+            <h2 class="text-center text-capitalize">{{ trans('home.featured_designers') }}</h2>
+            <div class="row">
+                @foreach ($designers as $designer)
+                    <div class="col-sm-6 col-md-4 {{ $loop->index === 3 ? 'hidden-md hidden-lg' : '' }}">
+                        @include('components.cards.designer-card', ['designer' => $designer])
                     </div>
-                    <div class="design-gallery gallery">
-                        @foreach ($designer->designs as $design)
-                            <a class="design-wrap image-wrap" href="{{ $design->url }}">
-                                @if ($design->image_id)
-                                    <img class="design-cover image" src="{{ $design->image->medium_file_url }}"/>
-                                @endif
-                                @if ($design->price && $design->currency)
-                                    <span class="price">{{ $design->price . ' ' . $design->currency }}</span>
-                                @endif
-                            </a>
-                        @endforeach
+                @endforeach
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+
+
+
+    <section id="design-list" class="design-list">
+        <div class="container">
+            <h2 class="text-center text-capitalize">{{ trans('home.explore_designs') }}</h2>
+            @include('components.tags.tag-filter')
+            <div class="row">
+                @foreach ($designs as $design)
+                    <div class="col-sm-6 col-md-4">
+                        @include('components.cards.design-card', ['design' => $design])
                     </div>
-                    <footer class="text-center">
-                        <a class="more-button btn btn-default btn-round" href="{{ $designer->url }}">
-                            {{ trans('common.learn_more') }}
-                        </a>
-                    </footer>
-                </article>
-            @endforeach
+                @endforeach
+            </div>
 
             <div class="text-center">
-                {!! $designers->appends(app('request')->all())->links() !!}
+                {!! $designs->appends(app('request')->all())->links() !!}
             </div>
         </div><!-- /.container -->
     </section>

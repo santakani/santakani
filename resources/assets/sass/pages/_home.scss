@@ -89,59 +89,11 @@
         }
     }
 
-    .designer-list {
-        background-color: #ffffff;
-        z-index: 1;
+    .tag-filter {
+        text-align: center;
     }
 
-    .designer {
-
-        $image-height: 200px;
-        $image-space: 10px;
-        $image-row-num: 1;
-
-        margin: 40px 0;
-
-        .logo {
-            height: 50px;
-            width: auto;
-            margin-right: 20px;
-            background: #ffffff;
-        }
-
-        .name {
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
-
-        .editor-pick-icon {
-            margin-left: 20px;
-            color: $brand-info;
-            cursor: default;
-        }
-
-        .gallery {
-            @include flexbin(200px, 4px);
-            max-height: 204px;
-            margin-bottom: 0;
-            margin-top: 0;
-            overflow: hidden;
-        }
-
-        .price {
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-            padding: 4px 10px;
-            background-color: rgba(0,0,0,0.5);
-            color: #ffffff;
-            border-radius: 99px;
-        }
-
-        .more-button {
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .featured-designers {
+        padding: $grid-gutter-width 0;
     }
 }

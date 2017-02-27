@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Design;
 use App\Designer;
 use App\Support\Random;
 
@@ -21,14 +21,32 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $designers = Designer::with('logo', 'image', 'translations', 'designs', 'designs.image', 'designs.translations')
-            ->whereNotNull('logo_id')
-            ->whereNotNull('image_id')
-            ->orderBy('editor_pick', 'desc')
-            ->orderByRaw('RAND(' . Random::getUserSeed() . ')')
+        $this->validate($request, [
+            'tag_id' => 'integer|exists:tag,id',
+        ]);
+        // Designs
+        $query = Design::with('image', 'translations', 'designer.logo', 'designer.translations')
+            ->whereNotNull('image_id');
+
+        if ($request->has('tag_id')) {
+            $query->whereHas('tags', function ($sub_query) use ($request){
+                $sub_query->where('id', $request->input('tag_id'));
+            });
+        }
+
+        $designs = $query->orderByRaw('RAND(' . Random::getUserSeed() . ')')
             ->paginate(24);
 
+        // Featured designers
+        $designers = Designer::with('logo', 'image', 'translations')
+            ->whereNotNull('logo_id')
+            ->whereNotNull('image_id')
+            ->where('editor_pick', 1)
+            ->orderByRaw('RAND()')
+            ->take(4)->get();
+
         return view('pages.home', [
+            'designs' => $designs,
             'designers' => $designers,
         ]);
     }
