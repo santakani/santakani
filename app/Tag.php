@@ -48,6 +48,11 @@ class Tag extends Model
     // Relationship Methods
     //==========================================================================
 
+    public function designs()
+    {
+        return $this->morphedByMany('App\Design', 'taggable', 'taggable');
+    }
+
     public function designers()
     {
         return $this->morphedByMany('App\Designer', 'taggable', 'taggable');

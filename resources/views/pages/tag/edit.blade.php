@@ -1,20 +1,16 @@
 @extends('layouts.app', [
-    'title' => trans('common.edit') . ': ' . $tag->text('name'),
+    'title' => trans('common.edit') . ' ' . $tag->text('name'),
     'body_id' => 'tag-edit-page',
     'body_classes' => ['tag-edit-page', 'tag-page', 'edit-page'],
     'active_nav' => 'tag',
 ])
 
-@section('header')
-    <div class="container">
-        <h1 class="page-header">{{ trans('common.edit') }}: {{ $tag->text('name') }}</h1>
-    </div>
-@endsection
-
 @section('main')
     <div class="container">
-        <form id="edit-form" class="edit-form" action="/tag/{{ $tag->id }}"
-            data-id="{{ $tag->id }}">
+
+        <h1 class="page-header">{{ trans('common.edit') }} <a href="{{ $tag->url }}">{{ $tag->text('name') }}</a></h1>
+
+        <form id="edit-form" class="edit-form" action="/tag/{{ $tag->id }}" data-id="{{ $tag->id }}">
 
             {!! csrf_field() !!}
 

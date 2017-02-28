@@ -5,32 +5,21 @@
 ])
 
 @section('main')
+
 <div class="container">
 
-    @if($errors->any())
-        <div class="alert alert-warning" role="alert">{{ $errors->first() }}</div>
-    @endif
-
-    <h1 class="page-header">
+    <h1 class="text-center">
         {{ trans('common.tags') }}
-        @if (Auth::check() && Auth::user()->can('create-tag'))
-            <a class="btn btn-default" href="/tag/create">
-                <i class="fa fa-plus"></i> {{ trans('common.create') }}
-            </a>
-        @endif
     </h1>
 
-    <form class="form-inline text-right" action="/tag" method="get">
+    <form class="form-inline text-center" action="/tag" method="get">
         <input name="search" value="{{ request()->input('search') }}"
-               type="search" class="form-control">
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-search"></i> {{ trans('common.search') }}
-        </button>
+               type="search" class="form-control" placeholder="&#xf4a4; {{ trans('common.search') }}">
     </form>
 
     <br>
 
-    <div id="tag-list" class="tag-list row">
+    <div id="tag-list" class="tag-list row small-gutter">
         @foreach ($tags as $tag)
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <article id="tag-{{ $tag->id }}" class="tag" data-id="{{ $tag->id }}">

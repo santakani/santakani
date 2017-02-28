@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Localization\Languages;
+use App\Support\Random;
 use App\Tag;
 use App\TagTranslation;
 use Illuminate\Http\Request;
@@ -93,10 +94,11 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $tag = Tag::find($id);
 
@@ -104,16 +106,20 @@ class TagController extends Controller
             abort(404);
         }
 
-        $designers = $tag->designers()->orderBy('id', 'desc')->take(7)->get();
-        $places = $tag->places()->orderBy('id', 'desc')->take(7)->get();
-        $stories = $tag->stories()->orderBy('id', 'desc')->take(7)->get();
+        $tab = $request->input('tab', 'designs');
 
-        return view('pages.tag.show', [
+        if (!in_array($tab, ['designs', 'designers', 'places', 'stories'])) {
+            $tab = 'designs';
+        }
+
+        $data = [
             'tag' => $tag,
-            'designers' => $designers,
-            'places' => $places,
-            'stories' => $stories,
-        ]);
+            'tab' => $tab,
+        ];
+
+        $data['likeables'] = $tag->$tab()->orderByRaw('RAND(' . Random::getUserSeed() . ')')->paginate(12);
+
+        return view('pages.tag.show', $data);
     }
 
     /**

@@ -1,0 +1,9 @@
+#tag-edit-page {
+    main {
+        padding: $grid-gutter-width 0;
+    }
+
+    .container {
+        max-width: 600px + $grid-gutter-width;
+    }
+}

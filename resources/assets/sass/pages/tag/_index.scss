@@ -7,7 +7,7 @@
 article.tag {
     position: relative;
     max-width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: $grid-small-gutter-width;
 
     a {
         display: block;

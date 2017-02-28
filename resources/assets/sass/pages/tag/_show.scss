@@ -1,49 +1,10 @@
 #tag-show-page {
     header {
-        padding: 20px 0;
+        padding: $grid-gutter-width 0;
     }
 
-    .header-content {
-        > .cover {
-            display: block;
-            max-width: 100%;
-            margin: auto;
-        }
-
-        > .text {
-            margin-top: 20px;
-
-            h1 {
-                margin-top: 0;
-            }
-        }
+    #tabs {
+        margin-bottom: $grid-gutter-width;
     }
 
-    article:not(.more-button):nth-child(n+6) {
-        display: none;
-    }
-
-    @media (min-width: $article-list-2-column-width + $scrollbar-width) {
-        .header-content {
-            display: flex;
-
-            > .cover {
-                display: block;
-                flex: 0 0 300px;
-                width: 300px;
-            }
-
-            > .text {
-                flex: 1 0 300px;
-                margin-top: 0;
-                margin-left: 20px;
-            }
-        }
-    }
-
-    @media (min-width: $article-list-4-column-width + $scrollbar-width) {
-        article:not(.more-button):nth-child(n+6) {
-            display: block;
-        }
-    }
 }
