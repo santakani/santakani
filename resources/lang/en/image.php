@@ -34,6 +34,8 @@ return array(
     'delete_image' => 'Delete image',
     'manage_images' => 'Manage images',
 
+    'recommended_size' => 'Recommended size: :width * :height px or larger.',
+
     // Image manager
     'image_manager.no_image_alert' => 'No images yet, please upload.',
     'image_manager.delete_alert_title' => 'Image Delete Confirm',

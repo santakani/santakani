@@ -135,12 +135,15 @@ $lg-path-images: '/img/lightgallery';
 
 @import "pages/design/show";
 @import "pages/design/index";
+@import "pages/design/edit";
 
 @import "pages/designer/index";
 @import "pages/designer/show";
+@import "pages/designer/edit";
 
 @import "pages/place/index";
 @import "pages/place/show";
+@import "pages/place/edit";
 
 @import "pages/story/index";
 @import "pages/story/show";
