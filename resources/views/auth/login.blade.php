@@ -1,77 +1,93 @@
-@extends('layouts.auth', [
+@extends('layouts.app', [
     'title' => trans('common.login'),
     'body_id' => 'login-page',
     'body_classes' => ['login-page'],
     'active_nav' => 'login',
 ])
 
-@section('panel_title', trans('common.login'))
+@section('main')
 
-@section('panel_body')
-<form class="form" role="form" method="POST" action="{{ url('/login') }}">
-    <div class="form-group">
-        <a class="btn btn-primary btn-lg btn-block" href="/auth/facebook">
-            <i class="fa fa-facebook-official fa-lg"></i>
-            Facebook {{ trans('common.login') }}
-        </a>
-    </div>
+<div class="container">
 
-    <div class="form-group">
-        <a class="btn btn-danger btn-lg btn-block" href="/auth/google">
-            <i class="fa fa-google fa-lg"></i>
-            Google {{ trans('common.login') }}
-        </a>
-    </div>
+    <header class="text-center">
+        <img src="{{ url('img/logo/without-shadow.svg') }}" width="64" height="64">
+        <h1>{{ trans('common.login') }}</h1>
+    </header>
 
-    <div class="form-group">
-        <a class="btn btn-info btn-lg btn-block" href="/auth/twitter">
-            <i class="fa fa-twitter fa-lg"></i>
-            Twitter {{ trans('common.login') }}
-        </a>
-    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
 
-    <p class="text-center text-muted">{{ strtolower(trans('common.or')) }}</p>
+            <div id="oauth-buttons">
+                <a class="btn btn-default btn-lg" href="/auth/facebook">
+                    <img src="{{ url('img/services/facebook.svg') }}" width="22" height="22">
+                    {{ trans('auth.login_with', ['service' => 'Facebook']) }}
+                </a>
 
-    {!! csrf_field() !!}
+                <a class="btn btn-default btn-lg" href="/auth/google">
+                    <img src="{{ url('img/services/google.svg') }}" width="22" height="22">
+                    {{ trans('auth.login_with', ['service' => 'Google']) }}
+                </a>
 
-    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('common.email_address') }}</label>
-        <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                <a class="btn btn-default btn-lg" href="/auth/twitter">
+                    <img src="{{ url('img/services/twitter.svg') }}" width="22" height="22">
+                    {{ trans('auth.login_with', ['service' => 'Twitter']) }}
+                </a>
+            </div><!-- /#oauth-buttons -->
 
-        @if ($errors->has('email'))
-            <span class="help-block">
-                <strong>{{ $errors->first('email') }}</strong>
-            </span>
-        @endif
-    </div>
+            <p class="text-muted">{{ trans('auth.no_registration_required') }}</p>
 
-    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('common.password') }}</label>
+            <hr>
 
-        <input type="password" class="form-control" name="password">
+            <form class="form" role="form" method="POST" action="{{ url('login') }}">
 
-        @if ($errors->has('password'))
-            <span class="help-block">
-                <strong>{{ $errors->first('password') }}</strong>
-            </span>
-        @endif
-    </div>
+                {!! csrf_field() !!}
 
-    <div class="form-group">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" name="remember"> {{ trans('auth.remember_me') }}
-            </label>
-        </div>
-    </div>
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <input type="email" class="form-control input-lg" name="email" value="{{ old('email') }}" placeholder="{{ trans('common.email') }}">
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-info">
-            {{ trans('common.login') }}
-        </button>
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
 
-        <a class="btn btn-link" href="{{ url('/password/reset') }}">{{ trans('auth.forgot_your_password') }}</a>
-        <a class="btn btn-link" href="{{ url('register') }}"><em>{{ trans('common.register') }}</em> <i class="fa fa-long-arrow-right"></i></a>
-    </div>
-</form>
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <input type="password" class="form-control input-lg" name="password" placeholder="{{ trans('common.password') }}">
+
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default btn-lg btn-block">
+                        {{ trans('common.login') }}
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember" checked> {{ trans('auth.remember_me') }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group text-muted">
+                    <a class="link-unstyled" href="{{ url('password/reset') }}">{{ trans('auth.forgot_your_password') }}</a>
+                </div>
+
+            </form>
+
+            <hr>
+
+            <p class="text-muted">{{ trans('auth.create_account_with_email') }}</p>
+            <a class="btn btn-success btn-lg btn-block" href="{{ url('register') }}">{{ trans('common.register') }}</a>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
 @endsection

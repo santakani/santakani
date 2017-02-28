@@ -23,6 +23,7 @@ return array(
     */
 
     'name' => 'Santakani',
+    'join' => 'Join Santakani',
     'summary' => 'Platform & Community of Independent Design',
     'title' => 'Find amazing Finnish design by independent designers. Explore local design shops in Helsinki.',
     'keywords' => 'design, designer, design shop, independent design, Finland, Finnish design, furniture, fashion, jewelry, graphics, ceramics, glass',

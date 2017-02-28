@@ -1,90 +1,68 @@
-@extends('layouts.auth', [
+@extends('layouts.app', [
     'title' => trans('common.register'),
     'body_id' => 'register-page',
     'body_classes' => ['register-page'],
     'active_nav' => 'register',
 ])
 
-@section('panel_title', trans('common.register'))
+@section('main')
 
-@section('panel_body')
+<div class="container">
 
-<form class="form" role="form" method="POST" action="{{ url('/register') }}">
-    <div class="form-group">
-        <a class="btn btn-primary btn-lg btn-block" href="/auth/facebook">
-            <i class="fa fa-facebook-official fa-lg"></i>
-            Facebook {{ trans('common.login') }}
-        </a>
-    </div>
+    <header class="text-center">
+        <img src="{{ url('img/logo/without-shadow.svg') }}" width="64" height="64">
+        <h1>{{ trans('common.register') }}</h1>
+    </header>
 
-    <div class="form-group">
-        <a class="btn btn-danger btn-lg btn-block" href="/auth/google">
-            <i class="fa fa-google fa-lg"></i>
-            Google {{ trans('common.login') }}
-        </a>
-    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
 
-    <div class="form-group">
-        <a class="btn btn-info btn-lg btn-block" href="/auth/twitter">
-            <i class="fa fa-twitter fa-lg"></i>
-            Twitter {{ trans('common.login') }}
-        </a>
-    </div>
+            <form class="form" role="form" method="POST" action="{{ url('register') }}">
 
-    <p class="text-center text-muted">{{ strtolower(trans('common.or')) }}</p>
+                {!! csrf_field() !!}
 
-    {!! csrf_field() !!}
+                {!! Honeypot::generate('username', 'birthday') !!}
 
-    {!! Honeypot::generate('username', 'birthday') !!}
+                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <input type="text" class="form-control input-lg" name="name" value="{{ old('name') }}" placeholder="{{ trans('common.name') }}">
 
-    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('common.name') }}</label>
-        <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                    @if ($errors->has('name'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('name') }}</strong>
+                        </span>
+                    @endif
+                </div>
 
-        @if ($errors->has('name'))
-            <span class="help-block">
-                <strong>{{ $errors->first('name') }}</strong>
-            </span>
-        @endif
-    </div>
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <input type="email" class="form-control input-lg" name="email" value="{{ old('email') }}" placeholder="{{ trans('common.email') }}">
 
-    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('common.email_address') }}</label>
-        <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
 
-        @if ($errors->has('email'))
-            <span class="help-block">
-                <strong>{{ $errors->first('email') }}</strong>
-            </span>
-        @endif
-    </div>
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <input type="password" class="form-control input-lg" name="password" placeholder="{{ trans('common.password') }}">
 
-    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('common.password') }}</label>
-        <input type="password" class="form-control" name="password">
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                </div>
 
-        @if ($errors->has('password'))
-            <span class="help-block">
-                <strong>{{ $errors->first('password') }}</strong>
-            </span>
-        @endif
-    </div>
-
-    <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('auth.confirm_password') }}</label>
-        <input type="password" class="form-control" name="password_confirmation">
-
-        @if ($errors->has('password_confirmation'))
-            <span class="help-block">
-                <strong>{{ $errors->first('password_confirmation') }}</strong>
-            </span>
-        @endif
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-info">
-            {{ trans('common.register') }}
-        </button>
-    </div>
-</form>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-block btn-default">
+                        {{ trans('common.register') }}
+                    </button>
+                </div>
+                <p class="text-muted">
+                    {!! trans('auth.agreement') !!}
+                </p>
+            </form>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.container -->
 @endsection

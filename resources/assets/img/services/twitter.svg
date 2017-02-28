@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Logo_FIXED"
+   data-name="Logo — FIXED"
+   viewBox="0 0 400 400"
+   version="1.1"
+   sodipodi:docname="twitter.svg"
+   inkscape:version="0.92.0 r">
+  <metadata
+     id="metadata15">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Twitter_Logo_Blue</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1445"
+     inkscape:window-height="911"
+     id="namedview13"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="220.33898"
+     inkscape:cy="203.38983"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Logo_FIXED"
+     inkscape:snap-page="true" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:none;}.cls-2{fill:#1da1f2;}</style>
+  </defs>
+  <title
+     id="title6">Twitter_Logo_Blue</title>
+  <path
+     class="cls-2"
+     d="m 133.2128,346.25931 c 135.8496,0 210.1536,-112.5504 210.1536,-210.1536 0,-3.1968 0,-6.3792 -0.216,-9.5472 A 150.2784,150.2784 0 0 0 380,88.326513 a 147.4272,147.4272 0 0 1 -42.4224,11.6208 74.1168,74.1168 0 0 0 32.472,-40.852796 148.0176,148.0176 0 0 1 -46.9008,17.928 A 73.9296,73.9296 0 0 0 197.2784,144.38571 209.6928,209.6928 0 0 1 45.056,67.216117 73.9152,73.9152 0 0 0 67.9232,165.81291 73.3104,73.3104 0 0 1 34.4,156.56811 c 0,0.3024 0,0.6192 0,0.936 a 73.8864,73.8864 0 0 0 59.256,72.4032 73.7424,73.7424 0 0 1 -33.3504,1.2672 73.944,73.944 0 0 0 69.0048,51.2928 148.2048,148.2048 0 0 1 -91.728,31.68 150.3504,150.3504 0 0 1 -17.5824,-1.0656 209.1024,209.1024 0 0 0 113.2128,33.12"
+     id="path10"
+     inkscape:connector-curvature="0"
+     style="fill:#1da1f2;stroke-width:1" />
+</svg>

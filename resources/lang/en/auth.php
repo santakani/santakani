@@ -24,8 +24,13 @@ return array(
     |
     */
 
+    'login_with' => 'Login with :service',
+    'no_registration_required' => 'No registration required',
+    'create_account_with_email' => 'Create account with email address and password',
+    'agreement' => 'By signing up, you agree to the <a href="https://santakani.com/terms">Terms of Service</a> and <a href="https://santakani.com/privacy">Privacy Policy</a>.',
     'remember_me' => 'Remember me',
     'forgot_your_password' => 'Forgot your password?',
+    'register_with_email' => 'Register with email',
     'old_password' => 'Old password',
     'new_password' => 'New password',
     'confirm_password' => 'Confirm password',
