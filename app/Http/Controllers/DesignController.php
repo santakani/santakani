@@ -150,6 +150,8 @@ class DesignController extends Controller
             abort(404);
         }
 
+        $design->load('translations');
+
         return view('pages.design.show', [
             'design' => $design,
         ]);
