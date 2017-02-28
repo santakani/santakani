@@ -85,10 +85,6 @@ $body_classes = isset($body_classes)?array_merge($body_classes, ['app-layout']):
 
 
     <!-- Modals -->
-    @if (Auth::guest())
-        @include('auth.modal')
-    @endif
-
     @stack('modals')
 
     <!-- Templates -->

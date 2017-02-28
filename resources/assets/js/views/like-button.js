@@ -1,5 +1,6 @@
 var Backbone = require('backbone');
 var Like = require('../models/like');
+var login = require('../utility/login');
 
 module.exports = Backbone.View.extend({
     el: '#like-button',
@@ -26,10 +27,7 @@ module.exports = Backbone.View.extend({
     },
 
     like: function () {
-        if (app.user === false) {
-            $('#auth-modal').modal('show');
-            return;
-        }
+        login();
 
         if (this.model.get('disabled')) {
             return;
