@@ -23,6 +23,7 @@ module.exports = Backbone.View.extend({
         // Initinalize map
         this.map = Leaflet.map(this.$('.map')[0], {
             scrollWheelZoom: false,
+            attributionControl: false,
         });
 
         this.tile = Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2FudGFrYW5pIiwiYSI6ImNpcW02em1lZzAwMWpoeW5tdmRiOHh4MTcifQ.sE-MLInkW3KwjlwoaaKuAQ', {
@@ -70,12 +71,12 @@ module.exports = Backbone.View.extend({
     },
 
     setCoordinate: function (latitude, longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.$('input[name="latitude"]').val(latitude);
-        this.$('input[name="longitude"]').val(longitude);
-        this.$('.latitude').text(latitude);
-        this.$('.longitude').text(longitude);
+        this.latitude = Math.round(latitude*1000000)/1000000;
+        this.longitude = Math.round(longitude*1000000)/1000000;
+        this.$('input[name="latitude"]').val(this.latitude);
+        this.$('input[name="longitude"]').val(this.longitude);
+        this.$('.latitude').text(this.latitude);
+        this.$('.longitude').text(this.longitude);
     },
 
     openFoundAlert: function () {
