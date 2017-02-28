@@ -79,7 +79,7 @@ return [
 
     'locale' => 'en',
 
-    'available_locale' => ['en', 'fi', 'sv', 'zh', 'pt', 'es', 'fr', 'de'],
+    'available_locale' => ['en', 'fi', 'sv', 'zh'],
 
     /*
     |--------------------------------------------------------------------------
