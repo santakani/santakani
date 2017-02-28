@@ -1,40 +1,13 @@
-body#user-show-page {
-    header {
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+#user-show-page {
+    main {
+        padding: $grid-gutter-width 0;
+    }
 
-            .avatar {
-                display: block;
-                width: 150px;
-                height: 150px;
-                border-radius: 5px;
-            }
+    #tabs {
+        margin-bottom: $grid-gutter-width;
+    }
 
-            .text {
-                text-align: center;
-            }
-
-            @media screen and (min-width: $screen-sm-min) {
-                .avatar {
-                    flex: 0 0 150px;
-                }
-
-                .text {
-                    flex: 1 1 400px;
-                    margin-left: 20px;
-                    text-align: left;
-
-                    > :first-child {
-                        margin-top: 0;
-                    }
-
-                    > :last-child {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-        }
+    #like-types {
+        margin-bottom: $grid-gutter-width;
     }
 }

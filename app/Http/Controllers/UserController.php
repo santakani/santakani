@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Design;
+use App\Designer;
 use App\Http\Requests;
+use App\Place;
+use App\Story;
 use App\User;
 
 class UserController extends Controller
@@ -50,10 +54,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $user = User::find($id);
 
@@ -61,9 +66,44 @@ class UserController extends Controller
             abort(404);
         }
 
-        $stories = $user->stories()->orderBy('created_at', 'desc')->paginate(12);
+        $tab = $request->input('tab', 'overview');
 
-        return view('pages.user.show', ['user' => $user, 'stories' => $stories]);
+        if (!in_array($tab, ['overview', 'stories', 'likes'])) {
+            $tab = 'overview';
+        }
+
+        // Navigation parameter under Likes tab
+        $type = $request->input('type', 'design');
+
+        if (!in_array($type, ['design', 'designer', 'place', 'story'])) {
+            $type = 'design';
+        }
+
+        $data = [
+            'user' => $user,
+            'tab' => $tab,
+            'type' => $type,
+        ];
+
+        switch ($tab) {
+            case 'overview':
+                $data['designers'] = $user->designers;
+                $data['places'] = $user->places;
+                $data['stories'] = $user->stories()->orderBy('created_at', 'desc')->take(3)->get();
+                $data['likes'] = $user->likes()->where('likeable_type', 'design')->with('user')->take(3)->get();
+                break;
+            case 'stories':
+                $data['stories'] = $user->stories()->paginate(12);
+                break;
+            case 'likes':
+                $class = '\\App\\' . ucfirst($type);
+                $data['likes'] = $class::whereHas('likes', function ($query) use ($user) {
+                    $query->where('user_id', $user->id)->orderBy('created_at', 'desc');
+                })->paginate(12);
+                break;
+        }
+
+        return view('pages.user.show', $data);
     }
 
     /**

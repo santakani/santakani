@@ -24,6 +24,7 @@ return array(
 
     'place' => 'Place',
     'places' => 'Places',
+    'no_place' => 'No shop, showroom or studio.',
     'list_title' => 'Design shops, showrooms and museums in :cityname',
     'no_place_found' => 'No place found. Please change search filters.',
     'place_list' => 'Place list',

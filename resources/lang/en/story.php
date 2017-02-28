@@ -24,6 +24,7 @@ return array(
 
     'story' => 'Story',
     'stories' => 'Stories',
+    'no_story' => 'No design story.',
     'story_list' => 'Story list',
 
     // Manage

@@ -24,7 +24,7 @@ return array(
 
     'designer' => 'Designer',
     'designers' => 'Designers',
-
+    'no_designer' => 'No designer profile.',
     'create_a_designer_page' => 'Create a designer page',
     'design_philosophy' => 'Design philosophy',
     'designer_photo' => 'Designer’s photo',
