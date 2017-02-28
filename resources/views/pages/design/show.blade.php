@@ -83,7 +83,7 @@
 
         <h2>{{ trans('design.more_designs_by_designer') }}</h2>
         <div class="row">
-            @foreach($design->designer->designs()->where('id', '!=', $design->id)->take(4)->get() as $d)
+            @foreach($design->designer->designs()->where('id', '!=', $design->id)->take(3)->get() as $d)
                 <div class="col-sm-6 col-md-4 {{ $loop->index === 2 ? 'hidden-sm' : '' }}">
                     @include('components.cards.design-card', ['design' => $d])
                 </div><!-- /.col-* -->
