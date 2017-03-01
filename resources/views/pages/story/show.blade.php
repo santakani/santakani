@@ -105,21 +105,7 @@
         @if ($story->user_id)
             <div class="author">
                 <h3>{{ trans('common.author') }}</h3>
-                <a class="link-unstyled" href="{{ $story->user->url }}">
-                    <div class="row">
-                        <div class="col-xs-3 col-sm-2">
-                            <img class="avatar img-rounded img-responsive" src="{{ $story->user->medium_avatar_url }}">
-                        </div>
-                        <div class="col-xs-9 col-sm-10">
-                            <div class="user-name text-lg">
-                                {{ $story->user->name }}
-                            </div>
-                            <div class="user-description text-muted">
-                                {{ $story->user->description }}
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                @include('components.cards.user-card', ['user' => $story->user]);
             </div>
         @endif
     </div>
