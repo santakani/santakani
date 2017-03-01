@@ -14,7 +14,7 @@ var EditForm = require('../../views/forms/edit-form');
 // Image manager
 var manager = new ImageManager({
     parentType: 'story',
-    parentId: parseInt($('form').data('id'))
+    parentId: $('#story-edit-form').data('id')
 });
 
 // Translation Tabs
@@ -40,4 +40,4 @@ var coverChooser = new ImageChooser({
 
 var tagSelect = new TagSelect({el: '.tag-select'});
 
-var editForm = new EditForm();
+var editForm = new EditForm({el: '#story-edit-form'});
