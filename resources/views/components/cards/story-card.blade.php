@@ -33,7 +33,7 @@ Parameter:
                     {{ $story->user->name }}
                 </a>
             </li>
-            <li>{{ $story->created_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
+            <li>{{ $story->published_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
             <li>{{ trans_choice('common.like_count', $story->like_count) }}</li>
         </ul>
     </footer>

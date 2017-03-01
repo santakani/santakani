@@ -27,6 +27,10 @@ return array(
     'no_story' => 'No design story.',
     'story_list' => 'Story list',
 
+    'status' => 'Status',
+    'draft' => 'Draft',
+    'published' => 'Published',
+
     // Manage
     'my_stories' => 'My stories',
     'my_stories_description' => 'Design stories you published.',

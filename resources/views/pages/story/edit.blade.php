@@ -73,6 +73,14 @@
             @include('components.selects.tag-select', ['selected' => $story->tags])
         </div>
 
+        <div class="form-group">
+            <label class="control-label">{{ trans('story.status') }}</label>
+            <select class="form-control" name="status">
+                <option value="draft" {{ $story->published_at ? '' : 'selected' }}>{{ trans('story.draft') }}</option>
+                <option value="published" {{ $story->published_at ? 'selected' : '' }}>{{ trans('story.published') }}</option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>
 
         <a class="btn btn-link" href="{{ url('story/'.$story->id) }}">{{ trans('common.cancel') }}</a>

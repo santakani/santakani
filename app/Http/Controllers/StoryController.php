@@ -16,6 +16,7 @@ use App\ActivityLog;
 use App\Localization\Languages;
 use App\Story;
 use App\StoryTranslation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
@@ -219,6 +220,7 @@ class StoryController extends Controller
             'translations.*.title' => 'string|nullable|max:255',
             'translations.*.content' => 'string|nullable',
             'editor_rating' => 'integer|max:100|min:-100',
+            'status' => 'in:draft,published',
         ]);
 
         // Editor rating
@@ -232,7 +234,17 @@ class StoryController extends Controller
             }
         }
 
-        $story->update(app_array_filter($request->all(), ['image_id', 'tag_ids']));
+        $story->image_id = $request->input('image_id');
+
+        if ($request->input('status') === 'draft' && !empty($story->published_at)) {
+            $story->published_at = null;
+        } elseif ($request->input('status') === 'published' && empty($story->published_at)) {
+            $story->published_at = Carbon::now();
+        }
+
+        $story->save();
+
+        $story->tag_ids = $request->input('tag_ids');
 
         if ($request->has('translations')) {
             foreach ($request->input('translations') as $locale => $texts) {

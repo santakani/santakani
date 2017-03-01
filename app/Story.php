@@ -46,7 +46,7 @@ class Story extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at', 'locked_at'];
+    protected $dates = ['published_at', 'deleted_at', 'locked_at'];
 
     /**
      * Dynamic properties that should be included in toArray() or toJSON().
