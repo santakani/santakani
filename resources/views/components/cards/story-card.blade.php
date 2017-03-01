@@ -22,7 +22,12 @@ Parameter:
         @endif
     </a>
     <div class="card-body">
-        <h3 class="card-title"><a href="{{ $story->url }}">{{ $story->text('title') }}</a></h3>
+        <h3 class="card-title">
+            @if (empty($story->published_at))
+                <span class="label label-warning">{{ trans('story.draft') }}</span>
+            @endif
+            <a href="{{ $story->url }}">{{ $story->text('title') }}</a>
+        </h3>
         <div class="card-description">{{ $story->excerpt('content') }}</div>
     </div>
     <footer class="card-footer text-muted">
