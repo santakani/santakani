@@ -63,7 +63,7 @@ class StoryController extends Controller
             });
         }
 
-        $stories = $query->orderBy('published_at', 'desc')->paginate(12);
+        $stories = $query->whereNotNull('published_at')->orderBy('published_at', 'desc')->paginate(12);
 
         if (!$request->has('page') || $request->input('page') == 1) {
             $drafts = Story::whereNull('published_at')->get();
