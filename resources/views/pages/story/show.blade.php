@@ -16,7 +16,9 @@
             <div class="alert alert-warning">{{ trans('story.draft_notice') }} <a href="{{ $story->url . '/edit' }}">{{ trans('common.edit') }}</a></div>
         @endif
 
-        <img class="img-responsive" src="{{ $story->image->banner_file_url }}" srcset="{{ $story->image->largebanner_file_url }} x2">
+        @if ($story->image_id)
+            <img class="img-responsive" src="{{ $story->image->banner_file_url }}" srcset="{{ $story->image->largebanner_file_url }} x2">
+        @endif
 
         <h1 class="page-header">{{ $story->text('title') }}</h1>
 
