@@ -22,10 +22,17 @@ module.exports = Backbone.View.extend({
         // Initialize TinyMCE
         tinymce.init({
             selector: this.selector,
-            plugins: ['link', 'autolink', 'image', 'media', 'paste', 'table', 'fullscreen'],
+
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen hr toc textcolor',
+                'insertdatetime media table contextmenu paste code'
+            ],
+
             menubar: false,
             statusbar: false,
-            toolbar: 'undo redo | formatselect bold italic | blockquote bullist numlist table | link unlink customimage media | removeformat | fullscreen',
+            toolbar1: 'bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link unlink customimage media hr',
+            toolbar2: 'undo redo | styleselect forecolor backcolor  | pastetext removeformat | toc charmap table insertdatetime | fullscreen',
 
             language: app.locale,
 
