@@ -98,14 +98,12 @@
 
         <div id="page-content" class="page-content">{!! $story->html('content') !!}</div>
 
-        @include('components.tag-list', [
-            'tags' => $story->tags,
-        ])
+        @include('components.tags.tags-hash', ['tags' => $story->tags])
 
         @if ($story->user_id)
             <div class="author">
                 <h3>{{ trans('common.author') }}</h3>
-                @include('components.cards.user-card', ['user' => $story->user]);
+                @include('components.cards.user-card', ['user' => $story->user])
             </div>
         @endif
     </div>
