@@ -17,7 +17,11 @@
         <h1 class="page-header">{{ $story->text('title') }}</h1>
 
         <ul class="info list-inline text-muted">
-            <li>{{ $story->published_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
+            @if (!empty($story->published_at))
+                <li>{{ $story->published_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
+            @else
+                <li>{{ $story->updated_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
+            @endif
             <li>{{ trans_choice('common.like_count', $story->like_count) }}</li>
         </ul>
 

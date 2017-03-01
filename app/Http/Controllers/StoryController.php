@@ -53,32 +53,9 @@ class StoryController extends Controller
         $query = Story::query();
 
         // Must have translation of current locale or English
-        if (!$request->has('search')) {
-            $query->whereHas('translations', function ($sub_query) {
-                $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title');
-            });
-        }
-
-        if ($request->has('search')) {
-            // Escape some special SQL characters. Not sure if it is safe enough.
-            $search = str_replace(['@', '*', '%', '"', "'"], ' ', $request->input('search'));
-            // array_filter() remove empty string in $words array.
-            $words = array_filter(explode(" ", $search));
-
-            $query->whereHas('translations', function ($sub_query) use ($words) {
-                foreach ($words as $word) {
-                    // If it is Chinese, use LIKE. Else, use full text index.
-                    // http://www.regular-expressions.info/unicode.html#script
-                    if (preg_match('/\p{Han}+/u', $word)) {
-                        $sub_query->where(function ($q) use ($word) {
-                            $q->where('title', 'like', '%'.$word.'%')->orWhere('content', 'like', '%'.$word.'%');
-                        });
-                    } else {
-                        $sub_query->whereRaw('MATCH(title,content) AGAINST(? IN BOOLEAN MODE)', [$word.'*']);
-                    }
-                }
-            });
-        }
+        $query->whereHas('translations', function ($sub_query) {
+            $sub_query->whereIn('locale', ['en', App::getLocale()])->whereNotNull('title');
+        });
 
         if ($request->has('tag_id')) {
             $query->whereHas('tags', function ($sub_query) use ($request){
@@ -86,7 +63,7 @@ class StoryController extends Controller
             });
         }
 
-        $stories = $query->orderBy('created_at', 'desc')->paginate(12);
+        $stories = $query->orderBy('published_at', 'desc')->paginate(12);
 
         return view('pages.story.index', [
             'stories' => $stories,
@@ -244,7 +221,9 @@ class StoryController extends Controller
 
         $story->save();
 
-        $story->tag_ids = $request->input('tag_ids');
+        if ($request->has('tag_ids')) {
+            $story->tag_ids = $request->input('tag_ids');
+        }
 
         if ($request->has('translations')) {
             foreach ($request->input('translations') as $locale => $texts) {

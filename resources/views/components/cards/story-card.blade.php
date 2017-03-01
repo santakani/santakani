@@ -33,7 +33,11 @@ Parameter:
                     {{ $story->user->name }}
                 </a>
             </li>
-            <li>{{ $story->published_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
+            @if (!empty($story->published_at))
+                <li>{{ $story->published_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
+            @else
+                <li>{{ $story->updated_at->formatLocalized(App\Localization\Languages::dateFormat()) }}</li>
+            @endif
             <li>{{ trans_choice('common.like_count', $story->like_count) }}</li>
         </ul>
     </footer>
