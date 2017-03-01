@@ -30,6 +30,8 @@ return array(
     'status' => 'Status',
     'draft' => 'Draft',
     'published' => 'Published',
+    'draft_notice' => 'This is the preview of story draft. It won\'t be visible until you publish it.',
+    'my_drafts' => 'My drafts',
 
     // Manage
     'my_stories' => 'My stories',

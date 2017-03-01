@@ -19,6 +19,14 @@
     <div class="row">
         <!-- article list -->
         <div class="col-md-8">
+
+            @if (count($drafts))
+                <p class="lead">{{ trans('story.my_drafts') }}</p>
+                @each('components.cards.story-card', $drafts, 'story')
+
+                <hr>
+            @endif
+
             @each('components.cards.story-card', $stories, 'story')
             {!! $stories->appends(app('request')->all())->links() !!}
         </div>
