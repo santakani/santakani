@@ -22,7 +22,7 @@ var EditForm = require('../../views/forms/edit-form');
 // Image manager
 var manager = new ImageManager({
     parentType: 'designer',
-    parentId: parseInt($('form').data('id'))
+    parentId: $('#designer-edit-form').data('id')
 });
 
 // Cover chooser
@@ -46,4 +46,4 @@ var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: mana
 var citySelect = new CitySelect({el: '.city-select'});
 var tagSelect = new TagSelect({el: '.tag-select'});
 
-var editForm = new EditForm();
+var editForm = new EditForm({el: '#designer-edit-form'});

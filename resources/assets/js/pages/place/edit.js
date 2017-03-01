@@ -22,7 +22,7 @@ var EditForm = require('../../views/forms/edit-form');
 // Image manager
 var manager = new ImageManager({
     parentType: 'place',
-    parentId: parseInt($('.edit-form').data('id'))
+    parentId: $('#place-edit-form').data('id')
 });
 
 
@@ -59,4 +59,4 @@ var coordinateSelect = new CoordinateSelect({
 // Tag select
 var tagSelect = new TagSelect({el: '.tag-select'});
 
-var editForm = new EditForm();
+var editForm = new EditForm({el: '#place-edit-form'});

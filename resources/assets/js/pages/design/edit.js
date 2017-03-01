@@ -12,7 +12,7 @@ var EditForm = require('../../views/forms/edit-form');
 // Image manager
 var manager = new ImageManager({
     parentType: 'design',
-    parentId: parseInt($('#edit-form').data('id'))
+    parentId: $('#design-edit-form').data('id')
 });
 
 // Cover chooser
@@ -29,4 +29,4 @@ var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: mana
 
 var tagSelect = new TagSelect({el: '.tag-select'});
 
-var editForm = new EditForm();
+var editForm = new EditForm({el: '#design-edit-form'});

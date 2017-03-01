@@ -10,7 +10,7 @@
 
     <h1 class="page-header">{{ trans('common.edit') }} <a href="{{ $design->url }}">{{ $design->text('name') }}</a></h1>
 
-    <form id="edit-form" class="edit-form" action="{{ $design->url }}" data-id="{{ $design->id }}" data-type="design">
+    <form id="design-edit-form" class="edit-form" action="{{ $design->url }}" data-id="{{ $design->id }}" data-type="design">
 
         {!! csrf_field() !!}
 

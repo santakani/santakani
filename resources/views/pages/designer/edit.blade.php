@@ -11,7 +11,7 @@
 
     <h1 class="page-header">{{ trans('common.edit') }} <a href="{{ $designer->url }}">{{ $designer->text('name') }}</a></h1>
 
-    <form id="edit-form" class="edit-form form" action="{{ $designer->url }}" data-id="{{ $designer->id }}">
+    <form id="designer-edit-form" class="edit-form" action="{{ $designer->url }}" data-id="{{ $designer->id }}">
 
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

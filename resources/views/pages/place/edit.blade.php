@@ -11,7 +11,7 @@
 
     <h1 class="page-header">{{ trans('common.edit') }} <a href="{{ $place->url }}">{{ $place->text('name') }}</a></h1>
 
-    <form id="edit-form" class="edit-form" action="{{ $place->url }}" data-id="{{ $place->id }}">
+    <form id="place-edit-form" class="edit-form" action="{{ $place->url }}" data-id="{{ $place->id }}">
 
 
         {!! csrf_field() !!}
