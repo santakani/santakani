@@ -48,40 +48,13 @@ module.exports = Backbone.View.extend({
             target_list: false,
             link_title: false,
 
+            // Image plugin options
+            image_description: false, // This is the alt="" property, only for accessibility
 
             // Media plugin options
             media_alt_source: false,
             media_dimensions: false,
             media_poster: false,
-
-            paste_postprocess: function(plugin, args) {
-                var $root = $(args.node);
-
-                // Remove <br> DOM
-                $root.find('br').remove();
-
-                // Remove empty <p>, <div> DOM
-                $root.find('p, div').each(function () {
-                    if (!$(this).html().trim()) {
-                        $(this).remove();
-                    }
-                });
-
-                // Remove <span>
-                $root.find('span').each(function () {
-                    $(this).before($(this).contents());
-                    $(this).remove();
-                });
-
-                // Remove all data and style attributes
-                $root.find('*').each(function () {
-                    $(this).removeAttr('style');
-                    $(this).removeAttrs(/^data-/);
-                    $(this).removeAttrs(/^data-/); // For unknown reason, we need do it twice to remove all data- attributes
-                });
-
-                $root.find('table').removeAttr('border').removeAttr('cellpadding').removeAttr('cellspacing');
-            },
 
             setup: function (editor) {
                 editor.on('change', function () {
