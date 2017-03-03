@@ -82,24 +82,55 @@
             @include('components.selects.tag-select', ['selected' => $design->tags])
         </div>
 
-        <div class="form-group">
-            <label>{{ trans('design.price') }}</label>
-            <div class="row">
-                <div class="col-xs-6">
-                    <input name="price" value="{{ $design->price }}" type="text"
-                        maxlength="255" class="form-control">
-                </div>
-                <div class="col-xs-6">
-                    @include('components.selects.currency-select', ['selected' => $design->currency])
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Purchase</legend>
+
+            <div class="form-group">
+                <label>{{ trans('design.price') }}</label>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <input name="price" value="{{ $design->price }}" type="text"
+                            maxlength="255" class="form-control">
+                    </div>
+                    <div class="col-xs-6">
+                        @include('components.selects.currency-select', ['selected' => $design->currency])
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label>{{ trans('design.webshop_link') }}</label>
-            <input name="webshop" value="{{ $design->webshop }}" type="url"
-                maxlength="255" class="form-control">
-        </div>
+            <div class="form-group">
+                <label>{{ trans('design.webshop_link') }}</label>
+                <input name="webshop" value="{{ $design->webshop }}" type="url"
+                    maxlength="255" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Shipped from</label>
+                @include('components.selects.country-select', ['selected' => $design->country_id])
+            </div>
+
+            <div class="form-group">
+                <label>National shipment price</label>
+                <input name="national_shipment_price" value="{{ $design->national_shipment_price }}" type="number" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>International shipment price</label>
+                <input name="international_shipment_price" value="{{ $design->international_shipment_price }}" type="number" class="form-control">
+            </div>
+
+        </fieldset>
+
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Options</legend>
+
+            <div class="form-group">
+                <label>Colors</label>
+                <input name="webshop" value="{{ $design->webshop }}" type="url"
+                    maxlength="255" class="form-control">
+            </div>
+
+        </fieldset>
 
         <button type="submit" class="btn btn-primary">{{ trans('common.save') }}</button>
 
