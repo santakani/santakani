@@ -115,6 +115,11 @@ class Design extends Model
         return $this->belongsTo('App\Image');
     }
 
+    public function options()
+    {
+        return $this->hasMany('App\Option');
+    }
+
     //====================================================================
     // Dynamic Attributes
     //====================================================================
