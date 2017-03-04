@@ -16,8 +16,10 @@ class CreateOptsetTable extends Migration
         Schema::create('optset', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('design_id')->unsigned();
-            $table->string('type')->nullable()->index();
+            $table->string('type'); // color, size, material
             $table->timestamps();
+
+            $table->unique(['design_id','type']);
 
             $table->foreign('design_id')->references('id')->on('design')->onDelete('cascade');
         });
