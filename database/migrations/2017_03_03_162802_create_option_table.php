@@ -17,7 +17,7 @@ class CreateOptionTable extends Migration
             $table->increments('id');
             $table->integer('optset_id')->unsigned();
             $table->integer('image_id')->unsigned()->nullable();
-            $table->decimal('price_add', 8, 2)->nullable();
+            $table->decimal('price_add', 8, 2)->default(0);
             $table->string('value')->nullable();
             $table->boolean('available')->default(1);
             $table->timestamps();
