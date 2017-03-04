@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOptionTable extends Migration
+class CreateOptsetTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOptionTable extends Migration
      */
     public function up()
     {
-        Schema::create('option', function (Blueprint $table) {
+        Schema::create('optset', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('design_id')->unsigned();
             $table->string('type')->nullable()->index();
@@ -22,16 +22,16 @@ class CreateOptionTable extends Migration
             $table->foreign('design_id')->references('id')->on('design')->onDelete('cascade');
         });
 
-        Schema::create('option_translation', function (Blueprint $table) {
+        Schema::create('optset_translation', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('option_id')->unsigned();
+            $table->integer('optset_id')->unsigned();
             $table->string('locale');
             $table->string('name')->nullable();
             $table->timestamps();
 
-            $table->unique(['option_id','locale']);
+            $table->unique(['optset_id','locale']);
 
-            $table->foreign('option_id')->references('id')->on('option')->onDelete('cascade');
+            $table->foreign('optset_id')->references('id')->on('optset')->onDelete('cascade');
         });
     }
 
@@ -42,7 +42,7 @@ class CreateOptionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('option_translation');
-        Schema::dropIfExists('option');
+        Schema::dropIfExists('optset_translation');
+        Schema::dropIfExists('optset');
     }
 }
