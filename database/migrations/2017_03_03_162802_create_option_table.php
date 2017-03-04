@@ -19,6 +19,7 @@ class CreateOptionTable extends Migration
             $table->integer('image_id')->unsigned()->nullable();
             $table->decimal('price_add', 8, 2)->nullable();
             $table->string('value')->nullable();
+            $table->boolean('available')->default(1);
             $table->timestamps();
 
             $table->foreign('optset_id')->references('id')->on('optset')->onDelete('cascade');
