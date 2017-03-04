@@ -15,14 +15,15 @@ class CreateOptionTable extends Migration
     {
         Schema::create('option', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('optset_id')->unsigned();
+            $table->integer('design_id')->unsigned();
+            $table->string('type'); // color, size, material, custom
             $table->integer('image_id')->unsigned()->nullable();
             $table->decimal('price_add', 8, 2)->default(0);
             $table->string('value')->nullable();
             $table->boolean('available')->default(1);
             $table->timestamps();
 
-            $table->foreign('optset_id')->references('id')->on('optset')->onDelete('cascade');
+            $table->foreign('design_id')->references('id')->on('design')->onDelete('cascade');
             $table->foreign('image_id')->references('id')->on('image')->onDelete('set null');
         });
 
