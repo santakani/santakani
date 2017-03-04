@@ -64,6 +64,10 @@ Route::group(['middleware' => 'web'], function () {
         'create', 'edit', 'update'
     ]]);
 
+    Route::resource('option', 'OptionController', ['except' => [
+        'create', 'edit',
+    ]]);
+
     Route::resource('like', 'LikeController', ['only' => ['store', 'destroy']]);
 
     Route::resource('tag', 'TagController');

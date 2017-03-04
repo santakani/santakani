@@ -9,6 +9,8 @@ var CitySelect = require('../../views/city-select');
 var TagSelect = require('../../views/tag-select');
 var EditForm = require('../../views/forms/edit-form');
 
+var OptsetEditor = require('../../views/optset-editor');
+
 // Image manager
 var manager = new ImageManager({
     parentType: 'design',
@@ -30,3 +32,9 @@ var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: mana
 var tagSelect = new TagSelect({el: '.tag-select'});
 
 var editForm = new EditForm({el: '#design-edit-form'});
+
+new OptsetEditor({
+    el: '#color-options',
+    designId: $('#design-edit-form').data('id'),
+    type: 'color'
+});

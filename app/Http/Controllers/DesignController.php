@@ -173,11 +173,18 @@ class DesignController extends Controller
             abort(404);
         }
 
+        $design->load('translations', 'image', 'images', 'tags', 'options', 'options');
+
         if ($request->user()->cannot('edit-design', $design)) {
             abort(403);
         }
 
-        return view('pages.design.edit', ['design' => $design]);
+        return view('pages.design.edit', [
+            'design' => $design,
+            'colors' => $design->options()->with('image', 'translations')->where('type', 'color')->get(),
+            'sizes' => $design->options()->with('image', 'translations')->where('type', 'size')->get(),
+            'materials' => $design->options()->with('image', 'translations')->where('type', 'material')->get(),
+        ]);
     }
 
     /**
