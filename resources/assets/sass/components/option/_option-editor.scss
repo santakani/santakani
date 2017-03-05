@@ -1,0 +1,6 @@
+.option-editor {
+    .drag-handle {
+        cursor: move; // Fallback if grab is not supported
+        cursor: grab;
+    }
+}
