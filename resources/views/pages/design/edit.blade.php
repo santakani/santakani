@@ -127,7 +127,7 @@
 
             <template id="option-editor-template">
                 <td>
-                    <span class="drag-handle btn-icon btn-icon-sm"><span class="icon ion-arrow-move"></span></span>
+                    <span class="drag-handle"><span class="ion-arrow-move"></span></span>
                 </td>
                 <td><input type="text" value="" class="name-input form-control input-sm"></td>
                 <td><input type="number" value="" class="price-add-input form-control input-sm" max="999999" min="-999999"></td>
@@ -138,7 +138,7 @@
                     <button class="image-button btn btn-default btn-sm" type="button">Choose image</button>
                 </td>
                 <td>
-                    <button class="delete-button btn-icon btn-icon-danger btn-icon-sm" type="button" href="#"><span class="icon ion-close"></span></button>
+                    <button class="delete-button btn btn-sm btn-danger" type="button">{{ trans('common.delete') }}</button>
                 </td>
             </template>
 
