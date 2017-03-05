@@ -12,12 +12,15 @@ var OptionEditor = require('../views/option-editor');
 
 module.exports = Backbone.View.extend({
 
+    hasColor: false,
+    hasImage: false,
+
     events: {
         'click .add-button': 'addOption',
     },
 
     initialize: function (options) {
-        _.extend(this, _.pick(options, 'designId', 'type'));
+        _.extend(this, _.pick(options, 'designId', 'type', 'imageManager', 'hasColor', 'hasImage'));
 
         this.collection = new OptionList();
         this.collection.comparator = 'sort_order';
@@ -46,8 +49,11 @@ module.exports = Backbone.View.extend({
         var option = new Option({
             design_id: this.designId,
             type: this.type,
-            sort_order: this.collection.last().get('sort_order') + 1,
         });
+
+        if (this.collection.length) {
+            option.set('sort_order', this.collection.last().get('sort_order') + 1);
+        }
 
         // Send AJAX and save to database. Then we have option id.
         option.save();
@@ -61,7 +67,12 @@ module.exports = Backbone.View.extend({
      * @param Option option
      */
     add: function (option) {
-        var optionEditor = new OptionEditor({model: option});
+        var optionEditor = new OptionEditor({
+            model: option,
+            imageManager: this.imageManager,
+            hasColor: this.hasColor,
+            hasImage: this.hasImage,
+        });
         this.$('tbody').append(optionEditor.$el);
         this.views.push(optionEditor);
     },

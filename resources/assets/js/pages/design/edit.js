@@ -36,5 +36,26 @@ var editForm = new EditForm({el: '#design-edit-form'});
 new OptsetEditor({
     el: '#color-options',
     designId: $('#design-edit-form').data('id'),
-    type: 'color'
+    type: 'color',
+    imageManager: manager,
+    hasColor: true,
+    hasImage: true,
+});
+
+new OptsetEditor({
+    el: '#size-options',
+    designId: $('#design-edit-form').data('id'),
+    type: 'size',
+    imageManager: manager,
+    hasColor: false,
+    hasImage: true,
+});
+
+new OptsetEditor({
+    el: '#material-options',
+    designId: $('#design-edit-form').data('id'),
+    type: 'material',
+    imageManager: manager,
+    hasColor: false,
+    hasImage: true,
 });

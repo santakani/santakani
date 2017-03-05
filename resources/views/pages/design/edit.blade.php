@@ -127,15 +127,20 @@
 
             <template id="option-editor-template">
                 <td>
-                    <span class="drag-handle"><span class="ion-arrow-move"></span></span>
+                    <span class="drag-handle icon ion-arrow-move"></span>
                 </td>
                 <td><input type="text" value="" class="name-input form-control input-sm"></td>
                 <td><input type="number" value="" class="price-add-input form-control input-sm" max="999999" min="-999999"></td>
-                <td>
+                <td class="color-wrap">
                     <input type="color" value="" class="color-input form-control input-sm">
                 </td>
+                <td class="image-wrap">
+                    <span class="image-choose-button clickable icon ion-image" title="Choose image"></span>
+                    <span class="image-remove-button clickable icon ion-close-circled" title="Remove image"></span>
+                    <img class="image-thumb" src="{{ url('img/placeholder/thumb.svg') }}" width="75" height="75" title="Change image">
+                </td>
                 <td>
-                    <button class="image-button btn btn-default btn-sm" type="button">Choose image</button>
+                    <input type="checkbox" class="available-checkbox">
                 </td>
                 <td>
                     <button class="delete-button btn btn-sm btn-danger" type="button">{{ trans('common.delete') }}</button>
@@ -152,6 +157,7 @@
                             <th class="price_add">Price add</th>
                             <th class="color">Color</th>
                             <th class="image">Image</th>
+                            <th class="available">Available</th>
                             <th></th>
                         </tr>
                     <thead>
@@ -167,16 +173,48 @@
 
             <div class="form-group">
                 <label>Size options</label>
-                <div id="size-options" data-collection="{{ $sizes }}">
-
-                </div>
+                <table id="size-options" class="table table-hover" data-collection="{{ $sizes }}">
+                    <thead>
+                        <tr class="option">
+                            <th></th>
+                            <th class="name">Size</th>
+                            <th class="price_add">Price add</th>
+                            <th class="image">Image</th>
+                            <th class="available">Available</th>
+                            <th></th>
+                        </tr>
+                    <thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td colspan="4"><button class="add-button btn btn-default btn-sm" type="button">Create new option</button></td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
 
             <div class="form-group">
                 <label>Material options</label>
-                <div id="material-options" data-collection="{{ $materials }}">
-
-                </div>
+                <table id="material-options" class="table table-hover" data-collection="{{ $materials }}">
+                    <thead>
+                        <tr class="option">
+                            <th></th>
+                            <th class="name">Material</th>
+                            <th class="price_add">Price add</th>
+                            <th class="image">Image</th>
+                            <th class="available">Available</th>
+                            <th></th>
+                        </tr>
+                    <thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td colspan="4"><button class="add-button btn btn-default btn-sm" type="button">Create new option</button></td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
 
         </fieldset>

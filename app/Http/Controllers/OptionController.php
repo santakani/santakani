@@ -56,7 +56,7 @@ class OptionController extends Controller
             'design_id' => 'required|integer|exists:design,id',
             'type' => 'required|string|in:color,size,material,custom',
             'image_id' => 'integer|nullable|exists:image,id',
-            'price_add' => 'numeric|nullable|between:-999999.99,999999.99',
+            'price_add' => 'numeric|between:-999999.99,999999.99',
             'value' => 'string|nullable|max:255',
             'available' => 'boolean',
             'sort_order' => 'integer',
@@ -137,7 +137,7 @@ class OptionController extends Controller
 
         $this->validate($request, [
             'image_id' => 'integer|nullable|exists:image,id',
-            'price_add' => 'numeric|nullable|between:-999999.99,999999.99',
+            'price_add' => 'numeric|between:-999999.99,999999.99',
             'value' => 'string|nullable|max:255',
             'available' => 'boolean',
             'sort_order' => 'integer',

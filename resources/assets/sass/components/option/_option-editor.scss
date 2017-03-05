@@ -3,4 +3,70 @@
         cursor: move; // Fallback if grab is not supported
         cursor: grab;
     }
+
+    .price-add-input {
+        width: 5em;
+    }
+
+    .color-input {
+        width: 31px;
+        padding: 3px;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+
+    .icon {
+        display: inline-block;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+    }
+
+    .image-remove-button {
+        display: none;
+        right: 0;
+        top: 0;
+        color: $brand-danger;
+    }
+
+    .image-thumb {
+        display: none;
+        cursor: pointer;
+    }
+
+    .image-wrap {
+        width: 75px;
+
+        &.chosen {
+            position: relative;
+            padding: 0;
+
+            .clickable {
+                opacity: 0;
+                position: absolute;
+            }
+
+            &:hover {
+                .clickable {
+                    opacity: 1;
+                }
+            }
+
+            .image-thumb {
+                display: block;
+            }
+
+            .image-choose-button {
+                display: none;
+            }
+
+            .image-remove-button {
+                display: block;
+            }
+        }
+    }
 }
