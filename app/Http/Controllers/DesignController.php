@@ -181,9 +181,9 @@ class DesignController extends Controller
 
         return view('pages.design.edit', [
             'design' => $design,
-            'colors' => $design->options()->with('image', 'translations')->where('type', 'color')->get(),
-            'sizes' => $design->options()->with('image', 'translations')->where('type', 'size')->get(),
-            'materials' => $design->options()->with('image', 'translations')->where('type', 'material')->get(),
+            'colors' => $design->options()->with('image', 'translations')->where('type', 'color')->orderBy('sort_order')->get(),
+            'sizes' => $design->options()->with('image', 'translations')->where('type', 'size')->orderBy('sort_order')->get(),
+            'materials' => $design->options()->with('image', 'translations')->where('type', 'material')->orderBy('sort_order')->get(),
         ]);
     }
 

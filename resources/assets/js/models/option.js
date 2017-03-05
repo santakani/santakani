@@ -56,4 +56,33 @@ module.exports = Backbone.Model.extend({
 
         return '';
     },
+
+    /**
+     * Set name (English) of the option
+     */
+    setName: function (name, locale) {
+        if (!locale) {
+            locale = 'en';
+        }
+
+        var translations = [];
+
+        // If translation exists
+        if (this.has('translations')) {
+            translations = this.get('translations');
+            var i = _.findIndex(translations, {locale: locale});
+            if (i > -1) {
+                translations[i]['name'] = name;
+                this.set('translations', translations);
+                return;
+            }
+        }
+
+        // Otherwise, create new translation
+        translations.push({
+            option_id: this.id,
+            locale: locale,
+            name: name
+        });
+    }
 });

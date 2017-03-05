@@ -5,6 +5,7 @@
  */
 
 var Backbone = require('backbone');
+var Sortable = require('sortablejs');
 var OptionList = require('../collections/option-list');
 var Option = require('../models/option');
 var OptionEditor = require('../views/option-editor');
@@ -19,10 +20,23 @@ module.exports = Backbone.View.extend({
         _.extend(this, _.pick(options, 'designId', 'type'));
 
         this.collection = new OptionList();
+        this.collection.comparator = 'sort_order';
 
-        this.listenTo(this.collection, 'add', this.addOptionEditor);
+        // Array of OptionEditor views
+        this.views = [];
+
+        this.listenTo(this.collection, 'add', this.add);
 
         this.collection.add(this.$el.data('collection'));
+
+        var that = this;
+
+        // Drag & sort option lists
+        this.sortable = Sortable.create(this.$('tbody')[0], {
+            handle: '.drag-handle',
+            dataId: 'data-id',
+            onEnd: this.index.bind(this),
+        });
     },
 
     /**
@@ -32,10 +46,8 @@ module.exports = Backbone.View.extend({
         var option = new Option({
             design_id: this.designId,
             type: this.type,
-            _token: app.token
+            sort_order: this.collection.last().get('sort_order') + 1,
         });
-
-        console.log(option);
 
         // Send AJAX and save to database. Then we have option id.
         option.save();
@@ -48,9 +60,19 @@ module.exports = Backbone.View.extend({
      *
      * @param Option option
      */
-    addOptionEditor: function (option) {
+    add: function (option) {
         var optionEditor = new OptionEditor({model: option});
         this.$('tbody').append(optionEditor.$el);
-    }
+        this.views.push(optionEditor);
+    },
+
+    /**
+     * Call child views to reindex and save order in their model
+     */
+    index: function () {
+        _.each(this.views, function (view, index, views) {
+            view.index();
+        });
+    },
 
 });

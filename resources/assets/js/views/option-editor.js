@@ -15,6 +15,11 @@ module.exports = module.exports = Backbone.View.extend({
     template: _.template($('#option-editor-template').html()),
 
     events: {
+        'change .name-input': 'changeName',
+        'change .price-add-input': 'changePriceAdd',
+        'change .value-input': 'changeValue',
+        'change .image-choose-button': 'chooseImage',
+        'change .image-remove-button': 'removeImage',
         'click .delete-button': 'delete',
     },
 
@@ -26,12 +31,20 @@ module.exports = module.exports = Backbone.View.extend({
         this.render();
     },
 
+    // Model --> View
+
+    /**
+     * Render DOM from temlplate
+     */
     render: function () {
         this.$el.html(this.template(this.model.attributes));
         this.update();
         return this;
     },
 
+    /**
+     * Update view from model data
+     */
     update: function () {
         this.$('.name-input').val(this.model.getName());
 
@@ -44,6 +57,24 @@ module.exports = module.exports = Backbone.View.extend({
         }
     },
 
+    // View --> Model
+
+    /**
+     * Read index in the list and save to model
+     */
+    index: function() {
+        this.model.set('sort_order', this.$el.index());
+        this.model.save();
+    },
+
+    changeName: function () {
+        this.model.setName(this.$('.name-input').val());
+        this.model.save();
+    },
+
+    /**
+     * Remove view and destroy model
+     */
     delete: function () {
         this.model.destroy();
     },

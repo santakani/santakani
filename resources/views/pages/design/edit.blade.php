@@ -127,7 +127,7 @@
 
             <template id="option-editor-template">
                 <td>
-                    <button class="sort-button btn-icon btn-icon-sm" type="button" href="#"><span class="icon ion-arrow-move"></span></button>
+                    <span class="drag-handle btn-icon btn-icon-sm"><span class="icon ion-arrow-move"></span></span>
                 </td>
                 <td><input type="text" value="" class="name-input form-control input-sm"></td>
                 <td><input type="number" value="" class="price-add-input form-control input-sm" max="999999" min="-999999"></td>
@@ -144,12 +144,12 @@
 
             <div class="form-group">
                 <label>Color options</label>
-                <table id="color-options" class="table" data-collection="{{ $colors }}">
+                <table id="color-options" class="table table-hover" data-collection="{{ $colors }}">
                     <thead>
                         <tr class="option">
                             <th></th>
                             <th class="name">Color name</th>
-                            <th class="price_add">Price add / EUR</th>
+                            <th class="price_add">Price add</th>
                             <th class="color">Color</th>
                             <th class="image">Image</th>
                             <th></th>

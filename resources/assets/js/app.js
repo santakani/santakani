@@ -8,6 +8,12 @@
 // Bootstrap needs 'jQuery' global variable.
 window.$ = window.jQuery = require('jquery');
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': app.token
+    }
+});
+
 // Underscore is often used.
 window._ = require('underscore');
 

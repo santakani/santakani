@@ -59,6 +59,7 @@ class OptionController extends Controller
             'price_add' => 'numeric|nullable|between:-999999.99,999999.99',
             'value' => 'string|nullable|max:255',
             'available' => 'boolean',
+            'sort_order' => 'integer',
             'translations' => 'array',
             'translations.*.name' => 'string|nullable|max:255',
         ]);
@@ -75,6 +76,7 @@ class OptionController extends Controller
         $option->price_add = $request->input('price_add');
         $option->value = $request->input('value');
         $option->available = $request->input('available');
+        $option->sort_order = $request->input('sort_order');
 
         $option->save();
 
@@ -138,6 +140,7 @@ class OptionController extends Controller
             'price_add' => 'numeric|nullable|between:-999999.99,999999.99',
             'value' => 'string|nullable|max:255',
             'available' => 'boolean',
+            'sort_order' => 'integer',
             'translations' => 'array',
             'translations.*.name' => 'string|nullable|max:255',
         ]);
@@ -146,6 +149,7 @@ class OptionController extends Controller
         $option->price_add = $request->input('price_add');
         $option->value = $request->input('value');
         $option->available = $request->input('available');
+        $option->sort_order = $request->input('sort_order');
 
         $option->save();
 
