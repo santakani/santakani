@@ -10,6 +10,7 @@ module.exports = Backbone.Model.extend({
         value: null,
         price_add: 0,
         available: 1,
+        sort_order: 0,
         translations: [
             {
                 locale: 'en',

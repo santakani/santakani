@@ -21,6 +21,7 @@ class CreateOptionTable extends Migration
             $table->decimal('price_add', 8, 2)->default(0);
             $table->string('value')->nullable();
             $table->boolean('available')->default(1);
+            $table->integer('sort_order')->unsigned()->default(0)->index();
             $table->timestamps();
 
             $table->foreign('design_id')->references('id')->on('design')->onDelete('cascade');
