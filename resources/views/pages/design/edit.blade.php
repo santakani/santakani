@@ -66,7 +66,7 @@
                 'height' => 300,
                 'size' => 'thumb',
             ])
-            <p class="text-muted">{{ trans('image.recommended_size', ['width' => 600, 'height' => 600]) }}
+            <p class="text-muted">{{ trans('image.recommended_size', ['width' => 600, 'height' => 600]) }}</p>
         </div>
 
         <div class="form-group">
