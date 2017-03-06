@@ -68,6 +68,10 @@ Route::group(['middleware' => 'web'], function () {
         'create', 'edit',
     ]]);
 
+    Route::resource('address', 'AddressController', ['except' => [
+        'create', 'edit',
+    ]]);
+
     Route::resource('like', 'LikeController', ['only' => ['store', 'destroy']]);
 
     Route::resource('tag', 'TagController');
