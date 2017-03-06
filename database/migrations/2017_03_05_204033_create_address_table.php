@@ -24,7 +24,7 @@ class CreateAddressTable extends Migration
             $table->string('phone');
             $table->timestamps();
 
-            $table->unique(['user_id','name', 'street', 'city_id']);
+            $table->index(['user_id', 'name', 'street', 'city_id']);
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->foreign('city_id')->references('id')->on('city')->onDelete('cascade');
