@@ -39,7 +39,7 @@ class OptionController extends Controller
         $options = Option::where([
             ['design_id', $request->input('design_id')],
             ['type', $request->input('type')],
-        ]);
+        ])->get();
 
         return response()->json($options);
     }
