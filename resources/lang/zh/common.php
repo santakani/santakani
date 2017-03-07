@@ -89,7 +89,7 @@ return array(
     'phone_number' => '电话号码',
     'price' => '价格',
     'privacy' => '隐私',
-    'profile' => '个人资料',
+    'profile' => '资料',
     'public' => '公开',
     'register' => '注册',
     'report' => '举报',

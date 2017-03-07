@@ -128,7 +128,7 @@
                     @if (Auth::user()->role === 'admin')
                         <li><a href="/admin">Admin panel</a></li>
                     @endif
-                    <li><a href="{{ url('setting') }}">{{ trans('common.settings') }}</a></li>
+                    <li><a href="{{ url('settings') }}">{{ trans('common.settings') }}</a></li>
                     <li><a class="logout-action" href="{{ url('logout') }}">{{ trans('common.logout') }}</a></li>
                 </ul>
             </li>

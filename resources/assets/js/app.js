@@ -45,6 +45,7 @@ require('./components/buttons/editor-rating-button');
 require('./components/page-cover');
 
 require('./components/selects/country-select');
+require('./components/selects/locale-select');
 
 require('./components/tabs/auto-collapse');
 

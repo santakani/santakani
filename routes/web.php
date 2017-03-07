@@ -42,14 +42,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('sitemap', 'SitemapController@index');
 
-    Route::get('setting', 'SettingController@profile');
-    Route::get('setting/profile', 'SettingController@profile');
-    Route::get('setting/account', 'SettingController@account');
-    Route::get('setting/page', 'SettingController@page');
-    Route::get('setting/story', 'SettingController@story');
-
-    Route::match(['post', 'put', 'patch'], 'setting', 'SettingController@update');
-
     Route::get('trash', 'TrashController@index');
     Route::get('trash/designer', 'TrashController@designer');
     Route::get('trash/design', 'TrashController@design');
@@ -86,6 +78,30 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('place', 'PlaceController');
 
     Route::resource('story', 'StoryController');
+
+    // User settings
+    Route::group(['middleware' => ['auth'], 'namespace' => 'Settings', 'prefix' => 'settings'], function() {
+        Route::get('/', function () {
+            return redirect('settings/profile');
+        });
+
+        Route::get('profile', 'ProfileController@edit');
+        Route::post('profile', 'ProfileController@update');
+
+        Route::get('account', 'AccountController@edit');
+        Route::post('account', 'AccountController@update');
+
+        Route::get('password', 'PasswordController@edit');
+        Route::post('password', 'PasswordController@update');
+
+        Route::get('address', 'AddressController@index');
+
+        Route::get('pages', 'PageController@index');
+
+        Route::get('story', 'StoryController@index');
+
+        Route::match(['post', 'put', 'patch'], 'setting', 'SettingController@update');
+    });
 
     // Admin panel
     Route::group(['middleware' => ['auth', 'admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
