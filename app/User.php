@@ -80,6 +80,14 @@ class User extends Authenticatable
     }
 
     /**
+     * User addresses for shopping.
+     */
+    public function addresses()
+    {
+        return $this->hasMany('App\Address');
+    }
+
+    /**
      * User likes.
      */
     public function likes()

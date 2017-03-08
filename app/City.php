@@ -38,8 +38,7 @@ class City extends Model
      * @var array
      */
     protected $appends = [
-        'url', 'name', 'full_name', 'native_name', 'native_full_name',
-        'english_name', 'english_full_name', 'search_index'
+        'url', 'name', 'country_name', 'full_name', 'english_name', 'english_country_name', 'english_full_name'
     ];
 
     /**
@@ -157,6 +156,11 @@ class City extends Model
     public function getEnglishNameAttribute()
     {
         return $this->text('name', 'en');
+    }
+
+    public function getEnglishCountryNameAttribute()
+    {
+        return $this->country->text('name', 'en');
     }
 
     public function getEnglishFullNameAttribute()

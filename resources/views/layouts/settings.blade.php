@@ -30,21 +30,6 @@
                         {{ trans('geo.address') }}
                     </a>
                 </li>
-                <li class="{{ $active_section === 'pages'?'active':'' }}">
-                    <a href="{{ url('settings/pages') }}">
-                        {{ trans('common.pages') }}
-                    </a>
-                </li>
-                <li class="{{ $active_section === 'designs'?'active':'' }}">
-                    <a href="{{ url('settings/designs') }}">
-                        {{ trans('design.designs') }}
-                    </a>
-                </li>
-                <li class="{{ $active_section === 'stories'?'active':'' }}">
-                    <a href="{{ url('settings/stories') }}">
-                        {{ trans('story.stories') }}
-                    </a>
-                </li>
             </ul>
         </div><!-- .col -->
         <div class="col-sm-9 col-md-8 col-lg-6 col-lg-offset-1">

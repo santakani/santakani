@@ -1,7 +1,7 @@
 @extends('layouts.settings', [
-    'title' => trans('common.account'),
-    'body_id' => 'account-setting-page',
-    'body_classes' => ['account-setting-page'],
+    'title' => trans('common.password'),
+    'body_id' => 'password-setting-page',
+    'body_classes' => ['password-setting-page'],
     'active_section' => 'password',
 ])
 

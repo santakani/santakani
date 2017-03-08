@@ -15,8 +15,7 @@ if (!empty($has_designers) && $has_designers) {
 }
 ?>
 
-<select name="{{ $name or 'city_id' }}" id="{{ $id or 'city-select' }}"
-    class="{{ $class or '' }} city-select form-control">
+<select name="{{ $name or 'city_id' }}" id="{{ $id or 'city-select' }}" class="{{ $class or '' }} city-select form-control">
     @if (!empty($selected))
         <option value="{{ $selected->id }}" selected="selected" data-data="{{ $selected->toJSON() }}">{{ $selected->full_name }}</option>
     @endif

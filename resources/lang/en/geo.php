@@ -37,6 +37,7 @@ return array(
 
     // Location
     'address' => 'Address',
+    'postcode' => 'Postcode',
     'location' => 'Location',
     'latitude' => 'Latitude',
     'longitude' => 'Longitude',

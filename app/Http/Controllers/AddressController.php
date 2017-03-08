@@ -27,7 +27,7 @@ class AddressController extends Controller
     public function index(Request $request)
     {
         // Address is sensitive data and only be read by the user themselves
-        $addresses = Address::where('user_id', $request->user()->id)->get();
+        $addresses = Address::with('city')->where('user_id', $request->user()->id)->get();
 
         return response()->json($addresses);
     }
@@ -61,6 +61,8 @@ class AddressController extends Controller
         $address->phone = $request->input('phone');
 
         $address->save();
+
+        $address->load('city.country');
 
         return response()->json($address);
     }
@@ -115,14 +117,18 @@ class AddressController extends Controller
             'phone' => 'required|string|max:255',
         ]);
 
-        $address = Address::update([
+        $address->update([
             'name' => $request->input('name'),
             'street' => $request->input('street'),
             'city_id' => $request->input('city_id'),
             'postcode' => $request->input('postcode'),
             'email' => $request->input('email'),
-            'phone' = $request->input('phone'),
+            'phone' => $request->input('phone'),
         ]);
+
+        $address->load('city.country');
+
+        return response()->json($address);
     }
 
     /**

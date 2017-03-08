@@ -138,6 +138,10 @@ else if (document.getElementById('profile-setting-page')) {
 else if (document.getElementById('account-setting-page')) {
     require('./pages/setting/account');
 }
+else if (document.getElementById('address-setting-page')) {
+    require('./pages/setting/address');
+}
+
 
 // Admin panel
 else if (document.getElementById('user-admin-page')) {
