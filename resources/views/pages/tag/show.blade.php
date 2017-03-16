@@ -31,7 +31,7 @@
                         </a>
                     </div><!-- /.action -->
                 @endif
-                @if (Auth::user()->can('delete-tag', $tag))
+                @if (Auth::check() && Auth::user()->can('delete-tag', $tag))
                     <div class="action">
                         <a id="delete-button" class="btn btn-icon" href="#" title="{{ trans('common.delete') }}">
                             <i class="icon ion-ios-close-outline"></i>

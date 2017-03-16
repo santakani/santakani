@@ -20,8 +20,9 @@
         <!-- article list -->
         <div class="col-md-8">
 
-            @if (count($drafts))
+            @if (isset($drafts) && count($drafts))
                 <p class="lead">{{ trans('story.my_drafts') }}</p>
+
                 @each('components.cards.story-card', $drafts, 'story')
 
                 <hr>
