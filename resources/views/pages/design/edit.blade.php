@@ -103,22 +103,6 @@
                 <input name="webshop" value="{{ $design->webshop }}" type="url"
                     maxlength="255" class="form-control">
             </div>
-
-            <div class="form-group">
-                <label>Shipped from</label>
-                @include('components.selects.country-select', ['selected' => $design->country_id])
-            </div>
-
-            <div class="form-group">
-                <label>National shipment price</label>
-                <input name="national_shipment_price" value="{{ $design->national_shipment_price }}" type="number" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label>International shipment price</label>
-                <input name="international_shipment_price" value="{{ $design->international_shipment_price }}" type="number" class="form-control">
-            </div>
-
         </fieldset>
 
         <fieldset class="scheduler-border">
