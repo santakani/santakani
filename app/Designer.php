@@ -52,7 +52,9 @@ class Designer extends Model
      */
     protected $fillable = [
         'image_id', 'logo_id', 'city_id', 'tag_ids', 'gallery_image_ids', 'email',
-        'website', 'facebook', 'instagram', 'pinterest', 'youtube', 'vimeo'
+        'website', 'facebook', 'instagram', 'pinterest', 'youtube', 'vimeo',
+        'vat_rate', 'national_shipment', 'regional_shipment', 'international_shipment',
+        'free_shipment_over', 'address_id',
     ];
 
     /**
@@ -187,6 +189,16 @@ class Designer extends Model
     public function designs()
     {
         return $this->hasMany('App\Design');
+    }
+
+    /**
+     * Address for return products.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function address()
+    {
+        return $this->belongsTo('App\Address');
     }
 
 

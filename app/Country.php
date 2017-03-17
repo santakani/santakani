@@ -111,6 +111,19 @@ class Country extends Model
         return $search_index;
     }
 
+    public function getContinentNameAttribute()
+    {
+        switch ($this->continent) {
+            case 'AS': return trans('geo.asia');
+            case 'AF': return trans('geo.africa');
+            case 'EU': return trans('geo.europe');
+            case 'NA': return trans('geo.north_america');
+            case 'SA': return trans('geo.south_america');
+            case 'OC':
+            case 'AU': return trans('geo.oceania');
+        }
+    }
+
     //====================================
     // Other methods
     //====================================

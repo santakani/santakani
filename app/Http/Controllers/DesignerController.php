@@ -14,6 +14,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 use App\ActivityLog;
+use App\Address;
 use App\Designer;
 use App\DesignerTranslation;
 use App\Http\Requests;
@@ -280,6 +281,7 @@ class DesignerController extends Controller
             'user_id' => 'integer|nullable|exists:user,id',
             'tag_ids.*' => 'integer|nullable|exists:tag,id',
             'email' => 'email|nullable|max:255',
+            'phone' => 'phone|nullable|max:255',
             'website' => 'url|nullable|max:255',
             'facebook' => 'url|nullable|max:255',
             'instagram' => 'url|nullable|max:255',
@@ -292,6 +294,13 @@ class DesignerController extends Controller
             'translations.*.tagline' => 'string|nullable|max:255',
             'translations.*.content' => 'string|nullable',
             'editor_rating' => 'integer|max:100|min:-100',
+            'address' => 'array',
+            'address.name' => 'string|nullable|max:255',
+            'address.street' => 'string|nullable|max:255',
+            'address.postcode' => 'string|nullable|max:255',
+            'address.city_id' => 'integer|nullable|exists:city,id',
+            'address.email' => 'email|nullable|email|max:255',
+            'address.phone' => 'string|nullable|max:255',
         ]);
 
         // Editor rating
@@ -337,6 +346,33 @@ class DesignerController extends Controller
         }
 
         $designer->fill($request->all());
+
+        // Update address object
+        $address_array = $request->input('address');
+        $update_address = true;
+
+        // Only update address if all fields are not empty
+        foreach ($address_array as $field) {
+            if (empty($field)) {
+                $update_address = false;
+            }
+        }
+
+        if ($update_address) {
+
+            $address_array['user_id'] = $designer->user_id;
+
+            if ($designer->address_id) {
+                $address = $designer->address;
+                $address->update($address_array);
+            } else {
+                $address = new Address;
+                $address->fill($address_array);
+                $address->save();
+                $designer->address()->associate($address);
+            }
+
+        }
 
         $designer->save();
 

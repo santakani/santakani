@@ -43,7 +43,9 @@ $('.content-editor').each(function () {
 
 var galleryEditor = new GalleryEditor({el: '#gallery-editor', imageManager: manager});
 
-var citySelect = new CitySelect({el: '.city-select'});
+new CitySelect({el: '#city-select'});
+new CitySelect({el: '#address-city-select'});
+
 var tagSelect = new TagSelect({el: '.tag-select'});
 
 var editForm = new EditForm({el: '#designer-edit-form'});

@@ -23,6 +23,17 @@ return array(
     |
     */
 
+    // Continents
+    'africa' => 'Africa',
+    'asia' => 'Asia',
+    'oceania' => 'Oceania',
+    'europe' => 'Europe',
+    'north_america' => 'North America',
+    'south_america' => 'South America',
+
+    // World
+    'international' => 'International',
+
     // Country
     'countries' => 'Countries',
     'country' => 'Country',
@@ -36,11 +47,15 @@ return array(
     'timezone' => 'Timezone',
 
     // Location
-    'address' => 'Address',
-    'postcode' => 'Postcode',
+
     'location' => 'Location',
     'latitude' => 'Latitude',
     'longitude' => 'Longitude',
+
+    // Address
+    'address' => 'Address',
+    'street' => 'Street',
+    'postcode' => 'Postcode',
 
     // Maps
     'map' => 'Map',
